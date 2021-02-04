@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["mailto","https://github.com/","https://www.linkedin.com/profile/","#about"]},"articleBody":"\nWelcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.\nQuick StartCreate a new post반갑습니다1$ hexo new &quot;My New Post&quot;\n123456import Alamofireclass HomeViewController: UIViewController &#123;    override func viewDidLoad() &#123;        super.viewdidLoad()    &#125;&#125;\n1234567891011121314151617181920const express = require(&#x27;express&#x27;)const router = express.Router()router.post(&#x27;/signup&#x27;, async (req, res, next) =&gt; &#123;            var response = &#123;                &quot;code&quot;: 1,                &quot;message&quot;: &#x27;Successfully signed up.&#x27;,                &quot;data&quot;: &#123;                    &quot;email&quot;: result.dataValues.email,                    &quot;nickname&quot;: result.dataValues.nickname                &#125;            &#125;            res.status(201)            res.json(response)&#125;)module.exports = router\n1234567891011package com.example.heart_to_heart.infrastructure.network.authoriztion.serviceimport com.example.heart_to_heart.infrastructure.model.LogOutResponseimport retrofit2.Callimport retrofit2.http.Headerimport retrofit2.http.POSTinterface LogOutService &#123;    @POST(&quot;/auth/logout&quot;)    fun logOut(@Header(&quot;Authorization&quot;) accessToken: String): Call&lt;LogOutResponse&gt;&#125;\nMore info: Writing\nRun server1$ hexo server\nMore info: Server\nGenerate static files1$ hexo generate\nMore info: Generating\nDeploy to remote sites1$ hexo deploy\nMore info: Deployment\n","dateCreated":"2020-12-21T20:16:30+09:00","dateModified":"2021-02-04T23:47:56+09:00","datePublished":"2020-12-21T20:16:30+09:00","description":"","headline":"[Kotlin] 변수선언","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/12/21/android_kotlin_constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["mailto","https://github.com/","https://www.linkedin.com/profile/","#about"]},"url":"https://yologger.github.io/ko/2020/12/21/android_kotlin_constant/","keywords":"Android, Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"\nWelcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.\nQuick StartCreate a new post반갑습니다1$ hexo new &quot;My New Post&quot;\n123456import Alamofireclass HomeViewController: UIViewController &#123;    override func viewDidLoad() &#123;        super.viewdidLoad()    &#125;&#125;\n1234567891011121314151617181920const express = require(&#x27;express&#x27;)const router = express.Router()router.post(&#x27;/signup&#x27;, async (req, res, next) =&gt; &#123;            var response = &#123;                &quot;code&quot;: 1,                &quot;message&quot;: &#x27;Successfully signed up.&#x27;,                &quot;data&quot;: &#123;                    &quot;email&quot;: result.dataValues.email,                    &quot;nickname&quot;: result.dataValues.nickname                &#125;            &#125;            res.status(201)            res.json(response)&#125;)module.exports = router\n1234567891011package com.example.heart_to_heart.infrastructure.network.authoriztion.serviceimport com.example.heart_to_heart.infrastructure.model.LogOutResponseimport retrofit2.Callimport retrofit2.http.Headerimport retrofit2.http.POSTinterface LogOutService &#123;    @POST(&quot;/auth/logout&quot;)    fun logOut(@Header(&quot;Authorization&quot;) accessToken: String): Call&lt;LogOutResponse&gt;&#125;\nMore info: Writing\nRun server1$ hexo server\nMore info: Server\nGenerate static files1$ hexo generate\nMore info: Generating\nDeploy to remote sites1$ hexo deploy\nMore info: Deployment\n","dateCreated":"2020-12-21T20:16:30+09:00","dateModified":"2021-02-04T23:47:56+09:00","datePublished":"2020-12-21T20:16:30+09:00","description":"","headline":"[Kotlin] 변수선언","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/12/21/android_kotlin_constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/ko/2020/12/21/android_kotlin_constant/","keywords":"Android, Kotlin"}</script>
     <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quic">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] 변수선언">
@@ -111,6 +111,38 @@
                     
                         <a
                             class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
                             href="/ko/ios"
                             
                             rel="noopener"
@@ -171,47 +203,15 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Home"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-categories"
-                            
-                            rel="noopener"
-                            title="Categories"
-                        >
-                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Categories</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
                 <li class="sidebar-button">
                     
@@ -258,24 +258,6 @@
                         <span class="sidebar-button-desc">LinkedIn</span>
                     </a>
             </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="#about"
-                            
-                            rel="noopener"
-                            title="About"
-                        >
-                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">About</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
                 <li class="sidebar-button">
                     
