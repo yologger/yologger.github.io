@@ -6,24 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Figma] 변수선언 - Yologger&#39;s Blog</title>
+    <title>Variable and Constant - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"\nWelcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.\nQuick StartCreate a new post반갑습니다1$ hexo new &quot;My New Post&quot;\n123456import Alamofireclass HomeViewController: UIViewController &#123;    override func viewDidLoad() &#123;        super.viewdidLoad()    &#125;&#125;\n1234567891011121314151617181920const express = require(&#x27;express&#x27;)const router = express.Router()router.post(&#x27;/signup&#x27;, async (req, res, next) =&gt; &#123;            var response = &#123;                &quot;code&quot;: 1,                &quot;message&quot;: &#x27;Successfully signed up.&#x27;,                &quot;data&quot;: &#123;                    &quot;email&quot;: result.dataValues.email,                    &quot;nickname&quot;: result.dataValues.nickname                &#125;            &#125;            res.status(201)            res.json(response)&#125;)module.exports = router\n1234567891011package com.example.heart_to_heart.infrastructure.network.authoriztion.serviceimport com.example.heart_to_heart.infrastructure.model.LogOutResponseimport retrofit2.Callimport retrofit2.http.Headerimport retrofit2.http.POSTinterface LogOutService &#123;    @POST(&quot;/auth/logout&quot;)    fun logOut(@Header(&quot;Authorization&quot;) accessToken: String): Call&lt;LogOutResponse&gt;&#125;\nMore info: Writing\nRun server1$ hexo server\nMore info: Server\nGenerate static files1$ hexo generate\nMore info: Generating\nDeploy to remote sites1$ hexo deploy\nMore info: Deployment\n","dateCreated":"2020-12-21T20:16:30+09:00","dateModified":"2021-02-04T23:45:16+09:00","datePublished":"2020-12-21T20:16:30+09:00","description":"","headline":"[Figma] 변수선언","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/2020/12/21/figma/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/2020/12/21/figma/","keywords":"Figma, Object"}</script>
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quic">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"\nIntroductionIn this post, let’s explore how to use variable and constant.\nVariableUse keywork var to declare variable.\n12345// Variable declarationvar name: String// Variable initializationname = &quot;Son&quot;\n12// Variable declaration and initializationvar name: String = &quot;Ronaldo&quot;\nYou can’t change the value of variable after initialization.\n12var name: String = &quot;Son&quot;name = &quot;Kane&quot;\n\nConstantYou can’t change the value of constant after initialization. Use keywork val to declare constant.\n1234// 상수 선언과 초기화val name: String = &quot;Son&quot;name = &quot;Kane&quot;       // Error\nYou have to declare and initialize at the same time.\n1234val name: String    // Errorname = &quot;Son&quot;        // Errorval nation: String = &quot;Republic of Korea&quot;    // Success","dateCreated":"2020-12-21T20:16:30+09:00","dateModified":"2021-02-05T15:27:03+09:00","datePublished":"2020-12-21T20:16:30+09:00","description":"","headline":"Variable and Constant","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/","keywords":"Android, Kotlin"}</script>
+    <meta name="description" content="IntroductionIn this post, let’s explore how to use variable and constant. VariableUse keywork var to declare variable. 12345&#x2F;&#x2F; Variable declarationvar name: String&#x2F;&#x2F; Variable initializationname &#x3D; &amp;qu">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Figma] 변수선언">
-<meta property="og:url" content="https://yologger.github.io/2020/12/21/figma/index.html">
+<meta property="og:title" content="Variable and Constant">
+<meta property="og:url" content="https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quic">
+<meta property="og:description" content="IntroductionIn this post, let’s explore how to use variable and constant. VariableUse keywork var to declare variable. 12345&#x2F;&#x2F; Variable declarationvar name: String&#x2F;&#x2F; Variable initializationname &#x3D; &amp;qu">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-21T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-02-04T14:45:16.084Z">
+<meta property="article:modified_time" content="2021-02-05T06:27:03.803Z">
 <meta property="article:author" content="yologger">
-<meta property="article:tag" content="Figma">
-<meta property="article:tag" content="Object">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
     
     
@@ -292,7 +292,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Figma] 변수선언
+            Variable and Constant
         </h1>
     
     
@@ -305,7 +305,7 @@
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/Figma/">Figma</a>, <a class="category-link" href="/categories/Figma/Object/">Object</a>
+    <a class="category-link" href="/categories/Android/">Android</a>, <a class="category-link" href="/categories/Android/Kotlin/">Kotlin</a>
 
 
     
@@ -318,19 +318,17 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <hr>
-<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><h3 id="반갑습니다"><a href="#반갑습니다" class="headerlink" title="반갑습니다"></a>반갑습니다</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Alamofire</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HomeViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewdidLoad()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = express.Router()</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">&#x27;/signup&#x27;</span>, <span class="keyword">async</span> (req, res, next) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> response = &#123;</span><br><span class="line">                <span class="string">&quot;code&quot;</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="string">&quot;message&quot;</span>: <span class="string">&#x27;Successfully signed up.&#x27;</span>,</span><br><span class="line">                <span class="string">&quot;data&quot;</span>: &#123;</span><br><span class="line">                    <span class="string">&quot;email&quot;</span>: result.dataValues.email,</span><br><span class="line">                    <span class="string">&quot;nickname&quot;</span>: result.dataValues.nickname</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            res.status(<span class="number">201</span>)</span><br><span class="line">            res.json(response)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.heart_to_heart.infrastructure.network.authoriztion.service</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.heart_to_heart.infrastructure.model.LogOutResponse</span><br><span class="line"><span class="keyword">import</span> retrofit2.Call</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.Header</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.POST</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">LogOutService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@POST(&quot;/auth/logout&quot;)</span></span><br><span class="line">    <span class="function">fun <span class="title">logOut</span><span class="params">(<span class="meta">@Header(&quot;Authorization&quot;)</span> accessToken: String)</span>: Call&lt;LogOutResponse&gt;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>In this post, let’s explore how to use variable and constant.</p>
+<h2 id="Variable"><a href="#Variable" class="headerlink" title="Variable"></a>Variable</h2><p>Use keywork <code>var</code> to declare variable.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Variable declaration</span></span><br><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line"><span class="comment">// Variable initialization</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Variable declaration and initialization</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
+<p>You can’t change the value of variable after initialization.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Constant"><a href="#Constant" class="headerlink" title="Constant"></a>Constant</h2><p>You can’t change the value of constant after initialization. Use keywork <code>val</code> to declare constant.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line"></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<p>You have to declare and initialize at the same time.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name: String    <span class="comment">// Error</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span>        <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> nation: String = <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
             
 
 
@@ -341,7 +339,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/tags/Figma/" rel="tag">Figma</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/Object/" rel="tag">Object</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/tags/Android/" rel="tag">Android</a> <a class="tag tag--primary tag--small t-none-link" href="/tags/Kotlin/" rel="tag">Kotlin</a>
 
             </div>
         
@@ -364,7 +362,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/2020/12/21/figma/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -377,7 +375,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/2020/12/21/figma/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -390,7 +388,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/2020/12/21/figma/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -441,7 +439,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/2020/12/21/figma/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -454,7 +452,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/2020/12/21/figma/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -467,7 +465,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/2020/12/21/figma/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -494,7 +492,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/2020/12/21/figma/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -507,7 +505,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/2020/12/21/figma/"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -520,7 +518,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://yologger.github.io/2020/12/21/figma/"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/2020/12/21/android_kotlin_variable_and_constant/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
