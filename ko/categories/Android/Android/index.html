@@ -289,6 +289,72 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/ko/2021/02/08/android-android-properties/"
+                            aria-label=": [.properties] 코드에서 환경변수 분리하기 (1)"
+                        >
+                            [.properties] 코드에서 환경변수 분리하기 (1)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2021-02-08T12:40:26+09:00">
+	
+		    2021/02/08
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Android/">Android</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>많은 어플리케이션이 Facebook, Google과 같은 SNS 계정을 통한 로그인을 지원합니다. 개발자는 SNS 로그인 API를 사용하기 위해 API Key를 발급받는데, 이를 소스코드에 포함시키면 여러 보안 이슈가 발생할 수 있습니다. 이번 포스트에서는 별도의 환경설정파일을 만들고, 이 곳에 API Key와 같이 유출되면 안되는 정보를 저장하는 법에 대해 알아보겠습니다. </p>
+<h2 id="1-properties-파일-만들기"><a href="#1-properties-파일-만들기" class="headerlink" title="1 - .properties 파일 만들기"></a>1 - .properties 파일 만들기</h2><p>프로젝트의 루트 디렉토리에 <code>config.properties</code>파일을 생성합니다.<br><img src="/ko/images/posts/android-android-properties/properties.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CLIENT_ID&#x3D;&quot;your_client_id&quot;</span><br><span class="line">CLIENT_SECRET&#x3D;&quot;your_client_secret&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="2-모듈-수준의-build-gradle-설정하기"><a href="#2-모듈-수준의-build-gradle-설정하기" class="headerlink" title="2 - 모듈 수준의 build.gradle 설정하기"></a>2 - 모듈 수준의 build.gradle 설정하기</h2><p>모듈 수준의 build.gradle 파일에서 다음과 같이 설정합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def configPropertiesFile &#x3D; rootProject.file(&quot;config.properties&quot;)</span><br><span class="line">def configProperties &#x3D; new Properties()</span><br><span class="line">configProperties.load(new FileInputStream(configPropertiesFile))</span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId &quot;com.example.simple_memo&quot;</span><br><span class="line">        minSdkVersion 21</span><br><span class="line">        targetSdkVersion 30</span><br><span class="line">        versionCode 1</span><br><span class="line">        versionName &quot;1.0&quot;</span><br><span class="line">        testInstrumentationRunner &quot;androidx.test.runner.AndroidJUnitRunner&quot;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; for xml file</span><br><span class="line">        resValue &quot;string&quot;, &quot;CLIENT_ID&quot;, configProperties[&#39;CLIENT_ID&#39;]</span><br><span class="line">        resValue &quot;string&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#39;CLIENT_SECRET&#39;]</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; for kotlin file</span><br><span class="line">        buildConfigField(&quot;String&quot;, &quot;CLIENT_ID&quot;, configProperties[&#39;CLIENT_ID&#39;])</span><br><span class="line">        buildConfigField(&quot;String&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#39;CLIENT_SECRET&#39;])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="소스코드에서-값을-사용하기"><a href="#소스코드에서-값을-사용하기" class="headerlink" title="소스코드에서 값을 사용하기"></a>소스코드에서 값을 사용하기</h2><p>java 파일이나 kotlin 파일에서 아래와 같이 사용할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="keyword">val</span> clientId = BuildConfig.CLIENT_ID            <span class="comment">// your_client_id</span></span><br><span class="line">        <span class="keyword">val</span> clientSecret = BuildConfig.CLIENT_SECRET    <span class="comment">// your_client_secret</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="xml-파일에서-값을-사용하기"><a href="#xml-파일에서-값을-사용하기" class="headerlink" title="xml 파일에서 값을 사용하기"></a>xml 파일에서 값을 사용하기</h2><p>xml 파일에서는 다음과 같이 접근할 수 있습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">    android:text=&quot;@string/CLIENT_ID&quot;/&gt;</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2021/02/08/android-android-properties/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/ko/2021/02/07/android-android-build-config/"
                             aria-label=": BuildConfig"
                         >
