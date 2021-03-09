@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"\n들어가며이번 포스트에서는 Kotlin의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.\n변수변수를 선언할 때는 키워드 var를 사용합니다.\n12345// 변수 선언var name: String// 변수 초기화name = &quot;Son&quot;\n12// 변수 선언과 동시에 초기화var name: String = &quot;Ronaldo&quot;\n변수는 값을 초기화한 후 변경할 수 있습니다.\n12var name: String = &quot;Son&quot;name = &quot;Kane&quot;\n\n상수상수는 값을 초기화한 후 변경할 수 없습니다. 상수를 선언할 때는 키워드 val을 사용합니다.\n1234// 상수 선언과 초기화val name: String = &quot;Son&quot;name = &quot;Kane&quot;       // Error\n상수는 선언과 초기화를 동시에 해야합니다.\n1234val name: String    // Errorname = &quot;Son&quot;        // Errorval nation: String = &quot;Republic of Korea&quot;    // Success","dateCreated":"2020-12-21T20:16:30+09:00","dateModified":"2021-02-08T12:39:14+09:00","datePublished":"2020-12-21T20:16:30+09:00","description":"","headline":"변수와 상수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/12/21/android-kotlin-variable-and-constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/ko/2020/12/21/android-kotlin-variable-and-constant/","keywords":"Android, Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"\n들어가며이번 포스트에서는 Kotlin의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.\n변수변수를 선언할 때는 키워드 var를 사용합니다.\n12345// 변수 선언var name: String// 변수 초기화name = &quot;Son&quot;\n12// 변수 선언과 동시에 초기화var name: String = &quot;Ronaldo&quot;\n변수는 값을 초기화한 후 변경할 수 있습니다.\n12var name: String = &quot;Son&quot;name = &quot;Kane&quot;\n\n상수상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 val을 사용합니다.\n12345// 상수 선언과 초기화val name: String = &quot;Son&quot;// 값을 변경할 수 없습니다.name = &quot;Kane&quot;       // Error\n상수는 선언과 초기화를 동시에 해야합니다.\n1234val name: String    // Errorname = &quot;Son&quot;        // Errorval nation: String = &quot;Republic of Korea&quot;    // Success","dateCreated":"2020-12-21T20:16:30+09:00","dateModified":"2021-03-09T13:35:18+09:00","datePublished":"2020-12-21T20:16:30+09:00","description":"","headline":"변수와 상수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/12/21/android-kotlin-variable-and-constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/ko/2020/12/21/android-kotlin-variable-and-constant/","keywords":"Kotlin"}</script>
     <meta name="description" content="들어가며이번 포스트에서는 Kotlin의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다. 변수변수를 선언할 때는 키워드 var를 사용합니다. 12345&#x2F;&#x2F; 변수 선언var name: String&#x2F;&#x2F; 변수 초기화name &#x3D; &quot;Son&quot; 12&#x2F;&#x2F; 변수 선언과 동시에 초기화var name: String &#x3D; &quot;Ronaldo&quot;">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="변수와 상수">
@@ -20,9 +20,8 @@
 <meta property="og:description" content="들어가며이번 포스트에서는 Kotlin의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다. 변수변수를 선언할 때는 키워드 var를 사용합니다. 12345&#x2F;&#x2F; 변수 선언var name: String&#x2F;&#x2F; 변수 초기화name &#x3D; &quot;Son&quot; 12&#x2F;&#x2F; 변수 선언과 동시에 초기화var name: String &#x3D; &quot;Ronaldo&quot;">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-12-21T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-02-08T03:39:14.835Z">
+<meta property="article:modified_time" content="2021-03-09T04:35:18.066Z">
 <meta property="article:author" content="yologger">
-<meta property="article:tag" content="Android">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
     
@@ -323,8 +322,8 @@
 <p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span></span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 값을 초기화한 후 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>val</code>을 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line"></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>val</code>을 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 값을 변경할 수 없습니다.</span></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
 <p>상수는 선언과 초기화를 동시에 해야합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name: String    <span class="comment">// Error</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span>        <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> nation: String = <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
             
@@ -337,7 +336,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">태그</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Android/" rel="tag">Android</a> <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Kotlin/" rel="tag">Kotlin</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Kotlin/" rel="tag">Kotlin</a>
 
             </div>
         

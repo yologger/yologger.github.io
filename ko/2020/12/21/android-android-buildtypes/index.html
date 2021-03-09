@@ -6,25 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>test - Yologger&#39;s Blog</title>
+    <title>코드에서 환경변수 분리하기 (3) ㅡ BuildTypes - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"This is test.mdThis is test.md\n","dateCreated":"2021-02-06T15:14:44+09:00","dateModified":"2021-02-08T14:42:51+09:00","datePublished":"2021-02-06T15:14:44+09:00","description":"","headline":"test","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2021/02/06/test/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/ko/2021/02/06/test/"}</script>
-    <meta name="description" content="This is test.mdThis is test.md">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"들어가며이번 포스트에서는 개발 환경과 릴리즈 환경에서 다른 설정파일을 사용하는 방법에 대해 알아보겠습니다.\n2개의 설정파일 만들기development.propeties을 생성합니다.\nproduction.properties 파일을 생성합니다.\n","dateCreated":"2020-12-21T20:16:30+09:00","dateModified":"2021-02-08T15:04:23+09:00","datePublished":"2020-12-21T20:16:30+09:00","description":"","headline":"코드에서 환경변수 분리하기 (3) ㅡ BuildTypes","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/","keywords":"Kotlin"}</script>
+    <meta name="description" content="들어가며이번 포스트에서는 개발 환경과 릴리즈 환경에서 다른 설정파일을 사용하는 방법에 대해 알아보겠습니다. 2개의 설정파일 만들기development.propeties을 생성합니다. production.properties 파일을 생성합니다.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="test">
-<meta property="og:url" content="https://yologger.github.io/ko/2021/02/06/test/index.html">
+<meta property="og:title" content="코드에서 환경변수 분리하기 (3) ㅡ BuildTypes">
+<meta property="og:url" content="https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="This is test.mdThis is test.md">
+<meta property="og:description" content="들어가며이번 포스트에서는 개발 환경과 릴리즈 환경에서 다른 설정파일을 사용하는 방법에 대해 알아보겠습니다. 2개의 설정파일 만들기development.propeties을 생성합니다. production.properties 파일을 생성합니다.">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://yologger.github.io/ko/images/posts/test/apple2.png">
-<meta property="article:published_time" content="2021-02-06T06:14:44.000Z">
-<meta property="article:modified_time" content="2021-02-08T05:42:51.180Z">
+<meta property="article:published_time" content="2020-12-21T11:16:30.000Z">
+<meta property="article:modified_time" content="2021-02-08T06:04:23.985Z">
 <meta property="article:author" content="yologger">
+<meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/test/apple2.png">
     
     
         
@@ -290,16 +289,22 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            test
+            코드에서 환경변수 분리하기 (3) ㅡ BuildTypes
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-02-06T15:14:44+09:00">
+    <time datetime="2020-12-21T20:16:30+09:00">
 	
-		    2021/02/06
+		    2020/12/21
     	
     </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Kotlin/">Kotlin</a>
+
+
     
 </div>
 
@@ -309,7 +314,9 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <p>This is test.md<br><img src="/ko/images/posts/test/apple2.png"><br>This is test.md</p>
+            <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 개발 환경과 릴리즈 환경에서 다른 설정파일을 사용하는 방법에 대해 알아보겠습니다.</p>
+<h2 id="2개의-설정파일-만들기"><a href="#2개의-설정파일-만들기" class="headerlink" title="2개의 설정파일 만들기"></a>2개의 설정파일 만들기</h2><p>development.propeties을 생성합니다.</p>
+<p>production.properties 파일을 생성합니다.</p>
 
             
 
@@ -317,6 +324,13 @@
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">태그</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Kotlin/" rel="tag">Kotlin</a>
+
+            </div>
         
         
             <div class="post-actions-wrap">
@@ -337,7 +351,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2021/02/06/test/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -350,7 +364,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2021/02/06/test/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -363,7 +377,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2021/02/06/test/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -414,7 +428,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2021/02/06/test/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -427,7 +441,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2021/02/06/test/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -440,7 +454,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2021/02/06/test/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -467,7 +481,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2021/02/06/test/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"
                         aria-label="Facebook에 공유하기"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
@@ -480,7 +494,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2021/02/06/test/"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"
                         aria-label="Twitter에 공유하기"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
@@ -493,7 +507,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2021/02/06/test/"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"
                         aria-label="Google+에 공유하기"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
