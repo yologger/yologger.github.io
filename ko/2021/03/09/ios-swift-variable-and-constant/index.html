@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"들어가며이번 포스트에서는 Swift의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.\n변수변수를 선언할 때는 키워드 var를 사용합니다.\n12345// 변수 선언var name: String// 변수초기화name = &quot;Son&quot;\n12// 변수 선언과 동시에 초기화var name: String = &quot;Ronaldo&quot;\n변수는 값을 초기화한 후 변경할 수 있습니다.\n12var name: String = &quot;Son&quot;name = &quot;Kane&quot; \n\n상수상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 let을 사용합니다.\n12345// 상수 선언과 초기화let name: String = &quot;Son&quot;// 값을 변경할 수 없습니다.name = &quot;Kane&quot;       // Error\n상수는 선언과 초기화를 동시에 해야합니다.\n1234let name: String    // Errorname = &quot;Son&quot;        // Errorlet nation: String = &quot;Republic of Korea&quot;    // Success","dateCreated":"2021-03-09T13:19:49+09:00","dateModified":"2021-03-09T13:35:17+09:00","datePublished":"2021-03-09T13:19:49+09:00","description":"","headline":"변수와 상수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2021/03/09/ios-swift-variable-and-constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/ko/2021/03/09/ios-swift-variable-and-constant/","keywords":"iOS, Swift"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"들어가며이번 포스트에서는 Swift의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.\n변수변수를 선언할 때는 키워드 var를 사용합니다.\n12345// 변수 선언var name: String// 변수초기화name = &quot;Son&quot;\n12// 변수 선언과 동시에 초기화var name: String = &quot;Ronaldo&quot;\n변수는 값을 초기화한 후 변경할 수 있습니다.\n12var name: String = &quot;Son&quot;name = &quot;Kane&quot; \n\n상수상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 let을 사용합니다.\n12345// 상수 선언과 초기화let name: String = &quot;Son&quot;// 값을 변경할 수 없습니다.name = &quot;Kane&quot;       // Error\n상수는 선언과 초기화를 동시에 해야합니다.\n1234let name: String    // Errorname = &quot;Son&quot;        // Errorlet nation: String = &quot;Republic of Korea&quot;    // Success","dateCreated":"2021-03-09T13:19:49+09:00","dateModified":"2021-03-09T13:35:17+09:00","datePublished":"2021-03-09T13:19:49+09:00","description":"","headline":"변수와 상수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2021/03/09/ios-swift-variable-and-constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/ko/2021/03/09/ios-swift-variable-and-constant/","keywords":"iOS, Swift"}</script>
     <meta name="description" content="들어가며이번 포스트에서는 Swift의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다. 변수변수를 선언할 때는 키워드 var를 사용합니다. 12345&#x2F;&#x2F; 변수 선언var name: String&#x2F;&#x2F; 변수초기화name &#x3D; &quot;Son&quot; 12&#x2F;&#x2F; 변수 선언과 동시에 초기화var name: String &#x3D; &quot;Ronaldo&quot; 변수">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="변수와 상수">
@@ -121,20 +121,6 @@
                     </a>
             </li>
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
@@ -203,6 +189,20 @@
                     
                         <a
                             class="sidebar-button-link "
+                            href="/ko/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
                             href="#about"
                             
                             rel="noopener"
@@ -236,10 +236,10 @@
                                 target="_blank"
                             
                             rel="noopener"
-                            title="GitHub"
+                            title="Github"
                         >
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">GitHub</span>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
             
