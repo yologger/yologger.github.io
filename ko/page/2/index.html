@@ -48,7 +48,7 @@
 
     
 
-<header id="header" data-behavior="2">
+<header id="header" data-behavior="5">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -75,7 +75,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="2">
+<nav id="sidebar" data-behavior="5">
     <div class="sidebar-container">
         
         
@@ -217,7 +217,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="2"
+            <div id="main" data-behavior="5"
                  class="
                         hasCoverMetaIn
                         ">
@@ -232,23 +232,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2020/12/21/ios-cocoa-touch-app-bundle/"
-                            aria-label=": iOS) 앱 번들"
+                            href="/ko/2018/01/02/kotlin/datatype/"
+                            aria-label=": 자료형"
                         >
-                            iOS) 앱 번들
+                            자료형
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2020-12-21T20:16:30+09:00">
+    <time datetime="2018-01-02T20:16:30+09:00">
 	
-		    2020/12/21
+		    2018/01/02
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/iOS/">iOS</a>, <a class="category-link" href="/ko/categories/iOS/Cocoa-Touch/">Cocoa Touch</a>
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
 
 
     
@@ -258,17 +258,28 @@
             
                 <div class="postShorten-content">
                     <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 iOS의 번들에 대해 알아보겠습니다.</p>
-<h2 id="번들이란"><a href="#번들이란" class="headerlink" title="번들이란?"></a>번들이란?</h2><p>번들이란 실행 가능한 코드와 리소스(이미지, 사운드 등)을 하나로 묶은 <code>디렉토리</code>입니다 애플리케이션, 프레임워크 등이 대표적인 번들에 해당합니다.<br>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수 초기화</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
-<p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Kotlin의 <code>자료형</code>에 대해 알아보겠습니다.</p>
+<h2 id="정수형-숫자"><a href="#정수형-숫자" class="headerlink" title="정수형 숫자"></a>정수형 숫자</h2><p><code>10진수 정수형 숫자</code>는 다음과 같이 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age: <span class="built_in">Byte</span> = <span class="number">4</span>       <span class="comment">// 1byte (-128 ~ 127의 정수 저장 가능)</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="built_in">Short</span> = <span class="number">4</span>      <span class="comment">// 2byte</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="built_in">Int</span> = <span class="number">4</span>        <span class="comment">// 4byte</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="built_in">Long</span> = <span class="number">4</span>       <span class="comment">// 8byte</span></span><br></pre></td></tr></table></figure>
+<p><code>2진수 정수형 숫자</code>는 다음과 같이 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> binaryByte: <span class="built_in">Byte</span> = <span class="number">0b01000001</span>   <span class="comment">// 10진수로 56</span></span><br></pre></td></tr></table></figure>
+<p><code>16진수 정수형 숫자</code>는 다음과 같이 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hexadecimalByte: <span class="built_in">Byte</span> = <span class="number">0x41</span>    <span class="comment">// 10진수로 56</span></span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 값을 초기화한 후 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>val</code>을 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line"></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
-<p>상수는 선언과 초기화를 동시에 해야합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name: String    <span class="comment">// Error</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span>        <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> nation: String = <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
+<h2 id="실수형-숫자"><a href="#실수형-숫자" class="headerlink" title="실수형 숫자"></a>실수형 숫자</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> height: <span class="built_in">Float</span> = <span class="number">178.2f</span>  <span class="comment">// 4byte</span></span><br><span class="line"><span class="keyword">var</span> weight: <span class="built_in">Double</span> = <span class="number">78.3</span>   <span class="comment">// 8byte</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="불리언"><a href="#불리언" class="headerlink" title="불리언"></a>불리언</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isMarried: <span class="built_in">Boolean</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="문자"><a href="#문자" class="headerlink" title="문자"></a>문자</h2><p>문자를 선언할 때는 따옴표(‘’)를 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> letter: <span class="built_in">Char</span> = <span class="string">&#x27;a&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="문자열"><a href="#문자열" class="headerlink" title="문자열"></a>문자열</h2><p>문자열을 선언할 때는 쌍따옴표(“”)를 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 문자열 선언 및 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Ronaldo&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 문자열 템플릿</span></span><br><span class="line"><span class="keyword">var</span> description: String = <span class="string">&quot;My name is <span class="subst">$&#123;name&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>문자열 타입의 변수에는 다양한 함수가 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;Ronaldo&quot;</span></span><br><span class="line">println(name.length)            <span class="comment">// 7</span></span><br><span class="line">println(name.toLowerCase())     <span class="comment">// ronaldo</span></span><br><span class="line">println(name.toUpperCase())     <span class="comment">// RONALDO</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;Hello.Nice.To.Meet.You&quot;</span></span><br><span class="line"><span class="keyword">var</span> words = str.spilt(<span class="string">&#x27;.&#x27;</span>)      <span class="comment">// [&quot;Hello&quot;, &quot;Nice&quot;, &quot;To&quot;, &quot;Meet&quot;, &quot;You&quot;]</span></span><br></pre></td></tr></table></figure>
+<h2 id="타입-추론"><a href="#타입-추론" class="headerlink" title="타입 추론"></a>타입 추론</h2><p>Kotlin에서는 변수명 뒤에 데이터타입을 선언합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Ronaldo&quot;</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="built_in">Int</span> = <span class="number">35</span></span><br></pre></td></tr></table></figure>
+<p>하지만 데이터타입을 선언하지 않아도 값을 할당하는 경우 자동으로 데이터타입이 추론됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;Ronaldo&quot;</span>    <span class="comment">// 문자열 타입</span></span><br><span class="line"><span class="keyword">var</span> age = <span class="number">35</span>            <span class="comment">// 정수형 타입</span></span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -277,7 +288,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/12/21/ios-cocoa-touch-app-bundle/#post-footer"
+                                href="/ko/2018/01/02/kotlin/datatype/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -300,91 +311,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2020/12/21/ios-cocoa-toucn-sandbox/"
-                            aria-label=": iOS) 샌드박스"
+                            href="/ko/2018/01/01/kotlin/variable-and-constant/"
+                            aria-label=": 변수와 상수"
                         >
-                            iOS) 샌드박스
+                            변수와 상수
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2020-12-21T20:16:30+09:00">
+    <time datetime="2018-01-01T20:16:30+09:00">
 	
-		    2020/12/21
+		    2018/01/01
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/iOS/">iOS</a>, <a class="category-link" href="/ko/categories/iOS/Cocoa-Touch/">Cocoa Touch</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<p>샌드박스는 App이 시스템 자원이나 유저 데이터에 접근하는 것을 제한하는 기술을 의미합니다.</p>
-<h2 id="번들이란"><a href="#번들이란" class="headerlink" title="번들이란?"></a>번들이란?</h2><p>번들이란 실행 가능한 코드와 리소스(이미지, 사운드 등)을 하나로 묶은 <code>디렉토리</code>입니다 애플리케이션, 프레임워크 등이 대표적인 번들에 해당합니다.<br>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수 초기화</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
-<p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 값을 초기화한 후 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>val</code>을 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line"></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
-<p>상수는 선언과 초기화를 동시에 해야합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name: String    <span class="comment">// Error</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span>        <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> nation: String = <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2020/12/21/ios-cocoa-toucn-sandbox/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2020/12/21/ios-cocoa-touch-xcconfig/"
-                            aria-label=": 환경변수 (Xcode Build Con)"
-                        >
-                            환경변수 (Xcode Build Con)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-12-21T20:16:30+09:00">
-	
-		    2020/12/21
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/iOS/">iOS</a>, <a class="category-link" href="/ko/categories/iOS/Cocoa-Touch/">Cocoa Touch</a>
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
 
 
     
@@ -399,10 +342,10 @@
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수 초기화</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
 <p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span></span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 값을 초기화한 후 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>val</code>을 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line"></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>val</code>을 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 값을 변경할 수 없습니다.</span></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
 <p>상수는 선언과 초기화를 동시에 해야합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name: String    <span class="comment">// Error</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span>        <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> nation: String = <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
                     
@@ -413,7 +356,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/12/21/ios-cocoa-touch-xcconfig/#post-footer"
+                                href="/ko/2018/01/01/kotlin/variable-and-constant/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
