@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"articleBody":"들어가며이번 포스트에서는 개발 환경과 릴리즈 환경에서 다른 설정파일을 사용하는 방법에 대해 알아보겠습니다.\n2개의 설정파일 만들기development.propeties을 생성합니다.\nproduction.properties 파일을 생성합니다.\n","dateCreated":"2020-12-21T20:16:30+09:00","dateModified":"2021-02-08T15:04:23+09:00","datePublished":"2020-12-21T20:16:30+09:00","description":"","headline":"코드에서 환경변수 분리하기 (3) ㅡ BuildTypes","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/","https://www.linkedin.com/profile/","/atom.xml"]},"url":"https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"들어가며이번 포스트에서는 개발 환경과 릴리즈 환경에서 다른 설정파일을 사용하는 방법에 대해 알아보겠습니다.\n2개의 설정파일 만들기development.propeties을 생성합니다.\nproduction.properties 파일을 생성합니다.\n","dateCreated":"2020-12-21T20:16:30+09:00","dateModified":"2021-02-08T15:04:23+09:00","datePublished":"2020-12-21T20:16:30+09:00","description":"","headline":"코드에서 환경변수 분리하기 (3) ㅡ BuildTypes","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2020/12/21/android-android-buildtypes/","keywords":"Kotlin"}</script>
     <meta name="description" content="들어가며이번 포스트에서는 개발 환경과 릴리즈 환경에서 다른 설정파일을 사용하는 방법에 대해 알아보겠습니다. 2개의 설정파일 만들기development.propeties을 생성합니다. production.properties 파일을 생성합니다.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="코드에서 환경변수 분리하기 (3) ㅡ BuildTypes">
@@ -128,20 +128,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
-                            
-                            rel="noopener"
-                            title="iOS"
-                        >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,13 +142,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/node"
+                            href="/ko/kotlin"
                             
                             rel="noopener"
-                            title="Node"
+                            title="Kotlin"
                         >
-                        <i class="sidebar-button-icon fab fa-node" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Node</span>
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
             
@@ -170,13 +156,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/figma"
+                            href="/ko/java"
                             
                             rel="noopener"
-                            title="Figma"
+                            title="Java"
                         >
-                        <i class="sidebar-button-icon fab fa-figma" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Figma</span>
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
             
@@ -188,13 +174,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/all-tags"
+                            href="/ko/ios"
                             
                             rel="noopener"
-                            title="Tags"
+                            title="iOS"
                         >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
+                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">iOS</span>
                     </a>
             </li>
             
@@ -202,13 +188,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="#about"
+                            href="/ko/swift"
                             
                             rel="noopener"
-                            title="About"
+                            title="Swift"
                         >
-                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">About</span>
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Swift</span>
                     </a>
             </li>
             
@@ -216,61 +202,19 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/mailto"
+                            href="/ko/objective-c"
                             
                             rel="noopener"
-                            title="Mail"
+                            title="Objective-C"
                         >
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Mail</span>
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Objective-C</span>
                     </a>
             </li>
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://github.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Github"
-                        >
-                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Github</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://www.linkedin.com/profile/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="LinkedIn"
-                        >
-                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">LinkedIn</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/atom.xml"
-                            
-                            rel="noopener"
-                            title="RSS"
-                        >
-                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">RSS</span>
-                    </a>
-            </li>
+        </ul>
+        
+            <ul class="sidebar-buttons">
             
         </ul>
         
