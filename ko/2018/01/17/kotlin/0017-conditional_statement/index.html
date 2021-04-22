@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>조건문 - Yologger&#39;s Blog</title>
+    <title>[Kotlin] 조건문 - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"들어가며이번 포스트에서는 코틀린의 조건문에 대해 알아보겠습니다.\n비교연산자1. ====는 내부적으로 equals()를 호출합니다.\n12println(100 == 100) // trueprintln(100 != 100) // false\n클래스의 인스턴스를 비교할 때도 마찬가지로 equals()를 호출합니다. 단 equals()메소드를 오버라이드하여 구현해 주어야 합니다.\n1234567891011121314class Person(var name: String) &#123;    override fun equals(other: Any?): Boolean &#123;        var target = other as Person        return this.name == target.name    &#125;&#125;var p1 = Person(&quot;Ronaldo&quot;)\tvar p2 = Person(&quot;Ronaldo&quot;)\tvar p3 = Person(&quot;Bale&quot;)\t\t// ==를 사용하면 .equals()이 호출됩니다. 아래 두 줄은 동일한 코드입니다.println(p1==p2)     // trueprintln(p1.equals(p2))      // true\n2. ======는 같은 주소를 참조하고 있는지 주소값을 비교합니다.\n12345678910class Person(var name: String) &#123;    // ...&#125;var p1 = Person(&quot;Paul&quot;)\tvar p2 = Person(&quot;Paul&quot;)\tvar p3 = p1\tprintln(p1===p2)    // falseprintln(p1===p3)    // true\n\n타입체크 is타입 체크를 할 때는 is키워드를 사용합니다.\n1234567891011class Person(var name: String) &#123;    // ...&#125;var p: Person = Person()if (p is Person) &#123;    println(&quot;p is Person.&quot;)&#125; else &#123;    println(&quot;p is not Person.&quot;)&#125;\n조건문코틀린은 2가지의 조건문을 제공합니다.\n1. if문1234567var isMarried: Boolean = trueif (isMarried) &#123;    println(&quot;He is married.&quot;);&#125; else &#123;    println(&quot;He is not married.&quot;);        &#125;\n2. switch문1234567891011fun doWhen(nation: String) &#123;    when(nation) &#123;        &quot;Korea&quot; -&gt; println(&quot;He&#x27;s from Korea.&quot;)        &quot;Spain&quot; -&gt; println(&quot;He&#x27;s from Spain.&quot;)        &quot;France&quot; -&gt; println(&quot;He&#x27;s from France.&quot;)        else -&gt; println(&quot;Where are you from?&quot;)    &#125;&#125;doWhen(&quot;Korea&quot;)     // He&#x27;s from Korea.doWhen(&quot;Germany&quot;)   // Where are you from?\nwhen구문의 결과를 변수에 할당할 수 있습니다.\n123456789101112fun doWhen(nation: String): String &#123;    var result: String = when(nation) &#123;        &quot;Korea&quot; -&gt; &quot;He&#x27;s from Korea.&quot;        &quot;Spain&quot; -&gt; &quot;He&#x27;s from Spain.&quot;        &quot;France&quot; -&gt; &quot;He&#x27;s from France.&quot;        else -&gt; &quot;Where are you from?&quot;    &#125;       return result&#125; var result = doWhen(&quot;Korean&quot;)println(result)","dateCreated":"2018-01-17T20:16:30+09:00","dateModified":"2021-04-21T15:27:04+09:00","datePublished":"2018-01-17T20:16:30+09:00","description":"","headline":"조건문","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/17/kotlin/0017-conditional_statement/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/17/kotlin/0017-conditional_statement/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"들어가며이번 포스트에서는 코틀린의 조건문에 대해 알아보겠습니다.\n비교연산자1. ====는 내부적으로 equals()를 호출합니다.\n12println(100 == 100) // trueprintln(100 != 100) // false\n클래스의 인스턴스를 비교할 때도 마찬가지로 equals()를 호출합니다. 단 equals()메소드를 오버라이드하여 구현해 주어야 합니다.\n1234567891011121314class Person(var name: String) &#123;    override fun equals(other: Any?): Boolean &#123;        var target = other as Person        return this.name == target.name    &#125;&#125;var p1 = Person(&quot;Ronaldo&quot;)\tvar p2 = Person(&quot;Ronaldo&quot;)\tvar p3 = Person(&quot;Bale&quot;)\t\t// ==를 사용하면 .equals()이 호출됩니다. 아래 두 줄은 동일한 코드입니다.println(p1==p2)     // trueprintln(p1.equals(p2))      // true\n2. ======는 같은 주소를 참조하고 있는지 주소값을 비교합니다.\n12345678910class Person(var name: String) &#123;    // ...&#125;var p1 = Person(&quot;Paul&quot;)\tvar p2 = Person(&quot;Paul&quot;)\tvar p3 = p1\tprintln(p1===p2)    // falseprintln(p1===p3)    // true\n\n타입체크 is타입 체크를 할 때는 is키워드를 사용합니다.\n1234567891011class Person(var name: String) &#123;    // ...&#125;var p: Person = Person()if (p is Person) &#123;    println(&quot;p is Person.&quot;)&#125; else &#123;    println(&quot;p is not Person.&quot;)&#125;\n조건문코틀린은 2가지의 조건문을 제공합니다.\n1. if문1234567var isMarried: Boolean = trueif (isMarried) &#123;    println(&quot;He is married.&quot;);&#125; else &#123;    println(&quot;He is not married.&quot;);        &#125;\n2. switch문1234567891011fun doWhen(nation: String) &#123;    when(nation) &#123;        &quot;Korea&quot; -&gt; println(&quot;He&#x27;s from Korea.&quot;)        &quot;Spain&quot; -&gt; println(&quot;He&#x27;s from Spain.&quot;)        &quot;France&quot; -&gt; println(&quot;He&#x27;s from France.&quot;)        else -&gt; println(&quot;Where are you from?&quot;)    &#125;&#125;doWhen(&quot;Korea&quot;)     // He&#x27;s from Korea.doWhen(&quot;Germany&quot;)   // Where are you from?\nwhen구문의 결과를 변수에 할당할 수 있습니다.\n123456789101112fun doWhen(nation: String): String &#123;    var result: String = when(nation) &#123;        &quot;Korea&quot; -&gt; &quot;He&#x27;s from Korea.&quot;        &quot;Spain&quot; -&gt; &quot;He&#x27;s from Spain.&quot;        &quot;France&quot; -&gt; &quot;He&#x27;s from France.&quot;        else -&gt; &quot;Where are you from?&quot;    &#125;       return result&#125; var result = doWhen(&quot;Korean&quot;)println(result)","dateCreated":"2018-01-17T20:16:30+09:00","dateModified":"2021-04-22T10:59:15+09:00","datePublished":"2018-01-17T20:16:30+09:00","description":"","headline":"[Kotlin] 조건문","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/17/kotlin/0017-conditional_statement/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/17/kotlin/0017-conditional_statement/","keywords":"Kotlin"}</script>
     <meta name="description" content="들어가며이번 포스트에서는 코틀린의 조건문에 대해 알아보겠습니다. 비교연산자1. &#x3D;&#x3D;&#x3D;&#x3D;는 내부적으로 equals()를 호출합니다. 12println(100 &#x3D;&#x3D; 100) &#x2F;&#x2F; trueprintln(100 !&#x3D; 100) &#x2F;&#x2F; false 클래스의 인스턴스를 비교할 때도 마찬가지로 equals()를 호출합니다. 단 equals()메소드를 오버라이드하여 구현해 주">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="조건문">
+<meta property="og:title" content="[Kotlin] 조건문">
 <meta property="og:url" content="https://yologger.github.io/ko/2018/01/17/kotlin/0017-conditional_statement/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="들어가며이번 포스트에서는 코틀린의 조건문에 대해 알아보겠습니다. 비교연산자1. &#x3D;&#x3D;&#x3D;&#x3D;는 내부적으로 equals()를 호출합니다. 12println(100 &#x3D;&#x3D; 100) &#x2F;&#x2F; trueprintln(100 !&#x3D; 100) &#x2F;&#x2F; false 클래스의 인스턴스를 비교할 때도 마찬가지로 equals()를 호출합니다. 단 equals()메소드를 오버라이드하여 구현해 주">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2018-01-17T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-04-21T06:27:04.610Z">
+<meta property="article:modified_time" content="2021-04-22T01:59:15.805Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -216,6 +216,38 @@
         
             <ul class="sidebar-buttons">
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
         </ul>
         
     </div>
@@ -233,7 +265,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            조건문
+            [Kotlin] 조건문
         </h1>
     
     

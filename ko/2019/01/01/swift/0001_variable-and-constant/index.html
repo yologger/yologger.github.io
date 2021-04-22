@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>데이터 타입 - 기본자료형 &amp; 타입 추론 - Yologger&#39;s Blog</title>
+    <title>[Swift] 변수와 상수 - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"들어가며이번 포스트에서는 Swift의 데이터 타입과 타입 추론에 대해 알아보겠습니다.\n기본자료형Swift에서는 변수나 상수 뒤에 데이터 타입을 명시합니다.\n123456789101112131415// 정수형 숫자var age: Int = 35// 실수형 숫자var height: Float = 180.3var weight: Double = 79.1// 불리언 var isMarred: Bool = true// 문자var grade: Character = &quot;a&quot;// 문자열var name: String = &quot;Ronaldo&quot;\n타입 추론Swift는 데이터 타입을 명시하지 않아도 자동으로 추론해줍니다.\n12var name = &quot;Ronaldo&quot;       // var name: String = &quot;Ronaldo&quot; 와 동일합니다.\n다만 변수를 선언만 하고 초기화는 나중에 하는 경우, 데이터 타입을 적어야합니다.\n12var name: Stringname = &quot;Ronaldo&quot;","dateCreated":"2021-03-09T13:19:49+09:00","dateModified":"2021-04-19T14:07:20+09:00","datePublished":"2021-03-09T13:19:49+09:00","description":"","headline":"데이터 타입 - 기본자료형 & 타입 추론","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2021/03/09/swift/data-type-1/","keywords":"iOS, Swift"}</script>
-    <meta name="description" content="들어가며이번 포스트에서는 Swift의 데이터 타입과 타입 추론에 대해 알아보겠습니다. 기본자료형Swift에서는 변수나 상수 뒤에 데이터 타입을 명시합니다. 123456789101112131415&#x2F;&#x2F; 정수형 숫자var age: Int &#x3D; 35&#x2F;&#x2F; 실수형 숫자var height: Float &#x3D; 180.3var weight: Double &#x3D; 79.1&#x2F;&#x2F; 불리언">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"들어가며이번 포스트에서는 Swift의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.\n변수변수를 선언할 때는 키워드 var를 사용합니다.\n12345// 변수 선언var name: String// 변수초기화name = &quot;Paul&quot;\n12// 변수 선언과 동시에 초기화var name: String = &quot;Paul&quot;\n변수는 값을 초기화한 후 변경할 수 있습니다.\n12var name: String = &quot;Paul&quot;name = &quot;John&quot; \n\n상수상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 let을 사용합니다.\n12345// 상수 선언과 초기화let name: String = &quot;Paul&quot;// 값을 변경할 수 없습니다.name = &quot;John&quot;       // Error\n또한 상수는 선언과 초기화를 동시에 해야합니다.\n1234let name: String    // Errorname = &quot;Paul&quot;       // Errorlet nation: String = &quot;Republic of Korea&quot;    // Success","dateCreated":"2019-01-01T13:19:49+09:00","dateModified":"2021-04-22T10:54:56+09:00","datePublished":"2019-01-01T13:19:49+09:00","description":"","headline":"[Swift] 변수와 상수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/","keywords":"iOS, Swift"}</script>
+    <meta name="description" content="들어가며이번 포스트에서는 Swift의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다. 변수변수를 선언할 때는 키워드 var를 사용합니다. 12345&#x2F;&#x2F; 변수 선언var name: String&#x2F;&#x2F; 변수초기화name &#x3D; &quot;Paul&quot; 12&#x2F;&#x2F; 변수 선언과 동시에 초기화var name: String &#x3D; &quot;Paul&quot; 변수는">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="데이터 타입 - 기본자료형 &amp; 타입 추론">
-<meta property="og:url" content="https://yologger.github.io/ko/2021/03/09/swift/data-type-1/index.html">
+<meta property="og:title" content="[Swift] 변수와 상수">
+<meta property="og:url" content="https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="들어가며이번 포스트에서는 Swift의 데이터 타입과 타입 추론에 대해 알아보겠습니다. 기본자료형Swift에서는 변수나 상수 뒤에 데이터 타입을 명시합니다. 123456789101112131415&#x2F;&#x2F; 정수형 숫자var age: Int &#x3D; 35&#x2F;&#x2F; 실수형 숫자var height: Float &#x3D; 180.3var weight: Double &#x3D; 79.1&#x2F;&#x2F; 불리언">
+<meta property="og:description" content="들어가며이번 포스트에서는 Swift의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다. 변수변수를 선언할 때는 키워드 var를 사용합니다. 12345&#x2F;&#x2F; 변수 선언var name: String&#x2F;&#x2F; 변수초기화name &#x3D; &quot;Paul&quot; 12&#x2F;&#x2F; 변수 선언과 동시에 초기화var name: String &#x3D; &quot;Paul&quot; 변수는">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2021-03-09T04:19:49.000Z">
-<meta property="article:modified_time" content="2021-04-19T05:07:20.108Z">
+<meta property="article:published_time" content="2019-01-01T04:19:49.000Z">
+<meta property="article:modified_time" content="2021-04-22T01:54:56.663Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="iOS">
 <meta property="article:tag" content="Swift">
@@ -217,6 +217,38 @@
         
             <ul class="sidebar-buttons">
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
         </ul>
         
     </div>
@@ -234,14 +266,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            데이터 타입 - 기본자료형 &amp; 타입 추론
+            [Swift] 변수와 상수
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2021-03-09T13:19:49+09:00">
+    <time datetime="2019-01-01T13:19:49+09:00">
 	
-		    2021/03/09
+		    2019/01/01
     	
     </time>
     
@@ -259,13 +291,17 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Swift의 <code>데이터 타입</code>과 <code>타입 추론</code>에 대해 알아보겠습니다.</p>
-<h2 id="기본자료형"><a href="#기본자료형" class="headerlink" title="기본자료형"></a>기본자료형</h2><p>Swift에서는 변수나 상수 뒤에 데이터 타입을 명시합니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정수형 숫자</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="type">Int</span> <span class="operator">=</span> <span class="number">35</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 실수형 숫자</span></span><br><span class="line"><span class="keyword">var</span> height: <span class="type">Float</span> <span class="operator">=</span> <span class="number">180.3</span></span><br><span class="line"><span class="keyword">var</span> weight: <span class="type">Double</span> <span class="operator">=</span> <span class="number">79.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 불리언 </span></span><br><span class="line"><span class="keyword">var</span> isMarred: <span class="type">Bool</span> <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 문자</span></span><br><span class="line"><span class="keyword">var</span> grade: <span class="type">Character</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 문자열</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="타입-추론"><a href="#타입-추론" class="headerlink" title="타입 추론"></a>타입 추론</h2><p>Swift는 데이터 타입을 명시하지 않아도 자동으로 추론해줍니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name <span class="operator">=</span> <span class="string">&quot;Ronaldo&quot;</span>       </span><br><span class="line"><span class="comment">// var name: String = &quot;Ronaldo&quot; 와 동일합니다.</span></span><br></pre></td></tr></table></figure>
-<p>다만 변수를 선언만 하고 초기화는 나중에 하는 경우, 데이터 타입을 적어야합니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
+            <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Swift의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.</p>
+<h2 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h2><p>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수초기화</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br></pre></td></tr></table></figure>
+<p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;John&quot;</span> </span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>let</code>을 사용합니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">let</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 값을 변경할 수 없습니다.</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;John&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<p>또한 상수는 선언과 초기화를 동시에 해야합니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name: <span class="type">String</span>    <span class="comment">// Error</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span>       <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> nation: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
             
 
 
@@ -299,7 +335,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -312,7 +348,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -325,7 +361,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -376,7 +412,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -389,7 +425,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -402,7 +438,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -429,7 +465,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"
                         aria-label="Facebook에 공유하기"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
@@ -442,7 +478,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"
                         aria-label="Twitter에 공유하기"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
@@ -455,7 +491,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2021/03/09/swift/data-type-1/"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/01/swift/0001_variable-and-constant/"
                         aria-label="Google+에 공유하기"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>

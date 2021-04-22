@@ -211,6 +211,38 @@
         
             <ul class="sidebar-buttons">
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
         </ul>
         
     </div>
@@ -232,10 +264,70 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/15/kotlin/0015-object/"
-                            aria-label=": Object"
+                            href="/ko/2018/01/16/kotlin/0016-sealed-class/"
+                            aria-label=": [Kotlin] Sealed Class"
                         >
-                            Object
+                            [Kotlin] Sealed Class
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-16T20:16:30+09:00">
+	
+		    2018/01/16
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <p>enum class의 확장판이라고 보시며 됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">SignUpData</span></span>(<span class="keyword">val</span> code: <span class="built_in">Int</span>, <span class="keyword">var</span> message: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">SignUpError</span> </span>&#123;</span><br><span class="line">    NETWORK_ERROR,</span><br><span class="line">    INVALID_EMAIL,</span><br><span class="line">    INVALID_PASSWORD</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">class</span> <span class="title">SignUpResponse</span> </span>&#123;</span><br><span class="line">    <span class="keyword">object</span> Progress : SignUpResponse()</span><br><span class="line">    <span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Success</span></span>(<span class="keyword">val</span> <span class="keyword">data</span>: SignUpData) : SignUpResponse()</span><br><span class="line">    <span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Failure</span></span>(<span class="keyword">val</span> error: SignUpError) : SignUpResponse()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>사용법</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">printResult</span><span class="params">(response: <span class="type">SignUpResponse</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span>(response) &#123;</span><br><span class="line">        <span class="keyword">is</span> SignUpResponse.Progress -&gt; &#123;</span><br><span class="line">            println(<span class="string">&quot;<span class="subst">$&#123;response&#125;</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">is</span> SignUpResponse.Success -&gt; &#123;</span><br><span class="line">            println(<span class="string">&quot;<span class="subst">$&#123;response.data.code&#125;</span>&quot;</span>)</span><br><span class="line">            println(<span class="string">&quot;<span class="subst">$&#123;response.data.message&#125;</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">is</span> SignUpResponse.Failure -&gt; &#123;</span><br><span class="line">            println(<span class="string">&quot;<span class="subst">$&#123;response.error&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">when</span>(response.error) &#123;</span><br><span class="line">                SignUpError.INVALID_EMAIL -&gt; &#123;</span><br><span class="line">                    println(<span class="string">&quot;invalid email&quot;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">                SignUpError.NETWORK_ERROR -&gt; &#123;</span><br><span class="line">                    println(<span class="string">&quot;network error&quot;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">                SignUpError.INVALID_PASSWORD -&gt; &#123;</span><br><span class="line">                    println(<span class="string">&quot;invalid password&quot;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> response1: SignUpResponse = SignUpResponse.Progress</span><br><span class="line">    <span class="keyword">var</span> response2: SignUpResponse = SignUpResponse.Success(SignUpData(<span class="number">111</span>, <span class="string">&quot;Successfully Signed Up.&quot;</span>))</span><br><span class="line">    <span class="keyword">var</span> response3: SignUpResponse = SignUpResponse.Failure(SignUpError.NETWORK_ERROR)</span><br><span class="line"></span><br><span class="line">    printResult(response3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/16/kotlin/0016-sealed-class/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/15/kotlin/0015-object/"
+                            aria-label=": [Kotlin] Object"
+                        >
+                            [Kotlin] Object
                         </a>
                     
                 </h1>
@@ -295,9 +387,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/14/kotlin/0014-enum-class/"
-                            aria-label=": 열거 클래스 (enum class)"
+                            aria-label=": [Kotlin] 열거 클래스 (enum class)"
                         >
-                            열거 클래스 (enum class)
+                            [Kotlin] 열거 클래스 (enum class)
                         </a>
                     
                 </h1>
@@ -353,9 +445,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/13/kotlin/0013-data-class/"
-                            aria-label=": 데이터 클래스 (data class)"
+                            aria-label=": [Kotlin] 데이터 클래스 (data class)"
                         >
-                            데이터 클래스 (data class)
+                            [Kotlin] 데이터 클래스 (data class)
                         </a>
                     
                 </h1>
@@ -415,9 +507,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/12/kotlin/0012-interface/"
-                            aria-label=": 인터페이스 (Interface)"
+                            aria-label=": [Kotlin] 인터페이스 (Interface)"
                         >
-                            인터페이스 (Interface)
+                            [Kotlin] 인터페이스 (Interface)
                         </a>
                     
                 </h1>
@@ -475,9 +567,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/11/kotlin/0011-abstract-class/"
-                            aria-label=": 추상 클래스 (Abstract Class)"
+                            aria-label=": [Kotlin] 추상 클래스 (Abstract Class)"
                         >
-                            추상 클래스 (Abstract Class)
+                            [Kotlin] 추상 클래스 (Abstract Class)
                         </a>
                     
                 </h1>
@@ -533,9 +625,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/10/kotlin/0010-inner-class/"
-                            aria-label=": Nested Class / Inner Class"
+                            aria-label=": [Kotlin] Nested Class / Inner Class"
                         >
-                            Nested Class / Inner Class
+                            [Kotlin] Nested Class / Inner Class
                         </a>
                     
                 </h1>
@@ -591,9 +683,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/09/kotlin/0009-inheritance/"
-                            aria-label=": 상속 (Inheritance)"
+                            aria-label=": [Kotlin] 상속 (Inheritance)"
                         >
-                            상속 (Inheritance)
+                            [Kotlin] 상속 (Inheritance)
                         </a>
                     
                 </h1>
@@ -655,9 +747,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/08/kotlin/0008-class-method/"
-                            aria-label=": 클래스 - 메소드"
+                            aria-label=": [Kotlin] 클래스와 메소드"
                         >
-                            클래스 - 메소드
+                            [Kotlin] 클래스와 메소드
                         </a>
                     
                 </h1>
@@ -712,9 +804,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/07/kotlin/0007-class-constructor/"
-                            aria-label=": 클래스 - 생성자"
+                            aria-label=": [Kotlin] 클래스와 생성자"
                         >
-                            클래스 - 생성자
+                            [Kotlin] 클래스와 생성자
                         </a>
                     
                 </h1>
@@ -753,64 +845,6 @@
                         <p>
                             <a
                                 href="/ko/2018/01/07/kotlin/0007-class-constructor/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/06/kotlin/0006-vararg/"
-                            aria-label=": 함수 - vararg"
-                        >
-                            함수 - vararg
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-06T20:16:30+09:00">
-	
-		    2018/01/06
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p>함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 <code>vararg</code>를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sum</span><span class="params">(<span class="keyword">vararg</span> numbers: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// numbers는 list가 아닌 array</span></span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (n <span class="keyword">in</span> numbers) &#123;</span><br><span class="line">        sum += n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result1 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)  <span class="comment">// 6</span></span><br><span class="line"><span class="keyword">var</span> result2 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/06/kotlin/0006-vararg/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

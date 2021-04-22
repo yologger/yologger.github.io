@@ -211,6 +211,38 @@
         
             <ul class="sidebar-buttons">
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
         </ul>
         
     </div>
@@ -232,140 +264,10 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2021/03/09/swift/variable-and-constant/"
-                            aria-label=": 변수와 상수"
+                            href="/ko/2020/12/21/ios/app-bundle/"
+                            aria-label=": iOS) 앱 번들"
                         >
-                            변수와 상수
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-03-09T13:19:49+09:00">
-	
-		    2021/03/09
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Swift/">Swift</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Swift의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.</p>
-<h2 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h2><p>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수초기화</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Son&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
-<p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Son&quot;</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Kane&quot;</span> </span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>let</code>을 사용합니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">let</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Son&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 값을 변경할 수 없습니다.</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Kane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
-<p>상수는 선언과 초기화를 동시에 해야합니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name: <span class="type">String</span>    <span class="comment">// Error</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Son&quot;</span>        <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> nation: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2021/03/09/swift/variable-and-constant/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2021/03/09/swift/data-type-1/"
-                            aria-label=": 데이터 타입 - 기본자료형 &amp; 타입 추론"
-                        >
-                            데이터 타입 - 기본자료형 &amp; 타입 추론
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2021-03-09T13:19:49+09:00">
-	
-		    2021/03/09
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Swift/">Swift</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Swift의 <code>데이터 타입</code>과 <code>타입 추론</code>에 대해 알아보겠습니다.</p>
-<h2 id="기본자료형"><a href="#기본자료형" class="headerlink" title="기본자료형"></a>기본자료형</h2><p>Swift에서는 변수나 상수 뒤에 데이터 타입을 명시합니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정수형 숫자</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="type">Int</span> <span class="operator">=</span> <span class="number">35</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 실수형 숫자</span></span><br><span class="line"><span class="keyword">var</span> height: <span class="type">Float</span> <span class="operator">=</span> <span class="number">180.3</span></span><br><span class="line"><span class="keyword">var</span> weight: <span class="type">Double</span> <span class="operator">=</span> <span class="number">79.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 불리언 </span></span><br><span class="line"><span class="keyword">var</span> isMarred: <span class="type">Bool</span> <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 문자</span></span><br><span class="line"><span class="keyword">var</span> grade: <span class="type">Character</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 문자열</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="타입-추론"><a href="#타입-추론" class="headerlink" title="타입 추론"></a>타입 추론</h2><p>Swift는 데이터 타입을 명시하지 않아도 자동으로 추론해줍니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name <span class="operator">=</span> <span class="string">&quot;Ronaldo&quot;</span>       </span><br><span class="line"><span class="comment">// var name: String = &quot;Ronaldo&quot; 와 동일합니다.</span></span><br></pre></td></tr></table></figure>
-<p>다만 변수를 선언만 하고 초기화는 나중에 하는 경우, 데이터 타입을 적어야합니다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2021/03/09/swift/data-type-1/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2020/12/21/ios/xcconfig/"
-                            aria-label=": 환경변수 (Xcode Build Con)"
-                        >
-                            환경변수 (Xcode Build Con)
+                            iOS) 앱 번들
                         </a>
                     
                 </h1>
@@ -388,8 +290,8 @@
             
                 <div class="postShorten-content">
                     <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Kotlin의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.</p>
-<h2 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h2><p>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 iOS의 번들에 대해 알아보겠습니다.</p>
+<h2 id="번들이란"><a href="#번들이란" class="headerlink" title="번들이란?"></a>번들이란?</h2><p>번들이란 실행 가능한 코드와 리소스(이미지, 사운드 등)을 하나로 묶은 <code>디렉토리</code>입니다 애플리케이션, 프레임워크 등이 대표적인 번들에 해당합니다.<br>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수 초기화</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
 <p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
@@ -407,7 +309,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/12/21/ios/xcconfig/#post-footer"
+                                href="/ko/2020/12/21/ios/app-bundle/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -498,10 +400,10 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2020/12/21/ios/app-bundle/"
-                            aria-label=": iOS) 앱 번들"
+                            href="/ko/2020/12/21/ios/xcconfig/"
+                            aria-label=": 환경변수 (Xcode Build Con)"
                         >
-                            iOS) 앱 번들
+                            환경변수 (Xcode Build Con)
                         </a>
                     
                 </h1>
@@ -524,8 +426,8 @@
             
                 <div class="postShorten-content">
                     <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 iOS의 번들에 대해 알아보겠습니다.</p>
-<h2 id="번들이란"><a href="#번들이란" class="headerlink" title="번들이란?"></a>번들이란?</h2><p>번들이란 실행 가능한 코드와 리소스(이미지, 사운드 등)을 하나로 묶은 <code>디렉토리</code>입니다 애플리케이션, 프레임워크 등이 대표적인 번들에 해당합니다.<br>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Kotlin의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.</p>
+<h2 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h2><p>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수 초기화</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
 <p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
@@ -543,7 +445,207 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/12/21/ios/app-bundle/#post-footer"
+                                href="/ko/2020/12/21/ios/xcconfig/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/03/swift/0003_Array/"
+                            aria-label=": [Swift] 집합자료형 - Array"
+                        >
+                            [Swift] 집합자료형 - Array
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-03T13:19:49+09:00">
+	
+		    2019/01/03
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Swift/">Swift</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Swift의 집합자료형 중 하나인 <code>Array</code>에 대해 알아보겠습니다.</p>
+<h2 id="선언-및-초기화"><a href="#선언-및-초기화" class="headerlink" title="선언 및 초기화"></a>선언 및 초기화</h2><p>정적 선언과 초기화에는 두가지 방법이 있습니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> players: <span class="type">Array</span>&lt;<span class="type">String</span>&gt; <span class="operator">=</span> [<span class="string">&quot;Paul&quot;</span>, <span class="string">&quot;John&quot;</span>, <span class="string">&quot;James&quot;</span>]</span><br><span class="line"><span class="keyword">var</span> players: [<span class="type">String</span>] <span class="operator">=</span> [<span class="string">&quot;Paul&quot;</span>, <span class="string">&quot;John&quot;</span>, <span class="string">&quot;James&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>동적 선언과 초기화 방법은 다음과 같습니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 동적 선언</span></span><br><span class="line"><span class="keyword">var</span> players: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;</span><br><span class="line"><span class="keyword">var</span> players: [<span class="type">String</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 동적 초기화</span></span><br><span class="line">players <span class="operator">=</span> <span class="type">Array</span>()</span><br><span class="line">players <span class="operator">=</span> [<span class="type">String</span>]()</span><br><span class="line">players <span class="operator">=</span> []</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 동적 선언 &amp; 초기화</span></span><br><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> <span class="type">Array</span>&lt;<span class="type">String</span>&gt;()</span><br><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> [<span class="type">String</span>]()</span><br><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> <span class="operator">&lt;</span><span class="type">String</span><span class="operator">&gt;</span>[]</span><br></pre></td></tr></table></figure>
+<h2 id="요소-조작"><a href="#요소-조작" class="headerlink" title="요소 조작"></a>요소 조작</h2><p>요소 추가</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> <span class="type">Array</span>&lt;<span class="type">String</span>&gt;()</span><br><span class="line"></span><br><span class="line">players.append(<span class="string">&quot;Harry&quot;</span>)</span><br><span class="line">players.insert(<span class="string">&quot;Lee&quot;</span>, at: <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>요소 변경</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">players[<span class="number">2</span>] <span class="operator">=</span> <span class="string">&quot;Park&quot;</span></span><br></pre></td></tr></table></figure>
+<p>요소 삭제</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">players.remove(at: <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>범위연산자</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> players: <span class="type">Array</span>&lt;<span class="type">String</span>&gt; <span class="operator">=</span> [<span class="string">&quot;Paul&quot;</span>, <span class="string">&quot;John&quot;</span>, <span class="string">&quot;James&quot;</span>, <span class="string">&quot;Lee&quot;</span>, <span class="string">&quot;Harry&quot;</span>]</span><br><span class="line"><span class="keyword">var</span> selected <span class="operator">=</span> players[<span class="number">1</span><span class="operator">...</span><span class="number">3</span>]    </span><br><span class="line"><span class="built_in">print</span>(selected)     <span class="comment">// [&quot;John&quot;, &quot;James&quot;, &quot;Lee&quot;]</span></span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/03/swift/0003_Array/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/02/swift/0002_data-type-1/"
+                            aria-label=": [Swift] 데이터 타입 - 기본자료형 &amp; 타입 추론"
+                        >
+                            [Swift] 데이터 타입 - 기본자료형 &amp; 타입 추론
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-02T13:19:49+09:00">
+	
+		    2019/01/02
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Swift/">Swift</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Swift의 <code>데이터 타입</code>과 <code>타입 추론</code>에 대해 알아보겠습니다.</p>
+<h2 id="기본자료형"><a href="#기본자료형" class="headerlink" title="기본자료형"></a>기본자료형</h2><p>Swift에서는 변수나 상수 뒤에 데이터 타입을 명시합니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정수형 숫자</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="type">Int</span> <span class="operator">=</span> <span class="number">35</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 실수형 숫자</span></span><br><span class="line"><span class="keyword">var</span> height: <span class="type">Float</span> <span class="operator">=</span> <span class="number">180.3</span></span><br><span class="line"><span class="keyword">var</span> weight: <span class="type">Double</span> <span class="operator">=</span> <span class="number">79.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 불리언 </span></span><br><span class="line"><span class="keyword">var</span> isMarred: <span class="type">Bool</span> <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 문자</span></span><br><span class="line"><span class="keyword">var</span> grade: <span class="type">Character</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 문자열</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 문자열 템플릿</span></span><br><span class="line"><span class="keyword">var</span> description: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;My name is <span class="subst">\(name)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="타입-추론"><a href="#타입-추론" class="headerlink" title="타입 추론"></a>타입 추론</h2><p>Swift는 데이터 타입을 명시하지 않아도 자동으로 추론해줍니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span>       </span><br><span class="line"><span class="comment">// var name: String = &quot;Paul&quot; 와 동일합니다.</span></span><br></pre></td></tr></table></figure>
+<p>다만 변수를 선언만 하고 초기화는 나중에 하는 경우, 데이터 타입을 반드시 적어야합니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/02/swift/0002_data-type-1/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/01/swift/0001_variable-and-constant/"
+                            aria-label=": [Swift] 변수와 상수"
+                        >
+                            [Swift] 변수와 상수
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-01T13:19:49+09:00">
+	
+		    2019/01/01
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Swift/">Swift</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Swift의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.</p>
+<h2 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h2><p>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수초기화</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br></pre></td></tr></table></figure>
+<p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;John&quot;</span> </span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>let</code>을 사용합니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">let</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 값을 변경할 수 없습니다.</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;John&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<p>또한 상수는 선언과 초기화를 동시에 해야합니다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name: <span class="type">String</span>    <span class="comment">// Error</span></span><br><span class="line">name <span class="operator">=</span> <span class="string">&quot;Paul&quot;</span>       <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> nation: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/01/swift/0001_variable-and-constant/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -567,9 +669,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/20/kotlin/0020-null-2/"
-                            aria-label=": 코틀린의 null 처리 - (2)"
+                            aria-label=": [Kotlin] null 처리 - (2)"
                         >
-                            코틀린의 null 처리 - (2)
+                            [Kotlin] null 처리 - (2)
                         </a>
                     
                 </h1>
@@ -630,9 +732,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/19/kotlin/0019-null-1/"
-                            aria-label=": 코틀린의 null 처리 - (1)"
+                            aria-label=": [Kotlin] null 처리 - (1)"
                         >
-                            코틀린의 null 처리 - (1)
+                            [Kotlin] null 처리 - (1)
                         </a>
                     
                 </h1>
@@ -699,9 +801,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/18/kotlin/0018-iteration_statement/"
-                            aria-label=": 반복문"
+                            aria-label=": [Kotlin] 반복문"
                         >
-                            반복문
+                            [Kotlin] 반복문
                         </a>
                     
                 </h1>
@@ -759,9 +861,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/17/kotlin/0017-conditional_statement/"
-                            aria-label=": 조건문"
+                            aria-label=": [Kotlin] 조건문"
                         >
-                            조건문
+                            [Kotlin] 조건문
                         </a>
                     
                 </h1>
@@ -807,66 +909,6 @@
                         <p>
                             <a
                                 href="/ko/2018/01/17/kotlin/0017-conditional_statement/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/16/kotlin/0016-sealed-class/"
-                            aria-label=": Sealed Class"
-                        >
-                            Sealed Class
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-16T20:16:30+09:00">
-	
-		    2018/01/16
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p>enum class의 확장판이라고 보시며 됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">SignUpData</span></span>(<span class="keyword">val</span> code: <span class="built_in">Int</span>, <span class="keyword">var</span> message: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">SignUpError</span> </span>&#123;</span><br><span class="line">    NETWORK_ERROR,</span><br><span class="line">    INVALID_EMAIL,</span><br><span class="line">    INVALID_PASSWORD</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">class</span> <span class="title">SignUpResponse</span> </span>&#123;</span><br><span class="line">    <span class="keyword">object</span> Progress : SignUpResponse()</span><br><span class="line">    <span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Success</span></span>(<span class="keyword">val</span> <span class="keyword">data</span>: SignUpData) : SignUpResponse()</span><br><span class="line">    <span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Failure</span></span>(<span class="keyword">val</span> error: SignUpError) : SignUpResponse()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>사용법</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">printResult</span><span class="params">(response: <span class="type">SignUpResponse</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span>(response) &#123;</span><br><span class="line">        <span class="keyword">is</span> SignUpResponse.Progress -&gt; &#123;</span><br><span class="line">            println(<span class="string">&quot;<span class="subst">$&#123;response&#125;</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">is</span> SignUpResponse.Success -&gt; &#123;</span><br><span class="line">            println(<span class="string">&quot;<span class="subst">$&#123;response.data.code&#125;</span>&quot;</span>)</span><br><span class="line">            println(<span class="string">&quot;<span class="subst">$&#123;response.data.message&#125;</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">is</span> SignUpResponse.Failure -&gt; &#123;</span><br><span class="line">            println(<span class="string">&quot;<span class="subst">$&#123;response.error&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">when</span>(response.error) &#123;</span><br><span class="line">                SignUpError.INVALID_EMAIL -&gt; &#123;</span><br><span class="line">                    println(<span class="string">&quot;invalid email&quot;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">                SignUpError.NETWORK_ERROR -&gt; &#123;</span><br><span class="line">                    println(<span class="string">&quot;network error&quot;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">                SignUpError.INVALID_PASSWORD -&gt; &#123;</span><br><span class="line">                    println(<span class="string">&quot;invalid password&quot;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> response1: SignUpResponse = SignUpResponse.Progress</span><br><span class="line">    <span class="keyword">var</span> response2: SignUpResponse = SignUpResponse.Success(SignUpData(<span class="number">111</span>, <span class="string">&quot;Successfully Signed Up.&quot;</span>))</span><br><span class="line">    <span class="keyword">var</span> response3: SignUpResponse = SignUpResponse.Failure(SignUpError.NETWORK_ERROR)</span><br><span class="line"></span><br><span class="line">    printResult(response3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/16/kotlin/0016-sealed-class/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>코틀린의 null 처리 - (2) - Yologger&#39;s Blog</title>
+    <title>[Kotlin] null 처리 - (2) - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"Nullable 타입의 변수를 사용하려면 null이 아닌지를 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다.\n12345678class Person constructor(val name: String) &#123;    fun printName() &#123;        println(&quot;name: $&#123;name&#125;&quot;)    &#125;&#125;var person: Person? = nullperson.printName()  // Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Person?\nNull 체크방법 1\n1234567var person: Person? = nullif (person != null) &#123;    person!!.printName()&#125;var name = if (person != null) person!!.name else &quot;&quot;\n방법 2 - 단축 구문\n123456var person: Person? = nullperson?.printName()// person이 null이면 아무 일도 일어나지 않습니다.var name = person?.name\nChaining1","dateCreated":"2018-01-20T20:16:30+09:00","dateModified":"2021-04-21T18:34:53+09:00","datePublished":"2018-01-20T20:16:30+09:00","description":"","headline":"코틀린의 null 처리 - (2)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/20/kotlin/0020-null-2/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/20/kotlin/0020-null-2/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"Nullable 타입의 변수를 사용하려면 null이 아닌지를 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다.\n12345678class Person constructor(val name: String) &#123;    fun printName() &#123;        println(&quot;name: $&#123;name&#125;&quot;)    &#125;&#125;var person: Person? = nullperson.printName()  // Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Person?\nNull 체크방법 1\n1234567var person: Person? = nullif (person != null) &#123;    person!!.printName()&#125;var name = if (person != null) person!!.name else &quot;&quot;\n방법 2 - 단축 구문\n123456var person: Person? = nullperson?.printName()// person이 null이면 아무 일도 일어나지 않습니다.var name = person?.name\nChaining1","dateCreated":"2018-01-20T20:16:30+09:00","dateModified":"2021-04-22T10:57:55+09:00","datePublished":"2018-01-20T20:16:30+09:00","description":"","headline":"[Kotlin] null 처리 - (2)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/20/kotlin/0020-null-2/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/20/kotlin/0020-null-2/","keywords":"Kotlin"}</script>
     <meta name="description" content="Nullable 타입의 변수를 사용하려면 null이 아닌지를 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다. 12345678class Person constructor(val name: String) &amp;#123;    fun printName() &amp;#123;        println(&quot;name: $&amp;#123;name&amp;#125;&quot;)">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="코틀린의 null 처리 - (2)">
+<meta property="og:title" content="[Kotlin] null 처리 - (2)">
 <meta property="og:url" content="https://yologger.github.io/ko/2018/01/20/kotlin/0020-null-2/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="Nullable 타입의 변수를 사용하려면 null이 아닌지를 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다. 12345678class Person constructor(val name: String) &amp;#123;    fun printName() &amp;#123;        println(&quot;name: $&amp;#123;name&amp;#125;&quot;)">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2018-01-20T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-04-21T09:34:53.428Z">
+<meta property="article:modified_time" content="2021-04-22T01:57:55.099Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -216,6 +216,38 @@
         
             <ul class="sidebar-buttons">
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
         </ul>
         
     </div>
@@ -233,7 +265,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            코틀린의 null 처리 - (2)
+            [Kotlin] null 처리 - (2)
         </h1>
     
     

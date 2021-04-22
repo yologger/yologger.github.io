@@ -211,6 +211,38 @@
         
             <ul class="sidebar-buttons">
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
         </ul>
         
     </div>
@@ -234,9 +266,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/10/kotlin/0010-inner-class/"
-                            aria-label=": Nested Class / Inner Class"
+                            aria-label=": [Kotlin] Nested Class / Inner Class"
                         >
-                            Nested Class / Inner Class
+                            [Kotlin] Nested Class / Inner Class
                         </a>
                     
                 </h1>
@@ -292,9 +324,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/09/kotlin/0009-inheritance/"
-                            aria-label=": 상속 (Inheritance)"
+                            aria-label=": [Kotlin] 상속 (Inheritance)"
                         >
-                            상속 (Inheritance)
+                            [Kotlin] 상속 (Inheritance)
                         </a>
                     
                 </h1>
@@ -356,9 +388,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/08/kotlin/0008-class-method/"
-                            aria-label=": 클래스 - 메소드"
+                            aria-label=": [Kotlin] 클래스와 메소드"
                         >
-                            클래스 - 메소드
+                            [Kotlin] 클래스와 메소드
                         </a>
                     
                 </h1>
@@ -413,9 +445,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/07/kotlin/0007-class-constructor/"
-                            aria-label=": 클래스 - 생성자"
+                            aria-label=": [Kotlin] 클래스와 생성자"
                         >
-                            클래스 - 생성자
+                            [Kotlin] 클래스와 생성자
                         </a>
                     
                 </h1>
@@ -477,9 +509,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/06/kotlin/0006-vararg/"
-                            aria-label=": 함수 - vararg"
+                            aria-label=": [Kotlin] vararg"
                         >
-                            함수 - vararg
+                            [Kotlin] vararg
                         </a>
                     
                 </h1>
@@ -535,9 +567,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/05/kotlin/0005-function/"
-                            aria-label=": 함수"
+                            aria-label=": [Kotlin] 함수"
                         >
-                            함수
+                            [Kotlin] 함수
                         </a>
                     
                 </h1>
@@ -604,9 +636,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/04/kotlin/0004-collection/"
-                            aria-label=": 집합 자료형"
+                            aria-label=": [Kotlin] 집합 자료형"
                         >
-                            집합 자료형
+                            [Kotlin] 집합 자료형
                         </a>
                     
                 </h1>
@@ -679,9 +711,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/03/kotlin/0003-array/"
-                            aria-label=": 배열"
+                            aria-label=": [Kotlin] 배열"
                         >
-                            배열
+                            [Kotlin] 배열
                         </a>
                     
                 </h1>
@@ -741,9 +773,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/02/kotlin/0002-datatype/"
-                            aria-label=": 자료형"
+                            aria-label=": [Kotlin] 자료형"
                         >
-                            자료형
+                            [Kotlin] 자료형
                         </a>
                     
                 </h1>
@@ -820,9 +852,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/01/kotlin/0001-variable-constant/"
-                            aria-label=": 변수와 상수"
+                            aria-label=": [Kotlin] 변수와 상수"
                         >
-                            변수와 상수
+                            [Kotlin] 변수와 상수
                         </a>
                     
                 </h1>
@@ -854,7 +886,7 @@
 <hr>
 <h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수는 초기화한 후 값을 변경할 수 없습니다. 상수를 선언할 때는 키워드 <code>val</code>을 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Son&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 값을 변경할 수 없습니다.</span></span><br><span class="line">name = <span class="string">&quot;Kane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
-<p>상수는 선언과 초기화를 동시에 해야합니다.</p>
+<p>또한 상수는 선언과 초기화를 동시에 해야합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name: String    <span class="comment">// Error</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span>        <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> nation: String = <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
                     
                         

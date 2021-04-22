@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>데이터 클래스 (data class) - Yologger&#39;s Blog</title>
+    <title>[Kotlin] 데이터 클래스 (data class) - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"코틀린은 데이터만을 담기 위한 클래스를 제공합니다. 이때 data 키워드를 사용합니다. 주의할 점은 멤버 변수를 반드시 기본 생성자에 추가해야 합니다.\n1data class Person constructor(val name: String, val nation: String)\n데이터 클래스(data class)는 데이터를 처리하는데 유용한 메소드들을 자동으로 제공합니다.\nequal()123456data class Person constructor(val name: String, val nation: String)val p1 = Person(&quot;Ronaldo&quot;, &quot;Portugal&quot;)val p2 = Person(&quot;Ramos&quot;, &quot;Spain&quot;)println(p1.equals(p2))  // false\ncopy()123456data class Person constructor(val name: String, val nation: String)val p1 = Person(&quot;Paul&quot;, &quot;England&quot;)val p2 = p1.copy()println(p2.name)    // Paul\ntoString()12345data class Person constructor(val name: String, val nation: String)val person = Person(&quot;Ronaldo&quot;, &quot;Portugal&quot;)println(person.toString())\t// Person(name=Ronaldo, nation=Portugal) ","dateCreated":"2018-01-13T20:16:30+09:00","dateModified":"2021-04-21T14:44:49+09:00","datePublished":"2018-01-13T20:16:30+09:00","description":"","headline":"데이터 클래스 (data class)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/13/kotlin/0013-data-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/13/kotlin/0013-data-class/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"코틀린은 데이터만을 담기 위한 클래스를 제공합니다. 이때 data 키워드를 사용합니다. 주의할 점은 멤버 변수를 반드시 기본 생성자에 추가해야 합니다.\n1data class Person constructor(val name: String, val nation: String)\n데이터 클래스(data class)는 데이터를 처리하는데 유용한 메소드들을 자동으로 제공합니다.\nequal()123456data class Person constructor(val name: String, val nation: String)val p1 = Person(&quot;Ronaldo&quot;, &quot;Portugal&quot;)val p2 = Person(&quot;Ramos&quot;, &quot;Spain&quot;)println(p1.equals(p2))  // false\ncopy()123456data class Person constructor(val name: String, val nation: String)val p1 = Person(&quot;Paul&quot;, &quot;England&quot;)val p2 = p1.copy()println(p2.name)    // Paul\ntoString()12345data class Person constructor(val name: String, val nation: String)val person = Person(&quot;Ronaldo&quot;, &quot;Portugal&quot;)println(person.toString())\t// Person(name=Ronaldo, nation=Portugal) ","dateCreated":"2018-01-13T20:16:30+09:00","dateModified":"2021-04-22T10:57:29+09:00","datePublished":"2018-01-13T20:16:30+09:00","description":"","headline":"[Kotlin] 데이터 클래스 (data class)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/13/kotlin/0013-data-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/13/kotlin/0013-data-class/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린은 데이터만을 담기 위한 클래스를 제공합니다. 이때 data 키워드를 사용합니다. 주의할 점은 멤버 변수를 반드시 기본 생성자에 추가해야 합니다. 1data class Person constructor(val name: String, val nation: String) 데이터 클래스(data class)는 데이터를 처리하는데 유용한 메소드들을 자동으로">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="데이터 클래스 (data class)">
+<meta property="og:title" content="[Kotlin] 데이터 클래스 (data class)">
 <meta property="og:url" content="https://yologger.github.io/ko/2018/01/13/kotlin/0013-data-class/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="코틀린은 데이터만을 담기 위한 클래스를 제공합니다. 이때 data 키워드를 사용합니다. 주의할 점은 멤버 변수를 반드시 기본 생성자에 추가해야 합니다. 1data class Person constructor(val name: String, val nation: String) 데이터 클래스(data class)는 데이터를 처리하는데 유용한 메소드들을 자동으로">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2018-01-13T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-04-21T05:44:49.610Z">
+<meta property="article:modified_time" content="2021-04-22T01:57:29.718Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -216,6 +216,38 @@
         
             <ul class="sidebar-buttons">
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
         </ul>
         
     </div>
@@ -233,7 +265,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            데이터 클래스 (data class)
+            [Kotlin] 데이터 클래스 (data class)
         </h1>
     
     

@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>Object - Yologger&#39;s Blog</title>
+    <title>[Kotlin] Object - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"1. 싱글톤 (Singleton)123456789101112131415161718192021222324252627object Counter &#123;    var count = 0    fun countUp() &#123;        count ++    &#125;    fun clear() &#123;        count = 0    &#125;&#125;println(Counter.count)      // 0Counter.countUp()Counter.countUp()Counter.countUp()println(Counter.count)      // 3Counter.clear()println(Counter.count)      // 0var myCounter: Counter = CountermyCounter.countUp()myCounter.countUp()println(myCounter.count)    // 2println(Counter.count)      // 0\n2. 익명 클래스 (Anonymous Class)12345button.setOnClickListener(object: View.OnClickListener &#123;    override fun onClick(v: View?) &#123;        // 클릭 시 처리    &#125;&#125;)\n3. Companion objectJava의 static과 유사합니다.\n12345678910111213141516171819202122232425262728293031323334353637class FoodPoll(val name: String) &#123;    companion object &#123;        var total = 0        fun printTotal() &#123;            println(total);        &#125;\t\t        const val POLL: String = &quot;food&quot;     &#125;        var count = 0        fun vote() &#123;        total++        count++    &#125;&#125;var melon = FoodPoll(&quot;Melon&quot;)melon.vote()melon.vote()var apple = FoodPoll(&quot;Apple&quot;)apple.vote()apple.vote()apple.vote()FoodPoll.printTotal()   // 5    println(&quot;$&#123;melon.name&#125;: $&#123;melon.count&#125;&quot;)    // Melon: 2println(&quot;$&#123;apple.name&#125;: $&#123;apple.count&#125;&quot;)    // Apple: 3println(&quot;Total: $&#123;FoodPoll.total&#125;&quot;) // Total: 5println(&quot;POLL: $&#123;FoodPoll.POLL&#125;&quot;)    // food\ncompanion object에 이름을 붙일 수도 있습니다.\n12345678class Person(val name: String) &#123;     companion object Loader &#123;         fun fromJSON(jsonText: String): Person = ....     &#125; &#125; person1 = Person.Loader.fromJSON(&quot;&#123;name:&#x27;hong&#x27;&#125;&quot;) person2 = Person.fromJSON(&quot;&#123;name:&#x27;kim&#x27;&#125;&quot;) ","dateCreated":"2018-01-15T20:16:30+09:00","dateModified":"2021-04-21T15:03:19+09:00","datePublished":"2018-01-15T20:16:30+09:00","description":"","headline":"Object","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/15/kotlin/0015-object/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/15/kotlin/0015-object/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"1. 싱글톤 (Singleton)123456789101112131415161718192021222324252627object Counter &#123;    var count = 0    fun countUp() &#123;        count ++    &#125;    fun clear() &#123;        count = 0    &#125;&#125;println(Counter.count)      // 0Counter.countUp()Counter.countUp()Counter.countUp()println(Counter.count)      // 3Counter.clear()println(Counter.count)      // 0var myCounter: Counter = CountermyCounter.countUp()myCounter.countUp()println(myCounter.count)    // 2println(Counter.count)      // 0\n2. 익명 클래스 (Anonymous Class)12345button.setOnClickListener(object: View.OnClickListener &#123;    override fun onClick(v: View?) &#123;        // 클릭 시 처리    &#125;&#125;)\n3. Companion objectJava의 static과 유사합니다.\n12345678910111213141516171819202122232425262728293031323334353637class FoodPoll(val name: String) &#123;    companion object &#123;        var total = 0        fun printTotal() &#123;            println(total);        &#125;\t\t        const val POLL: String = &quot;food&quot;     &#125;        var count = 0        fun vote() &#123;        total++        count++    &#125;&#125;var melon = FoodPoll(&quot;Melon&quot;)melon.vote()melon.vote()var apple = FoodPoll(&quot;Apple&quot;)apple.vote()apple.vote()apple.vote()FoodPoll.printTotal()   // 5    println(&quot;$&#123;melon.name&#125;: $&#123;melon.count&#125;&quot;)    // Melon: 2println(&quot;$&#123;apple.name&#125;: $&#123;apple.count&#125;&quot;)    // Apple: 3println(&quot;Total: $&#123;FoodPoll.total&#125;&quot;) // Total: 5println(&quot;POLL: $&#123;FoodPoll.POLL&#125;&quot;)    // food\ncompanion object에 이름을 붙일 수도 있습니다.\n12345678class Person(val name: String) &#123;     companion object Loader &#123;         fun fromJSON(jsonText: String): Person = ....     &#125; &#125; person1 = Person.Loader.fromJSON(&quot;&#123;name:&#x27;hong&#x27;&#125;&quot;) person2 = Person.fromJSON(&quot;&#123;name:&#x27;kim&#x27;&#125;&quot;) ","dateCreated":"2018-01-15T20:16:30+09:00","dateModified":"2021-04-22T10:57:36+09:00","datePublished":"2018-01-15T20:16:30+09:00","description":"","headline":"[Kotlin] Object","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/15/kotlin/0015-object/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/15/kotlin/0015-object/","keywords":"Kotlin"}</script>
     <meta name="description" content="1. 싱글톤 (Singleton)123456789101112131415161718192021222324252627object Counter &amp;#123;    var count &#x3D; 0    fun countUp() &amp;#123;        count ++    &amp;#125;    fun clear() &amp;#123;        count &#x3D; 0    &amp;#125;">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Object">
+<meta property="og:title" content="[Kotlin] Object">
 <meta property="og:url" content="https://yologger.github.io/ko/2018/01/15/kotlin/0015-object/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="1. 싱글톤 (Singleton)123456789101112131415161718192021222324252627object Counter &amp;#123;    var count &#x3D; 0    fun countUp() &amp;#123;        count ++    &amp;#125;    fun clear() &amp;#123;        count &#x3D; 0    &amp;#125;">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2018-01-15T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-04-21T06:03:19.033Z">
+<meta property="article:modified_time" content="2021-04-22T01:57:36.731Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -216,6 +216,38 @@
         
             <ul class="sidebar-buttons">
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
         </ul>
         
     </div>
@@ -233,7 +265,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Object
+            [Kotlin] Object
         </h1>
     
     

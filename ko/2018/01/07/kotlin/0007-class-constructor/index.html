@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>클래스 - 생성자 - Yologger&#39;s Blog</title>
+    <title>[Kotlin] 클래스와 생성자 - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"기본 생성자클래스 이름 뒤에 constructor키워드를 붙여서 만듭니다.\n123456789101112131415class Person constructor(name: String) &#123;\t    // 멤버변수 선언    var name: String\t        // 초기화 구문    init &#123;        this.name = name    &#125;&#125;// 클래스의 인스턴스 생성var person = Person(&quot;Ronaldo&quot;)\t\tprint(person.name)\nconstructor키워드는 생략 가능합니다.\n1234567891011121314class Person(name: String) &#123;\t    // 멤버변수 선언    var name: String\t        // 초기화 구문    init &#123;        this.name = name    &#125;&#125;var person = Person(&quot;Ronaldo&quot;)\t\tprint(person.name)\n맴버변수 선언도 생성자 안에서 할 수 있습니다.\n12345class Person (var name: String)\tvar person = Person(&quot;Ronaldo&quot;)print(person.name)\n보조 생성자기본 생성자를 정의하지 않고 보조 생성자만 사용할 수 있습니다.\n12345678910111213class Person &#123;    // 멤버변수    var name: String    // 보조 생성자    constructor(name: String) &#123;        this.name = name        &#125;&#125;\tvar person = Person(&quot;Ronaldo&quot;) println(person.name)","dateCreated":"2018-01-07T20:16:30+09:00","dateModified":"2021-04-21T18:16:36+09:00","datePublished":"2018-01-07T20:16:30+09:00","description":"","headline":"클래스 - 생성자","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/07/kotlin/0007-class-constructor/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/07/kotlin/0007-class-constructor/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"기본 생성자클래스 이름 뒤에 constructor키워드를 붙여서 만듭니다.\n123456789101112131415class Person constructor(name: String) &#123;\t    // 멤버변수 선언    var name: String\t        // 초기화 구문    init &#123;        this.name = name    &#125;&#125;// 클래스의 인스턴스 생성var person = Person(&quot;Ronaldo&quot;)\t\tprint(person.name)\nconstructor키워드는 생략 가능합니다.\n1234567891011121314class Person(name: String) &#123;\t    // 멤버변수 선언    var name: String\t        // 초기화 구문    init &#123;        this.name = name    &#125;&#125;var person = Person(&quot;Ronaldo&quot;)\t\tprint(person.name)\n맴버변수 선언도 생성자 안에서 할 수 있습니다.\n12345class Person (var name: String)\tvar person = Person(&quot;Ronaldo&quot;)print(person.name)\n보조 생성자기본 생성자를 정의하지 않고 보조 생성자만 사용할 수 있습니다.\n12345678910111213class Person &#123;    // 멤버변수    var name: String    // 보조 생성자    constructor(name: String) &#123;        this.name = name        &#125;&#125;\tvar person = Person(&quot;Ronaldo&quot;) println(person.name)","dateCreated":"2018-01-07T20:16:30+09:00","dateModified":"2021-04-22T10:56:42+09:00","datePublished":"2018-01-07T20:16:30+09:00","description":"","headline":"[Kotlin] 클래스와 생성자","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/07/kotlin/0007-class-constructor/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/07/kotlin/0007-class-constructor/","keywords":"Kotlin"}</script>
     <meta name="description" content="기본 생성자클래스 이름 뒤에 constructor키워드를 붙여서 만듭니다. 123456789101112131415class Person constructor(name: String) &amp;#123;	    &#x2F;&#x2F; 멤버변수 선언    var name: String	        &#x2F;&#x2F; 초기화 구문    init &amp;#123;        this.name &#x3D; name">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="클래스 - 생성자">
+<meta property="og:title" content="[Kotlin] 클래스와 생성자">
 <meta property="og:url" content="https://yologger.github.io/ko/2018/01/07/kotlin/0007-class-constructor/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="기본 생성자클래스 이름 뒤에 constructor키워드를 붙여서 만듭니다. 123456789101112131415class Person constructor(name: String) &amp;#123;	    &#x2F;&#x2F; 멤버변수 선언    var name: String	        &#x2F;&#x2F; 초기화 구문    init &amp;#123;        this.name &#x3D; name">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2018-01-07T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-04-21T09:16:36.326Z">
+<meta property="article:modified_time" content="2021-04-22T01:56:42.661Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -216,6 +216,38 @@
         
             <ul class="sidebar-buttons">
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
         </ul>
         
     </div>
@@ -233,7 +265,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            클래스 - 생성자
+            [Kotlin] 클래스와 생성자
         </h1>
     
     
