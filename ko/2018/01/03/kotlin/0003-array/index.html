@@ -11,16 +11,16 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n들어가며이번 포스트에서는 Kotlin의 배열에 대해 알아보겠습니다.\n배열배열을 선언하고 초기화할 때는 arrayOf 메소드를 사용합니다.\n12345var players: Array&lt;String&gt; = arrayOf&lt;String&gt;(&quot;ronaldo&quot;, &quot;benzema&quot;, &quot;kane&quot;)println(players[0])         // ronaldoprintln(players[1])         // benzemaprintln(players.length)     // 3\n요소가 배열에 포함되는지 확인할 때는 in 키워드를 사용합니다.\n12345if (&quot;ronaldo&quot; in players) &#123;    // 요소가 배열에 포함될 때&#125; else &#123;    // 요소가 배열에 포함되지 않을 때&#125;","dateCreated":"2018-01-03T20:16:30+09:00","dateModified":"2021-04-22T10:56:20+09:00","datePublished":"2018-01-03T20:16:30+09:00","description":"","headline":"[Kotlin] 배열","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/03/kotlin/0003-array/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/03/kotlin/0003-array/","keywords":"Kotlin"}</script>
-    <meta name="description" content="들어가며이번 포스트에서는 Kotlin의 배열에 대해 알아보겠습니다. 배열배열을 선언하고 초기화할 때는 arrayOf 메소드를 사용합니다. 12345var players: Array&lt;String&gt; &#x3D; arrayOf&lt;String&gt;(&quot;ronaldo&quot;, &quot;benzema&quot;, &quot;kane&quot;)p">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n들어가며이번 포스트에서는 Kotlin의 배열에 대해 알아보겠습니다.\n배열배열을 선언하고 초기화할 때는 arrayOf 메소드를 사용합니다. 배열은 인스턴스가 생성될 때 크기가 설정되므로 동적으로 값을 추가하거나 삭제할 수 없습니다. \n12345var players: Array&lt;String&gt; = arrayOf&lt;String&gt;(&quot;ronaldo&quot;, &quot;benzema&quot;, &quot;kane&quot;)println(players[0])         // ronaldoprintln(players[1])         // benzemaprintln(players.length)     // 3\n요소가 배열에 포함되는지 확인할 때는 in 키워드를 사용합니다.\n12345if (&quot;ronaldo&quot; in players) &#123;    // 요소가 배열에 포함될 때&#125; else &#123;    // 요소가 배열에 포함되지 않을 때&#125;","dateCreated":"2018-01-03T20:16:30+09:00","dateModified":"2021-04-22T14:28:14+09:00","datePublished":"2018-01-03T20:16:30+09:00","description":"","headline":"[Kotlin] 배열","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/03/kotlin/0003-array/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/03/kotlin/0003-array/","keywords":"Kotlin"}</script>
+    <meta name="description" content="들어가며이번 포스트에서는 Kotlin의 배열에 대해 알아보겠습니다. 배열배열을 선언하고 초기화할 때는 arrayOf 메소드를 사용합니다. 배열은 인스턴스가 생성될 때 크기가 설정되므로 동적으로 값을 추가하거나 삭제할 수 없습니다.  12345var players: Array&lt;String&gt; &#x3D; arrayOf&lt;String&gt;(&quot;r">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] 배열">
 <meta property="og:url" content="https://yologger.github.io/ko/2018/01/03/kotlin/0003-array/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="들어가며이번 포스트에서는 Kotlin의 배열에 대해 알아보겠습니다. 배열배열을 선언하고 초기화할 때는 arrayOf 메소드를 사용합니다. 12345var players: Array&lt;String&gt; &#x3D; arrayOf&lt;String&gt;(&quot;ronaldo&quot;, &quot;benzema&quot;, &quot;kane&quot;)p">
+<meta property="og:description" content="들어가며이번 포스트에서는 Kotlin의 배열에 대해 알아보겠습니다. 배열배열을 선언하고 초기화할 때는 arrayOf 메소드를 사용합니다. 배열은 인스턴스가 생성될 때 크기가 설정되므로 동적으로 값을 추가하거나 삭제할 수 없습니다.  12345var players: Array&lt;String&gt; &#x3D; arrayOf&lt;String&gt;(&quot;r">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2018-01-03T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-04-22T01:56:20.364Z">
+<meta property="article:modified_time" content="2021-04-22T05:28:14.275Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -38,6 +38,15 @@
 
     <!--STYLES END-->
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '[object Object]');
+    </script>
+
 
     
 
@@ -142,20 +151,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/kotlin"
-                            
-                            rel="noopener"
-                            title="Kotlin"
-                        >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Kotlin</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/java"
                             
                             rel="noopener"
@@ -163,6 +158,20 @@
                         >
                         <i class="sidebar-button-icon " aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
             
@@ -292,7 +301,7 @@
         <div class="main-content-wrap">
             <hr>
 <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Kotlin의 <code>배열</code>에 대해 알아보겠습니다.</p>
-<h2 id="배열"><a href="#배열" class="headerlink" title="배열"></a>배열</h2><p>배열을 선언하고 초기화할 때는 <code>arrayOf</code> 메소드를 사용합니다.</p>
+<h2 id="배열"><a href="#배열" class="headerlink" title="배열"></a>배열</h2><p>배열을 선언하고 초기화할 때는 <code>arrayOf</code> 메소드를 사용합니다. 배열은 인스턴스가 생성될 때 크기가 설정되므로 동적으로 값을 추가하거나 삭제할 수 없습니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> players: Array&lt;String&gt; = arrayOf&lt;String&gt;(<span class="string">&quot;ronaldo&quot;</span>, <span class="string">&quot;benzema&quot;</span>, <span class="string">&quot;kane&quot;</span>)</span><br><span class="line"></span><br><span class="line">println(players[<span class="number">0</span>])         <span class="comment">// ronaldo</span></span><br><span class="line">println(players[<span class="number">1</span>])         <span class="comment">// benzema</span></span><br><span class="line">println(players.length)     <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 <p>요소가 배열에 포함되는지 확인할 때는 <code>in</code> 키워드를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">&quot;ronaldo&quot;</span> <span class="keyword">in</span> players) &#123;</span><br><span class="line">    <span class="comment">// 요소가 배열에 포함될 때</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 요소가 배열에 포함되지 않을 때</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

@@ -35,6 +35,15 @@
 
     <!--STYLES END-->
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '[object Object]');
+    </script>
+
 
     
 
@@ -137,20 +146,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/kotlin"
-                            
-                            rel="noopener"
-                            title="Kotlin"
-                        >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Kotlin</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/java"
                             
                             rel="noopener"
@@ -158,6 +153,20 @@
                         >
                         <i class="sidebar-button-icon " aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
             
@@ -298,8 +307,6 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 동적 선언 &amp; 초기화</span></span><br><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> <span class="type">Array</span>&lt;<span class="type">String</span>&gt;()</span><br><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> [<span class="type">String</span>]()</span><br><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> <span class="operator">&lt;</span><span class="type">String</span><span class="operator">&gt;</span>[]</span><br></pre></td></tr></table></figure>
 <h2 id="요소-조작"><a href="#요소-조작" class="headerlink" title="요소 조작"></a>요소 조작</h2><p>요소 추가</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> <span class="type">Array</span>&lt;<span class="type">String</span>&gt;()</span><br><span class="line"></span><br><span class="line">players.append(<span class="string">&quot;Harry&quot;</span>)</span><br><span class="line">players.insert(<span class="string">&quot;Lee&quot;</span>, at: <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p>요소 변경</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">players[<span class="number">2</span>] <span class="operator">=</span> <span class="string">&quot;Park&quot;</span></span><br></pre></td></tr></table></figure>
 <p>요소 삭제</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">players.remove(at: <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <p>범위연산자</p>

@@ -11,7 +11,7 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"들어가며이번 포스트에서는 Swift의 집합자료형 중 하나인 Array에 대해 알아보겠습니다.\n선언 및 초기화정적 선언과 초기화에는 두가지 방법이 있습니다.\n12var players: Array&lt;String&gt; = [&quot;Paul&quot;, &quot;John&quot;, &quot;James&quot;]var players: [String] = [&quot;Paul&quot;, &quot;John&quot;, &quot;James&quot;]\n동적 선언과 초기화 방법은 다음과 같습니다.\n12345678// 동적 선언var players: Array&lt;String&gt;var players: [String]// 동적 초기화players = Array()players = [String]()players = []\n1234// 동적 선언 &amp; 초기화var players = Array&lt;String&gt;()var players = [String]()var players = &lt;String&gt;[]\n요소 조작요소 추가\n1234var players = Array&lt;String&gt;()players.append(&quot;Harry&quot;)players.insert(&quot;Lee&quot;, at: 2)\n요소 변경\n1players[2] = &quot;Park&quot;\n요소 삭제\n1players.remove(at: 0)\n범위연산자\n123var players: Array&lt;String&gt; = [&quot;Paul&quot;, &quot;John&quot;, &quot;James&quot;, &quot;Lee&quot;, &quot;Harry&quot;]var selected = players[1...3]    print(selected)     // [&quot;John&quot;, &quot;James&quot;, &quot;Lee&quot;]","dateCreated":"2019-01-03T13:19:49+09:00","dateModified":"2021-04-22T11:18:18+09:00","datePublished":"2019-01-03T13:19:49+09:00","description":"","headline":"[Swift] 집합자료형 - Array","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/03/swift/0003_Array/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/03/swift/0003_Array/","keywords":"iOS, Swift"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"들어가며이번 포스트에서는 Swift의 집합자료형 중 하나인 Array에 대해 알아보겠습니다.\n선언 및 초기화정적 선언과 초기화에는 두가지 방법이 있습니다.\n12var players: Array&lt;String&gt; = [&quot;Paul&quot;, &quot;John&quot;, &quot;James&quot;]var players: [String] = [&quot;Paul&quot;, &quot;John&quot;, &quot;James&quot;]\n동적 선언과 초기화 방법은 다음과 같습니다.\n12345678// 동적 선언var players: Array&lt;String&gt;var players: [String]// 동적 초기화players = Array()players = [String]()players = []\n1234// 동적 선언 &amp; 초기화var players = Array&lt;String&gt;()var players = [String]()var players = &lt;String&gt;[]\n요소 조작요소 추가\n1234var players = Array&lt;String&gt;()players.append(&quot;Harry&quot;)players.insert(&quot;Lee&quot;, at: 2)\n요소 삭제\n1players.remove(at: 0)\n범위연산자\n123var players: Array&lt;String&gt; = [&quot;Paul&quot;, &quot;John&quot;, &quot;James&quot;, &quot;Lee&quot;, &quot;Harry&quot;]var selected = players[1...3]    print(selected)     // [&quot;John&quot;, &quot;James&quot;, &quot;Lee&quot;]","dateCreated":"2019-01-03T13:19:49+09:00","dateModified":"2021-04-22T14:25:20+09:00","datePublished":"2019-01-03T13:19:49+09:00","description":"","headline":"[Swift] 집합자료형 - Array","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/03/swift/0003_Array/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/03/swift/0003_Array/","keywords":"iOS, Swift"}</script>
     <meta name="description" content="들어가며이번 포스트에서는 Swift의 집합자료형 중 하나인 Array에 대해 알아보겠습니다. 선언 및 초기화정적 선언과 초기화에는 두가지 방법이 있습니다. 12var players: Array&lt;String&gt; &#x3D; [&quot;Paul&quot;, &quot;John&quot;, &quot;James&quot;]var players: [String]">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Swift] 집합자료형 - Array">
@@ -20,7 +20,7 @@
 <meta property="og:description" content="들어가며이번 포스트에서는 Swift의 집합자료형 중 하나인 Array에 대해 알아보겠습니다. 선언 및 초기화정적 선언과 초기화에는 두가지 방법이 있습니다. 12var players: Array&lt;String&gt; &#x3D; [&quot;Paul&quot;, &quot;John&quot;, &quot;James&quot;]var players: [String]">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2019-01-03T04:19:49.000Z">
-<meta property="article:modified_time" content="2021-04-22T02:18:18.112Z">
+<meta property="article:modified_time" content="2021-04-22T05:25:20.585Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="iOS">
 <meta property="article:tag" content="Swift">
@@ -39,6 +39,15 @@
 
     <!--STYLES END-->
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '[object Object]');
+    </script>
+
 
     
 
@@ -143,20 +152,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/kotlin"
-                            
-                            rel="noopener"
-                            title="Kotlin"
-                        >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Kotlin</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/java"
                             
                             rel="noopener"
@@ -164,6 +159,20 @@
                         >
                         <i class="sidebar-button-icon " aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
             
@@ -299,8 +308,6 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 동적 선언 &amp; 초기화</span></span><br><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> <span class="type">Array</span>&lt;<span class="type">String</span>&gt;()</span><br><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> [<span class="type">String</span>]()</span><br><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> <span class="operator">&lt;</span><span class="type">String</span><span class="operator">&gt;</span>[]</span><br></pre></td></tr></table></figure>
 <h2 id="요소-조작"><a href="#요소-조작" class="headerlink" title="요소 조작"></a>요소 조작</h2><p>요소 추가</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> players <span class="operator">=</span> <span class="type">Array</span>&lt;<span class="type">String</span>&gt;()</span><br><span class="line"></span><br><span class="line">players.append(<span class="string">&quot;Harry&quot;</span>)</span><br><span class="line">players.insert(<span class="string">&quot;Lee&quot;</span>, at: <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p>요소 변경</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">players[<span class="number">2</span>] <span class="operator">=</span> <span class="string">&quot;Park&quot;</span></span><br></pre></td></tr></table></figure>
 <p>요소 삭제</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">players.remove(at: <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <p>범위연산자</p>

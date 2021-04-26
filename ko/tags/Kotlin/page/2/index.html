@@ -35,6 +35,15 @@
 
     <!--STYLES END-->
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '[object Object]');
+    </script>
+
 
     
 
@@ -137,20 +146,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/kotlin"
-                            
-                            rel="noopener"
-                            title="Kotlin"
-                        >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Kotlin</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/java"
                             
                             rel="noopener"
@@ -158,6 +153,20 @@
                         >
                         <i class="sidebar-button-icon " aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
             
@@ -737,7 +746,7 @@
                 <div class="postShorten-content">
                     <hr>
 <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Kotlin의 <code>배열</code>에 대해 알아보겠습니다.</p>
-<h2 id="배열"><a href="#배열" class="headerlink" title="배열"></a>배열</h2><p>배열을 선언하고 초기화할 때는 <code>arrayOf</code> 메소드를 사용합니다.</p>
+<h2 id="배열"><a href="#배열" class="headerlink" title="배열"></a>배열</h2><p>배열을 선언하고 초기화할 때는 <code>arrayOf</code> 메소드를 사용합니다. 배열은 인스턴스가 생성될 때 크기가 설정되므로 동적으로 값을 추가하거나 삭제할 수 없습니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> players: Array&lt;String&gt; = arrayOf&lt;String&gt;(<span class="string">&quot;ronaldo&quot;</span>, <span class="string">&quot;benzema&quot;</span>, <span class="string">&quot;kane&quot;</span>)</span><br><span class="line"></span><br><span class="line">println(players[<span class="number">0</span>])         <span class="comment">// ronaldo</span></span><br><span class="line">println(players[<span class="number">1</span>])         <span class="comment">// benzema</span></span><br><span class="line">println(players.length)     <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 <p>요소가 배열에 포함되는지 확인할 때는 <code>in</code> 키워드를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">&quot;ronaldo&quot;</span> <span class="keyword">in</span> players) &#123;</span><br><span class="line">    <span class="comment">// 요소가 배열에 포함될 때</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 요소가 배열에 포함되지 않을 때</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -877,7 +886,7 @@
             
                 <div class="postShorten-content">
                     <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Kotlin의 변수와 상수의 선언과 사용방법에 대해 알아보겠습니다.</p>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Kotlin의 <code>변수</code>, <code>상수</code>의 선언과 사용방법에 대해 알아보겠습니다.</p>
 <h2 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h2><p>변수를 선언할 때는 키워드 <code>var</code>를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수 초기화</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
