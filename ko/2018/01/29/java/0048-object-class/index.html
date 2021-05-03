@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Yologger&#39;s Blog">
+    <title>[Java] Object 클래스 - Yologger&#39;s Blog</title>
+    <meta name="author" content="yologger">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\njava.lang 패키지java.lang 패키지는 자바에서 가장 기본적인 동작을 수행하는 클래스들의 집합입니다. 따라서 자바에서는 java.lang 패키지를 import하지 않아도 바로 사용할 수 있습니다. \nObject 클래스Object클래스는 모든 자바 클래스의 최고 조상 클래스입니다. 따라서 자바의 모든 클래스는 암시적으로든 명시적으로든 Object클래스를 상속받고 있습니다. Object클래스는 java.lang패키지에 포함되며, Object클래스는 여러 메소드를 제공하고 있습니다.\nequals(Object obj) 메소드메소드를 호출하는 객체와 인자로 전달받은 객체가 동일한지 여부를 반환합니다. 다만 Object클래스를 상속받는 클래스에서는 equals(Object obj)을 직접 구현해야합니다.\n12345678910111213141516171819class Person &#123;    String name;    Person(String name) &#123;        this.name = name;    &#125;    // equal()메소드를 직접 구현    @Override    public boolean equals(Object obj) &#123;        if (obj instanceof Person) &#123;            return name == ((Person) obj).name;        &#125; else &#123;            return false;        &#125;    &#125;&#125;\n1234Person p1 = new Person(&quot;Paul&quot;);Person p2 = new Person(&quot;Paul&quot;);boolean result = p1.equals(p2); // true\ngetClass() 메소드해당 객체의 클래스 타입을 반환합니다.\n12345Person person = new Person(&quot;Paul&quot;);System.out.println(person.getClass());  // class com.test.example.PersonPhone phone = new Phone();System.out.println(phone.getClass());   // class com.test.example.Phone\nhashcode() 메소드hashcode()는 객체의 해시코드를 반환합니다. 해시코드는 객체의 주소값을 해시함수에 넣어 반환된 고유한 정수값입니다. 따라서 두 객체가 동일한 객체인지 비교할 때 사용할 수 있습니다.\n1234567Person p1 = new Person(&quot;Paul&quot;);Person p2 = p1;Person p3 = new Person(&quot;John&quot;);System.out.println(p1.hashCode());  // 214520509System.out.println(p2.hashCode());  // 214520509System.out.println(p3.hashCode());  // 68944050\ntoString() 메소드해당 객체의 정보를 문자열로 반환합니다.\n123Person person = new Person(&quot;Paul&quot;);System.out.println(person.toString());  // com.test.Person@cc952bd\n그 외그 외에 Object 클래스는 clone(), finalize(), notify(), notifyAll(), wait() 메소드도 제공합니다.\n","dateCreated":"2018-01-29T20:16:30+09:00","dateModified":"2021-05-01T21:41:55+09:00","datePublished":"2018-01-29T20:16:30+09:00","description":"","headline":"[Java] Object 클래스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/29/java/0048-object-class/","keywords":"Java"}</script>
+    <meta name="description" content="java.lang 패키지java.lang 패키지는 자바에서 가장 기본적인 동작을 수행하는 클래스들의 집합입니다. 따라서 자바에서는 java.lang 패키지를 import하지 않아도 바로 사용할 수 있습니다.  Object 클래스Object클래스는 모든 자바 클래스의 최고 조상 클래스입니다. 따라서 자바의 모든 클래스는 암시적으로든 명시적으로든 Object">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[Java] Object 클래스">
+<meta property="og:url" content="https://yologger.github.io/ko/2018/01/29/java/0048-object-class/index.html">
+<meta property="og:site_name" content="Yologger&#39;s Blog">
+<meta property="og:description" content="java.lang 패키지java.lang 패키지는 자바에서 가장 기본적인 동작을 수행하는 클래스들의 집합입니다. 따라서 자바에서는 java.lang 패키지를 import하지 않아도 바로 사용할 수 있습니다.  Object 클래스Object클래스는 모든 자바 클래스의 최고 조상 클래스입니다. 따라서 자바의 모든 클래스는 암시적으로든 명시적으로든 Object">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2018-01-29T11:16:30.000Z">
+<meta property="article:modified_time" content="2021-05-01T12:41:55.026Z">
+<meta property="article:author" content="yologger">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYKNWR810R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-QYKNWR810R');
+    </script>
+
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/ko/"
+            aria-label=""
+        >
+            Yologger&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="링크 열기: /ko/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://yologger.github.io"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="English"
+                        >
+                        <i class="sidebar-button-icon fa fa-globe" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">English</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/java"
+                            
+                            rel="noopener"
+                            title="Java"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/ios"
+                            
+                            rel="noopener"
+                            title="iOS"
+                        >
+                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">iOS</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/swift"
+                            
+                            rel="noopener"
+                            title="Swift"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Swift</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/objective-c"
+                            
+                            rel="noopener"
+                            title="Objective-C"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Objective-C</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [Java] Object 클래스
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2018-01-29T20:16:30+09:00">
+	
+		    2018/01/29
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <hr>
+<h2 id="java-lang-패키지"><a href="#java-lang-패키지" class="headerlink" title="java.lang 패키지"></a>java.lang 패키지</h2><p><code>java.lang</code> 패키지는 자바에서 가장 기본적인 동작을 수행하는 클래스들의 집합입니다. 따라서 자바에서는 <code>java.lang</code> 패키지를 import하지 않아도 바로 사용할 수 있습니다. </p>
+<h2 id="Object-클래스"><a href="#Object-클래스" class="headerlink" title="Object 클래스"></a>Object 클래스</h2><p><code>Object</code>클래스는 모든 자바 클래스의 최고 조상 클래스입니다. 따라서 자바의 모든 클래스는 암시적으로든 명시적으로든 <code>Object</code>클래스를 상속받고 있습니다. <code>Object</code>클래스는 <code>java.lang</code>패키지에 포함되며, <code>Object</code>클래스는 여러 메소드를 제공하고 있습니다.</p>
+<h2 id="equals-Object-obj-메소드"><a href="#equals-Object-obj-메소드" class="headerlink" title="equals(Object obj) 메소드"></a>equals(Object obj) 메소드</h2><p>메소드를 호출하는 객체와 인자로 전달받은 객체가 동일한지 여부를 반환합니다. 다만 <code>Object</code>클래스를 상속받는 클래스에서는 <code>equals(Object obj)</code>을 직접 구현해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// equal()메소드를 직접 구현</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">            <span class="keyword">return</span> name == ((Person) obj).name;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person p1 = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">Person p2 = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">boolean</span> result = p1.equals(p2); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="getClass-메소드"><a href="#getClass-메소드" class="headerlink" title="getClass() 메소드"></a>getClass() 메소드</h2><p>해당 객체의 클래스 타입을 반환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">System.out.println(person.getClass());  <span class="comment">// class com.test.example.Person</span></span><br><span class="line"></span><br><span class="line">Phone phone = <span class="keyword">new</span> Phone();</span><br><span class="line">System.out.println(phone.getClass());   <span class="comment">// class com.test.example.Phone</span></span><br></pre></td></tr></table></figure>
+<h2 id="hashcode-메소드"><a href="#hashcode-메소드" class="headerlink" title="hashcode() 메소드"></a>hashcode() 메소드</h2><p><code>hashcode()</code>는 객체의 <code>해시코드</code>를 반환합니다. <code>해시코드</code>는 <strong>객체의 주소값을 해시함수에 넣어 반환된 고유한 정수값</strong>입니다. 따라서 두 객체가 동일한 객체인지 비교할 때 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person p1 = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">Person p2 = p1;</span><br><span class="line">Person p3 = <span class="keyword">new</span> Person(<span class="string">&quot;John&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(p1.hashCode());  <span class="comment">// 214520509</span></span><br><span class="line">System.out.println(p2.hashCode());  <span class="comment">// 214520509</span></span><br><span class="line">System.out.println(p3.hashCode());  <span class="comment">// 68944050</span></span><br></pre></td></tr></table></figure>
+<h2 id="toString-메소드"><a href="#toString-메소드" class="headerlink" title="toString() 메소드"></a>toString() 메소드</h2><p>해당 객체의 정보를 문자열로 반환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(person.toString());  <span class="comment">// com.test.Person@cc952bd</span></span><br></pre></td></tr></table></figure>
+<h2 id="그-외"><a href="#그-외" class="headerlink" title="그 외"></a>그 외</h2><p>그 외에 <code>Object</code> 클래스는 <code>clone()</code>, <code>finalize()</code>, <code>notify()</code>, <code>notifyAll()</code>, <code>wait()</code> 메소드도 제공합니다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">태그</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Java/" rel="tag">Java</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 yologger. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"
+                        aria-label="Facebook에 공유하기"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"
+                        aria-label="Twitter에 공유하기"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/01/29/java/0048-object-class/"
+                        aria-label="Google+에 공유하기"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">yologger</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+        <!--SCRIPTS-->
+
+<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
