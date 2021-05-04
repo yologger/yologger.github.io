@@ -273,135 +273,17 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/06/kotlin/0106-vararg/"
-                            aria-label=": [Kotlin] vararg"
+                            href="/ko/2018/01/25/java/180125-casting/"
+                            aria-label=": [Java] 타입 캐스팅 (Type Casting)"
                         >
-                            [Kotlin] vararg
+                            [Java] 타입 캐스팅 (Type Casting)
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-01-06T20:16:30+09:00">
+    <time datetime="2018-01-25T20:16:30+09:00">
 	
-		    2018/01/06
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p>함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 <code>vararg</code>를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sum</span><span class="params">(<span class="keyword">vararg</span> numbers: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// numbers는 list가 아닌 array</span></span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (n <span class="keyword">in</span> numbers) &#123;</span><br><span class="line">        sum += n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result1 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)  <span class="comment">// 6</span></span><br><span class="line"><span class="keyword">var</span> result2 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/06/kotlin/0106-vararg/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/05/android/buildtypes/"
-                            aria-label=": 코드에서 환경변수 분리하기 (3) ㅡ BuildTypes"
-                        >
-                            코드에서 환경변수 분리하기 (3) ㅡ BuildTypes
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-05T20:16:30+09:00">
-	
-		    2018/01/05
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 개발 환경과 릴리즈 환경에서 다른 설정파일을 사용하는 방법에 대해 알아보겠습니다.</p>
-<h2 id="2개의-설정파일-만들기"><a href="#2개의-설정파일-만들기" class="headerlink" title="2개의 설정파일 만들기"></a>2개의 설정파일 만들기</h2><p>development.propeties을 생성합니다.</p>
-<p>production.properties 파일을 생성합니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/05/android/buildtypes/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/05/java/0025-collection-set/"
-                            aria-label=": [Java] 집합자료형 (2) - Set"
-                        >
-                            [Java] 집합자료형 (2) - Set
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-05T20:16:30+09:00">
-	
-		    2018/01/05
+		    2018/01/25
     	
     </time>
     
@@ -417,12 +299,10 @@
             
                 <div class="postShorten-content">
                     <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 집합자료형에서 <code>Set</code>에 대해 알아보겠습니다.</p>
-<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>Java API에서 제공하는 <code>Set</code>의 정의는 다음과 같습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Set</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span></span>;</span><br><span class="line">    <span class="function">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위에서 보는 것처럼 <code>Set</code>은 interface이므로 인스턴스를 생성할 수 없습니다. 따라서 <code>Set</code>의 구현체가 필요합니다. 다행히 Java API에서는 <code>HashSet</code>, <code>TreeSet</code>이라는 구현체들을 제공합니다. </p>
-<h2 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; players = <span class="keyword">new</span> HashSet&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">players.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Benzema&quot;</span>);</span><br><span class="line">System.out.println(players.toString()); <span class="comment">// [Benzema, Ronaldo, Kane]</span></span><br><span class="line"></span><br><span class="line">players.add(<span class="string">&quot;Son&quot;</span>);</span><br><span class="line">System.out.println(players.toString()); <span class="comment">// [Benzema, Ronaldo, Son, Kane]</span></span><br></pre></td></tr></table></figure>
-<h2 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; players = <span class="keyword">new</span> TreeSet&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">players.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Benzema&quot;</span>);</span><br><span class="line">System.out.println(players.toString());     <span class="comment">// [Benzema, Ronaldo, Kane]</span></span><br><span class="line"></span><br><span class="line">players.add(<span class="string">&quot;Son&quot;</span>);</span><br><span class="line">System.out.println(players.toString());     <span class="comment">// [Benzema, Ronaldo, Kane, Son]</span></span><br></pre></td></tr></table></figure>
+<p>기본타입</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> height = <span class="number">180.9</span>;</span><br><span class="line"><span class="keyword">int</span> _height = (<span class="keyword">int</span>)height;</span><br><span class="line">System.out.print(_height);  <span class="comment">// 180</span></span><br></pre></td></tr></table></figure>
+<p>참조타입</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;work.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Designer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;design.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Designer designer = <span class="keyword">new</span> Designer();</span><br><span class="line">Person person = (Person)designer;</span><br><span class="line">person.work();  <span class="comment">// design</span></span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -431,7 +311,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/01/05/java/0025-collection-set/#post-footer"
+                                href="/ko/2018/01/25/java/180125-casting/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -454,156 +334,17 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/05/kotlin/0105-function/"
-                            aria-label=": [Kotlin] 함수"
+                            href="/ko/2018/01/24/java/180124-instanceof/"
+                            aria-label=": [Java] instanceOf"
                         >
-                            [Kotlin] 함수
+                            [Java] instanceOf
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-01-05T20:16:30+09:00">
+    <time datetime="2018-01-24T20:16:30+09:00">
 	
-		    2018/01/05
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="매개변수가-없는-함수"><a href="#매개변수가-없는-함수" class="headerlink" title="매개변수가 없는 함수"></a>매개변수가 없는 함수</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 함수 선언</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sayHello</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">&quot;Hello World!&quot;</span>);  </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수 호출</span></span><br><span class="line">sayHello()</span><br></pre></td></tr></table></figure>
-
-<h2 id="매개변수가-있는-함수"><a href="#매개변수가-있는-함수" class="headerlink" title="매개변수가 있는 함수"></a>매개변수가 있는 함수</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 함수 선언</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">saySomething</span><span class="params">(something: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">    println(<span class="string">&quot;<span class="subst">$&#123;something&#125;</span>&quot;</span>);  </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수 호출</span></span><br><span class="line">saySomething(<span class="string">&quot;Hello World!&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="반환값이-없는-함수"><a href="#반환값이-없는-함수" class="headerlink" title="반환값이 없는 함수"></a>반환값이 없는 함수</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 함수 선언</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">(name: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">    println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>&quot;</span>);  </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수 호출</span></span><br><span class="line">printName(<span class="string">&quot;ronaldo&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="반환값이-있는-함수"><a href="#반환값이-있는-함수" class="headerlink" title="반환값이 있는 함수"></a>반환값이 있는 함수</h2><p>반환값이 있는 경우 반드시 타입을 명시해야합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 함수 선언</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">getDescription</span><span class="params">(name: <span class="type">String</span>)</span></span>: String &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>&quot;</span>  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수 호출l</span></span><br><span class="line"><span class="keyword">var</span> description = getDescription(<span class="string">&quot;John&quot;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="Named-argument"><a href="#Named-argument" class="headerlink" title="Named argument"></a>Named argument</h2><p>함수를 호출할 때 매개변수</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">(name: <span class="type">String</span>, age: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">    println(name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printName(<span class="string">&quot;John&quot;</span>, <span class="number">35</span>)    </span><br><span class="line">printName(name=<span class="string">&quot;John&quot;</span>, age=<span class="number">35</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 매개변수의 이름을 명시하는 경우 순서를 바꿀 수 있다.</span></span><br><span class="line">printName(age=<span class="number">35</span>, name=<span class="string">&quot;John&quot;</span>)   </span><br><span class="line">```								</span><br><span class="line"></span><br><span class="line">## 기본값</span><br><span class="line">함수를 선언할 때 기본값을 선언할 수 있습니다.</span><br><span class="line">``` kotlin</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">(name: <span class="type">String</span>=<span class="string">&quot;John&quot;</span>)</span></span> &#123;</span><br><span class="line">    println(name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printName()  <span class="comment">// John</span></span><br><span class="line">printName(<span class="string">&quot;Kane&quot;</span>)  <span class="comment">// Kane</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="단일-표현식"><a href="#단일-표현식" class="headerlink" title="단일 표현식"></a>단일 표현식</h2><p>함수의 실행코드가 하나의 표현식인 경우 대입문(=)처럼 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 반환값이 있는 경우</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">getDescription</span><span class="params">(name: <span class="type">String</span>)</span></span> = <span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">var</span> name: String = getDescription(<span class="string">&quot;Ronaldo&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 반환값이 없는 경우</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printDescription</span><span class="params">(name: <span class="type">String</span>)</span></span> = print(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">printDescription(<span class="string">&quot;Ronaldo&quot;</span>)</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/05/kotlin/0105-function/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/04/android/properties/"
-                            aria-label=": 코드에서 환경변수 분리하기 (2) ㅡ .properties파일"
-                        >
-                            코드에서 환경변수 분리하기 (2) ㅡ .properties파일
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-04T20:16:30+09:00">
-	
-		    2018/01/04
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>많은 어플리케이션이 Facebook, Google과 같은 SNS 계정을 통한 로그인을 지원합니다. 개발자는 SNS 로그인 API를 사용하기 위해 API Key를 발급받는데, 이를 소스코드에 포함시키면 여러 보안 이슈가 발생할 수 있습니다. 이번 포스트에서는 별도의 환경설정파일을 만들고, 이 곳에 API Key와 같이 유출되면 안되는 정보를 저장하는 법에 대해 알아보겠습니다. </p>
-<h2 id="properties-파일-만들기"><a href="#properties-파일-만들기" class="headerlink" title=".properties 파일 만들기"></a>.properties 파일 만들기</h2><p>프로젝트의 루트 디렉토리에 <code>config.properties</code>파일을 생성합니다.<br><img src="/ko/images/posts/android/properties/properties.png"></p>
-<p>내용은 다음과 같습니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CLIENT_ID&#x3D;&quot;your_client_id&quot;</span><br><span class="line">CLIENT_SECRET&#x3D;&quot;your_client_secret&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="모듈-수준의-build-gradle-설정하기"><a href="#모듈-수준의-build-gradle-설정하기" class="headerlink" title="모듈 수준의 build.gradle 설정하기"></a>모듈 수준의 build.gradle 설정하기</h2><p>모듈 수준의 build.gradle 파일에서 다음과 같이 설정합니다.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> configPropertiesFile = rootProject.file(<span class="string">&quot;config.properties&quot;</span>)</span><br><span class="line"><span class="keyword">def</span> configProperties = <span class="keyword">new</span> Properties()</span><br><span class="line">configProperties.load(<span class="keyword">new</span> FileInputStream(configPropertiesFile))</span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.example.simple_memo&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line">        testInstrumentationRunner <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// for xml file</span></span><br><span class="line">        resValue <span class="string">&quot;string&quot;</span>, <span class="string">&quot;CLIENT_ID&quot;</span>, configProperties[<span class="string">&#x27;CLIENT_ID&#x27;</span>]</span><br><span class="line">        resValue <span class="string">&quot;string&quot;</span>, <span class="string">&quot;CLIENT_SECRET&quot;</span>, configProperties[<span class="string">&#x27;CLIENT_SECRET&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment">// for kotlin file</span></span><br><span class="line">        buildConfigField(<span class="string">&quot;String&quot;</span>, <span class="string">&quot;CLIENT_ID&quot;</span>, configProperties[<span class="string">&#x27;CLIENT_ID&#x27;</span>])</span><br><span class="line">        buildConfigField(<span class="string">&quot;String&quot;</span>, <span class="string">&quot;CLIENT_SECRET&quot;</span>, configProperties[<span class="string">&#x27;CLIENT_SECRET&#x27;</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="소스코드에서-값을-사용하기"><a href="#소스코드에서-값을-사용하기" class="headerlink" title="소스코드에서 값을 사용하기"></a>소스코드에서 값을 사용하기</h2><p>java 파일이나 kotlin 파일에서 아래와 같이 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="keyword">val</span> clientId = BuildConfig.CLIENT_ID            <span class="comment">// your_client_id</span></span><br><span class="line">        <span class="keyword">val</span> clientSecret = BuildConfig.CLIENT_SECRET    <span class="comment">// your_client_secret</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="xml-파일에서-값을-사용하기"><a href="#xml-파일에서-값을-사용하기" class="headerlink" title="xml 파일에서 값을 사용하기"></a>xml 파일에서 값을 사용하기</h2><p>xml 파일에서는 다음과 같이 접근할 수 있습니다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span> <span class="attr">android:text</span>=<span class="string">&quot;@string/CLIENT_ID&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="gitignore파일에-추가하기"><a href="#gitignore파일에-추가하기" class="headerlink" title=".gitignore파일에 추가하기"></a>.gitignore파일에 추가하기</h2><p><code>config.properties</code>파일을 <code>.gitignore</code>에 추가하여 Github에 Push할 때 제외되도록 설정합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">config.properties</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/04/android/properties/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/04/java/0024-collection-list/"
-                            aria-label=": [Java] 집합자료형 (1) - List"
-                        >
-                            [Java] 집합자료형 (1) - List
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-04T20:16:30+09:00">
-	
-		    2018/01/04
+		    2018/01/24
     	
     </time>
     
@@ -619,20 +360,8 @@
             
                 <div class="postShorten-content">
                     <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>Java는 동일한 타입의 여러 데이터를 다루기 위해 <code>집합 자료형(Collection)</code>을 제공합니다. 이번 포스트에서는 집합자료형에서 <code>List</code>에 대해 알아보겠습니다.</p>
-<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>Java API에서 제공하는 <code>List</code>의 정의는 다음과 같습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span></span>;</span><br><span class="line">    <span class="function">E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span></span>;</span><br><span class="line">    <span class="function">E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위에서 보는 것처럼 <code>List</code>는 interface이므로 인스턴스를 생성할 수 없습니다. 따라서 <code>List</code>의 구현체가 필요합니다. 다행히 Java API에서는 <code>Vector</code>, <code>ArrayList</code>, <code>LinkedList</code> 등의 구현체들을 제공합니다. </p>
-<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p><code>ArrayList</code>는 가장 많이 쓰이는 <code>List</code>의 구현체입니다. <code>ArrayList</code>는 다음과 같이 선언합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-<p>요소 추가는 다음과 같이 합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">list.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;Benzema&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;Bale&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(list.toString());    <span class="comment">// [Ronaldo, Benzema, Bale]</span></span><br></pre></td></tr></table></figure>
-<p>요소 삭제하기</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.remove(<span class="number">0</span>);</span><br><span class="line">System.out.println(list.toString());    <span class="comment">// [Benzema, Bale]</span></span><br></pre></td></tr></table></figure>
-<p>요소 변경하기</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.set(<span class="number">0</span>, <span class="string">&quot;Son&quot;</span>);</span><br><span class="line">System.out.println(list.toString());    <span class="comment">// [Son, Bale]</span></span><br></pre></td></tr></table></figure>
-<p>요소값 가져오기</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(list.get(<span class="number">0</span>));        <span class="comment">// Son</span></span><br></pre></td></tr></table></figure>
+<p>키워드 <code>instanceOf</code>는 인스턴스가 특정 클래스 타입인지 확인할 때 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (person <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;person is instance of Person.&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;person is not instance of Person.&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -641,7 +370,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/01/04/java/0024-collection-list/#post-footer"
+                                href="/ko/2018/01/24/java/180124-instanceof/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -664,172 +393,17 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/04/kotlin/0104-collection/"
-                            aria-label=": [Kotlin] 집합 자료형"
+                            href="/ko/2018/01/23/java/180123-comparison/"
+                            aria-label=": [Java] 비교문"
                         >
-                            [Kotlin] 집합 자료형
+                            [Java] 비교문
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-01-04T20:16:30+09:00">
+    <time datetime="2018-01-23T20:16:30+09:00">
 	
-		    2018/01/04
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <p><code>집합자료형(Collection)</code>은 같은 타입의 데이터를 여러개 담을 수 있습니다. Kotlin은 <code>List</code>, <code>Set</code>, <code>Map</code>이라는 3개의 집합자료형을 지원합니다. <code>List</code>, <code>Set</code>, <code>Map</code>은 모두 <code>Collection</code>클래스를 상속받습니다.</p>
-<h2 id="1-List"><a href="#1-List" class="headerlink" title="1. List"></a>1. List</h2><p>변경 불가능한 List를 선언할 때는 <code>listOf()</code>메소드를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 초기화 이후 추가, 삭제, 변경 불가능</span></span><br><span class="line"><span class="keyword">val</span> players: List&lt;String&gt; = listOf(<span class="string">&quot;Ronaldo&quot;</span>, <span class="string">&quot;Kane&quot;</span>, <span class="string">&quot;Benzema&quot;</span>)</span><br><span class="line">print(players[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-<p>변경 가능한 List를 선언할 때는 <code>mutableListOf()</code>메소드를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// List에 데이터를 추가, 삭제, 변경 가능</span></span><br><span class="line"><span class="keyword">var</span> players: MutableList&lt;String&gt; = mutableListOf(<span class="string">&quot;Ronaldo&quot;</span>, <span class="string">&quot;Kane&quot;</span>, <span class="string">&quot;Benzema&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// List의 끝에 데이터 추가</span></span><br><span class="line">mutableList.add(<span class="string">&quot;Ramos&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2번 인덱스에 데이터 추가</span></span><br><span class="line">mutableList.add(<span class="number">2</span>, <span class="string">&quot;Son&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 데이터 삭제</span></span><br><span class="line">mutableList.removeAt(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 데이터 변경</span></span><br><span class="line">mutableList[<span class="number">1</span>] = <span class="string">&quot;Marcelo&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-Set"><a href="#2-Set" class="headerlink" title="2. Set"></a>2. Set</h2><p>변경 불가능한 Set를 선언할 때는 <code>setOf()</code>메소드를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 초기화 이후 추가, 삭제, 변경 불가능</span></span><br><span class="line"><span class="keyword">var</span> jobs: Set&lt;String&gt; = setOf(<span class="string">&quot;programmer&quot;</span>, <span class="string">&quot;desinger&quot;</span>, <span class="string">&quot;footballer&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 데이터 포함여부 확인</span></span><br><span class="line">print(jobs.contains(<span class="string">&quot;programmer&quot;</span>))  <span class="comment">// true</span></span><br><span class="line">print(jobs.contains(<span class="string">&quot;singer&quot;</span>))      <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<p>변경 가능한 Set를 선언할 때는 <code>mutableSetOf()</code>메소드를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 초기화 이후 추가, 삭제, 변경 가능</span></span><br><span class="line"><span class="keyword">var</span> jobs: MutableSet&lt;String&gt; = mutableSetOf(<span class="string">&quot;footballer&quot;</span>, <span class="string">&quot;programmer&quot;</span>, <span class="string">&quot;desinger&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 데이터 추가</span></span><br><span class="line">jobs.add(<span class="string">&quot;CEO&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 데이터 삭제</span></span><br><span class="line">jobs.remove(<span class="string">&quot;footballer&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="3-Map"><a href="#3-Map" class="headerlink" title="3. Map"></a>3. Map</h2><p>변경 불가능한 Map을 선언할 때는 <code>mapOf()</code>메소드를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> map: Map&lt;String, String&gt; = mapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;ronaldo&quot;</span>, <span class="string">&quot;job&quot;</span> to <span class="string">&quot;footballer&quot;</span>)</span><br><span class="line"></span><br><span class="line">println(map[<span class="string">&quot;name&quot;</span>]);   <span class="comment">// ronaldo</span></span><br></pre></td></tr></table></figure>
-<p>변경 가능한 Map를 선언할 때는 <code>mutableMapOf()</code>메소드를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mutableMap: MutableSet&lt;String, String&gt; = mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;ronaldo&quot;</span>, <span class="string">&quot;job&quot;</span> to <span class="string">&quot;footballer&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 데이터 변경</span></span><br><span class="line">mutableMap[<span class="string">&quot;nation&quot;</span>] = <span class="string">&quot;portugal&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="4-집합자료형-조작-함수"><a href="#4-집합자료형-조작-함수" class="headerlink" title="4. 집합자료형 조작 함수"></a>4. 집합자료형 조작 함수</h2><p>집합자료형은 데이터 조작을 위한 다양한 메소드를 제공합니다. 대표적인 메소드 몇 가지만 알아보겠습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 필터링</span></span><br><span class="line"><span class="keyword">val</span> fruits = listOf(<span class="string">&quot;pineapple&quot;</span>, <span class="string">&quot;melon&quot;</span>, <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;mango&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> new_fruits = fruits.filter(&#123; fruit: String -&gt; fruit.startsWith(<span class="string">&#x27;m&#x27;</span>) &#125;)  <span class="comment">// [&quot;melon&quot;, &quot;mango&quot;]</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정렬</span></span><br><span class="line"><span class="keyword">val</span> fruits = listOf(<span class="string">&quot;pineapple&quot;</span>, <span class="string">&quot;melon&quot;</span>, <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> new_fruits = fruits.sortedBy(&#123; element: String -&gt; element &#125;) [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;melon&quot;</span>, <span class="string">&quot;pineapple&quot;</span>]</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// map()</span></span><br><span class="line"><span class="keyword">val</span> fruits = listOf(<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;pineapple&quot;</span>, <span class="string">&quot;melon&quot;</span>)</span><br><span class="line">    .map(&#123; fruit -&gt; </span><br><span class="line">        <span class="comment">// 람다는 마지막 값이 반환</span></span><br><span class="line">        <span class="string">&quot;My favorite fruit is <span class="subst">$&#123;fruit&#125;</span>&quot;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .forEach &#123; println(it) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 단축형</span></span><br><span class="line"><span class="keyword">val</span> fruits = listOf(<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;pineapple&quot;</span>, <span class="string">&quot;melon&quot;</span>)</span><br><span class="line">    .map &#123; it.toUpperCase() &#125;</span><br><span class="line">    .forEach &#123; println(it) &#125;</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/04/kotlin/0104-collection/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/03/android/build-config/"
-                            aria-label=": 코드에서 환경변수 분리하기 (1) ㅡ BuildConfig"
-                        >
-                            코드에서 환경변수 분리하기 (1) ㅡ BuildConfig
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-03T20:16:30+09:00">
-	
-		    2018/01/03
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<p>안드로이드 시스템은 앱을 빌드할 때 여러 파일을 자동으로 생성합니다. 그 중 하나가 <code>BuildConfig</code>클래스입니다. 이 클래스에는 현재 빌드와 관련된 정보가 상수 형태로 정의되어 있고, 코드에서도 직접 참조할 수 있습니다.</p>
-<h2 id="코드에서-BuildConfig-상수에-접근하기"><a href="#코드에서-BuildConfig-상수에-접근하기" class="headerlink" title="코드에서 BuildConfig 상수에 접근하기"></a>코드에서 BuildConfig 상수에 접근하기</h2><p>자동으로 생성된 <code>BuildConfig</code>클래스는 다음과 같습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Automatically generated file. DO NOT MODIFY</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildConfig</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> DEBUG = Boolean.parseBoolean(<span class="string">&quot;true&quot;</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String APPLICATION_ID = <span class="string">&quot;com.example.simple_memo&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BUILD_TYPE = <span class="string">&quot;debug&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VERSION_CODE = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String VERSION_NAME = <span class="string">&quot;1.0&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>BuildConfig</code>클래스 내부의 상수는 코드에서 다음과 같이 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="keyword">val</span> applicationId = BuildConfig.APPLICATION_ID      <span class="comment">// &quot;com.example.simple_memo&quot;</span></span><br><span class="line">        <span class="keyword">val</span> versionCode = BuildConfig.VERSION_CODE          <span class="comment">// 1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>그렇다면 이 상수값은 어디에 정의되어 있을까요? 바로 모듈 수준의 <code>build.gradle</code>입니다. 이 파일의 <code>defaultConfig</code> 안에 상수가 정의되어 있습니다.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.example.simple_memo&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="상수를-직접-정의하고-사용하기"><a href="#상수를-직접-정의하고-사용하기" class="headerlink" title="상수를 직접 정의하고 사용하기"></a>상수를 직접 정의하고 사용하기</h2><p>상수를 직접 정의하고 코드에서 참조할 수도 있습니다. <code>buildConfigField</code>를 사용하면 됩니다. 모듈수준의 <code>build.gradle</code>에  <code>buildConfigField (&quot;DATA_TYPE&quot;, &quot;KEY&quot;, &quot;VALUE&quot;)</code> 형태로 선언하면 됩니다.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.example.simple_memo&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line">        testInstrumentationRunner <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line">        buildConfigField (<span class="string">&quot;String&quot;</span>, <span class="string">&quot;AUTH_API_KEY&quot;</span>, <span class="string">&#x27;&quot;your_auth_api_key&quot;&#x27;</span>)</span><br><span class="line">        buildConfigField (<span class="string">&quot;String&quot;</span>, <span class="string">&quot;AUTH_API_URL&quot;</span>, <span class="string">&#x27;&quot;your_auth_api_url&quot;&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Gradle Sync를 해주어야 BuildConfig 클래스가 생성됩니다.<br>문자열의 경우 작은따옴표로 감싸주어야 합니다.</p>
-</blockquote>
-<p>새로 생성된 BuildConfig 클래스는 다음과 같습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Automatically generated file. DO NOT MODIFY</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.example.simple_memo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildConfig</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> DEBUG = Boolean.parseBoolean(<span class="string">&quot;true&quot;</span>);</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String APPLICATION_ID = <span class="string">&quot;com.example.simple_memo&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BUILD_TYPE = <span class="string">&quot;debug&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VERSION_CODE = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String VERSION_NAME = <span class="string">&quot;1.0&quot;</span>;</span><br><span class="line">  <span class="comment">// Field from default config.</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH_API_KEY = <span class="string">&quot;your_auth_api_key&quot;</span>;</span><br><span class="line">  <span class="comment">// Field from default config.</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH_API_URL = <span class="string">&quot;your_auth_api_url&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>BuildConfig에 생성된 상수를 접근해봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="keyword">val</span> apiKey = BuildConfig.AUTH_API_KEY       <span class="comment">// your_auth_api_key</span></span><br><span class="line">        <span class="keyword">val</span> apiUrl = BuildConfig.AUTH_API_URL       <span class="comment">// your_auth_api_url</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="상수를-xml-파일에서-사용하기"><a href="#상수를-xml-파일에서-사용하기" class="headerlink" title="상수를 xml 파일에서 사용하기"></a>상수를 xml 파일에서 사용하기</h2><p>모듈 수준의 build.gradle에 선언한 상수는 xml 파일에서도 참조할 수 있습니다. 이 때는 <code>resValue</code>를 사용합니다.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">// buildConfigField (&quot;String&quot;, &quot;AUTH_API_KEY&quot;, &#x27;&quot;your_auth_api_key&quot;&#x27;)</span></span><br><span class="line">        <span class="comment">// buildConfigField (&quot;String&quot;, &quot;AUTH_API_URL&quot;, &#x27;&quot;your_auth_api_url&quot;&#x27;)</span></span><br><span class="line">        resValue <span class="string">&quot;string&quot;</span>, <span class="string">&quot;CLIENT_ID&quot;</span>, <span class="string">&quot;your_client_id&quot;</span></span><br><span class="line">        resValue <span class="string">&quot;string&quot;</span>, <span class="string">&quot;CLIENT_SECRET&quot;</span>, <span class="string">&quot;your_client_secret&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>xml 파일에서는 다음과 같이 참조할 수 있습니다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span> <span class="attr">android:text</span>=<span class="string">&quot;@string/CLIENT_ID&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/03/android/build-config/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/03/java/0023-array/"
-                            aria-label=": [Java] 배열 (Array)"
-                        >
-                            [Java] 배열 (Array)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-03T20:16:30+09:00">
-	
-		    2018/01/03
+		    2018/01/23
     	
     </time>
     
@@ -845,9 +419,10 @@
             
                 <div class="postShorten-content">
                     <hr>
-<p><code>배열(Array)</code>은 인스턴스를 생성할 때 크기가 설정됩니다. 또한 값을 동적으로 추가하거나 삭제할 수 없습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String[] players = <span class="keyword">new</span> String[<span class="number">3</span>];</span><br><span class="line"><span class="comment">// String players[] = new String[3];</span></span><br><span class="line"></span><br><span class="line">players[<span class="number">0</span>] = <span class="string">&quot;Ronaldo&quot;</span>;</span><br><span class="line">players[<span class="number">1</span>] = <span class="string">&quot;Kane&quot;</span>;</span><br><span class="line">players[<span class="number">2</span>] = <span class="string">&quot;Benzema&quot;</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(players[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String[] players = &#123;<span class="string">&quot;Ronaldo&quot;</span>, <span class="string">&quot;Kane&quot;</span>, <span class="string">&quot;Benzema&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">System.out.println(players[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+<p>비교문</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (isMarried) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;He is married.&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;He is not married.&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>switch문</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Direction</span> </span>&#123;</span><br><span class="line">    EAST, WEST, SOUTH, NORTH</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Direction direction = Direction.EAST;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (direction) &#123;</span><br><span class="line">    <span class="keyword">case</span> EAST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to east.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> WEST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to west.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> NORTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to north.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> SOUTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to south.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -856,7 +431,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/01/03/java/0023-array/#post-footer"
+                                href="/ko/2018/01/23/java/180123-comparison/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -879,23 +454,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/03/kotlin/0103-array/"
-                            aria-label=": [Kotlin] 배열"
+                            href="/ko/2018/01/22/java/180122-iteration/"
+                            aria-label=": [Java] 반복문"
                         >
-                            [Kotlin] 배열
+                            [Java] 반복문
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-01-03T20:16:30+09:00">
+    <time datetime="2018-01-22T20:16:30+09:00">
 	
-		    2018/01/03
+		    2018/01/22
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
 
 
     
@@ -905,11 +480,10 @@
             
                 <div class="postShorten-content">
                     <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 Kotlin의 <code>배열</code>에 대해 알아보겠습니다.</p>
-<h2 id="배열"><a href="#배열" class="headerlink" title="배열"></a>배열</h2><p>배열을 선언하고 초기화할 때는 <code>arrayOf</code> 메소드를 사용합니다. 배열은 인스턴스가 생성될 때 크기가 설정되므로 동적으로 값을 추가하거나 삭제할 수 없습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> players: Array&lt;String&gt; = arrayOf&lt;String&gt;(<span class="string">&quot;ronaldo&quot;</span>, <span class="string">&quot;benzema&quot;</span>, <span class="string">&quot;kane&quot;</span>)</span><br><span class="line"></span><br><span class="line">println(players[<span class="number">0</span>])         <span class="comment">// ronaldo</span></span><br><span class="line">println(players[<span class="number">1</span>])         <span class="comment">// benzema</span></span><br><span class="line">println(players.length)     <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-<p>요소가 배열에 포함되는지 확인할 때는 <code>in</code> 키워드를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">&quot;ronaldo&quot;</span> <span class="keyword">in</span> players) &#123;</span><br><span class="line">    <span class="comment">// 요소가 배열에 포함될 때</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 요소가 배열에 포함되지 않을 때</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> idx=<span class="number">0</span>; idx&lt;<span class="number">10</span>; idx++) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Person[] people = &#123;</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Son&quot;</span>, <span class="string">&quot;Korea&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Kane&quot;</span>, <span class="string">&quot;England&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Messi&quot;</span>, <span class="string">&quot;Argentina&quot;</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Person person: people) &#123;</span><br><span class="line">    person.printName();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Son</span></span><br><span class="line"><span class="comment">// Kane</span></span><br><span class="line"><span class="comment">// Messi</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (idx &lt; <span class="number">10</span>) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">    idx ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">    idx ++;</span><br><span class="line">    <span class="keyword">if</span> (idx &gt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -918,7 +492,380 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/01/03/kotlin/0103-array/#post-footer"
+                                href="/ko/2018/01/22/java/180122-iteration/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/21/java/180121-error-handling/"
+                            aria-label=": [Java] 에러 처리 (Error Handling)"
+                        >
+                            [Java] 에러 처리 (Error Handling)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-21T20:16:30+09:00">
+	
+		    2018/01/21
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;Exception has occurred.&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception exception) &#123;</span><br><span class="line">    System.out.println(exception.getLocalizedMessage());</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PostAPI</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getPosts</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;Error occurred.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    PostAPI api = <span class="keyword">new</span> PostAPI();</span><br><span class="line">    api.getPosts();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception exception) &#123;</span><br><span class="line">    System.out.println(exception.getLocalizedMessage());</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/21/java/180121-error-handling/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/19/java/180119-anonymous-class/"
+                            aria-label=": [Java] 익명 클래스 (Anonymous Class)"
+                        >
+                            [Java] 익명 클래스 (Anonymous Class)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-19T20:16:30+09:00">
+	
+		    2018/01/19
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<p>클래스를 상속하여 사용할 때 자식 클래스를 한번만 사용하는 경우, 매번 자식 클래스를 정의하기에는 번거로운 경우가 있습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 자식 클래스 정의</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Designer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Do something.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person person = <span class="keyword">new</span> Designer();</span><br><span class="line">person.doSomething();</span><br></pre></td></tr></table></figure>
+<p>이때 <code>익명 클래스(Anonymous Class)</code>를 유용하게 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person person = <span class="keyword">new</span> Person() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Do something.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.doSomething();</span><br></pre></td></tr></table></figure>
+<p>익명 클래스는 안드로이드 어플리케이션에서 이벤트를 처리할 때 많이 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Button loginButton = findViewById(R.id.loginButton);</span><br><span class="line"></span><br><span class="line">loginButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// log in</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/19/java/180119-anonymous-class/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/18/java/180118-inner-class/"
+                            aria-label=": [Java] 이너 클래스 (Inner Class)"
+                        >
+                            [Java] 이너 클래스 (Inner Class)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-18T20:16:30+09:00">
+	
+		    2018/01/18
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<p>Java에서는 클래스 안에 클래스를 정의할 수 있습니다. 이를 <code>이너 클래스(Inner Class)</code>라고 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Inner Class</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Static Inner Class</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInnerClass</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">OuterClass outerClass = <span class="keyword">new</span> OuterClass();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Inner Class는 Outer Class의 instance를 생성해야 Inner Class의 Instance도 생성할 수 있습니다.</span></span><br><span class="line">OuterClass.InnerClass innerClass = outerClass.<span class="function">new <span class="title">InnerClass</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Static Outer Class의 instance를 생성하지 않고도 Inner Class의 Instance를 생성할 수 있습니다.</span></span><br><span class="line">OuterClass.StaticInnerClass staticInnerClass = <span class="keyword">new</span> OuterClass.StaticInnerClass();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/18/java/180118-inner-class/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/17/java/180117-interface/"
+                            aria-label=": [Java] 추상 클래스 (Abstract Class)"
+                        >
+                            [Java] 추상 클래스 (Abstract Class)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-17T20:16:30+09:00">
+	
+		    2018/01/17
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<p>미구현된 메소드를 가지고 있는 클래스를 <code>추상 클래스(Abstract Class)</code>라고 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 구현된 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 미구현된 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printInformation</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이를 상속하는 자식 클래스에서 미구현된 메소드를 구현해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String team;</span><br><span class="line"></span><br><span class="line">    Player(String name, String team) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.team = team;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 메소드 구현</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printInformation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot; plays in &quot;</span> +team);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/17/java/180117-interface/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/16/java/180116-abstract-class/"
+                            aria-label=": [Java] 인터페이스 (interface)"
+                        >
+                            [Java] 인터페이스 (interface)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-16T20:16:30+09:00">
+	
+		    2018/01/16
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p><code>인터페이스 (Interface)</code>는 특정 규격을 준수하도록 강제하는데 사용합니다. </p>
+<h2 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h2><p><code>인터페이스 (Interface)</code>를 선언할 때는 키워드 <code>interface</code>를 사용합니다. 인터페이스에는 메서드를 선언만 하고 구현은 하지 않습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Database</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">save</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>클래스에서 인터페이스를 구현할 때는 키워드 <code>implements</code>를 사용합니다. 인터페이스 <code>Database</code> 규격을 따르는 클래스 2개를 구현해보겠습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySQL</span> <span class="keyword">implements</span> <span class="title">Database</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        OracleClient client = <span class="keyword">new</span> OracleClient()</span><br><span class="line">        client.save()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        OracleClient client = <span class="keyword">new</span> OracleClient()</span><br><span class="line">        client.delete()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Realm</span> <span class="keyword">implements</span> <span class="title">Database</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Realm realm = <span class="keyword">new</span> Realm()</span><br><span class="line">        realm.save()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Realm realm = <span class="keyword">new</span> Realm()</span><br><span class="line">        realm.delete()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위 예제에서는 인터페이스 <code>Database</code>라는 규격을 따르도록 강제하고 있습니다. 이렇게 하면 <code>Database</code>를 사용하는 입장에서 실제 구현체가 무엇인지 신경쓰지 않고 사용할 수 있습니다. 이를 통해 유지보수성을 극대화할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginViewModel</span> <span class="keyword">implements</span> <span class="title">ViewModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Database db = <span class="keyword">new</span> MySQL()</span><br><span class="line">    db.save()</span><br><span class="line">    </span><br><span class="line">    db = <span class="keyword">new</span> Realm()</span><br><span class="line">    db.save()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/16/java/180116-abstract-class/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/15/java/180115-final/"
+                            aria-label=": [Java] 키워드 final"
+                        >
+                            [Java] 키워드 final
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-15T20:16:30+09:00">
+	
+		    2018/01/15
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 키워드 <code>final</code>에 대해 알아보겠습니다. </p>
+<h2 id="1-상수"><a href="#1-상수" class="headerlink" title="1. 상수"></a>1. 상수</h2><p>키워드 <code>final</code>은 변수를 <code>변경할 수 없는 상수</code>로 만드는데 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> String NAME = <span class="string">&quot;Paul&quot;</span>;</span><br><span class="line">NAME = <span class="string">&quot;John&quot;</span>;  <span class="comment">// 아래와 같은 오류가 발생합니다.</span></span><br><span class="line"><span class="comment">// Cannot assign a value to final variable &#x27;NAME&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-상속-불가능한-클래스"><a href="#2-상속-불가능한-클래스" class="headerlink" title="2. 상속 불가능한 클래스"></a>2. 상속 불가능한 클래스</h2><p>부모 클래스에 <code>final</code>을 붙이면 상속이 불가능합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스 Person</span></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 다음과 같은 오류가 발생합니다.</span></span><br><span class="line"><span class="comment">// Cannot inherit from final &#x27;Person&#x27;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;   </span><br><span class="line">    </span><br><span class="line">    Programmer(String name) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-오버라이드-불가능한-메소드"><a href="#3-오버라이드-불가능한-메소드" class="headerlink" title="3. 오버라이드 불가능한 메소드"></a>3. 오버라이드 불가능한 메소드</h2><p>부모 클래스 메소드 앞에 <code>final</code>을 붙으면 오버라이드가 불가능합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// final 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Programmer(String name) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 다음과 같은 오류가 발생합니다.</span></span><br><span class="line">    <span class="comment">// &#x27;printName()&#x27; cannot override &#x27;printName()&#x27; in &#x27;Person&#x27;.</span></span><br><span class="line">    <span class="comment">// overridden method is final.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/15/java/180115-final/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -958,7 +905,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 8 of 9</li>
+        <li class="pagination-number">page 8 of 10</li>
     </ul>
 </div>
 

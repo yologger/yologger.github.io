@@ -274,7 +274,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/03/07/java/0057-method-reference/"
+                            href="/ko/2018/02/08/java/180208-method-reference/"
                             aria-label=": [Java] 메소드 참조 (Method Reference)"
                         >
                             [Java] 메소드 참조 (Method Reference)
@@ -282,9 +282,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-03-07T20:16:30+09:00">
+    <time datetime="2018-02-08T20:16:30+09:00">
 	
-		    2018/03/07
+		    2018/02/08
     	
     </time>
     
@@ -333,7 +333,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/03/07/java/0057-method-reference/#post-footer"
+                                href="/ko/2018/02/08/java/180208-method-reference/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -356,7 +356,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/03/06/java/0056-lambda/"
+                            href="/ko/2018/02/07/java/180207-lambda/"
                             aria-label=": [Java] 람다식(익명함수)와 함수형 인터페이스"
                         >
                             [Java] 람다식(익명함수)와 함수형 인터페이스
@@ -364,9 +364,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-03-06T20:16:30+09:00">
+    <time datetime="2018-02-07T20:16:30+09:00">
 	
-		    2018/03/06
+		    2018/02/07
     	
     </time>
     
@@ -408,6 +408,17 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정의</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Function</span>&lt;<span class="title">T</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">R <span class="title">apply</span><span class="params">(T t)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span> &lt;V&gt; <span class="function">Function&lt;V, R&gt; <span class="title">compose</span><span class="params">(Function&lt;? <span class="keyword">super</span> V, ? extends T&gt; before)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(before);</span><br><span class="line">        <span class="keyword">return</span> (V v) -&gt; apply(before.apply(v));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span> &lt;V&gt; <span class="function">Function&lt;T, V&gt; <span class="title">andThen</span><span class="params">(Function&lt;? <span class="keyword">super</span> R, ? extends V&gt; after)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(after);</span><br><span class="line">        <span class="keyword">return</span> (T t) -&gt; after.apply(apply(t));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &lt;T&gt; <span class="function">Function&lt;T, T&gt; <span class="title">identity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> t -&gt; t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 예시, 메소드 참조로 간소화 가능(String::length;)</span></span><br><span class="line">Function&lt;String, Integer&gt; function = (String str) -&gt; &#123;</span><br><span class="line">    str.length();</span><br><span class="line">&#125;</span><br><span class="line">function.apply(<span class="string">&quot;Hello World&quot;</span>);</span><br></pre></td></tr></table></figure>
 <h4 id="4-Predicate"><a href="#4-Predicate" class="headerlink" title="4. Predicate "></a>4. Predicate <T></h4><p>Predicate는 객체 T를 매개 변수로 받아 처리한 후 Boolean을 반환합니다. Supplier는 Boolean test(T t)을 추상 메소드로 갖고 있습니다. </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정의</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Predicate</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">test</span><span class="params">(T t)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">and</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; other)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(other);</span><br><span class="line">        <span class="keyword">return</span> (t) -&gt; test(t) &amp;&amp; other.test(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">negate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (t) -&gt; !test(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">or</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; other)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(other);</span><br><span class="line">        <span class="keyword">return</span> (t) -&gt; test(t) || other.test(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &lt;T&gt; <span class="function">Predicate&lt;T&gt; <span class="title">isEqual</span><span class="params">(Object targetRef)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">null</span> == targetRef)</span><br><span class="line">                ? Objects::isNull</span><br><span class="line">                : object -&gt; targetRef.equals(object);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 예시</span></span><br><span class="line">Predicate&lt;String&gt; predicate = (str) -&gt; str.equals(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">predicate.test(<span class="string">&quot;Hello World&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="안드로이드에서의-람다식"><a href="#안드로이드에서의-람다식" class="headerlink" title="안드로이드에서의 람다식"></a>안드로이드에서의 람다식</h2><p>람다식은 안드로이드 어플리케이션 개발에서도 자주 사용합니다. 보통 위젯을 클릭했을 때 실행할 구문을 람다식 안에 구현합니다. </p>
+<p>우선 람다식을 사용하지 않고 익명 클래스를 사용하여 특정 버튼을 클릭했을 때 실행할 구문을 등록해보겠습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Button button = findViewById(R.id.button);</span><br><span class="line"></span><br><span class="line">button.setOnTouchListener(<span class="keyword">new</span> View.OnTouchListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View v, MotionEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>위 코드에 람다식을 사용하면 다음과 같습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">button.setOnTouchListener((View v, MotionEvent event) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>데이터 타입 생략도 가능합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">button.setOnTouchListener((v, event) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>함수의 몸체, 즉 구현부가 1줄일 때는 대괄호{}도 생략하고 1줄로 표현할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button.setOnTouchListener((v, event) -&gt; <span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+<p>매개변수가 1개일 때는 괄호도 생략 가능합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button.setOnClickListener(v -&gt; System.out.println(<span class="string">&quot;Button clicked.&quot;</span>));</span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -416,7 +427,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/03/06/java/0056-lambda/#post-footer"
+                                href="/ko/2018/02/07/java/180207-lambda/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -439,7 +450,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/03/04/java/0054-function-programming/"
+                            href="/ko/2018/02/06/java/180206-function-programming/"
                             aria-label=": [Java] 1급 객체, 1급 함수와 함수형 프로그래밍"
                         >
                             [Java] 1급 객체, 1급 함수와 함수형 프로그래밍
@@ -447,9 +458,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-03-04T20:16:30+09:00">
+    <time datetime="2018-02-06T20:16:30+09:00">
 	
-		    2018/03/04
+		    2018/02/06
     	
     </time>
     
@@ -486,7 +497,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/03/04/java/0054-function-programming/#post-footer"
+                                href="/ko/2018/02/06/java/180206-function-programming/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -509,7 +520,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/03/03/java/0053-annotation-processor/"
+                            href="/ko/2018/02/05/java/180205-annotation-processor/"
                             aria-label=": [Java] 어노테이션 프로세서 (Annotation Processor)"
                         >
                             [Java] 어노테이션 프로세서 (Annotation Processor)
@@ -517,9 +528,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-03-03T20:16:30+09:00">
+    <time datetime="2018-02-05T20:16:30+09:00">
 	
-		    2018/03/03
+		    2018/02/05
     	
     </time>
     
@@ -579,7 +590,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/03/03/java/0053-annotation-processor/#post-footer"
+                                href="/ko/2018/02/05/java/180205-annotation-processor/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -602,7 +613,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/03/02/java/0052-annotation2/"
+                            href="/ko/2018/02/04/java/180204-annotation2/"
                             aria-label=": [Java] 어노테이션 사용방법"
                         >
                             [Java] 어노테이션 사용방법
@@ -610,9 +621,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-03-02T20:16:30+09:00">
+    <time datetime="2018-02-04T20:16:30+09:00">
 	
-		    2018/03/02
+		    2018/02/04
     	
     </time>
     
@@ -650,7 +661,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/03/02/java/0052-annotation2/#post-footer"
+                                href="/ko/2018/02/04/java/180204-annotation2/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -673,7 +684,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/03/01/java/0051-annotation/"
+                            href="/ko/2018/02/03/java/180203-annotation/"
                             aria-label=": [Java] 어노테이션(Annotation)이란"
                         >
                             [Java] 어노테이션(Annotation)이란
@@ -681,9 +692,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-03-01T20:16:30+09:00">
+    <time datetime="2018-02-03T20:16:30+09:00">
 	
-		    2018/03/01
+		    2018/02/03
     	
     </time>
     
@@ -721,7 +732,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/03/01/java/0051-annotation/#post-footer"
+                                href="/ko/2018/02/03/java/180203-annotation/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -744,23 +755,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/02/09/kotlin/0139-generic/"
-                            aria-label=": [Kotlin] 제너릭 (Generic)"
+                            href="/ko/2018/02/02/java/180202-reflection/"
+                            aria-label=": [Java] 리플렉션 (Reflection)"
                         >
-                            [Kotlin] 제너릭 (Generic)
+                            [Java] 리플렉션 (Reflection)
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-02-09T20:16:30+09:00">
+    <time datetime="2018-02-02T20:16:30+09:00">
 	
-		    2018/02/09
+		    2018/02/02
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
 
 
     
@@ -769,17 +780,30 @@
             </div>
             
                 <div class="postShorten-content">
-                    <h2 id="제너릭-Generic"><a href="#제너릭-Generic" class="headerlink" title="제너릭 (Generic)"></a>제너릭 (Generic)</h2><p><code>제네릭 (Generic)</code>은 클래스나 메서드 내부에서 사용할 데이터의 타입을 외부에서 설정하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 <code>타입 체크</code>를 가능하게 합니다.</p>
-<h2 id="클래스에서의-제너릭-Generic"><a href="#클래스에서의-제너릭-Generic" class="headerlink" title="클래스에서의 제너릭 (Generic)"></a>클래스에서의 제너릭 (Generic)</h2><p><code>제네릭 클래스</code>를 정의할 땐 <code>&lt;&gt;</code>안에 임의의 <code>타입 파라미터</code>를 명시합니다. 보통 <code>타입 파라미터</code>는 관습적으로 <code>대문자 E(Element)</code>, <code>T(Type)</code>, <code>K(Key)</code>, <code>V(Value)</code>를 사용합니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="type">T</span>&gt; <span class="keyword">constructor</span></span>(<span class="keyword">val</span> item: T) </span><br></pre></td></tr></table></figure>
-<p>이렇께 정의된 <code>제너릭 클래스</code>는 다음과 같이 사용합니다. <code>&lt;&gt;</code>안의 <code>타입 파리미터</code> <code>T</code>에는 어떠한 데이터 타입도 들어갈 수 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box1 = Box&lt;<span class="built_in">Int</span>&gt;(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> box2 = Box&lt;String&gt;(<span class="string">&quot;Hello World.&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> box3 = Box&lt;Person&gt;(Person(<span class="string">&quot;Paul&quot;</span>))</span><br></pre></td></tr></table></figure>
-<p>여러 개의 <code>타입 파라미터</code>을 사용할 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="type">T, U</span>&gt; <span class="keyword">constructor</span></span>(<span class="keyword">val</span> item1: T, <span class="keyword">val</span> item2: U)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> box1 = Box&lt;<span class="built_in">Int</span>, String&gt;(<span class="number">1</span>, <span class="string">&quot;Hello World.&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> box2 = Box&lt;String, <span class="built_in">Double</span>&gt;(<span class="string">&quot;Hello World.&quot;</span>, <span class="number">3.4</span>)</span><br><span class="line"><span class="keyword">var</span> box3 = Box&lt;Person, Phone&gt;(Person(<span class="string">&quot;Paul&quot;</span>), Phone(<span class="string">&quot;Apple&quot;</span>))</span><br></pre></td></tr></table></figure>
-<h2 id="타입-제한"><a href="#타입-제한" class="headerlink" title="타입 제한"></a>타입 제한</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&lt;<span class="type">T: Phone</span>&gt; <span class="keyword">constructor</span></span>(<span class="keyword">val</span> phone: T)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Laptop</span></span>()</span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span></span>()</span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Galaxy</span></span>(): Phone() &#123;&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person1 = Person&lt;Phone&gt;(Phone())</span><br><span class="line"><span class="keyword">var</span> person2 = Person&lt;Galaxy&gt;(Galaxy())</span><br><span class="line"><span class="keyword">var</span> person3 = Person&lt;Laptop&gt;(Laptop())  <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
-<p>키워드 <code>where</code>를 사용할 수도 있다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">getElement</span><span class="params">(element: <span class="type">T</span>)</span></span>: T <span class="keyword">where</span> T: <span class="built_in">Int</span> &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> element1 = getElement(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> element2 = getElement(<span class="number">3.14</span>) <span class="comment">// Error</span></span><br><span class="line"><span class="keyword">var</span> element3 = getElement(<span class="string">&quot;Hello World&quot;</span>)    <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+                    <hr>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p><code>리플렉션(Reflection)</code>은 런타임에서 <strong>구체적인 클래스 타입을 몰라도 그 클래스의 멤버변수, 메소드 등에 접근할 수 있도록 하는 자바 API와 기법</strong>입니다. <code>리플렉션</code>과 관련된 API는 <code>java.lang.reflect.*</code>패키지에 있습니다.</p>
+<h2 id="Class클래스와-클래스-참조"><a href="#Class클래스와-클래스-참조" class="headerlink" title="Class클래스와 클래스 참조"></a>Class클래스와 클래스 참조</h2><p>자바의 모든 클래스와 인터페이스는 컴파일 후 .class파일로 변환됩니다. .class파일에는 생성자, 멤버변수, 메서드 등의 객체 정보가 포함되어있는데 <code>Class</code>클래스는 이 .class파일에서 가져온 객체의 정보를 담는 역할을 합니다. <code>Class</code>클래스에 정보를 담는 방법에는 3가지가 있습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .class를 사용하여 객체 정보 가져오기</span></span><br><span class="line">Class c1 = String.class</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// forName()메소드를 사용하여 객체 정보 가져오기</span></span><br><span class="line">Class c1 = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 인스턴스로부터 객체 정보 가져오기</span></span><br><span class="line">String string = <span class="keyword">new</span> String();</span><br><span class="line">Class c1 = string.getClass();</span><br></pre></td></tr></table></figure>
+
+<h2 id="리플렉션"><a href="#리플렉션" class="headerlink" title="리플렉션"></a>리플렉션</h2><p>코드를 작성하다보면 작성시점에 클래스 타입을 모르는 경우가 있습니다. 이때 <code>리플렉션</code>을 사용할 수 있습니다. </p>
+<p>다음과 같은 클래스가 있다고 가정해봅시다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line">    String nation;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 기본 생성자</span></span><br><span class="line">    Person() &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">this</span>.nation = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 보조 생성자</span></span><br><span class="line">    Person(String name, String nation) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.nation = nation;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printNation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(nation);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printSomething</span><span class="params">(String something)</span> </span>&#123;</span><br><span class="line">        System.out.println(something);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Class</code>클래스에 클래스 정보를 저장할 수 있습니다. 방법은 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line"><span class="comment">// 또는 Class personClass = Class.forName(&quot;Person&quot;);</span></span><br></pre></td></tr></table></figure>
+<p>아래와 같이 클래스의 인스턴스를 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>, <span class="string">&quot;America&quot;</span>);</span><br><span class="line">Class personClass = person.getClass();</span><br></pre></td></tr></table></figure>
+<p>이 <code>Class</code>타입의 변수로 클래스의 인스턴스를 생성할 수도 있습니다. 이때는 <code>newInstance()</code>메소드를 사용합니다. 다만 반드시 매개변수가 없는 <code>기본생성자</code>가 존재해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Person person = (Person) personClass.newInstance();</span><br><span class="line">&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="클래스의-필드-멤버변수-가져오기"><a href="#클래스의-필드-멤버변수-가져오기" class="headerlink" title="클래스의 필드(멤버변수) 가져오기"></a>클래스의 필드(멤버변수) 가져오기</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line">Field[] fields = personClass.getDeclaredFields();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;fields.length; i++) &#123;</span><br><span class="line">    System.out.println(fields[i].getName());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// name</span></span><br><span class="line"><span class="comment">// nation</span></span><br></pre></td></tr></table></figure>
+<h2 id="클래스의-생성자-가져오기"><a href="#클래스의-생성자-가져오기" class="headerlink" title="클래스의 생성자 가져오기"></a>클래스의 생성자 가져오기</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line">Constructor[] constructors = personClass.getDeclaredConstructors();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;constructors.length; i++) &#123;</span><br><span class="line">    System.out.println(constructors[i].getName());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// com.my_project.Person</span></span><br><span class="line"><span class="comment">// com.my_project.Person</span></span><br></pre></td></tr></table></figure>
+<h2 id="클래스의-메소드-가져오기"><a href="#클래스의-메소드-가져오기" class="headerlink" title="클래스의 메소드 가져오기"></a>클래스의 메소드 가져오기</h2><p>클래스의 모든 메소드들은 다음과 같이 가져올 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line">Method[] methods = personClass.getDeclaredMethods();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;methods.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 메소드 이름 출력</span></span><br><span class="line">    System.out.println(methods[i].getName());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// printName</span></span><br><span class="line"><span class="comment">// printNation</span></span><br><span class="line"><span class="comment">// printSomething</span></span><br><span class="line"><span class="comment">// printHello</span></span><br></pre></td></tr></table></figure>
+<p>특정 메소드 1개만 가져올 수도 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Method method = personClass.getDeclaredMethod(<span class="string">&quot;printSomething&quot;</span>);</span><br><span class="line">    System.out.println(method.getName());   <span class="comment">// printSomething</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>클래스의 메소드를 가져오면 이를 통해 호출도 할 수도 있습니다. 이때는 <code>invoke()</code>메소드를 호출합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>, <span class="string">&quot;America&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Method printHelloMethod = personClass.getDeclaredMethod(<span class="string">&quot;printHello&quot;</span>);</span><br><span class="line">    printHelloMethod.invoke(person);    <span class="comment">// Hello</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -788,7 +812,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/02/09/kotlin/0139-generic/#post-footer"
+                                href="/ko/2018/02/02/java/180202-reflection/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -811,23 +835,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/02/09/kotlin/0140-generic-in-out-where/"
-                            aria-label=": [Kotlin] 제너릭 (Generic)"
+                            href="/ko/2018/02/01/java/180201-object-class/"
+                            aria-label=": [Java] Object 클래스"
                         >
-                            [Kotlin] 제너릭 (Generic)
+                            [Java] Object 클래스
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-02-09T20:16:30+09:00">
+    <time datetime="2018-02-01T20:16:30+09:00">
 	
-		    2018/02/09
+		    2018/02/01
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
 
 
     
@@ -836,11 +860,20 @@
             </div>
             
                 <div class="postShorten-content">
-                    <h2 id="in"><a href="#in" class="headerlink" title="in"></a>in</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">constructor</span></span>(name: String, <span class="keyword">var</span> company: String) : Person(name)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppProgrammer</span> <span class="keyword">constructor</span></span>(name: String, company: String, <span class="keyword">var</span> field: String) : Programmer(name, company)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printArrayList</span><span class="params">(arrayList: <span class="type">ArrayList</span>&lt;<span class="type">in</span> <span class="type">Programmer</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(arrayList.toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">printArrayList(people)</span><br><span class="line">printArrayList(programmers)</span><br><span class="line">printArrayList(appProgrammer)   <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+                    <hr>
+<h2 id="java-lang-패키지"><a href="#java-lang-패키지" class="headerlink" title="java.lang 패키지"></a>java.lang 패키지</h2><p><code>java.lang</code> 패키지는 자바에서 가장 기본적인 동작을 수행하는 클래스들의 집합입니다. 따라서 자바에서는 <code>java.lang</code> 패키지를 import하지 않아도 바로 사용할 수 있습니다. </p>
+<h2 id="Object-클래스"><a href="#Object-클래스" class="headerlink" title="Object 클래스"></a>Object 클래스</h2><p><code>Object</code>클래스는 모든 자바 클래스의 최고 조상 클래스입니다. 따라서 자바의 모든 클래스는 암시적으로든 명시적으로든 <code>Object</code>클래스를 상속받고 있습니다. <code>Object</code>클래스는 <code>java.lang</code>패키지에 포함되며, <code>Object</code>클래스는 여러 메소드를 제공하고 있습니다.</p>
+<h2 id="equals-Object-obj-메소드"><a href="#equals-Object-obj-메소드" class="headerlink" title="equals(Object obj) 메소드"></a>equals(Object obj) 메소드</h2><p>메소드를 호출하는 객체와 인자로 전달받은 객체가 동일한지 여부를 반환합니다. 다만 <code>Object</code>클래스를 상속받는 클래스에서는 <code>equals(Object obj)</code>을 직접 구현해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// equal()메소드를 직접 구현</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">            <span class="keyword">return</span> name == ((Person) obj).name;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person p1 = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">Person p2 = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">boolean</span> result = p1.equals(p2); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="getClass-메소드"><a href="#getClass-메소드" class="headerlink" title="getClass() 메소드"></a>getClass() 메소드</h2><p>해당 객체의 클래스 타입을 반환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">System.out.println(person.getClass());  <span class="comment">// class com.test.example.Person</span></span><br><span class="line"></span><br><span class="line">Phone phone = <span class="keyword">new</span> Phone();</span><br><span class="line">System.out.println(phone.getClass());   <span class="comment">// class com.test.example.Phone</span></span><br></pre></td></tr></table></figure>
+<h2 id="hashcode-메소드"><a href="#hashcode-메소드" class="headerlink" title="hashcode() 메소드"></a>hashcode() 메소드</h2><p><code>hashcode()</code>는 객체의 <code>해시코드</code>를 반환합니다. <code>해시코드</code>는 <strong>객체의 주소값을 해시함수에 넣어 반환된 고유한 정수값</strong>입니다. 따라서 두 객체가 동일한 객체인지 비교할 때 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person p1 = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">Person p2 = p1;</span><br><span class="line">Person p3 = <span class="keyword">new</span> Person(<span class="string">&quot;John&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(p1.hashCode());  <span class="comment">// 214520509</span></span><br><span class="line">System.out.println(p2.hashCode());  <span class="comment">// 214520509</span></span><br><span class="line">System.out.println(p3.hashCode());  <span class="comment">// 68944050</span></span><br></pre></td></tr></table></figure>
+<h2 id="toString-메소드"><a href="#toString-메소드" class="headerlink" title="toString() 메소드"></a>toString() 메소드</h2><p>해당 객체의 정보를 문자열로 반환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(person.toString());  <span class="comment">// com.test.Person@cc952bd</span></span><br></pre></td></tr></table></figure>
+<h2 id="그-외"><a href="#그-외" class="headerlink" title="그 외"></a>그 외</h2><p>그 외에 <code>Object</code> 클래스는 <code>clone()</code>, <code>finalize()</code>, <code>notify()</code>, <code>notifyAll()</code>, <code>wait()</code> 메소드도 제공합니다.</p>
 
-<h2 id="out"><a href="#out" class="headerlink" title="out"></a>out</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">constructor</span></span>(name: String, <span class="keyword">var</span> company: String) : Person(name)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppProgrammer</span> <span class="keyword">constructor</span></span>(name: String, company: String, <span class="keyword">var</span> field: String) : Programmer(name, company)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printArrayList</span><span class="params">(arrayList: <span class="type">ArrayList</span>&lt;<span class="type">out</span> <span class="type">Programmer</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(arrayList.toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">printArrayList(people)          <span class="comment">// Error</span></span><br><span class="line">printArrayList(programmers)</span><br><span class="line">printArrayList(appProgrammer)   </span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -849,7 +882,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/02/09/kotlin/0140-generic-in-out-where/#post-footer"
+                                href="/ko/2018/02/01/java/180201-object-class/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -872,23 +905,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/02/09/kotlin/0141-generic-function/"
-                            aria-label=": [Kotlin] 제너릭 함수"
+                            href="/ko/2018/01/30/java/180130-type-eraser/"
+                            aria-label=": [Java] 타입 소거(Type Eraser)란?"
                         >
-                            [Kotlin] 제너릭 함수
+                            [Java] 타입 소거(Type Eraser)란?
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-02-09T20:16:30+09:00">
+    <time datetime="2018-01-30T20:16:30+09:00">
 	
-		    2018/02/09
+		    2018/01/30
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
 
 
     
@@ -897,11 +930,35 @@
             </div>
             
                 <div class="postShorten-content">
-                    <p><code>&lt;T: Superclass&gt;</code><br>Superclass를 구현한 클래스만 올 수 있다.</p>
-<h2 id="파라미터"><a href="#파라미터" class="headerlink" title="파라미터"></a>파라미터</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">printElement</span><span class="params">(element: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">printElement(<span class="number">1</span>)</span><br><span class="line">printElement(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">printElement(Person())</span><br></pre></td></tr></table></figure>
-<h2 id="반환값"><a href="#반환값" class="headerlink" title="반환값"></a>반환값</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">getElement</span><span class="params">(element: <span class="type">T</span>)</span></span>: T &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element1 = getElement(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> element2 = getElement(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> element3 = getElement(Person())</span><br></pre></td></tr></table></figure>
+                    <hr>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>본 포스트는 제너릭(Generic)에 대한 기본 지식이 있다는 가정하에 설명합니다. 제너릭은 해당 포스트에서 배우실 수 있습니다. </p>
+<h2 id="공변과-불공변"><a href="#공변과-불공변" class="headerlink" title="공변과 불공변"></a>공변과 불공변</h2><p><code>타입소거</code>를 이해하려면 <code>공변(covariant)</code>과 <code>불공변(contravariant)</code>을 먼저 알아야합니다. </p>
+<p>배열은 공변이고, 제네릭은 불공변입니다. 우선 예제를 살펴보겠습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object[] numbers = <span class="keyword">new</span> Int[<span class="number">5</span>];</span><br></pre></td></tr></table></figure>
+<p>Int는 Object의 자식 클래스입니다. 공변이란 자기 자신과 자식 객체로 타입 변환을 허용해주는 것입니다. 따라서 배열은 공변이라 할 수 있습니다.</p>
+<p>그럼 아래 제네릭 예제를 살펴보겠습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printList</span><span class="params">(List&lt;Object&gt; list)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; players = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">players.add(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;John&quot;</span>);</span><br><span class="line"></span><br><span class="line">printList(list);   <span class="comment">// 컴파일 에러</span></span><br></pre></td></tr></table></figure>
+<p>불공변은 두 개의 타입이 전혀 관련없다는 뜻입니다. 두 개의 제너릭 타입 List<String>과 List<Object>는 전혀 관련이 없습니다. 따라서 위 코드는 컴파일 에러가 발생합니다. 이러한 특성 때문에 제네릭은 컴파일 타임에서의 타입 안정성 높여줍니다.</p>
+<h2 id="구체화-reify"><a href="#구체화-reify" class="headerlink" title="구체화 (reify)"></a>구체화 (reify)</h2><p>배열은 구체화(reify)되고, 제네릭은 비 구체화(non-reify)가 됩니다. 용어가 벌써부터 어렵습니다. 우선 개념은 다음과 같습니다.</p>
+<ul>
+<li>구체화 타입(reifiable type): 자신의 타입 정보를 런타임에도 알고 있는 것</li>
+<li>비구체화 타입(non-reifiable type): 런타임에는 소거(erasure)가 되기 때문에 컴파일 타임보다 정보를 적게 가지는 것</li>
+</ul>
+<p>여기서 바로 타입 소거(Type Erasure)가 나옵니다. 제네릭은 컴파일 타임에 타입 체크를 한 후에 런타임에는 타입을 지우는 방법을 사용하고 있습니다.</p>
+<h2 id="Generic-Type-erasure란"><a href="#Generic-Type-erasure란" class="headerlink" title="Generic Type erasure란?"></a>Generic Type erasure란?</h2><p>결국 <code>Generic Type erasure</code>는 타입을 컴파일 타임에만 검사하는데 사용하며, 런타임에는 타입 정보를 알 수 없는 것입니다.<br>요약하자면, 컴파일 타임에만 타입 제약 조건을 정의하고, 런타임에는 타입을 제거한다는 뜻입니다.</p>
+<h4 id="Java-Compiler의-타입-소거-방식"><a href="#Java-Compiler의-타입-소거-방식" class="headerlink" title="Java Compiler의 타입 소거 방식"></a>Java Compiler의 타입 소거 방식</h4><ul>
+<li><code>Unbounded Type(&lt;?&gt;, &lt;T&gt;)</code>는 <code>Object</code>로 변환합니다.</li>
+<li>Bound Type(<code>&lt;E extends Observable&gt;</code>)의 경우는 Object가 아닌 <code>Observable</code>로 변환합니다.</li>
+</ul>
+<p>Unbounded Type 예제를 먼저 살펴보겠습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 할 때 (타입 소거 전) </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(T test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 런타임 때 (타입 소거 후)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Object test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>제네릭 파라미터가 소거되고 Object 클래스로 대치되었습니다. 그럼 Bounded Type 예제를 살펴보겠습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Observable</span>&lt;<span class="title">T</span>&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>제네릭 파라미터를 포함한 Observable<T>가 Observable로 소거되었습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Observable data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Observable <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Observable data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>Type Eraser</code>에 대해 알아보았습니다. 개발을 하다보면 개발 시점에 변수의 타입을 모르는 경우가 있습니다. 이때는 <code>Class 클래스</code>와 <code>리플렉션</code>을 사용하여 타입을 분석하기도 합니다. 더불어 Kotlin에서는 런타임에서 <code>Type Eraser</code>로 타입을 몰라도 사용하는 방법을 재공합니다. 해당 포스트들을 꼭 읽어보셨으면 좋겠습니다. </p>
+
                     
                         
 
@@ -910,7 +967,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/02/09/kotlin/0141-generic-function/#post-footer"
+                                href="/ko/2018/01/30/java/180130-type-eraser/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -933,23 +990,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/02/08/kotlin/0138-access-modifier/"
-                            aria-label=": [Kotlin] 접근 제한자 (Access Modifiers)"
+                            href="/ko/2018/01/29/java/180120-enum/"
+                            aria-label=": [Java] enum"
                         >
-                            [Kotlin] 접근 제한자 (Access Modifiers)
+                            [Java] enum
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-02-08T20:16:30+09:00">
+    <time datetime="2018-01-29T20:16:30+09:00">
 	
-		    2018/02/08
+		    2018/01/29
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
 
 
     
@@ -958,26 +1015,8 @@
             </div>
             
                 <div class="postShorten-content">
-                    <h2 id="private"><a href="#private" class="headerlink" title="private"></a>private</h2><p><code>private</code>으로 선언된 변수는 해당 클래스 내부에서만 접근이 가능합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> name: String) &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// 해당 클래스 내부에서 private 변수 name에 접근할 수 있습니다.</span></span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> name = person.name      <span class="comment">// 클래스 내부가 아니므로 접근 불가능합니다.</span></span><br></pre></td></tr></table></figure>
-<p><code>private</code>으로 선언된 변수는 상속받는 자식 클래스에서도 접근이 불가능합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> name: String) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span></span>(name: String, <span class="keyword">private</span> <span class="keyword">var</span> team: String): Person(name) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printTeam</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Team: <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printInformation</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;<span class="subst">$&#123;name&#125;</span> works in <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment">// 부모클래스에 선언된 private 변수 name에 접근할 수 없고 컴파일되지 않습니다.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="protected"><a href="#protected" class="headerlink" title="protected"></a>protected</h2><p><code>protected</code>로 선언된 변수는 해당 클래스와 자식 클래스에서 접근이 가능합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">protected</span> <span class="keyword">val</span> name: String) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span></span>(name: String, <span class="keyword">private</span> <span class="keyword">var</span> team: String): Person(name) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printTeam</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Team: <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printInformation</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;<span class="subst">$&#123;name&#125;</span> works in <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment">// 부모클래스에 선언된 protected 변수 name에 접근할 수 있습니다.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="internal"><a href="#internal" class="headerlink" title="internal"></a>internal</h2><p><code>internal</code>로 선언된 변수는 같은 <code>모듈</code> 내에서는 어디서 접근이 가능합니다. 코틀린 공식 문서에서 말하는 같은 <code>모듈</code>은 아래 상황을 뜻합니다.</p>
-<ol>
-<li><p>IntelliJ IDEA Module</p>
-</li>
-<li><p>Maven Project</p>
-</li>
-<li><p>Gradle Source Set(with the exception that the test source set can access the internal declarations of main)</p>
-</li>
-<li><p>a set of files compiled with one invocation of the <kotlinc> Ant task</p>
-<p>쉽게 말하면 같은 <code>프로젝트</code> 내에서는 internal 제한자에 대해 접근 가능하다고 보면 되겠습니다.</p>
-</li>
-</ol>
-<h2 id="public-default"><a href="#public-default" class="headerlink" title="public (default)"></a>public (default)</h2><p>어디서든 접근이 가능합니다. 접근 제한자를 붙이지 않으면 기본적으로 <code>public</code>입니다. </p>
-
+                    <hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// enum 정의</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Direction</span> </span>&#123;</span><br><span class="line">    EAST, WEST, SOUTH, NORTH</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// enum 인스턴스 생성</span></span><br><span class="line">Direction direction = Direction.EAST;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (direction) &#123;</span><br><span class="line">    <span class="keyword">case</span> EAST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to east.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> WEST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to west.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> NORTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to north.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> SOUTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to south.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -986,7 +1025,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/02/08/kotlin/0138-access-modifier/#post-footer"
+                                href="/ko/2018/01/29/java/180120-enum/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -1015,7 +1054,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 1 of 8</li>
+        <li class="pagination-number">page 1 of 5</li>
     </ul>
 </div>
 
