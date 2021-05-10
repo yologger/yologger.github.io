@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Kotlin] 제너릭 (Generic) - Yologger&#39;s Blog</title>
+    <title>[Kotlin] 제너릭(Generic) - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"제너릭 (Generic)제네릭 (Generic)은 클래스나 메서드 내부에서 사용할 데이터의 타입을 외부에서 설정하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 타입 체크를 가능하게 합니다.\n클래스에서의 제너릭 (Generic)제네릭 클래스를 정의할 땐 &lt;&gt;안에 임의의 타입 파라미터를 명시합니다. 보통 타입 파라미터는 관습적으로 대문자 E(Element), T(Type), K(Key), V(Value)를 사용합니다. \n1class Box&lt;T&gt; constructor(val item: T) \n이렇께 정의된 제너릭 클래스는 다음과 같이 사용합니다. &lt;&gt;안의 타입 파리미터 T에는 어떠한 데이터 타입도 들어갈 수 있습니다. \n123var box1 = Box&lt;Int&gt;(1)var box2 = Box&lt;String&gt;(&quot;Hello World.&quot;)var box3 = Box&lt;Person&gt;(Person(&quot;Paul&quot;))\n여러 개의 타입 파라미터을 사용할 수도 있습니다.\n12345class Box&lt;T, U&gt; constructor(val item1: T, val item2: U)var box1 = Box&lt;Int, String&gt;(1, &quot;Hello World.&quot;)var box2 = Box&lt;String, Double&gt;(&quot;Hello World.&quot;, 3.4)var box3 = Box&lt;Person, Phone&gt;(Person(&quot;Paul&quot;), Phone(&quot;Apple&quot;))\n타입 제한12345class Person&lt;T: Phone&gt; constructor(val phone: T)open class Laptop()open class Phone()open class Galaxy(): Phone() &#123;&#125;\n123var person1 = Person&lt;Phone&gt;(Phone())var person2 = Person&lt;Galaxy&gt;(Galaxy())var person3 = Person&lt;Laptop&gt;(Laptop())  // Error\n키워드 where를 사용할 수도 있다.\n1234567fun &lt;T&gt; getElement(element: T): T where T: Int &#123;    println(&quot;Element: $&#123;element.toString()&#125;&quot;)&#125;var element1 = getElement(1)var element2 = getElement(3.14) // Errorvar element3 = getElement(&quot;Hello World&quot;)    // Error","dateCreated":"2019-02-14T20:16:30+09:00","dateModified":"2021-05-04T19:39:44+09:00","datePublished":"2019-02-14T20:16:30+09:00","description":"","headline":"[Kotlin] 제너릭 (Generic)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/","keywords":"Kotlin"}</script>
-    <meta name="description" content="제너릭 (Generic)제네릭 (Generic)은 클래스나 메서드 내부에서 사용할 데이터의 타입을 외부에서 설정하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 타입 체크를 가능하게 합니다. 클래스에서의 제너릭 (Generic)제네릭 클래스를 정의할 땐 &lt;&gt;안에 임의의 타입 파라미터를 명시합니다. 보통 타입 파라미터">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 인라인 함수(Inline Function)와 noinline, crossline에 대해 알아봤습니다. 이번 포스트에서는 제너릭(Generic)에 대해 알아보겠습니다. \n제너릭 (Generic)제네릭 (Generic)은 클래스나 메서드 내부에서 사용할 데이터의 자료형을 외부에서 설정하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 타입 체크를 가능하게 합니다.\n클래스에서의 제너릭 (Generic)제네릭 클래스를 정의할 땐 &lt;&gt;안에 임의의 문자를 명시합니다. 이 문자를 타입 파라미터(Type Parameter)라고 합니다. 보통 타입 파라미터는 관습적으로 대문자 E(Element), T(Type), K(Key), V(Value)를 사용합니다.\n1class Box&lt;T&gt; constructor(val item: T) \n이렇게 정의된 제너릭 클래스는 다음과 같이 사용합니다. &lt;&gt;안의 타입 파리미터 T에는 어떠한 데이터 타입도 들어갈 수 있습니다. \n123var box1 = Box&lt;Int&gt;(1)var box2 = Box&lt;String&gt;(&quot;Hello World.&quot;)var box3 = Box&lt;Person&gt;(Person(&quot;Paul&quot;))\n아래 코드를 살펴봅시다. \n123class Box&lt;T&gt; constructor(val item: T)var box1 = Box&lt;Int&gt;(1)\n이 코드를 컴파일하면 아래와 같은 코드로 변환됩니다.\n123class Box constructor(val item: Int)var box1 = Box(1)\n타입 파라미터는 여러 개를 사용할 수도 있습니다.\n12345class Box&lt;T, U&gt; constructor(val item1: T, val item2: U)var box1 = Box&lt;Int, String&gt;(1, &quot;Hello World.&quot;)var box2 = Box&lt;String, Double&gt;(&quot;Hello World.&quot;, 3.4)var box3 = Box&lt;Person, Phone&gt;(Person(&quot;Paul&quot;), Phone(&quot;Apple&quot;))\n\n타입 제한타입 제한을 사용하면 타입 파라미터에 들어올 실제 값의 자료형을 제한할 수 있습니다. 타입 제한은 &lt;T: Superclass&gt; 형태로 사용합니다. 아래 코드를 살펴봅시다. \n1class Person&lt;T: Phone&gt; constructor(val phone: T)\n&lt;T: Phone&gt;가 바로 타입을 제한하는 코드입니다. 타입 파리미터 T에는 Phone클래스와 Phone클래스를 상속받는 클래스만 올 수 있습니다.\n1234open class Phone()open class Galaxy(): Phone() &#123;&#125;open class Laptop()\n1234var person1 = Person&lt;Phone&gt;(Phone())    // Successvar person2 = Person&lt;Galaxy&gt;(Galaxy())  // Successvar person3 = Person&lt;Laptop&gt;(Laptop())  // Error\n키워드 where를 사용해도 타입 파라미터에 실제로 오는 자료형을 제한할 수 있습니다. 아래 코드를 살펴봅시다.\n1234567fun &lt;T&gt; getElement(element: T): T where T: Int &#123;    println(&quot;Element: $&#123;element.toString()&#125;&quot;)&#125;var element1 = getElement(1)var element2 = getElement(3.14) // Errorvar element3 = getElement(&quot;Hello World&quot;)    // Error\nwhere T: Int를 통해 타입 파라미터 T에 올 수 있는 데이터의 자료형을 Int로 제한하고 있습니다.\n마치며이번 포스트에서는 제너릭(Generic)에 대해 알아봤습니다. 다음 포스트에서는 제네릭 함수(Generic Function)에 대해 알아보겠습니다. \n","dateCreated":"2019-02-11T20:16:30+09:00","dateModified":"2021-05-08T03:13:05+09:00","datePublished":"2019-02-11T20:16:30+09:00","description":"","headline":"[Kotlin] 제너릭(Generic)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/","keywords":"Kotlin"}</script>
+    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 인라인 함수(Inline Function)와 noinline, crossline에 대해 알아봤습니다. 이번 포스트에서는 제너릭(Generic)에 대해 알아보겠습니다.  제너릭 (Generic)제네릭 (Generic)은 클래스나 메서드 내">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Kotlin] 제너릭 (Generic)">
-<meta property="og:url" content="https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/index.html">
+<meta property="og:title" content="[Kotlin] 제너릭(Generic)">
+<meta property="og:url" content="https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="제너릭 (Generic)제네릭 (Generic)은 클래스나 메서드 내부에서 사용할 데이터의 타입을 외부에서 설정하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 타입 체크를 가능하게 합니다. 클래스에서의 제너릭 (Generic)제네릭 클래스를 정의할 땐 &lt;&gt;안에 임의의 타입 파라미터를 명시합니다. 보통 타입 파라미터">
+<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 인라인 함수(Inline Function)와 noinline, crossline에 대해 알아봤습니다. 이번 포스트에서는 제너릭(Generic)에 대해 알아보겠습니다.  제너릭 (Generic)제네릭 (Generic)은 클래스나 메서드 내">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2019-02-14T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-04T10:39:44.974Z">
+<meta property="article:published_time" content="2019-02-11T11:16:30.000Z">
+<meta property="article:modified_time" content="2021-05-07T18:13:05.705Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -274,14 +274,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Kotlin] 제너릭 (Generic)
+            [Kotlin] 제너릭(Generic)
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2019-02-14T20:16:30+09:00">
+    <time datetime="2019-02-11T20:16:30+09:00">
 	
-		    2019/02/14
+		    2019/02/11
     	
     </time>
     
@@ -299,17 +299,32 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="제너릭-Generic"><a href="#제너릭-Generic" class="headerlink" title="제너릭 (Generic)"></a>제너릭 (Generic)</h2><p><code>제네릭 (Generic)</code>은 클래스나 메서드 내부에서 사용할 데이터의 타입을 외부에서 설정하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 <code>타입 체크</code>를 가능하게 합니다.</p>
-<h2 id="클래스에서의-제너릭-Generic"><a href="#클래스에서의-제너릭-Generic" class="headerlink" title="클래스에서의 제너릭 (Generic)"></a>클래스에서의 제너릭 (Generic)</h2><p><code>제네릭 클래스</code>를 정의할 땐 <code>&lt;&gt;</code>안에 임의의 <code>타입 파라미터</code>를 명시합니다. 보통 <code>타입 파라미터</code>는 관습적으로 <code>대문자 E(Element)</code>, <code>T(Type)</code>, <code>K(Key)</code>, <code>V(Value)</code>를 사용합니다. </p>
+            <blockquote>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 <a href="/ko/2019/02/10/kotlin/190210-inline-function/"><code>인라인 함수(Inline Function)</code>와 <code>noinline</code>, <code>crossline</code></a>에 대해 알아봤습니다. 이번 포스트에서는 <code>제너릭(Generic)</code>에 대해 알아보겠습니다. </p>
+<h2 id="제너릭-Generic"><a href="#제너릭-Generic" class="headerlink" title="제너릭 (Generic)"></a>제너릭 (Generic)</h2><p><code>제네릭 (Generic)</code>은 <strong>클래스나 메서드 내부에서 사용할 데이터의 자료형을 외부에서 설정</strong>하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 <code>타입 체크</code>를 가능하게 합니다.</p>
+<h2 id="클래스에서의-제너릭-Generic"><a href="#클래스에서의-제너릭-Generic" class="headerlink" title="클래스에서의 제너릭 (Generic)"></a>클래스에서의 제너릭 (Generic)</h2><p><code>제네릭 클래스</code>를 정의할 땐 <code>&lt;&gt;</code>안에 임의의 문자를 명시합니다. 이 문자를 <code>타입 파라미터(Type Parameter)</code>라고 합니다. 보통 <code>타입 파라미터</code>는 관습적으로 <code>대문자 E(Element)</code>, <code>T(Type)</code>, <code>K(Key)</code>, <code>V(Value)</code>를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="type">T</span>&gt; <span class="keyword">constructor</span></span>(<span class="keyword">val</span> item: T) </span><br></pre></td></tr></table></figure>
-<p>이렇께 정의된 <code>제너릭 클래스</code>는 다음과 같이 사용합니다. <code>&lt;&gt;</code>안의 <code>타입 파리미터</code> <code>T</code>에는 어떠한 데이터 타입도 들어갈 수 있습니다. </p>
+<p>이렇게 정의된 <code>제너릭 클래스</code>는 다음과 같이 사용합니다. <code>&lt;&gt;</code>안의 <code>타입 파리미터</code> <code>T</code>에는 어떠한 데이터 타입도 들어갈 수 있습니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box1 = Box&lt;<span class="built_in">Int</span>&gt;(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> box2 = Box&lt;String&gt;(<span class="string">&quot;Hello World.&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> box3 = Box&lt;Person&gt;(Person(<span class="string">&quot;Paul&quot;</span>))</span><br></pre></td></tr></table></figure>
-<p>여러 개의 <code>타입 파라미터</code>을 사용할 수도 있습니다.</p>
+<p>아래 코드를 살펴봅시다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="type">T</span>&gt; <span class="keyword">constructor</span></span>(<span class="keyword">val</span> item: T)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> box1 = Box&lt;<span class="built_in">Int</span>&gt;(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>이 코드를 컴파일하면 아래와 같은 코드로 변환됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> item: <span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> box1 = Box(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><code>타입 파라미터</code>는 여러 개를 사용할 수도 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="type">T, U</span>&gt; <span class="keyword">constructor</span></span>(<span class="keyword">val</span> item1: T, <span class="keyword">val</span> item2: U)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> box1 = Box&lt;<span class="built_in">Int</span>, String&gt;(<span class="number">1</span>, <span class="string">&quot;Hello World.&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> box2 = Box&lt;String, <span class="built_in">Double</span>&gt;(<span class="string">&quot;Hello World.&quot;</span>, <span class="number">3.4</span>)</span><br><span class="line"><span class="keyword">var</span> box3 = Box&lt;Person, Phone&gt;(Person(<span class="string">&quot;Paul&quot;</span>), Phone(<span class="string">&quot;Apple&quot;</span>))</span><br></pre></td></tr></table></figure>
-<h2 id="타입-제한"><a href="#타입-제한" class="headerlink" title="타입 제한"></a>타입 제한</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&lt;<span class="type">T: Phone</span>&gt; <span class="keyword">constructor</span></span>(<span class="keyword">val</span> phone: T)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Laptop</span></span>()</span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span></span>()</span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Galaxy</span></span>(): Phone() &#123;&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person1 = Person&lt;Phone&gt;(Phone())</span><br><span class="line"><span class="keyword">var</span> person2 = Person&lt;Galaxy&gt;(Galaxy())</span><br><span class="line"><span class="keyword">var</span> person3 = Person&lt;Laptop&gt;(Laptop())  <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
-<p>키워드 <code>where</code>를 사용할 수도 있다.</p>
+
+<h2 id="타입-제한"><a href="#타입-제한" class="headerlink" title="타입 제한"></a>타입 제한</h2><p><code>타입 제한</code>을 사용하면 <code>타입 파라미터</code>에 들어올 실제 값의 자료형을 제한할 수 있습니다. 타입 제한은 <code>&lt;T: Superclass&gt;</code> 형태로 사용합니다. 아래 코드를 살펴봅시다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&lt;<span class="type">T: Phone</span>&gt; <span class="keyword">constructor</span></span>(<span class="keyword">val</span> phone: T)</span><br></pre></td></tr></table></figure>
+<p><code>&lt;T: Phone&gt;</code>가 바로 타입을 제한하는 코드입니다. 타입 파리미터 <code>T</code>에는 <code>Phone</code>클래스와 <code>Phone</code>클래스를 상속받는 클래스만 올 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span></span>()</span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Galaxy</span></span>(): Phone() &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Laptop</span></span>()</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person1 = Person&lt;Phone&gt;(Phone())    <span class="comment">// Success</span></span><br><span class="line"><span class="keyword">var</span> person2 = Person&lt;Galaxy&gt;(Galaxy())  <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person3 = Person&lt;Laptop&gt;(Laptop())  <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<p>키워드 <code>where</code>를 사용해도 <code>타입 파라미터</code>에 실제로 오는 자료형을 제한할 수 있습니다. 아래 코드를 살펴봅시다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">getElement</span><span class="params">(element: <span class="type">T</span>)</span></span>: T <span class="keyword">where</span> T: <span class="built_in">Int</span> &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> element1 = getElement(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> element2 = getElement(<span class="number">3.14</span>) <span class="comment">// Error</span></span><br><span class="line"><span class="keyword">var</span> element3 = getElement(<span class="string">&quot;Hello World&quot;</span>)    <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<p><code>where T: Int</code>를 통해 타입 파라미터 <code>T</code>에 올 수 있는 데이터의 자료형을 <code>Int</code>로 제한하고 있습니다.</p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>제너릭(Generic)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a>에 대해 알아보겠습니다. </p>
+
             
 
 
@@ -343,7 +358,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -356,7 +371,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -369,7 +384,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -420,7 +435,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -433,7 +448,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -446,7 +461,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -473,7 +488,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"
                         aria-label="Facebook에 공유하기"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
@@ -486,7 +501,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"
                         aria-label="Twitter에 공유하기"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
@@ -499,7 +514,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/14/kotlin/190214-generic/"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"
                         aria-label="Google+에 공유하기"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>

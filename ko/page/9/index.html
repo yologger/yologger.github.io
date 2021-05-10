@@ -273,6 +273,72 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/ko/2018/01/15/java/180115-final/"
+                            aria-label=": [Java] 키워드 final"
+                        >
+                            [Java] 키워드 final
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-15T20:16:30+09:00">
+	
+		    2018/01/15
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 키워드 <code>final</code>에 대해 알아보겠습니다. </p>
+<h2 id="1-상수"><a href="#1-상수" class="headerlink" title="1. 상수"></a>1. 상수</h2><p>키워드 <code>final</code>은 변수를 <code>변경할 수 없는 상수</code>로 만드는데 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> String NAME = <span class="string">&quot;Paul&quot;</span>;</span><br><span class="line">NAME = <span class="string">&quot;John&quot;</span>;  <span class="comment">// 아래와 같은 오류가 발생합니다.</span></span><br><span class="line"><span class="comment">// Cannot assign a value to final variable &#x27;NAME&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-상속-불가능한-클래스"><a href="#2-상속-불가능한-클래스" class="headerlink" title="2. 상속 불가능한 클래스"></a>2. 상속 불가능한 클래스</h2><p>부모 클래스에 <code>final</code>을 붙이면 상속이 불가능합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스 Person</span></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 다음과 같은 오류가 발생합니다.</span></span><br><span class="line"><span class="comment">// Cannot inherit from final &#x27;Person&#x27;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;   </span><br><span class="line">    </span><br><span class="line">    Programmer(String name) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-오버라이드-불가능한-메소드"><a href="#3-오버라이드-불가능한-메소드" class="headerlink" title="3. 오버라이드 불가능한 메소드"></a>3. 오버라이드 불가능한 메소드</h2><p>부모 클래스 메소드 앞에 <code>final</code>을 붙으면 오버라이드가 불가능합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// final 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Programmer(String name) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 다음과 같은 오류가 발생합니다.</span></span><br><span class="line">    <span class="comment">// &#x27;printName()&#x27; cannot override &#x27;printName()&#x27; in &#x27;Person&#x27;.</span></span><br><span class="line">    <span class="comment">// overridden method is final.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/15/java/180115-final/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/ko/2018/01/14/java/180114-inheritance/"
                             aria-label=": [Java] 상속 (Inheritance)"
                         >
@@ -811,66 +877,6 @@
                         <p>
                             <a
                                 href="/ko/2018/01/06/java/180106-variable-constant/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/05/android/buildtypes/"
-                            aria-label=": 코드에서 환경변수 분리하기 (3) ㅡ BuildTypes"
-                        >
-                            코드에서 환경변수 분리하기 (3) ㅡ BuildTypes
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-05T20:16:30+09:00">
-	
-		    2018/01/05
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 개발 환경과 릴리즈 환경에서 다른 설정파일을 사용하는 방법에 대해 알아보겠습니다.</p>
-<h2 id="2개의-설정파일-만들기"><a href="#2개의-설정파일-만들기" class="headerlink" title="2개의 설정파일 만들기"></a>2개의 설정파일 만들기</h2><p>development.propeties을 생성합니다.</p>
-<p>production.properties 파일을 생성합니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/05/android/buildtypes/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

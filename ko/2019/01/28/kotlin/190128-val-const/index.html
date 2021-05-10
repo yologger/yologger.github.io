@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Kotlin] 상수 (val, const) - Yologger&#39;s Blog</title>
+    <title>[Kotlin] 상수(val, const) - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"var변수를 선언할 때는 키워드 var를 사용합니다. 변수는 런타임에서 값을 수시로 변경할 수 있습니다.\n12345// 변수 선언var name: String = &quot;Paul&quot;// 값 변경name = &quot;John&quot;\nvalval은 런타임에 값이 결정되는 상수입니다. 상수는 한 번 값이 할당되면 변경할 수 없습니다. \n12345// 기본타입의 상수 선언var age: Int = 30// 에러, 값 변경 불가능age = 31\nval은 문자열도 할당할 수 있습니다.\n12345// 문자열 타입의 상수 선언val name: String = &quot;Paul&quot;// 에러, 값 변경 불가능name = &quot;John&quot;\nval는 클래스의 인스턴스도 할당할 수 있습니다.\n1234val person = Person(&quot;Paul&quot;, 35)// 에러, 물론 다른 인스턴스를 할당할 수도 없습니다.person = Person(&quot;John&quot;, 25)\nconst valconst val는 컴파일 타임에 값이 결정되는 상수입니다. 인스턴스를 할당할 수 없으며, 기본 자료형과 문자열만 할당할 수 있습니다.\n1234const val DEVICE_WIDTH: Int = 1400  // 성공const val URL: String = &quot;http://www.naver.com&quot;  // 성공const val person: Person = Person(&quot;ronaldo&quot;, 34)  // 에러\n클래스 안에서 사용할 때는 companion object블럭 안에서 정의합니다.\n12345678class MediaQueryMananger &#123;    companion object &#123;        const val DEVICE_WIDTH: Int = 1400    &#125;&#125; // 클래스의 인스턴스를 생성하지 않고 사용 가능합니다.println(MediaQueryManager.DEVICE_WIDTH)","dateCreated":"2019-01-28T20:16:30+09:00","dateModified":"2021-05-04T19:35:45+09:00","datePublished":"2019-01-28T20:16:30+09:00","description":"","headline":"[Kotlin] 상수 (val, const)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/28/kotlin/190128-val-const/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/28/kotlin/190128-val-const/","keywords":"Kotlin"}</script>
-    <meta name="description" content="var변수를 선언할 때는 키워드 var를 사용합니다. 변수는 런타임에서 값을 수시로 변경할 수 있습니다. 12345&#x2F;&#x2F; 변수 선언var name: String &#x3D; &quot;Paul&quot;&#x2F;&#x2F; 값 변경name &#x3D; &quot;John&quot; valval은 런타임에 값이 결정되는 상수입니다. 상수는 한 번 값이 할당되면 변경할 수 없습니다.  12345">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며우리는 이전 포스트에서 스코프 함수에 대해 알아봤습니다. 이번 포스트에서는 상수 (val, const)에 대해 알아보겠습니다. \n변수 var변수를 선언할 때는 키워드 var를 사용합니다. 변수는 런타임에서 값을 수시로 변경할 수 있습니다.\n12345// 변수 선언var name: String = &quot;Paul&quot;// 값 변경name = &quot;John&quot;\n상수 valval은 런타임에 값이 결정되는 상수입니다. 상수는 한 번 값이 할당되면 변경할 수 없습니다. \n12345// 기본타입의 상수 선언var age: Int = 30// 에러, 값 변경 불가능age = 31\nval은 문자열도 할당할 수 있습니다.\n12345// 문자열 타입의 상수 선언val name: String = &quot;Paul&quot;// 에러, 값 변경 불가능name = &quot;John&quot;\nval는 클래스의 인스턴스도 할당할 수 있습니다.\n1234val person = Person(&quot;Paul&quot;, 35)// 에러, 물론 다른 인스턴스를 할당할 수도 없습니다.person = Person(&quot;John&quot;, 25)\nconst valconst val는 컴파일 타임에 값이 결정되는 상수입니다. 인스턴스를 할당할 수 없으며, 기본 자료형과 문자열만 할당할 수 있습니다. const val상수의 이름은 통상 대문자와 언더바를 통해 선언합니다.\n1234const val DEVICE_WIDTH: Int = 1400  // 성공const val URL: String = &quot;http://www.naver.com&quot;  // 성공const val person: Person = Person(&quot;ronaldo&quot;, 34)  // 에러\n클래스 안에서 사용할 때는 companion object 블럭 안에 정의합니다.\n12345678class MediaQueryMananger &#123;    companion object &#123;        const val DEVICE_WIDTH: Int = 1400    &#125;&#125; // 클래스의 인스턴스를 생성하지 않고 사용 가능합니다.println(MediaQueryManager.DEVICE_WIDTH)\n마치며이번 포스트에서는 상수(val, const)에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 늦은 초기화의 lateinit에 대해 알아보겠습니다.\n","dateCreated":"2019-01-28T20:16:30+09:00","dateModified":"2021-05-08T02:54:08+09:00","datePublished":"2019-01-28T20:16:30+09:00","description":"","headline":"[Kotlin] 상수(val, const)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/28/kotlin/190128-val-const/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/28/kotlin/190128-val-const/","keywords":"Kotlin"}</script>
+    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며우리는 이전 포스트에서 스코프 함수에 대해 알아봤습니다. 이번 포스트에서는 상수 (val, const)에 대해 알아보겠습니다.  변수 var변수를 선언할 때는 키워드 var를 사용합니다. 변수는 런타임에서 값을 수시로 변경할 수 있습니다. 12345&#x2F;&#x2F;">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Kotlin] 상수 (val, const)">
+<meta property="og:title" content="[Kotlin] 상수(val, const)">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/01/28/kotlin/190128-val-const/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="var변수를 선언할 때는 키워드 var를 사용합니다. 변수는 런타임에서 값을 수시로 변경할 수 있습니다. 12345&#x2F;&#x2F; 변수 선언var name: String &#x3D; &quot;Paul&quot;&#x2F;&#x2F; 값 변경name &#x3D; &quot;John&quot; valval은 런타임에 값이 결정되는 상수입니다. 상수는 한 번 값이 할당되면 변경할 수 없습니다.  12345">
+<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며우리는 이전 포스트에서 스코프 함수에 대해 알아봤습니다. 이번 포스트에서는 상수 (val, const)에 대해 알아보겠습니다.  변수 var변수를 선언할 때는 키워드 var를 사용합니다. 변수는 런타임에서 값을 수시로 변경할 수 있습니다. 12345&#x2F;&#x2F;">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2019-01-28T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-04T10:35:45.821Z">
+<meta property="article:modified_time" content="2021-05-07T17:54:08.666Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -274,7 +274,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Kotlin] 상수 (val, const)
+            [Kotlin] 상수(val, const)
         </h1>
     
     
@@ -299,18 +299,24 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h3 id="var"><a href="#var" class="headerlink" title="var"></a>var</h3><p><code>변수</code>를 선언할 때는 키워드 <code>var</code>를 사용합니다. <code>변수</code>는 런타임에서 값을 수시로 변경할 수 있습니다.</p>
+            <blockquote>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>우리는 이전 포스트에서 <a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">스코프 함수</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>상수 (val, const)</code>에 대해 알아보겠습니다. </p>
+<h3 id="변수-var"><a href="#변수-var" class="headerlink" title="변수 var"></a>변수 var</h3><p><code>변수</code>를 선언할 때는 키워드 <code>var</code>를 사용합니다. <code>변수</code>는 런타임에서 값을 수시로 변경할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 값 변경</span></span><br><span class="line">name = <span class="string">&quot;John&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="val"><a href="#val" class="headerlink" title="val"></a>val</h3><p><code>val</code>은 <code>런타임</code>에 값이 결정되는 <code>상수</code>입니다. <code>상수</code>는 한 번 값이 할당되면 변경할 수 없습니다. </p>
+<h3 id="상수-val"><a href="#상수-val" class="headerlink" title="상수 val"></a>상수 val</h3><p><code>val</code>은 <strong>런타임</strong>에 값이 결정되는 <code>상수</code>입니다. <code>상수</code>는 한 번 값이 할당되면 변경할 수 없습니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 기본타입의 상수 선언</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="built_in">Int</span> = <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 에러, 값 변경 불가능</span></span><br><span class="line">age = <span class="number">31</span></span><br></pre></td></tr></table></figure>
 <p><code>val</code>은 문자열도 할당할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 문자열 타입의 상수 선언</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 에러, 값 변경 불가능</span></span><br><span class="line">name = <span class="string">&quot;John&quot;</span></span><br></pre></td></tr></table></figure>
 <p><code>val</code>는 클래스의 인스턴스도 할당할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 에러, 물론 다른 인스턴스를 할당할 수도 없습니다.</span></span><br><span class="line">person = Person(<span class="string">&quot;John&quot;</span>, <span class="number">25</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="const-val"><a href="#const-val" class="headerlink" title="const val"></a>const val</h3><p><code>const val</code>는 <code>컴파일 타임</code>에 값이 결정되는 <code>상수</code>입니다. 인스턴스를 할당할 수 없으며, <code>기본 자료형</code>과 <code>문자열</code>만 할당할 수 있습니다.</p>
+<h3 id="const-val"><a href="#const-val" class="headerlink" title="const val"></a>const val</h3><p><code>const val</code>는 <strong>컴파일 타임</strong>에 값이 결정되는 <code>상수</code>입니다. 인스턴스를 할당할 수 없으며, <code>기본 자료형</code>과 <code>문자열</code>만 할당할 수 있습니다. <code>const val</code>상수의 이름은 통상 <code>대문자</code>와 <code>언더바</code>를 통해 선언합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> DEVICE_WIDTH: <span class="built_in">Int</span> = <span class="number">1400</span>  <span class="comment">// 성공</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> URL: String = <span class="string">&quot;http://www.naver.com&quot;</span>  <span class="comment">// 성공</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> person: Person = Person(<span class="string">&quot;ronaldo&quot;</span>, <span class="number">34</span>)  <span class="comment">// 에러</span></span><br></pre></td></tr></table></figure>
-<p>클래스 안에서 사용할 때는 <code>companion object</code>블럭 안에서 정의합니다.</p>
+<p>클래스 안에서 사용할 때는 <a href="/ko/2019/01/15/kotlin/190115-object/">companion object</a> 블럭 안에 정의합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MediaQueryMananger</span> </span>&#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">val</span> DEVICE_WIDTH: <span class="built_in">Int</span> = <span class="number">1400</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 클래스의 인스턴스를 생성하지 않고 사용 가능합니다.</span></span><br><span class="line">println(MediaQueryManager.DEVICE_WIDTH)</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>상수(val, const)</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/29/kotlin/190129-lateinit-var/">늦은 초기화의 lateinit</a>에 대해 알아보겠습니다.</p>
+
             
 
 

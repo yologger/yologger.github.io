@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Kotlin] Type Alias - Yologger&#39;s Blog</title>
+    <title>[Kotlin] 매개변수(Parameter)와 전달인자(Argument)의 차이점 - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"Type AliasType aliases는 기존 타입에 대한 대체할 수 있는 이름을 제공합니다. 만약 타입의 이름이 너무 길다면 간단한 이름으로 대체할 수 있습니다.\n기본자료형에 Type aliases를 적용한 예제는 다음과 같습니다.\n123typealias Number = Intvar number: Number = 3\n클래스에 Type aliases를 적용한 예제는 다음과 같습니다.\n12345class Person constructor(val name: String)typealias Man = Personvar man: Man = Person(&quot;Harry&quot;)\nType aliases는 타입에 제네릭 타입 파라미터가 포함됐을 때 유용하게 사용할 수 있습니다. 아래 코드를 살펴봅시다.\n1234567var users: MutableList&lt;MutableMap&lt;String, String&gt;&gt; = mutableListOf(        mutableMapOf(&quot;name&quot; to &quot;Paul&quot;),        mutableMapOf(&quot;name&quot; to &quot;John&quot;),        mutableMapOf(&quot;name&quot; to &quot;Jenny&quot;),        mutableMapOf(&quot;name&quot; to &quot;Park&quot;),        mutableMapOf(&quot;name&quot; to &quot;Lee&quot;))\n변수 user의 데이터 타입은 MutableList&lt;MutableMap&lt;String, String&gt;&gt;입니다. 이를 Type alias를 사용하여 User로 축약해보겠습니다. 이때 키워드 typealias를 사용합니다.\n123456789typealias Users = MutableList&lt;MutableMap&lt;String, String&gt;&gt;var users: Users = mutableListOf(        mutableMapOf(&quot;name&quot; to &quot;Paul&quot;),        mutableMapOf(&quot;name&quot; to &quot;John&quot;),        mutableMapOf(&quot;name&quot; to &quot;Jenny&quot;),        mutableMapOf(&quot;name&quot; to &quot;Park&quot;),        mutableMapOf(&quot;name&quot; to &quot;Lee&quot;))","dateCreated":"2019-02-12T20:16:30+09:00","dateModified":"2021-05-04T19:39:26+09:00","datePublished":"2019-02-12T20:16:30+09:00","description":"","headline":"[Kotlin] Type Alias","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/","keywords":"Kotlin"}</script>
-    <meta name="description" content="Type AliasType aliases는 기존 타입에 대한 대체할 수 있는 이름을 제공합니다. 만약 타입의 이름이 너무 길다면 간단한 이름으로 대체할 수 있습니다. 기본자료형에 Type aliases를 적용한 예제는 다음과 같습니다. 123typealias Number &#x3D; Intvar number: Number &#x3D; 3 클래스에 Type aliases를 적">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며저번 포스트에서는 함수(Function)에 대해 알아봤습니다. 이번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보겠습니다.\n매개변수(Parameter)Kotlin에서 함수는 다음과 같이 선언합니다. \n123fun printSomething(something: String): Int &#123;    // ...&#125;\n여기서 something을 매개변수라고 합니다. 변수라는 말 그대로 함수의 실행구문 내에서 변수처럼 접근이 가능합니다.\n123456fun printSomething(something: String): Int &#123;    // 변수처럼 something에 접근    println(something)    return something.length&#125;\n전달인자(Argument)전달인자는 함수를 호출할 때 매개변수로 전달되는 실제 값을 의미합니다. 위에서 선언한 함수는 다음과 같이 호출합니다.\n1printSomething(&quot;Hello World!&quot;)\n여기서 실제로 전달되는 문자열 Hello World가 바로 전달인자입니다.\n마치며이번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보았습니다. 다음 포스트에서는 키워드 vararg에 대해 알아보겠습니다. \n","dateCreated":"2019-01-05T21:16:30+09:00","dateModified":"2021-05-08T01:56:05+09:00","datePublished":"2019-01-05T21:16:30+09:00","description":"","headline":"[Kotlin] 매개변수(Parameter)와 전달인자(Argument)의 차이점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/","keywords":"Kotlin"}</script>
+    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며저번 포스트에서는 함수(Function)에 대해 알아봤습니다. 이번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보겠습니다. 매개변수(Parameter)Kotlin에서 함수는 다음과 같이 선언합니다.  123f">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Kotlin] Type Alias">
-<meta property="og:url" content="https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/index.html">
+<meta property="og:title" content="[Kotlin] 매개변수(Parameter)와 전달인자(Argument)의 차이점">
+<meta property="og:url" content="https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="Type AliasType aliases는 기존 타입에 대한 대체할 수 있는 이름을 제공합니다. 만약 타입의 이름이 너무 길다면 간단한 이름으로 대체할 수 있습니다. 기본자료형에 Type aliases를 적용한 예제는 다음과 같습니다. 123typealias Number &#x3D; Intvar number: Number &#x3D; 3 클래스에 Type aliases를 적">
+<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며저번 포스트에서는 함수(Function)에 대해 알아봤습니다. 이번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보겠습니다. 매개변수(Parameter)Kotlin에서 함수는 다음과 같이 선언합니다.  123f">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2019-02-12T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-04T10:39:26.745Z">
+<meta property="article:published_time" content="2019-01-05T12:16:30.000Z">
+<meta property="article:modified_time" content="2021-05-07T16:56:05.026Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -274,14 +274,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Kotlin] Type Alias
+            [Kotlin] 매개변수(Parameter)와 전달인자(Argument)의 차이점
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2019-02-12T20:16:30+09:00">
+    <time datetime="2019-01-05T21:16:30+09:00">
 	
-		    2019/02/12
+		    2019/01/05
     	
     </time>
     
@@ -299,15 +299,19 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="Type-Alias"><a href="#Type-Alias" class="headerlink" title="Type Alias"></a>Type Alias</h2><p><code>Type aliases</code>는 기존 타입에 대한 대체할 수 있는 이름을 제공합니다. 만약 타입의 이름이 너무 길다면 간단한 이름으로 대체할 수 있습니다.</p>
-<p>기본자료형에 <code>Type aliases</code>를 적용한 예제는 다음과 같습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typealias</span> Number = <span class="built_in">Int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> number: Number = <span class="number">3</span></span><br></pre></td></tr></table></figure>
-<p>클래스에 <code>Type aliases</code>를 적용한 예제는 다음과 같습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">typealias</span> Man = Person</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> man: Man = Person(<span class="string">&quot;Harry&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><code>Type aliases</code>는 타입에 제네릭 타입 파라미터가 포함됐을 때 유용하게 사용할 수 있습니다. 아래 코드를 살펴봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> users: MutableList&lt;MutableMap&lt;String, String&gt;&gt; = mutableListOf(</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Paul&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;John&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Jenny&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Park&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Lee&quot;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>변수 user의 데이터 타입은 <code>MutableList&lt;MutableMap&lt;String, String&gt;&gt;</code>입니다. 이를 <code>Type alias</code>를 사용하여 <code>User</code>로 축약해보겠습니다. 이때 키워드 <code>typealias</code>를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typealias</span> Users = MutableList&lt;MutableMap&lt;String, String&gt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> users: Users = mutableListOf(</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Paul&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;John&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Jenny&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Park&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Lee&quot;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+            <blockquote>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>저번 포스트에서는 <a href="/ko/2019/01/05/kotlin/190105-function/">함수(Function)</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>매개변수(Parameter)</code>와 <code>전달인자(Argument)</code>의 차이점에 대해 알아보겠습니다.</p>
+<h2 id="매개변수-Parameter"><a href="#매개변수-Parameter" class="headerlink" title="매개변수(Parameter)"></a>매개변수(Parameter)</h2><p>Kotlin에서 함수는 다음과 같이 선언합니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printSomething</span><span class="params">(something: <span class="type">String</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>여기서 <strong>something</strong>을 <code>매개변수</code>라고 합니다. <code>변수</code>라는 말 그대로 함수의 실행구문 내에서 <code>변수</code>처럼 접근이 가능합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printSomething</span><span class="params">(something: <span class="type">String</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// 변수처럼 something에 접근</span></span><br><span class="line">    println(something)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> something.length</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="전달인자-Argument"><a href="#전달인자-Argument" class="headerlink" title="전달인자(Argument)"></a>전달인자(Argument)</h2><p><code>전달인자</code>는 함수를 호출할 때 <strong>매개변수로 전달되는 실제 값</strong>을 의미합니다. 위에서 선언한 함수는 다음과 같이 호출합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printSomething(<span class="string">&quot;Hello World!&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>여기서 실제로 전달되는 문자열 <strong>Hello World</strong>가 바로 <code>전달인자</code>입니다.</p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>매개변수(Parameter)</code>와 <code>전달인자(Argument)</code>의 차이점에 대해 알아보았습니다. 다음 포스트에서는 키워드 <a href="/ko/2019/01/06/kotlin/190106-vararg/">vararg</a>에 대해 알아보겠습니다. </p>
+
             
 
 
@@ -341,7 +345,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -354,7 +358,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -367,7 +371,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -418,7 +422,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -431,7 +435,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -444,7 +448,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -471,7 +475,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"
                         aria-label="Facebook에 공유하기"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
@@ -484,7 +488,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"
                         aria-label="Twitter에 공유하기"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
@@ -497,7 +501,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/12/kotlin/190212-type-alias/"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"
                         aria-label="Google+에 공유하기"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>

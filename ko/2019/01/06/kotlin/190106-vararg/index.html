@@ -11,16 +11,16 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 vararg를 사용합니다.\n1234567891011fun sum(vararg numbers: Int): Int &#123;    // numbers는 list가 아닌 array    var sum = 0    for (n in numbers) &#123;        sum += n    &#125;    return sum&#125;var result1 = sum(1, 2, 3)  // 6var result2 = sum(1, 2, 3, 4, 5, 6)  // 21","dateCreated":"2019-01-06T20:16:30+09:00","dateModified":"2021-05-04T19:34:14+09:00","datePublished":"2019-01-06T20:16:30+09:00","description":"","headline":"[Kotlin] vararg","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/06/kotlin/190106-vararg/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/06/kotlin/190106-vararg/","keywords":"Kotlin"}</script>
-    <meta name="description" content="함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 vararg를 사용합니다. 1234567891011fun sum(vararg numbers: Int): Int &amp;#123;    &#x2F;&#x2F; numbers는 list가 아닌 array    var sum &#x3D; 0    for (n in numbers) &amp;#123;        sum +&#x3D; n    &amp;">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며저번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아봤습니다. 이번 포스트에서는 키워드 vararg에 대해 알아보겠습니다.\n키워드 vararg함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 키워드vararg를 사용할 수 있습니다. \n123fun sum(vararg numbers: Int): Int &#123;    // ...&#125;\nvararg가 붙은 매개변수는 함수 몸체에서 마치 배열(Array)처럼 사용할 수 있습니다.\n12345678fun sum(vararg numbers: Int): Int &#123;    // numbers는 array    var sum = 0    for (n in numbers) &#123;        sum += n    &#125;    return sum&#125;\nvararg를 사용하면 값을 함수로 유연하게 전달할 수 있습니다.\n12var result1 = sum(1, 2, 3)  // 6var result2 = sum(1, 2, 3, 4, 5, 6)  // 21\n마치며이번 포스트에서는 키워드 vararg에 대해 알아보았습니다. 다음 포스트에서는 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-06T21:16:30+09:00","dateModified":"2021-05-08T01:57:49+09:00","datePublished":"2019-01-06T21:16:30+09:00","description":"","headline":"[Kotlin] vararg","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/06/kotlin/190106-vararg/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/06/kotlin/190106-vararg/","keywords":"Kotlin"}</script>
+    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며저번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아봤습니다. 이번 포스트에서는 키워드 vararg에 대해 알아보겠습니다. 키워드 vararg함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 키워">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] vararg">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/01/06/kotlin/190106-vararg/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 vararg를 사용합니다. 1234567891011fun sum(vararg numbers: Int): Int &amp;#123;    &#x2F;&#x2F; numbers는 list가 아닌 array    var sum &#x3D; 0    for (n in numbers) &amp;#123;        sum +&#x3D; n    &amp;">
+<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며저번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아봤습니다. 이번 포스트에서는 키워드 vararg에 대해 알아보겠습니다. 키워드 vararg함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 키워">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2019-01-06T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-04T10:34:14.218Z">
+<meta property="article:published_time" content="2019-01-06T12:16:30.000Z">
+<meta property="article:modified_time" content="2021-05-07T16:57:49.684Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -279,7 +279,7 @@
     
     
         <div class="post-meta">
-    <time datetime="2019-01-06T20:16:30+09:00">
+    <time datetime="2019-01-06T21:16:30+09:00">
 	
 		    2019/01/06
     	
@@ -299,8 +299,18 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <p>함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 <code>vararg</code>를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sum</span><span class="params">(<span class="keyword">vararg</span> numbers: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// numbers는 list가 아닌 array</span></span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (n <span class="keyword">in</span> numbers) &#123;</span><br><span class="line">        sum += n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result1 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)  <span class="comment">// 6</span></span><br><span class="line"><span class="keyword">var</span> result2 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure>
+            <blockquote>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>저번 포스트에서는 <a href="/ko/2019/01/05/kotlin/190105-argument-parameter/">매개변수(Parameter)와 전달인자(Argument)의 차이점</a>에 대해 알아봤습니다. 이번 포스트에서는 키워드 <code>vararg</code>에 대해 알아보겠습니다.</p>
+<h2 id="키워드-vararg"><a href="#키워드-vararg" class="headerlink" title="키워드 vararg"></a>키워드 vararg</h2><p>함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 키워드<code>vararg</code>를 사용할 수 있습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sum</span><span class="params">(<span class="keyword">vararg</span> numbers: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>vararg</code>가 붙은 매개변수는 함수 몸체에서 마치 <code>배열(Array)</code>처럼 사용할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sum</span><span class="params">(<span class="keyword">vararg</span> numbers: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// numbers는 array</span></span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (n <span class="keyword">in</span> numbers) &#123;</span><br><span class="line">        sum += n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>vararg</code>를 사용하면 값을 함수로 유연하게 전달할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)  <span class="comment">// 6</span></span><br><span class="line"><span class="keyword">var</span> result2 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 키워드 <code>vararg</code>에 대해 알아보았습니다. 다음 포스트에서는 <a href="/ko/2019/01/07/kotlin/190107-class-instance-object/">클래스(Class), 인스턴스(Instance), 객체(Object)</a>에 대해 알아보겠습니다.</p>
+
             
 
 

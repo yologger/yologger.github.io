@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Kotlin] null 처리 - (1) - Yologger&#39;s Blog</title>
+    <title>[Kotlin] null 처리 - (1) NotNull과 Nullable - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"들어가며이번 포스트에서는 코틀린의 null 처리에 대해 알아보겠습니다.\nNot null 타입코틀린은 변수를 초기화하지 않으면 컴파일 자체가 안됩니다.\n123var name: String// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.// Property must be initialized or be abstract\n클래스의 멤버변수 역시 초기화하지 않으면 컴파일 자체가 안됩니다.\n1234class Person &#123;    private var name: String    // Property must be initialized or be abstract    private var nation: String  // Property must be initialized or be abstract&#125;\nNot null 타입의 변수에는 null을 할당할 수도 없습니다.\n123var name: String = null\t// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.// Null can not be a value of a non-null type String\n1234class Person &#123;    private var name: String = null     // Null can not be a value of a non-null type String    private var nation: String = null   // Null can not be a value of a non-null type String&#125;\nNullable 타입null을 할당하기 위해서는 변수를 Nullable타입으로 선언해야합니다. 이때는 타입 뒤에 물음표(?)를 붙입니다. \n123456var name: String? = nullclass Person &#123;    private var name: String? = null    private var nation: String? = null&#125;\n물론 Nullable타입이라도 초기화하지 않으면 컴파일 자체가 되지 않습니다.\n12var name: String?   // 다음과 같은 에러가 발생합니다.// Property must be initialized or be abstract\n1234class Person &#123;    private var name: String?       // Property must be initialized or be abstract    private var nation: String?     // Property must be initialized or be abstract&#125;","dateCreated":"2019-01-19T20:16:30+09:00","dateModified":"2021-05-04T19:35:01+09:00","datePublished":"2019-01-19T20:16:30+09:00","description":"","headline":"[Kotlin] null 처리 - (1)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/19/kotlin/190119-null-1/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/19/kotlin/190119-null-1/","keywords":"Kotlin"}</script>
-    <meta name="description" content="들어가며이번 포스트에서는 코틀린의 null 처리에 대해 알아보겠습니다. Not null 타입코틀린은 변수를 초기화하지 않으면 컴파일 자체가 안됩니다. 123var name: String&#x2F;&#x2F; 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.&#x2F;&#x2F; Property must be initialized or be abstract 클래스의 멤버변수 역시 초기화">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 4개의 포스트를 통해 Kotlin의 null 처리 방법에 대해 알아보려고 합니다.\n\nNotNull과 Nullable ⬅️ ⬅️ ⬅️\nNull Check\n엘비스 연산자(Elvis Operator)\n스코프 함수를 통한 Null Check\n\nNot null 타입Kotlin은 변수를 초기화하지 않으면 컴파일 자체가 안됩니다.\n123var name: String// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.// Property must be initialized or be abstract\n클래스의 멤버변수 역시 초기화하지 않으면 컴파일 자체가 안됩니다.\n1234class Person &#123;    private var name: String    // Property must be initialized or be abstract    private var nation: String  // Property must be initialized or be abstract&#125;\nNot null 타입의 변수에는 null을 할당할 수도 없습니다.\n123var name: String = null\t// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.// Null can not be a value of a non-null type String\n1234class Person &#123;    private var name: String = null     // Null can not be a value of a non-null type String    private var nation: String = null   // Null can not be a value of a non-null type String&#125;\nNullable 타입Kotlin에서 null을 할당하기 위해서는 변수를 Nullable타입으로 선언해야합니다. 이때는 타입 뒤에 물음표(?)를 붙입니다. \n123456var name: String? = nullclass Person &#123;    private var name: String? = null    private var nation: String? = null&#125;\n물론 Nullable타입이라도 초기화하지 않으면 컴파일 자체가 되지 않습니다.\n12var name: String?   // 다음과 같은 에러가 발생합니다.// Property must be initialized or be abstract\n1234class Person &#123;    private var name: String?       // Property must be initialized or be abstract    private var nation: String?     // Property must be initialized or be abstract&#125;\n마치며이번 포스트에서는 NotNull과 Nullable에 대해 알아봤습니다. 다음 포스트에서는 Kotlin의 Null Check 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-01-19T20:16:30+09:00","dateModified":"2021-05-07T23:47:28+09:00","datePublished":"2019-01-19T20:16:30+09:00","description":"","headline":"[Kotlin] null 처리 - (1) NotNull과 Nullable","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/19/kotlin/190119-null-1/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/19/kotlin/190119-null-1/","keywords":"Kotlin"}</script>
+    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며앞으로 4개의 포스트를 통해 Kotlin의 null 처리 방법에 대해 알아보려고 합니다.  NotNull과 Nullable ⬅️ ⬅️ ⬅️ Null Check 엘비스 연산자(Elvis Operator) 스코프 함수를 통한 Null Check  Not nu">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Kotlin] null 처리 - (1)">
+<meta property="og:title" content="[Kotlin] null 처리 - (1) NotNull과 Nullable">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/01/19/kotlin/190119-null-1/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="들어가며이번 포스트에서는 코틀린의 null 처리에 대해 알아보겠습니다. Not null 타입코틀린은 변수를 초기화하지 않으면 컴파일 자체가 안됩니다. 123var name: String&#x2F;&#x2F; 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.&#x2F;&#x2F; Property must be initialized or be abstract 클래스의 멤버변수 역시 초기화">
+<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며앞으로 4개의 포스트를 통해 Kotlin의 null 처리 방법에 대해 알아보려고 합니다.  NotNull과 Nullable ⬅️ ⬅️ ⬅️ Null Check 엘비스 연산자(Elvis Operator) 스코프 함수를 통한 Null Check  Not nu">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2019-01-19T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-04T10:35:01.183Z">
+<meta property="article:modified_time" content="2021-05-07T14:47:28.043Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -274,7 +274,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Kotlin] null 처리 - (1)
+            [Kotlin] null 처리 - (1) NotNull과 Nullable
         </h1>
     
     
@@ -299,19 +299,30 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 코틀린의 <code>null</code> 처리에 대해 알아보겠습니다.</p>
-<h2 id="Not-null-타입"><a href="#Not-null-타입" class="headerlink" title="Not null 타입"></a>Not null 타입</h2><p>코틀린은 변수를 초기화하지 않으면 컴파일 자체가 안됩니다.</p>
+            <blockquote>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>앞으로 4개의 포스트를 통해 Kotlin의 <code>null</code> 처리 방법에 대해 알아보려고 합니다.</p>
+<ol>
+<li>NotNull과 Nullable ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/01/20/kotlin/190120-null-2/">Null Check</a></li>
+<li><a href="/ko/2019/01/21/kotlin/190121-elvis-operator/">엘비스 연산자(Elvis Operator)</a></li>
+<li><a href="/ko/2019/01/22/kotlin/190122-null-check-with-scope-function/">스코프 함수를 통한 Null Check</a></li>
+</ol>
+<h2 id="Not-null-타입"><a href="#Not-null-타입" class="headerlink" title="Not null 타입"></a>Not null 타입</h2><p>Kotlin은 변수를 초기화하지 않으면 컴파일 자체가 안됩니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"><span class="comment">// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// Property must be initialized or be abstract</span></span><br></pre></td></tr></table></figure>
 <p>클래스의 멤버변수 역시 초기화하지 않으면 컴파일 자체가 안됩니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> name: String    <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> nation: String  <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>Not null</code> 타입의 변수에는 null을 할당할 수도 없습니다.</p>
+<p><code>Not null</code> 타입의 변수에는 <code>null</code>을 할당할 수도 없습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="literal">null</span>	</span><br><span class="line"><span class="comment">// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// Null can not be a value of a non-null type String</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> name: String = <span class="literal">null</span>     <span class="comment">// Null can not be a value of a non-null type String</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> nation: String = <span class="literal">null</span>   <span class="comment">// Null can not be a value of a non-null type String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Nullable-타입"><a href="#Nullable-타입" class="headerlink" title="Nullable 타입"></a>Nullable 타입</h2><p><code>null</code>을 할당하기 위해서는 변수를 <code>Nullable</code>타입으로 선언해야합니다. 이때는 타입 뒤에 <code>물음표(?)</code>를 붙입니다. </p>
+<h2 id="Nullable-타입"><a href="#Nullable-타입" class="headerlink" title="Nullable 타입"></a>Nullable 타입</h2><p>Kotlin에서 <code>null</code>을 할당하기 위해서는 변수를 <code>Nullable</code>타입으로 선언해야합니다. 이때는 타입 뒤에 <code>물음표(?)</code>를 붙입니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> name: String? = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> nation: String? = <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>물론 <code>Nullable</code>타입이라도 초기화하지 않으면 컴파일 자체가 되지 않습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String?   <span class="comment">// 다음과 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// Property must be initialized or be abstract</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> name: String?       <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> nation: String?     <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>NotNull과 Nullable</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/20/kotlin/190120-null-2/">Kotlin의 Null Check 방법</a>에 대해 알아보겠습니다.</p>
+
             
 
 
