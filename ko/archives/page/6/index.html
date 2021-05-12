@@ -710,10 +710,73 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/04/03/java/180403-java-platform/"
-                            aria-label=": [Java] Oracle JDK vs. OpenJDK"
+                            href="/ko/2019/01/01/kotlin/190100-paid-java/"
+                            aria-label=": [Kotlin] Java 유료화 논쟁과 Kotlin"
                         >
-                            [Java] Oracle JDK vs. OpenJDK
+                            [Kotlin] Java 유료화 논쟁과 Kotlin
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-01T08:16:30+09:00">
+	
+		    2019/01/01
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><p><code>Kotlin</code>은 IntelliJ와 Android Studio를 만든 JetBrains가 2010년에 출시한 프로그래밍 언어입니다. Google은 2017년 안드로이드 공식 언어로 Kotlin으로 추가합니다. <a href="/ko/2018/04/03/java/180403-oraclejdk-openjdk/">Java의 유료화</a>, 그리고 Java API 저작권에 대한 Google과 Oracle의 기나긴 소송의 여파로 보는 시각이 많습니다. </p>
+<p>Java에 익숙한 많은 개발자들이 Kotlin이라는 새로운 언어를 배우는데 부담을 느끼고 있습니다. 그러나 Java을 알고있다면 Kotlin도 쉽게 배울 수 있습니다. 앞으로 Kotlin의 특징과 개념에 대해 다루도록 하겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/01/kotlin/190100-paid-java/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/04/03/java/180403-oraclejdk-openjdk/"
+                            aria-label=": [Java] 자바 유료화? Oracle JDK와 OpenJDK"
+                        >
+                            [Java] 자바 유료화? Oracle JDK와 OpenJDK
                         </a>
                     
                 </h1>
@@ -739,10 +802,19 @@
 <blockquote>
 <p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
 </blockquote>
-<h2 id="Oracle-JDK"><a href="#Oracle-JDK" class="headerlink" title="Oracle JDK"></a>Oracle JDK</h2><p>사용 목적에 따라 유료이기도 무료이기도 한 JDK입니다. Mac OS에는 JDK가 기본적으로 설치되어 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Library/Java/JavaVirtualMachines</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">jdk-13.0.1.jdk</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> java -version</span></span><br><span class="line">java version &quot;13.0.1&quot; 2019-10-15</span><br><span class="line">Java(TM) SE Runtime Environment (build 13.0.1+9)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 13.0.1+9, mixed mode, sharing)</span><br></pre></td></tr></table></figure>
-<h2 id="OpenJDK"><a href="#OpenJDK" class="headerlink" title="OpenJDK"></a>OpenJDK</h2><p>사용 목적에 관계없이 무료인 JDK입니다. 안드로이드 스튜디오에는 OpenJDK가 내장되어 있으므로 별도의 JDK 설치가 필요없습니다. <code>File &gt; Project Structure &gt; SDK Location</code>에서 경로를 확인할 수 있습니다.<br><img src="/ko/images/posts/java/openjdk.png"><br>보통 compileSDKVersion에 따라 적당한 JDK 버전이 설정됩니다. 물론 직접 JDK 버전을 설정할 수 있습니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#x2F;&#x2F; Java 8을 사용하도록 설정</span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; For Kotlin projects</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        jvmTarget &#x3D; &quot;1.8&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>2018년 Oracle이 Java SE의 과금 방식을 영구 라이선스에서 구독 모델(서브스크립션)로 변경하겠다고 밝혔습니다. 이 선언이 그동안 무료로 인식된 Java의 유료화로 받아들여지면서 관련 업계에 큰 혼란을 초래했습니다. Java의 유료화를 이해하려면 <code>Oracle JDK</code>와 <code>OpenJDK</code>에 대해 알아야 합니다.</p>
+<blockquote>
+<p>참고로 Java 언어 자체는 무료입니다. Java 언어로 작성된 어플리케이션을 컴파일하고 실행하는 <a href="/ko/2018/01/01/java/180101-jvm-jre-jdk/">JDK(Java Development Kit)</a>가 유료화 논쟁의 대상입니다.</p>
+</blockquote>
+<h1 id="Oracle-JDK"><a href="#Oracle-JDK" class="headerlink" title="Oracle JDK"></a>Oracle JDK</h1><p><code>Oracle JDK</code>는 사용 목적에 따라 유료이기도 무료이기도 한 JDK입니다. </p>
+<p>서버, PC, 스마트폰 등의 일반적인 목적으로 사용될 때는 무료이지만 키오스크 등 특수한 목적의 컴퓨팅에 사용될 땐 유료입니다. 또한 <code>Oracle JDK 8(Oracle Java SE 8)</code>부터는 Oracle의 지속적인 업데이트와 보안 패치, 기술지원을 받으려면 유료 서비스를 구매해야합니다. (참고로 Oracle JDK 8 이전 버전에서도 일반적인 목적의 사용은 무료였고 지속적인 업데이트와 보안 패치, 기술지원은 유료였습니다.)</p>
+<p>Oracle JDK는 OpenJDK를 기본으로 합니다. Open JDK에 추가적인 기능이 더해진 것이 <code>Oracle JDK</code>입니다. Oracle JDK에 존재하고 Open JDK에는 없는 대표적 기능으로는 글꼴 라이브러리와 Java Web Start가 있습니다. </p>
+<h1 id="OpenJDK"><a href="#OpenJDK" class="headerlink" title="OpenJDK"></a>OpenJDK</h1><p><code>OpenJDK</code>는 사용 목적에 관계없이 무료인 JDK입니다. </p>
+<p>2007년 Java를 개발한 Sun Microsystems사는 JDK를 오픈소스화하기 위해 OpenJDK를 만들었습니다. Sun Microsystems사는 저작권자가 오픈소스화를 거부한 일부 기능을 제외한 나머지 JDK 소스코드 전부를 OpenJDK에 제공했고, OpenJDK는 이를 기반으로 JDK 7 프로젝트를 시작했습니다.</p>
+<p>Java 6 시절에는 OpenJDK가 Oracle JDK보다 성능이나 안정성이 크게 떨어졌습니다. 하지만 오늘날에는 Oracle JDK만이 제공하는 일부 기능을 제외하고는 차이가 없다는게 Oracle의 설명입니다. </p>
+<h1 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h1><p>Line이나 Kakao 같이 국내에서 잘 알려진 기업도 OpenJDK를 도입하고 활용하고 있는 것으로 알고 있습니다. OpenJDK에서는 제공하지 않는 컴포넌트를 사용해야하거나, Oracle의 지속적인 지원을 받아야 하거나, 키오스크 등 특수한 목적의 컴퓨팅에 사용하는 경우에는 비용을 지불하고 Oracle JDK를 사용해야할 것입니다. 그렇지 않은 경우는 <code>Open JDK</code>를 사용해도 무방할 것 같습니다.</p>
+<h1 id="안드로이드-스튜디오의-JDK"><a href="#안드로이드-스튜디오의-JDK" class="headerlink" title="안드로이드 스튜디오의 JDK"></a>안드로이드 스튜디오의 JDK</h1><p>참고로 안드로이드 스튜디오에는 OpenJDK가 내장되어 있으므로 별도의 JDK 설치가 필요없습니다. <code>File &gt; Project Structure &gt; SDK Location</code>에서 경로를 확인할 수 있습니다.<br><img src="/ko/images/posts/java/openjdk.png"><br>안드로이드 스튜디오에서는 보통 compileSDKVersion에 따라 적당한 JDK 버전이 자동으로 설정됩니다. 물론 직접 JDK 버전을 설정할 수 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#x2F;&#x2F; Java 8을 사용하도록 설정</span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -751,7 +823,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/04/03/java/180403-java-platform/#post-footer"
+                                href="/ko/2018/04/03/java/180403-oraclejdk-openjdk/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -774,10 +846,10 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/04/02/java/180402-Oracle-jdk/"
-                            aria-label=": [Java] Java Platform(JDK) 버전과 종류"
+                            href="/ko/2018/04/02/java/180402-jdk-version/"
+                            aria-label=": [Java] 자바 플랫폼(Java Platform)의 종류"
                         >
-                            [Java] Java Platform(JDK) 버전과 종류
+                            [Java] 자바 플랫폼(Java Platform)의 종류
                         </a>
                     
                 </h1>
@@ -803,23 +875,27 @@
 <blockquote>
 <p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
 </blockquote>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p><code>Java Platform(JDK)</code>에는 여러 에디션이 존재합니다. 이번 포스트에서는 대표적인 3가지 에디션의 특징에 대해 알아보겠습니다.</p>
-<h2 id="Java-SE-Java-Standard-Edition"><a href="#Java-SE-Java-Standard-Edition" class="headerlink" title="Java SE (Java Standard Edition)"></a>Java SE (Java Standard Edition)</h2><ol>
-<li>과거에는 J2SE(Java 2 SE)로 불렸다.</li>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p><code>자바 플랫폼(Java Platform)</code>에는 여러 에디션이 존재합니다. 이번 포스트에서는 대표적인 3가지 에디션의 특징에 대해 알아보겠습니다.</p>
+<h1 id="Java-SE-Java-Platform-Standard-Edition"><a href="#Java-SE-Java-Platform-Standard-Edition" class="headerlink" title="Java SE (Java Platform, Standard Edition)"></a>Java SE (Java Platform, Standard Edition)</h1><ul>
+<li>과거에는 J2SE(Java 2 SE)로 불렸습니다.</li>
 <li>가장 보편적으로 사용되는 에디션입니다.</li>
-<li>자바 데스크탑, 모바일 어플리케이션 개발에 사용됩니다.</li>
-<li>JDK 외에 Swing, AWT 등 데스크탑 개발에 필요한 API가 포함됩니다.</li>
-</ol>
-<h2 id="Java-EE-Java-Enterprise-Edition"><a href="#Java-EE-Java-Enterprise-Edition" class="headerlink" title="Java EE (Java Enterprise Edition)"></a>Java EE (Java Enterprise Edition)</h2><ol>
+<li>자바 <code>데스크탑</code>, <code>스마트폰</code> 어플리케이션 개발에 사용됩니다.</li>
+<li>안드로이드 어플리케이션을 개발할 때에도 주로 Java SE가 사용됩니다.</li>
+<li>가상머신 외에도 기초적인 타입부터 네트워킹, 보안, 데이터베이스 처리, 그래픽 사용자 인터페이스 개발(Swing, AWT) 등 데스크탑 개발에 필요한 API를 포함합니다.</li>
+</ul>
+<h1 id="Java-EE-Java-Platform-Enterprise-Edition"><a href="#Java-EE-Java-Platform-Enterprise-Edition" class="headerlink" title="Java EE (Java Platform, Enterprise Edition)"></a>Java EE (Java Platform, Enterprise Edition)</h1><ul>
 <li>과거에는 J2EE(Java 2 EE)로 불렸습니다.  </li>
-<li>자바 서버 애플리케이션 에 사용된다.</li>
-<li>Java SE의 모든 API도 포함된다.</li>
-<li>그 외 EJB, JSP, Sevlet, JDBC등 서버 어플리케이션 개발을 위한 API가 포함된다.</li>
-</ol>
-<h2 id="Java-ME-Java-Micro-Edition"><a href="#Java-ME-Java-Micro-Edition" class="headerlink" title="Java ME (Java Micro Edition)"></a>Java ME (Java Micro Edition)</h2><ol>
-<li>Java SE API의 일부만 포함</li>
+<li>자바 <code>서버</code> 애플리케이션 개발에 사용됩니다.</li>
+<li>Java SE의 모든 API를 포함합니다.</li>
+<li>그 외 EJB, JSP, Sevlet, JDBC 등 서버 어플리케이션 개발을 위한 API가 포함됩니다.</li>
+<li>국내에서는 Java SE, Spring Framework, Tomcat를 조합한 기술스택에 밀려 거의 사장된 상태입니다. </li>
+<li>2017년 오라클은 오픈소스 진영인 이클립스 재단에 Java EE를 넘겼고, 명칭은 Jakarta EE로 변경되었습니다.</li>
+</ul>
+<h1 id="Java-ME-Java-Platform-Micro-Edition"><a href="#Java-ME-Java-Platform-Micro-Edition" class="headerlink" title="Java ME (Java Platform, Micro Edition)"></a>Java ME (Java Platform, Micro Edition)</h1><ul>
+<li>Java SE API의 일부만 포함합니다.</li>
 <li>셋톱박스, PDA등 임베디드 시스템을 개발하는데 사용됩니다.</li>
-</ol>
+</ul>
+<p><img src="/ko/images/posts/java/java-version-1.png"><br>각각의 에디션도 사용하는 운영체제(Window, MacOs, Linux, ..)에 따라 다른 jdk를 다운받아야합니다. Java Platform의 모든 에디션은 <a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/oracle-java-archive-downloads.html">이 곳</a>에서 다운받을 수 있습니다. </p>
 
                     
                         
@@ -829,7 +905,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/04/02/java/180402-Oracle-jdk/#post-footer"
+                                href="/ko/2018/04/02/java/180402-jdk-version/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -894,106 +970,6 @@
                         <p>
                             <a
                                 href="/ko/2018/04/01/java/180401-check-java-version/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/03/16/java/180316-lambda/"
-                            aria-label=": [Java] 람다식(익명함수)와 함수형 인터페이스"
-                        >
-                            [Java] 람다식(익명함수)와 함수형 인터페이스
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-03-16T20:16:30+09:00">
-	
-		    2018/03/16
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<blockquote>
-<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/02/06/java/180206-function-programming/">1급 객체와 1급 함수, 그리고 함수형 프로그래밍</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>람다식(익명함수)</code>와 <code>함수형 인터페이스</code>에 대해 알아보겠습니다.</p>
-<h2 id="람다식-Lambda-Expression"><a href="#람다식-Lambda-Expression" class="headerlink" title="람다식(Lambda Expression)"></a>람다식(Lambda Expression)</h2><p>람다식(Lambda Expression)이란 함수를 하나의 식(expression)으로 표현한 것입니다. 함수를 람다식으로 표현하면 메소드의 이름이 필요 없기 때문에, 람다식은 익명 함수(Anonymous Function)라고도 불립니다.</p>
-<h2 id="코틀린에서의-람다식"><a href="#코틀린에서의-람다식" class="headerlink" title="코틀린에서의 람다식"></a>코틀린에서의 람다식</h2><p>코틀린(Kotlin), 스위프트(Swift)처럼 비교적 최근에 개발된 프로그래밍 언어는 자체적으로 람다식을 지원합니다. 그럼 코틀린 먼저 예제를 살펴보겠습니다. 보통 코틀린에 함수는 다음과 같이 선언합니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">(name: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">    println(name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위 코드를 람다식으로 표현하면 다음과 같습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; name: String -&gt;</span><br><span class="line">    println(name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>코틀린은 함수를 일급객체로 취급하므로 람다식을 다음 코드와 같이 변수에 저장할 수 있습니다. (일급함수에 대해서는 이 포스트에서 확인할 수 있습니다.) 이는 언어 자체에서 <code>함수 타입</code>을 지원하기 때문입니다. <code>정수 타입</code>에는 정수를 할당하는 것처럼 <code>함수 타입</code>에는 함수를 할당할 수 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> printName: (name: String) -&gt; <span class="built_in">Unit</span> = &#123; name: String -&gt;</span><br><span class="line">    println(name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위 코드에서 <code>(name: String) -&gt; Unit</code>가 바로 <code>함수 타입</code>입니다. </p>
-<p>또한 함수의 매개변수로도 전달할 수 있습니다. 아래 코드는 run()이라는 함수의 매개변수로 람다식을 전달하고 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">run(&#123; name: String -&gt; </span><br><span class="line">    printName()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="자바에서의-람다식"><a href="#자바에서의-람다식" class="headerlink" title="자바에서의 람다식"></a>자바에서의 람다식</h2><p>자바(Java)는 코틀린(Kotlin), 스위프트(Swift)같은 언어에 비해 비교적 오래되었습니다. 또한 객체지향 프로그래밍을 패러다임으로 만들어졌기에 람다식과 함수형 프로그래밍을 지원하지 않았습니다. 그러나 2014년 발표된 Java 8부터 함수형 프로그래밍을 지원하기 위한 Java API가 추가되었습니다.</p>
-<p>아쉽게도 자바(Java)는 <code>함수 타입</code>이 없으므로 람다식을 변수에 저장하거나 매개변수로 전달할 수 없습니다. 이를 해결하기 위해 도입된 개념이 <code>@FunctionalInterface</code>어노테이션 입니다.</p>
-<h2 id="FunctionInterface"><a href="#FunctionInterface" class="headerlink" title="@FunctionInterface"></a>@FunctionInterface</h2><p>함수형 인터페이스를 구현하기 위해서는 인터페이스를 정의하고 그 내부에는 1개 뿐인 abstract 함수를 선언하고, <code>@FunctionalInterface</code> 어노테이션을 붙여주면 됩니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">PrintNameLambda</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">(String name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이제 마치 변수에 함수를 할당하는 것처럼 사용할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PrintNameLambda lambda = (String name) -&gt; &#123;</span><br><span class="line">    System.out.println(name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">lambda.printName(<span class="string">&quot;Paul&quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>Java API에서는 자주 사용될 것 같은 함수형 인터페이스가 이미 정의되어있습니다.</p>
-<h4 id="1-Supplier"><a href="#1-Supplier" class="headerlink" title="1. Supplier "></a>1. Supplier <T></h4><p>Supplier는 매개변수 없이 반환값만을 갖는 함수형 인터페이스입니다. Supplier는 <code>T get()</code>을 추상 메소드로 갖고 있습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정의</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Supplier</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">get</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 사용 방법</span></span><br><span class="line">Supplier&lt;String&gt; supplier = () -&gt; <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">System.out.println(supplier.get());</span><br></pre></td></tr></table></figure>
-<h4 id="2-Consumer"><a href="#2-Consumer" class="headerlink" title="2. Consumer "></a>2. Consumer <T></h4><p>객체 T를 매개변수로 받아서 사용하며, 반환값은 없는 함수형 인터페이스입니다. Consumer는 void accept(T t)를 추상메소드로 갖고 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정의</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Consumer</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">accept</span><span class="params">(T t)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Consumer&lt;T&gt; <span class="title">andThen</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> T&gt; after)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(after);</span><br><span class="line">        <span class="keyword">return</span> (T t) -&gt; &#123; accept(t); after.accept(t); &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Consumer&lt;String&gt; consumer = (String name) -&gt; &#123;</span><br><span class="line">    System.out.println(name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">consumer.accept(<span class="string">&quot;Hello World&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="3-Function-lt-T-R-gt"><a href="#3-Function-lt-T-R-gt" class="headerlink" title="3. Function &lt;T, R&gt;"></a>3. Function &lt;T, R&gt;</h4><p>Function은 객체 T를 매개변수로 받아서 처리한 후 R로 반환하는 함수형 인터페이스입니다. Function은 R apply(T t)를 추상메소드로 가지고 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정의</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Function</span>&lt;<span class="title">T</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">R <span class="title">apply</span><span class="params">(T t)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span> &lt;V&gt; <span class="function">Function&lt;V, R&gt; <span class="title">compose</span><span class="params">(Function&lt;? <span class="keyword">super</span> V, ? extends T&gt; before)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(before);</span><br><span class="line">        <span class="keyword">return</span> (V v) -&gt; apply(before.apply(v));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span> &lt;V&gt; <span class="function">Function&lt;T, V&gt; <span class="title">andThen</span><span class="params">(Function&lt;? <span class="keyword">super</span> R, ? extends V&gt; after)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(after);</span><br><span class="line">        <span class="keyword">return</span> (T t) -&gt; after.apply(apply(t));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &lt;T&gt; <span class="function">Function&lt;T, T&gt; <span class="title">identity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> t -&gt; t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 예시, 메소드 참조로 간소화 가능(String::length;)</span></span><br><span class="line">Function&lt;String, Integer&gt; function = (String str) -&gt; &#123;</span><br><span class="line">    str.length();</span><br><span class="line">&#125;</span><br><span class="line">function.apply(<span class="string">&quot;Hello World&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="4-Predicate"><a href="#4-Predicate" class="headerlink" title="4. Predicate "></a>4. Predicate <T></h4><p>Predicate는 객체 T를 매개 변수로 받아 처리한 후 Boolean을 반환합니다. Supplier는 Boolean test(T t)을 추상 메소드로 갖고 있습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정의</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Predicate</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">test</span><span class="params">(T t)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">and</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; other)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(other);</span><br><span class="line">        <span class="keyword">return</span> (t) -&gt; test(t) &amp;&amp; other.test(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">negate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (t) -&gt; !test(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">or</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; other)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(other);</span><br><span class="line">        <span class="keyword">return</span> (t) -&gt; test(t) || other.test(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &lt;T&gt; <span class="function">Predicate&lt;T&gt; <span class="title">isEqual</span><span class="params">(Object targetRef)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">null</span> == targetRef)</span><br><span class="line">                ? Objects::isNull</span><br><span class="line">                : object -&gt; targetRef.equals(object);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 예시</span></span><br><span class="line">Predicate&lt;String&gt; predicate = (str) -&gt; str.equals(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">predicate.test(<span class="string">&quot;Hello World&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="안드로이드에서의-람다식"><a href="#안드로이드에서의-람다식" class="headerlink" title="안드로이드에서의 람다식"></a>안드로이드에서의 람다식</h2><p>람다식은 안드로이드 어플리케이션 개발에서도 자주 사용합니다. 보통 위젯을 클릭했을 때 실행할 구문을 람다식 안에 구현합니다. </p>
-<p>우선 람다식을 사용하지 않고 익명 클래스를 사용하여 특정 버튼을 클릭했을 때 실행할 구문을 등록해보겠습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Button button = findViewById(R.id.button);</span><br><span class="line"></span><br><span class="line">button.setOnTouchListener(<span class="keyword">new</span> View.OnTouchListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View v, MotionEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>위 코드에 람다식을 사용하면 다음과 같습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">button.setOnTouchListener((View v, MotionEvent event) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>데이터 타입 생략도 가능합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">button.setOnTouchListener((v, event) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>함수의 몸체, 즉 구현부가 1줄일 때는 대괄호{}도 생략하고 1줄로 표현할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button.setOnTouchListener((v, event) -&gt; <span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
-<p>매개변수가 1개일 때는 괄호도 생략 가능합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button.setOnClickListener(v -&gt; System.out.println(<span class="string">&quot;Button clicked.&quot;</span>));</span><br></pre></td></tr></table></figure>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>람다식(익명함수)</code>와 <code>함수형 인터페이스</code>에 대해 알아봤습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/03/16/java/180316-lambda/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

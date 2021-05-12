@@ -6,26 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Java] Oracle JDK vs. OpenJDK - Yologger&#39;s Blog</title>
+    <title>[Kotlin] Java 유료화 논쟁과 Kotlin - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nOracle JDK사용 목적에 따라 유료이기도 무료이기도 한 JDK입니다. Mac OS에는 JDK가 기본적으로 설치되어 있습니다.\n12345678910$ pwd/Library/Java/JavaVirtualMachines$ lsjdk-13.0.1.jdk$ java -versionjava version &quot;13.0.1&quot; 2019-10-15Java(TM) SE Runtime Environment (build 13.0.1+9)Java HotSpot(TM) 64-Bit Server VM (build 13.0.1+9, mixed mode, sharing)\nOpenJDK사용 목적에 관계없이 무료인 JDK입니다. 안드로이드 스튜디오에는 OpenJDK가 내장되어 있으므로 별도의 JDK 설치가 필요없습니다. File &gt; Project Structure &gt; SDK Location에서 경로를 확인할 수 있습니다.보통 compileSDKVersion에 따라 적당한 JDK 버전이 설정됩니다. 물론 직접 JDK 버전을 설정할 수 있습니다.\n123456789101112android &#123;    ...    &#x2F;&#x2F; Java 8을 사용하도록 설정    compileOptions &#123;        sourceCompatibility JavaVersion.VERSION_1_8        targetCompatibility JavaVersion.VERSION_1_8    &#125;    &#x2F;&#x2F; For Kotlin projects    kotlinOptions &#123;        jvmTarget &#x3D; &quot;1.8&quot;    &#125;&#125;","dateCreated":"2018-04-03T08:16:30+09:00","dateModified":"2021-05-12T17:58:30+09:00","datePublished":"2018-04-03T08:16:30+09:00","description":"","headline":"[Java] Oracle JDK vs. OpenJDK","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/","keywords":"Java"}</script>
-    <meta name="description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  Oracle JDK사용 목적에 따라 유료이기도 무료이기도 한 JDK입니다. Mac OS에는 JDK가 기본적으로 설치되어 있습니다. 12345678910$ pwd&#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines$ lsjdk-13.0.1.jdk$ java">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nKotlinKotlin은 IntelliJ와 Android Studio를 만든 JetBrains가 2010년에 출시한 프로그래밍 언어입니다. Google은 2017년 안드로이드 공식 언어로 Kotlin으로 추가합니다. Java의 유료화, 그리고 Java API 저작권에 대한 Google과 Oracle의 기나긴 소송의 여파로 보는 시각이 많습니다. \nJava에 익숙한 많은 개발자들이 Kotlin이라는 새로운 언어를 배우는데 부담을 느끼고 있습니다. 그러나 Java을 알고있다면 Kotlin도 쉽게 배울 수 있습니다. 앞으로 Kotlin의 특징과 개념에 대해 다루도록 하겠습니다. \n","dateCreated":"2019-01-01T08:16:30+09:00","dateModified":"2021-05-13T01:16:52+09:00","datePublished":"2019-01-01T08:16:30+09:00","description":"","headline":"[Kotlin] Java 유료화 논쟁과 Kotlin","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/","keywords":"Kotlin"}</script>
+    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  KotlinKotlin은 IntelliJ와 Android Studio를 만든 JetBrains가 2010년에 출시한 프로그래밍 언어입니다. Google은 2017년 안드로이드 공식 언어로 Kotlin으로 추가합니다. Java의 유료화, 그리고 Java API">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Java] Oracle JDK vs. OpenJDK">
-<meta property="og:url" content="https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/index.html">
+<meta property="og:title" content="[Kotlin] Java 유료화 논쟁과 Kotlin">
+<meta property="og:url" content="https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  Oracle JDK사용 목적에 따라 유료이기도 무료이기도 한 JDK입니다. Mac OS에는 JDK가 기본적으로 설치되어 있습니다. 12345678910$ pwd&#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines$ lsjdk-13.0.1.jdk$ java">
+<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  KotlinKotlin은 IntelliJ와 Android Studio를 만든 JetBrains가 2010년에 출시한 프로그래밍 언어입니다. Google은 2017년 안드로이드 공식 언어로 Kotlin으로 추가합니다. Java의 유료화, 그리고 Java API">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://yologger.github.io/ko/images/posts/java/openjdk.png">
-<meta property="article:published_time" content="2018-04-02T23:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-12T08:58:30.481Z">
+<meta property="article:published_time" content="2018-12-31T23:16:30.000Z">
+<meta property="article:modified_time" content="2021-05-12T16:16:52.914Z">
 <meta property="article:author" content="yologger">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/java/openjdk.png">
     
     
         
@@ -276,20 +274,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Java] Oracle JDK vs. OpenJDK
+            [Kotlin] Java 유료화 논쟁과 Kotlin
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2018-04-03T08:16:30+09:00">
+    <time datetime="2019-01-01T08:16:30+09:00">
 	
-		    2018/04/03
+		    2019/01/01
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
 
 
     
@@ -303,12 +301,11 @@
         <div class="main-content-wrap">
             <hr>
 <blockquote>
-<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
 </blockquote>
-<h2 id="Oracle-JDK"><a href="#Oracle-JDK" class="headerlink" title="Oracle JDK"></a>Oracle JDK</h2><p>사용 목적에 따라 유료이기도 무료이기도 한 JDK입니다. Mac OS에는 JDK가 기본적으로 설치되어 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Library/Java/JavaVirtualMachines</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">jdk-13.0.1.jdk</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> java -version</span></span><br><span class="line">java version &quot;13.0.1&quot; 2019-10-15</span><br><span class="line">Java(TM) SE Runtime Environment (build 13.0.1+9)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 13.0.1+9, mixed mode, sharing)</span><br></pre></td></tr></table></figure>
-<h2 id="OpenJDK"><a href="#OpenJDK" class="headerlink" title="OpenJDK"></a>OpenJDK</h2><p>사용 목적에 관계없이 무료인 JDK입니다. 안드로이드 스튜디오에는 OpenJDK가 내장되어 있으므로 별도의 JDK 설치가 필요없습니다. <code>File &gt; Project Structure &gt; SDK Location</code>에서 경로를 확인할 수 있습니다.<br><img src="/ko/images/posts/java/openjdk.png"><br>보통 compileSDKVersion에 따라 적당한 JDK 버전이 설정됩니다. 물론 직접 JDK 버전을 설정할 수 있습니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#x2F;&#x2F; Java 8을 사용하도록 설정</span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; For Kotlin projects</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        jvmTarget &#x3D; &quot;1.8&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><p><code>Kotlin</code>은 IntelliJ와 Android Studio를 만든 JetBrains가 2010년에 출시한 프로그래밍 언어입니다. Google은 2017년 안드로이드 공식 언어로 Kotlin으로 추가합니다. <a href="/ko/2018/04/03/java/180403-oraclejdk-openjdk/">Java의 유료화</a>, 그리고 Java API 저작권에 대한 Google과 Oracle의 기나긴 소송의 여파로 보는 시각이 많습니다. </p>
+<p>Java에 익숙한 많은 개발자들이 Kotlin이라는 새로운 언어를 배우는데 부담을 느끼고 있습니다. 그러나 Java을 알고있다면 Kotlin도 쉽게 배울 수 있습니다. 앞으로 Kotlin의 특징과 개념에 대해 다루도록 하겠습니다. </p>
+
             
 
 
@@ -319,7 +316,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">태그</span><br/>
                 
-    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Java/" rel="tag">Java</a>
+    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Kotlin/" rel="tag">Kotlin</a>
 
             </div>
         
@@ -342,7 +339,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -355,7 +352,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -368,7 +365,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -419,7 +416,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -432,7 +429,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -445,7 +442,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -472,7 +469,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"
                         aria-label="Facebook에 공유하기"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
@@ -485,7 +482,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"
                         aria-label="Twitter에 공유하기"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
@@ -498,7 +495,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/04/03/java/180403-java-platform/"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/01/kotlin/190100-paid-java/"
                         aria-label="Google+에 공유하기"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
