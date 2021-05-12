@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Yologger&#39;s Blog">
+    <title>[Java] 제너릭과 타입 소거(Type Erasure) - Yologger&#39;s Blog</title>
+    <meta name="author" content="yologger">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function)\n제너릭의 와일드 카드(Wildcard)\n타입 소거(Type Erasure) ⬅️ ⬅️ ⬅️\n\n이번 마지막 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아보겠습니다.\n타입 소거(Type Erasure)타입 소거(Type Erasure)는 제너릭의 타입 파라미터를 구체화된 자료형으로 대체하는 작업을 의미합니다. 자바 컴파일러는 소스 코드를 컴파일할 때 타입 소거를 수행합니다. \n\n타입 파라미터가 Unbounded Type인지 Bounded Type인지에 따라 소거 방식이 다릅니다.\n\n1. Unbounded Type의 타입소거Unbounded Type은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한하지 않은 것을 의미합니다. &lt;?&gt;, &lt;T&gt; 형태의 타입 파라미터라고 생각하시면 됩니다. \n\n&lt;?&gt;, &lt;T&gt;는 Object로 대체됩니다.\n\nUnbounded Type 예제를 먼저 살펴보겠습니다. \n123456// 컴파일 전 (타입 소거 전) public class Test&lt;T&gt; &#123;    public void test(T test) &#123;        System.out.println(test.toString());    &#125;&#125;\n123456// 컴파일 후 (타입 소거 후)public class Test &#123;    public void test(Object test) &#123;        System.out.println(test.toString());    &#125;&#125;\n타입 파라미터가 소거되고 Object클래스로 대치되었습니다.\n2. Bounded Type의 타입소거Bounded Type은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한한 것을 의미합니다. &lt;E extends Something&gt; 형태의 타입 파라미터라고 생각하시면 됩니다.\n\n&lt;E extends Something&gt;)은 Object가 아닌 Something로 대치합니다.\n\nBounded Type 예제를 살펴보겠습니다. \n1234567891011public class Test&lt;T extends Observable&lt;T&gt;&gt; &#123;    private T data;    public T getData() &#123;        return data;    &#125;    public void setData(T data) &#123;        this.data = data;    &#125;&#125;\n타입 파라미터를 포함한 Observable가 Observable로 소거되었습니다. \n1234567891011public class Test &#123;    private Observable data;    public Observable getData() &#123;        return data;    &#125;    public void setData(Observable data) &#123;        this.data = data;    &#125;&#125;\n마치며이번 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아보았습니다. 다음 포스트에서는 리플렉션(Reflection)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-05T20:16:30+09:00","dateModified":"2021-05-12T18:08:45+09:00","datePublished":"2018-02-05T20:16:30+09:00","description":"","headline":"[Java] 제너릭과 타입 소거(Type Erasure)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/","keywords":"Java"}</script>
+    <meta name="description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.  제너릭(Generic)의 개념과 장점 제너릭 클래스(Generic Class) 제너릭 함수(Generic Function) 제너릭의 와일드 카드(Wildcard) 타입 소거(T">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[Java] 제너릭과 타입 소거(Type Erasure)">
+<meta property="og:url" content="https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/index.html">
+<meta property="og:site_name" content="Yologger&#39;s Blog">
+<meta property="og:description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.  제너릭(Generic)의 개념과 장점 제너릭 클래스(Generic Class) 제너릭 함수(Generic Function) 제너릭의 와일드 카드(Wildcard) 타입 소거(T">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2018-02-05T11:16:30.000Z">
+<meta property="article:modified_time" content="2021-05-12T09:08:45.996Z">
+<meta property="article:author" content="yologger">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYKNWR810R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-QYKNWR810R');
+    </script>
+
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/ko/"
+            aria-label=""
+        >
+            Yologger&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="링크 열기: /ko/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://yologger.github.io"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="English"
+                        >
+                        <i class="sidebar-button-icon fa fa-globe" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">English</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/java"
+                            
+                            rel="noopener"
+                            title="Java"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/ios"
+                            
+                            rel="noopener"
+                            title="iOS"
+                        >
+                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">iOS</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/swift"
+                            
+                            rel="noopener"
+                            title="Swift"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Swift</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/objective-c"
+                            
+                            rel="noopener"
+                            title="Objective-C"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Objective-C</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/flutter"
+                            
+                            rel="noopener"
+                            title="Flutter"
+                        >
+                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Flutter</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/dart"
+                            
+                            rel="noopener"
+                            title="Dart"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Dart</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [Java] 제너릭과 타입 소거(Type Erasure)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2018-02-05T20:16:30+09:00">
+	
+		    2018/02/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 5개의 포스트에 걸쳐 <code>제너릭(Generic)</code>에 대해 알아보고자 합니다.</p>
+<ol>
+<li><a href="/ko/2018/02/01/java/180201-generic/">제너릭(Generic)의 개념과 장점</a></li>
+<li><a href="/ko/2018/02/02/java/180202-generic-class/">제너릭 클래스(Generic Class)</a></li>
+<li><a href="/ko/2018/02/03/java/180203-generic-method/">제너릭 함수(Generic Function)</a></li>
+<li><a href="/ko/2018/02/04/java/180204-wildcard/">제너릭의 와일드 카드(Wildcard)</a></li>
+<li>타입 소거(Type Erasure) ⬅️ ⬅️ ⬅️</li>
+</ol>
+<p>이번 마지막 포스트에서는 <code>제너릭의 와일드 카드(Wildcard)</code>에 대해 알아보겠습니다.</p>
+<h1 id="타입-소거-Type-Erasure"><a href="#타입-소거-Type-Erasure" class="headerlink" title="타입 소거(Type Erasure)"></a>타입 소거(Type Erasure)</h1><p><code>타입 소거(Type Erasure)</code>는 제너릭의 <code>타입 파라미터</code>를 구체화된 자료형으로 대체하는 작업을 의미합니다. 자바 컴파일러는 소스 코드를 컴파일할 때 타입 소거를 수행합니다. </p>
+<blockquote>
+<p><code>타입 파라미터</code>가 <code>Unbounded Type</code>인지 <code>Bounded Type</code>인지에 따라 소거 방식이 다릅니다.</p>
+</blockquote>
+<h3 id="1-Unbounded-Type의-타입소거"><a href="#1-Unbounded-Type의-타입소거" class="headerlink" title="1. Unbounded Type의 타입소거"></a>1. Unbounded Type의 타입소거</h3><p>Unbounded Type은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한하지 않은 것을 의미합니다. <code>&lt;?&gt;</code>, <code>&lt;T&gt;</code> 형태의 타입 파라미터라고 생각하시면 됩니다. </p>
+<blockquote>
+<p><code>&lt;?&gt;</code>, <code>&lt;T&gt;</code>는 <code>Object</code>로 대체됩니다.</p>
+</blockquote>
+<p>Unbounded Type 예제를 먼저 살펴보겠습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 전 (타입 소거 전) </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(T test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 후 (타입 소거 후)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Object test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>타입 파라미터가 소거되고 <code>Object</code>클래스로 대치되었습니다.</p>
+<h3 id="2-Bounded-Type의-타입소거"><a href="#2-Bounded-Type의-타입소거" class="headerlink" title="2. Bounded Type의 타입소거"></a>2. Bounded Type의 타입소거</h3><p><code>Bounded Type</code>은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한한 것을 의미합니다. <code>&lt;E extends Something&gt;</code> 형태의 타입 파라미터라고 생각하시면 됩니다.</p>
+<blockquote>
+<p><code>&lt;E extends Something&gt;</code>)은 Object가 아닌 <code>Something</code>로 대치합니다.</p>
+</blockquote>
+<p>Bounded Type 예제를 살펴보겠습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Observable</span>&lt;<span class="title">T</span>&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>타입 파라미터를 포함한 Observable<T>가 Observable로 소거되었습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Observable data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Observable <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Observable data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>제너릭의 와일드 카드(Wildcard)</code>에 대해 알아보았습니다. 다음 포스트에서는 <a href="/ko/2018/03/01/java/180301-reflection/"><code>리플렉션(Reflection)</code></a>에 대해 알아보겠습니다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">태그</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Java/" rel="tag">Java</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 yologger. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"
+                        aria-label="Facebook에 공유하기"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"
+                        aria-label="Twitter에 공유하기"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"
+                        aria-label="Google+에 공유하기"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">yologger</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+        <!--SCRIPTS-->
+
+<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

@@ -274,23 +274,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/02/java/180102-check-java-version/"
-                            aria-label=": [Java] 맥북에서 Java Platform(JDK) 버전 확인하는 법"
+                            href="/ko/2018/01/03/android/build-config/"
+                            aria-label=": 코드에서 환경변수 분리하기 (1) ㅡ BuildConfig"
                         >
-                            [Java] 맥북에서 Java Platform(JDK) 버전 확인하는 법
+                            코드에서 환경변수 분리하기 (1) ㅡ BuildConfig
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-01-02T08:16:30+09:00">
+    <time datetime="2018-01-03T20:16:30+09:00">
 	
-		    2018/01/02
+		    2018/01/03
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>
 
 
     
@@ -300,9 +300,29 @@
             
                 <div class="postShorten-content">
                     <hr>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> java -version</span></span><br><span class="line">java version &quot;13.0.1&quot; 2019-10-15    // Java Platform(JDK) Version</span><br><span class="line">Java(TM) SE Runtime Environment (build 13.0.1+9)    // JRE version</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 13.0.1+9, mixed mode, sharing) // JVM version</span><br></pre></td></tr></table></figure>
-<p>2020년 기준 Java SE 15까지 출시됐습니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Java SE8        &#x2F;&#x2F; jdk 1.8.x</span><br><span class="line">Java SE9        &#x2F;&#x2F; jdk 9.x.x</span><br><span class="line">Java SE10       &#x2F;&#x2F; jdk 10.x.x</span><br></pre></td></tr></table></figure>
+<p>안드로이드 시스템은 앱을 빌드할 때 여러 파일을 자동으로 생성합니다. 그 중 하나가 <code>BuildConfig</code>클래스입니다. 이 클래스에는 현재 빌드와 관련된 정보가 상수 형태로 정의되어 있고, 코드에서도 직접 참조할 수 있습니다.</p>
+<h2 id="코드에서-BuildConfig-상수에-접근하기"><a href="#코드에서-BuildConfig-상수에-접근하기" class="headerlink" title="코드에서 BuildConfig 상수에 접근하기"></a>코드에서 BuildConfig 상수에 접근하기</h2><p>자동으로 생성된 <code>BuildConfig</code>클래스는 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Automatically generated file. DO NOT MODIFY</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildConfig</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> DEBUG = Boolean.parseBoolean(<span class="string">&quot;true&quot;</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String APPLICATION_ID = <span class="string">&quot;com.example.simple_memo&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BUILD_TYPE = <span class="string">&quot;debug&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VERSION_CODE = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String VERSION_NAME = <span class="string">&quot;1.0&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>BuildConfig</code>클래스 내부의 상수는 코드에서 다음과 같이 접근할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="keyword">val</span> applicationId = BuildConfig.APPLICATION_ID      <span class="comment">// &quot;com.example.simple_memo&quot;</span></span><br><span class="line">        <span class="keyword">val</span> versionCode = BuildConfig.VERSION_CODE          <span class="comment">// 1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>그렇다면 이 상수값은 어디에 정의되어 있을까요? 바로 모듈 수준의 <code>build.gradle</code>입니다. 이 파일의 <code>defaultConfig</code> 안에 상수가 정의되어 있습니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.example.simple_memo&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="상수를-직접-정의하고-사용하기"><a href="#상수를-직접-정의하고-사용하기" class="headerlink" title="상수를 직접 정의하고 사용하기"></a>상수를 직접 정의하고 사용하기</h2><p>상수를 직접 정의하고 코드에서 참조할 수도 있습니다. <code>buildConfigField</code>를 사용하면 됩니다. 모듈수준의 <code>build.gradle</code>에  <code>buildConfigField (&quot;DATA_TYPE&quot;, &quot;KEY&quot;, &quot;VALUE&quot;)</code> 형태로 선언하면 됩니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.example.simple_memo&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line">        testInstrumentationRunner <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line">        buildConfigField (<span class="string">&quot;String&quot;</span>, <span class="string">&quot;AUTH_API_KEY&quot;</span>, <span class="string">&#x27;&quot;your_auth_api_key&quot;&#x27;</span>)</span><br><span class="line">        buildConfigField (<span class="string">&quot;String&quot;</span>, <span class="string">&quot;AUTH_API_URL&quot;</span>, <span class="string">&#x27;&quot;your_auth_api_url&quot;&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Gradle Sync를 해주어야 BuildConfig 클래스가 생성됩니다.<br>문자열의 경우 작은따옴표로 감싸주어야 합니다.</p>
+</blockquote>
+<p>새로 생성된 BuildConfig 클래스는 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Automatically generated file. DO NOT MODIFY</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.example.simple_memo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildConfig</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> DEBUG = Boolean.parseBoolean(<span class="string">&quot;true&quot;</span>);</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String APPLICATION_ID = <span class="string">&quot;com.example.simple_memo&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BUILD_TYPE = <span class="string">&quot;debug&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VERSION_CODE = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String VERSION_NAME = <span class="string">&quot;1.0&quot;</span>;</span><br><span class="line">  <span class="comment">// Field from default config.</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH_API_KEY = <span class="string">&quot;your_auth_api_key&quot;</span>;</span><br><span class="line">  <span class="comment">// Field from default config.</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH_API_URL = <span class="string">&quot;your_auth_api_url&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>BuildConfig에 생성된 상수를 접근해봅시다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="keyword">val</span> apiKey = BuildConfig.AUTH_API_KEY       <span class="comment">// your_auth_api_key</span></span><br><span class="line">        <span class="keyword">val</span> apiUrl = BuildConfig.AUTH_API_URL       <span class="comment">// your_auth_api_url</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="상수를-xml-파일에서-사용하기"><a href="#상수를-xml-파일에서-사용하기" class="headerlink" title="상수를 xml 파일에서 사용하기"></a>상수를 xml 파일에서 사용하기</h2><p>모듈 수준의 build.gradle에 선언한 상수는 xml 파일에서도 참조할 수 있습니다. 이 때는 <code>resValue</code>를 사용합니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">// buildConfigField (&quot;String&quot;, &quot;AUTH_API_KEY&quot;, &#x27;&quot;your_auth_api_key&quot;&#x27;)</span></span><br><span class="line">        <span class="comment">// buildConfigField (&quot;String&quot;, &quot;AUTH_API_URL&quot;, &#x27;&quot;your_auth_api_url&quot;&#x27;)</span></span><br><span class="line">        resValue <span class="string">&quot;string&quot;</span>, <span class="string">&quot;CLIENT_ID&quot;</span>, <span class="string">&quot;your_client_id&quot;</span></span><br><span class="line">        resValue <span class="string">&quot;string&quot;</span>, <span class="string">&quot;CLIENT_SECRET&quot;</span>, <span class="string">&quot;your_client_secret&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>xml 파일에서는 다음과 같이 참조할 수 있습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span> <span class="attr">android:text</span>=<span class="string">&quot;@string/CLIENT_ID&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -311,7 +331,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/01/02/java/180102-check-java-version/#post-footer"
+                                href="/ko/2018/01/03/android/build-config/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -335,14 +355,14 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/01/java/180101-jvm-jre-jdk/"
-                            aria-label=": [Java] JVM, JRE, JDK 차이"
+                            aria-label=": [Java] Java Compiler, JVM, JRE, JDK 차이"
                         >
-                            [Java] JVM, JRE, JDK 차이
+                            [Java] Java Compiler, JVM, JRE, JDK 차이
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-01-01T08:16:30+09:00">
+    <time datetime="2018-01-01T01:16:30+09:00">
 	
 		    2018/01/01
     	
@@ -360,11 +380,16 @@
             
                 <div class="postShorten-content">
                     <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 <code>JVM</code>, <code>JRE</code>, <code>JDK</code>의 차이점에 대해 알아보겠습니다.</p>
-<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><p><code>JVM</code>은 <code>Java Virtual Machine</code>의 줄임말로 <code>자바 바이트 코드(.class 파일)</code>를 운영체제에 종속적인 코드로 변환하여 실제로 실행하는 역할을 합니다.</p>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이번 포스트에서는 <code>자바 컴파일러(Java Compiler)</code>, <code>JVM</code>, <code>JRE</code>, <code>JDK</code>의 차이점에 대해 알아보겠습니다.</p>
+<h2 id="자바-컴파일러-Java-Compiler"><a href="#자바-컴파일러-Java-Compiler" class="headerlink" title="자바 컴파일러(Java Compiler)"></a>자바 컴파일러(Java Compiler)</h2><p>우리가 Java로 작성한 파일은 뒤에는 <code>.java</code>라는 확장자가 붙습니다. 이를 보통 <code>자바 소스 코드(Source Code)</code>라고 합니다. <code>자바 컴파일러(Java Compiler)</code>는 이 소스코드를 <code>자바 바이트코드(Java Bytecode)</code>로 변환합니다. 자바 바이트코드는 <code>.class</code>확장자를 가집니다.<br><img src="/ko/images/posts/java/java-compiler-1.png"></p>
+<h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><p><code>JVM</code>은 <code>Java Virtual Machine</code>의 줄임말로 <code>자바 바이트코드(Java Bytecode)</code>를 운영체제에 종속적인 코드로 변환하여 실제로 실행합니다.<br><img src="/ko/images/posts/java/jvm.png"><br>위 그림처럼 서로 다른 운영체제라도 <strong>JVM</strong>만 설치되어 있다면, 같은 자바 어플리케이션을 추가적인 작업 없이 실행할 수 있습니다. 단, 자바 어플리케이션과는 달리 <strong>JVM</strong>은 운영체제에 종속적이므로, 각 운영체제에 맞는 <strong>JVM</strong>을 설치해야 합니다.</p>
 <h2 id="JRE"><a href="#JRE" class="headerlink" title="JRE"></a>JRE</h2><p><code>JRE</code>는 <code>Java Runtime Edition</code>의 줄임말로 <code>Java</code>언어로 작성된 애플리케이션을 실행하는데 필요한 요소들입니다. <code>JVM</code>과 <code>실행에 필요한 Java API</code>로 구성되어 있습니다.</p>
 <h2 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h2><p><code>JDK</code>는 <code>Java Development Kit</code>의 줄임말로 어플리케이션 <code>개발</code>에 필요한 요소들입니다. <code>JRE</code>외에도 <code>Java Compiler</code>, <code>Java Debugger</code> 등 개발에 필요한 다양한 도구를 포함하고 있습니다. 보통 <code>Java Platform</code>은 <code>JDK</code>를 의미합니다.</p>
 <p><img src="/ko/images/posts/java/jvm-jdk.png"></p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>자바 컴파일러(Java Compiler)</code>, <code>JVM</code>, <code>JRE</code>, <code>JDK</code>의 차이점에 대해 알아보았습니다. 다음 포스트에서는 Java의 <a href="/ko/2018/01/05/java/180105-primitive-data-type/">자료형(Data Type)</a>에 대해 알아보겠습니다.</p>
 
                     
                         

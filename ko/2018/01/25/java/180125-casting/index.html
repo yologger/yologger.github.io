@@ -6,21 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Java] 타입 캐스팅 (Type Casting) - Yologger&#39;s Blog</title>
+    <title>[Java] 형 변환(타입 캐스팅, Type Casting) - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n기본타입\n123double height = 180.9;int _height = (int)height;System.out.print(_height);  // 180\n참조타입\n12345678910111213141516class Person &#123;    void work() &#123;        System.out.println(&quot;work.&quot;);    &#125;&#125;class Designer extends Person &#123;    @Override    void work() &#123;        System.out.println(&quot;design.&quot;);    &#125;&#125;Designer designer = new Designer();Person person = (Person)designer;person.work();  // design","dateCreated":"2018-01-25T20:16:30+09:00","dateModified":"2021-05-04T19:26:50+09:00","datePublished":"2018-01-25T20:16:30+09:00","description":"","headline":"[Java] 타입 캐스팅 (Type Casting)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/25/java/180125-casting/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/25/java/180125-casting/","keywords":"Java"}</script>
-    <meta name="description" content="기본타입 123double height &#x3D; 180.9;int _height &#x3D; (int)height;System.out.print(_height);  &#x2F;&#x2F; 180 참조타입 12345678910111213141516class Person &amp;#123;    void work() &amp;#123;        System.out.println(&quot;work.&amp;">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 Java의 instanceOf에 대해 알아봤습니다. 이번 포스트에서는 Java의 형 변환(Type Casting)에 대해 알아보겠습니다.\n형 변환(Type Casting)형 변환은 자료형을 다른 자료형으로 변환하는 것을 의미합니다.\n기본자료형의 형 변환기본자료형을 형 변환할 때는 ()를 사용합니다.\n123456double height = 180.9;// double형 변수를 int형 변수로 형 변환int _height = (int)height;System.out.print(_height);  // 180\n참조타입의 형 변환다음 두 클래스가 있다고 가정합시다.\n12345class Person &#123;    void work() &#123;        System.out.println(&quot;work.&quot;);    &#125;&#125;\n123456class Designer extends Person &#123;    @Override    void work() &#123;        System.out.println(&quot;design.&quot;);    &#125;&#125;\n형 변환은 다음과 같이 합니다.\n12345Designer designer = new Designer();// Designer 클래스를 Person 클래스로 형 변환Person person = (Person)designer;person.work();  // design\n마치며이번 포스트에서는 Java의 형 변환(Type Casting)에 대해 알아봤습니다. 다음 포스트에서는 접근 제한자(Access Modifier)에 대해 알아보겠습니다.\n","dateCreated":"2018-01-25T20:16:30+09:00","dateModified":"2021-05-12T16:42:02+09:00","datePublished":"2018-01-25T20:16:30+09:00","description":"","headline":"[Java] 형 변환(타입 캐스팅, Type Casting)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/25/java/180125-casting/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/25/java/180125-casting/","keywords":"Java"}</script>
+    <meta name="description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 Java의 instanceOf에 대해 알아봤습니다. 이번 포스트에서는 Java의 형 변환(Type Casting)에 대해 알아보겠습니다. 형 변환(Type Casting)형 변환은 자료형을 다른 자료형으로 변환하는 것을 의미합니다. 기본자">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Java] 타입 캐스팅 (Type Casting)">
+<meta property="og:title" content="[Java] 형 변환(타입 캐스팅, Type Casting)">
 <meta property="og:url" content="https://yologger.github.io/ko/2018/01/25/java/180125-casting/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="기본타입 123double height &#x3D; 180.9;int _height &#x3D; (int)height;System.out.print(_height);  &#x2F;&#x2F; 180 참조타입 12345678910111213141516class Person &amp;#123;    void work() &amp;#123;        System.out.println(&quot;work.&amp;">
+<meta property="og:description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 Java의 instanceOf에 대해 알아봤습니다. 이번 포스트에서는 Java의 형 변환(Type Casting)에 대해 알아보겠습니다. 형 변환(Type Casting)형 변환은 자료형을 다른 자료형으로 변환하는 것을 의미합니다. 기본자">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2018-01-25T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-04T10:26:50.101Z">
+<meta property="article:modified_time" content="2021-05-12T07:42:02.798Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -274,7 +274,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Java] 타입 캐스팅 (Type Casting)
+            [Java] 형 변환(타입 캐스팅, Type Casting)
         </h1>
     
     
@@ -300,10 +300,20 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <hr>
-<p>기본타입</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> height = <span class="number">180.9</span>;</span><br><span class="line"><span class="keyword">int</span> _height = (<span class="keyword">int</span>)height;</span><br><span class="line">System.out.print(_height);  <span class="comment">// 180</span></span><br></pre></td></tr></table></figure>
-<p>참조타입</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;work.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Designer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;design.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Designer designer = <span class="keyword">new</span> Designer();</span><br><span class="line">Person person = (Person)designer;</span><br><span class="line">person.work();  <span class="comment">// design</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/24/java/180124-instanceof/"><code>instanceOf</code></a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 <code>형 변환(Type Casting)</code>에 대해 알아보겠습니다.</p>
+<h2 id="형-변환-Type-Casting"><a href="#형-변환-Type-Casting" class="headerlink" title="형 변환(Type Casting)"></a>형 변환(Type Casting)</h2><p><code>형 변환</code>은 <strong>자료형을 다른 자료형으로 변환하는 것</strong>을 의미합니다.</p>
+<h2 id="기본자료형의-형-변환"><a href="#기본자료형의-형-변환" class="headerlink" title="기본자료형의 형 변환"></a>기본자료형의 형 변환</h2><p>기본자료형을 형 변환할 때는 <code>()</code>를 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> height = <span class="number">180.9</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// double형 변수를 int형 변수로 형 변환</span></span><br><span class="line"><span class="keyword">int</span> _height = (<span class="keyword">int</span>)height;</span><br><span class="line"></span><br><span class="line">System.out.print(_height);  <span class="comment">// 180</span></span><br></pre></td></tr></table></figure>
+<h2 id="참조타입의-형-변환"><a href="#참조타입의-형-변환" class="headerlink" title="참조타입의 형 변환"></a>참조타입의 형 변환</h2><p>다음 두 클래스가 있다고 가정합시다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;work.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Designer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;design.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>형 변환은 다음과 같이 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Designer designer = <span class="keyword">new</span> Designer();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Designer 클래스를 Person 클래스로 형 변환</span></span><br><span class="line">Person person = (Person)designer;</span><br><span class="line">person.work();  <span class="comment">// design</span></span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 Java의 <code>형 변환(Type Casting)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/26/java/180126-access-modifier/">접근 제한자(Access Modifier)</a>에 대해 알아보겠습니다.</p>
+
             
 
 

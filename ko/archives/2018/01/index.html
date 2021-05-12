@@ -274,292 +274,10 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/30/java/180130-type-eraser/"
-                            aria-label=": [Java] 타입 소거(Type Eraser)란?"
+                            href="/ko/2018/01/27/java/180127-object-class/"
+                            aria-label=": [Java] Object 클래스"
                         >
-                            [Java] 타입 소거(Type Eraser)란?
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-30T20:16:30+09:00">
-	
-		    2018/01/30
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>본 포스트는 제너릭(Generic)에 대한 기본 지식이 있다는 가정하에 설명합니다. 제너릭은 해당 포스트에서 배우실 수 있습니다. </p>
-<h2 id="공변과-불공변"><a href="#공변과-불공변" class="headerlink" title="공변과 불공변"></a>공변과 불공변</h2><p><code>타입소거</code>를 이해하려면 <code>공변(covariant)</code>과 <code>불공변(contravariant)</code>을 먼저 알아야합니다. </p>
-<p>배열은 공변이고, 제네릭은 불공변입니다. 우선 예제를 살펴보겠습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object[] numbers = <span class="keyword">new</span> Int[<span class="number">5</span>];</span><br></pre></td></tr></table></figure>
-<p>Int는 Object의 자식 클래스입니다. 공변이란 자기 자신과 자식 객체로 타입 변환을 허용해주는 것입니다. 따라서 배열은 공변이라 할 수 있습니다.</p>
-<p>그럼 아래 제네릭 예제를 살펴보겠습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printList</span><span class="params">(List&lt;Object&gt; list)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; players = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">players.add(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;John&quot;</span>);</span><br><span class="line"></span><br><span class="line">printList(list);   <span class="comment">// 컴파일 에러</span></span><br></pre></td></tr></table></figure>
-<p>불공변은 두 개의 타입이 전혀 관련없다는 뜻입니다. 두 개의 제너릭 타입 List<String>과 List<Object>는 전혀 관련이 없습니다. 따라서 위 코드는 컴파일 에러가 발생합니다. 이러한 특성 때문에 제네릭은 컴파일 타임에서의 타입 안정성 높여줍니다.</p>
-<h2 id="구체화-reify"><a href="#구체화-reify" class="headerlink" title="구체화 (reify)"></a>구체화 (reify)</h2><p>배열은 구체화(reify)되고, 제네릭은 비 구체화(non-reify)가 됩니다. 용어가 벌써부터 어렵습니다. 우선 개념은 다음과 같습니다.</p>
-<ul>
-<li>구체화 타입(reifiable type): 자신의 타입 정보를 런타임에도 알고 있는 것</li>
-<li>비구체화 타입(non-reifiable type): 런타임에는 소거(erasure)가 되기 때문에 컴파일 타임보다 정보를 적게 가지는 것</li>
-</ul>
-<p>여기서 바로 타입 소거(Type Erasure)가 나옵니다. 제네릭은 컴파일 타임에 타입 체크를 한 후에 런타임에는 타입을 지우는 방법을 사용하고 있습니다.</p>
-<h2 id="Generic-Type-erasure란"><a href="#Generic-Type-erasure란" class="headerlink" title="Generic Type erasure란?"></a>Generic Type erasure란?</h2><p>결국 <code>Generic Type erasure</code>는 타입을 컴파일 타임에만 검사하는데 사용하며, 런타임에는 타입 정보를 알 수 없는 것입니다.<br>요약하자면, 컴파일 타임에만 타입 제약 조건을 정의하고, 런타임에는 타입을 제거한다는 뜻입니다.</p>
-<h4 id="Java-Compiler의-타입-소거-방식"><a href="#Java-Compiler의-타입-소거-방식" class="headerlink" title="Java Compiler의 타입 소거 방식"></a>Java Compiler의 타입 소거 방식</h4><ul>
-<li><code>Unbounded Type(&lt;?&gt;, &lt;T&gt;)</code>는 <code>Object</code>로 변환합니다.</li>
-<li>Bound Type(<code>&lt;E extends Observable&gt;</code>)의 경우는 Object가 아닌 <code>Observable</code>로 변환합니다.</li>
-</ul>
-<p>Unbounded Type 예제를 먼저 살펴보겠습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 할 때 (타입 소거 전) </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(T test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 런타임 때 (타입 소거 후)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Object test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>제네릭 파라미터가 소거되고 Object 클래스로 대치되었습니다. 그럼 Bounded Type 예제를 살펴보겠습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Observable</span>&lt;<span class="title">T</span>&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>제네릭 파라미터를 포함한 Observable<T>가 Observable로 소거되었습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Observable data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Observable <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Observable data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>Type Eraser</code>에 대해 알아보았습니다. 개발을 하다보면 개발 시점에 변수의 타입을 모르는 경우가 있습니다. 이때는 <code>Class 클래스</code>와 <code>리플렉션</code>을 사용하여 타입을 분석하기도 합니다. 더불어 Kotlin에서는 런타임에서 <code>Type Eraser</code>로 타입을 몰라도 사용하는 방법을 재공합니다. 해당 포스트들을 꼭 읽어보셨으면 좋겠습니다. </p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/30/java/180130-type-eraser/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/29/java/180120-enum/"
-                            aria-label=": [Java] enum"
-                        >
-                            [Java] enum
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-29T20:16:30+09:00">
-	
-		    2018/01/29
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// enum 정의</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Direction</span> </span>&#123;</span><br><span class="line">    EAST, WEST, SOUTH, NORTH</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// enum 인스턴스 생성</span></span><br><span class="line">Direction direction = Direction.EAST;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (direction) &#123;</span><br><span class="line">    <span class="keyword">case</span> EAST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to east.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> WEST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to west.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> NORTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to north.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> SOUTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to south.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/29/java/180120-enum/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/29/java/180129-generic-method/"
-                            aria-label=": [Java] 제네릭 메소드"
-                        >
-                            [Java] 제네릭 메소드
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-29T20:16:30+09:00">
-	
-		    2018/01/29
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<h2 id="제너릭-메소드"><a href="#제너릭-메소드" class="headerlink" title="제너릭 메소드"></a>제너릭 메소드</h2><p>제너릭은 클래스 뿐만 아니라 메소드에서도 사용할 수 있습니다. 메소드 선언부에 제너릭 타입을 사용할 수 있으며 이러한 메소드를 <code>제너릭 메소드</code>라고 합니다. </p>
-<p>반환값이 없는 <code>제너릭 메소드</code>는 다음과 같이 정의하고 사용합니다. 반환 타입 앞에 <code>&lt;&gt;</code>와 <code>타입 파라미터</code>를 적어주면 됩니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">printElement</span><span class="params">(ArrayList&lt;T&gt; list)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;list.size(); i++) &#123;</span><br><span class="line">        System.out.println(list.get(i).toString());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ArrayList&lt;Integer&gt; numbers = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">numbers.add(<span class="number">1</span>);</span><br><span class="line">numbers.add(<span class="number">2</span>);</span><br><span class="line">numbers.add(<span class="number">3</span>);</span><br><span class="line">printElement(numbers);</span><br><span class="line"></span><br><span class="line">ArrayList&lt;String&gt; players = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">players.add(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;John&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Smith&quot;</span>);</span><br><span class="line">printElement(players);</span><br></pre></td></tr></table></figure>
-<p>반환값이 있는 <code>제너릭 메소드</code>는 다음과 같이 정의하고 사용합니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; <span class="function">T <span class="title">getFirstElement</span><span class="params">(ArrayList&lt;T&gt; list)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> list.get(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>제너릭 클래스</code> 안에서 <code>제너릭 메소드</code>를 사용할 땐 주의해야합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">printElements</span><span class="params">(ArrayList&lt;T&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;list.size(); i++) &#123;</span><br><span class="line">            System.out.println(list.get(i).toString());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>따라서 다음과 같이 <code>타입 파라미터</code>의 문자를 구분하는 것을 추천합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    &lt;E&gt; <span class="function"><span class="keyword">void</span> <span class="title">printElements</span><span class="params">(ArrayList&lt;E&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;list.size(); i++) &#123;</span><br><span class="line">            System.out.println(list.get(i).toString());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/29/java/180129-generic-method/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/28/java/180128-wildcard/"
-                            aria-label=": [Java] 제네릭 (Generic) - Wildcard"
-                        >
-                            [Java] 제네릭 (Generic) - Wildcard
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-28T20:16:30+09:00">
-	
-		    2018/01/28
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<h2 id="와일드-카드-Wildcard"><a href="#와일드-카드-Wildcard" class="headerlink" title="와일드 카드(Wildcard)"></a>와일드 카드(Wildcard)</h2><p><code>와일드 카드(Wildcard)</code>는 제네릭 클래스의 인스턴스를 함수의 인자로 전달할 때, 그 인스턴스의 타입 변수를 제한하는 것을 의미합니다. 개념이 어려우므로 예제를 통해 살펴보겠습니다.</p>
-<h2 id="와일드-카드-와-extends"><a href="#와일드-카드-와-extends" class="headerlink" title="와일드 카드(?)와 extends"></a>와일드 카드(?)와 extends</h2><p>다음과 같은 함수가 있다고 가정해봅시다. <code>printElements()</code>는 인자로 <code>ArrayList</code>타입의 데이터를 입력받습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printElements</span><span class="params">(ArrayList list)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ..</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    String team;</span><br><span class="line"></span><br><span class="line">    Player(String name, String team) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.team = team;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 제네릭 클래스 ArrayList의 타입 변수로 String, Person, Player가 모두 올 수 있습니다.</span></span><br><span class="line">ArrayList&lt;String&gt; list1 = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">ArrayList&lt;Person&gt; list2 = <span class="keyword">new</span> ArrayList&lt;Person&gt;();</span><br><span class="line">ArrayList&lt;Player&gt; list3 = <span class="keyword">new</span> ArrayList&lt;Player&gt;();</span><br><span class="line"></span><br><span class="line">printElements(list1);</span><br><span class="line">printElements(list2);</span><br><span class="line">printElements(list3);</span><br></pre></td></tr></table></figure>
-<p>그런데 인자로 전달되는 <code>ArrayList</code>에 저장되는 데이터를 제한할 수 있습니다. 아래와 같이 키워드 <code>extends</code>를 사용하면 됩니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printElements</span><span class="params">(ArrayList&lt;? extends Person&gt; list)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ..</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>&lt;? extends Person&gt;</code>는 <code>Person</code>객체 또는 이를 상속한 객체를 데이터로 가지고 있는 <code>ArrayList</code>객체만 함수의 인자로 전달될 수 있음을 의미합니다. 따라서 아래 코드에서 <code>Person</code>객체를 상속하지 않은 <code>list1</code> 때문에 컴파일 에러가 발생합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; list1 = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">ArrayList&lt;Person&gt; list2 = <span class="keyword">new</span> ArrayList&lt;Person&gt;();</span><br><span class="line">ArrayList&lt;Player&gt; list3 = <span class="keyword">new</span> ArrayList&lt;Player&gt;();</span><br><span class="line"></span><br><span class="line">printElements(list1);   <span class="comment">// 에러</span></span><br><span class="line">printElements(list2);</span><br><span class="line">printElements(list3);</span><br></pre></td></tr></table></figure>
-<h2 id="super"><a href="#super" class="headerlink" title="super"></a>super</h2><p>키워드 <code>super</code>를 사용하면 특정 클래스와 부모 클래스만 인자로 제한할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printElements</span><span class="params">(ArrayList&lt;? <span class="keyword">super</span> Person&gt; list)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ..</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ArrayList&lt;String&gt; list1 = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">ArrayList&lt;Person&gt; list2 = <span class="keyword">new</span> ArrayList&lt;Person&gt;();</span><br><span class="line">ArrayList&lt;Player&gt; list3 = <span class="keyword">new</span> ArrayList&lt;Player&gt;();</span><br><span class="line"></span><br><span class="line">printElements(list1);   <span class="comment">// 에러</span></span><br><span class="line">printElements(list2);</span><br><span class="line">printElements(list3);</span><br></pre></td></tr></table></figure>
-<h2 id="와일드-카드-lt-gt-의-종류"><a href="#와일드-카드-lt-gt-의-종류" class="headerlink" title="와일드 카드&lt;?&gt;의 종류"></a>와일드 카드&lt;?&gt;의 종류</h2><ul>
-<li><? extends T> 와일드 카드의 상한 제한(upper bound) - T와 그 자손들을 구현한 객체들만 매개변수로 가능</li>
-<li><? super T> 와일드 카드의 하한 제한(lower bound) -T와 그 조상들을 구현한 객체들만 매개변수로 가능</li>
-<li><?> 제한 없음</li>
-</ul>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/28/java/180128-wildcard/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/27/java/180127-generic/"
-                            aria-label=": [Java] 제네릭 (Generic)"
-                        >
-                            [Java] 제네릭 (Generic)
+                            [Java] Object 클래스
                         </a>
                     
                 </h1>
@@ -582,17 +300,24 @@
             
                 <div class="postShorten-content">
                     <hr>
-<h2 id="제네릭-Generic-이란"><a href="#제네릭-Generic-이란" class="headerlink" title="제네릭(Generic)이란"></a>제네릭(Generic)이란</h2><p><code>제네릭 (Generic)</code>은 클래스나 메서드 내부에서 사용할 데이터의 타입을 외부에서 설정하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 <code>타입 체크</code>를 가능하게 합니다.</p>
-<h2 id="제네릭-클래스"><a href="#제네릭-클래스" class="headerlink" title="제네릭 클래스"></a>제네릭 클래스</h2><p>우선 <code>제네릭(Generic)</code>은 <code>클래스</code>에서 사용할 수 있습니다. <code>제네릭 클래스</code>는 다음과 같이 정의합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    E element;</span><br><span class="line"></span><br><span class="line">    Box(E element) &#123;</span><br><span class="line">        <span class="keyword">this</span>.element = element;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">E <span class="title">getElement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>&lt;&gt;</code>안에는 <code>아직 아직 타입이 결정되지 않음</code>을 의미하는 문자를 넣어줍니다. 이를 <code>타입 파라미터</code>라고 합니다. 관습적으로 대문자 E(Element), T(Type), K(Key), V(Value)를 사용합니다. 이렇게 작성된 <code>&lt;E&gt;</code>에는 어떠한 타입의 데이터도 들어올 수 있습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// element의 데이터 타입을 Integer로 설정합니다.</span></span><br><span class="line">Box&lt;Integer&gt; box1 = <span class="keyword">new</span> Box&lt;Integer&gt;(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// element의 데이터 타입을 String으로 설정합니다.</span></span><br><span class="line">Box&lt;String&gt; box2 = <span class="keyword">new</span> Box&lt;String&gt;(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// element의 데이터 타입을 Person으로 설정합니다.</span></span><br><span class="line">Box&lt;Person&gt; box3 = <span class="keyword">new</span> Box&lt;Person&gt;(<span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>));</span><br></pre></td></tr></table></figure>
-<p>다음 코드는 <code>제네릭</code>을 사용한 <code>Stack</code> 예제입니다. 보통 <code>List</code>, <code>Set</code>, <code>Map</code>처럼 다양한 타입에 데이터를 저장하는 <code>Collection</code>에서 <code>제네릭</code>을 많이 사용합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> E[] elements;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_SIZE = <span class="number">16</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        elements = (E[])<span class="keyword">new</span> Object[DEFAULT_SIZE];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(E element)</span> </span>&#123;</span><br><span class="line">        elements[size++] = element;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> E <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(size == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        E result = elements[--size];</span><br><span class="line">        elements[size] = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Stack&lt;String&gt; people = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line">people.push(<span class="string">&quot;John&quot;</span>);</span><br><span class="line">people.push(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">people.pop();</span><br><span class="line"></span><br><span class="line">Stack&lt;Person&gt; players = <span class="keyword">new</span> Stack&lt;Person&gt;();</span><br><span class="line">players.push(<span class="keyword">new</span> Person(<span class="string">&quot;Messi&quot;</span>));</span><br><span class="line">players.push(<span class="keyword">new</span> Person(<span class="string">&quot;Ronaldo&quot;</span>));</span><br><span class="line">players.pop();</span><br></pre></td></tr></table></figure>
-<h2 id="제한된-제너릭-클래스"><a href="#제한된-제너릭-클래스" class="headerlink" title="제한된 제너릭 클래스"></a>제한된 제너릭 클래스</h2><p>키워드 <code>extends</code>를 사용하면 <code>제네릭 클래스</code>에 들어올 데이터의 타입을 <code>제한</code>할 수 있습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Course</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Person</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> T[] students;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Course</span><span class="params">(String name, <span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        students = (T[]) (<span class="keyword">new</span> Object[capacity]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> T[] getStudents() &#123;</span><br><span class="line">        <span class="keyword">return</span> students;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStudents</span><span class="params">(T[] students)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.students = students;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; students.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (students[i] == <span class="keyword">null</span>) &#123;</span><br><span class="line">                students[i] = t;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위 코드처럼 정의하면 <code>Person</code>클래스를 상속받은 클래스만 들어갈 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Course course = <span class="keyword">new</span> Course(<span class="string">&quot;Programming&quot;</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">course.add(<span class="keyword">new</span> Student(<span class="string">&quot;Paul&quot;</span>));</span><br><span class="line">course.add(<span class="keyword">new</span> Student(<span class="string">&quot;John&quot;</span>));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/26/java/180126-access-modifier">접근 제한자(Access Modifier)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 <code>Object 클래스</code>에 대해 알아보겠습니다.</p>
+<h2 id="java-lang-패키지"><a href="#java-lang-패키지" class="headerlink" title="java.lang 패키지"></a>java.lang 패키지</h2><p><code>java.lang</code> 패키지는 자바에서 가장 기본적인 동작을 수행하는 클래스들의 집합입니다. 따라서 자바에서는 <code>java.lang</code> 패키지를 import하지 않아도 바로 사용할 수 있습니다. </p>
+<h2 id="Object-클래스"><a href="#Object-클래스" class="headerlink" title="Object 클래스"></a>Object 클래스</h2><p><code>Object</code>클래스는 모든 자바 클래스의 최고 조상 클래스입니다. 따라서 자바의 모든 클래스는 암시적으로든 명시적으로든 <code>Object</code>클래스를 상속받고 있습니다. <code>Object</code>클래스는 <code>java.lang</code>패키지에 포함되며, <code>Object</code>클래스는 여러 메소드를 제공하고 있습니다.</p>
+<h2 id="equals-Object-obj-메소드"><a href="#equals-Object-obj-메소드" class="headerlink" title="equals(Object obj) 메소드"></a>equals(Object obj) 메소드</h2><p>메소드를 호출하는 객체와 인자로 전달받은 객체가 동일한지 여부를 반환합니다. 다만 <code>Object</code>클래스를 상속받는 클래스에서는 <code>equals(Object obj)</code>을 직접 구현해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// equal()메소드를 직접 구현</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">            <span class="keyword">return</span> name == ((Person) obj).name;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person p1 = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">Person p2 = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">boolean</span> result = p1.equals(p2); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="getClass-메소드"><a href="#getClass-메소드" class="headerlink" title="getClass() 메소드"></a>getClass() 메소드</h2><p>해당 객체의 클래스 타입을 반환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">System.out.println(person.getClass());  <span class="comment">// class com.test.example.Person</span></span><br><span class="line"></span><br><span class="line">Phone phone = <span class="keyword">new</span> Phone();</span><br><span class="line">System.out.println(phone.getClass());   <span class="comment">// class com.test.example.Phone</span></span><br></pre></td></tr></table></figure>
+<h2 id="hashcode-메소드"><a href="#hashcode-메소드" class="headerlink" title="hashcode() 메소드"></a>hashcode() 메소드</h2><p><code>hashcode()</code>는 객체의 <code>해시코드</code>를 반환합니다. <code>해시코드</code>는 <strong>객체의 주소값을 해시함수에 넣어 반환된 고유한 정수값</strong>입니다. 따라서 두 객체가 동일한 객체인지 비교할 때 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person p1 = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line">Person p2 = p1;</span><br><span class="line">Person p3 = <span class="keyword">new</span> Person(<span class="string">&quot;John&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(p1.hashCode());  <span class="comment">// 214520509</span></span><br><span class="line">System.out.println(p2.hashCode());  <span class="comment">// 214520509</span></span><br><span class="line">System.out.println(p3.hashCode());  <span class="comment">// 68944050</span></span><br></pre></td></tr></table></figure>
+<h2 id="toString-메소드"><a href="#toString-메소드" class="headerlink" title="toString() 메소드"></a>toString() 메소드</h2><p>해당 객체의 정보를 문자열로 반환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(person.toString());  <span class="comment">// com.test.Person@cc952bd</span></span><br></pre></td></tr></table></figure>
+<h2 id="그-외"><a href="#그-외" class="headerlink" title="그 외"></a>그 외</h2><p>그 외에 <code>Object</code> 클래스는 <code>clone()</code>, <code>finalize()</code>, <code>notify()</code>, <code>notifyAll()</code>, <code>wait()</code> 메소드도 제공합니다.</p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서 <code>Object 클래스</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/02/01/java/180201-generic/">제너릭(Generic)</a>에 대해 알아보겠습니다.</p>
+
                     
                         
 
@@ -601,7 +326,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/01/27/java/180127-generic/#post-footer"
+                                href="/ko/2018/01/27/java/180127-object-class/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -625,9 +350,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/26/java/180126-access-modifier/"
-                            aria-label=": [Java] 접근 제한자 (public, private, protected, default)"
+                            aria-label=": [Java] 접근 제한자(public, private, protected, default)"
                         >
-                            [Java] 접근 제한자 (public, private, protected, default)
+                            [Java] 접근 제한자(public, private, protected, default)
                         </a>
                     
                 </h1>
@@ -650,6 +375,10 @@
             
                 <div class="postShorten-content">
                     <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/25/java/180125-casting/">형 변환(Type Casting)</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>접근 제한자(Access Modifier)</code>에 대해 알아보겠습니다.</p>
 <h2 id="접근-제한자-Access-Modifiers"><a href="#접근-제한자-Access-Modifiers" class="headerlink" title="접근 제한자 (Access Modifiers)"></a>접근 제한자 (Access Modifiers)</h2><p>접근 제한자는 <strong>외부에서 클래스 내부의 메소드나 멤버변수에 접근하는 것을 제한하는 것</strong>입니다. Java는  <code>private</code>, <code>protected</code>, <code>default</code>, <code>public</code>이라는 4개의 접근 제한자를 지원합니다. 접근 제한자는 클래스, 생성자, 메소드, 멤버변수 앞에 붙일 수 있습니다.</p>
 <h2 id="private"><a href="#private" class="headerlink" title="private"></a>private</h2><p><code>private</code>은 같은 클래스 내에서만 접근이 가능합니다. 클래스에는 붙일 수 없으며 멤버변수, 메소드, 생성자 앞에만 붙일 수 있습니다. </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// private 변수 name</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 같은 클래스에서는 name에 접근할 수 있습니다.</span></span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line">person.name;    <span class="comment">// 클래스 외부에서는 접근할 수 없습니다. 다음과 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// &#x27;name&#x27; has private access in Person</span></span><br></pre></td></tr></table></figure>
@@ -665,6 +394,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.yologger.person;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>다른 패키지인 <code>com.yologger.app</code>에서도 접근할 수 있습니다. </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.yologger.app;</span><br><span class="line"></span><br><span class="line">Person person = <span class="keyword">new</span> Person();</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 Java의 <code>접근 제한자(Access Modifier)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/27/java/180127-object-class/">Object 클래스</a>에 대해 알아보겠습니다.</p>
+
                     
                         
 
@@ -697,9 +428,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/25/java/180125-casting/"
-                            aria-label=": [Java] 타입 캐스팅 (Type Casting)"
+                            aria-label=": [Java] 형 변환(타입 캐스팅, Type Casting)"
                         >
-                            [Java] 타입 캐스팅 (Type Casting)
+                            [Java] 형 변환(타입 캐스팅, Type Casting)
                         </a>
                     
                 </h1>
@@ -722,10 +453,20 @@
             
                 <div class="postShorten-content">
                     <hr>
-<p>기본타입</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> height = <span class="number">180.9</span>;</span><br><span class="line"><span class="keyword">int</span> _height = (<span class="keyword">int</span>)height;</span><br><span class="line">System.out.print(_height);  <span class="comment">// 180</span></span><br></pre></td></tr></table></figure>
-<p>참조타입</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;work.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Designer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;design.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Designer designer = <span class="keyword">new</span> Designer();</span><br><span class="line">Person person = (Person)designer;</span><br><span class="line">person.work();  <span class="comment">// design</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/24/java/180124-instanceof/"><code>instanceOf</code></a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 <code>형 변환(Type Casting)</code>에 대해 알아보겠습니다.</p>
+<h2 id="형-변환-Type-Casting"><a href="#형-변환-Type-Casting" class="headerlink" title="형 변환(Type Casting)"></a>형 변환(Type Casting)</h2><p><code>형 변환</code>은 <strong>자료형을 다른 자료형으로 변환하는 것</strong>을 의미합니다.</p>
+<h2 id="기본자료형의-형-변환"><a href="#기본자료형의-형-변환" class="headerlink" title="기본자료형의 형 변환"></a>기본자료형의 형 변환</h2><p>기본자료형을 형 변환할 때는 <code>()</code>를 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> height = <span class="number">180.9</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// double형 변수를 int형 변수로 형 변환</span></span><br><span class="line"><span class="keyword">int</span> _height = (<span class="keyword">int</span>)height;</span><br><span class="line"></span><br><span class="line">System.out.print(_height);  <span class="comment">// 180</span></span><br></pre></td></tr></table></figure>
+<h2 id="참조타입의-형-변환"><a href="#참조타입의-형-변환" class="headerlink" title="참조타입의 형 변환"></a>참조타입의 형 변환</h2><p>다음 두 클래스가 있다고 가정합시다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;work.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Designer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;design.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>형 변환은 다음과 같이 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Designer designer = <span class="keyword">new</span> Designer();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Designer 클래스를 Person 클래스로 형 변환</span></span><br><span class="line">Person person = (Person)designer;</span><br><span class="line">person.work();  <span class="comment">// design</span></span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 Java의 <code>형 변환(Type Casting)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/26/java/180126-access-modifier/">접근 제한자(Access Modifier)</a>에 대해 알아보겠습니다.</p>
+
                     
                         
 
@@ -757,78 +498,10 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/24/java/180124-static/"
-                            aria-label=": [Java] static 이란? (정적 변수와 정적 메소드)"
-                        >
-                            [Java] static 이란? (정적 변수와 정적 메소드)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-24T21:16:30+09:00">
-	
-		    2018/01/24
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>키워드 <code>static</code>은 클래스의 멤버변수와 메소드 앞에 붙일 수 있습니다. 이렇게 <code>static</code>이 붙은 멤버변수와 메소드를 <code>정적 멤버변수(Static Variable)</code>와 <code>정적 메소드(Static Method)</code>라고 합니다. <strong>정적 멤버변수</strong>와 <strong>정적 메소드</strong>는 다음과 같은 특징이 있습니다.</p>
-<blockquote>
-<p>클래스의 인스턴스를 생성하지 않고도 사용이 가능합니다. </p>
-</blockquote>
-<blockquote>
-<p>클래스의 모든 인스턴스가 공유합니다.</p>
-</blockquote>
-<h2 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h2><p><code>정적 멤버변수</code>와 <code>정적 메소드</code>는 다음과 같이 선언합니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decrement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>정적 멤버변수</code>와 <code>정적 메소드</code>는 다음과 같이 사용할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스의 인스턴스를 생성하지 않고도 멤버변수에 접근할 수 있습니다.</span></span><br><span class="line">Counter.count;  <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스의 인스턴스를 생성하지 않고도 메소드를 호출할 수 있습니다.</span></span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.count;  <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">Counter.decrement();</span><br><span class="line">Counter.count;  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/24/java/180124-static/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2018/01/24/java/180124-instanceof/"
-                            aria-label=": [Java] static 이란?"
+                            aria-label=": [Java] instanceOf 란?"
                         >
-                            [Java] static 이란?
+                            [Java] instanceOf 란?
                         </a>
                     
                 </h1>
@@ -851,8 +524,14 @@
             
                 <div class="postShorten-content">
                     <hr>
-<p>키워드 <code>instanceOf</code>는 인스턴스가 특정 클래스 타입인지 확인할 때 사용합니다.</p>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/23/java/180123-comparison/">비교문</a>에 대해 알아봤습니다. 이번 포스트에서는 키워드<code>instanceOf</code>에 대해 알아보겠습니다.</p>
+<h2 id="instanceOf"><a href="#instanceOf" class="headerlink" title="instanceOf"></a>instanceOf</h2><p>키워드<code>instanceOf</code>는 인스턴스가 특정 클래스의 타입인지 확인할 때 사용합니다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (person <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;person is instance of Person.&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;person is not instance of Person.&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 Java의 <code>instanceOf</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/25/java/180125-casting/">형 변환(Type Casting)</a>에 대해 알아보겠습니다.</p>
+
                     
                         
 
@@ -910,10 +589,17 @@
             
                 <div class="postShorten-content">
                     <hr>
-<p>비교문</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (isMarried) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;He is married.&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;He is not married.&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>switch문</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Direction</span> </span>&#123;</span><br><span class="line">    EAST, WEST, SOUTH, NORTH</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Direction direction = Direction.EAST;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (direction) &#123;</span><br><span class="line">    <span class="keyword">case</span> EAST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to east.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> WEST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to west.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> NORTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to north.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> SOUTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to south.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a target="_blank" rel="noopener" href="//ko/2018/01/22/java/180122-iteration/">반복문</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>비교문</code>에 대해 알아보겠습니다.</p>
+<h2 id="if-else문"><a href="#if-else문" class="headerlink" title="if-else문"></a>if-else문</h2><p><code>if-else문</code>은 다음과 같이 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bool isMarried = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (isMarried) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;He is married.&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;He is not married.&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="switch문"><a href="#switch문" class="headerlink" title="switch문"></a>switch문</h2><p><code>switch문</code>은 <code>열거형(enum)</code>과 함께 유용하게 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Direction</span> </span>&#123;</span><br><span class="line">    EAST, WEST, SOUTH, NORTH</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Direction direction = Direction.EAST;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (direction) &#123;</span><br><span class="line">    <span class="keyword">case</span> EAST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to east.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> WEST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to west.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> NORTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to north.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> SOUTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to south.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 Java의 <code>비교문</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/24/java/180124-instanceof/">키워드 <code>instanceOf</code></a>에 대해 알아보겠습니다.</p>
+
                     
                         
 
@@ -923,6 +609,365 @@
                         <p>
                             <a
                                 href="/ko/2018/01/23/java/180123-comparison/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/22/java/180122-iteration/"
+                            aria-label=": [Java] 반복문"
+                        >
+                            [Java] 반복문
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-22T20:16:30+09:00">
+	
+		    2018/01/22
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/21/java/180121-error-handling/">에러 처리(Error Handling)</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>반복문</code>에 대해 알아보겠습니다.</p>
+<h2 id="for문"><a href="#for문" class="headerlink" title="for문"></a>for문</h2><p><code>for문</code>은 다음과 같이 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> idx=<span class="number">0</span>; idx&lt;<span class="number">10</span>; idx++) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>for문</code>은 <code>:</code>과 함께 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Person[] people = &#123;</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Son&quot;</span>, <span class="string">&quot;Korea&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Kane&quot;</span>, <span class="string">&quot;England&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Messi&quot;</span>, <span class="string">&quot;Argentina&quot;</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Person person: people) &#123;</span><br><span class="line">    person.printName();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Son</span></span><br><span class="line"><span class="comment">// Kane</span></span><br><span class="line"><span class="comment">// Messi</span></span><br></pre></td></tr></table></figure>
+<h2 id="while문"><a href="#while문" class="headerlink" title="while문"></a>while문</h2><p><code>while문</code>은 조건이 만족할 때 까지 <code>블럭(&#123; .. &#125;)</code>을 반복 수행합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (idx &lt; <span class="number">10</span>) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">    idx ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>while문</code>은 <code>break</code>나 <code>continue</code>와도 자주 사용됩니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">    idx ++;</span><br><span class="line">    <span class="keyword">if</span> (idx &gt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 Java의 <code>반복문</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/23/java/180123-comparison/">비교문</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/22/java/180122-iteration/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/21/java/180121-error-handling/"
+                            aria-label=": [Java] 에러 처리(Exception &amp; Error Handling)"
+                        >
+                            [Java] 에러 처리(Exception &amp; Error Handling)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-21T20:16:30+09:00">
+	
+		    2018/01/21
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/20/java/180120-enum/">열거형(enum)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 <code>에러 처리(Error Handling)</code>에 대해 알아보겠습니다.</p>
+<h2 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a>Throwable</h2><p>Java은 오류가 발생하면 <code>Error</code>나 <code>Exception</code>을 발생시킵니다. <code>Error</code>와 <code>Exception</code>은 모두 <code>Throwable</code>클래스를 상속받습니다.<br><img src="/ko/images/posts/kotlin/exception/exception.png"></p>
+<h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p><code>Error</code>는 코드에서 잡아낼 수 없으며 어플리케이션 자체가 다운됩니다. 대표적으로 메모리가 부족하여 발생하는 <code>OutOfMemoryError</code>, <code>StackOveflowError</code>가 있습니다.</p>
+<h2 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h2><p><code>Exception</code>은 <code>try-catch</code>구문으로 잡아낼 수 있으며 프로그램이 다운되지 않도록 처리할 수 있습니다. 대표적으로 값이 null인 변수에 접근하면 발생하는 <code>NullPointException</code>이 있습니다.</p>
+<p>아래 코드를 살펴봅시다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 값이 null인 변수에 접근하고 있습니다.</span></span><br><span class="line">person.printName();</span><br></pre></td></tr></table></figure>
+<p>값이 null인 변수 person에 접근하고 있습니다. 위 코드는 <code>NullPointException</code>이 발생하고 어플리케이션이 다운됩니다. </p>
+<p>이때 <code>try-catch</code>구문으로 Exception이 발생할 가능성이 있는 부분을 감싸주면, Exception이 발생해도 어플리케이션을 다운시키지 않고 에러 처리를 할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 값이 null인 변수에 접근하고 있습니다.</span></span><br><span class="line">    person.printName();</span><br><span class="line">&#125; <span class="keyword">catch</span> (NullPointerException nullPointerException) &#123;</span><br><span class="line">    nullPointerException.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>개발자가 직접 <code>Exception</code>을 정의하고 발생시킬 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line">    CustomException(String message) &#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>직접 <code>Exception</code>을 발생시킬 때는 키워드<code>throw</code>를 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> CustomException(<span class="string">&quot;CustomException&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (CustomException customException) &#123;</span><br><span class="line">    customException.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Exception</code>을 발생시킬 가능성이 있는 함수 뒤에는 키워드<code>throws</code>를 사용하여 가능성을 표기할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> <span class="keyword">throws</span> CustomException </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> CustomException(<span class="string">&quot;Custom Exception&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이 함수는 <code>try-catch문</code> 안에서 사용해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    doSomething();</span><br><span class="line">&#125; <span class="keyword">catch</span> (CustomException customException) &#123;</span><br><span class="line">    customException.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>에러 처리(Error Handling)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/22/java/180122-iteration/">반복문</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/21/java/180121-error-handling/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/20/java/180120-enum/"
+                            aria-label=": [Java] 열거형(enum)"
+                        >
+                            [Java] 열거형(enum)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-20T20:16:30+09:00">
+	
+		    2018/01/20
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/19/java/180119-anonymous-class/">익명 클래스(Anonymous Class)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>열거형(enum)</code>에 대해 알아보겠습니다.</p>
+<h2 id="열거형-enum"><a href="#열거형-enum" class="headerlink" title="열거형(enum)"></a>열거형(enum)</h2><p><code>열거형(enum)</code>는 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의하는 것입니다.</p>
+<p>예를 들어 방향은 동, 서, 남, 북 4가지로 범위가 한정되어 있습니다. 이러한 경우 <strong>열거형</strong>을 유용하게 사용할 수 있습니다. 열거형은 다음과 같이 키워드<code>enum</code>을 사용하여 정의합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Direction</span> </span>&#123;</span><br><span class="line">    EAST, WEST, SOUTH, NORTH</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>열거형의 인스턴스는 다음과 같이 생성할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Direction direction = Direction.EAST;</span><br></pre></td></tr></table></figure>
+<p>열거형은 <a href="/ko/2018/01/23/java/180123-comparison/"><code>switch문</code></a>과 함께 유용하게 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (direction) &#123;</span><br><span class="line">    <span class="keyword">case</span> EAST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to east.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> WEST: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to west.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> NORTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to north.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> SOUTH: &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Go to south.&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>열거형(enum)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/21/java/180121-error-handling/">Java의 에러처리</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/20/java/180120-enum/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/19/java/180119-anonymous-class/"
+                            aria-label=": [Java] 익명 클래스(Anonymous Class)"
+                        >
+                            [Java] 익명 클래스(Anonymous Class)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-19T20:16:30+09:00">
+	
+		    2018/01/19
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/18/java/180118-inner-class/">내부 클래스(Inner Class)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>익명 클래스(Anonymous Class)</code>에 대해 알아보겠습니다.</p>
+<p>클래스를 상속할 때 자식 클래스를 한번만 사용하는 경우, 매번 자식 클래스를 정의하기에는 번거로운 경우가 있습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 자식 클래스를 정의</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Designer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Do something.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 자식 클래스 사용</span></span><br><span class="line">Person person = <span class="keyword">new</span> Designer();</span><br><span class="line">person.doSomething();</span><br></pre></td></tr></table></figure>
+<p>이때 <code>익명 클래스(Anonymous Class)</code>를 유용하게 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 익명 클래스 사용</span></span><br><span class="line">Person person = <span class="keyword">new</span> Person() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Do something.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.doSomething();</span><br></pre></td></tr></table></figure>
+<p>익명 클래스는 안드로이드 어플리케이션에서 이벤트를 처리할 때 많이 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Button loginButton = findViewById(R.id.loginButton);</span><br><span class="line"></span><br><span class="line">loginButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// log in</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>익명 클래스(Anonymous Class)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/20/java/180120-enum/">열거형(enum)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/19/java/180119-anonymous-class/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/18/java/180118-inner-class/"
+                            aria-label=": [Java] 내부 클래스(Inner Class)"
+                        >
+                            [Java] 내부 클래스(Inner Class)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-18T20:16:30+09:00">
+	
+		    2018/01/18
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/17/java/180117-interface/">인터페이스(Interface)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>내부 클래스(Inner Class)</code>에 대해 알아보겠습니다.</p>
+<h2 id="Inner-Class"><a href="#Inner-Class" class="headerlink" title="Inner Class"></a>Inner Class</h2><p>Java에서는 클래스 안에 클래스를 정의할 수 있습니다. 이를 <code>내부 클래스(Inner Class)</code>라고 합니다. 내부 클래스는 다음과 같이 선언합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>내부 클래스는 다음과 같이 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (1) 외부 클래스의 인스턴스 생성</span></span><br><span class="line">OuterClass outerClass = <span class="keyword">new</span> OuterClass();</span><br><span class="line"></span><br><span class="line"><span class="comment">// (2) 외부 클래스의 인스턴스를 사용하여 내부 클래스의 인스턴스 생성</span></span><br><span class="line">OuterClass.InnerClass innerClass = outerClass.<span class="function">new <span class="title">InnerClass</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Static-Inner-Class"><a href="#Static-Inner-Class" class="headerlink" title="Static Inner Class"></a>Static Inner Class</h2><p><code>Static</code> 내부 클래스도 선언하고 사용할 수 있습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Static Inner Class</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInnerClass</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 외부 클래스의 인스턴스를 생성하지 않고도 내부 클래스의 인스턴스 생성</span></span><br><span class="line">OuterClass.StaticInnerClass staticInnerClass = <span class="keyword">new</span> OuterClass.StaticInnerClass();</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>내부 클래스(Inner Class)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/19/java/180119-anonymous-class/">익명 클래스(Anonymous Class)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/18/java/180118-inner-class/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -951,7 +996,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 1 of 4</li>
+        <li class="pagination-number">page 1 of 3</li>
     </ul>
 </div>
 
