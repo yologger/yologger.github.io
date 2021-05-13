@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n들어가며많은 어플리케이션이 Facebook, Google과 같은 SNS 계정을 통한 로그인을 지원합니다. 개발자는 SNS 로그인 API를 사용하기 위해 API Key를 발급받는데, 이를 소스코드에 포함시키면 여러 보안 이슈가 발생할 수 있습니다. 이번 포스트에서는 별도의 환경설정파일을 만들고, 이 곳에 API Key와 같이 유출되면 안되는 정보를 저장하는 법에 대해 알아보겠습니다. \n.properties 파일 만들기프로젝트의 루트 디렉토리에 config.properties파일을 생성합니다.\n내용은 다음과 같습니다.\n12CLIENT_ID&#x3D;&quot;your_client_id&quot;CLIENT_SECRET&#x3D;&quot;your_client_secret&quot;\n모듈 수준의 build.gradle 설정하기모듈 수준의 build.gradle 파일에서 다음과 같이 설정합니다.\n12345678910111213141516171819202122def configPropertiesFile = rootProject.file(&quot;config.properties&quot;)def configProperties = new Properties()configProperties.load(new FileInputStream(configPropertiesFile))android &#123;    defaultConfig &#123;        applicationId &quot;com.example.simple_memo&quot;        minSdkVersion 21        targetSdkVersion 30        versionCode 1        versionName &quot;1.0&quot;        testInstrumentationRunner &quot;androidx.test.runner.AndroidJUnitRunner&quot;        // for xml file        resValue &quot;string&quot;, &quot;CLIENT_ID&quot;, configProperties[&#x27;CLIENT_ID&#x27;]        resValue &quot;string&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#x27;CLIENT_SECRET&#x27;]        // for kotlin file        buildConfigField(&quot;String&quot;, &quot;CLIENT_ID&quot;, configProperties[&#x27;CLIENT_ID&#x27;])        buildConfigField(&quot;String&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#x27;CLIENT_SECRET&#x27;])    &#125;&#125;\n소스코드에서 값을 사용하기java 파일이나 kotlin 파일에서 아래와 같이 사용할 수 있습니다.\n12345678class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val clientId = BuildConfig.CLIENT_ID            // your_client_id        val clientSecret = BuildConfig.CLIENT_SECRET    // your_client_secret    &#125;&#125;\nxml 파일에서 값을 사용하기xml 파일에서는 다음과 같이 접근할 수 있습니다.\n1&lt;TextView android:text=&quot;@string/CLIENT_ID&quot;/&gt;\n\n.gitignore파일에 추가하기config.properties파일을 .gitignore에 추가하여 Github에 Push할 때 제외되도록 설정합니다.\n12...config.properties","dateCreated":"2018-01-04T20:16:30+09:00","dateModified":"2021-04-19T19:40:34+09:00","datePublished":"2018-01-04T20:16:30+09:00","description":"","headline":"코드에서 환경변수 분리하기 (2) ㅡ .properties파일","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/04/android/properties/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/01/04/android/properties/","keywords":"Android"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n들어가며많은 어플리케이션이 Facebook, Google과 같은 SNS 계정을 통한 로그인을 지원합니다. 개발자는 SNS 로그인 API를 사용하기 위해 API Key를 발급받는데, 이를 소스코드에 포함시키면 여러 보안 이슈가 발생할 수 있습니다. 이번 포스트에서는 별도의 환경설정파일을 만들고, 이 곳에 API Key와 같이 유출되면 안되는 정보를 저장하는 법에 대해 알아보겠습니다. \n.properties 파일 만들기프로젝트의 루트 디렉토리에 config.properties파일을 생성합니다.\n내용은 다음과 같습니다.\n12CLIENT_ID&#x3D;&quot;your_client_id&quot;CLIENT_SECRET&#x3D;&quot;your_client_secret&quot;\n모듈 수준의 build.gradle 설정하기모듈 수준의 build.gradle 파일에서 다음과 같이 설정합니다.\n12345678910111213141516171819202122def configPropertiesFile = rootProject.file(&quot;config.properties&quot;)def configProperties = new Properties()configProperties.load(new FileInputStream(configPropertiesFile))android &#123;    defaultConfig &#123;        applicationId &quot;com.example.simple_memo&quot;        minSdkVersion 21        targetSdkVersion 30        versionCode 1        versionName &quot;1.0&quot;        testInstrumentationRunner &quot;androidx.test.runner.AndroidJUnitRunner&quot;        // for xml file        resValue &quot;string&quot;, &quot;CLIENT_ID&quot;, configProperties[&#x27;CLIENT_ID&#x27;]        resValue &quot;string&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#x27;CLIENT_SECRET&#x27;]        // for kotlin file        buildConfigField(&quot;String&quot;, &quot;CLIENT_ID&quot;, configProperties[&#x27;CLIENT_ID&#x27;])        buildConfigField(&quot;String&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#x27;CLIENT_SECRET&#x27;])    &#125;&#125;\n소스코드에서 값을 사용하기java 파일이나 kotlin 파일에서 아래와 같이 사용할 수 있습니다.\n12345678class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val clientId = BuildConfig.CLIENT_ID            // your_client_id        val clientSecret = BuildConfig.CLIENT_SECRET    // your_client_secret    &#125;&#125;\nxml 파일에서 값을 사용하기xml 파일에서는 다음과 같이 접근할 수 있습니다.\n1&lt;TextView android:text=&quot;@string/CLIENT_ID&quot;/&gt;\n\n.gitignore파일에 추가하기config.properties파일을 .gitignore에 추가하여 Github에 Push할 때 제외되도록 설정합니다.\n12...config.properties","dateCreated":"2018-01-04T20:16:30+09:00","dateModified":"2021-04-19T19:40:34+09:00","datePublished":"2018-01-04T20:16:30+09:00","description":"","headline":"코드에서 환경변수 분리하기 (2) ㅡ .properties파일","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/04/android/properties/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2018/01/04/android/properties/","keywords":"Android"}</script>
     <meta name="description" content="들어가며많은 어플리케이션이 Facebook, Google과 같은 SNS 계정을 통한 로그인을 지원합니다. 개발자는 SNS 로그인 API를 사용하기 위해 API Key를 발급받는데, 이를 소스코드에 포함시키면 여러 보안 이슈가 발생할 수 있습니다. 이번 포스트에서는 별도의 환경설정파일을 만들고, 이 곳에 API Key와 같이 유출되면 안되는 정보를 저장하는">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="코드에서 환경변수 분리하기 (2) ㅡ .properties파일">
@@ -121,24 +123,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -158,7 +142,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -185,13 +169,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -199,13 +183,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -213,31 +197,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -245,19 +211,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -545,7 +509,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

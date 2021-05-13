@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.\n\n제너릭(Generic)의 개념과 장점 ⬅️ ⬅️ ⬅️\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function)\n제너릭의 와일드 카드(Wildcard)\n타입 소거(Type Erasure)\n\n이번 첫 번째 포스트에서는 제너릭(Generic)의 개념과 장점에 대해 알아보겠습니다.\n제네릭(Generic)이란제네릭(Generic)은 클래스나 메서드 내부에서 사용할 데이터의 자료형을 외부에서 설정하는 것입니다. 제너릭을 사용하면 다음과 같은 장점이 있습니다.\n\n특정 타입에 종속되지 않은 유연한 로직\n타입 안정성\n자동 형변환 \n\n장점 1) 특정 타입에 종속되지 않은 유연한 로직제너릭을 사용하지 않았을 때의 문제점제너릭을 사용하면 특정 타입에 종속되지 않은 유연한 로직을 구현할 수 있습니다. 우선 아래 Stack클래스 예제를 살펴봅시다.\n123456789101112131415161718192021222324252627282930313233class Stack &#123;    private String[] elements;  // String 타입의 배열    private int size = 0;    private static final int DEFAULT_SIZE = 16;    public Stack() &#123;        elements = new String[DEFAULT_SIZE];    &#125;    public void push(String element) &#123;        elements[size++] = element;    &#125;    public String pop() &#123;        if(size == 0) &#123;            throw new EmptyStackException();        &#125;        String result = elements[--size];        elements[size] = null;        return result;    &#125;    public boolean isEmpty() &#123;        return size == 0;    &#125;    public int size() &#123;        return size;    &#125;&#125;\nStack클래스는 String타입의 배열을 멤버변수로 가지고 있습니다. 따라서 다음과 같이 String타입의 데이터만 추가하고 삭제할 수 있습니다.\n12345678910// Stack 생성Stack stack = new Stack();// String 타입의 데이터 추가stack.push(&quot;Paul&quot;);stack.push(&quot;John&quot;);stack.push(&quot;James&quot;);// String 타입의 데이터 삭제stack.pop();\n이제 String타입이 아닌 Integer타입의 데이터를 추가하려고 합니다. 그러나 위 Stack클래스를 사용할 수는 없습니다. Stack클래스는 String타입의 데이터만 입력받고 저장하고 삭제할 수 있기 때문입니다. 따라서 별도의 StackForInteger클래스를 정의하겠습니다.\n123456789101112131415161718192021222324252627282930313233class StackForInteger &#123;    private Integer[] elements;    private int size = 0;    private static final int DEFAULT_SIZE = 16;    public Stack() &#123;        elements = new Integer[DEFAULT_SIZE];    &#125;    public void push(Integer element) &#123;        elements[size++] = element;    &#125;    public Integer pop() &#123;        if(size == 0) &#123;            throw new EmptyStackException();        &#125;        Integer result = elements[--size];        elements[size] = null;        return result;    &#125;    public boolean isEmpty() &#123;        return size == 0;    &#125;    public int size() &#123;        return size;    &#125;&#125;\n이제 StackForInteger클래스를 사용해서 Integer타입의 데이터를 추가하고 삭제할 수 있게 되었습니다.\n12345678910// StackForInteger 생성StackForInteger stack = new StackForInteger();// Integer 타입의 데이터 추가stack.push(1);stack.push(2);stack.push(3);// Integer 타입의 데이터 삭제stack.pop();\n이제 String, Integer뿐만 아니라 더 다양한 타입의 데이터를 취급하려고 합니다. 그럼 타입이 추가될 때 마다 새로운 클래스를 정의해야 할까요? 바로 이러한 경우 제너릭을 사용할 수 있습니다.\n제너릭 적용하기아래 코드는 제너릭을 적용한 Stack클래스 입니다.\n123456789101112131415161718192021222324252627282930313233class Stack&lt;E&gt; &#123;    private E[] elements;    private int size = 0;    private static final int DEFAULT_SIZE = 16;    public Stack() &#123;        elements = (E[])new Object[DEFAULT_SIZE];    &#125;    public void push(E element) &#123;        elements[size++] = element;    &#125;    public E pop() &#123;        if(size == 0) &#123;            throw new EmptyStackException();        &#125;        E result = elements[--size];        elements[size] = null;        return result;    &#125;    public boolean isEmpty() &#123;        return size == 0;    &#125;    public int size() &#123;        return size;    &#125;&#125;\n클래스 이름 옆에 붙어있는 &lt;E&gt;를 타입 파라미터(Type Parameter)라고 합니다. 그리고 타입 파라미터가 붙어있는 Stack&lt;E&gt;를 제너릭 클래스라고 합니다. 제너릭 클래스는 인스턴스를 생성할 때 자료형 정보를 타입 파라미터로 전달할 수 있습니다.\n우선 타입 파라미터로 String을 전달하여 Stack을 생성해봅시다.\n12// Stack 생성Stack&lt;String&gt; people = new Stack&lt;String&gt;();\n이제 String타입의 데이터를 추가할 수 있습니다.\n1234// 문자열 데이터 추가people.push(&quot;Paul&quot;);people.push(&quot;John&quot;);people.push(&quot;James&quot;);\n타입 파라미터로 Integer를 전달하여 새로운 Stack을 생성해봅시다.\n12// Stack 생성Stack&lt;Int&gt; scores = new Stack&lt;Int&gt;();\n이제 Integer타입의 데이터를 추가할 수 있습니다.\n1234// 문자열 데이터 추가scores.push(1);scores.push(2);scores.push(3);\n이처럼 제너릭을 사용하면 특정 타입에 종속되지 않은 유연한 로직을 작성할 수 있습니다.\n장점 2) 타입 안정성타입 안정성은 런타임에 발생할 에러를 컴파일 타임에 찾아낼 수 있음을 의미합니다. \n\n오류는 컴파일 타임에서 찾아내는 것이 가장 좋습니다. 런타임에 오류가 발생하여 어플리케이션이 다운되면 비즈니스에 큰 문제가 생기기 때문입니다.\n\n제너릭을 사용하지 않았을 때의 문제점아래 예제를 살펴봅시다\n12345678910111213class CustomArrayList &#123;    private int size;    private Object[] elementData = new Object[5];    public void add(Object value) &#123;        elementData[size++] = value;    &#125;    public Object get(int idx) &#123;        return elementData[idx];    &#125;&#125;\nJava에서 기본적으로 제공하는 ArrayList를 쉽고 간단하게 재구현했습니다. 이제 CustomArrayList의 인스턴스를 생성하고 데이터를 넣어보겠습니다.\n123456CustomArrayList list = new CustomArrayList();list.add(10)list.add(20)Integer value = (Integer) list.get(0)\n컴파일도 잘 되고 런타임에서도 잘 동작하는 것을 확인할 수 있습니다. add()메소드는 매개변수로 Object타입의 데이터를 입력받기 때문입니다. \n이제 add() 메소드에 문자열 데이터를 전달해봅시다.\n123456CustomArrayList list = new CustomArrayList();list.add(&quot;10&quot;)list.add(&quot;20&quot;)Integer value = (Integer) list.get(0)\nadd()메소드는 매개변수로 Object타입의 데이터를 입력받기 때문에 문법적으로는 아무런 문제가 없고 컴파일도 정상적으로 수행됩니다. 그러나 실행을 하면 런타임에 다음과 같은 오류가 발생합니다.\n12Exception in thread &quot;main&quot; java.lang.ClassCastException:    java.lang.String cannot be cast to java.lang.Integer\n형 변환이 제대로 이루어지지 않았다는 오류 메시지입니다. \n\n컴파일 시점에 어떤 오류도 발생하지 않은 것이 가장 큰 문제입니다.\n\n따라서 이러한 문제점을 해결하는데 제너릭을 사용할 수 있습니다.\n제너릭 적용하기이제 제너릭을 사용하여 CustomArrayList를 정의해보겠습니다.\n12345678910111213class CustomArrayList&lt;T&gt; &#123;    private Object[] elementData = new Object[5];    private int size;    public void add(T value) &#123;        elementData[size++] = value;    &#125;    public T get(int idx) &#123;        return (T) elementData[idx];    &#125;&#125;\n이제 인스턴스를 생성할 때 자료형을 전달하면, 컴파일러는 타입 파라미터로 전달된 자료형을 클래스 내부의 T로 대체되어 들어가는 것 처럼 인식하게 됩니다.\n12345CustomArrayList&lt;Integer&gt; list = new CustomArrayList&lt;Integer&gt;();list.add(10);list.add(20);Integer value = list.get(0)\n또한 잘못된 데이터를 입력하면 컴파일 시점에 오류를 탐지하여 타입 안정성을 높여줄 수 있습니다.\n123CustomArrayList&lt;Integer&gt; list = new CustomArrayList&lt;Integer&gt;();list.add(&quot;10&quot;);  // 컴파일 시점에 다음과 같은 에러가 발생합니다.\n장점 3) 자동 형변환제너릭을 사용하면 자동으로 형변환을 해준다는 장점이 있습니다. 위에서 사용한 CustomArrayList클래스를 다시 살펴봅시다.\n12345678910111213class CustomArrayList &#123;    private int size;    private Object[] elementData = new Object[5];    public void add(Object value) &#123;        elementData[size++] = value;    &#125;    public Object get(int idx) &#123;        return elementData[idx];    &#125;&#125;\n메소드 get()은 Object타입의 데이터를 반환합니다. 따라서 값을 사용하려면 형 변환을 해야합니다.\n123456CustomArrayList list = new CustomArrayList();list.add(10)list.add(20)Integer value = (Integer) list.get(0)   // 형 변환\n그러나 제너릭을 사용하면 별도의 형 변환이 필요없습니다.\n12345678910111213class CustomArrayList&lt;T&gt; &#123;    private Object[] elementData = new Object[5];    private int size;    public void add(T value) &#123;        elementData[size++] = value;    &#125;    public T get(int idx) &#123;        return (T) elementData[idx];    &#125;&#125;\n12345CustomArrayList&lt;Integer&gt; list = new CustomArrayList&lt;Integer&gt;();list.add(10);list.add(20);Integer value = list.get(0);    // 형 변환 필요없음\n\n마치며이번 포스트에서는 제너릭(Generic)의 개념과 장점에 대해 알아봤습니다. 다음 포스트에서는 제너릭 클래스(Generic Class)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-01T20:16:30+09:00","dateModified":"2021-05-12T18:07:24+09:00","datePublished":"2018-02-01T20:16:30+09:00","description":"","headline":"[Java] 제너릭(Generic)과 개념과 장점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/01/java/180201-generic/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/02/01/java/180201-generic/","keywords":"Java"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.\n\n제너릭(Generic)의 개념과 장점 ⬅️ ⬅️ ⬅️\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function)\n제너릭의 와일드 카드(Wildcard)\n타입 소거(Type Erasure)\n\n이번 첫 번째 포스트에서는 제너릭(Generic)의 개념과 장점에 대해 알아보겠습니다.\n제네릭(Generic)이란제네릭(Generic)은 클래스나 메서드 내부에서 사용할 데이터의 자료형을 외부에서 설정하는 것입니다. 제너릭을 사용하면 다음과 같은 장점이 있습니다.\n\n특정 타입에 종속되지 않은 유연한 로직\n타입 안정성\n자동 형변환 \n\n장점 1) 특정 타입에 종속되지 않은 유연한 로직제너릭을 사용하지 않았을 때의 문제점제너릭을 사용하면 특정 타입에 종속되지 않은 유연한 로직을 구현할 수 있습니다. 우선 아래 Stack클래스 예제를 살펴봅시다.\n123456789101112131415161718192021222324252627282930313233class Stack &#123;    private String[] elements;  // String 타입의 배열    private int size = 0;    private static final int DEFAULT_SIZE = 16;    public Stack() &#123;        elements = new String[DEFAULT_SIZE];    &#125;    public void push(String element) &#123;        elements[size++] = element;    &#125;    public String pop() &#123;        if(size == 0) &#123;            throw new EmptyStackException();        &#125;        String result = elements[--size];        elements[size] = null;        return result;    &#125;    public boolean isEmpty() &#123;        return size == 0;    &#125;    public int size() &#123;        return size;    &#125;&#125;\nStack클래스는 String타입의 배열을 멤버변수로 가지고 있습니다. 따라서 다음과 같이 String타입의 데이터만 추가하고 삭제할 수 있습니다.\n12345678910// Stack 생성Stack stack = new Stack();// String 타입의 데이터 추가stack.push(&quot;Paul&quot;);stack.push(&quot;John&quot;);stack.push(&quot;James&quot;);// String 타입의 데이터 삭제stack.pop();\n이제 String타입이 아닌 Integer타입의 데이터를 추가하려고 합니다. 그러나 위 Stack클래스를 사용할 수는 없습니다. Stack클래스는 String타입의 데이터만 입력받고 저장하고 삭제할 수 있기 때문입니다. 따라서 별도의 StackForInteger클래스를 정의하겠습니다.\n123456789101112131415161718192021222324252627282930313233class StackForInteger &#123;    private Integer[] elements;    private int size = 0;    private static final int DEFAULT_SIZE = 16;    public Stack() &#123;        elements = new Integer[DEFAULT_SIZE];    &#125;    public void push(Integer element) &#123;        elements[size++] = element;    &#125;    public Integer pop() &#123;        if(size == 0) &#123;            throw new EmptyStackException();        &#125;        Integer result = elements[--size];        elements[size] = null;        return result;    &#125;    public boolean isEmpty() &#123;        return size == 0;    &#125;    public int size() &#123;        return size;    &#125;&#125;\n이제 StackForInteger클래스를 사용해서 Integer타입의 데이터를 추가하고 삭제할 수 있게 되었습니다.\n12345678910// StackForInteger 생성StackForInteger stack = new StackForInteger();// Integer 타입의 데이터 추가stack.push(1);stack.push(2);stack.push(3);// Integer 타입의 데이터 삭제stack.pop();\n이제 String, Integer뿐만 아니라 더 다양한 타입의 데이터를 취급하려고 합니다. 그럼 타입이 추가될 때 마다 새로운 클래스를 정의해야 할까요? 바로 이러한 경우 제너릭을 사용할 수 있습니다.\n제너릭 적용하기아래 코드는 제너릭을 적용한 Stack클래스 입니다.\n123456789101112131415161718192021222324252627282930313233class Stack&lt;E&gt; &#123;    private E[] elements;    private int size = 0;    private static final int DEFAULT_SIZE = 16;    public Stack() &#123;        elements = (E[])new Object[DEFAULT_SIZE];    &#125;    public void push(E element) &#123;        elements[size++] = element;    &#125;    public E pop() &#123;        if(size == 0) &#123;            throw new EmptyStackException();        &#125;        E result = elements[--size];        elements[size] = null;        return result;    &#125;    public boolean isEmpty() &#123;        return size == 0;    &#125;    public int size() &#123;        return size;    &#125;&#125;\n클래스 이름 옆에 붙어있는 &lt;E&gt;를 타입 파라미터(Type Parameter)라고 합니다. 그리고 타입 파라미터가 붙어있는 Stack&lt;E&gt;를 제너릭 클래스라고 합니다. 제너릭 클래스는 인스턴스를 생성할 때 자료형 정보를 타입 파라미터로 전달할 수 있습니다.\n우선 타입 파라미터로 String을 전달하여 Stack을 생성해봅시다.\n12// Stack 생성Stack&lt;String&gt; people = new Stack&lt;String&gt;();\n이제 String타입의 데이터를 추가할 수 있습니다.\n1234// 문자열 데이터 추가people.push(&quot;Paul&quot;);people.push(&quot;John&quot;);people.push(&quot;James&quot;);\n타입 파라미터로 Integer를 전달하여 새로운 Stack을 생성해봅시다.\n12// Stack 생성Stack&lt;Int&gt; scores = new Stack&lt;Int&gt;();\n이제 Integer타입의 데이터를 추가할 수 있습니다.\n1234// 문자열 데이터 추가scores.push(1);scores.push(2);scores.push(3);\n이처럼 제너릭을 사용하면 특정 타입에 종속되지 않은 유연한 로직을 작성할 수 있습니다.\n장점 2) 타입 안정성타입 안정성은 런타임에 발생할 에러를 컴파일 타임에 찾아낼 수 있음을 의미합니다. \n\n오류는 컴파일 타임에서 찾아내는 것이 가장 좋습니다. 런타임에 오류가 발생하여 어플리케이션이 다운되면 비즈니스에 큰 문제가 생기기 때문입니다.\n\n제너릭을 사용하지 않았을 때의 문제점아래 예제를 살펴봅시다\n12345678910111213class CustomArrayList &#123;    private int size;    private Object[] elementData = new Object[5];    public void add(Object value) &#123;        elementData[size++] = value;    &#125;    public Object get(int idx) &#123;        return elementData[idx];    &#125;&#125;\nJava에서 기본적으로 제공하는 ArrayList를 쉽고 간단하게 재구현했습니다. 이제 CustomArrayList의 인스턴스를 생성하고 데이터를 넣어보겠습니다.\n123456CustomArrayList list = new CustomArrayList();list.add(10)list.add(20)Integer value = (Integer) list.get(0)\n컴파일도 잘 되고 런타임에서도 잘 동작하는 것을 확인할 수 있습니다. add()메소드는 매개변수로 Object타입의 데이터를 입력받기 때문입니다. \n이제 add() 메소드에 문자열 데이터를 전달해봅시다.\n123456CustomArrayList list = new CustomArrayList();list.add(&quot;10&quot;)list.add(&quot;20&quot;)Integer value = (Integer) list.get(0)\nadd()메소드는 매개변수로 Object타입의 데이터를 입력받기 때문에 문법적으로는 아무런 문제가 없고 컴파일도 정상적으로 수행됩니다. 그러나 실행을 하면 런타임에 다음과 같은 오류가 발생합니다.\n12Exception in thread &quot;main&quot; java.lang.ClassCastException:    java.lang.String cannot be cast to java.lang.Integer\n형 변환이 제대로 이루어지지 않았다는 오류 메시지입니다. \n\n컴파일 시점에 어떤 오류도 발생하지 않은 것이 가장 큰 문제입니다.\n\n따라서 이러한 문제점을 해결하는데 제너릭을 사용할 수 있습니다.\n제너릭 적용하기이제 제너릭을 사용하여 CustomArrayList를 정의해보겠습니다.\n12345678910111213class CustomArrayList&lt;T&gt; &#123;    private Object[] elementData = new Object[5];    private int size;    public void add(T value) &#123;        elementData[size++] = value;    &#125;    public T get(int idx) &#123;        return (T) elementData[idx];    &#125;&#125;\n이제 인스턴스를 생성할 때 자료형을 전달하면, 컴파일러는 타입 파라미터로 전달된 자료형을 클래스 내부의 T로 대체되어 들어가는 것 처럼 인식하게 됩니다.\n12345CustomArrayList&lt;Integer&gt; list = new CustomArrayList&lt;Integer&gt;();list.add(10);list.add(20);Integer value = list.get(0)\n또한 잘못된 데이터를 입력하면 컴파일 시점에 오류를 탐지하여 타입 안정성을 높여줄 수 있습니다.\n123CustomArrayList&lt;Integer&gt; list = new CustomArrayList&lt;Integer&gt;();list.add(&quot;10&quot;);  // 컴파일 시점에 다음과 같은 에러가 발생합니다.\n장점 3) 자동 형변환제너릭을 사용하면 자동으로 형변환을 해준다는 장점이 있습니다. 위에서 사용한 CustomArrayList클래스를 다시 살펴봅시다.\n12345678910111213class CustomArrayList &#123;    private int size;    private Object[] elementData = new Object[5];    public void add(Object value) &#123;        elementData[size++] = value;    &#125;    public Object get(int idx) &#123;        return elementData[idx];    &#125;&#125;\n메소드 get()은 Object타입의 데이터를 반환합니다. 따라서 값을 사용하려면 형 변환을 해야합니다.\n123456CustomArrayList list = new CustomArrayList();list.add(10)list.add(20)Integer value = (Integer) list.get(0)   // 형 변환\n그러나 제너릭을 사용하면 별도의 형 변환이 필요없습니다.\n12345678910111213class CustomArrayList&lt;T&gt; &#123;    private Object[] elementData = new Object[5];    private int size;    public void add(T value) &#123;        elementData[size++] = value;    &#125;    public T get(int idx) &#123;        return (T) elementData[idx];    &#125;&#125;\n12345CustomArrayList&lt;Integer&gt; list = new CustomArrayList&lt;Integer&gt;();list.add(10);list.add(20);Integer value = list.get(0);    // 형 변환 필요없음\n\n마치며이번 포스트에서는 제너릭(Generic)의 개념과 장점에 대해 알아봤습니다. 다음 포스트에서는 제너릭 클래스(Generic Class)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-01T20:16:30+09:00","dateModified":"2021-05-12T18:07:24+09:00","datePublished":"2018-02-01T20:16:30+09:00","description":"","headline":"[Java] 제너릭(Generic)과 개념과 장점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/01/java/180201-generic/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2018/02/01/java/180201-generic/","keywords":"Java"}</script>
     <meta name="description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.  제너릭(Generic)의 개념과 장점 ⬅️ ⬅️ ⬅️ 제너릭 클래스(Generic Class) 제너릭 함수(Generic Function) 제너릭의 와일드 카드(Wildcard">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Java] 제너릭(Generic)과 개념과 장점">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -603,7 +567,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

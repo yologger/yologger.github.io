@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 5개의 스코프 함수(Scope function)를 제공합니다. run, let, apply, also, with가 그것입니다. 우리는 5개의 포스트에서 스코프 함수에 대해 알아보고 있습니다. 이번 세 번째 포스트에서는 apply()함수에 대해 알아보겠습니다. \n\nrun()\nlet()\napply()  ⬅️ ⬅️ ⬅️\nalso()\nwith()\n\napply() 함수apply()는 run()함수와 유사하게 코드 블록&#123;&#125;으로 함수를 호출한 객체가 암시적으로 전달됩니다. 다만 전달 받은 객체 자체를 반환한다는 점에서 차이가 있습니다. \n12345678910class Person(var name: String, var age: Int) &#123;    fun incrementAge() &#123;        age += 1    &#125;    fun printAge() &#123;        println(&quot;Age: $&#123;age&#125;&quot;)    &#125;&#125;\n123456var person = Person(&quot;&quot;, 0).apply &#123;    name = &quot;Paul&quot;    age = 35    incrementAge()    printAge()&#125;\n다음과 같이 사용할 수도 있습니다.\n123456var person = Person(&quot;Paul&quot;, 35)person.apply &#123;    incrementAge()    printAge()&#125;\n마치며이번 포스트에서 스코프 함수 중 apply()에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 also()에 대해 알아보겠습니다.\n","dateCreated":"2019-01-25T20:16:30+09:00","dateModified":"2021-05-07T23:47:09+09:00","datePublished":"2019-01-25T20:16:30+09:00","description":"","headline":"[Kotlin] 스코프 함수 - (3) apply","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/","keywords":"Kotlin"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 5개의 스코프 함수(Scope function)를 제공합니다. run, let, apply, also, with가 그것입니다. 우리는 5개의 포스트에서 스코프 함수에 대해 알아보고 있습니다. 이번 세 번째 포스트에서는 apply()함수에 대해 알아보겠습니다. \n\nrun()\nlet()\napply()  ⬅️ ⬅️ ⬅️\nalso()\nwith()\n\napply() 함수apply()는 run()함수와 유사하게 코드 블록&#123;&#125;으로 함수를 호출한 객체가 암시적으로 전달됩니다. 다만 전달 받은 객체 자체를 반환한다는 점에서 차이가 있습니다. \n12345678910class Person(var name: String, var age: Int) &#123;    fun incrementAge() &#123;        age += 1    &#125;    fun printAge() &#123;        println(&quot;Age: $&#123;age&#125;&quot;)    &#125;&#125;\n123456var person = Person(&quot;&quot;, 0).apply &#123;    name = &quot;Paul&quot;    age = 35    incrementAge()    printAge()&#125;\n다음과 같이 사용할 수도 있습니다.\n123456var person = Person(&quot;Paul&quot;, 35)person.apply &#123;    incrementAge()    printAge()&#125;\n마치며이번 포스트에서 스코프 함수 중 apply()에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 also()에 대해 알아보겠습니다.\n","dateCreated":"2019-01-25T20:16:30+09:00","dateModified":"2021-05-07T23:47:09+09:00","datePublished":"2019-01-25T20:16:30+09:00","description":"","headline":"[Kotlin] 스코프 함수 - (3) apply","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/","keywords":"Kotlin"}</script>
     <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 5개의 스코프 함수(Scope function)를 제공합니다. run, let, apply, also, with가 그것입니다. 우리는 5개의 포스트에서 스코프 함수에">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] 스코프 함수 - (3) apply">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -547,7 +511,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

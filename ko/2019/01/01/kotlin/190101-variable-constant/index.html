@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이번 포스트에서는 Kotlin의 변수(Variable)와 상수(Constant)에 대해 알아보겠습니다.\n변수변수를 선언할 때는 키워드var를 사용합니다.\n12345// 변수 선언var name: String// 변수 초기화name = &quot;Paul&quot;\n12// 변수 선언과 동시에 초기화var name: String = &quot;Paul&quot;\n변수는 값을 초기화한 후 변경할 수 있습니다.\n12var name: String = &quot;Paul&quot;name = &quot;Jane&quot;\n\n상수상수를 선언할 때는 키워드 val을 사용합니다. 상수는 초기화한 후 값을 변경할 수 없습니다. \n12345// 상수 선언과 초기화val name: String = &quot;Paul&quot;// 값을 변경할 수 없습니다.name = &quot;Jane&quot;       // Error\n또한 상수는 선언과 초기화를 동시에 해야합니다.\n1234val nation: String = &quot;Republic of Korea&quot;    // Successval name: String    // Errorname = &quot;Son&quot;        // Error\n마치며이번 포스트에서는 변수와 상수에 대해 알아봤습니다. 다음 포스트에서는 자료형(Data Type)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-01T20:16:30+09:00","dateModified":"2021-05-08T01:39:45+09:00","datePublished":"2019-01-01T20:16:30+09:00","description":"","headline":"[Kotlin] 변수(Variable)와 상수(Constant)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/01/kotlin/190101-variable-constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/01/kotlin/190101-variable-constant/","keywords":"Kotlin"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이번 포스트에서는 Kotlin의 변수(Variable)와 상수(Constant)에 대해 알아보겠습니다.\n변수변수를 선언할 때는 키워드var를 사용합니다.\n12345// 변수 선언var name: String// 변수 초기화name = &quot;Paul&quot;\n12// 변수 선언과 동시에 초기화var name: String = &quot;Paul&quot;\n변수는 값을 초기화한 후 변경할 수 있습니다.\n12var name: String = &quot;Paul&quot;name = &quot;Jane&quot;\n\n상수상수를 선언할 때는 키워드 val을 사용합니다. 상수는 초기화한 후 값을 변경할 수 없습니다. \n12345// 상수 선언과 초기화val name: String = &quot;Paul&quot;// 값을 변경할 수 없습니다.name = &quot;Jane&quot;       // Error\n또한 상수는 선언과 초기화를 동시에 해야합니다.\n1234val nation: String = &quot;Republic of Korea&quot;    // Successval name: String    // Errorname = &quot;Son&quot;        // Error\n마치며이번 포스트에서는 변수와 상수에 대해 알아봤습니다. 다음 포스트에서는 자료형(Data Type)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-01T20:16:30+09:00","dateModified":"2021-05-08T01:39:45+09:00","datePublished":"2019-01-01T20:16:30+09:00","description":"","headline":"[Kotlin] 변수(Variable)와 상수(Constant)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/01/kotlin/190101-variable-constant/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/01/kotlin/190101-variable-constant/","keywords":"Kotlin"}</script>
     <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이번 포스트에서는 Kotlin의 변수(Variable)와 상수(Constant)에 대해 알아보겠습니다. 변수변수를 선언할 때는 키워드var를 사용합니다. 12345&#x2F;&#x2F; 변수 선언var name: String&#x2F;&#x2F; 변수 초기화name &#x3D; &quot;Paul">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] 변수(Variable)와 상수(Constant)">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -546,7 +510,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

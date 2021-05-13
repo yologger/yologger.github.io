@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 데이터 클래스(data class)에 대해 알아봤습니다. 이번 포스트에서는 클래스의 열거 클래스(enum class)에 대해 알아보겠습니다. \n열거 클래스(enum class)열거 클래스(enum class)는 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의하는 것입니다. \n예를 들어 요일은 월요일부터 일요일까지로 데이터의 범위가 한정되어 있습니다. 이러한 경우 열거 클래스를 유용하게 사용할 수 있습니다. 열거 클래스는 키워드 enum을 붙여 정의합니다. \n123456789enum class Day &#123;    SUNDAY,    MONDAY,    TUESDAY,    WEDNESDAY,    THURSDAY,    FRIDAY,    SATURDAY,&#125;\n열거 클래스의 인스턴스는 다음과 같이 생성합니다. \n1val today = Day.MONDAY\n열거 클래스는 when()과 함께 유용하게 사용할 수 있습니다.\n12345678when(today) &#123;    Day.MONDAY -&gt; println(&quot;It&#x27;s monday today.&quot;)    Day.TUESDAY -&gt; println(&quot;It&#x27;s tuesday today.&quot;)    Day.WEDNESDAY -&gt; println(&quot;It&#x27;s Wednesday today.&quot;)    Day.THURSDAY -&gt; println(&quot;It&#x27;s thursday today.&quot;)    Day.FRIDAY -&gt; println(&quot;It&#x27;s friday today.&quot;)    else -&gt; println(&quot;Weekend.&quot;)&#125;\n열거 클래스는 내부에 데이터를 담을 수도 있습니다. \n123456789enum class Day(val color: String) &#123;    SUNDAY(&quot;Red&quot;),    MONDAY(&quot;Black&quot;),    TUESDAY(&quot;Black&quot;),    WEDNESDAY(&quot;Black&quot;),    THURSDAY(&quot;Black&quot;),    FRIDAY(&quot;Black&quot;),    SATURDAY(&quot;Blue&quot;),&#125;\n123val today = Day.SUNDAYprintln(today.color)    // Red\n마치며이번 포스트에서는 열거 클래스(enum class)에 대해 알아봤습니다. 다음 포스트에서는 Object와 Companion Object에 대해 알아보겠습니다.\n","dateCreated":"2019-01-14T20:16:30+09:00","dateModified":"2021-05-08T02:39:05+09:00","datePublished":"2019-01-14T20:16:30+09:00","description":"","headline":"[Kotlin] 열거 클래스(enum class)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/14/kotlin/190114-enum-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/14/kotlin/190114-enum-class/","keywords":"Kotlin"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 데이터 클래스(data class)에 대해 알아봤습니다. 이번 포스트에서는 클래스의 열거 클래스(enum class)에 대해 알아보겠습니다. \n열거 클래스(enum class)열거 클래스(enum class)는 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의하는 것입니다. \n예를 들어 요일은 월요일부터 일요일까지로 데이터의 범위가 한정되어 있습니다. 이러한 경우 열거 클래스를 유용하게 사용할 수 있습니다. 열거 클래스는 키워드 enum을 붙여 정의합니다. \n123456789enum class Day &#123;    SUNDAY,    MONDAY,    TUESDAY,    WEDNESDAY,    THURSDAY,    FRIDAY,    SATURDAY,&#125;\n열거 클래스의 인스턴스는 다음과 같이 생성합니다. \n1val today = Day.MONDAY\n열거 클래스는 when()과 함께 유용하게 사용할 수 있습니다.\n12345678when(today) &#123;    Day.MONDAY -&gt; println(&quot;It&#x27;s monday today.&quot;)    Day.TUESDAY -&gt; println(&quot;It&#x27;s tuesday today.&quot;)    Day.WEDNESDAY -&gt; println(&quot;It&#x27;s Wednesday today.&quot;)    Day.THURSDAY -&gt; println(&quot;It&#x27;s thursday today.&quot;)    Day.FRIDAY -&gt; println(&quot;It&#x27;s friday today.&quot;)    else -&gt; println(&quot;Weekend.&quot;)&#125;\n열거 클래스는 내부에 데이터를 담을 수도 있습니다. \n123456789enum class Day(val color: String) &#123;    SUNDAY(&quot;Red&quot;),    MONDAY(&quot;Black&quot;),    TUESDAY(&quot;Black&quot;),    WEDNESDAY(&quot;Black&quot;),    THURSDAY(&quot;Black&quot;),    FRIDAY(&quot;Black&quot;),    SATURDAY(&quot;Blue&quot;),&#125;\n123val today = Day.SUNDAYprintln(today.color)    // Red\n마치며이번 포스트에서는 열거 클래스(enum class)에 대해 알아봤습니다. 다음 포스트에서는 Object와 Companion Object에 대해 알아보겠습니다.\n","dateCreated":"2019-01-14T20:16:30+09:00","dateModified":"2021-05-08T02:39:05+09:00","datePublished":"2019-01-14T20:16:30+09:00","description":"","headline":"[Kotlin] 열거 클래스(enum class)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/14/kotlin/190114-enum-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/14/kotlin/190114-enum-class/","keywords":"Kotlin"}</script>
     <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 데이터 클래스(data class)에 대해 알아봤습니다. 이번 포스트에서는 클래스의 열거 클래스(enum class)에 대해 알아보겠습니다.  열거 클래스(enum class)열거 클래스(enum class)는 서로 관련 있는 상수들을">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] 열거 클래스(enum class)">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -545,7 +509,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

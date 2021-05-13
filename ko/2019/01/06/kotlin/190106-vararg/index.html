@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며저번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아봤습니다. 이번 포스트에서는 키워드 vararg에 대해 알아보겠습니다.\n키워드 vararg함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 키워드vararg를 사용할 수 있습니다. \n123fun sum(vararg numbers: Int): Int &#123;    // ...&#125;\nvararg가 붙은 매개변수는 함수 몸체에서 마치 배열(Array)처럼 사용할 수 있습니다.\n12345678fun sum(vararg numbers: Int): Int &#123;    // numbers는 array    var sum = 0    for (n in numbers) &#123;        sum += n    &#125;    return sum&#125;\nvararg를 사용하면 값을 함수로 유연하게 전달할 수 있습니다.\n12var result1 = sum(1, 2, 3)  // 6var result2 = sum(1, 2, 3, 4, 5, 6)  // 21\n마치며이번 포스트에서는 키워드 vararg에 대해 알아보았습니다. 다음 포스트에서는 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-06T21:16:30+09:00","dateModified":"2021-05-08T01:57:49+09:00","datePublished":"2019-01-06T21:16:30+09:00","description":"","headline":"[Kotlin] vararg","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/06/kotlin/190106-vararg/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/06/kotlin/190106-vararg/","keywords":"Kotlin"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며저번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아봤습니다. 이번 포스트에서는 키워드 vararg에 대해 알아보겠습니다.\n키워드 vararg함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 키워드vararg를 사용할 수 있습니다. \n123fun sum(vararg numbers: Int): Int &#123;    // ...&#125;\nvararg가 붙은 매개변수는 함수 몸체에서 마치 배열(Array)처럼 사용할 수 있습니다.\n12345678fun sum(vararg numbers: Int): Int &#123;    // numbers는 array    var sum = 0    for (n in numbers) &#123;        sum += n    &#125;    return sum&#125;\nvararg를 사용하면 값을 함수로 유연하게 전달할 수 있습니다.\n12var result1 = sum(1, 2, 3)  // 6var result2 = sum(1, 2, 3, 4, 5, 6)  // 21\n마치며이번 포스트에서는 키워드 vararg에 대해 알아보았습니다. 다음 포스트에서는 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-06T21:16:30+09:00","dateModified":"2021-05-08T01:57:49+09:00","datePublished":"2019-01-06T21:16:30+09:00","description":"","headline":"[Kotlin] vararg","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/06/kotlin/190106-vararg/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/06/kotlin/190106-vararg/","keywords":"Kotlin"}</script>
     <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며저번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아봤습니다. 이번 포스트에서는 키워드 vararg에 대해 알아보겠습니다. 키워드 vararg함수의 매개변수로 몇 개가 들어올지 모르는 경우가 있습니다. 이때 키워">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] vararg">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -541,7 +505,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

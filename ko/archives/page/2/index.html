@@ -10,6 +10,8 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
+    
     
     <script type="application/ld+json">{}</script>
     <meta name="description" content="Yologger&#39;s Blog">
@@ -114,24 +116,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -151,7 +135,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -178,13 +162,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -192,13 +176,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -206,31 +190,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -238,19 +204,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -264,225 +228,6 @@
                         ">
                 
     <section class="postShorten-group main-content-wrap">
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/09/kotlin/190209-infix-function/"
-                            aria-label=": [Kotlin] 중위 함수(Infix Function)"
-                        >
-                            [Kotlin] 중위 함수(Infix Function)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-09T20:16:30+09:00">
-	
-		    2019/02/09
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 <a href="/ko/2019/02/07/kotlin/190207-reflection/"><code>확장 함수(Extension Function)</code></a>에 대해 알아봤습니다. 이번 포스트에서는 <code>중위 함수(Infix Function)</code>에 대해 알아보겠습니다. </p>
-<h2 id="확장-함수-Extenson-Function"><a href="#확장-함수-Extenson-Function" class="headerlink" title="확장 함수(Extenson Function)"></a>확장 함수(Extenson Function)</h2><p>우리는 이전 포스트에서 <a href="/ko/2019/02/08/kotlin/190208-extension-function/">확장 함수(Extenson Function)</a>에 대해 배웠습니다. <code>확장 함수</code>를 사용하여 두 정수의 곱을 반환하는 메소드를 Int 클래스에 추가해보겠습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">multiply</span><span class="params">(x: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> * x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> three = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수 호출</span></span><br><span class="line"><span class="keyword">var</span> result = three.multiply(<span class="number">5</span>)  <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
-<h2 id="중위-함수-Infix-Function"><a href="#중위-함수-Infix-Function" class="headerlink" title="중위 함수(Infix Function)"></a>중위 함수(Infix Function)</h2><p>일반적으로 메소드를 호출할 땐 <code>점(.)</code>과 <code>함수이름</code>, <code>소괄호를</code> 사용하여 호출합니다. 이때 <code>중위 함수(Infix Function)</code>를 사용하면 <code>점(.)</code>과 <code>소괄호</code>를 생략하고 다음과 같이 호출할 수 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">infix</span> <span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">multiply</span><span class="params">(x: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> * x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> three = <span class="number">3</span></span><br><span class="line"><span class="comment">// 점과 괄호를 생략하여 호출</span></span><br><span class="line"><span class="keyword">var</span> result = three multiply <span class="number">5</span></span><br></pre></td></tr></table></figure>
-<p>중위함수를 사용하려면 3가지 조건을 충족해야합니다.</p>
-<ol>
-<li>중위함수는 클래스의 메소드 또는 확장함수의 형태여야 합니다.</li>
-<li>오직 하나의 인자만 가져야합니다.</li>
-<li><code>키워드 infix</code>를 붙여줍니다.</li>
-</ol>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>중위 함수(Infix Function)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/10/kotlin/190210-inline-function/"><code>인라인 함수(Inline Function)</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/09/kotlin/190209-infix-function/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/08/kotlin/190208-extension-function/"
-                            aria-label=": [Kotlin] 확장 함수(Extension Function)"
-                        >
-                            [Kotlin] 확장 함수(Extension Function)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-08T20:16:30+09:00">
-	
-		    2019/02/08
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 <a href="/ko/2019/02/07/kotlin/190207-reflection/"><code>리플렉션(Reflection)</code></a>에 대해 알아봤습니다. 이번 포스트에서는 <code>확장 함수(Extension Function)</code>에 대해 알아보겠습니다. </p>
-<h2 id="확장-함수-Extension-Function"><a href="#확장-함수-Extension-Function" class="headerlink" title="확장 함수(Extension Function)"></a>확장 함수(Extension Function)</h2><p><code>확장 함수(Extension Function)</code>는 기존에 정의된 클래스에 함수를 추가하는 것입니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> name: String, <span class="keyword">val</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Age: <span class="subst">$&#123;age&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Person.<span class="title">printInformation</span><span class="params">()</span></span> &#123;</span><br><span class="line">    print(<span class="string">&quot;<span class="subst">$&#123;name&#125;</span> is <span class="subst">$&#123;age&#125;</span> years old.&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> person: Person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line">person.printInformation()</span><br></pre></td></tr></table></figure>
-<p>보통 Java API나 다른 사람이 만든 라이브러리처럼 코드를 직접 변경하기 어려운 경우 <code>확장 함수(Extension Function)</code>을 사용합니다. 다음은 <code>Int</code>에 홀수인지 짝수인지 판단해주는 함수를 추가하는 예제입니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">isEven</span><span class="params">()</span></span> = <span class="keyword">this</span> % <span class="number">2</span> == <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">isOdd</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> % <span class="number">2</span> !== <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">val</span> age: <span class="built_in">Int</span> = <span class="number">5</span>	</span><br><span class="line"></span><br><span class="line">println(a.isEven())   <span class="comment">// false</span></span><br><span class="line">println(a.isOdd())    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>확장 함수(Extension Function)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/09/kotlin/190209-infix-function/"><code>중위 함수(Infix Function)</code></a>에 대해 알아보겠습니다. </p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/08/kotlin/190208-extension-function/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/07/kotlin/190207-reflection/"
-                            aria-label=": [Kotlin] 리플렉션(Reflection)"
-                        >
-                            [Kotlin] 리플렉션(Reflection)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-07T20:16:30+09:00">
-	
-		    2019/02/07
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p><code>리플렉션(Reflection)</code>은 런타임에서 <strong>구체적인 클래스 타입을 몰라도 그 클래스의 멤버변수, 메소드 등에 접근할 수 있도록 하는 API와 기법</strong>입니다. </p>
-<h2 id="Class와-KClass"><a href="#Class와-KClass" class="headerlink" title="Class와 KClass"></a>Class와 KClass</h2><p>우선 <strong>Kotlin의 리플렉션</strong>을 이해하려면 <strong>Java의 리플랙션</strong>에 대해 알아볼 필요가 있습니다. (자세한 내용은 <a href="/ko/2018/02/02/java/180202-reflection/">이 포스트</a>를 참고하시기 바랍니다.) Java에서는 클래스에 대한 정보를 다음과 같이 <code>Class</code>클래스에 저장할 수 있습니다. 이를 <code>클래스 참조(Class Reference)</code>라고 합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .class를 사용하여 클래스에서 객체 정보 가져오기</span></span><br><span class="line">Class c1 = String.class</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// forName()메소드를 사용하여 클래스에서 객체 정보 가져오기</span></span><br><span class="line">Class c1 = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 인스턴스로부터 객체 정보 가져오기</span></span><br><span class="line">String string = <span class="keyword">new</span> String();</span><br><span class="line">Class c1 = string.getClass();</span><br></pre></td></tr></table></figure>
-<p>반면 Kotlin에서는 <code>더블콜론(::)</code>을 사용하여 클래스에 대한 정보를 가져올 수 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스에서 객체 정보 가져오기</span></span><br><span class="line"><span class="keyword">var</span> kc1: KClass&lt;Person&gt; = Person::<span class="class"><span class="keyword">class</span></span></span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 인스턴스에서 객체 정보 가져오기</span></span><br><span class="line"><span class="keyword">var</span> kc1: KClass&lt;Person&gt; = Person::<span class="class"><span class="keyword">class</span></span></span><br></pre></td></tr></table></figure>
-<p>주의할 점은 Class클래스가 아닌 <code>KClass</code>라는 클래스에 정보가 저장된다는 점입니다. 이는 Java에서 사용하는 클래스와 Kotlin에서 사용하는 클래스가 다르기 때문입니다. </p>
-<p>Kotlin의 Kclass를 Java의 Class로 변환하려면 <code>.java</code>를 뒤에 붙여주면 됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> kc1: KClass&lt;Person&gt; = Person::<span class="class"><span class="keyword">class</span></span></span><br><span class="line"><span class="keyword">var</span> c1: Class&lt;Person&gt; = kc.java</span><br></pre></td></tr></table></figure>
-<h2 id="리플렉션을-사용하여-멤버-변수-참조"><a href="#리플렉션을-사용하여-멤버-변수-참조" class="headerlink" title="리플렉션을 사용하여 멤버 변수 참조"></a>리플렉션을 사용하여 멤버 변수 참조</h2><p>다음과 같은 클래스가 있다고 가정해봅시다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">&quot;Ronaldo&quot;</span></span><br><span class="line">    <span class="keyword">var</span> nation = <span class="string">&quot;Portugal&quot;</span></span><br><span class="line">    <span class="keyword">var</span> team = <span class="string">&quot;Juventus&quot;</span></span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">35</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>리플렉션을 사용하면 다음과 같이 클래스의 멤버변수에 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> player: Player = Player()</span><br><span class="line"><span class="keyword">val</span> kclass: KClass&lt;Player&gt; = p::<span class="class"><span class="keyword">class</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// KClass를 사용하여 Player 클래스의 멤버변수를 알아내고 있습니다.</span></span><br><span class="line">kclass.memberProperties.forEach &#123;</span><br><span class="line">    print(<span class="string">&quot;<span class="subst">$&#123;it.name&#125;</span> :: <span class="subst">$&#123;it.getter.get(p)&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// name :: Ronaldo</span></span><br><span class="line"><span class="comment">// nation :: Portugal</span></span><br><span class="line"><span class="comment">// team :: Juventus</span></span><br><span class="line"><span class="comment">// age :: 35</span></span><br></pre></td></tr></table></figure>
-<h2 id="리플렉션을-사용하여-함수-참조"><a href="#리플렉션을-사용하여-함수-참조" class="headerlink" title="리플렉션을 사용하여 함수 참조"></a>리플렉션을 사용하여 함수 참조</h2><p>리플렉션은 함수를 참조하는데 사용할 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">(name: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">    println(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수를 변수에 저장하는데 리플렉션 사용</span></span><br><span class="line"><span class="keyword">var</span> myFun = ::printName</span><br><span class="line">myFun(<span class="string">&quot;ronaldo&quot;</span>)  </span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">isOdd</span><span class="params">(x: <span class="type">Int</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> x % <span class="number">2</span> !=<span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> numbers = listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수를 함수의 인자로 전달하는데 리플렉션 사용</span></span><br><span class="line">println(numbers.filter(::isOdd)) </span><br></pre></td></tr></table></figure>
-<h2 id="초기화-여부-확인"><a href="#초기화-여부-확인" class="headerlink" title="초기화 여부 확인"></a>초기화 여부 확인</h2><p>리플렉션을 사용하여 멤버변수가 초기화되었는지 확인할 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> phone: Phone</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">getPhone</span><span class="params">()</span></span>: Phone &#123;</span><br><span class="line">        <span class="comment">//  변수가 초기화 됐는지 확인</span></span><br><span class="line">        <span class="keyword">if</span>(::phone.isInitialized) &#123;	</span><br><span class="line">            <span class="keyword">return</span> phone</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.phone = Phone()</span><br><span class="line">            <span class="keyword">return</span> phone</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>리플렉션(Reflection)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/08/kotlin/190208-extension-function/"><code>확장 함수(Extension Function)</code></a>에 대해 알아보겠습니다. </p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/07/kotlin/190207-reflection/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
     
     
     <article class="postShorten postShorten--thumbnailimg-bottom">
@@ -1012,6 +757,227 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/29/kotlin/190129-lateinit-var/"
+                            aria-label=": [Kotlin] 늦은 초기화 - (1) lateinit var"
+                        >
+                            [Kotlin] 늦은 초기화 - (1) lateinit var
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-29T20:16:30+09:00">
+	
+		    2019/01/29
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <blockquote>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h3 id="늦은-초기화-Late-Initialization"><a href="#늦은-초기화-Late-Initialization" class="headerlink" title="늦은 초기화(Late Initialization)"></a>늦은 초기화(Late Initialization)</h3><p>Kotlin에서 변수나 상수는 원칙적으로 선언과 동시에 초기화해야합니다. 값이 없다면 <code>null</code>으로라도 초기화해야합니다. (관련 내용은 <a href="/ko/2019/01/19/kotlin/190119-null-1/">이 곳</a>에서 확인하실 수 있습니다.)</p>
+<p>그러나 Kotlin은 선언만 먼저 하고 초기화는 나중에 하는 방법을 제공합니다. 이를 <code>늦은 초기화(Late Initialization)</code>라고 합니다.</p>
+<p>이번 포스트에서는 <code>늦은 초기화(Late Initialization)</code>의 첫 번째 방법인 <code>lateinit var</code>에 대해 알아보겠습니다.</p>
+<h3 id="var"><a href="#var" class="headerlink" title="var"></a>var</h3><p>우선 Kotlin에서 변수는 초기화하지 않으면 컴파일 자체가 안됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 기본 데이터타입 Int</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="built_in">Int</span>        <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line"><span class="keyword">var</span> person: Person  <span class="comment">// Property must be initialized or be abstract</span></span><br></pre></td></tr></table></figure>
+<p>데이터 타입을 <code>Nullable</code>로 선언하여 <code>null</code>이라도 할당해주어야 합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age: <span class="built_in">Int</span>? = <span class="literal">null</span></span><br><span class="line"><span class="keyword">var</span> person: Person? = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="lateinit-var"><a href="#lateinit-var" class="headerlink" title="lateinit var"></a>lateinit var</h3><p><code>lateinit var</code>는 값의 생성 및 초기화를 나중에 할 수 있도록 합니다. 기본 자료형에는 사용할 수 없으며 <code>클래스의 인스턴스</code>에만 사용 가능합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(name: String, age: <span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">lateinit</span> <span class="keyword">var</span> person: Person     <span class="comment">// 컴파일 에러가 발생하지 않습니다.</span></span><br><span class="line"></span><br><span class="line">person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br></pre></td></tr></table></figure>
+<p>문자열 <code>String</code>도 클래스이므로 사용할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lateinit</span> <span class="keyword">var</span> name: String</span><br><span class="line">name = <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
+<p>보통 안드로이드 앱을 개발할 때 다음과 같이 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> loginButton: Button</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        </span><br><span class="line">        loginButton = findViewById(R.id.login_button)</span><br><span class="line"></span><br><span class="line">        loginButton.setOnClickListener &#123;</span><br><span class="line">            println(<span class="string">&quot;LoginButton Clicked.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서 <code>늦은 초기화</code>와 <code>lateinit var</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/30/kotlin/190130-by-lazy/">by lazy</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/29/kotlin/190129-lateinit-var/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/28/kotlin/190128-val-const/"
+                            aria-label=": [Kotlin] 상수(val, const)"
+                        >
+                            [Kotlin] 상수(val, const)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-28T20:16:30+09:00">
+	
+		    2019/01/28
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <blockquote>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>우리는 이전 포스트에서 <a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">스코프 함수</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>상수 (val, const)</code>에 대해 알아보겠습니다. </p>
+<h3 id="변수-var"><a href="#변수-var" class="headerlink" title="변수 var"></a>변수 var</h3><p><code>변수</code>를 선언할 때는 키워드 <code>var</code>를 사용합니다. <code>변수</code>는 런타임에서 값을 수시로 변경할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 값 변경</span></span><br><span class="line">name = <span class="string">&quot;John&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="상수-val"><a href="#상수-val" class="headerlink" title="상수 val"></a>상수 val</h3><p><code>val</code>은 <strong>런타임</strong>에 값이 결정되는 <code>상수</code>입니다. <code>상수</code>는 한 번 값이 할당되면 변경할 수 없습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 기본타입의 상수 선언</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="built_in">Int</span> = <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 에러, 값 변경 불가능</span></span><br><span class="line">age = <span class="number">31</span></span><br></pre></td></tr></table></figure>
+<p><code>val</code>은 문자열도 할당할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 문자열 타입의 상수 선언</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 에러, 값 변경 불가능</span></span><br><span class="line">name = <span class="string">&quot;John&quot;</span></span><br></pre></td></tr></table></figure>
+<p><code>val</code>는 클래스의 인스턴스도 할당할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 에러, 물론 다른 인스턴스를 할당할 수도 없습니다.</span></span><br><span class="line">person = Person(<span class="string">&quot;John&quot;</span>, <span class="number">25</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="const-val"><a href="#const-val" class="headerlink" title="const val"></a>const val</h3><p><code>const val</code>는 <strong>컴파일 타임</strong>에 값이 결정되는 <code>상수</code>입니다. 인스턴스를 할당할 수 없으며, <code>기본 자료형</code>과 <code>문자열</code>만 할당할 수 있습니다. <code>const val</code>상수의 이름은 통상 <code>대문자</code>와 <code>언더바</code>를 통해 선언합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> DEVICE_WIDTH: <span class="built_in">Int</span> = <span class="number">1400</span>  <span class="comment">// 성공</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> URL: String = <span class="string">&quot;http://www.naver.com&quot;</span>  <span class="comment">// 성공</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> person: Person = Person(<span class="string">&quot;ronaldo&quot;</span>, <span class="number">34</span>)  <span class="comment">// 에러</span></span><br></pre></td></tr></table></figure>
+<p>클래스 안에서 사용할 때는 <a href="/ko/2019/01/15/kotlin/190115-object/">companion object</a> 블럭 안에 정의합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MediaQueryMananger</span> </span>&#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">val</span> DEVICE_WIDTH: <span class="built_in">Int</span> = <span class="number">1400</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 클래스의 인스턴스를 생성하지 않고 사용 가능합니다.</span></span><br><span class="line">println(MediaQueryManager.DEVICE_WIDTH)</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>상수(val, const)</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/29/kotlin/190129-lateinit-var/">늦은 초기화의 lateinit</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/28/kotlin/190128-val-const/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/"
+                            aria-label=": [Kotlin] 스코프 함수 - (5) with"
+                        >
+                            [Kotlin] 스코프 함수 - (5) with
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-27T20:16:30+09:00">
+	
+		    2019/01/27
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <blockquote>
+<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 <code>5개</code>의 <code>스코프 함수(Scope function)</code>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 우리는 5개의 포스트에서 스코프 함수에 대해 알아보고 있습니다. 이번 마지막 포스트에서는 <code>with()</code>함수에 대해 알아보겠습니다. </p>
+<ol>
+<li><a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">run()</a></li>
+<li><a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a></li>
+<li><a href="/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/">apply()</a></li>
+<li><a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a></li>
+<li>with()  ⬅️ ⬅️ ⬅️</li>
+</ol>
+<h3 id="with-함수"><a href="#with-함수" class="headerlink" title="with() 함수"></a>with() 함수</h3><p><code>with() 함수</code>는 <strong>run()</strong> 함수와 유사합니다. 차이점은 인스턴스 뒤에 점(.)을 붙여 호출하지 않고 <strong>with()</strong> 함수의 인자로 인스턴스를 전달합니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age = with(person) &#123;</span><br><span class="line">    incrementAge()</span><br><span class="line">    printAge()</span><br><span class="line">    age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>우리는 5개의 포스트에서 스코프 함수(Scope Function)에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/28/kotlin/190128-val-const/">상수 (val, const)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1083,7 +1049,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

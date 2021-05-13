@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 인라인 함수(Inline Function)와 noinline, crossline에 대해 알아봤습니다. 이번 포스트에서는 제너릭(Generic)에 대해 알아보겠습니다. \n제너릭 (Generic)제네릭 (Generic)은 클래스나 메서드 내부에서 사용할 데이터의 자료형을 외부에서 설정하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 타입 체크를 가능하게 합니다.\n클래스에서의 제너릭 (Generic)제네릭 클래스를 정의할 땐 &lt;&gt;안에 임의의 문자를 명시합니다. 이 문자를 타입 파라미터(Type Parameter)라고 합니다. 보통 타입 파라미터는 관습적으로 대문자 E(Element), T(Type), K(Key), V(Value)를 사용합니다.\n1class Box&lt;T&gt; constructor(val item: T) \n이렇게 정의된 제너릭 클래스는 다음과 같이 사용합니다. &lt;&gt;안의 타입 파리미터 T에는 어떠한 데이터 타입도 들어갈 수 있습니다. \n123var box1 = Box&lt;Int&gt;(1)var box2 = Box&lt;String&gt;(&quot;Hello World.&quot;)var box3 = Box&lt;Person&gt;(Person(&quot;Paul&quot;))\n아래 코드를 살펴봅시다. \n123class Box&lt;T&gt; constructor(val item: T)var box1 = Box&lt;Int&gt;(1)\n이 코드를 컴파일하면 아래와 같은 코드로 변환됩니다.\n123class Box constructor(val item: Int)var box1 = Box(1)\n타입 파라미터는 여러 개를 사용할 수도 있습니다.\n12345class Box&lt;T, U&gt; constructor(val item1: T, val item2: U)var box1 = Box&lt;Int, String&gt;(1, &quot;Hello World.&quot;)var box2 = Box&lt;String, Double&gt;(&quot;Hello World.&quot;, 3.4)var box3 = Box&lt;Person, Phone&gt;(Person(&quot;Paul&quot;), Phone(&quot;Apple&quot;))\n\n타입 제한타입 제한을 사용하면 타입 파라미터에 들어올 실제 값의 자료형을 제한할 수 있습니다. 타입 제한은 &lt;T: Superclass&gt; 형태로 사용합니다. 아래 코드를 살펴봅시다. \n1class Person&lt;T: Phone&gt; constructor(val phone: T)\n&lt;T: Phone&gt;가 바로 타입을 제한하는 코드입니다. 타입 파리미터 T에는 Phone클래스와 Phone클래스를 상속받는 클래스만 올 수 있습니다.\n1234open class Phone()open class Galaxy(): Phone() &#123;&#125;open class Laptop()\n1234var person1 = Person&lt;Phone&gt;(Phone())    // Successvar person2 = Person&lt;Galaxy&gt;(Galaxy())  // Successvar person3 = Person&lt;Laptop&gt;(Laptop())  // Error\n키워드 where를 사용해도 타입 파라미터에 실제로 오는 자료형을 제한할 수 있습니다. 아래 코드를 살펴봅시다.\n1234567fun &lt;T&gt; getElement(element: T): T where T: Int &#123;    println(&quot;Element: $&#123;element.toString()&#125;&quot;)&#125;var element1 = getElement(1)var element2 = getElement(3.14) // Errorvar element3 = getElement(&quot;Hello World&quot;)    // Error\nwhere T: Int를 통해 타입 파라미터 T에 올 수 있는 데이터의 자료형을 Int로 제한하고 있습니다.\n마치며이번 포스트에서는 제너릭(Generic)에 대해 알아봤습니다. 다음 포스트에서는 제네릭 함수(Generic Function)에 대해 알아보겠습니다. \n","dateCreated":"2019-02-11T20:16:30+09:00","dateModified":"2021-05-08T03:13:05+09:00","datePublished":"2019-02-11T20:16:30+09:00","description":"","headline":"[Kotlin] 제너릭(Generic)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/","keywords":"Kotlin"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 인라인 함수(Inline Function)와 noinline, crossline에 대해 알아봤습니다. 이번 포스트에서는 제너릭(Generic)에 대해 알아보겠습니다. \n제너릭 (Generic)제네릭 (Generic)은 클래스나 메서드 내부에서 사용할 데이터의 자료형을 외부에서 설정하는 것입니다. 이를 통해 컴파일 시 메서드나 클래스에 사용되는 다양한 데이터의 타입 체크를 가능하게 합니다.\n클래스에서의 제너릭 (Generic)제네릭 클래스를 정의할 땐 &lt;&gt;안에 임의의 문자를 명시합니다. 이 문자를 타입 파라미터(Type Parameter)라고 합니다. 보통 타입 파라미터는 관습적으로 대문자 E(Element), T(Type), K(Key), V(Value)를 사용합니다.\n1class Box&lt;T&gt; constructor(val item: T) \n이렇게 정의된 제너릭 클래스는 다음과 같이 사용합니다. &lt;&gt;안의 타입 파리미터 T에는 어떠한 데이터 타입도 들어갈 수 있습니다. \n123var box1 = Box&lt;Int&gt;(1)var box2 = Box&lt;String&gt;(&quot;Hello World.&quot;)var box3 = Box&lt;Person&gt;(Person(&quot;Paul&quot;))\n아래 코드를 살펴봅시다. \n123class Box&lt;T&gt; constructor(val item: T)var box1 = Box&lt;Int&gt;(1)\n이 코드를 컴파일하면 아래와 같은 코드로 변환됩니다.\n123class Box constructor(val item: Int)var box1 = Box(1)\n타입 파라미터는 여러 개를 사용할 수도 있습니다.\n12345class Box&lt;T, U&gt; constructor(val item1: T, val item2: U)var box1 = Box&lt;Int, String&gt;(1, &quot;Hello World.&quot;)var box2 = Box&lt;String, Double&gt;(&quot;Hello World.&quot;, 3.4)var box3 = Box&lt;Person, Phone&gt;(Person(&quot;Paul&quot;), Phone(&quot;Apple&quot;))\n\n타입 제한타입 제한을 사용하면 타입 파라미터에 들어올 실제 값의 자료형을 제한할 수 있습니다. 타입 제한은 &lt;T: Superclass&gt; 형태로 사용합니다. 아래 코드를 살펴봅시다. \n1class Person&lt;T: Phone&gt; constructor(val phone: T)\n&lt;T: Phone&gt;가 바로 타입을 제한하는 코드입니다. 타입 파리미터 T에는 Phone클래스와 Phone클래스를 상속받는 클래스만 올 수 있습니다.\n1234open class Phone()open class Galaxy(): Phone() &#123;&#125;open class Laptop()\n1234var person1 = Person&lt;Phone&gt;(Phone())    // Successvar person2 = Person&lt;Galaxy&gt;(Galaxy())  // Successvar person3 = Person&lt;Laptop&gt;(Laptop())  // Error\n키워드 where를 사용해도 타입 파라미터에 실제로 오는 자료형을 제한할 수 있습니다. 아래 코드를 살펴봅시다.\n1234567fun &lt;T&gt; getElement(element: T): T where T: Int &#123;    println(&quot;Element: $&#123;element.toString()&#125;&quot;)&#125;var element1 = getElement(1)var element2 = getElement(3.14) // Errorvar element3 = getElement(&quot;Hello World&quot;)    // Error\nwhere T: Int를 통해 타입 파라미터 T에 올 수 있는 데이터의 자료형을 Int로 제한하고 있습니다.\n마치며이번 포스트에서는 제너릭(Generic)에 대해 알아봤습니다. 다음 포스트에서는 제네릭 함수(Generic Function)에 대해 알아보겠습니다. \n","dateCreated":"2019-02-11T20:16:30+09:00","dateModified":"2021-05-08T03:13:05+09:00","datePublished":"2019-02-11T20:16:30+09:00","description":"","headline":"[Kotlin] 제너릭(Generic)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/02/11/kotlin/190211-generic/","keywords":"Kotlin"}</script>
     <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 인라인 함수(Inline Function)와 noinline, crossline에 대해 알아봤습니다. 이번 포스트에서는 제너릭(Generic)에 대해 알아보겠습니다.  제너릭 (Generic)제네릭 (Generic)은 클래스나 메서드 내">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] 제너릭(Generic)">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -555,7 +519,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n람다식(익명함수)람다식(Lambda Expression)은 익명함수(Anonymous Function)라고도 불리며 이름이 없는 함수를 의미합니다. \n람다식을 사용할 때는 &#123;&#125;를 사용합니다.\n12345val sayHello: () -&gt; Unit = &#123;    println(&quot;Hello.&quot;)&#125;sayHello()\n람다식에 매개변수가 있는 경우 &#123; 인자1, 인자2, ... -&gt; &#125;을 사용합니다.\n12345val printInformation: (name: String, age: Int) -&gt; Unit = &#123; name: String, age: Int -&gt;    println(&quot;$&#123;name&#125; is $&#123;age&#125; years old.&quot;)&#125;printInformation(&quot;Paul&quot;, 35)\n반환값이 있는 경우 다음과 같이 사용합니다. 람다식에서 값을 반환할 땐 키워드 return을 사용하지 않아도 마지막 구문이 자동으로 반환됩니다.\n123456val sum: (a: Int, b: Int) -&gt; Int = &#123; a: Int, b: Int -&gt;    a+b&#125;var result = sum(3, 5)println(result)\n람다식도 자동으로 타입 추론이 되므로 매개변수의 자료형과 함수타입을 생략할 수 있습니다. 위 코드와 아래 코드는 동일합니다.\n123456val sum = &#123; a, b -&gt;    a+b&#125;var result = sum(3, 5)println(result)\n매개변수가 1개인 경우, 매개변수와 -&gt;을 생략하고 it로 사용할 수 있습니다. 아래 두 코드는 동일합니다.\n123val printName = &#123; name -&gt;    println(name)&#125;\n123val printName = &#123;     println(it)&#125;\nTrailing함수의 맨 마지막 인자가 람다식이라면 괄호()에서 빼내어 밖에 표현할 수 있습니다.\n1234people.maxBy(&#123;p: Person -&gt; p.age&#125;) // Trailingpeople.maxBy() &#123;p: Person -&gt; p.age&#125; \n함수의 인자가 1개고 그 인자가 익명함수라면 괄호()까지 생략할 수 있습니다.\n1people.maxBy &#123;p: Person -&gt; p.age&#125; \n람다의 인자가 1개라면 그 인자는 익명함수 내부에서 it으로 받을 수 있습니다.\n1people.maxBy &#123;it.age&#125;\n예제안드로이드 앱에서 버튼과 같은 위젯을 클릭했을 때 처리할 내용을 람다식으로 구현합니다. 아래 코드들은 모두 동일합니다.\n123456// 익명 클래스 사용button.setOnClickListener(object: View.OnClickListener &#123;    override fun onClick(v: View?) &#123;        // 클릭 시 처리    &#125;&#125;)\n1234// 익명클래스의 구현해야 할 매서드가 1개 뿐인 인터페이스는 람다식으로 대체할 수 있다.button.setOnClickListener(&#123; v: View? -&gt;    // 클릭 시 처리&#125;)\n1234// 트레일링button.setOnClickListener() &#123; v: View? -&gt;    // 클릭 시 처리&#125;\n1234// 파라미터가 하나인 경우, 괄호생략 가능button.setOnClickListener &#123; v: View? -&gt;    // 클릭 시 처리&#125;\n1234// 자료형 추론button.setOnClickListener &#123; v -&gt;    // ...&#125;\n마치며이번 포스트에서는 람다식(Lambda Expression)과 익명함수(Anonymous Function)에 대해 알아봤습니다. 다음 포스트에서는 1급 객체, 1급 함수와 함수형 프로그래밍에 대해 알아보겠습니다.\n","dateCreated":"2019-02-02T20:16:30+09:00","dateModified":"2021-05-08T02:59:54+09:00","datePublished":"2019-02-02T20:16:30+09:00","description":"","headline":"[Kotlin] 람다식(익명함수)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/02/kotlin/190202-lamda/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/02/02/kotlin/190202-lamda/","keywords":"Kotlin"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n람다식(익명함수)람다식(Lambda Expression)은 익명함수(Anonymous Function)라고도 불리며 이름이 없는 함수를 의미합니다. \n람다식을 사용할 때는 &#123;&#125;를 사용합니다.\n12345val sayHello: () -&gt; Unit = &#123;    println(&quot;Hello.&quot;)&#125;sayHello()\n람다식에 매개변수가 있는 경우 &#123; 인자1, 인자2, ... -&gt; &#125;을 사용합니다.\n12345val printInformation: (name: String, age: Int) -&gt; Unit = &#123; name: String, age: Int -&gt;    println(&quot;$&#123;name&#125; is $&#123;age&#125; years old.&quot;)&#125;printInformation(&quot;Paul&quot;, 35)\n반환값이 있는 경우 다음과 같이 사용합니다. 람다식에서 값을 반환할 땐 키워드 return을 사용하지 않아도 마지막 구문이 자동으로 반환됩니다.\n123456val sum: (a: Int, b: Int) -&gt; Int = &#123; a: Int, b: Int -&gt;    a+b&#125;var result = sum(3, 5)println(result)\n람다식도 자동으로 타입 추론이 되므로 매개변수의 자료형과 함수타입을 생략할 수 있습니다. 위 코드와 아래 코드는 동일합니다.\n123456val sum = &#123; a, b -&gt;    a+b&#125;var result = sum(3, 5)println(result)\n매개변수가 1개인 경우, 매개변수와 -&gt;을 생략하고 it로 사용할 수 있습니다. 아래 두 코드는 동일합니다.\n123val printName = &#123; name -&gt;    println(name)&#125;\n123val printName = &#123;     println(it)&#125;\nTrailing함수의 맨 마지막 인자가 람다식이라면 괄호()에서 빼내어 밖에 표현할 수 있습니다.\n1234people.maxBy(&#123;p: Person -&gt; p.age&#125;) // Trailingpeople.maxBy() &#123;p: Person -&gt; p.age&#125; \n함수의 인자가 1개고 그 인자가 익명함수라면 괄호()까지 생략할 수 있습니다.\n1people.maxBy &#123;p: Person -&gt; p.age&#125; \n람다의 인자가 1개라면 그 인자는 익명함수 내부에서 it으로 받을 수 있습니다.\n1people.maxBy &#123;it.age&#125;\n예제안드로이드 앱에서 버튼과 같은 위젯을 클릭했을 때 처리할 내용을 람다식으로 구현합니다. 아래 코드들은 모두 동일합니다.\n123456// 익명 클래스 사용button.setOnClickListener(object: View.OnClickListener &#123;    override fun onClick(v: View?) &#123;        // 클릭 시 처리    &#125;&#125;)\n1234// 익명클래스의 구현해야 할 매서드가 1개 뿐인 인터페이스는 람다식으로 대체할 수 있다.button.setOnClickListener(&#123; v: View? -&gt;    // 클릭 시 처리&#125;)\n1234// 트레일링button.setOnClickListener() &#123; v: View? -&gt;    // 클릭 시 처리&#125;\n1234// 파라미터가 하나인 경우, 괄호생략 가능button.setOnClickListener &#123; v: View? -&gt;    // 클릭 시 처리&#125;\n1234// 자료형 추론button.setOnClickListener &#123; v -&gt;    // ...&#125;\n마치며이번 포스트에서는 람다식(Lambda Expression)과 익명함수(Anonymous Function)에 대해 알아봤습니다. 다음 포스트에서는 1급 객체, 1급 함수와 함수형 프로그래밍에 대해 알아보겠습니다.\n","dateCreated":"2019-02-02T20:16:30+09:00","dateModified":"2021-05-08T02:59:54+09:00","datePublished":"2019-02-02T20:16:30+09:00","description":"","headline":"[Kotlin] 람다식(익명함수)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/02/kotlin/190202-lamda/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/02/02/kotlin/190202-lamda/","keywords":"Kotlin"}</script>
     <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  람다식(익명함수)람다식(Lambda Expression)은 익명함수(Anonymous Function)라고도 불리며 이름이 없는 함수를 의미합니다.  람다식을 사용할 때는 &amp;#123;&amp;#125;를 사용합니다. 12345val sayHello: () -&gt; U">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] 람다식(익명함수)">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -558,7 +522,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

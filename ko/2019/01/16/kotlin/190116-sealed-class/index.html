@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 Object와 Companion Object에 대해 알아봤습니다. 이번 포스트에서는 Sealed Class에 대해 알아보겠습니다. \nSealed ClassSealed Class는 Enum Class의 확장판이라고 보시며 됩니다. Enum Class와 마찬가지로 Sealed Class는 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의할 수 있습니다.Sealed Class는 다음과 같이 키워드 Sealed를 사용하여 선언합니다. \n12345sealed class Color &#123;    object Red: Color()    object Blue: Color()    object Green: Color()&#125;\nSealed Class는 다음과 같이 Enum Class처럼 사용할 수 있습니다. \n1234567891011121314// Sealed Class의 인스턴스 생성var backgroundColor: Color = Color.Bluewhen(backgroundColor) &#123;    is Color.Red -&gt; &#123;        println(&quot;Background color is red.&quot;)    &#125;    is Color.Blue -&gt; &#123;        println(&quot;Background color is blue.&quot;)    &#125;    is Color.Green -&gt; &#123;        println(&quot;Background color is green.&quot;)    &#125;&#125;\nEnum Class와의 차이점Sealed Class는 인스턴스 안에 다른 타입의 데이터를 포함할 수도 있습니다. 아래 코드를 살펴봅시다.\n1234sealed class Manager &#123;    data class Programmer(var school: String) : Manager()    data class Marketer(var major: String) : Manager()&#125;\n매니저는 프로그래머 출신일 수도 있고 마케터 출신일 수도 있습니다. 이에 따라 다른 구문이 실행되도록 구현할 수 있습니다. \n12345678910111213141516171819fun printInformation(manager: Manager) &#123;    when (manager) &#123;        is Manager.Programmer -&gt; &#123;            println(&quot;Manager studied at MIT&quot;)        &#125;        is Manager.Marketer -&gt; &#123;            println(&quot;Manager majored in Economics&quot;)        &#125;    &#125;&#125;var itManager = Manager.Programmer(&quot;MIT&quot;)var marketingManager = Manager.Marketer(&quot;Economics&quot;)printInformation(itManager) // Manager studied at MITprintInformation(marketingManager)  // Manager majored in Economics\n로그인 예제서버에 로그인을 요청하는 코드가 있다고 가정합시다. 로그인에 성공하면 다음과 같이 데이터를 반환합니다. \n1data class LogInData(val code: Int, var message: String)\n반면 실패하면 다음 에러를 반환합니다.  \n12345enum class LogInError &#123;    INVALID_EMAIL,    INVALID_PASSWORD,    NETWORK_ERROR&#125; \n이처럼 상황에 따라 다른 자료형의 결과를 반환할 때 Sealed Class를 유용하게 사용할 수 있습니다.\n12345sealed class LogInResponse &#123;    object OnProgress : LogInResponse()    data class OnSuccess(val data: LogInData) : LogInResponse()    data class OnFailure(val error: LogInError) : LogInResponse()&#125;\n로그인을 요청하는 함수는 아래와 같이 LogInResponse를 반환합니다.\n123fun logIn(id: String, password; String): LogInResponse &#123;    // 로그인 &#125;\nSealed Class는 when()구문과 함께 사용할 때 힘을 발휘합니다. \n123456789101112131415161718192021222324var response = logIn(&quot;Paul@gmail.com&quot;, &quot;12345&quot;)when(response) &#123;    is SignUpResponse.OnProgress -&gt; &#123;        println(&quot;$&#123;response&#125;&quot;)    &#125;    is SignUpResponse.OnSuccess -&gt; &#123;        println(&quot;$&#123;response.data.code&#125;&quot;)        println(&quot;$&#123;response.data.message&#125;&quot;)    &#125;    is SignUpResponse.OnFailure -&gt; &#123;        when(response.error) &#123;            SignUpError.INVALID_EMAIL -&gt; &#123;                println(&quot;invalid email&quot;)            &#125;            SignUpError.NETWORK_ERROR -&gt; &#123;                println(&quot;network error&quot;)            &#125;            SignUpError.INVALID_PASSWORD -&gt; &#123;                println(&quot;invalid password&quot;)            &#125;        &#125;    &#125;&#125;\n마치며이번 포스트에서는 Sealed Class에 대해 알아봤습니다. 다음 포스트에서는 조건문에 대해 알아보겠습니다.\n","dateCreated":"2019-01-16T20:16:30+09:00","dateModified":"2021-05-08T02:47:33+09:00","datePublished":"2019-01-16T20:16:30+09:00","description":"","headline":"[Kotlin] Sealed Class","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/16/kotlin/190116-sealed-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/16/kotlin/190116-sealed-class/","keywords":"Kotlin"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 Object와 Companion Object에 대해 알아봤습니다. 이번 포스트에서는 Sealed Class에 대해 알아보겠습니다. \nSealed ClassSealed Class는 Enum Class의 확장판이라고 보시며 됩니다. Enum Class와 마찬가지로 Sealed Class는 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의할 수 있습니다.Sealed Class는 다음과 같이 키워드 Sealed를 사용하여 선언합니다. \n12345sealed class Color &#123;    object Red: Color()    object Blue: Color()    object Green: Color()&#125;\nSealed Class는 다음과 같이 Enum Class처럼 사용할 수 있습니다. \n1234567891011121314// Sealed Class의 인스턴스 생성var backgroundColor: Color = Color.Bluewhen(backgroundColor) &#123;    is Color.Red -&gt; &#123;        println(&quot;Background color is red.&quot;)    &#125;    is Color.Blue -&gt; &#123;        println(&quot;Background color is blue.&quot;)    &#125;    is Color.Green -&gt; &#123;        println(&quot;Background color is green.&quot;)    &#125;&#125;\nEnum Class와의 차이점Sealed Class는 인스턴스 안에 다른 타입의 데이터를 포함할 수도 있습니다. 아래 코드를 살펴봅시다.\n1234sealed class Manager &#123;    data class Programmer(var school: String) : Manager()    data class Marketer(var major: String) : Manager()&#125;\n매니저는 프로그래머 출신일 수도 있고 마케터 출신일 수도 있습니다. 이에 따라 다른 구문이 실행되도록 구현할 수 있습니다. \n12345678910111213141516171819fun printInformation(manager: Manager) &#123;    when (manager) &#123;        is Manager.Programmer -&gt; &#123;            println(&quot;Manager studied at MIT&quot;)        &#125;        is Manager.Marketer -&gt; &#123;            println(&quot;Manager majored in Economics&quot;)        &#125;    &#125;&#125;var itManager = Manager.Programmer(&quot;MIT&quot;)var marketingManager = Manager.Marketer(&quot;Economics&quot;)printInformation(itManager) // Manager studied at MITprintInformation(marketingManager)  // Manager majored in Economics\n로그인 예제서버에 로그인을 요청하는 코드가 있다고 가정합시다. 로그인에 성공하면 다음과 같이 데이터를 반환합니다. \n1data class LogInData(val code: Int, var message: String)\n반면 실패하면 다음 에러를 반환합니다.  \n12345enum class LogInError &#123;    INVALID_EMAIL,    INVALID_PASSWORD,    NETWORK_ERROR&#125; \n이처럼 상황에 따라 다른 자료형의 결과를 반환할 때 Sealed Class를 유용하게 사용할 수 있습니다.\n12345sealed class LogInResponse &#123;    object OnProgress : LogInResponse()    data class OnSuccess(val data: LogInData) : LogInResponse()    data class OnFailure(val error: LogInError) : LogInResponse()&#125;\n로그인을 요청하는 함수는 아래와 같이 LogInResponse를 반환합니다.\n123fun logIn(id: String, password; String): LogInResponse &#123;    // 로그인 &#125;\nSealed Class는 when()구문과 함께 사용할 때 힘을 발휘합니다. \n123456789101112131415161718192021222324var response = logIn(&quot;Paul@gmail.com&quot;, &quot;12345&quot;)when(response) &#123;    is SignUpResponse.OnProgress -&gt; &#123;        println(&quot;$&#123;response&#125;&quot;)    &#125;    is SignUpResponse.OnSuccess -&gt; &#123;        println(&quot;$&#123;response.data.code&#125;&quot;)        println(&quot;$&#123;response.data.message&#125;&quot;)    &#125;    is SignUpResponse.OnFailure -&gt; &#123;        when(response.error) &#123;            SignUpError.INVALID_EMAIL -&gt; &#123;                println(&quot;invalid email&quot;)            &#125;            SignUpError.NETWORK_ERROR -&gt; &#123;                println(&quot;network error&quot;)            &#125;            SignUpError.INVALID_PASSWORD -&gt; &#123;                println(&quot;invalid password&quot;)            &#125;        &#125;    &#125;&#125;\n마치며이번 포스트에서는 Sealed Class에 대해 알아봤습니다. 다음 포스트에서는 조건문에 대해 알아보겠습니다.\n","dateCreated":"2019-01-16T20:16:30+09:00","dateModified":"2021-05-08T02:47:33+09:00","datePublished":"2019-01-16T20:16:30+09:00","description":"","headline":"[Kotlin] Sealed Class","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/16/kotlin/190116-sealed-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/16/kotlin/190116-sealed-class/","keywords":"Kotlin"}</script>
     <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 Object와 Companion Object에 대해 알아봤습니다. 이번 포스트에서는 Sealed Class에 대해 알아보겠습니다.  Sealed ClassSealed Class는 Enum Class의 확장판이라고 보시며 됩니다. Enum">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] Sealed Class">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -553,7 +517,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

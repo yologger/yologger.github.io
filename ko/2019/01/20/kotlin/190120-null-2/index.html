@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며4개의 포스트를 통해 Kotlin의 null 처리 방법에 대해 알아보고 있습니다. 이번 두 번째 포스트에서는 Null Check 방법에 대해 알아보겠습니다.\n\nNotNull과 Nullable \nNull Check ⬅️ ⬅️ ⬅️\n엘비스 연산자(Elvis Operator)\n스코프 함수를 통한 Null Check\n\nNullableNullable타입의 변수에 접근하려면 값이 null이 아닌지를 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다.\n123456789class Person constructor(val name: String) &#123;    fun printName() &#123;        println(&quot;name: $&#123;name&#125;&quot;)    &#125;&#125;var person: Person? = nullperson.printName()  // null 체크를 하지 않았으므로 다음과 같은 에러가 발생합니다.// Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Person?\nNull Check우선 변수가 Nullable타입이라고 단언하고 변수에 접근할 수 있습니다.\n12var person: Person? = Person()person!!.printName()    // 성공\n다만 값이 null인 경우 런타임 에러가 발생합니다.\n12var person: Person? = nullperson!!.printName()    // 런타임 에러\n따라서 런타임 에러를 방지하기 위해 if문으로 null체크를 합니다. \n1234567var person: Person? = nullif (person != null) &#123;    person!!.printName()&#125;var name = if (person != null) person!!.name else &quot;&quot;\nSafe Call (?.)매번 if문으로 null체크를 하는 것은 번거로운 일입니다. 따라서 보통 단축구문인 물음표(?)를 사용하며, 이를 Safe Call이라고 합니다.\n1234567var person: Person? = nullperson?.printName()// person이 null이면 아무 일도 일어나지 않습니다.// person이 null이 아니면 printName()을 호출합니다.var name = person?.name\nChainingNullable타입의 변수가 중첩되어 있는 경우, 다음과 같이 연속적으로 null 체크를 할 수 있습니다.\n12345678910111213class Person constructor(val phone: Phone?)class Phone constructor(val manufacturer: String) &#123;    fun printManufacturer() &#123;        print(manufacturer)    &#125;&#125;var person: Person? = Person(Phone(&quot;Samsung&quot;))// Chainingperson?.phone?.printManufacturer()var manufacturer: String? = person?.phone?.manufacturer\n마치며이번 포스트에서는 Null Check에 대해 알아봤습니다. 다음 포스트에서는 엘비스 연산자(Elvis Operator)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-20T20:16:30+09:00","dateModified":"2021-05-08T02:52:12+09:00","datePublished":"2019-01-20T20:16:30+09:00","description":"","headline":"[Kotlin] null 처리 - (2) Null Check","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/20/kotlin/190120-null-2/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2019/01/20/kotlin/190120-null-2/","keywords":"Kotlin"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며4개의 포스트를 통해 Kotlin의 null 처리 방법에 대해 알아보고 있습니다. 이번 두 번째 포스트에서는 Null Check 방법에 대해 알아보겠습니다.\n\nNotNull과 Nullable \nNull Check ⬅️ ⬅️ ⬅️\n엘비스 연산자(Elvis Operator)\n스코프 함수를 통한 Null Check\n\nNullableNullable타입의 변수에 접근하려면 값이 null이 아닌지를 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다.\n123456789class Person constructor(val name: String) &#123;    fun printName() &#123;        println(&quot;name: $&#123;name&#125;&quot;)    &#125;&#125;var person: Person? = nullperson.printName()  // null 체크를 하지 않았으므로 다음과 같은 에러가 발생합니다.// Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Person?\nNull Check우선 변수가 Nullable타입이라고 단언하고 변수에 접근할 수 있습니다.\n12var person: Person? = Person()person!!.printName()    // 성공\n다만 값이 null인 경우 런타임 에러가 발생합니다.\n12var person: Person? = nullperson!!.printName()    // 런타임 에러\n따라서 런타임 에러를 방지하기 위해 if문으로 null체크를 합니다. \n1234567var person: Person? = nullif (person != null) &#123;    person!!.printName()&#125;var name = if (person != null) person!!.name else &quot;&quot;\nSafe Call (?.)매번 if문으로 null체크를 하는 것은 번거로운 일입니다. 따라서 보통 단축구문인 물음표(?)를 사용하며, 이를 Safe Call이라고 합니다.\n1234567var person: Person? = nullperson?.printName()// person이 null이면 아무 일도 일어나지 않습니다.// person이 null이 아니면 printName()을 호출합니다.var name = person?.name\nChainingNullable타입의 변수가 중첩되어 있는 경우, 다음과 같이 연속적으로 null 체크를 할 수 있습니다.\n12345678910111213class Person constructor(val phone: Phone?)class Phone constructor(val manufacturer: String) &#123;    fun printManufacturer() &#123;        print(manufacturer)    &#125;&#125;var person: Person? = Person(Phone(&quot;Samsung&quot;))// Chainingperson?.phone?.printManufacturer()var manufacturer: String? = person?.phone?.manufacturer\n마치며이번 포스트에서는 Null Check에 대해 알아봤습니다. 다음 포스트에서는 엘비스 연산자(Elvis Operator)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-20T20:16:30+09:00","dateModified":"2021-05-08T02:52:12+09:00","datePublished":"2019-01-20T20:16:30+09:00","description":"","headline":"[Kotlin] null 처리 - (2) Null Check","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/20/kotlin/190120-null-2/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/20/kotlin/190120-null-2/","keywords":"Kotlin"}</script>
     <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며4개의 포스트를 통해 Kotlin의 null 처리 방법에 대해 알아보고 있습니다. 이번 두 번째 포스트에서는 Null Check 방법에 대해 알아보겠습니다.  NotNull과 Nullable  Null Check ⬅️ ⬅️ ⬅️ 엘비스 연산자(Elvis">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Kotlin] null 처리 - (2) Null Check">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -553,7 +517,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>

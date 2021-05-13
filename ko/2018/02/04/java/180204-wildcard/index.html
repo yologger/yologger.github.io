@@ -10,8 +10,10 @@
     <meta name="author" content="yologger">
     
     
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":[]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function) \n제너릭의 와일드 카드(Wildcard) ⬅️ ⬅️ ⬅️\n타입 소거(Type Erasure)\n\n이번 네 번째 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아보겠습니다.\n와일드 카드(Wildcard)와일드 카드(Wildcard)는 제네릭 클래스의 인스턴스를 함수의 인자로 전달할 때, 그 인스턴스의 타입 파라미터를 제한하는 것을 의미합니다. 개념이 어려우므로 예제를 통해 살펴보겠습니다.\n와일드 카드(?)와 extends다음과 같은 함수가 있다고 가정해봅시다. printElements()는 인자로 ArrayList타입의 데이터를 입력받습니다. \n123void printElements(ArrayList list) &#123;    // ..&#125;\nPerson 클래스를 선언합니다.\n1234567class Person &#123;    String name;    Person(String name) &#123;        this.name = name;    &#125;&#125;\nPerson 클래스를 상속하는 Player 클래스를 선언합니다.\n12345678class Player extends Person &#123;    String team;    Player(String name, String team) &#123;        super(name);        this.team = team;    &#125;&#125;\n이제 아래와 같이 3개의 ArrayList를 생성하고 printElements(ArrayList list)의 매개변수로 전달해봅시다.\n12345678// 제네릭 클래스 ArrayList의 타입 변수로 String, Person, Player가 모두 올 수 있습니다.ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);printElements(list2);printElements(list3);\n그런데 인자로 전달되는 ArrayList에 저장되는 데이터를 제한할 수 있습니다. 아래와 같이 물음표(?)와 키워드 extends를 사용하면 됩니다. 물음표(?)는 와일드카드(Wild Card)라고 불리며, 타입이 아직 정해지지 않았음을 의미합니다.\n123void printElements(ArrayList&lt;? extends Person&gt; list) &#123;    // ..&#125;\n&lt;? extends Person&gt;는 Person객체 또는 이를 상속한 객체를 데이터로 가지고 있는 ArrayList객체만 함수의 인자로 전달될 수 있음을 의미합니다. 따라서 아래 코드에서 Person객체를 상속하지 않은 list1 때문에 컴파일 에러가 발생합니다.\n1234567ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);   // 에러printElements(list2);printElements(list3);\nsuper키워드 super를 사용하면 특정 클래스와 부모 클래스만 인자로 제한할 수 있습니다.\n1234567891011void printElements(ArrayList&lt;? super Person&gt; list) &#123;    // ..&#125;ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);   // 에러printElements(list2);printElements(list3);\n와일드 카드&lt;?&gt;의 종류\n&lt;? extends T&gt; 와일드 카드의 상한 제한(upper bound) - T와 그 자손들을 구현한 객체들만 타입 매개변수로 올 수 있습니다.\n&lt;? super T&gt; 와일드 카드의 하한 제한(lower bound) - T와 그 조상들을 구현한 객체들만 타입 매개변수로 올 수 있습니다.\n&lt;?&gt; 타입 매개변수에 제한 없습니다.\n\n마치며이번 포스트에서는 Java의 제너릭의 와일드 카드(Wildcard)에 대해 알아봤습니다. 다음 포스트에서는 제너릭의 타입 소거(Type Erasure)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-04T20:16:30+09:00","dateModified":"2021-05-12T18:07:10+09:00","datePublished":"2018-02-04T20:16:30+09:00","description":"","headline":"[Java] 제너릭의 와일드 카드(Wildcard)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/04/java/180204-wildcard/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":[]},"url":"https://yologger.github.io/ko/2018/02/04/java/180204-wildcard/","keywords":"Java"}</script>
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function) \n제너릭의 와일드 카드(Wildcard) ⬅️ ⬅️ ⬅️\n타입 소거(Type Erasure)\n\n이번 네 번째 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아보겠습니다.\n와일드 카드(Wildcard)와일드 카드(Wildcard)는 제네릭 클래스의 인스턴스를 함수의 인자로 전달할 때, 그 인스턴스의 타입 파라미터를 제한하는 것을 의미합니다. 개념이 어려우므로 예제를 통해 살펴보겠습니다.\n와일드 카드(?)와 extends다음과 같은 함수가 있다고 가정해봅시다. printElements()는 인자로 ArrayList타입의 데이터를 입력받습니다. \n123void printElements(ArrayList list) &#123;    // ..&#125;\nPerson 클래스를 선언합니다.\n1234567class Person &#123;    String name;    Person(String name) &#123;        this.name = name;    &#125;&#125;\nPerson 클래스를 상속하는 Player 클래스를 선언합니다.\n12345678class Player extends Person &#123;    String team;    Player(String name, String team) &#123;        super(name);        this.team = team;    &#125;&#125;\n이제 아래와 같이 3개의 ArrayList를 생성하고 printElements(ArrayList list)의 매개변수로 전달해봅시다.\n12345678// 제네릭 클래스 ArrayList의 타입 변수로 String, Person, Player가 모두 올 수 있습니다.ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);printElements(list2);printElements(list3);\n그런데 인자로 전달되는 ArrayList에 저장되는 데이터를 제한할 수 있습니다. 아래와 같이 물음표(?)와 키워드 extends를 사용하면 됩니다. 물음표(?)는 와일드카드(Wild Card)라고 불리며, 타입이 아직 정해지지 않았음을 의미합니다.\n123void printElements(ArrayList&lt;? extends Person&gt; list) &#123;    // ..&#125;\n&lt;? extends Person&gt;는 Person객체 또는 이를 상속한 객체를 데이터로 가지고 있는 ArrayList객체만 함수의 인자로 전달될 수 있음을 의미합니다. 따라서 아래 코드에서 Person객체를 상속하지 않은 list1 때문에 컴파일 에러가 발생합니다.\n1234567ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);   // 에러printElements(list2);printElements(list3);\nsuper키워드 super를 사용하면 특정 클래스와 부모 클래스만 인자로 제한할 수 있습니다.\n1234567891011void printElements(ArrayList&lt;? super Person&gt; list) &#123;    // ..&#125;ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);   // 에러printElements(list2);printElements(list3);\n와일드 카드&lt;?&gt;의 종류\n&lt;? extends T&gt; 와일드 카드의 상한 제한(upper bound) - T와 그 자손들을 구현한 객체들만 타입 매개변수로 올 수 있습니다.\n&lt;? super T&gt; 와일드 카드의 하한 제한(lower bound) - T와 그 조상들을 구현한 객체들만 타입 매개변수로 올 수 있습니다.\n&lt;?&gt; 타입 매개변수에 제한 없습니다.\n\n마치며이번 포스트에서는 Java의 제너릭의 와일드 카드(Wildcard)에 대해 알아봤습니다. 다음 포스트에서는 제너릭의 타입 소거(Type Erasure)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-04T20:16:30+09:00","dateModified":"2021-05-12T18:07:10+09:00","datePublished":"2018-02-04T20:16:30+09:00","description":"","headline":"[Java] 제너릭의 와일드 카드(Wildcard)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/04/java/180204-wildcard/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2018/02/04/java/180204-wildcard/","keywords":"Java"}</script>
     <meta name="description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.  제너릭(Generic)의 개념과 장점 제너릭 클래스(Generic Class) 제너릭 함수(Generic Function)  제너릭의 와일드 카드(Wildcard) ⬅️ ⬅️">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Java] 제너릭의 와일드 카드(Wildcard)">
@@ -119,24 +121,6 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
                             href="/ko/android"
                             
                             rel="noopener"
@@ -156,7 +140,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,13 +167,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/ios"
+                            href="/ko/all-tags"
                             
                             rel="noopener"
-                            title="iOS"
+                            title="Tags"
                         >
-                        <i class="sidebar-button-icon fab fa-apple" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">iOS</span>
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
                     </a>
             </li>
             
@@ -197,13 +181,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/swift"
+                            href="#about"
                             
                             rel="noopener"
-                            title="Swift"
+                            title="About"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Swift</span>
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
                     </a>
             </li>
             
@@ -211,31 +195,13 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/objective-c"
+                            href="/ko/mailto"
                             
                             rel="noopener"
-                            title="Objective-C"
+                            title="Mail"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Objective-C</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/flutter"
-                            
-                            rel="noopener"
-                            title="Flutter"
-                        >
-                        <i class="sidebar-button-icon fab fa-google" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Flutter</span>
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
                     </a>
             </li>
             
@@ -243,19 +209,17 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/ko/dart"
+                            href="https://github.com/"
+                            
+                                target="_blank"
                             
                             rel="noopener"
-                            title="Dart"
+                            title="Github"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Dart</span>
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
                     </a>
             </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
             
         </ul>
         
@@ -564,7 +528,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
