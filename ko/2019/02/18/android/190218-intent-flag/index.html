@@ -1,0 +1,599 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Yologger&#39;s Blog">
+    <title>[Android] 액티비티 - (4) 인텐트 플래그(Intent Flag) - Yologger&#39;s Blog</title>
+    <meta name="author" content="yologger">
+    
+    
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서 Task Affinity와 Launch Mode를 사용하여 태스크나 액티비티의 실행 흐름을 제어하는 법에 대해 알아봤습니다. 태스크나 액티비티의 실행 흐름은 인텐트 플래그(Intent Flag)를 사용해서도 제어할 수 있습니다.\n\n인텐트 플래그 설정 방법인텐트 플래그를 설정하는 방법에는 2가지가 있습니다.\n(1) setFlags()기존 플래그는 없애고 인자로 전달된 플래그를 설정합니다.\n(2) addFlags()기존 플래그를 유지하고 인자로 전달된 플래그를 추가합니다.\n\n인탠트 플래그 종류안드로이드에는 무수히 많은 인탠트 플래그가 있습니다. 이번 포스트에서는 자주 사용하는 인텐트 플래그에 대해 알아보겠습니다.\n(1) FLAG_ACTIVITY_CLEAR_TOP실행되는 액티비티가 이미 태스크에 존재할 경우, 그 위에 있는 액티비티들을 종료하고 실행되는 액티비티를 스택의 가장 위에 위치시킵니다.\n1234// ActivityD.ktval intent = Intent(this@ActivityD, ActivityB::class.java)intent.setFlags(FLAG_ACTIVITY_CLEAR_TOP)startActivity(intent)\n(2) FLAG_ACTIVITY_NO_ANIMATION화면 전환 시 애니메이션을 없애줍니다.\n1234// ActivityA.ktval intent = Intent(this@ActivityA, ActivityB::class.java)intent.setFlags(FLAG_ACTIVITY_NO_ANIMATION)startActivity(intent)\n(3) FLAG_ACTIVITY_SINGLE_TOPlaunchMode=&quot;singleTop&quot;과 동일합니다.\n(4) FLAG_ACTIVITY_REORDER_TO_FRONT실행되는 액티비티가 태스크에 이미 존재하면 태스크의 가장 위로 올려줍니다.\n1234// ActivityD.ktval intent = Intent(this@ActivityD, ActivityB::class.java)intent.setFlags(FLAG_ACTIVITY_REORDER_TO_FRONT)startActivity(intent)\n(5) FLAG_ACTIVITY_NO_HISTORYActivity A &gt; Activity B &gt; Activity C 순서대로 실행한다고 가정합시다.\nActivity A에서 Activity B를 실행할 때 FLAG_ACTIVITY_NO_HISTORY 플래그를 설정하면 Activity B는 태스크에 추가되지 않고 화면전환만 됩니다.\n1234// ActivityA.ktval intent = Intent(this@ActivityA, ActivityB::class.java)intent.setFlags(FLAG_ACTIVITY_NO_HISTORY)startActivity(intent)\n이제 Activity B에서 어떠한 플래그도 설정하지 않고 Activity C로 이동합시다.\n123// ActivityB.ktval intent = Intent(this@ActivityA, ActivityB::class.java)startActivity(intent)\nActivity C에서 뒤로 가기(Back) 버튼을 누르면 Activity B가 아니라 Activity A로 이동합니다. Activity B는 태스크에 추가되지 않았기 때문입니다. 로딩 화면처럼 다시 돌아올 필요가 없는 화면에 사용합니다.\n(6) FLAG_ACTIVITY_FORWARD_RESULTActivity A &gt; Activity B &gt; Activity C로 화면 이동을 한다고 가정합시다. Activity C에서 Activity A로 돌아가면서 데이터를 반환하려면 Activity B에서 onActivityResult()를 구현하고, 이 안에서 다시 Activity A로 데이터를 반환하는 로직을 구현해야합니다.이러한 경우 FLAG_ACTIVITY_FORWARD_RESULT을 사용하여 값을 쉽게 반환할 수 있습니다.우선 Activity A에서 Activity B로 이동하는 코드는 다음과 같습니다.\n1234567891011121314151617181920// Activity A.ktclass ActivityA : AppCompatActivity() &#123;    private val buttonOpenB: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_a_button_open_b) &#125;    private val REQUEST_CODE = 1000    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_a)        buttonOpenB.setOnClickListener &#123;            // Open B 버튼을 눌렀을 때 Activity B 실행            val intent = Intent(this, ActivityB::class.java)            startActivityForResult(intent, REQUEST_CODE)        &#125;        // ...    &#125;&#125;\nActivity B에서 Activity C를 실행할 때는 startActivityForResult() 대신에 startActivity()를 사용합니다. 또한 FLAG_ACTIVITY_FORWARD_RESULT 플래그를 설정해줍니다.\n123456789101112131415161718class ActivityB : AppCompatActivity() &#123;    private val buttonOpenC: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button_open_c) &#125;    private val buttonCloseC: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button_close_c) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_b)        buttonOpenC.setOnClickListener &#123;            // Open C 버튼을 눌렀을 때 Activity C 실행            val intent = Intent(this@ActivityB, ActivityC::class.java)            // 플래그 설정            intent.setFlags(FLAG_ACTIVITY_FORWARD_RESULT)            startActivity(intent)        &#125;    &#125;&#125;\nActivity C에서 Activity B로 돌아가는 로직은 다음과 같이 구현합니다.\n12345678910111213141516171819class ActivityC : AppCompatActivity() &#123;    val buttonCloseC: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_c_button_close_c) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_c)        buttonCloseC.setOnClickListener &#123;            // Close C 버튼을 눌렀을 때 데이터를 반환하면서 Activity C 종료            val intent = Intent()            intent.putExtra(&quot;name&quot;, &quot;Paul&quot;)            setResult(Activity.RESULT_OK, intent)            finish()        &#125;        // ...    &#125;&#125;\n이제 Activity B에서 데이터를 받아 Activity A로 전달해봅시다. \nActivity B에서 Activity C로 이동할 때 FLAG_ACTIVITY_FORWARD_RESULT 플래그를 설정하지 않았다면, Activity B에 onActivityResult()를 구현하고 이 안에서 setResult()와 finish()를 호출하여 Activity A로 데이터를 반환하는 로직을 구현해야 합니다. 그러나 Activity B에서 Activity C로 이동할 때 플래그를 설정했으므로 그저 finish()만 호출하여 Activity B를 종료하면 됩니다.\n1234567891011121314151617181920212223242526272829class ActivityB : AppCompatActivity() &#123;    private val buttonOpenC: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button_open_c) &#125;    private val buttonCloseB: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button_back_to_a) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_b)        buttonOpenC.setOnClickListener &#123;            // ...        &#125;        buttonCloseB.setOnClickListener &#123;            // Close B 버튼을 눌렀을 때 Activity B 종료            finish()        &#125;    &#125;    // onActivityResult()를 구현하지 않아도 됩니다.    /*     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) &#123;        super.onActivityResult(requestCode, resultCode, data)        // ...    &#125;    */&#125;    &#125;\n이제 Activity A에서 onActivityResult()를 구현하여 Activity C에서 온 데이터를 전달받을 수 있습니다.\n12345678910111213141516171819202122232425class ActivityA : AppCompatActivity() &#123;    private val button: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_a_button_open_b) &#125;    private val REQUEST_CODE = 1000    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_a)        button.setOnClickListener &#123;            // ...        &#125;    &#125;    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) &#123;        super.onActivityResult(requestCode, resultCode, data)        if (requestCode == REQUEST_CODE) &#123;            if (resultCode != Activity.RESULT_OK) &#123; return &#125;            data?.extras?.getString(&quot;name&quot;)?.run &#123;                Toast.makeText(this@ActivityA, this, Toast.LENGTH_SHORT).show()            &#125;        &#125;    &#125;&#125;\n(7) FLAG_ACTIVITY_NEW_TASK새로운 태스크를 생성하고 그 안에서 액티비티를 실행합니다. 그러나 동일한 affinity를 가진 태스크가 존재하면 새로운 태스크를 생성하지 않고 기존의 태스크를 재활용합니다.\nAndroidManifest.xml에 다음과 같이 4개의 액티비티가 정의되어있다고 가정합시다. Activity A와 Activity B의 taskAffinity 값이 동일하고, Activity C와 Activity D의 taskAffinity 값이 동일합니다.\n123456789101112131415161718192021222324252627282930&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.example&quot;&gt;     &lt;application        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:theme=&quot;@style/AppTheme&quot;&gt;        &lt;activity            android:name=&quot;.ActivityA&quot;            android:taskAffinity=&quot;com.yologger.task1&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;         &lt;activity android:name=&quot;.ActivityB&quot;            android:taskAffinity=&quot;com.yologger.task1&quot;/&gt;         &lt;activity android:name=&quot;.ActivityC&quot;            android:taskAffinity=&quot;com.yologger.task2&quot;/&gt;         &lt;activity android:name=&quot;.ActivityD&quot;            android:taskAffinity=&quot;com.yologger.task2&quot;/&gt;     &lt;/application&gt; &lt;/manifest&gt;\n앱을 처음 실행하면 다음과 같은 상태입니다.Activity A에서 다음과 같이 Activity B를 실행합시다.\n1234// ActivityA.ktval intent = Intent(this, ActivityB::class.java)intent.setFlags(FLAG_ACTIVITY_NEW_TASK)startActivity(intent)\n그럼 태스크는 아래와 같습니다. Activity A와 Activity B는 동일한 taskAffinity 속성값을 가지고 있기 때문입니다.이제 Activity B에서 Activity C를 실행합니다.\n1234// ActivityB.ktval intent = Intent(this, ActivityC::class.java)intent.setFlags(FLAG_ACTIVITY_NEW_TASK)startActivity(intent)\n이제 태스크는 아래와 같습니다. Activity B와 Activity C는 다른 taskAffinity 속성값을 가지고 있기 때문입니다.이제 Activity C에서 Activity D를 실행합니다.\n1234// ActivityC.ktval intent = Intent(this, ActivityD::class.java)intent.setFlags(FLAG_ACTIVITY_NEW_TASK)startActivity(intent)\n이제 태스크는 아래와 같습니다. Activity C와 Activity D는 동일한 taskAffinity 속성값을 가지고 있기 때문입니다.\n(8) FLAG_ACTIVITY_MULTIPLE_TASK이 플래그는 FLAG_ACTIVITY_NEW_TASK와 같이 사용하지 않으면 아무련 효과가 없습니다. 액티비티를 실행하면 무조건 새로운 태스크를 생성하고 그 안의 루트 액티비티로 지정하여 실행합니다. 만약 동일한 taskAffinity 속성값을 같는 태스크가 존재하면, 기존의 태스크를 제거하고 새로운 태스크를 생성한 후 루트 액티비티로 지정합니다.\n바로 위 예제와 동일하게 AndroidManifest.xml에 4개의 Activity가 정의되어있습니다.\n1234567891011121314151617181920212223242526272829&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.example&quot;&gt;     &lt;application        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:theme=&quot;@style/AppTheme&quot;&gt;        &lt;activity            android:name=&quot;.ActivityA&quot;            android:taskAffinity=&quot;com.yologger.task1&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;         &lt;activity android:name=&quot;.ActivityB&quot;            android:taskAffinity=&quot;com.yologger.task1&quot;/&gt;         &lt;activity android:name=&quot;.ActivityC&quot;            android:taskAffinity=&quot;com.yologger.task2&quot;/&gt;         &lt;activity android:name=&quot;.ActivityD&quot;            android:taskAffinity=&quot;com.yologger.task2&quot;/&gt;     &lt;/application&gt; &lt;/manifest&gt;\n앱을 처음 실행하면 다음과 같은 상태입니다.이제 FLAG_ACTIVITY_NEW_TASK와 FLAG_ACTIVITY_MULTIPLE_TASK를 모두 설정하여 Activity B를 실행합시다.\n1234// ActivityA.ktval intent = Intent(this, ActivityB::class.java)intent.setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_MULTIPLE_TASK)startActivity(intent)\n이제 앱은 다음과 같은 상태가 됩니다.FLAG_ACTIVITY_MULTIPLE_TASK 플래그는 태스크를 무조건 생성합니다. 그런데 Activity A와 Activity B의 taskAffinity 속성값이 동일합니다. 따라서 기존 태스크를 제거하고 새로운 태스크를 생성한 후 Activity B를 루트 액티비티로 지정합니다.\n이제 다음과 같이 Activity B에서 Activity C를 실행합시다.\n1234// ActivityB.ktval intent = Intent(this, ActivityC::class.java)intent.setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_MULTIPLE_TASK)startActivity(intent)\nActivity B와 Activity C는 taskAffinity 속성값이 다릅니다. 따라서 태스크는 2개가 되며, 앱은 다음과 같은 상태가 됩니다.마지막으로 Activity C에서 Activity D를 실행합시다.\n1234// ActivityC.ktval intent = Intent(this, ActivityD::class.java)intent.setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_MULTIPLE_TASK)startActivity(intent)\n이제 앱은 다음과 같은 상태가 됩니다.\n마치며이번 포스트에서는 자주 쓰는 인텐트 플래그에 대해 알아봤습니다. 안드로이드가 제공하는 모든 인텐트 플래그는 이 곳에서 확인할 수 있습니다. 다음 포스트에서는 액티비티 생명주기 메소드에 대해 알아보겠습니다.\n","dateCreated":"2019-02-18T20:16:30+09:00","dateModified":"2021-06-11T16:10:37+09:00","datePublished":"2019-02-18T20:16:30+09:00","description":"","headline":"[Android] 액티비티 - (4) 인텐트 플래그(Intent Flag)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/","keywords":"Android"}</script>
+    <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서 Task Affinity와 Launch Mode를 사용하여 태스크나 액티비티의 실행 흐름을 제어하는 법에 대해 알아봤습니다. 태스크나 액티비티의 실행 흐름은 인텐트 플래그(Intent Flag)를 사용해서도 제어할 수 있습니다.  인텐">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[Android] 액티비티 - (4) 인텐트 플래그(Intent Flag)">
+<meta property="og:url" content="https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/index.html">
+<meta property="og:site_name" content="Yologger&#39;s Blog">
+<meta property="og:description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서 Task Affinity와 Launch Mode를 사용하여 태스크나 액티비티의 실행 흐름을 제어하는 법에 대해 알아봤습니다. 태스크나 액티비티의 실행 흐름은 인텐트 플래그(Intent Flag)를 사용해서도 제어할 수 있습니다.  인텐">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/1.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/2.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/3.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/4.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/5.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/6.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/7.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/8.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/9.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/10.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/11.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/12.png">
+<meta property="article:published_time" content="2019-02-18T11:16:30.000Z">
+<meta property="article:modified_time" content="2021-06-11T07:10:37.534Z">
+<meta property="article:author" content="yologger">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/android/intent-flag/1.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYKNWR810R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-QYKNWR810R');
+    </script>
+
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/ko/"
+            aria-label=""
+        >
+            Yologger&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="링크 열기: /ko/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://yologger.github.io"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="English"
+                        >
+                        <i class="sidebar-button-icon fa fa-globe" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">English</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/java"
+                            
+                            rel="noopener"
+                            title="Java"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Github"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [Android] 액티비티 - (4) 인텐트 플래그(Intent Flag)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2019-02-18T20:16:30+09:00">
+	
+		    2019/02/18
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <hr>
+<blockquote>
+<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서 <a href="/ko/2019/02/17/android/190217-launchmode/"><code>Task Affinity</code>와 <code>Launch Mode</code></a>를 사용하여 태스크나 액티비티의 실행 흐름을 제어하는 법에 대해 알아봤습니다. 태스크나 액티비티의 실행 흐름은 <code>인텐트 플래그(Intent Flag)</code>를 사용해서도 제어할 수 있습니다.</p>
+<hr>
+<h1 id="인텐트-플래그-설정-방법"><a href="#인텐트-플래그-설정-방법" class="headerlink" title="인텐트 플래그 설정 방법"></a>인텐트 플래그 설정 방법</h1><p>인텐트 플래그를 설정하는 방법에는 2가지가 있습니다.</p>
+<h5 id="1-setFlags"><a href="#1-setFlags" class="headerlink" title="(1) setFlags()"></a>(1) setFlags()</h5><p>기존 플래그는 없애고 인자로 전달된 플래그를 설정합니다.</p>
+<h5 id="2-addFlags"><a href="#2-addFlags" class="headerlink" title="(2) addFlags()"></a>(2) addFlags()</h5><p>기존 플래그를 유지하고 인자로 전달된 플래그를 추가합니다.</p>
+<hr>
+<h1 id="인탠트-플래그-종류"><a href="#인탠트-플래그-종류" class="headerlink" title="인탠트 플래그 종류"></a>인탠트 플래그 종류</h1><p>안드로이드에는 무수히 많은 인탠트 플래그가 있습니다. 이번 포스트에서는 자주 사용하는 인텐트 플래그에 대해 알아보겠습니다.</p>
+<h5 id="1-FLAG-ACTIVITY-CLEAR-TOP"><a href="#1-FLAG-ACTIVITY-CLEAR-TOP" class="headerlink" title="(1) FLAG_ACTIVITY_CLEAR_TOP"></a>(1) FLAG_ACTIVITY_CLEAR_TOP</h5><p>실행되는 액티비티가 이미 태스크에 존재할 경우, 그 위에 있는 액티비티들을 종료하고 실행되는 액티비티를 스택의 가장 위에 위치시킵니다.<br><img src="/ko/images/posts/android/intent-flag/1.png"></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityD.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span><span class="symbol">@ActivityD</span>, ActivityB::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_CLEAR_TOP)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<h5 id="2-FLAG-ACTIVITY-NO-ANIMATION"><a href="#2-FLAG-ACTIVITY-NO-ANIMATION" class="headerlink" title="(2) FLAG_ACTIVITY_NO_ANIMATION"></a>(2) FLAG_ACTIVITY_NO_ANIMATION</h5><p>화면 전환 시 애니메이션을 없애줍니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityA.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span><span class="symbol">@ActivityA</span>, ActivityB::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_NO_ANIMATION)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<h5 id="3-FLAG-ACTIVITY-SINGLE-TOP"><a href="#3-FLAG-ACTIVITY-SINGLE-TOP" class="headerlink" title="(3) FLAG_ACTIVITY_SINGLE_TOP"></a>(3) FLAG_ACTIVITY_SINGLE_TOP</h5><p><code>launchMode=&quot;singleTop&quot;</code>과 동일합니다.</p>
+<h5 id="4-FLAG-ACTIVITY-REORDER-TO-FRONT"><a href="#4-FLAG-ACTIVITY-REORDER-TO-FRONT" class="headerlink" title="(4) FLAG_ACTIVITY_REORDER_TO_FRONT"></a>(4) FLAG_ACTIVITY_REORDER_TO_FRONT</h5><p>실행되는 액티비티가 태스크에 이미 존재하면 태스크의 가장 위로 올려줍니다.<br><img src="/ko/images/posts/android/intent-flag/2.png"></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityD.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span><span class="symbol">@ActivityD</span>, ActivityB::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_REORDER_TO_FRONT)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<h5 id="5-FLAG-ACTIVITY-NO-HISTORY"><a href="#5-FLAG-ACTIVITY-NO-HISTORY" class="headerlink" title="(5) FLAG_ACTIVITY_NO_HISTORY"></a>(5) FLAG_ACTIVITY_NO_HISTORY</h5><p>Activity A &gt; Activity B &gt; Activity C 순서대로 실행한다고 가정합시다.</p>
+<p>Activity A에서 Activity B를 실행할 때 FLAG_ACTIVITY_NO_HISTORY 플래그를 설정하면 Activity B는 태스크에 추가되지 않고 화면전환만 됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityA.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span><span class="symbol">@ActivityA</span>, ActivityB::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_NO_HISTORY)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<p>이제 Activity B에서 어떠한 플래그도 설정하지 않고 Activity C로 이동합시다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityB.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span><span class="symbol">@ActivityA</span>, ActivityB::<span class="keyword">class</span>.java)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<p>Activity C에서 <code>뒤로 가기(Back) 버튼</code>을 누르면 Activity B가 아니라 Activity A로 이동합니다. Activity B는 태스크에 추가되지 않았기 때문입니다. 로딩 화면처럼 다시 돌아올 필요가 없는 화면에 사용합니다.</p>
+<h5 id="6-FLAG-ACTIVITY-FORWARD-RESULT"><a href="#6-FLAG-ACTIVITY-FORWARD-RESULT" class="headerlink" title="(6) FLAG_ACTIVITY_FORWARD_RESULT"></a>(6) FLAG_ACTIVITY_FORWARD_RESULT</h5><p>Activity A &gt; Activity B &gt; Activity C로 화면 이동을 한다고 가정합시다. Activity C에서 Activity A로 돌아가면서 데이터를 반환하려면 Activity B에서 <a href="/ko/2019/03/02/android/190302-intent-data-transfer/">onActivityResult()</a>를 구현하고, 이 안에서 다시 Activity A로 데이터를 반환하는 로직을 구현해야합니다.<br><img src="/ko/images/posts/android/intent-flag/3.png"><br>이러한 경우 FLAG_ACTIVITY_FORWARD_RESULT을 사용하여 값을 쉽게 반환할 수 있습니다.<br><img src="/ko/images/posts/android/intent-flag/4.png"><br>우선 Activity A에서 Activity B로 이동하는 코드는 다음과 같습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Activity A.kt</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityA</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonOpenB: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.activity_a_button_open_b) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> REQUEST_CODE = <span class="number">1000</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_a)</span><br><span class="line"></span><br><span class="line">        buttonOpenB.setOnClickListener &#123;</span><br><span class="line">            <span class="comment">// Open B 버튼을 눌렀을 때 Activity B 실행</span></span><br><span class="line">            <span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, ActivityB::<span class="keyword">class</span>.java)</span><br><span class="line">            startActivityForResult(intent, REQUEST_CODE)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Activity B에서 Activity C를 실행할 때는 startActivityForResult() 대신에 startActivity()를 사용합니다. 또한 FLAG_ACTIVITY_FORWARD_RESULT 플래그를 설정해줍니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityB</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonOpenC: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button_open_c) &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonCloseC: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button_close_c) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_b)</span><br><span class="line"></span><br><span class="line">        buttonOpenC.setOnClickListener &#123;</span><br><span class="line">            <span class="comment">// Open C 버튼을 눌렀을 때 Activity C 실행</span></span><br><span class="line">            <span class="keyword">val</span> intent = Intent(<span class="keyword">this</span><span class="symbol">@ActivityB</span>, ActivityC::<span class="keyword">class</span>.java)</span><br><span class="line">            <span class="comment">// 플래그 설정</span></span><br><span class="line">            intent.setFlags(FLAG_ACTIVITY_FORWARD_RESULT)</span><br><span class="line">            startActivity(intent)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Activity C에서 Activity B로 돌아가는 로직은 다음과 같이 구현합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityC</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> buttonCloseC: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.activity_c_button_close_c) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_c)</span><br><span class="line"></span><br><span class="line">        buttonCloseC.setOnClickListener &#123;</span><br><span class="line">            <span class="comment">// Close C 버튼을 눌렀을 때 데이터를 반환하면서 Activity C 종료</span></span><br><span class="line">            <span class="keyword">val</span> intent = Intent()</span><br><span class="line">            intent.putExtra(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Paul&quot;</span>)</span><br><span class="line">            setResult(Activity.RESULT_OK, intent)</span><br><span class="line">            finish()</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이제 Activity B에서 데이터를 받아 Activity A로 전달해봅시다. </p>
+<p>Activity B에서 Activity C로 이동할 때 FLAG_ACTIVITY_FORWARD_RESULT 플래그를 설정하지 않았다면, Activity B에 onActivityResult()를 구현하고 이 안에서 setResult()와 finish()를 호출하여 Activity A로 데이터를 반환하는 로직을 구현해야 합니다. 그러나 Activity B에서 Activity C로 이동할 때 플래그를 설정했으므로 그저 finish()만 호출하여 Activity B를 종료하면 됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityB</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonOpenC: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button_open_c) &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonCloseB: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button_back_to_a) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_b)</span><br><span class="line"></span><br><span class="line">        buttonOpenC.setOnClickListener &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        buttonCloseB.setOnClickListener &#123;</span><br><span class="line">            <span class="comment">// Close B 버튼을 눌렀을 때 Activity B 종료</span></span><br><span class="line">            finish()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// onActivityResult()를 구현하지 않아도 됩니다.</span></span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) &#123;</span></span><br><span class="line"><span class="comment">        super.onActivityResult(requestCode, resultCode, data)</span></span><br><span class="line"><span class="comment">        // ...</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이제 Activity A에서 onActivityResult()를 구현하여 Activity C에서 온 데이터를 전달받을 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityA</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> button: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.activity_a_button_open_b) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> REQUEST_CODE = <span class="number">1000</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_a)</span><br><span class="line"></span><br><span class="line">        button.setOnClickListener &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, <span class="keyword">data</span>: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, <span class="keyword">data</span>)</span><br><span class="line">        <span class="keyword">if</span> (requestCode == REQUEST_CODE) &#123;</span><br><span class="line">            <span class="keyword">if</span> (resultCode != Activity.RESULT_OK) &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">            <span class="keyword">data</span>?.extras?.getString(<span class="string">&quot;name&quot;</span>)?.run &#123;</span><br><span class="line">                Toast.makeText(<span class="keyword">this</span><span class="symbol">@ActivityA</span>, <span class="keyword">this</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="7-FLAG-ACTIVITY-NEW-TASK"><a href="#7-FLAG-ACTIVITY-NEW-TASK" class="headerlink" title="(7) FLAG_ACTIVITY_NEW_TASK"></a>(7) FLAG_ACTIVITY_NEW_TASK</h5><p>새로운 태스크를 생성하고 그 안에서 액티비티를 실행합니다. 그러나 동일한 affinity를 가진 태스크가 존재하면 새로운 태스크를 생성하지 않고 기존의 태스크를 재활용합니다.</p>
+<p>AndroidManifest.xml에 다음과 같이 4개의 액티비티가 정의되어있다고 가정합시다. Activity A와 Activity B의 taskAffinity 값이 동일하고, Activity C와 Activity D의 taskAffinity 값이 동일합니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.example&quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    &lt;application</span><br><span class="line">        android:icon=&quot;@mipmap/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:theme=&quot;@style/AppTheme&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.ActivityA&quot;</span><br><span class="line">            android:taskAffinity=&quot;com.yologger.task1&quot;&gt;</span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityB&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:taskAffinity</span>=<span class="string">&quot;com.yologger.task1&quot;</span>/&gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityC&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:taskAffinity</span>=<span class="string">&quot;com.yologger.task2&quot;</span>/&gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityD&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:taskAffinity</span>=<span class="string">&quot;com.yologger.task2&quot;</span>/&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>앱을 처음 실행하면 다음과 같은 상태입니다.<br><img src="/ko/images/posts/android/intent-flag/5.png"><br>Activity A에서 다음과 같이 Activity B를 실행합시다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityA.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, ActivityB::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_NEW_TASK)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<p>그럼 태스크는 아래와 같습니다. Activity A와 Activity B는 동일한 taskAffinity 속성값을 가지고 있기 때문입니다.<br><img src="/ko/images/posts/android/intent-flag/6.png"><br>이제 Activity B에서 Activity C를 실행합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityB.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, ActivityC::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_NEW_TASK)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<p>이제 태스크는 아래와 같습니다. Activity B와 Activity C는 다른 taskAffinity 속성값을 가지고 있기 때문입니다.<br><img src="/ko/images/posts/android/intent-flag/7.png"><br>이제 Activity C에서 Activity D를 실행합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityC.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, ActivityD::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_NEW_TASK)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<p>이제 태스크는 아래와 같습니다. Activity C와 Activity D는 동일한 taskAffinity 속성값을 가지고 있기 때문입니다.<br><img src="/ko/images/posts/android/intent-flag/8.png"></p>
+<h5 id="8-FLAG-ACTIVITY-MULTIPLE-TASK"><a href="#8-FLAG-ACTIVITY-MULTIPLE-TASK" class="headerlink" title="(8) FLAG_ACTIVITY_MULTIPLE_TASK"></a>(8) FLAG_ACTIVITY_MULTIPLE_TASK</h5><p>이 플래그는 FLAG_ACTIVITY_NEW_TASK와 같이 사용하지 않으면 아무련 효과가 없습니다. 액티비티를 실행하면 무조건 새로운 태스크를 생성하고 그 안의 루트 액티비티로 지정하여 실행합니다. 만약 동일한 taskAffinity 속성값을 같는 태스크가 존재하면, 기존의 태스크를 제거하고 새로운 태스크를 생성한 후 루트 액티비티로 지정합니다.</p>
+<p>바로 위 예제와 동일하게 AndroidManifest.xml에 4개의 Activity가 정의되어있습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.example&quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    &lt;application</span><br><span class="line">        android:icon=&quot;@mipmap/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:theme=&quot;@style/AppTheme&quot;&gt;</span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.ActivityA&quot;</span><br><span class="line">            android:taskAffinity=&quot;com.yologger.task1&quot;&gt;</span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityB&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:taskAffinity</span>=<span class="string">&quot;com.yologger.task1&quot;</span>/&gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityC&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:taskAffinity</span>=<span class="string">&quot;com.yologger.task2&quot;</span>/&gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityD&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:taskAffinity</span>=<span class="string">&quot;com.yologger.task2&quot;</span>/&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>앱을 처음 실행하면 다음과 같은 상태입니다.<br><img src="/ko/images/posts/android/intent-flag/9.png"><br>이제 FLAG_ACTIVITY_NEW_TASK와 FLAG_ACTIVITY_MULTIPLE_TASK를 모두 설정하여 Activity B를 실행합시다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityA.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, ActivityB::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_MULTIPLE_TASK)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<p>이제 앱은 다음과 같은 상태가 됩니다.<br><img src="/ko/images/posts/android/intent-flag/10.png"><br>FLAG_ACTIVITY_MULTIPLE_TASK 플래그는 태스크를 무조건 생성합니다. 그런데 Activity A와 Activity B의 taskAffinity 속성값이 동일합니다. 따라서 기존 태스크를 제거하고 새로운 태스크를 생성한 후 Activity B를 루트 액티비티로 지정합니다.</p>
+<p>이제 다음과 같이 Activity B에서 Activity C를 실행합시다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityB.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, ActivityC::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_MULTIPLE_TASK)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<p>Activity B와 Activity C는 taskAffinity 속성값이 다릅니다. 따라서 태스크는 2개가 되며, 앱은 다음과 같은 상태가 됩니다.<br><img src="/ko/images/posts/android/intent-flag/11.png"><br>마지막으로 Activity C에서 Activity D를 실행합시다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityC.kt</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, ActivityD::<span class="keyword">class</span>.java)</span><br><span class="line">intent.setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_MULTIPLE_TASK)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<p>이제 앱은 다음과 같은 상태가 됩니다.<br><img src="/ko/images/posts/android/intent-flag/12.png"></p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 자주 쓰는 인텐트 플래그에 대해 알아봤습니다. 안드로이드가 제공하는 모든 인텐트 플래그는 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/Intent">이 곳</a>에서 확인할 수 있습니다. 다음 포스트에서는 <a href="/ko/2019/02/19/android/190219-activity-lifecycle/">액티비티 생명주기 메소드</a>에 대해 알아보겠습니다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">태그</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Android/" rel="tag">Android</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 yologger. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"
+                        aria-label="Facebook에 공유하기"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"
+                        aria-label="Twitter에 공유하기"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/18/android/190218-intent-flag/"
+                        aria-label="Google+에 공유하기"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">yologger</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+        <!--SCRIPTS-->
+
+<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

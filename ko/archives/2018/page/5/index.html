@@ -256,23 +256,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/03/android/build-config/"
-                            aria-label=": 코드에서 환경변수 분리하기 (1) ㅡ BuildConfig"
+                            href="/ko/2018/01/18/java/180118-inner-class/"
+                            aria-label=": [Java] 내부 클래스(Inner Class)"
                         >
-                            코드에서 환경변수 분리하기 (1) ㅡ BuildConfig
+                            [Java] 내부 클래스(Inner Class)
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-01-03T20:16:30+09:00">
+    <time datetime="2018-01-18T20:16:30+09:00">
 	
-		    2018/01/03
+		    2018/01/18
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
 
 
     
@@ -282,29 +282,19 @@
             
                 <div class="postShorten-content">
                     <hr>
-<p>안드로이드 시스템은 앱을 빌드할 때 여러 파일을 자동으로 생성합니다. 그 중 하나가 <code>BuildConfig</code>클래스입니다. 이 클래스에는 현재 빌드와 관련된 정보가 상수 형태로 정의되어 있고, 코드에서도 직접 참조할 수 있습니다.</p>
-<h2 id="코드에서-BuildConfig-상수에-접근하기"><a href="#코드에서-BuildConfig-상수에-접근하기" class="headerlink" title="코드에서 BuildConfig 상수에 접근하기"></a>코드에서 BuildConfig 상수에 접근하기</h2><p>자동으로 생성된 <code>BuildConfig</code>클래스는 다음과 같습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Automatically generated file. DO NOT MODIFY</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildConfig</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> DEBUG = Boolean.parseBoolean(<span class="string">&quot;true&quot;</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String APPLICATION_ID = <span class="string">&quot;com.example.simple_memo&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BUILD_TYPE = <span class="string">&quot;debug&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VERSION_CODE = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String VERSION_NAME = <span class="string">&quot;1.0&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>BuildConfig</code>클래스 내부의 상수는 코드에서 다음과 같이 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="keyword">val</span> applicationId = BuildConfig.APPLICATION_ID      <span class="comment">// &quot;com.example.simple_memo&quot;</span></span><br><span class="line">        <span class="keyword">val</span> versionCode = BuildConfig.VERSION_CODE          <span class="comment">// 1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>그렇다면 이 상수값은 어디에 정의되어 있을까요? 바로 모듈 수준의 <code>build.gradle</code>입니다. 이 파일의 <code>defaultConfig</code> 안에 상수가 정의되어 있습니다.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.example.simple_memo&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="상수를-직접-정의하고-사용하기"><a href="#상수를-직접-정의하고-사용하기" class="headerlink" title="상수를 직접 정의하고 사용하기"></a>상수를 직접 정의하고 사용하기</h2><p>상수를 직접 정의하고 코드에서 참조할 수도 있습니다. <code>buildConfigField</code>를 사용하면 됩니다. 모듈수준의 <code>build.gradle</code>에  <code>buildConfigField (&quot;DATA_TYPE&quot;, &quot;KEY&quot;, &quot;VALUE&quot;)</code> 형태로 선언하면 됩니다.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.example.simple_memo&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line">        testInstrumentationRunner <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line">        buildConfigField (<span class="string">&quot;String&quot;</span>, <span class="string">&quot;AUTH_API_KEY&quot;</span>, <span class="string">&#x27;&quot;your_auth_api_key&quot;&#x27;</span>)</span><br><span class="line">        buildConfigField (<span class="string">&quot;String&quot;</span>, <span class="string">&quot;AUTH_API_URL&quot;</span>, <span class="string">&#x27;&quot;your_auth_api_url&quot;&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Gradle Sync를 해주어야 BuildConfig 클래스가 생성됩니다.<br>문자열의 경우 작은따옴표로 감싸주어야 합니다.</p>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
 </blockquote>
-<p>새로 생성된 BuildConfig 클래스는 다음과 같습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Automatically generated file. DO NOT MODIFY</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.example.simple_memo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildConfig</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> DEBUG = Boolean.parseBoolean(<span class="string">&quot;true&quot;</span>);</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String APPLICATION_ID = <span class="string">&quot;com.example.simple_memo&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BUILD_TYPE = <span class="string">&quot;debug&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VERSION_CODE = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String VERSION_NAME = <span class="string">&quot;1.0&quot;</span>;</span><br><span class="line">  <span class="comment">// Field from default config.</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH_API_KEY = <span class="string">&quot;your_auth_api_key&quot;</span>;</span><br><span class="line">  <span class="comment">// Field from default config.</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH_API_URL = <span class="string">&quot;your_auth_api_url&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>BuildConfig에 생성된 상수를 접근해봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="keyword">val</span> apiKey = BuildConfig.AUTH_API_KEY       <span class="comment">// your_auth_api_key</span></span><br><span class="line">        <span class="keyword">val</span> apiUrl = BuildConfig.AUTH_API_URL       <span class="comment">// your_auth_api_url</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="상수를-xml-파일에서-사용하기"><a href="#상수를-xml-파일에서-사용하기" class="headerlink" title="상수를 xml 파일에서 사용하기"></a>상수를 xml 파일에서 사용하기</h2><p>모듈 수준의 build.gradle에 선언한 상수는 xml 파일에서도 참조할 수 있습니다. 이 때는 <code>resValue</code>를 사용합니다.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">// buildConfigField (&quot;String&quot;, &quot;AUTH_API_KEY&quot;, &#x27;&quot;your_auth_api_key&quot;&#x27;)</span></span><br><span class="line">        <span class="comment">// buildConfigField (&quot;String&quot;, &quot;AUTH_API_URL&quot;, &#x27;&quot;your_auth_api_url&quot;&#x27;)</span></span><br><span class="line">        resValue <span class="string">&quot;string&quot;</span>, <span class="string">&quot;CLIENT_ID&quot;</span>, <span class="string">&quot;your_client_id&quot;</span></span><br><span class="line">        resValue <span class="string">&quot;string&quot;</span>, <span class="string">&quot;CLIENT_SECRET&quot;</span>, <span class="string">&quot;your_client_secret&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/17/java/180117-interface/">인터페이스(Interface)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>내부 클래스(Inner Class)</code>에 대해 알아보겠습니다.</p>
+<h2 id="Inner-Class"><a href="#Inner-Class" class="headerlink" title="Inner Class"></a>Inner Class</h2><p>Java에서는 클래스 안에 클래스를 정의할 수 있습니다. 이를 <code>내부 클래스(Inner Class)</code>라고 합니다. 내부 클래스는 다음과 같이 선언합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>내부 클래스는 다음과 같이 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (1) 외부 클래스의 인스턴스 생성</span></span><br><span class="line">OuterClass outerClass = <span class="keyword">new</span> OuterClass();</span><br><span class="line"></span><br><span class="line"><span class="comment">// (2) 외부 클래스의 인스턴스를 사용하여 내부 클래스의 인스턴스 생성</span></span><br><span class="line">OuterClass.InnerClass innerClass = outerClass.<span class="function">new <span class="title">InnerClass</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Static-Inner-Class"><a href="#Static-Inner-Class" class="headerlink" title="Static Inner Class"></a>Static Inner Class</h2><p><code>Static</code> 내부 클래스도 선언하고 사용할 수 있습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Static Inner Class</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInnerClass</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 외부 클래스의 인스턴스를 생성하지 않고도 내부 클래스의 인스턴스 생성</span></span><br><span class="line">OuterClass.StaticInnerClass staticInnerClass = <span class="keyword">new</span> OuterClass.StaticInnerClass();</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>내부 클래스(Inner Class)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/19/java/180119-anonymous-class/">익명 클래스(Anonymous Class)</a>에 대해 알아보겠습니다.</p>
 
-<p>xml 파일에서는 다음과 같이 참조할 수 있습니다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span> <span class="attr">android:text</span>=<span class="string">&quot;@string/CLIENT_ID&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -313,7 +303,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/01/03/android/build-config/#post-footer"
+                                href="/ko/2018/01/18/java/180118-inner-class/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -336,17 +326,17 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/01/java/180101-jvm-jre-jdk/"
-                            aria-label=": [Java] Java Compiler, JVM, JRE, JDK 차이"
+                            href="/ko/2018/01/17/java/180117-interface/"
+                            aria-label=": [Java] 인터페이스(Interface)"
                         >
-                            [Java] Java Compiler, JVM, JRE, JDK 차이
+                            [Java] 인터페이스(Interface)
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2018-01-01T01:16:30+09:00">
+    <time datetime="2018-01-17T20:16:30+09:00">
 	
-		    2018/01/01
+		    2018/01/17
     	
     </time>
     
@@ -365,15 +355,21 @@
 <blockquote>
 <p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
 </blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이번 포스트에서는 <code>자바 컴파일러(Java Compiler)</code>, <code>JVM</code>, <code>JRE</code>, <code>JDK</code>의 차이점에 대해 알아보겠습니다.</p>
-<h1 id="자바-컴파일러-Java-Compiler"><a href="#자바-컴파일러-Java-Compiler" class="headerlink" title="자바 컴파일러(Java Compiler)"></a>자바 컴파일러(Java Compiler)</h1><p>우리가 Java로 작성한 파일은 뒤에는 <code>.java</code>라는 확장자가 붙습니다. 이를 보통 <code>자바 소스 코드(Source Code)</code>라고 합니다. <code>자바 컴파일러(Java Compiler)</code>는 이 소스코드를 <code>자바 바이트코드(Java Bytecode)</code>로 변환합니다. 자바 바이트코드는 <code>.class</code>확장자를 가집니다.<br><img src="/ko/images/posts/java/java-compiler-1.png"></p>
-<h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><p><code>JVM</code>은 <code>Java Virtual Machine</code>의 줄임말로 <code>자바 바이트코드(Java Bytecode)</code>를 운영체제에 종속적인 코드로 변환하여 실제로 실행합니다.<br><img src="/ko/images/posts/java/jvm.png"><br>위 그림처럼 서로 다른 운영체제라도 <strong>JVM</strong>만 설치되어 있다면, 같은 자바 어플리케이션을 추가적인 작업 없이 실행할 수 있습니다. 단, 자바 어플리케이션과는 달리 <strong>JVM</strong>은 운영체제에 종속적이므로, 각 운영체제에 맞는 <strong>JVM</strong>을 설치해야 합니다.</p>
-<h1 id="JRE"><a href="#JRE" class="headerlink" title="JRE"></a>JRE</h1><p><code>JRE</code>는 <code>Java Runtime Edition</code>의 줄임말로 <code>Java</code>언어로 작성된 애플리케이션을 실행하는데 필요한 요소들입니다. <code>JVM</code>과 <code>실행에 필요한 Java API</code>로 구성되어 있습니다.</p>
-<h1 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h1><p><code>JDK</code>는 <code>Java Development Kit</code>의 줄임말로 어플리케이션 <code>개발</code>에 필요한 요소들입니다. <code>JRE</code>외에도 <code>Java Compiler</code>, <code>Java Debugger</code> 등 개발에 필요한 다양한 도구를 포함하고 있습니다. 보통 <code>Java Platform</code>은 <code>JDK</code>를 의미합니다.</p>
-<p><img src="/ko/images/posts/java/jvm-jdk.png"></p>
-<h1 id="Java-7-Java-SE-7-JDK-7의-차이점"><a href="#Java-7-Java-SE-7-JDK-7의-차이점" class="headerlink" title="Java 7, Java SE 7, JDK 7의 차이점"></a>Java 7, Java SE 7, JDK 7의 차이점</h1><p>Java SE는 Java Platform Standard Edition의 약자로, Java Platform의 근간을 이루는 ‘명세(Specification)’를 가리킵니다. JDK는 이 ‘명세’를 코드로 구현한 ‘구현체’입니다. 즉, Java SE 7은 JSR-336로 규정된 Java SE의 7번째 명세를 의미하고, JDK 7은 OpenJDK JDK 7, Oracle JDK 7과 같은 구현체를 의미합니다. </p>
-<p>추가적으로 Java 7은 정확한 표현이 아닙니다. 하지만 Java SE 7이나 JDK 7보다 사용하기 편해서 흔히 Java 7이라고 부르는 것입니다. </p>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>자바 컴파일러(Java Compiler)</code>, <code>JVM</code>, <code>JRE</code>, <code>JDK</code>의 차이점에 대해 알아보았습니다. 다음 포스트에서는 Java의 <a href="/ko/2018/01/05/java/180105-primitive-data-type/">자료형(Data Type)</a>에 대해 알아보겠습니다.</p>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/16/java/180116-abstract-class/">추상 클래스(Abstract Class)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>인터페이스(Interface)</code>에 대해 알아보겠습니다.</p>
+<h2 id="인터페이스-interface"><a href="#인터페이스-interface" class="headerlink" title="인터페이스(interface)"></a>인터페이스(interface)</h2><p>모든 메소드가 선언만 있고 구현부가 없는 클래스를 <code>인터페이스(Interface)</code>라고 합니다. 인터페이스는 특정 규격을 준수하도록 강제하는데 사용합니다. </p>
+<p><code>인터페이스 (Interface)</code>를 선언할 때는 키워드 <code>interface</code>를 사용합니다. 인터페이스에는 메서드를 선언만 하고 구현은 하지 않습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Database</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">save</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>인터페이스는 인스턴스 생성할 수 없습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Database db = <span class="keyword">new</span> Database();   <span class="comment">// 아래와 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// &#x27;Database&#x27; is abstract; cannot be instantiated</span></span><br></pre></td></tr></table></figure>
+<p>따라서 인터페이스를 구현해야합니다. 보통 인터페이스를 구현한 클래스를 <code>구현체(Imlementation)</code>라고 합니다.</p>
+<p>인터페이스를 구현할 때는 키워드 <code>implements</code>를 사용합니다. 인터페이스 <code>Database</code> 규격을 따르는 클래스 2개를 구현해보겠습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySQL</span> <span class="keyword">implements</span> <span class="title">Database</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        OracleClient client = <span class="keyword">new</span> OracleClient()</span><br><span class="line">        client.save()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        OracleClient client = <span class="keyword">new</span> OracleClient()</span><br><span class="line">        client.delete()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Realm</span> <span class="keyword">implements</span> <span class="title">Database</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">save</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Realm realm = <span class="keyword">new</span> Realm()</span><br><span class="line">        realm.save()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Realm realm = <span class="keyword">new</span> Realm()</span><br><span class="line">        realm.delete()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위 예제에서는 인터페이스 <code>Database</code>라는 규격을 따르도록 강제하고 있습니다. 이렇게 하면 <code>Database</code>를 사용하는 입장에서 실제 구현체가 무엇인지 신경쓰지 않고 사용할 수 있습니다. 이를 어려운 용어로 <code>다형성(Polymorphism)</code>이라고 합니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginViewModel</span> <span class="keyword">implements</span> <span class="title">ViewModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Database db = <span class="keyword">new</span> MySQL()</span><br><span class="line">    db.save()</span><br><span class="line">    </span><br><span class="line">    db = <span class="keyword">new</span> Realm()</span><br><span class="line">    db.save()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위 코드 살펴봅시다. 변수 <code>db</code>에 <code>MySQL</code>의 인스턴스가 할당되든 <code>Realm</code>의 인스턴스가  할당되는 상관없이 <code>save()</code>메소드를 호출할 수 있습니다. <code>MySql</code>클래스와 <code>Realm</code>클래스가 <code>Database</code>인터페이스의 표준을 따르고 있기 때문입니다. </p>
+<p>이처럼 인터페이스와 다형성을 사용하면 유지보수성을 향상시킬 수 있습니다.</p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 클래스의 <code>인터페이스(Interface)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/18/java/180118-inner-class/">내부 클래스(Inner Class)</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -383,7 +379,593 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/01/01/java/180101-jvm-jre-jdk/#post-footer"
+                                href="/ko/2018/01/17/java/180117-interface/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/16/java/180116-abstract-class/"
+                            aria-label=": [Java] 추상 클래스(Abstract Class)"
+                        >
+                            [Java] 추상 클래스(Abstract Class)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-16T20:16:30+09:00">
+	
+		    2018/01/16
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/15/java/180115-final/">키워드<code>final</code></a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>추상 클래스(Abstract Class)</code>에 대해 알아보겠습니다.</p>
+<h2 id="추상-클래스-Abstract-Class"><a href="#추상-클래스-Abstract-Class" class="headerlink" title="추상 클래스(Abstract Class)"></a>추상 클래스(Abstract Class)</h2><p>미구현된 메소드를 가지고 있는 클래스를 <code>추상 클래스(Abstract Class)</code>라고 합니다. 추상 클래스를 선언할 땐 키워드 <code>abstract</code>를 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 구현된 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 미구현된 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printInformation</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>추상 클래스는 인스턴스를 생성할 수 없습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>); <span class="comment">// 아래와 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// &#x27;Person&#x27; is abstract; cannot be instantiated</span></span><br></pre></td></tr></table></figure>
+<p>따라서 이를 상속하는 자식 클래스에서 미구현된 메소드를 구현해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String team;</span><br><span class="line"></span><br><span class="line">    Player(String name, String team) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.team = team;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 메소드 구현</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printInformation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot; plays in &quot;</span> +team);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이제 클래스의 인스턴스를 생성할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Player player = <span class="keyword">new</span> Player(<span class="string">&quot;Paul&quot;</span>, <span class="string">&quot;Real Madrid&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 클래스의 <code>추상 클래스(Abstract Class)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/17/java/180117-interface/">인터페이스(Interface)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/16/java/180116-abstract-class/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/15/java/180115-final/"
+                            aria-label=": [Java] 키워드 final"
+                        >
+                            [Java] 키워드 final
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-15T20:16:30+09:00">
+	
+		    2018/01/15
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/14/java/180114-inheritance/">상속(Inheritance)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 키워드<code>final</code>에 대해 알아보겠습니다.</p>
+<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><p>키워드<code>final</code>은 크게 3가지 용도로 사용됩니다.</p>
+<h2 id="1-상수"><a href="#1-상수" class="headerlink" title="1. 상수"></a>1. 상수</h2><p>키워드 <code>final</code>은 변수를 <code>변경할 수 없는 상수</code>로 만드는데 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> String NAME = <span class="string">&quot;Paul&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>이렇게 선언된 상수는 값을 변경할 수 없습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NAME = <span class="string">&quot;John&quot;</span>;  <span class="comment">// 아래와 같은 오류가 발생합니다.</span></span><br><span class="line"><span class="comment">// Cannot assign a value to final variable &#x27;NAME&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-상속-불가능한-클래스"><a href="#2-상속-불가능한-클래스" class="headerlink" title="2. 상속 불가능한 클래스"></a>2. 상속 불가능한 클래스</h2><p>부모 클래스에 <code>final</code>을 붙여보겠습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스 Person</span></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>자식 클래스는 상속이 불가능합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 다음과 같은 오류가 발생합니다.</span></span><br><span class="line"><span class="comment">// Cannot inherit from final &#x27;Person&#x27;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;   </span><br><span class="line">    </span><br><span class="line">    Programmer(String name) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-오버라이드-불가능한-메소드"><a href="#3-오버라이드-불가능한-메소드" class="headerlink" title="3. 오버라이드 불가능한 메소드"></a>3. 오버라이드 불가능한 메소드</h2><p>부모 클래스 메소드 앞에 <code>final</code>을 붙으면 오버라이드가 불가능합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// final 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Programmer(String name) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 다음과 같은 오류가 발생합니다.</span></span><br><span class="line">    <span class="comment">// &#x27;printName()&#x27; cannot override &#x27;printName()&#x27; in &#x27;Person&#x27;.</span></span><br><span class="line">    <span class="comment">// overridden method is final.</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 키워드<code>final</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/16/java/180116-abstract-class/">추상 클래스(Abstract Class)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/15/java/180115-final/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/14/java/180114-inheritance/"
+                            aria-label=": [Java] 상속(Inheritance)"
+                        >
+                            [Java] 상속(Inheritance)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-14T20:16:30+09:00">
+	
+		    2018/01/14
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/12/java/180112-static/">초기화 블록(Initialization Block)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>상속(Inheritance)</code>에 대해 알아보겠습니다.</p>
+<h2 id="상속-Inheritance"><a href="#상속-Inheritance" class="headerlink" title="상속(Inheritance)"></a>상속(Inheritance)</h2><p>실생활에서 상속은 부모가 자신에게 재산을 물려주는 행위를 뜻합니다. Java에서도 상속은 비슷한 의미로 사용되고 있습니다. <code>상속(Inheritance)</code>은 <strong>부모 클래스의 멤버변수나 메소드를 그대로 물려받는 것</strong>을 의미합니다. 이를 통해 코드의 중복을 제거할 수 있습니다.</p>
+<h2 id="사용-방법"><a href="#사용-방법" class="headerlink" title="사용 방법"></a>사용 방법</h2><p>다음과 같은 부모 클래스가 있다고 가정해봅시다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모 클래스</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> String name;</span><br><span class="line"></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printInformation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>부모 클래스를 상속할 땐 키워드<code>extends</code>를 사용합니다. 자식 클래스에서는 <code>@Override</code>를 붙여 메소드를 재정의할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 자식 클래스</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String team;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 자식 클래스의 생성자</span></span><br><span class="line">    Player(String name, String team) &#123;</span><br><span class="line">        <span class="comment">// 부모 클래스의 생성자를 호출</span></span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.team = team;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 부모 클래스의 메소드를 재정의</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printInformation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot; plays in &quot;</span> + team);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>주의할 점은 자식 클래스의 생성자에서 부모 클래스의 생성자를 호출해야 한다는 것입니다. 이땐 키워드 <code>super</code>를 사용합니다.</p>
+<p>이렇게 정의한 자식 클래스는 다음과 같이 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Player player = <span class="keyword">new</span> Player(<span class="string">&quot;Heung-min Son&quot;</span>, <span class="string">&quot;Tottenham&quot;</span>);</span><br><span class="line">player.printInformation();	<span class="comment">// Heung-min Son plays in Tottenham</span></span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 클래스의 <code>상속(Inheritance)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/15/java/180115-final/">키워드(final)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/14/java/180114-inheritance/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/13/java/180113-initialization_block/"
+                            aria-label=": [Java] 초기화 블록(Initialization Block)"
+                        >
+                            [Java] 초기화 블록(Initialization Block)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-13T20:16:30+09:00">
+	
+		    2018/01/13
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/12/java/180112-static/">정적 멤버변수(Static Variable)과 정적 메소드(Static Method)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>초기화 블록(Initialization Block)</code>에 대해 알아보겠습니다.</p>
+<h2 id="인스턴스-초기화-블록"><a href="#인스턴스-초기화-블록" class="headerlink" title="인스턴스 초기화 블록"></a>인스턴스 초기화 블록</h2><p><code>인스턴스 초기화 블록</code>은 클래스의 인스턴스가 생성될 때 호출되며, 생성자보다도 먼저 호출됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 초기화 블록</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;This is initialization block&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;This is constructor&quot;</span>);</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>클래스의 인스턴스를 생성하면 다음과 같이 화면에 출력됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"><span class="comment">// This is initialization block</span></span><br><span class="line"><span class="comment">// This is constructor</span></span><br><span class="line"></span><br><span class="line">person.printName();</span><br><span class="line"><span class="comment">// Paul</span></span><br></pre></td></tr></table></figure>
+<h2 id="static-초기화-블록"><a href="#static-초기화-블록" class="headerlink" title="static 초기화 블록"></a>static 초기화 블록</h2><p><code>static 초기화 블록</code>은 클래스가 로드될 때 호출됩니다. <code>static 초기화 블록</code>은 다음과 같이 선언합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// static 초기화 블록</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Static Initialization Block&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decrement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>static 초기화 블록</code>은 다음과 같이 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Counter.printCount();</span><br><span class="line"><span class="comment">// Static Initialization Block</span></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.printCount();</span><br><span class="line"><span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 클래스의 <code>초기화 블록(Initialization Block)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/14/java/180114-inheritance/">상속(Inheritance)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/13/java/180113-initialization_block/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/12/java/180112-static/"
+                            aria-label=": [Java] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)"
+                        >
+                            [Java] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-12T20:16:30+09:00">
+	
+		    2018/01/12
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/11/java/180111-constructor/">클래스의 생성자, 멤버변수, 메소드</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>정적 멤버변수(Static Variable)</code>과 <code>정적 메소드(Static Method)</code>에 대해 알아보겠습니다.</p>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>키워드 <code>static</code>은 클래스의 멤버변수와 메소드 앞에 붙일 수 있습니다. 이렇게 <code>static</code>이 붙은 멤버변수와 메소드를 <code>정적 멤버변수(Static Variable)</code>와 <code>정적 메소드(Static Method)</code>라고 합니다. <strong>정적 멤버변수</strong>와 <strong>정적 메소드</strong>는 다음과 같은 특징이 있습니다.</p>
+<blockquote>
+<p>클래스의 인스턴스를 생성하지 않고도 사용이 가능합니다. </p>
+</blockquote>
+<blockquote>
+<p>클래스의 모든 인스턴스가 공유합니다.</p>
+</blockquote>
+<h2 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h2><p><code>정적 멤버변수</code>와 <code>정적 메소드</code>는 다음과 같이 선언합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 멤버변수</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    Counter() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decrement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>정적 멤버변수와 정적 메소드는 다음과 같이 인스턴스를 생성하지 않고 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Counter.printCount();   <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.printCount();   <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 클래스의 <code>정적 멤버변수(Static Variable)</code>과 <code>정적 메소드(Static Method)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/13/java/180113-initialization_block/">초기화 구문(Initialization Block)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/12/java/180112-static/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/11/java/180111-constructor/"
+                            aria-label=": [Java] 클래스의 생성자, 멤버변수, 메소드"
+                        >
+                            [Java] 클래스의 생성자, 멤버변수, 메소드
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-11T22:16:30+09:00">
+	
+		    2018/01/11
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/11/java/180111-class/">클래스(Class), 인스턴스(Instance), 객체(Object)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 클래스의 <code>생성자(Constructor)</code>, <code>멤버변수(Member Variable)</code>, <code>메소드(Metho)</code>에 대해 알아보겠습니다.</p>
+<h2 id="생성자-Constructor"><a href="#생성자-Constructor" class="headerlink" title="생성자(Constructor)"></a>생성자(Constructor)</h2><p><code>생성자</code>는 클래스의 인스턴스를 생성할 때 호출되는 구문입니다. 보통 생성자에서는 초기화 작업을 수행합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    Person() &#123;</span><br><span class="line">        <span class="comment">// 멤버변수 초기화</span></span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;Paul&quot;</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;Constructor has occurred.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>생성자</code>는 인스턴스를 생성할 때 호출됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person();   <span class="comment">// Constructor has occurred.</span></span><br></pre></td></tr></table></figure>
+<p><code>생성자</code>는 매개변수를 전달받을 수도 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 매개변수가 없는 생성자</span></span><br><span class="line">    Person() &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 매개변수가 있는 생성자</span></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="멤버변수와-메소드"><a href="#멤버변수와-메소드" class="headerlink" title="멤버변수와 메소드"></a>멤버변수와 메소드</h2><p><code>멤버변수</code>와 <code>메소드</code>는 클래스 내부에 다음과 같이 선언합니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String nation;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>멤버변수와 메소드는 다음과 같이 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line">person.printName();</span><br><span class="line"></span><br><span class="line">String name = person.name;</span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 클래스의 <code>생성자(Constructor)</code>, <code>멤버변수(Member Variable)</code>, <code>메소드(Metho)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/12/java/180112-static/">정적 메소드(Static Method)와 정적 멤버변수(Static Variable)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/11/java/180111-constructor/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/11/java/180111-class/"
+                            aria-label=": [Java] 클래스(Class), 인스턴스(Instance), 객체(Object) 차이점"
+                        >
+                            [Java] 클래스(Class), 인스턴스(Instance), 객체(Object) 차이점
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-11T21:16:30+09:00">
+	
+		    2018/01/11
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/10/java/180110-collection-map/">집합자료형(Collection)의 Map</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 <code>클래스(Class)</code>, <code>인스턴스(Instance)</code>, <code>객체(Object)</code>에 대해 알아보겠습니다.</p>
+<h2 id="객체지향-프로그래밍-Object-oriented-Programming"><a href="#객체지향-프로그래밍-Object-oriented-Programming" class="headerlink" title="객체지향 프로그래밍(Object-oriented Programming)"></a>객체지향 프로그래밍(Object-oriented Programming)</h2><p>Java는 모든 대상을 객체(Object)로 바라봅니다. 이러한 점에서 Java은 객체지향 프로그래밍 언어입니다. 객체지향 프로그래밍을 이해하려면 클래스와 인스턴스에 대해 알아야합니다.</p>
+<h2 id="클래스와-인스턴스"><a href="#클래스와-인스턴스" class="headerlink" title="클래스와 인스턴스"></a>클래스와 인스턴스</h2><p><code>클래스</code>와 <code>인스턴스</code>를 설명할 때 <code>와플 기계</code>과 <code>와플</code>을 예로 많이 듭니다.<br><img src="/ko/images/posts/kotlin/class/waffle.png"><br><code>클래스</code>는 <strong>인스턴스를 만드는 틀</strong>, <code>인스턴스</code>는 <strong>클래스로 만든 무언가</strong>라고 생각하면 됩니다. 즉 와플 기계는 <strong>클래스</strong>, 와플은 <strong>인스턴스</strong>입니다. 이 <code>클래스</code>를 코드로 표현하면 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Waffle</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>그럼 <code>인스턴스</code>를 만들어 보겠습니다. <code>인스턴스</code>는 다음과 같이 생성합니다. 키워드<code>new</code>를 사용하고 클래스 이름 뒤에 <code>()</code>를 붙여주면 됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Waffle waffle = <span class="keyword">new</span> Waffle()</span><br></pre></td></tr></table></figure>
+<p>이렇게 만든 인스턴스는 <code>객체(Object)</code>라고도 불립니다.</p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 Java의 <code>클래스(Class)</code>, <code>인스턴스(Instance)</code>, <code>객체(Object)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/11/java/180111-constructor/">클래스의 생성자, 멤버변수, 메소드</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/11/java/180111-class/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/10/java/180110-collection-map/"
+                            aria-label=": [Java] 집합자료형 - (3) Map"
+                        >
+                            [Java] 집합자료형 - (3) Map
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-10T20:16:30+09:00">
+	
+		    2018/01/10
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 Java의 <a href="/ko/2018/01/09/java/180109-collection-set/">집합자료형(Collection)의 집합(Set)</a>에 대해 알아봤습니다. 이번 포스트에서는 Java의 집합자료형(Collection)의 <code>Map</code>에 대해 알아보겠습니다.</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p><code>Map</code>은 <code>키(Key)</code>와 <code>값(Value)</code>으로 구성된 집합자료형입니다. <code>키</code>를 통해 <code>값</code>을 저장하거나 읽어오거나 변경하거나 삭제할 수 있습니다. Java API에서 제공하는 <code>Map</code>의 정의는 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Map</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(Object key)</span></span>;</span><br><span class="line">    <span class="function">V <span class="title">put</span><span class="params">(K key, V value)</span></span>;</span><br><span class="line">    <span class="function">V <span class="title">remove</span><span class="params">(Object key)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">putAll</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</span><br><span class="line">    ... </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위에서 보는 것처럼 <code>Map</code>은 <a href="(/ko/2018/01/17/java/180117-interface/)">interface</a>이므로 인스턴스를 생성할 수 없습니다. 따라서 <code>Map</code>의 구현체가 필요합니다. 다행히 Java API에서는 <code>HashMap</code>, <code>TreeMap</code>이라는 구현체들을 제공합니다. </p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p><code>HashMap</code>은 다음과 같이 선언하고 초기화합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer, String&gt; players = <span class="keyword">new</span> HashMap&lt;Integer, String&gt;();</span><br></pre></td></tr></table></figure>
+<p>데이터 추가는 다음과 같이 합니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">players.put(<span class="number">7</span>, <span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.put(<span class="number">9</span>, <span class="string">&quot;Benzema&quot;</span>);</span><br><span class="line">players.put(<span class="number">11</span>, <span class="string">&quot;Bale&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(players.toString()); <span class="comment">// &#123;7=Ronaldo, 9=Benzema, 11=Bale&#125;</span></span><br></pre></td></tr></table></figure>
+<p>데이터 변경은 다음과 같이 합니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">players.put(<span class="number">7</span>, <span class="string">&quot;Son&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(players.toString()); <span class="comment">// &#123;7=Son, 9=Benzema, 11=Bale&#125;</span></span><br></pre></td></tr></table></figure>
+<p>데이터 삭제는 다음과 같이 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">players.remove(<span class="number">7</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(players.toString()); <span class="comment">// &#123;9=Benzema, 11=Bale&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><p><code>TreeMap</code>은 다음과 같이 선언하고 초기화합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer, String&gt; players = <span class="keyword">new</span> TreeMap&lt;Integer, String&gt;();</span><br></pre></td></tr></table></figure>
+<p>데이터 추가는 다음과 같이 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">players.put(<span class="number">7</span>, <span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.put(<span class="number">9</span>, <span class="string">&quot;Benzema&quot;</span>);</span><br><span class="line">players.put(<span class="number">11</span>, <span class="string">&quot;Bale&quot;</span>);</span><br><span class="line"></span><br><span class="line">players.toString(); <span class="comment">// &#123;7=Ronaldo, 9=Benzema, 11=Bale&#125;</span></span><br></pre></td></tr></table></figure>
+<p>데이터 변경은 다음과 같이 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">players.put(<span class="number">7</span>, <span class="string">&quot;Son&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(players.toString()); <span class="comment">// &#123;7=Son, 9=Benzema, 11=Bale&#125;</span></span><br></pre></td></tr></table></figure>
+<p>데이터 삭제는 다음과 같이 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">players.remove(<span class="number">7</span>);</span><br><span class="line">System.out.println(players.toString()); <span class="comment">// &#123;9=Benzema, 11=Bale&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 Java의 <code>집합자료형(Collection)</code>의 <code>Map</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/11/java/180111-class/">클래스(Class), 인스턴스(Instance), 객체(Object)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/10/java/180110-collection-map/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -412,7 +994,18 @@
           </li>
         
         
-        <li class="pagination-number">page 5 of 5</li>
+          <li class="pagination-next">
+            <a
+                class="btn btn--default btn--small"
+                href="/ko/archives/2018/page/6/"
+                aria-label="이전 포스트"
+            >
+              <span>이전 포스트</span>
+              <i class="fa fa-angle-right text-base icon-ml"></i>
+            </a>
+          </li>
+        
+        <li class="pagination-number">page 5 of 6</li>
     </ul>
 </div>
 

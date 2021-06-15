@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Yologger&#39;s Blog">
+    <title>[Android] 액티비티 - (3) taskAffinity와 launchMode - Yologger&#39;s Blog</title>
+    <meta name="author" content="yologger">
+    
+    
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 태스크(Task)와 액티비티 스택(Activity Stack)에 대해 알아봤습니다. 이번 포스트에서는 Task Affinity와 Launch Mode에 대해 알아보겠습니다.\n\n예제 프로젝트 만들기taskAffinity와 launchMode를 이해하기 위해 다음과 같은 프로젝트를 생성합시다.\n세 개의 액티비티로 구성된 앱이 있습니다. ActivityA 버튼을 누르면 ActivityB로 화면이 전환됩니다. ActivityB에서 버튼을 누르면 ActivityC로 화면이 전환됩니다.코드는 다음과 같습니다.\n123456789101112131415// ActivityA.ktclass ActivityA : AppCompatActivity() &#123;    val button: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_a_button) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_a)        button.setOnClickListener &#123;            val intent = Intent(this, ActivityB::class.java)            startActivity(intent)        &#125;    &#125;&#125;\n123456789101112131415// ActivityB.ktclass ActivityB : AppCompatActivity() &#123;    val button: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_bb)        button.setOnClickListener &#123;            val intent = Intent(this, ActivityC::class.java)            startActivity(intent)        &#125;    &#125;&#125;\n1234567// ActivityC.ktclass ActivityC : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.c)    &#125;&#125;\nAndroidManifest.xml은 다음과 같습니다.\n123456789101112131415161718192021222324&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.activity&quot;&gt;    &lt;application        android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Activity&quot;&gt;        &lt;activity android:name=&quot;.ActivityA&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        &lt;activity android:name=&quot;.ActivityB&quot;&gt;        &lt;/activity&gt;        &lt;activity android:name=&quot;.ActivityC&quot;&gt;        &lt;/activity&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 앱을 실행하고 Activity A &gt; Activity B &gt; Activity C 순서로 호출합시다. 그리고 ADB를 사용하여 태스크의 스택을 출력해봅시다. 터미널에서 아래 명령어를 입력하면 됩니다. (ADB에 대한 자세한 내용은 이 곳에서 확인할 수 있습니다.)\n1$ adb shell dumpsys activity activities\n이제 출력 결과를 확인해봅시다. 출력 결과가 매우 길기 때문에 중요한 부분만 살펴보겠습니다.\n1234567891011ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)Display #0 (activities from top to bottom):    ...    * Task&#123; ... A=10719:com.yologger.activity U=0 StackId=28904 sz=3&#125;        ...          * Hist #2: ActivityRecord&#123;2eef99a u0 com.yologger.activity/.ActivityC t28904&#125;        ...       * Hist #1: ActivityRecord&#123;b4dbaed u0 com.yologger.activity/.ActivityB t28904&#125;        ...       * Hist #0: ActivityRecord&#123;bdd0c7e u0 com.yologger.activity/.ActivityA t28904&#125;    ... \ncom.yologger.activity라는 태스크에 세 개의 액티비티가 쌓여있는 것을 확인할 수 있습니다. 태스크 이름을 별도로 설정하지 않으면 자동으로 패키지 이름으로 설정됩니다. \ntaskAffinitytaskAffinity속성을 사용하면 태스크 이름을 직접 설정할 수 있습니다. AndroidManifest.xml에서 루트 액티비티인 ActivityA에 taskAffinity 속성을 설정해봅시다.\n1234567891011121314151617&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.activity&quot;&gt;    &lt;application        ... &gt;        &lt;activity android:name=&quot;.ActivityA&quot;            android:taskAffinity=&quot;com.yologger.my_task&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        ...    &lt;/application&gt;&lt;/manifest&gt;\nADB를 사용하여 태스크의 스택을 다시 출력해봅시다.\n1234567891011ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)Display #0 (activities from top to bottom):    ...    * Task&#123; ... A=10719:com.yologger.my_task U=0 StackId=28904 sz=3&#125;        ...          * Hist #2: ActivityRecord&#123;2eef99a u0 com.yologger.activity/.ActivityC t28904&#125;        ...       * Hist #1: ActivityRecord&#123;b4dbaed u0 com.yologger.activity/.ActivityB t28904&#125;        ...       * Hist #0: ActivityRecord&#123;bdd0c7e u0 com.yologger.activity/.ActivityA t28904&#125;    ... \n태스크의 이름이 com.yologger.my_task로 변경된 것을 확인할 수 있습니다.\n의문점주목할 것이 하나 있습니다. 위 예제에서는 Activity B와 Activity C에는 별도의 속성을 지정하지 않고, Activity A에만 taskAffinity 속성을 지정했습니다. 그런대도 Activity B와 Activity C가 동일한 이름의 태스크에 추가되었습니다.\n만약 Activity B와 Activity C는 또 다른 task에서 실행하려면 어떻게 해야할까요? 이러한 경우 launchMode를 사용할 수 있습니다.\nlaunchModeAndroidManifest.xml의 launchMode속성을 사용하면 태스크와 액티비티 실행의 흐름을 제어할 수 있습니다. launchMode는 다음과 같이 4개의 값 중 하나를 설정할 수 있습니다.\n1234&lt;activity     android:name=&quot;your_activity_name&quot;    android:launchMode=[&quot;singleTask&quot; | &quot;singleInstance&quot; | &quot;multiple&quot; | &quot;singleTop&quot;]&gt;&lt;/activity&gt;\n(1) singleTaskandroid:launchMode=&quot;singleTask&quot;는 새로운 태스크를 생성하고 그 곳에 액티비티를 추가합니다. 주의할 점은 새로운 태스크의 이름을 taskAffinity 속성으로 설정해주어야 한다는 것입니다. taskAffinity 속성을 설정하지 않으면 새로운 액티비티를 호출하는 액티비티의 태스크에 추가됩니다.\n위 예제에서 Activity C에 launchMode 속성과 taskAffinity 속성을 추가해봅시다.\n1234567891011121314&lt;activity android:name=&quot;.ActivityA&quot;    android:taskAffinity=&quot;com.yologger.my_task&quot;&gt;    &lt;intent-filter&gt;        &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;        &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;    &lt;/intent-filter&gt;&lt;/activity&gt;&lt;activity android:name=&quot;.ActivityB&quot;&gt;&lt;/activity&gt;&lt;activity android:name=&quot;.ActivityC&quot;    android:taskAffinity=&quot;com.yologger.another_task&quot;    android:launchMode=&quot;singleTask&quot;&gt;&lt;/activity&gt;\n다시 태스크의 스택을 확인해봅시다.\n12345678ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)Display #0 (activities from top to bottom):  ...    * Task&#123; ... A=10719:com.yologger.another_task &#125;      * Hist #0: ActivityRecord&#123;260ef2c u0 com.yologger.activity/.ActivityC t28915&#125;    * Task&#123; ... A=10719:com.yologger.my_task &#125;      * Hist #1: ActivityRecord&#123;656d934 u0 com.yologger.activity/.ActivityB t28914&#125;      * Hist #0: ActivityRecord&#123;8320723 u0 com.yologger.activity/.ActivityA t28914&#125;\nActivity C는 com.yologger.another_task라는 새로운 태스크에서 실행되었습니다. \n현재 실행 중인 태스크가 Task 2일 때는 Task 1 전체가 background 상태로 진입합니다.최근 앱 목록(Recent List)에서도 2개의 태스크를 확인할 수 있습니다.주의할 점이 하나 있습니다. Task 1과 Task 2가 둘 다 실행된 상태에서 Activity C를 다시 호출하면, 새로운 Task 3가 생성되지 않고 기존의 Task 2를 재사용합니다.또한 Activity C에서는 onCreate()가 호출되지 않고 onNewIntent()가 호출됩니다.\n이제 Activity D를 추가하고 다음과 같이 launchMode와 taskAffinity를 설정해봅시다.\n12345678910111213141516171819202122232425262728293031323334&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.activity&quot;&gt;    &lt;application        android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Activity&quot;&gt;        &lt;activity            android:name=&quot;.ActivityA&quot;            android:taskAffinity=&quot;com.yologger.task1&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        &lt;activity android:name=&quot;.ActivityB&quot;&gt;        &lt;/activity&gt;        &lt;activity            android:name=&quot;.ActivityC&quot;            android:taskAffinity=&quot;com.yologger.task2&quot;            android:launchMode=&quot;singleTask&quot;&gt;        &lt;/activity&gt;        &lt;activity            android:name=&quot;.ActivityD&quot;            android:taskAffinity=&quot;com.yologger.task2&quot;            android:launchMode=&quot;singleTask&quot;&gt;        &lt;/activity&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 Activity A &gt; Activity B &gt; Activity C &gt; Activity D 순서대로 실행하면 다음과 같이 스택과 액티비티가 생성됩니다.\n(2) singleInstance바로 위 예제에서 Activity C와 Activity D의 launchMode만 singleInstance로 바꿔봅시다.\n12345678910111213141516171819202122232425262728293031&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.activity&quot;&gt;    &lt;application        android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Activity&quot;&gt;        &lt;activity            android:name=&quot;.ActivityA&quot;            android:taskAffinity=&quot;com.yologger.task1&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        &lt;activity android:name=&quot;.ActivityB&quot;&gt;&lt;/activity&gt;        &lt;activity            android:name=&quot;.ActivityC&quot;            android:taskAffinity=&quot;com.yologger.task2&quot;            android:launchMode=&quot;singleInstance&quot;&gt;&lt;/activity&gt;        &lt;activity            android:name=&quot;.ActivityD&quot;            android:taskAffinity=&quot;com.yologger.task2&quot;            android:launchMode=&quot;singleInstance&quot;&gt;&lt;/activity&gt;    &lt;/application&gt;&lt;/manifest&gt;\n다시 Activity A &gt; Activity B &gt; Activity C &gt; Activity D 순서대로 실행하면 다음과 같이 스택과 액티비티가 생성됩니다.\nsingleInstance는 singleTask와 매우 유사합니다. 다만 차이점은 새로운 태스크 안에 오직 하나의 루트 액티비티만을 유지한다는 것입니다.\n(3) standardstandard와 singleTop은 새로운 태스크를 만드는 것과는 관련이 없습니다. 기존 태스크에 새로운 액티비티를 어떻게 추가할 것인지와 관련있습니다.\nstandard는 기본값입니다. 실행할 액티비티를 기존 태스크의 가장 위에 추가합니다. 또한 동일한 액티비티의 인스턴스를 여러 개 추가할 수 있습니다. \n다음과 같이 2개의 액티비티(MainActivity, SubActivity)가 있다고 가정합시다.\n1234567891011121314151617181920212223&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.activity&quot;&gt;    &lt;application        android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Activity&quot;&gt;        &lt;activity android:name=&quot;.MainActivity&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        &lt;activity             android:name=&quot;.SubActivity&quot;            android:launchMode=&quot;standard&quot; /&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 MainActivity &gt; SubActivity &gt; SubActivity &gt; SubActivity 순서대로 호출하면, 태스크 상태는 다음과 같습니다.\n(4) singleTop바로 위 예제에서 standard를 singleTop으로 변경합시다.\n1234567891011121314151617181920212223&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.activity&quot;&gt;    &lt;application        android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Activity&quot;&gt;        &lt;activity android:name=&quot;.MainActivity&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        &lt;activity             android:name=&quot;.SubActivity&quot;            android:launchMode=&quot;singleTop&quot; /&gt;    &lt;/application&gt;&lt;/manifest&gt;\n다시 MainActivity &gt; SubActivity &gt; SubActivity &gt; SubActivity 순서대로 호출하면, 태스크 상태는 다음과 같습니다.\nsingleTop은 실행할 액티비티의 인스턴스가 이미 스택의 맨 위에 있으면 새로운 인스턴스를 생성하지 않고 기존 인스턴스를 사용합니다. 이때 호출되는 액티비티에서는 onCreate()가 아니라 onNewIntent()가 호출됩니다.\n12345678class SecondActivity : AppCompatActivity() &#123;    // ...    override fun onNewIntent(intent: Intent?) &#123;        super.onNewIntent(intent)    &#125;&#125;\n\n\n마치며이번 포스트에서는 Task Affinity와 Launch Mode에 대해 알아봤습니다. 다음 포스트에서는 인텐트 플래그(Intent Flag)에 대해 알아보겠습니다.\n","dateCreated":"2019-02-17T20:16:30+09:00","dateModified":"2021-06-11T15:56:36+09:00","datePublished":"2019-02-17T20:16:30+09:00","description":"","headline":"[Android] 액티비티 - (3) taskAffinity와 launchMode","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/","keywords":"Android"}</script>
+    <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 태스크(Task)와 액티비티 스택(Activity Stack)에 대해 알아봤습니다. 이번 포스트에서는 Task Affinity와 Launch Mode에 대해 알아보겠습니다.  예제 프로젝트 만들기taskAffinity와 launchM">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[Android] 액티비티 - (3) taskAffinity와 launchMode">
+<meta property="og:url" content="https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/index.html">
+<meta property="og:site_name" content="Yologger&#39;s Blog">
+<meta property="og:description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 태스크(Task)와 액티비티 스택(Activity Stack)에 대해 알아봤습니다. 이번 포스트에서는 Task Affinity와 Launch Mode에 대해 알아보겠습니다.  예제 프로젝트 만들기taskAffinity와 launchM">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/launch-mode/1.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/launch-mode/2.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/launch-mode/3.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/launch-mode/4.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/launch-mode/5.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/launch-mode/6.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/launch-mode/7.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/launch-mode/8.png">
+<meta property="article:published_time" content="2019-02-17T11:16:30.000Z">
+<meta property="article:modified_time" content="2021-06-11T06:56:36.084Z">
+<meta property="article:author" content="yologger">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/android/launch-mode/1.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYKNWR810R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-QYKNWR810R');
+    </script>
+
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/ko/"
+            aria-label=""
+        >
+            Yologger&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="링크 열기: /ko/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://yologger.github.io"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="English"
+                        >
+                        <i class="sidebar-button-icon fa fa-globe" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">English</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/java"
+                            
+                            rel="noopener"
+                            title="Java"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Github"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [Android] 액티비티 - (3) taskAffinity와 launchMode
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2019-02-17T20:16:30+09:00">
+	
+		    2019/02/17
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <hr>
+<blockquote>
+<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/16/android/190216-activity-stack/"><code>태스크(Task)와 액티비티 스택(Activity Stack)</code></a>에 대해 알아봤습니다. 이번 포스트에서는 <code>Task Affinity</code>와 <code>Launch Mode</code>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="예제-프로젝트-만들기"><a href="#예제-프로젝트-만들기" class="headerlink" title="예제 프로젝트 만들기"></a>예제 프로젝트 만들기</h1><p>taskAffinity와 launchMode를 이해하기 위해 다음과 같은 프로젝트를 생성합시다.</p>
+<p>세 개의 액티비티로 구성된 앱이 있습니다. ActivityA 버튼을 누르면 ActivityB로 화면이 전환됩니다. ActivityB에서 버튼을 누르면 ActivityC로 화면이 전환됩니다.<br><img src="/ko/images/posts/android/launch-mode/1.png"><br>코드는 다음과 같습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityA.kt</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityA</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> button: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.activity_a_button) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_a)</span><br><span class="line"></span><br><span class="line">        button.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, ActivityB::<span class="keyword">class</span>.java)</span><br><span class="line">            startActivity(intent)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityB.kt</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityB</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> button: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.activity_b_button) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_bb)</span><br><span class="line"></span><br><span class="line">        button.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, ActivityC::<span class="keyword">class</span>.java)</span><br><span class="line">            startActivity(intent)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityC.kt</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivityC</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.c)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>AndroidManifest.xml</code>은 다음과 같습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.activity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &lt;application</span><br><span class="line">        android:allowBackup=&quot;true&quot;</span><br><span class="line">        android:icon=&quot;@mipmap/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;</span><br><span class="line">        android:supportsRtl=&quot;true&quot;</span><br><span class="line">        android:theme=&quot;@style/Theme.Activity&quot;&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityA&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityB&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityC&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>이제 앱을 실행하고 Activity A &gt; Activity B &gt; Activity C 순서로 호출합시다. 그리고 ADB를 사용하여 태스크의 스택을 출력해봅시다. 터미널에서 아래 명령어를 입력하면 됩니다. (ADB에 대한 자세한 내용은 <a href="/ko/2019/01/17/android/190117-adb/">이 곳</a>에서 확인할 수 있습니다.)</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys activity activities</span></span><br></pre></td></tr></table></figure>
+<p>이제 출력 결과를 확인해봅시다. 출력 결과가 매우 길기 때문에 중요한 부분만 살펴보겠습니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)</span><br><span class="line">Display #0 (activities from top to bottom):</span><br><span class="line">    ...</span><br><span class="line">    * Task&#123; ... A=10719:com.yologger.activity U=0 StackId=28904 sz=3&#125;</span><br><span class="line">        ...    </span><br><span class="line">      * Hist #2: ActivityRecord&#123;2eef99a u0 com.yologger.activity/.ActivityC t28904&#125;</span><br><span class="line">        ... </span><br><span class="line">      * Hist #1: ActivityRecord&#123;b4dbaed u0 com.yologger.activity/.ActivityB t28904&#125;</span><br><span class="line">        ... </span><br><span class="line">      * Hist #0: ActivityRecord&#123;bdd0c7e u0 com.yologger.activity/.ActivityA t28904&#125;</span><br><span class="line">    ... </span><br></pre></td></tr></table></figure>
+<p><code>com.yologger.activity</code>라는 태스크에 세 개의 액티비티가 쌓여있는 것을 확인할 수 있습니다. 태스크 이름을 별도로 설정하지 않으면 자동으로 패키지 이름으로 설정됩니다. </p>
+<h1 id="taskAffinity"><a href="#taskAffinity" class="headerlink" title="taskAffinity"></a>taskAffinity</h1><p><code>taskAffinity</code>속성을 사용하면 태스크 이름을 직접 설정할 수 있습니다. AndroidManifest.xml에서 루트 액티비티인 ActivityA에 taskAffinity 속성을 설정해봅시다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.activity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &lt;application</span><br><span class="line">        ... &gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityA&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:taskAffinity</span>=<span class="string">&quot;com.yologger.my_task&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>ADB를 사용하여 태스크의 스택을 다시 출력해봅시다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)</span><br><span class="line">Display #0 (activities from top to bottom):</span><br><span class="line">    ...</span><br><span class="line">    * Task&#123; ... A=10719:com.yologger.my_task U=0 StackId=28904 sz=3&#125;</span><br><span class="line">        ...    </span><br><span class="line">      * Hist #2: ActivityRecord&#123;2eef99a u0 com.yologger.activity/.ActivityC t28904&#125;</span><br><span class="line">        ... </span><br><span class="line">      * Hist #1: ActivityRecord&#123;b4dbaed u0 com.yologger.activity/.ActivityB t28904&#125;</span><br><span class="line">        ... </span><br><span class="line">      * Hist #0: ActivityRecord&#123;bdd0c7e u0 com.yologger.activity/.ActivityA t28904&#125;</span><br><span class="line">    ... </span><br></pre></td></tr></table></figure>
+<p>태스크의 이름이 <code>com.yologger.my_task</code>로 변경된 것을 확인할 수 있습니다.</p>
+<h1 id="의문점"><a href="#의문점" class="headerlink" title="의문점"></a>의문점</h1><p>주목할 것이 하나 있습니다. 위 예제에서는 Activity B와 Activity C에는 별도의 속성을 지정하지 않고, Activity A에만 taskAffinity 속성을 지정했습니다. 그런대도 Activity B와 Activity C가 동일한 이름의 태스크에 추가되었습니다.</p>
+<p>만약 Activity B와 Activity C는 또 다른 task에서 실행하려면 어떻게 해야할까요? 이러한 경우 launchMode를 사용할 수 있습니다.</p>
+<h1 id="launchMode"><a href="#launchMode" class="headerlink" title="launchMode"></a>launchMode</h1><p>AndroidManifest.xml의 <code>launchMode</code>속성을 사용하면 태스크와 액티비티 실행의 흐름을 제어할 수 있습니다. launchMode는 다음과 같이 4개의 값 중 하나를 설정할 수 있습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">activity</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">android:name</span>=<span class="string">&quot;your_activity_name&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:launchMode</span>=<span class="string">[</span>&quot;<span class="attr">singleTask</span>&quot; | &quot;<span class="attr">singleInstance</span>&quot; | &quot;<span class="attr">multiple</span>&quot; | &quot;<span class="attr">singleTop</span>&quot;]&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-singleTask"><a href="#1-singleTask" class="headerlink" title="(1) singleTask"></a>(1) singleTask</h3><p><code>android:launchMode=&quot;singleTask&quot;</code>는 새로운 태스크를 생성하고 그 곳에 액티비티를 추가합니다. 주의할 점은 새로운 태스크의 이름을 taskAffinity 속성으로 설정해주어야 한다는 것입니다. taskAffinity 속성을 설정하지 않으면 새로운 액티비티를 호출하는 액티비티의 태스크에 추가됩니다.</p>
+<p>위 예제에서 Activity C에 launchMode 속성과 taskAffinity 속성을 추가해봅시다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityA&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:taskAffinity</span>=<span class="string">&quot;com.yologger.my_task&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityB&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityC&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:taskAffinity</span>=<span class="string">&quot;com.yologger.another_task&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:launchMode</span>=<span class="string">&quot;singleTask&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>다시 태스크의 스택을 확인해봅시다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)</span><br><span class="line">Display #0 (activities from top to bottom):</span><br><span class="line">  ...</span><br><span class="line">    * Task&#123; ... A=10719:com.yologger.another_task &#125;</span><br><span class="line">      * Hist #0: ActivityRecord&#123;260ef2c u0 com.yologger.activity/.ActivityC t28915&#125;</span><br><span class="line">    * Task&#123; ... A=10719:com.yologger.my_task &#125;</span><br><span class="line">      * Hist #1: ActivityRecord&#123;656d934 u0 com.yologger.activity/.ActivityB t28914&#125;</span><br><span class="line">      * Hist #0: ActivityRecord&#123;8320723 u0 com.yologger.activity/.ActivityA t28914&#125;</span><br></pre></td></tr></table></figure>
+<p>Activity C는 <code>com.yologger.another_task</code>라는 새로운 태스크에서 실행되었습니다. </p>
+<p>현재 실행 중인 태스크가 Task 2일 때는 Task 1 전체가 background 상태로 진입합니다.<br><img src="/ko/images/posts/android/launch-mode/2.png"><br><code>최근 앱 목록(Recent List)</code>에서도 2개의 태스크를 확인할 수 있습니다.<br><img src="/ko/images/posts/android/launch-mode/3.png"><br>주의할 점이 하나 있습니다. Task 1과 Task 2가 둘 다 실행된 상태에서 Activity C를 다시 호출하면, 새로운 Task 3가 생성되지 않고 기존의 Task 2를 재사용합니다.<br><img src="/ko/images/posts/android/launch-mode/4.png"><br>또한 Activity C에서는 onCreate()가 호출되지 않고 <code>onNewIntent()</code>가 호출됩니다.</p>
+<p>이제 Activity D를 추가하고 다음과 같이 launchMode와 taskAffinity를 설정해봅시다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.activity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &lt;application</span><br><span class="line">        android:allowBackup=&quot;true&quot;</span><br><span class="line">        android:icon=&quot;@mipmap/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;</span><br><span class="line">        android:supportsRtl=&quot;true&quot;</span><br><span class="line">        android:theme=&quot;@style/Theme.Activity&quot;&gt;</span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.ActivityA&quot;</span><br><span class="line">            android:taskAffinity=&quot;com.yologger.task1&quot;&gt;</span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityB&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.ActivityC&quot;</span><br><span class="line">            android:taskAffinity=&quot;com.yologger.task2&quot;</span><br><span class="line">            android:launchMode=&quot;singleTask&quot;&gt;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.ActivityD&quot;</span><br><span class="line">            android:taskAffinity=&quot;com.yologger.task2&quot;</span><br><span class="line">            android:launchMode=&quot;singleTask&quot;&gt;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>이제 Activity A &gt; Activity B &gt; Activity C &gt; Activity D 순서대로 실행하면 다음과 같이 스택과 액티비티가 생성됩니다.<br><img src="/ko/images/posts/android/launch-mode/5.png"></p>
+<h3 id="2-singleInstance"><a href="#2-singleInstance" class="headerlink" title="(2) singleInstance"></a>(2) singleInstance</h3><p>바로 위 예제에서 Activity C와 Activity D의 launchMode만 singleInstance로 바꿔봅시다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.activity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &lt;application</span><br><span class="line">        android:allowBackup=&quot;true&quot;</span><br><span class="line">        android:icon=&quot;@mipmap/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;</span><br><span class="line">        android:supportsRtl=&quot;true&quot;</span><br><span class="line">        android:theme=&quot;@style/Theme.Activity&quot;&gt;</span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.ActivityA&quot;</span><br><span class="line">            android:taskAffinity=&quot;com.yologger.task1&quot;&gt;</span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityB&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.ActivityC&quot;</span><br><span class="line">            android:taskAffinity=&quot;com.yologger.task2&quot;</span><br><span class="line">            android:launchMode=&quot;singleInstance&quot;&gt;<span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.ActivityD&quot;</span><br><span class="line">            android:taskAffinity=&quot;com.yologger.task2&quot;</span><br><span class="line">            android:launchMode=&quot;singleInstance&quot;&gt;<span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>다시 Activity A &gt; Activity B &gt; Activity C &gt; Activity D 순서대로 실행하면 다음과 같이 스택과 액티비티가 생성됩니다.</p>
+<p><img src="/ko/images/posts/android/launch-mode/6.png"><br>singleInstance는 singleTask와 매우 유사합니다. 다만 차이점은 새로운 태스크 안에 오직 하나의 루트 액티비티만을 유지한다는 것입니다.</p>
+<h3 id="3-standard"><a href="#3-standard" class="headerlink" title="(3) standard"></a>(3) standard</h3><p>standard와 singleTop은 새로운 태스크를 만드는 것과는 관련이 없습니다. 기존 태스크에 새로운 액티비티를 어떻게 추가할 것인지와 관련있습니다.</p>
+<p>standard는 기본값입니다. 실행할 액티비티를 기존 태스크의 가장 위에 추가합니다. 또한 동일한 액티비티의 인스턴스를 여러 개 추가할 수 있습니다. </p>
+<p>다음과 같이 2개의 액티비티(MainActivity, SubActivity)가 있다고 가정합시다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.activity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &lt;application</span><br><span class="line">        android:allowBackup=&quot;true&quot;</span><br><span class="line">        android:icon=&quot;@mipmap/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;</span><br><span class="line">        android:supportsRtl=&quot;true&quot;</span><br><span class="line">        android:theme=&quot;@style/Theme.Activity&quot;&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.MainActivity&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> </span></span><br><span class="line"><span class="tag">            <span class="attr">android:name</span>=<span class="string">&quot;.SubActivity&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:launchMode</span>=<span class="string">&quot;standard&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>이제 MainActivity &gt; SubActivity &gt; SubActivity &gt; SubActivity 순서대로 호출하면, 태스크 상태는 다음과 같습니다.<br><img src="/ko/images/posts/android/launch-mode/7.png"></p>
+<h3 id="4-singleTop"><a href="#4-singleTop" class="headerlink" title="(4) singleTop"></a>(4) singleTop</h3><p>바로 위 예제에서 standard를 singleTop으로 변경합시다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.activity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &lt;application</span><br><span class="line">        android:allowBackup=&quot;true&quot;</span><br><span class="line">        android:icon=&quot;@mipmap/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;</span><br><span class="line">        android:supportsRtl=&quot;true&quot;</span><br><span class="line">        android:theme=&quot;@style/Theme.Activity&quot;&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.MainActivity&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> </span></span><br><span class="line"><span class="tag">            <span class="attr">android:name</span>=<span class="string">&quot;.SubActivity&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:launchMode</span>=<span class="string">&quot;singleTop&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>다시 MainActivity &gt; SubActivity &gt; SubActivity &gt; SubActivity 순서대로 호출하면, 태스크 상태는 다음과 같습니다.<br><img src="/ko/images/posts/android/launch-mode/8.png"></p>
+<p>singleTop은 실행할 액티비티의 인스턴스가 이미 스택의 맨 위에 있으면 새로운 인스턴스를 생성하지 않고 기존 인스턴스를 사용합니다. 이때 호출되는 액티비티에서는 <code>onCreate()</code>가 아니라 <code>onNewIntent()</code>가 호출됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SecondActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNewIntent</span><span class="params">(intent: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onNewIntent(intent)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>Task Affinity</code>와 <code>Launch Mode</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/18/android/190218-intent-flag/"><code>인텐트 플래그(Intent Flag)</code></a>에 대해 알아보겠습니다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">태그</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Android/" rel="tag">Android</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 yologger. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"
+                        aria-label="Facebook에 공유하기"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"
+                        aria-label="Twitter에 공유하기"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/17/android/190217-launchmode/"
+                        aria-label="Google+에 공유하기"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">yologger</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
+        <!--SCRIPTS-->
+
+<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
