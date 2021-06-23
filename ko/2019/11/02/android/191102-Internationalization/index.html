@@ -6,17 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Android] 여러 언어 지원하기 (다국어 지원, Internationalization) - Yologger&#39;s Blog</title>
+    <title>[안드로이드] 여러 언어 지원하기 (다국어 지원, Internationalization) - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며안드로이드 어플리케이션을 사용하다보면 시스템 언어 설정에 따라 어플리케이션의 언어가 바뀌는 것을 볼 수 있습니다. 이를 다국어 지원(Internationalization)이라고 합니다. \n다국어 지원우선 시스템 언어를 영어로 설정합니다. 시스템 언어는 설정 &gt; 일반 &gt; 언어에서 설정할 수 있습니다.이제 다음과 같이 레이아웃을 구성합니다.레이아웃에 대한 xml은 다음과 같습니다.\n123456789101112131415161718192021222324252627282930&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;TextView        android:id=&quot;@+id/textview_welcome_message&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:text=&quot;@string/textview_welcome_message&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintBottom_toTopOf=&quot;@+id/btn_log_in&quot;        tools:layout_editor_absoluteY=&quot;124dp&quot; /&gt;    &lt;Button        android:id=&quot;@+id/button_login&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:text=&quot;@string/button_login&quot;        app:layout_constraintTop_toBottomOf=&quot;@+id/tv_welcome&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot; /&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n기본 문자열 리소스는 다음과 같습니다./res/values/strings.xml\n12345&lt;resources&gt;    &lt;string name=&quot;app_name&quot;&gt;Test App&lt;/string&gt;    &lt;string name=&quot;textview_welcome&quot;&gt;Welcome&lt;/string&gt;    &lt;string name=&quot;button_login&quot;&gt;Log in&lt;/string&gt;&lt;/resources&gt;\n이제 한국어를 지원하기 위해 한국어 문자열 리소스를 추가해야합니다. /res/ 경로에서 [New] &gt; [Directory]를 클릭하고 폴더 이름을 values-ko로 작성합니다.\n\n폴더 이름은 values-[국가코드]입니다. 국가코드는 ISO-639-1 문서를 따르며 이 곳에서 확인할 수 있습니다.\n\n\n프로젝트 뷰를 Android에서 Project로 변경하면 values-ko폴더가 생성된 것을 확인할 수 있습니다.\n이 곳에 한국어에 해당하는 xml 문자열 리소스 파일을 생성해줍니다.\n한국어 문자열 리소스는 다음과 같습니다./res/values-ko/strings.xml\n12345&lt;resources&gt;    &lt;string name=&quot;app_name&quot;&gt;테스트 앱&lt;/string&gt;    &lt;string name=&quot;textview_welcome&quot;&gt;반갑습니다&lt;/string&gt;    &lt;string name=&quot;button_login&quot;&gt;로그인&lt;/string&gt;&lt;/resources&gt;\n이제 시스템 언어를 한국어로 변경합니다.앱을 실행하면 다음과 같이 한국어 문자열 리소스가 적용됩니다.\n","dateCreated":"2019-11-02T20:16:30+09:00","dateModified":"2021-06-15T15:09:17+09:00","datePublished":"2019-11-02T20:16:30+09:00","description":"","headline":"[Android] 여러 언어 지원하기 (다국어 지원, Internationalization)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/11/02/android/191102-Internationalization/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/11/02/android/191102-Internationalization/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며안드로이드 어플리케이션을 사용하다보면 시스템 언어 설정에 따라 어플리케이션의 언어가 바뀌는 것을 볼 수 있습니다. 이를 다국어 지원(Internationalization)이라고 합니다. \n다국어 지원우선 시스템 언어를 영어로 설정합니다. 시스템 언어는 설정 &gt; 일반 &gt; 언어에서 설정할 수 있습니다.이제 다음과 같이 레이아웃을 구성합니다.레이아웃에 대한 xml은 다음과 같습니다.\n123456789101112131415161718192021222324252627282930&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;TextView        android:id=&quot;@+id/textview_welcome_message&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:text=&quot;@string/textview_welcome_message&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintBottom_toTopOf=&quot;@+id/btn_log_in&quot;        tools:layout_editor_absoluteY=&quot;124dp&quot; /&gt;    &lt;Button        android:id=&quot;@+id/button_login&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:text=&quot;@string/button_login&quot;        app:layout_constraintTop_toBottomOf=&quot;@+id/tv_welcome&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot; /&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n기본 문자열 리소스는 다음과 같습니다./res/values/strings.xml\n12345&lt;resources&gt;    &lt;string name=&quot;app_name&quot;&gt;Test App&lt;/string&gt;    &lt;string name=&quot;textview_welcome&quot;&gt;Welcome&lt;/string&gt;    &lt;string name=&quot;button_login&quot;&gt;Log in&lt;/string&gt;&lt;/resources&gt;\n이제 한국어를 지원하기 위해 한국어 문자열 리소스를 추가해야합니다. /res/ 경로에서 [New] &gt; [Directory]를 클릭하고 폴더 이름을 values-ko로 작성합니다.\n\n폴더 이름은 values-[국가코드]입니다. 국가코드는 ISO-639-1 문서를 따르며 이 곳에서 확인할 수 있습니다.\n\n\n프로젝트 뷰를 Android에서 Project로 변경하면 values-ko폴더가 생성된 것을 확인할 수 있습니다.\n이 곳에 한국어에 해당하는 xml 문자열 리소스 파일을 생성해줍니다.\n한국어 문자열 리소스는 다음과 같습니다./res/values-ko/strings.xml\n12345&lt;resources&gt;    &lt;string name=&quot;app_name&quot;&gt;테스트 앱&lt;/string&gt;    &lt;string name=&quot;textview_welcome&quot;&gt;반갑습니다&lt;/string&gt;    &lt;string name=&quot;button_login&quot;&gt;로그인&lt;/string&gt;&lt;/resources&gt;\n이제 시스템 언어를 한국어로 변경합니다.앱을 실행하면 다음과 같이 한국어 문자열 리소스가 적용됩니다.\n","dateCreated":"2019-11-02T20:16:30+09:00","dateModified":"2021-06-21T14:13:48+09:00","datePublished":"2019-11-02T20:16:30+09:00","description":"","headline":"[안드로이드] 여러 언어 지원하기 (다국어 지원, Internationalization)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/11/02/android/191102-Internationalization/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/11/02/android/191102-Internationalization/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며안드로이드 어플리케이션을 사용하다보면 시스템 언어 설정에 따라 어플리케이션의 언어가 바뀌는 것을 볼 수 있습니다. 이를 다국어 지원(Internationalization)이라고 합니다.  다국어 지원우선 시스템 언어를 영어로 설정합니다. 시스템 언어는">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Android] 여러 언어 지원하기 (다국어 지원, Internationalization)">
+<meta property="og:title" content="[안드로이드] 여러 언어 지원하기 (다국어 지원, Internationalization)">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/11/02/android/191102-Internationalization/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며안드로이드 어플리케이션을 사용하다보면 시스템 언어 설정에 따라 어플리케이션의 언어가 바뀌는 것을 볼 수 있습니다. 이를 다국어 지원(Internationalization)이라고 합니다.  다국어 지원우선 시스템 언어를 영어로 설정합니다. 시스템 언어는">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/internationalization/6.png">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/internationalization/7.png">
 <meta property="article:published_time" content="2019-11-02T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-06-15T06:09:17.612Z">
+<meta property="article:modified_time" content="2021-06-21T05:13:48.922Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -45,7 +45,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -236,7 +236,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -265,7 +265,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Android] 여러 언어 지원하기 (다국어 지원, Internationalization)
+            [안드로이드] 여러 언어 지원하기 (다국어 지원, Internationalization)
         </h1>
     
     
@@ -543,7 +543,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

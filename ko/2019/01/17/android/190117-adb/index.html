@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Android] ADB(Android Debug Bridge)란? - Yologger&#39;s Blog</title>
+    <title>[안드로이드] ADB(Android Debug Bridge)란? - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nADB(Android Debug Bridge)ADB(Android Debug Bridge)는 안드로이드 기기와 통신할 수 있는 명령어 도구입니다. ADB를 사용하면 윈도우의 계열 명령 프롬프트나 리눅스 계열의 터미널처럼 연결된 기기에 접근할 수 있습니다.\nADB는 안드로이드 SDK의 Platform Tools에 포함되어 있습니다. \n123456$ pwd/Users/[your_username]/Library/Android/sdk/platform-tools$ lsadb...\n어느 위치에서든 ADB 명령어를 사용하려면 아래와 같이 경로 설정을 해야합니다.\n12345$ cd ~ $ echo &#x27;/Users/[your_username]/Library/Android/sdk/platform-tools&#x27; &gt;&gt; ~/.bash_profile$ source ~/.bash_profile\n\n이제 adb --help 명령어를 입력하면 ADB와 관련된 옵션들을 확인할 수 있습니다.\n1234567891011121314151617181920$ adb --helpAndroid Debug Bridge version 1.0.41Version 31.0.0-7110759Installed as /usr/local/bin/adbglobal options: -a         listen on all network interfaces, not just localhost -d         use USB device (error if multiple devices connected) -e         use TCP/IP device (error if multiple TCP/IP devices available) -s SERIAL  use device with given serial (overrides $ANDROID_SERIAL) -t ID      use device with given transport id -H         name of adb server host [default=localhost] -P         port of adb server [default=5037] -L SOCKET  listen on given socket for adb server [default=tcp:localhost:5037]general commands: devices [-l]             list connected devices (-l for long output) help                     show this help message version                  show version num...\n안드로이드는 리눅스 기반의 운영체제입니다. 따라서 연결된 기기의 리눅스 쉘에 접속할 수 있습니다. 이 때는 adb shell 명령어를 사용합니다.\n1$ adb shell\n이제 연결된 기기의 파일 구조를 확인할 수 있습니다.\n123456789$ lsbindatasdcardstoragedevsyssystem...\n자주 쓰는 adb 명령어adb devices명령어를 사용하면 실제 기기와 정상적으로 확인되었는지 확인할 수 있습니다.\n12345$ adb devicesList of devices attachedR3CN109JVFK     deviceR332AEW32AA     deviceR3CN238IKEF     offline\n\n\n\n상태\n설명\n\n\n\noffline\n기기가 연결되지 않았거나 비정상인 경우\n\n\ndevice\n정상적으로 기기가 연결된 경우\n\n\nno device\n연결된 기기가 없는 경우\n\n\nadb reboot명령어를 사용하면 기기를 재시작할 수 있습니다.\n1$ adb reboot\nPC에서 안드로이드 기기로 파일을 복사할 수도 있습니다.\n123$ adb push &quot;파일 명&quot; &quot;복사할 경로&quot;$ adb push backup.zip /sdcard\n안드로이드 기기에서 PC로 파일을 복사할 수도 있습니다.\n123$ adb pull &quot;파일 명&quot; &quot;복사할 경로&quot;$ adb pull /sdcard/log.txt .\nAPK 파일을 직접 설치할 수도 있습니다.\n123$ adb install &quot;앱 이름&quot;.apk$ adb install my_app.apk\n앱을 삭제할 수도 있습니다.\n123$ adb uninstall &quot;package name&quot;$ adb uninstall com.test.package\n연결된 기기의 시스템 정보를 가져올 수 도 있습니다. \n1$ adb shell dumpsys\n아래와 같이 액티비티와 태스크의 스택을 확인할 때 많이 사용합니다.\n1$ adb shell dumpsys activity activities\n위 명령어를 입력하면 너무 방대한 정보가 한꺼번에 출력됩니다. 따라서 여러 옵션과 grep 을 적절히 활용하여 필요한 정보만 출력할 수 있습니다.\n123$ adb shell dumpsys activity activities | grep -i &quot;your_package_name&quot; | grep -i Hist$ adb shell dumpsys activity activities | grep -i com.yologger.activity | grep -i Hist","dateCreated":"2019-01-17T20:16:30+09:00","dateModified":"2021-06-11T11:49:16+09:00","datePublished":"2019-01-17T20:16:30+09:00","description":"","headline":"[Android] ADB(Android Debug Bridge)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/17/android/190117-adb/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/17/android/190117-adb/","keywords":"Android, Module"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nADB(Android Debug Bridge)ADB(Android Debug Bridge)는 안드로이드 기기와 통신할 수 있는 명령어 도구입니다. ADB를 사용하면 윈도우의 계열 명령 프롬프트나 리눅스 계열의 터미널처럼 연결된 기기에 접근할 수 있습니다.\nADB는 안드로이드 SDK의 Platform Tools에 포함되어 있습니다. \n123456$ pwd/Users/[your_username]/Library/Android/sdk/platform-tools$ lsadb...\n어느 위치에서든 ADB 명령어를 사용하려면 아래와 같이 경로 설정을 해야합니다.\n12345$ cd ~ $ echo &#x27;/Users/[your_username]/Library/Android/sdk/platform-tools&#x27; &gt;&gt; ~/.bash_profile$ source ~/.bash_profile\n\n이제 adb --help 명령어를 입력하면 ADB와 관련된 옵션들을 확인할 수 있습니다.\n1234567891011121314151617181920$ adb --helpAndroid Debug Bridge version 1.0.41Version 31.0.0-7110759Installed as /usr/local/bin/adbglobal options: -a         listen on all network interfaces, not just localhost -d         use USB device (error if multiple devices connected) -e         use TCP/IP device (error if multiple TCP/IP devices available) -s SERIAL  use device with given serial (overrides $ANDROID_SERIAL) -t ID      use device with given transport id -H         name of adb server host [default=localhost] -P         port of adb server [default=5037] -L SOCKET  listen on given socket for adb server [default=tcp:localhost:5037]general commands: devices [-l]             list connected devices (-l for long output) help                     show this help message version                  show version num...\n안드로이드는 리눅스 기반의 운영체제입니다. 따라서 연결된 기기의 리눅스 쉘에 접속할 수 있습니다. 이 때는 adb shell 명령어를 사용합니다.\n1$ adb shell\n이제 연결된 기기의 파일 구조를 확인할 수 있습니다.\n123456789$ lsbindatasdcardstoragedevsyssystem...\n자주 쓰는 adb 명령어adb devices명령어를 사용하면 실제 기기와 정상적으로 확인되었는지 확인할 수 있습니다.\n12345$ adb devicesList of devices attachedR3CN109JVFK     deviceR332AEW32AA     deviceR3CN238IKEF     offline\n\n\n\n상태\n설명\n\n\n\noffline\n기기가 연결되지 않았거나 비정상인 경우\n\n\ndevice\n정상적으로 기기가 연결된 경우\n\n\nno device\n연결된 기기가 없는 경우\n\n\nadb reboot명령어를 사용하면 기기를 재시작할 수 있습니다.\n1$ adb reboot\nPC에서 안드로이드 기기로 파일을 복사할 수도 있습니다.\n123$ adb push &quot;파일 명&quot; &quot;복사할 경로&quot;$ adb push backup.zip /sdcard\n안드로이드 기기에서 PC로 파일을 복사할 수도 있습니다.\n123$ adb pull &quot;파일 명&quot; &quot;복사할 경로&quot;$ adb pull /sdcard/log.txt .\nAPK 파일을 직접 설치할 수도 있습니다.\n123$ adb install &quot;앱 이름&quot;.apk$ adb install my_app.apk\n앱을 삭제할 수도 있습니다.\n123$ adb uninstall &quot;package name&quot;$ adb uninstall com.test.package\n연결된 기기의 시스템 정보를 가져올 수 도 있습니다. \n1$ adb shell dumpsys\n아래와 같이 액티비티와 태스크의 스택을 확인할 때 많이 사용합니다.\n1$ adb shell dumpsys activity activities\n위 명령어를 입력하면 너무 방대한 정보가 한꺼번에 출력됩니다. 따라서 여러 옵션과 grep 을 적절히 활용하여 필요한 정보만 출력할 수 있습니다.\n123$ adb shell dumpsys activity activities | grep -i &quot;your_package_name&quot; | grep -i Hist$ adb shell dumpsys activity activities | grep -i com.yologger.activity | grep -i Hist","dateCreated":"2019-01-17T20:16:30+09:00","dateModified":"2021-06-21T14:10:52+09:00","datePublished":"2019-01-17T20:16:30+09:00","description":"","headline":"[안드로이드] ADB(Android Debug Bridge)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/17/android/190117-adb/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/17/android/190117-adb/","keywords":"Android, Module"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  ADB(Android Debug Bridge)ADB(Android Debug Bridge)는 안드로이드 기기와 통신할 수 있는 명령어 도구입니다. ADB를 사용하면 윈도우의 계열 명령 프롬프트나 리눅스 계열의 터미널처럼 연결된 기기에 접근할 수 있습니다. A">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Android] ADB(Android Debug Bridge)란?">
+<meta property="og:title" content="[안드로이드] ADB(Android Debug Bridge)란?">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/01/17/android/190117-adb/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  ADB(Android Debug Bridge)ADB(Android Debug Bridge)는 안드로이드 기기와 통신할 수 있는 명령어 도구입니다. ADB를 사용하면 윈도우의 계열 명령 프롬프트나 리눅스 계열의 터미널처럼 연결된 기기에 접근할 수 있습니다. A">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2019-01-17T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-06-11T02:49:16.195Z">
+<meta property="article:modified_time" content="2021-06-21T05:10:52.082Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Module">
@@ -37,7 +37,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -228,7 +228,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -257,7 +257,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Android] ADB(Android Debug Bridge)란?
+            [안드로이드] ADB(Android Debug Bridge)란?
         </h1>
     
     
@@ -569,7 +569,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

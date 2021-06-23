@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Kotlin] 열거 클래스(enum class) - Yologger&#39;s Blog</title>
+    <title>[코틀린] 열거 클래스(enum class) - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 데이터 클래스(data class)에 대해 알아봤습니다. 이번 포스트에서는 클래스의 열거 클래스(enum class)에 대해 알아보겠습니다. \n열거 클래스(enum class)열거 클래스(enum class)는 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의하는 것입니다. \n예를 들어 요일은 월요일부터 일요일까지로 데이터의 범위가 한정되어 있습니다. 이러한 경우 열거 클래스를 유용하게 사용할 수 있습니다. 열거 클래스는 키워드 enum을 붙여 정의합니다. \n123456789enum class Day &#123;    SUNDAY,    MONDAY,    TUESDAY,    WEDNESDAY,    THURSDAY,    FRIDAY,    SATURDAY,&#125;\n열거 클래스의 인스턴스는 다음과 같이 생성합니다. \n1val today = Day.MONDAY\n열거 클래스는 when()과 함께 유용하게 사용할 수 있습니다.\n12345678when(today) &#123;    Day.MONDAY -&gt; println(&quot;It&#x27;s monday today.&quot;)    Day.TUESDAY -&gt; println(&quot;It&#x27;s tuesday today.&quot;)    Day.WEDNESDAY -&gt; println(&quot;It&#x27;s Wednesday today.&quot;)    Day.THURSDAY -&gt; println(&quot;It&#x27;s thursday today.&quot;)    Day.FRIDAY -&gt; println(&quot;It&#x27;s friday today.&quot;)    else -&gt; println(&quot;Weekend.&quot;)&#125;\n열거 클래스는 내부에 데이터를 담을 수도 있습니다. \n123456789enum class Day(val color: String) &#123;    SUNDAY(&quot;Red&quot;),    MONDAY(&quot;Black&quot;),    TUESDAY(&quot;Black&quot;),    WEDNESDAY(&quot;Black&quot;),    THURSDAY(&quot;Black&quot;),    FRIDAY(&quot;Black&quot;),    SATURDAY(&quot;Blue&quot;),&#125;\n123val today = Day.SUNDAYprintln(today.color)    // Red\n마치며이번 포스트에서는 열거 클래스(enum class)에 대해 알아봤습니다. 다음 포스트에서는 Object와 Companion Object에 대해 알아보겠습니다.\n","dateCreated":"2019-01-14T20:16:30+09:00","dateModified":"2021-05-08T02:39:05+09:00","datePublished":"2019-01-14T20:16:30+09:00","description":"","headline":"[Kotlin] 열거 클래스(enum class)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/14/kotlin/190114-enum-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/14/kotlin/190114-enum-class/","keywords":"Kotlin"}</script>
-    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 데이터 클래스(data class)에 대해 알아봤습니다. 이번 포스트에서는 클래스의 열거 클래스(enum class)에 대해 알아보겠습니다.  열거 클래스(enum class)열거 클래스(enum class)는 서로 관련 있는 상수들을">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 데이터 클래스(data class)에 대해 알아봤습니다. 이번 포스트에서는 클래스의 열거 클래스(enum class)에 대해 알아보겠습니다. \n\n열거 클래스(enum class)열거 클래스는 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의하는 것입니다. \n예를 들어 요일은 월요일부터 일요일까지로 데이터의 범위가 한정되어 있습니다. 이러한 경우 열거 클래스를 유용하게 사용할 수 있습니다. 열거 클래스는 키워드 enum을 붙여 정의합니다. \n123456789enum class Day &#123;    SUNDAY,    MONDAY,    TUESDAY,    WEDNESDAY,    THURSDAY,    FRIDAY,    SATURDAY,&#125;\n열거 클래스의 인스턴스는 다음과 같이 생성합니다. \n1val today = Day.MONDAY\n열거 클래스는 when()구문과 함께 유용하게 사용할 수 있습니다.\n12345678when(today) &#123;    Day.MONDAY -&gt; println(&quot;It&#x27;s monday today.&quot;)    Day.TUESDAY -&gt; println(&quot;It&#x27;s tuesday today.&quot;)    Day.WEDNESDAY -&gt; println(&quot;It&#x27;s Wednesday today.&quot;)    Day.THURSDAY -&gt; println(&quot;It&#x27;s thursday today.&quot;)    Day.FRIDAY -&gt; println(&quot;It&#x27;s friday today.&quot;)    else -&gt; println(&quot;Weekend.&quot;)&#125;\n열거 클래스는 내부에 데이터를 담을 수도 있습니다. \n123456789enum class Day(val color: String) &#123;    SUNDAY(&quot;Red&quot;),    MONDAY(&quot;Black&quot;),    TUESDAY(&quot;Black&quot;),    WEDNESDAY(&quot;Black&quot;),    THURSDAY(&quot;Black&quot;),    FRIDAY(&quot;Black&quot;),    SATURDAY(&quot;Blue&quot;),&#125;\n다음과 같이 값에 접근할 수 있습니다.\n123val today = Day.SUNDAYtoday.color    // Red\n\n마치며이번 포스트에서는 열거 클래스(enum class)에 대해 알아봤습니다. 다음 포스트에서는 Sealed Class에 대해 알아보겠습니다.\n","dateCreated":"2019-01-14T20:16:30+09:00","dateModified":"2021-06-23T11:18:04+09:00","datePublished":"2019-01-14T20:16:30+09:00","description":"","headline":"[코틀린] 열거 클래스(enum class)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/14/kotlin/190114-enum-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/14/kotlin/190114-enum-class/","keywords":"Kotlin"}</script>
+    <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 데이터 클래스(data class)에 대해 알아봤습니다. 이번 포스트에서는 클래스의 열거 클래스(enum class)에 대해 알아보겠습니다.   열거 클래스(enum class)열거 클래스는 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Kotlin] 열거 클래스(enum class)">
+<meta property="og:title" content="[코틀린] 열거 클래스(enum class)">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/01/14/kotlin/190114-enum-class/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 데이터 클래스(data class)에 대해 알아봤습니다. 이번 포스트에서는 클래스의 열거 클래스(enum class)에 대해 알아보겠습니다.  열거 클래스(enum class)열거 클래스(enum class)는 서로 관련 있는 상수들을">
+<meta property="og:description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 데이터 클래스(data class)에 대해 알아봤습니다. 이번 포스트에서는 클래스의 열거 클래스(enum class)에 대해 알아보겠습니다.   열거 클래스(enum class)열거 클래스는 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2019-01-14T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-07T17:39:05.142Z">
+<meta property="article:modified_time" content="2021-06-23T02:18:04.626Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -36,7 +36,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -227,7 +227,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -256,7 +256,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Kotlin] 열거 클래스(enum class)
+            [코틀린] 열거 클래스(enum class)
         </h1>
     
     
@@ -281,21 +281,25 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 <a href="/ko/2019/01/13/kotlin/190113-data-class/">데이터 클래스(data class)</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <code>열거 클래스(enum class)</code>에 대해 알아보겠습니다. </p>
-<h2 id="열거-클래스-enum-class"><a href="#열거-클래스-enum-class" class="headerlink" title="열거 클래스(enum class)"></a>열거 클래스(enum class)</h2><p><code>열거 클래스(enum class)</code>는 <strong>서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의하는 것</strong>입니다. </p>
-<p>예를 들어 요일은 월요일부터 일요일까지로 데이터의 범위가 한정되어 있습니다. 이러한 경우 <strong>열거 클래스</strong>를 유용하게 사용할 수 있습니다. 열거 클래스는 키워드 <code>enum</code>을 붙여 정의합니다. </p>
+            <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/13/kotlin/190113-data-class/">데이터 클래스(data class)</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">열거 클래스(enum class)</span>에 대해 알아보겠습니다. </p>
+<hr>
+<h1 id="열거-클래스-enum-class"><a href="#열거-클래스-enum-class" class="headerlink" title="열거 클래스(enum class)"></a>열거 클래스(enum class)</h1><p>열거 클래스는 <strong>서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의하는 것</strong>입니다. </p>
+<p>예를 들어 요일은 월요일부터 일요일까지로 데이터의 범위가 한정되어 있습니다. 이러한 경우 열거 클래스를 유용하게 사용할 수 있습니다. 열거 클래스는 키워드 <code>enum</code>을 붙여 정의합니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Day</span> </span>&#123;</span><br><span class="line">    SUNDAY,</span><br><span class="line">    MONDAY,</span><br><span class="line">    TUESDAY,</span><br><span class="line">    WEDNESDAY,</span><br><span class="line">    THURSDAY,</span><br><span class="line">    FRIDAY,</span><br><span class="line">    SATURDAY,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>열거 클래스의 인스턴스는 다음과 같이 생성합니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> today = Day.MONDAY</span><br></pre></td></tr></table></figure>
-<p>열거 클래스는 <a href="/ko/2019/01/17/kotlin/190117-conditional_statement/"><code>when()</code></a>과 함께 유용하게 사용할 수 있습니다.</p>
+<p>열거 클래스는 <a href="/ko/2019/01/17/kotlin/190117-conditional_statement/"><code>when()</code></a>구문과 함께 유용하게 사용할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">when</span>(today) &#123;</span><br><span class="line">    Day.MONDAY -&gt; println(<span class="string">&quot;It&#x27;s monday today.&quot;</span>)</span><br><span class="line">    Day.TUESDAY -&gt; println(<span class="string">&quot;It&#x27;s tuesday today.&quot;</span>)</span><br><span class="line">    Day.WEDNESDAY -&gt; println(<span class="string">&quot;It&#x27;s Wednesday today.&quot;</span>)</span><br><span class="line">    Day.THURSDAY -&gt; println(<span class="string">&quot;It&#x27;s thursday today.&quot;</span>)</span><br><span class="line">    Day.FRIDAY -&gt; println(<span class="string">&quot;It&#x27;s friday today.&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span> -&gt; println(<span class="string">&quot;Weekend.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>열거 클래스는 내부에 데이터를 담을 수도 있습니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Day</span></span>(<span class="keyword">val</span> color: String) &#123;</span><br><span class="line">    SUNDAY(<span class="string">&quot;Red&quot;</span>),</span><br><span class="line">    MONDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    TUESDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    WEDNESDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    THURSDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    FRIDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    SATURDAY(<span class="string">&quot;Blue&quot;</span>),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> today = Day.SUNDAY</span><br><span class="line"></span><br><span class="line">println(today.color)    <span class="comment">// Red</span></span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>열거 클래스(enum class)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/15/kotlin/190115-object/"><code>Object</code>와 <code>Companion Object</code></a>에 대해 알아보겠습니다.</p>
+<p>다음과 같이 값에 접근할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> today = Day.SUNDAY</span><br><span class="line"></span><br><span class="line">today.color    <span class="comment">// Red</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>열거 클래스(enum class)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/15/kotlin/190115-sealed-class/"><code>Sealed Class</code></a>에 대해 알아보겠습니다.</p>
 
             
 
@@ -530,7 +534,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

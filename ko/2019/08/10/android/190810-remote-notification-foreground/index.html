@@ -6,17 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Android] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기 - Yologger&#39;s Blog</title>
+    <title>[안드로이드] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기 - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기  ⬅️ ⬅️ ⬅️\n\n\n포그라운드 상태에서 알람 받기이전 포스트에서 이야기한 것처럼, 현재 포그라운드로 실행되고 있는 앱은 Firebase 알림을 받지 못합니다. \n포그라운드 상태에서 알림을 받으려면 FirebaseMessagingService클래스를 구현하고 onMessageReceived()메서드를 오버라이딩 해야합니다.\nMyFBMessageService라는 클래스를 다음과 같이 구현합니다.\n1234567class MyFBMessageService : FirebaseMessagingService() &#123;    override fun onMessageReceived(remoteMessage: RemoteMessage) &#123;        super.onMessageReceived(remoteMessage)        // Do somthing when you receive a message.    &#125;&#125;\nonMessageReceived()메소드가 호출될 때는 RemoteMessage객체를 인자로 받습니다. 이 객체에는 알림의 제목과 내용같은 정보가 담겨있습니다. \n제목과 내용을 로그에 출력해보겠습니다.\n123456789101112131415class MyFBMessageService : FirebaseMessagingService() &#123;    override fun onMessageReceived(remoteMessage: RemoteMessage) &#123;        super.onMessageReceived(remoteMessage)        // 제목        val title = remoteMessage.notification?.title        // 내용        val body = remoteMessage.notification?.body        Log.d(&quot;TEST&quot;, &quot;title: $&#123;title&#125;&quot;)        Log.d(&quot;TEST&quot;, &quot;body: $&#123;body&#125;&quot;)    &#125;&#125;\n마지막으로 AndroidManifest.xml에 Firebase 메시징과 관련된 액션을 수신할 수 있도록 인텐트 필터를 추가합니다.\n1234567891011121314151617181920212223&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.remote_notification&quot;&gt;    &lt;application android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Remote_notification&quot;&gt;        &lt;service android:name=&quot;.MyFBMessageService&quot;            android:enabled=&quot;true&quot;            android:exported=&quot;true&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;com.google.firebase.MESSAGING_EVENT&quot;/&gt;            &lt;/intent-filter&gt;        &lt;/service&gt;        &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 앱을 실행시킵니다. 홈 버튼을 누르지 않고 앱을 포그라운드 상태로 유지합니다.\nFirebase 콘솔에서 알림을 보냅시다.그러면 로그에 다음과 같은 내용이 출력됩니다.\n","dateCreated":"2019-08-10T20:16:30+09:00","dateModified":"2021-06-15T03:21:00+09:00","datePublished":"2019-08-10T20:16:30+09:00","description":"","headline":"[Android] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/10/android/190810-remote-notification-foreground/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/08/10/android/190810-remote-notification-foreground/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기  ⬅️ ⬅️ ⬅️\n\n\n포그라운드 상태에서 알람 받기이전 포스트에서 이야기한 것처럼, 현재 포그라운드로 실행되고 있는 앱은 Firebase 알림을 받지 못합니다. \n포그라운드 상태에서 알림을 받으려면 FirebaseMessagingService클래스를 구현하고 onMessageReceived()메서드를 오버라이딩 해야합니다.\nMyFBMessageService라는 클래스를 다음과 같이 구현합니다.\n1234567class MyFBMessageService : FirebaseMessagingService() &#123;    override fun onMessageReceived(remoteMessage: RemoteMessage) &#123;        super.onMessageReceived(remoteMessage)        // Do somthing when you receive a message.    &#125;&#125;\nonMessageReceived()메소드가 호출될 때는 RemoteMessage객체를 인자로 받습니다. 이 객체에는 알림의 제목과 내용같은 정보가 담겨있습니다. \n제목과 내용을 로그에 출력해보겠습니다.\n123456789101112131415class MyFBMessageService : FirebaseMessagingService() &#123;    override fun onMessageReceived(remoteMessage: RemoteMessage) &#123;        super.onMessageReceived(remoteMessage)        // 제목        val title = remoteMessage.notification?.title        // 내용        val body = remoteMessage.notification?.body        Log.d(&quot;TEST&quot;, &quot;title: $&#123;title&#125;&quot;)        Log.d(&quot;TEST&quot;, &quot;body: $&#123;body&#125;&quot;)    &#125;&#125;\n마지막으로 AndroidManifest.xml에 Firebase 메시징과 관련된 액션을 수신할 수 있도록 인텐트 필터를 추가합니다.\n1234567891011121314151617181920212223&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.remote_notification&quot;&gt;    &lt;application android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Remote_notification&quot;&gt;        &lt;service android:name=&quot;.MyFBMessageService&quot;            android:enabled=&quot;true&quot;            android:exported=&quot;true&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;com.google.firebase.MESSAGING_EVENT&quot;/&gt;            &lt;/intent-filter&gt;        &lt;/service&gt;        &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 앱을 실행시킵니다. 홈 버튼을 누르지 않고 앱을 포그라운드 상태로 유지합니다.\nFirebase 콘솔에서 알림을 보냅시다.그러면 로그에 다음과 같은 내용이 출력됩니다.\n","dateCreated":"2019-08-10T20:16:30+09:00","dateModified":"2021-06-21T14:13:42+09:00","datePublished":"2019-08-10T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/10/android/190810-remote-notification-foreground/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/10/android/190810-remote-notification-foreground/","keywords":"Android"}</script>
     <meta name="description" content="들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.  로컬 알림 알림에서 액티비티 시작하기 알림에 액션 추가하기 알림 메시지 묶기 원격 알림 포그라운드 상태에서 원격 알림 받기  ⬅️ ⬅️ ⬅️   포그라운드 상태에서 알람 받기이전 포스트에서 이야기한 것처럼, 현재 포그라운드로 실행되고 있는 앱은 Firebase 알림을 받지">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Android] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기">
+<meta property="og:title" content="[안드로이드] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/08/10/android/190810-remote-notification-foreground/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.  로컬 알림 알림에서 액티비티 시작하기 알림에 액션 추가하기 알림 메시지 묶기 원격 알림 포그라운드 상태에서 원격 알림 받기  ⬅️ ⬅️ ⬅️   포그라운드 상태에서 알람 받기이전 포스트에서 이야기한 것처럼, 현재 포그라운드로 실행되고 있는 앱은 Firebase 알림을 받지">
@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/remote-notification/23.png">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/remote-notification/24.png">
 <meta property="article:published_time" content="2019-08-10T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-06-14T18:21:00.592Z">
+<meta property="article:modified_time" content="2021-06-21T05:13:42.726Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -40,7 +40,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -231,7 +231,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -260,7 +260,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Android] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기
+            [안드로이드] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기
         </h1>
     
     
@@ -541,7 +541,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

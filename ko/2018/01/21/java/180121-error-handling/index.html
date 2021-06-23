@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 Java의 열거형(enum)에 대해 알아봤습니다. 이번 포스트에서는 Java의 에러 처리(Error Handling)에 대해 알아보겠습니다.\nThrowableJava은 오류가 발생하면 Error나 Exception을 발생시킵니다. Error와 Exception은 모두 Throwable클래스를 상속받습니다.\nErrorError는 코드에서 잡아낼 수 없으며 어플리케이션 자체가 다운됩니다. 대표적으로 메모리가 부족하여 발생하는 OutOfMemoryError, StackOveflowError가 있습니다.\nExceptionException은 try-catch구문으로 잡아낼 수 있으며 프로그램이 다운되지 않도록 처리할 수 있습니다. 대표적으로 값이 null인 변수에 접근하면 발생하는 NullPointException이 있습니다.\n아래 코드를 살펴봅시다.\n1234Person person = null;// 값이 null인 변수에 접근하고 있습니다.person.printName();\n값이 null인 변수 person에 접근하고 있습니다. 위 코드는 NullPointException이 발생하고 어플리케이션이 다운됩니다. \n이때 try-catch구문으로 Exception이 발생할 가능성이 있는 부분을 감싸주면, Exception이 발생해도 어플리케이션을 다운시키지 않고 에러 처리를 할 수 있습니다.\n12345678Person person = null;try &#123;    // 값이 null인 변수에 접근하고 있습니다.    person.printName();&#125; catch (NullPointerException nullPointerException) &#123;    nullPointerException.printStackTrace();&#125;\n개발자가 직접 Exception을 정의하고 발생시킬 수 있습니다.\n12345class CustomException extends Exception &#123;    CustomException(String message) &#123;        super(message);    &#125;&#125;\n직접 Exception을 발생시킬 때는 키워드throw를 사용합니다.\n12345try &#123;    throw new CustomException(&quot;CustomException&quot;);&#125; catch (CustomException customException) &#123;    customException.printStackTrace();&#125;\nException을 발생시킬 가능성이 있는 함수 뒤에는 키워드throws를 사용하여 가능성을 표기할 수 있습니다.\n123void doSomething() throws CustomException &#123;    throw new CustomException(&quot;Custom Exception&quot;);&#125;\n이 함수는 try-catch문 안에서 사용해야합니다.\n12345try &#123;    doSomething();&#125; catch (CustomException customException) &#123;    customException.printStackTrace();&#125;\n마치며이번 포스트에서는 에러 처리(Error Handling)에 대해 알아봤습니다. 다음 포스트에서는 반복문에 대해 알아보겠습니다.\n","dateCreated":"2018-01-21T20:16:30+09:00","dateModified":"2021-05-12T16:39:51+09:00","datePublished":"2018-01-21T20:16:30+09:00","description":"","headline":"[Java] 에러 처리(Exception & Error Handling)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/21/java/180121-error-handling/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2018/01/21/java/180121-error-handling/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 Java의 열거형(enum)에 대해 알아봤습니다. 이번 포스트에서는 Java의 에러 처리(Error Handling)에 대해 알아보겠습니다.\nThrowableJava은 오류가 발생하면 Error나 Exception을 발생시킵니다. Error와 Exception은 모두 Throwable클래스를 상속받습니다.\nErrorError는 코드에서 잡아낼 수 없으며 어플리케이션 자체가 다운됩니다. 대표적으로 메모리가 부족하여 발생하는 OutOfMemoryError, StackOveflowError가 있습니다.\nExceptionException은 try-catch구문으로 잡아낼 수 있으며 프로그램이 다운되지 않도록 처리할 수 있습니다. 대표적으로 값이 null인 변수에 접근하면 발생하는 NullPointException이 있습니다.\n아래 코드를 살펴봅시다.\n1234Person person = null;// 값이 null인 변수에 접근하고 있습니다.person.printName();\n값이 null인 변수 person에 접근하고 있습니다. 위 코드는 NullPointException이 발생하고 어플리케이션이 다운됩니다. \n이때 try-catch구문으로 Exception이 발생할 가능성이 있는 부분을 감싸주면, Exception이 발생해도 어플리케이션을 다운시키지 않고 에러 처리를 할 수 있습니다.\n12345678Person person = null;try &#123;    // 값이 null인 변수에 접근하고 있습니다.    person.printName();&#125; catch (NullPointerException nullPointerException) &#123;    nullPointerException.printStackTrace();&#125;\n개발자가 직접 Exception을 정의하고 발생시킬 수 있습니다.\n12345class CustomException extends Exception &#123;    CustomException(String message) &#123;        super(message);    &#125;&#125;\n직접 Exception을 발생시킬 때는 키워드throw를 사용합니다.\n12345try &#123;    throw new CustomException(&quot;CustomException&quot;);&#125; catch (CustomException customException) &#123;    customException.printStackTrace();&#125;\nException을 발생시킬 가능성이 있는 함수 뒤에는 키워드throws를 사용하여 가능성을 표기할 수 있습니다.\n123void doSomething() throws CustomException &#123;    throw new CustomException(&quot;Custom Exception&quot;);&#125;\n이 함수는 try-catch문 안에서 사용해야합니다.\n12345try &#123;    doSomething();&#125; catch (CustomException customException) &#123;    customException.printStackTrace();&#125;\n마치며이번 포스트에서는 에러 처리(Error Handling)에 대해 알아봤습니다. 다음 포스트에서는 반복문에 대해 알아보겠습니다.\n","dateCreated":"2018-01-21T20:16:30+09:00","dateModified":"2021-05-12T16:39:51+09:00","datePublished":"2018-01-21T20:16:30+09:00","description":"","headline":"[Java] 에러 처리(Exception & Error Handling)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/21/java/180121-error-handling/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/01/21/java/180121-error-handling/","keywords":"Java"}</script>
     <meta name="description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 Java의 열거형(enum)에 대해 알아봤습니다. 이번 포스트에서는 Java의 에러 처리(Error Handling)에 대해 알아보겠습니다. ThrowableJava은 오류가 발생하면 Error나 Exception을 발생시킵니다. Erro">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Java] 에러 처리(Exception &amp; Error Handling)">
@@ -38,7 +38,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -229,7 +229,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -539,7 +539,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

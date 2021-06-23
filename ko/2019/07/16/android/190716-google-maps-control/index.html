@@ -6,24 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Android] 구글 지도(Google Maps) - (7) 맵 컨트롤 - Yologger&#39;s Blog</title>
+    <title>[안드로이드] 구글 지도(Google Maps) - (7) 맵 컨트롤 - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.\n\n구글 지도 띄우기\n지도 타입 변경하기\n마커 보여주기\n지도 확대와 축소(줌-인과 줌-아웃)\n지도에 내 위치 보여주기\n내 위치로 카메라 이동하기\n맵 컨트롤  ⬅️ ⬅️ ⬅️\n\n\n맵 컨트롤우리는 이전 포스트에서 줌 인 버튼과 줌 아웃 버튼, 내 위치 버튼을 직접 만들고 구현했습니다. 구글 맵 API는 이러한 기능을 위한 여러 컨트롤을 자체적으로 제공합니다. UiSetting클래스의 setZoomControlsEnable(true)메소드를 사용하면 됩니다.\n우선 GoogleMap객체에서 UiSettings객체를 가져옵니다.\n1val mapSettings: MapSettings? = mMap?.uiSettings\n그리고 setZoomControlsEnable(true)메소드를 호출합니다.\n1mapSettings?.setZoomControlsEnabled(true)\n앱을 실행하면 줌-인과 줌-아웃 버튼, 현재 내 위치 버튼이 나타납니다.\n내 위치 버튼에서 위치 정보를 사용하므로 권한 설정 코드가 필요합니다. 전체 코드는 다음과 같습니다.\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657class MainActivity : AppCompatActivity(), OnMapReadyCallback &#123;    private var mMap: GoogleMap? = null    companion object &#123;        const val REQUEST_CODE_PERMISSIONS = 1    &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_fragment_map) as SupportMapFragment        mapFragment.getMapAsync(this)    &#125;    override fun onMapReady(googleMap: GoogleMap) &#123;        mMap = googleMap        // 초기 위치 설정        val sydney = LatLng(-33.8688, 151.2093)        mMap?.moveCamera(CameraUpdateFactory.newLatLng(sydney))        val hasFineLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)        val hasCoarseLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)        if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED &amp;&amp; hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) &#123;            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_CODE_PERMISSIONS)        &#125; else &#123;            // MapSettings 객체 가져오기            val mapSettings: MapSettings? = mMap?.uiSettings            mapSettings?.run &#123;                // 컨트롤 보여주기                setZoomControlsEnabled(true)            &#125;        &#125;    &#125;    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array&lt;out String&gt;, grantResults: IntArray) &#123;        super.onRequestPermissionsResult(requestCode, permissions, grantResults)        when (requestCode) &#123;            REQUEST_CODE_PERMISSIONS -&gt; &#123;                if(grantResults.isNotEmpty()) &#123;                    for ((i, permission) in permissions.withIndex()) &#123;                        isPermissionsGranted = grantResults[i] == PackageManager.PERMISSION_GRANTED                    &#125;                &#125;            &#125;            else -&gt; &#123;                Toast.makeText(this@MainActivity, &quot;Permissions denied.&quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;    &#125;&#125;\n\n마치며7개의 포스트에 걸쳐 구글 지도에 대해 알아봤습니다. 다음 포스트에서는 구글 애드몹(Google AdMob)에 대해 알아보겠습니다.\n","dateCreated":"2019-07-16T20:16:30+09:00","dateModified":"2021-06-15T02:25:19+09:00","datePublished":"2019-07-16T20:16:30+09:00","description":"","headline":"[Android] 구글 지도(Google Maps) - (7) 맵 컨트롤","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/07/16/android/190716-google-maps-control/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/07/16/android/190716-google-maps-control/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.\n\n구글 지도 띄우기\n지도 타입 변경하기\n마커 보여주기\n지도 확대와 축소(줌-인과 줌-아웃)\n지도에 내 위치 보여주기\n내 위치로 카메라 이동하기\n맵 컨트롤  ⬅️ ⬅️ ⬅️\n\n\n맵 컨트롤우리는 이전 포스트에서 줌 인 버튼과 줌 아웃 버튼, 내 위치 버튼을 직접 만들고 구현했습니다. 구글 맵 API는 이러한 기능을 위한 여러 컨트롤을 자체적으로 제공합니다. UiSetting클래스의 setZoomControlsEnable(true)메소드를 사용하면 됩니다.\n우선 GoogleMap객체에서 UiSettings객체를 가져옵니다.\n1val mapSettings: MapSettings? = mMap?.uiSettings\n그리고 setZoomControlsEnable(true)메소드를 호출합니다.\n1mapSettings?.setZoomControlsEnabled(true)\n앱을 실행하면 줌-인과 줌-아웃 버튼, 현재 내 위치 버튼이 나타납니다.\n내 위치 버튼에서 위치 정보를 사용하므로 권한 설정 코드가 필요합니다. 전체 코드는 다음과 같습니다.\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657class MainActivity : AppCompatActivity(), OnMapReadyCallback &#123;    private var mMap: GoogleMap? = null    companion object &#123;        const val REQUEST_CODE_PERMISSIONS = 1    &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_fragment_map) as SupportMapFragment        mapFragment.getMapAsync(this)    &#125;    override fun onMapReady(googleMap: GoogleMap) &#123;        mMap = googleMap        // 초기 위치 설정        val sydney = LatLng(-33.8688, 151.2093)        mMap?.moveCamera(CameraUpdateFactory.newLatLng(sydney))        val hasFineLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)        val hasCoarseLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)        if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED &amp;&amp; hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) &#123;            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_CODE_PERMISSIONS)        &#125; else &#123;            // MapSettings 객체 가져오기            val mapSettings: MapSettings? = mMap?.uiSettings            mapSettings?.run &#123;                // 컨트롤 보여주기                setZoomControlsEnabled(true)            &#125;        &#125;    &#125;    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array&lt;out String&gt;, grantResults: IntArray) &#123;        super.onRequestPermissionsResult(requestCode, permissions, grantResults)        when (requestCode) &#123;            REQUEST_CODE_PERMISSIONS -&gt; &#123;                if(grantResults.isNotEmpty()) &#123;                    for ((i, permission) in permissions.withIndex()) &#123;                        isPermissionsGranted = grantResults[i] == PackageManager.PERMISSION_GRANTED                    &#125;                &#125;            &#125;            else -&gt; &#123;                Toast.makeText(this@MainActivity, &quot;Permissions denied.&quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;    &#125;&#125;\n\n마치며7개의 포스트에 걸쳐 구글 지도에 대해 알아봤습니다. 다음 포스트에서는 구글 애드몹(Google AdMob)에 대해 알아보겠습니다.\n","dateCreated":"2019-07-16T20:16:30+09:00","dateModified":"2021-06-21T14:13:12+09:00","datePublished":"2019-07-16T20:16:30+09:00","description":"","headline":"[안드로이드] 구글 지도(Google Maps) - (7) 맵 컨트롤","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/07/16/android/190716-google-maps-control/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/07/16/android/190716-google-maps-control/","keywords":"Android"}</script>
     <meta name="description" content="들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.  구글 지도 띄우기 지도 타입 변경하기 마커 보여주기 지도 확대와 축소(줌-인과 줌-아웃) 지도에 내 위치 보여주기 내 위치로 카메라 이동하기 맵 컨트롤  ⬅️ ⬅️ ⬅️   맵 컨트롤우리는 이전 포스트에서 줌 인 버튼과 줌 아웃 버튼, 내 위치 버튼을 직접 만들고">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Android] 구글 지도(Google Maps) - (7) 맵 컨트롤">
+<meta property="og:title" content="[안드로이드] 구글 지도(Google Maps) - (7) 맵 컨트롤">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/07/16/android/190716-google-maps-control/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.  구글 지도 띄우기 지도 타입 변경하기 마커 보여주기 지도 확대와 축소(줌-인과 줌-아웃) 지도에 내 위치 보여주기 내 위치로 카메라 이동하기 맵 컨트롤  ⬅️ ⬅️ ⬅️   맵 컨트롤우리는 이전 포스트에서 줌 인 버튼과 줌 아웃 버튼, 내 위치 버튼을 직접 만들고">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/google-maps-control/1.png">
 <meta property="article:published_time" content="2019-07-16T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-06-14T17:25:19.919Z">
+<meta property="article:modified_time" content="2021-06-21T05:13:12.346Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -38,7 +38,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -229,7 +229,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -258,7 +258,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Android] 구글 지도(Google Maps) - (7) 맵 컨트롤
+            [안드로이드] 구글 지도(Google Maps) - (7) 맵 컨트롤
         </h1>
     
     
@@ -539,7 +539,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

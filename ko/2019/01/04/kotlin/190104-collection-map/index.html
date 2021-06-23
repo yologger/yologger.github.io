@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Kotlin] 집합자료형(Collection) - Map - Yologger&#39;s Blog</title>
+    <title>[코틀린] 집합자료형(Collection) - (3) Map - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 집합자료형의 집합(Set)에 대해 알아봤습니다. 이번 포스트에서는 맵(Map)에 대해 알아보겠습니다. \n맵(Map)Map은 키(Key)와 값(Value)으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할 수 있습니다.\n우선 변경 불가능한 Map을 선언할 때는 mapOf()메소드를 사용합니다.\n1var map: Map&lt;String, String&gt; = mapOf(&quot;name&quot; to &quot;paul&quot;, &quot;job&quot; to &quot;programmer&quot;)\n다음과 같이 키를 사용하여 값을 읽어올 수 있습니다.\n12map[&quot;name&quot;]     // paulmap[&quot;job&quot;]      // programmer\n변경 가능한 Map를 선언할 때는 mutableMapOf()메소드를 사용합니다.\n1var mutableMap: MutableSet&lt;String, String&gt; = mutableMapOf(&quot;name&quot; to &quot;paul&quot;, &quot;job&quot; to &quot;programmer&quot;)\n다음과 같이 키를 사용하여 값을 변경할 수 도 있습니다.\n1mutableMap[&quot;job&quot;] = &quot;designer&quot;\n마치며이번 포스트에서는 맵(Map)에 대해 알아봤습니다. 다음 포스트에서는 함수(Function)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-04T22:16:30+09:00","dateModified":"2021-05-08T01:51:21+09:00","datePublished":"2019-01-04T22:16:30+09:00","description":"","headline":"[Kotlin] 집합자료형(Collection) - Map","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/04/kotlin/190104-collection-map/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/04/kotlin/190104-collection-map/","keywords":"Kotlin"}</script>
-    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 집합자료형의 집합(Set)에 대해 알아봤습니다. 이번 포스트에서는 맵(Map)에 대해 알아보겠습니다.  맵(Map)Map은 키(Key)와 값(Value)으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 집합자료형의 집합(Set)에 대해 알아봤습니다. 이번 포스트에서는 맵(Map)에 대해 알아보겠습니다. \n\n맵(Map)Map은 키(Key)와 값(Value)으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할 수 있습니다.\n우선 변경 불가능한 Map을 선언할 때는 mapOf()메소드를 사용합니다.\n1var map: Map&lt;String, String&gt; = mapOf(&quot;name&quot; to &quot;paul&quot;, &quot;job&quot; to &quot;programmer&quot;)\n다음과 같이 키를 사용하여 값을 읽어올 수 있습니다.\n12map[&quot;name&quot;]     // paulmap[&quot;job&quot;]      // programmer\n변경 가능한 Map를 선언할 때는 mutableMapOf()메소드를 사용합니다.\n1var mutableMap: MutableSet&lt;String, String&gt; = mutableMapOf(&quot;name&quot; to &quot;paul&quot;, &quot;job&quot; to &quot;programmer&quot;)\n다음과 같이 키를 사용하여 값을 변경할 수 도 있습니다.\n1mutableMap[&quot;job&quot;] = &quot;designer&quot;\n\n마치며이번 포스트에서는 맵(Map)에 대해 알아봤습니다. 다음 포스트에서는 함수(Function)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-04T22:16:30+09:00","dateModified":"2021-06-23T10:47:20+09:00","datePublished":"2019-01-04T22:16:30+09:00","description":"","headline":"[코틀린] 집합자료형(Collection) - (3) Map","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/04/kotlin/190104-collection-map/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/04/kotlin/190104-collection-map/","keywords":"Kotlin"}</script>
+    <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 집합자료형의 집합(Set)에 대해 알아봤습니다. 이번 포스트에서는 맵(Map)에 대해 알아보겠습니다.   맵(Map)Map은 키(Key)와 값(Value)으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Kotlin] 집합자료형(Collection) - Map">
+<meta property="og:title" content="[코틀린] 집합자료형(Collection) - (3) Map">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/01/04/kotlin/190104-collection-map/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 집합자료형의 집합(Set)에 대해 알아봤습니다. 이번 포스트에서는 맵(Map)에 대해 알아보겠습니다.  맵(Map)Map은 키(Key)와 값(Value)으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할">
+<meta property="og:description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 집합자료형의 집합(Set)에 대해 알아봤습니다. 이번 포스트에서는 맵(Map)에 대해 알아보겠습니다.   맵(Map)Map은 키(Key)와 값(Value)으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2019-01-04T13:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-07T16:51:21.959Z">
+<meta property="article:modified_time" content="2021-06-23T01:47:20.459Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -36,7 +36,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -227,7 +227,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -256,7 +256,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Kotlin] 집합자료형(Collection) - Map
+            [코틀린] 집합자료형(Collection) - (3) Map
         </h1>
     
     
@@ -281,20 +281,23 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에서는 집합자료형의 <a href="/ko/2019/01/04/kotlin/190104-collection-set/">집합(Set)</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>맵(Map)</code>에 대해 알아보겠습니다. </p>
-<h2 id="맵-Map"><a href="#맵-Map" class="headerlink" title="맵(Map)"></a>맵(Map)</h2><p><strong>Map</strong>은 <code>키(Key)</code>와 <code>값(Value)</code>으로 구성된 집합자료형입니다. <code>키</code>를 통해 <code>값</code>을 저장하거나 읽어오거나 변경하거나 삭제할 수 있습니다.</p>
+            <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 집합자료형의 <a href="/ko/2019/01/04/kotlin/190104-collection-set/">집합(Set)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">맵(Map)</span>에 대해 알아보겠습니다. </p>
+<hr>
+<h1 id="맵-Map"><a href="#맵-Map" class="headerlink" title="맵(Map)"></a>맵(Map)</h1><p><strong>Map</strong>은 <code>키(Key)</code>와 <code>값(Value)</code>으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할 수 있습니다.</p>
 <p>우선 변경 불가능한 Map을 선언할 때는 <code>mapOf()</code>메소드를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> map: Map&lt;String, String&gt; = mapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;paul&quot;</span>, <span class="string">&quot;job&quot;</span> to <span class="string">&quot;programmer&quot;</span>)</span><br></pre></td></tr></table></figure>
 <p>다음과 같이 <strong>키</strong>를 사용하여 <strong>값</strong>을 읽어올 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map[<span class="string">&quot;name&quot;</span>]     <span class="comment">// paul</span></span><br><span class="line">map[<span class="string">&quot;job&quot;</span>]      <span class="comment">// programmer</span></span><br></pre></td></tr></table></figure>
-<p>변경 가능한 Map를 선언할 때는 <code>mutableMapOf()</code>메소드를 사용합니다.</p>
+<p>변경 가능한 <strong>Map</strong>를 선언할 때는 <code>mutableMapOf()</code>메소드를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mutableMap: MutableSet&lt;String, String&gt; = mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;paul&quot;</span>, <span class="string">&quot;job&quot;</span> to <span class="string">&quot;programmer&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>다음과 같이 <strong>키</strong>를 사용하여 <strong>값</strong>을 변경할 수 도 있습니다.</p>
+<p>다음과 같이 키를 사용하여 값을 변경할 수 도 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mutableMap[<span class="string">&quot;job&quot;</span>] = <span class="string">&quot;designer&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>맵(Map)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/05/kotlin/190105-function/">함수(Function)</a>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <b>맵(Map)</b>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/05/kotlin/190105-function/">함수(Function)</a>에 대해 알아보겠습니다.</p>
 
             
 
@@ -529,7 +532,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

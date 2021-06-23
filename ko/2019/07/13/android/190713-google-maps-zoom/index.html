@@ -6,24 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Android] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃) - Yologger&#39;s Blog</title>
+    <title>[안드로이드] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃) - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.\n\n구글 지도 띄우기\n지도 타입 변경하기\n마커 보여주기\n지도 확대와 축소(줌-인과 줌-아웃)  ⬅️ ⬅️ ⬅️\n지도에 내 위치 보여주기\n내 위치로 카메라 이동하기\n맵 컨트롤\n\n\n줌-인, 줌-아웃지도를 확대하는 것을 줌-인(Zoom-in), 축소하는 것을 줌-아웃(Zoom-out)이라고 합니다. 예제를 만들면서 줌-인과 줌-아웃에 대해 알아보겠습니다.\n예제우선 다음과 같이 2개의 버튼을 추가합니다.레이아웃 파일은 다음과 같습니다.\n12345678910111213141516171819202122232425262728293031323334353637&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;fragment xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;        xmlns:tools=&quot;http://schemas.android.com/tools&quot;        android:layout_width=&quot;match_parent&quot;        android:layout_height=&quot;match_parent&quot;        android:id=&quot;@+id/activity_main_fragment_map&quot;        tools:context=&quot;.MapsActivity&quot;        android:name=&quot;com.google.android.gms.maps.SupportMapFragment&quot; /&gt;    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton        android:id=&quot;@+id/activity_fab_zoom_in&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:clickable=&quot;true&quot;        app:srcCompat=&quot;@drawable/ic_baseline_add_24&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        android:layout_margin=&quot;16dp&quot;/&gt;    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton        android:id=&quot;@+id/activity_fab_zoom_out&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:clickable=&quot;true&quot;        app:srcCompat=&quot;@drawable/ic_baseline_remove_24&quot;        app:layout_constraintTop_toBottomOf=&quot;@+id/activity_fab_zoom_in&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        android:layout_margin=&quot;16dp&quot;/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n코드는 다음과 같습니다. 카메라 위치를 바꿀 때는 GoogleMap클래스의 moveCamera()메소드를 호출합니다. 이 때 줌-인을 하려면 CameraUpdateFactory.zoomIn()을 줌-아웃을 하려면 CameraUpdateFactory.zoomOut()을 인자로 전달합니다.\n1234567891011121314151617181920212223242526class MainActivity : AppCompatActivity(), OnMapReadyCallback &#123;    private lateinit var mMap: GoogleMap    private val buttonZoomIn: FloatingActionButton by lazy &#123; findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_zoom_in) &#125;    private val buttonZoomOut: FloatingActionButton by lazy &#123; findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_zoom_out) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_fragment_map) as SupportMapFragment        mapFragment.getMapAsync(this)        buttonZoomIn.setOnClickListener &#123;            mMap.moveCamera(CameraUpdateFactory.zoomIn())        &#125;        buttonZoomOut.setOnClickListener &#123;            mMap.moveCamera(CameraUpdateFactory.zoomOut())        &#125;    &#125;    override fun onMapReady(googleMap: GoogleMap) &#123;        mMap = googleMap        val sydney = LatLng(37.5665, 126.9780)    &#125;&#125;\n이제 (+) 버튼을 누르면 줌-인, (-) 버튼을 누르면 줌-아웃이 됩니다. zoomTo()메소드를 사용하면 특정 줌으로 이동할 수 있습니다.\n\n마치며이번 포스트에서는 줌-인과 줌-아웃 기능에 대해 알아봤습니다. 다음 포스트에서는 지도에 내 위치를 보여주는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-07-13T20:16:30+09:00","dateModified":"2021-06-15T01:59:46+09:00","datePublished":"2019-07-13T20:16:30+09:00","description":"","headline":"[Android] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/07/13/android/190713-google-maps-zoom/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/07/13/android/190713-google-maps-zoom/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.\n\n구글 지도 띄우기\n지도 타입 변경하기\n마커 보여주기\n지도 확대와 축소(줌-인과 줌-아웃)  ⬅️ ⬅️ ⬅️\n지도에 내 위치 보여주기\n내 위치로 카메라 이동하기\n맵 컨트롤\n\n\n줌-인, 줌-아웃지도를 확대하는 것을 줌-인(Zoom-in), 축소하는 것을 줌-아웃(Zoom-out)이라고 합니다. 예제를 만들면서 줌-인과 줌-아웃에 대해 알아보겠습니다.\n예제우선 다음과 같이 2개의 버튼을 추가합니다.레이아웃 파일은 다음과 같습니다.\n12345678910111213141516171819202122232425262728293031323334353637&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;fragment xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;        xmlns:tools=&quot;http://schemas.android.com/tools&quot;        android:layout_width=&quot;match_parent&quot;        android:layout_height=&quot;match_parent&quot;        android:id=&quot;@+id/activity_main_fragment_map&quot;        tools:context=&quot;.MapsActivity&quot;        android:name=&quot;com.google.android.gms.maps.SupportMapFragment&quot; /&gt;    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton        android:id=&quot;@+id/activity_fab_zoom_in&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:clickable=&quot;true&quot;        app:srcCompat=&quot;@drawable/ic_baseline_add_24&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        android:layout_margin=&quot;16dp&quot;/&gt;    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton        android:id=&quot;@+id/activity_fab_zoom_out&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:clickable=&quot;true&quot;        app:srcCompat=&quot;@drawable/ic_baseline_remove_24&quot;        app:layout_constraintTop_toBottomOf=&quot;@+id/activity_fab_zoom_in&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        android:layout_margin=&quot;16dp&quot;/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n코드는 다음과 같습니다. 카메라 위치를 바꿀 때는 GoogleMap클래스의 moveCamera()메소드를 호출합니다. 이 때 줌-인을 하려면 CameraUpdateFactory.zoomIn()을 줌-아웃을 하려면 CameraUpdateFactory.zoomOut()을 인자로 전달합니다.\n1234567891011121314151617181920212223242526class MainActivity : AppCompatActivity(), OnMapReadyCallback &#123;    private lateinit var mMap: GoogleMap    private val buttonZoomIn: FloatingActionButton by lazy &#123; findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_zoom_in) &#125;    private val buttonZoomOut: FloatingActionButton by lazy &#123; findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_zoom_out) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_fragment_map) as SupportMapFragment        mapFragment.getMapAsync(this)        buttonZoomIn.setOnClickListener &#123;            mMap.moveCamera(CameraUpdateFactory.zoomIn())        &#125;        buttonZoomOut.setOnClickListener &#123;            mMap.moveCamera(CameraUpdateFactory.zoomOut())        &#125;    &#125;    override fun onMapReady(googleMap: GoogleMap) &#123;        mMap = googleMap        val sydney = LatLng(37.5665, 126.9780)    &#125;&#125;\n이제 (+) 버튼을 누르면 줌-인, (-) 버튼을 누르면 줌-아웃이 됩니다. zoomTo()메소드를 사용하면 특정 줌으로 이동할 수 있습니다.\n\n마치며이번 포스트에서는 줌-인과 줌-아웃 기능에 대해 알아봤습니다. 다음 포스트에서는 지도에 내 위치를 보여주는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-07-13T20:16:30+09:00","dateModified":"2021-06-21T14:13:04+09:00","datePublished":"2019-07-13T20:16:30+09:00","description":"","headline":"[안드로이드] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/07/13/android/190713-google-maps-zoom/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/07/13/android/190713-google-maps-zoom/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.  구글 지도 띄우기 지도 타입 변경하기 마커 보여주기 지도 확대와 축소(줌-인과 줌-아웃)  ⬅️ ⬅️ ⬅️ 지도에 내 위치 보여주기 내 위치로 카메라 이동하기 맵 컨트">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Android] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃)">
+<meta property="og:title" content="[안드로이드] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃)">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/07/13/android/190713-google-maps-zoom/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.  구글 지도 띄우기 지도 타입 변경하기 마커 보여주기 지도 확대와 축소(줌-인과 줌-아웃)  ⬅️ ⬅️ ⬅️ 지도에 내 위치 보여주기 내 위치로 카메라 이동하기 맵 컨트">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/google-maps-zoom/1.png">
 <meta property="article:published_time" content="2019-07-13T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-06-14T16:59:46.743Z">
+<meta property="article:modified_time" content="2021-06-21T05:13:04.804Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -38,7 +38,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -229,7 +229,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -258,7 +258,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Android] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃)
+            [안드로이드] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃)
         </h1>
     
     
@@ -540,7 +540,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

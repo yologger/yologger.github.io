@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Kotlin] null 처리 - (2) Null Check - Yologger&#39;s Blog</title>
+    <title>[코틀린] null 처리 - (2) Null Check - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며4개의 포스트를 통해 Kotlin의 null 처리 방법에 대해 알아보고 있습니다. 이번 두 번째 포스트에서는 Null Check 방법에 대해 알아보겠습니다.\n\nNotNull과 Nullable \nNull Check ⬅️ ⬅️ ⬅️\n엘비스 연산자(Elvis Operator)\n스코프 함수를 통한 Null Check\n\nNullableNullable타입의 변수에 접근하려면 값이 null이 아닌지를 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다.\n123456789class Person constructor(val name: String) &#123;    fun printName() &#123;        println(&quot;name: $&#123;name&#125;&quot;)    &#125;&#125;var person: Person? = nullperson.printName()  // null 체크를 하지 않았으므로 다음과 같은 에러가 발생합니다.// Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Person?\nNull Check우선 변수가 Nullable타입이라고 단언하고 변수에 접근할 수 있습니다.\n12var person: Person? = Person()person!!.printName()    // 성공\n다만 값이 null인 경우 런타임 에러가 발생합니다.\n12var person: Person? = nullperson!!.printName()    // 런타임 에러\n따라서 런타임 에러를 방지하기 위해 if문으로 null체크를 합니다. \n1234567var person: Person? = nullif (person != null) &#123;    person!!.printName()&#125;var name = if (person != null) person!!.name else &quot;&quot;\nSafe Call (?.)매번 if문으로 null체크를 하는 것은 번거로운 일입니다. 따라서 보통 단축구문인 물음표(?)를 사용하며, 이를 Safe Call이라고 합니다.\n1234567var person: Person? = nullperson?.printName()// person이 null이면 아무 일도 일어나지 않습니다.// person이 null이 아니면 printName()을 호출합니다.var name = person?.name\nChainingNullable타입의 변수가 중첩되어 있는 경우, 다음과 같이 연속적으로 null 체크를 할 수 있습니다.\n12345678910111213class Person constructor(val phone: Phone?)class Phone constructor(val manufacturer: String) &#123;    fun printManufacturer() &#123;        print(manufacturer)    &#125;&#125;var person: Person? = Person(Phone(&quot;Samsung&quot;))// Chainingperson?.phone?.printManufacturer()var manufacturer: String? = person?.phone?.manufacturer\n마치며이번 포스트에서는 Null Check에 대해 알아봤습니다. 다음 포스트에서는 엘비스 연산자(Elvis Operator)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-20T20:16:30+09:00","dateModified":"2021-05-08T02:52:12+09:00","datePublished":"2019-01-20T20:16:30+09:00","description":"","headline":"[Kotlin] null 처리 - (2) Null Check","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/20/kotlin/190120-null-2/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/20/kotlin/190120-null-2/","keywords":"Kotlin"}</script>
-    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며4개의 포스트를 통해 Kotlin의 null 처리 방법에 대해 알아보고 있습니다. 이번 두 번째 포스트에서는 Null Check 방법에 대해 알아보겠습니다.  NotNull과 Nullable  Null Check ⬅️ ⬅️ ⬅️ 엘비스 연산자(Elvis">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며네 개의 포스트를 통해 코틀린의 null 처리 방법에 대해 알아보고 있습니다.\n\nNotNull과 Nullable \nNull Check ⬅️ ⬅️ ⬅️\n엘비스 연산자(Elvis Operator)\n스코프 함수를 통한 Null Check\n\n\nNullableNullable타입의 변수에 접근하려면 값이 null인지 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다.\n12345678910class Person constructor(val name: String) &#123;    fun printName() &#123;        println(&quot;name: $&#123;name&#125;&quot;)    &#125;&#125;var person: Person? = nullperson.printName()  // null 체크를 하지 않았으므로 다음과 같은 에러가 발생합니다.// Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Person?\nNull Check변수가 null이 아니라고 단언하고 변수에 접근할 수 있습니다. 이때는 느낌표 두 개(!!)를 사용합니다.\n12var person: Person? = Person()person!!.printName()    // 성공\n다만 값이 null인 경우 런타임 에러가 발생합니다.\n12var person: Person? = nullperson!!.printName()    // 런타임 에러\n따라서 런타임 에러를 방지하기 위해 if구문으로 null체크를 합니다. \n1234567var person: Person? = nullif (person != null) &#123;    person!!.printName()&#125;var name = if (person != null) person!!.name else &quot;&quot;\nSafe Call (?.)매번 if구문으로 null체크를 하는 것은 번거로운 일입니다. 이 때 단축구문인 물음표(?)를 사용할 수 있으며, 이를 Safe Call이라고 합니다.\n1234567var person: Person? = nullperson?.printName()// person이 null이면 아무 일도 일어나지 않습니다.// person이 null이 아니면 printName()을 호출합니다.var name = person?.name\nChainingNullable타입의 변수가 중첩되어 있는 경우, 다음과 같이 연속적으로 null체크를 할 수 있습니다.\n12345678910111213class Person constructor(val phone: Phone?)class Phone constructor(val manufacturer: String) &#123;    fun printManufacturer() &#123;        print(manufacturer)    &#125;&#125;var person: Person? = Person(Phone(&quot;Samsung&quot;))// Chainingperson?.phone?.printManufacturer()var manufacturer: String? = person?.phone?.manufacturer\n\n마치며이번 포스트에서는 코틀린의 Null Check에 대해 알아봤습니다. 다음 포스트에서는 엘비스 연산자(Elvis Operator)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-20T20:16:30+09:00","dateModified":"2021-06-23T11:10:15+09:00","datePublished":"2019-01-20T20:16:30+09:00","description":"","headline":"[코틀린] null 처리 - (2) Null Check","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/20/kotlin/190120-null-2/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/20/kotlin/190120-null-2/","keywords":"Kotlin"}</script>
+    <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며네 개의 포스트를 통해 코틀린의 null 처리 방법에 대해 알아보고 있습니다.  NotNull과 Nullable  Null Check ⬅️ ⬅️ ⬅️ 엘비스 연산자(Elvis Operator) 스코프 함수를 통한 Null Check   NullableNull">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Kotlin] null 처리 - (2) Null Check">
+<meta property="og:title" content="[코틀린] null 처리 - (2) Null Check">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/01/20/kotlin/190120-null-2/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며4개의 포스트를 통해 Kotlin의 null 처리 방법에 대해 알아보고 있습니다. 이번 두 번째 포스트에서는 Null Check 방법에 대해 알아보겠습니다.  NotNull과 Nullable  Null Check ⬅️ ⬅️ ⬅️ 엘비스 연산자(Elvis">
+<meta property="og:description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며네 개의 포스트를 통해 코틀린의 null 처리 방법에 대해 알아보고 있습니다.  NotNull과 Nullable  Null Check ⬅️ ⬅️ ⬅️ 엘비스 연산자(Elvis Operator) 스코프 함수를 통한 Null Check   NullableNull">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2019-01-20T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-05-07T17:52:12.705Z">
+<meta property="article:modified_time" content="2021-06-23T02:10:15.297Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -36,7 +36,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -227,7 +227,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -256,7 +256,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Kotlin] null 처리 - (2) Null Check
+            [코틀린] null 처리 - (2) Null Check
         </h1>
     
     
@@ -281,29 +281,32 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>4개의 포스트를 통해 Kotlin의 <code>null</code> 처리 방법에 대해 알아보고 있습니다. 이번 두 번째 포스트에서는 <strong>Null Check 방법</strong>에 대해 알아보겠습니다.</p>
+            <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>네 개의 포스트를 통해 코틀린의 <code>null</code> 처리 방법에 대해 알아보고 있습니다.</p>
 <ol>
 <li><a href="/ko/2019/01/19/kotlin/190119-null-1/">NotNull과 Nullable</a> </li>
 <li>Null Check ⬅️ ⬅️ ⬅️</li>
 <li><a href="/ko/2019/01/21/kotlin/190121-elvis-operator/">엘비스 연산자(Elvis Operator)</a></li>
 <li><a href="/ko/2019/01/22/kotlin/190122-null-check-with-scope-function/">스코프 함수를 통한 Null Check</a></li>
 </ol>
-<h2 id="Nullable"><a href="#Nullable" class="headerlink" title="Nullable"></a>Nullable</h2><p><code>Nullable</code>타입의 변수에 접근하려면 값이 <code>null</code>이 아닌지를 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> name: String) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;name: <span class="subst">$&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person: Person? = <span class="literal">null</span></span><br><span class="line">person.printName()  <span class="comment">// null 체크를 하지 않았으므로 다음과 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Person?</span></span><br></pre></td></tr></table></figure>
-<h2 id="Null-Check"><a href="#Null-Check" class="headerlink" title="Null Check"></a>Null Check</h2><p>우선 변수가 <code>Nullable</code>타입이라고 <strong>단언</strong>하고 변수에 접근할 수 있습니다.</p>
+<hr>
+<h1 id="Nullable"><a href="#Nullable" class="headerlink" title="Nullable"></a>Nullable</h1><p><code>Nullable</code>타입의 변수에 접근하려면 값이 <code>null</code>인지 체크해야합니다. 그렇지 않으면 컴파일 자체가 안됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> name: String) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;name: <span class="subst">$&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person: Person? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">person.printName()  <span class="comment">// null 체크를 하지 않았으므로 다음과 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Person?</span></span><br></pre></td></tr></table></figure>
+<h1 id="Null-Check"><a href="#Null-Check" class="headerlink" title="Null Check"></a>Null Check</h1><p>변수가 <code>null</code>이 아니라고 <strong>단언</strong>하고 변수에 접근할 수 있습니다. 이때는 <code>느낌표 두 개(!!)</code>를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person: Person? = Person()</span><br><span class="line">person!!.printName()    <span class="comment">// 성공</span></span><br></pre></td></tr></table></figure>
-<p>다만 값이 <code>null</code>인 경우 <code>런타임 에러</code>가 발생합니다.</p>
+<p>다만 값이 <code>null</code>인 경우 런타임 에러가 발생합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person: Person? = <span class="literal">null</span></span><br><span class="line">person!!.printName()    <span class="comment">// 런타임 에러</span></span><br></pre></td></tr></table></figure>
-<p>따라서 <code>런타임 에러</code>를 방지하기 위해 <code>if문</code>으로 <code>null</code>체크를 합니다. </p>
+<p>따라서 런타임 에러를 방지하기 위해 <code>if</code>구문으로 <code>null</code>체크를 합니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person: Person? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (person != <span class="literal">null</span>) &#123;</span><br><span class="line">    person!!.printName()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="keyword">if</span> (person != <span class="literal">null</span>) person!!.name <span class="keyword">else</span> <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Safe-Call"><a href="#Safe-Call" class="headerlink" title="Safe Call (?.)"></a>Safe Call (?.)</h2><p>매번 <code>if문</code>으로 <code>null</code>체크를 하는 것은 번거로운 일입니다. 따라서 보통 단축구문인 <code>물음표(?)</code>를 사용하며, 이를 <code>Safe Call</code>이라고 합니다.</p>
+<h1 id="Safe-Call"><a href="#Safe-Call" class="headerlink" title="Safe Call (?.)"></a>Safe Call (?.)</h1><p>매번 <code>if</code>구문으로 <code>null</code>체크를 하는 것은 번거로운 일입니다. 이 때 단축구문인 <code>물음표(?)</code>를 사용할 수 있으며, 이를 <code>Safe Call</code>이라고 합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person: Person? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">person?.printName()</span><br><span class="line"><span class="comment">// person이 null이면 아무 일도 일어나지 않습니다.</span></span><br><span class="line"><span class="comment">// person이 null이 아니면 printName()을 호출합니다.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = person?.name</span><br></pre></td></tr></table></figure>
-<h2 id="Chaining"><a href="#Chaining" class="headerlink" title="Chaining"></a>Chaining</h2><p><code>Nullable</code>타입의 변수가 중첩되어 있는 경우, 다음과 같이 연속적으로 <code>null 체크</code>를 할 수 있습니다.</p>
+<h1 id="Chaining"><a href="#Chaining" class="headerlink" title="Chaining"></a>Chaining</h1><p><code>Nullable</code>타입의 변수가 중첩되어 있는 경우, 다음과 같이 연속적으로 <code>null</code>체크를 할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> phone: Phone?)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> manufacturer: String) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printManufacturer</span><span class="params">()</span></span> &#123;</span><br><span class="line">        print(manufacturer)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person: Person? = Person(Phone(<span class="string">&quot;Samsung&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// Chaining</span></span><br><span class="line">person?.phone?.printManufacturer()</span><br><span class="line"><span class="keyword">var</span> manufacturer: String? = person?.phone?.manufacturer</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>Null Check</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/21/kotlin/190121-elvis-operator/">엘비스 연산자(Elvis Operator)</a>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>코틀린의 Null Check</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/21/kotlin/190121-elvis-operator/">엘비스 연산자(Elvis Operator)</a>에 대해 알아보겠습니다.</p>
 
             
 
@@ -538,7 +541,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

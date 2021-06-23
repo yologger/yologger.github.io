@@ -6,24 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Kotlin] 객체지향 프로그래밍, 클래스, 인스턴스, 객체 - Yologger&#39;s Blog</title>
+    <title>[코틀린] 객체지향 프로그래밍, 클래스, 인스턴스, 객체 - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\nKotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에는 키워드 vararg에 대해 알아봤습니다. 이번 포스트에서는 객체지향 프로그래밍(Object-oriented Programming), 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아보겠습니다.\n객체지향 프로그래밍Kotlin은 모든 대상을 객체(Object)로 바라봅니다. 이러한 점에서 Kotlin은 객체지향 프로그래밍 언어입니다. 객체지향 프로그래밍을 이해하려면 클래스와 인스턴스에 대해 알아야합니다. \n클래스와 인스턴스클래스와 인스턴스를 설명할 때 와플 기계과 와플을 예로 많이 듭니다.클래스는 인스턴스를 만드는 틀, 인스턴스는 클래스로 만든 무언가라고 생각하면 됩니다. 즉 와플 기계는 클래스, 와플은 인스턴스입니다. 이 클래스를 코드로 표현하면 다음과 같습니다.\n123class Waffle &#123;    // ...&#125;\n그럼 인스턴스를 만들어 보겠습니다. 인스턴스는 다음과 같이 생성합니다. 클래스 이름 뒤에 ()를 붙여주면 됩니다.\n1var waffle = Waffle()\n이렇게 만든 인스턴스는 객체(Object)라고도 불립니다.\n마치며이번 포스트에서는 객체지향 프로그래밍(Object-oriented Programming), 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아봤습니다. 다음 포스트에서는 클래스의 생성자(Constructor)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-07T20:13:30+09:00","dateModified":"2021-05-11T16:25:59+09:00","datePublished":"2019-01-07T20:13:30+09:00","description":"","headline":"[Kotlin] 객체지향 프로그래밍, 클래스, 인스턴스, 객체","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/07/kotlin/190107-class-instance-object/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/01/07/kotlin/190107-class-instance-object/","keywords":"Kotlin"}</script>
-    <meta name="description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에는 키워드 vararg에 대해 알아봤습니다. 이번 포스트에서는 객체지향 프로그래밍(Object-oriented Programming), 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아보겠습니다. 객체지향 프로">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에는 가변인자(vararg)에 대해 알아봤습니다. 이번 포스트에서는 객체지향 프로그래밍(Object-oriented Programming), 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아보겠습니다.\n\n객체지향 프로그래밍코틀린은 모든 대상을 객체(Object)로 바라봅니다. 이러한 점에서 코틀린은 객체지향 프로그래밍 언어입니다. 객체지향 프로그래밍을 이해하려면 클래스와 인스턴스에 대해 알아야합니다. \n클래스와 인스턴스클래스와 인스턴스를 설명할 때 와플 기계와 와플을 예로 많이 듭니다.클래스는 인스턴스를 만드는 틀, 인스턴스는 클래스로 만든 무언가입니다. 즉 클래스는 와플 기계, 인스턴스 와플입니다. 클래스를 코드로 표현하면 다음과 같습니다.\n123class Waffle &#123;    // ...&#125;\n인스턴스는 다음과 같이 생성합니다. 클래스 이름 뒤에 ()를 붙여주면 됩니다.\n1var waffle = Waffle()\n이렇게 만든 인스턴스는 객체라고도 불립니다.\n\n마치며이번 포스트에서는 객체지향 프로그래밍, 클래스, 인스턴스, 객체에 대해 알아봤습니다. 다음 포스트에서는 클래스의 생성자(Constructor)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-07T20:13:30+09:00","dateModified":"2021-06-23T10:47:06+09:00","datePublished":"2019-01-07T20:13:30+09:00","description":"","headline":"[코틀린] 객체지향 프로그래밍, 클래스, 인스턴스, 객체","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/07/kotlin/190107-class-instance-object/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/07/kotlin/190107-class-instance-object/","keywords":"Kotlin"}</script>
+    <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에는 가변인자(vararg)에 대해 알아봤습니다. 이번 포스트에서는 객체지향 프로그래밍(Object-oriented Programming), 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아보겠습니다.  객체지향 프">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Kotlin] 객체지향 프로그래밍, 클래스, 인스턴스, 객체">
+<meta property="og:title" content="[코틀린] 객체지향 프로그래밍, 클래스, 인스턴스, 객체">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/01/07/kotlin/190107-class-instance-object/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에는 키워드 vararg에 대해 알아봤습니다. 이번 포스트에서는 객체지향 프로그래밍(Object-oriented Programming), 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아보겠습니다. 객체지향 프로">
+<meta property="og:description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에는 가변인자(vararg)에 대해 알아봤습니다. 이번 포스트에서는 객체지향 프로그래밍(Object-oriented Programming), 클래스(Class), 인스턴스(Instance), 객체(Object)에 대해 알아보겠습니다.  객체지향 프">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/kotlin/class/waffle.png">
 <meta property="article:published_time" content="2019-01-07T11:13:30.000Z">
-<meta property="article:modified_time" content="2021-05-11T07:25:59.757Z">
+<meta property="article:modified_time" content="2021-06-23T01:47:06.868Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
@@ -38,7 +38,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -229,7 +229,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -258,7 +258,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Kotlin] 객체지향 프로그래밍, 클래스, 인스턴스, 객체
+            [코틀린] 객체지향 프로그래밍, 클래스, 인스턴스, 객체
         </h1>
     
     
@@ -283,17 +283,20 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h2 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h2><p>이전 포스트에는 키워드 <a href="/ko/2019/01/06/kotlin/190106-vararg/">vararg</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>객체지향 프로그래밍(Object-oriented Programming)</code>, <code>클래스(Class)</code>, <code>인스턴스(Instance)</code>, <code>객체(Object)</code>에 대해 알아보겠습니다.</p>
-<h2 id="객체지향-프로그래밍"><a href="#객체지향-프로그래밍" class="headerlink" title="객체지향 프로그래밍"></a>객체지향 프로그래밍</h2><p>Kotlin은 모든 대상을 <code>객체(Object)</code>로 바라봅니다. 이러한 점에서 Kotlin은 <code>객체지향 프로그래밍 언어</code>입니다. <strong>객체지향 프로그래밍</strong>을 이해하려면 <code>클래스</code>와 <code>인스턴스</code>에 대해 알아야합니다. </p>
-<h2 id="클래스와-인스턴스"><a href="#클래스와-인스턴스" class="headerlink" title="클래스와 인스턴스"></a>클래스와 인스턴스</h2><p><code>클래스</code>와 <code>인스턴스</code>를 설명할 때 <code>와플 기계</code>과 <code>와플</code>을 예로 많이 듭니다.<br><img src="/ko/images/posts/kotlin/class/waffle.png"><br><code>클래스</code>는 <strong>인스턴스를 만드는 틀</strong>, <code>인스턴스</code>는 <strong>클래스로 만든 무언가</strong>라고 생각하면 됩니다. 즉 와플 기계는 <strong>클래스</strong>, 와플은 <strong>인스턴스</strong>입니다. 이 <code>클래스</code>를 코드로 표현하면 다음과 같습니다.</p>
+            <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에는 <a href="/ko/2019/01/06/kotlin/190106-vararg/">가변인자(vararg)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">객체지향 프로그래밍(Object-oriented Programming)</span>, <span class="highlight-text red">클래스(Class)</span>, <span class="highlight-text red">인스턴스(Instance)</span>, <span class="highlight-text red">객체(Object)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="객체지향-프로그래밍"><a href="#객체지향-프로그래밍" class="headerlink" title="객체지향 프로그래밍"></a>객체지향 프로그래밍</h1><p>코틀린은 모든 대상을 <b>객체(Object)</b>로 바라봅니다. 이러한 점에서 코틀린은 객체지향 프로그래밍 언어입니다. 객체지향 프로그래밍을 이해하려면 클래스와 인스턴스에 대해 알아야합니다. </p>
+<h1 id="클래스와-인스턴스"><a href="#클래스와-인스턴스" class="headerlink" title="클래스와 인스턴스"></a>클래스와 인스턴스</h1><p>클래스와 인스턴스를 설명할 때 와플 기계와 와플을 예로 많이 듭니다.<br><img src="/ko/images/posts/kotlin/class/waffle.png"><br><strong>클래스</strong>는 인스턴스를 만드는 틀, <strong>인스턴스</strong>는 클래스로 만든 무언가입니다. 즉 클래스는 와플 기계, 인스턴스 와플입니다. 클래스를 코드로 표현하면 다음과 같습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Waffle</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>그럼 <code>인스턴스</code>를 만들어 보겠습니다. <code>인스턴스</code>는 다음과 같이 생성합니다. 클래스 이름 뒤에 <code>()</code>를 붙여주면 됩니다.</p>
+<p>인스턴스는 다음과 같이 생성합니다. 클래스 이름 뒤에 <code>()</code>를 붙여주면 됩니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> waffle = Waffle()</span><br></pre></td></tr></table></figure>
-<p>이렇게 만든 인스턴스는 <code>객체(Object)</code>라고도 불립니다.</p>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>객체지향 프로그래밍(Object-oriented Programming)</code>, <code>클래스(Class)</code>, <code>인스턴스(Instance)</code>, <code>객체(Object)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/07/kotlin/190107-constructor/">클래스의 생성자(Constructor)</a>에 대해 알아보겠습니다.</p>
+<p>이렇게 만든 인스턴스는 <b>객체</b>라고도 불립니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 객체지향 프로그래밍, 클래스, 인스턴스, 객체에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/07/kotlin/190107-constructor/">클래스의 생성자(Constructor)</a>에 대해 알아보겠습니다.</p>
 
             
 
@@ -528,7 +531,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

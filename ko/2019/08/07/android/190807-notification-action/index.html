@@ -6,17 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Android] 알림(Notification) - (3) 알림에 액션 추가하기 - Yologger&#39;s Blog</title>
+    <title>[안드로이드] 알림(Notification) - (3) 알림에 액션 추가하기 - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기  ⬅️ ⬅️ ⬅️\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기\n\n\n알림에는 버튼이 포함될 수 있습니다. 이를 액션 버튼이라고 합니다.\n액션은 다음과 같이 생성할 수 있습니다.\n12345val action = NotificationCompat.Action.Builder(    android.R.drawable.sym_action_chat,    &quot;OPEN&quot;,    pendingIntent).build()\n생성된 액션은 NotificationBuilder객체의 addAction()메소드를 사용하여 추가합니다.\n1notificationBuilder.addAction(action)\n전체 코드는 다음과 같습니다.\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354class MainActivity : AppCompatActivity() &#123;    lateinit var button: Button    val REQUEST_CODE = 1    val NOTIFICATION_ID = 1    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById&lt;Button&gt;(R.id.activity_main_btn)        button.setOnClickListener &#123;            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;                val channelId = &quot;channel_id&quot;                val channelName = &quot;channel_name&quot;                val channelDescription = &quot;channel_description&quot;                val importance = NotificationManager.IMPORTANCE_HIGH                val notificationChannel = NotificationChannel(channelId, channelName, importance)                notificationChannel.description = channelDescription                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager                notificationManager.createNotificationChannel(notificationChannel)                val notificationBuilder = NotificationCompat.Builder(this, channelId)                    .setSmallIcon(android.R.drawable.ic_dialog_info)                    .setContentTitle(&quot;A Notification&quot;)                    .setContentText(&quot;This is a notification&quot;)                val resultIntent = Intent(this@MainActivity, ResultActivity::class.java)                val pendingIntent = PendingIntent.getActivity(this@MainActivity, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)                notificationBuilder.setContentIntent(pendingIntent)                val action = NotificationCompat.Action.Builder(                    android.R.drawable.sym_action_chat,                    &quot;OPEN&quot;,                    pendingIntent                ).build()                notificationBuilder.addAction(action)                val notification = notificationBuilder.build()                notificationManager.notify(NOTIFICATION_ID, notification)            &#125; else &#123;                // ...             &#125;        &#125;    &#125;&#125;\n이제 알림 패널에서 액션 버튼을 클릭하면 ResultActivity가 실행됩니다.\n\n마치며이번 포스트에서는 알림에 액션 버튼을 추가하는 방법에 대해 알아봤습니다. 다음 포스트에서는 알림 메시지를 묶는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-07T20:16:30+09:00","dateModified":"2021-06-15T03:04:54+09:00","datePublished":"2019-08-07T20:16:30+09:00","description":"","headline":"[Android] 알림(Notification) - (3) 알림에 액션 추가하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/07/android/190807-notification-action/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/08/07/android/190807-notification-action/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기  ⬅️ ⬅️ ⬅️\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기\n\n\n알림에는 버튼이 포함될 수 있습니다. 이를 액션 버튼이라고 합니다.\n액션은 다음과 같이 생성할 수 있습니다.\n12345val action = NotificationCompat.Action.Builder(    android.R.drawable.sym_action_chat,    &quot;OPEN&quot;,    pendingIntent).build()\n생성된 액션은 NotificationBuilder객체의 addAction()메소드를 사용하여 추가합니다.\n1notificationBuilder.addAction(action)\n전체 코드는 다음과 같습니다.\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354class MainActivity : AppCompatActivity() &#123;    lateinit var button: Button    val REQUEST_CODE = 1    val NOTIFICATION_ID = 1    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById&lt;Button&gt;(R.id.activity_main_btn)        button.setOnClickListener &#123;            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;                val channelId = &quot;channel_id&quot;                val channelName = &quot;channel_name&quot;                val channelDescription = &quot;channel_description&quot;                val importance = NotificationManager.IMPORTANCE_HIGH                val notificationChannel = NotificationChannel(channelId, channelName, importance)                notificationChannel.description = channelDescription                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager                notificationManager.createNotificationChannel(notificationChannel)                val notificationBuilder = NotificationCompat.Builder(this, channelId)                    .setSmallIcon(android.R.drawable.ic_dialog_info)                    .setContentTitle(&quot;A Notification&quot;)                    .setContentText(&quot;This is a notification&quot;)                val resultIntent = Intent(this@MainActivity, ResultActivity::class.java)                val pendingIntent = PendingIntent.getActivity(this@MainActivity, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)                notificationBuilder.setContentIntent(pendingIntent)                val action = NotificationCompat.Action.Builder(                    android.R.drawable.sym_action_chat,                    &quot;OPEN&quot;,                    pendingIntent                ).build()                notificationBuilder.addAction(action)                val notification = notificationBuilder.build()                notificationManager.notify(NOTIFICATION_ID, notification)            &#125; else &#123;                // ...             &#125;        &#125;    &#125;&#125;\n이제 알림 패널에서 액션 버튼을 클릭하면 ResultActivity가 실행됩니다.\n\n마치며이번 포스트에서는 알림에 액션 버튼을 추가하는 방법에 대해 알아봤습니다. 다음 포스트에서는 알림 메시지를 묶는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-07T20:16:30+09:00","dateModified":"2021-06-21T14:13:34+09:00","datePublished":"2019-08-07T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (3) 알림에 액션 추가하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/07/android/190807-notification-action/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/07/android/190807-notification-action/","keywords":"Android"}</script>
     <meta name="description" content="들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.  로컬 알림 알림에서 액티비티 시작하기 알림에 액션 추가하기  ⬅️ ⬅️ ⬅️ 알림 메시지 묶기 원격 알림 포그라운드 상태에서 원격 알림 받기   알림에는 버튼이 포함될 수 있습니다. 이를 액션 버튼이라고 합니다. 액션은 다음과 같이 생성할 수 있습니다. 12345val a">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Android] 알림(Notification) - (3) 알림에 액션 추가하기">
+<meta property="og:title" content="[안드로이드] 알림(Notification) - (3) 알림에 액션 추가하기">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/08/07/android/190807-notification-action/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.  로컬 알림 알림에서 액티비티 시작하기 알림에 액션 추가하기  ⬅️ ⬅️ ⬅️ 알림 메시지 묶기 원격 알림 포그라운드 상태에서 원격 알림 받기   알림에는 버튼이 포함될 수 있습니다. 이를 액션 버튼이라고 합니다. 액션은 다음과 같이 생성할 수 있습니다. 12345val a">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/notification_action/1.png">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/notification_action/2.png">
 <meta property="article:published_time" content="2019-08-07T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-06-14T18:04:54.501Z">
+<meta property="article:modified_time" content="2021-06-21T05:13:34.740Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -39,7 +39,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -230,7 +230,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -259,7 +259,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Android] 알림(Notification) - (3) 알림에 액션 추가하기
+            [안드로이드] 알림(Notification) - (3) 알림에 액션 추가하기
         </h1>
     
     
@@ -539,7 +539,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

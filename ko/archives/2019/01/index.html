@@ -33,7 +33,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -222,7 +222,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -257,9 +257,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/31/kotlin/190131-type-casting/"
-                            aria-label=": [Kotlin] 형 변환(Type Casting)"
+                            aria-label=": [코틀린] 형 변환(Type Casting)"
                         >
-                            [Kotlin] 형 변환(Type Casting)
+                            [코틀린] 형 변환(Type Casting)
                         </a>
                     
                 </h1>
@@ -281,22 +281,27 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>이전 포스트에서는 <a href="/ko/2019/01/29/kotlin/190129-lateinit-var/">늦은 초기화와 lateinit</a>, <a href="/ko/2019/01/30/kotlin/190130-by-lazy/">by lazy</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>형 변환</code>에 대해 알아보겠습니다.</p>
-<h3 id="형-변환-Type-Casting"><a href="#형-변환-Type-Casting" class="headerlink" title="형 변환(Type Casting)"></a>형 변환(Type Casting)</h3><p><code>형 변환</code>은 자료형을 다른 자료형으로 변환하는 것을 의미합니다.</p>
-<h3 id="기본자료형의-형변환"><a href="#기본자료형의-형변환" class="headerlink" title="기본자료형의 형변환"></a>기본자료형의 형변환</h3><p>기본자료형을 형변환할 때는 내장된 <code>형변환 함수</code>를 사용합니다.</p>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/29/kotlin/190129-lateinit-var/">늦은 초기화와 lateinit</a>, <a href="/ko/2019/01/30/kotlin/190130-by-lazy/">by lazy</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">형 변환(Type Casting)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="형-변환"><a href="#형-변환" class="headerlink" title="형 변환"></a>형 변환</h1><p><code>형 변환</code>은 자료형을 다른 자료형으로 변환하는 것을 의미합니다.</p>
+<h3 id="1-기본자료형의-형변환"><a href="#1-기본자료형의-형변환" class="headerlink" title="(1) 기본자료형의 형변환"></a>(1) 기본자료형의 형변환</h3><p>기본 자료형을 형변환할 때는 내장된 <code>형변환 함수</code>를 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 실수형 숫자를 정수형 숫자로 형변환</span></span><br><span class="line"><span class="keyword">var</span> height: <span class="built_in">Double</span> = <span class="number">179.3</span></span><br><span class="line"><span class="keyword">var</span> roughHeight: <span class="built_in">Int</span> = height.toInt()  <span class="comment">// 179</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 문자열을 정수형 숫자로 형변환</span></span><br><span class="line"><span class="keyword">var</span> string: String = <span class="string">&quot;100&quot;</span></span><br><span class="line"><span class="keyword">var</span> number: <span class="built_in">Int</span> = string.toInt()  <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> string: String = <span class="string">&quot;hundred&quot;</span></span><br><span class="line"><span class="keyword">var</span> number: <span class="built_in">Int</span>? = string.toIntOrNull()  <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
 
 
-<h3 id="클래스-인스턴스의-형변환"><a href="#클래스-인스턴스의-형변환" class="headerlink" title="클래스 인스턴스의 형변환"></a>클래스 인스턴스의 형변환</h3><p>클래스 인스턴스를 형변환할 때는 키워드 <code>as</code>를 사용합니다. </p>
+<h3 id="2-클래스-인스턴스의-형변환"><a href="#2-클래스-인스턴스의-형변환" class="headerlink" title="(2) 클래스 인스턴스의 형변환"></a>(2) 클래스 인스턴스의 형변환</h3><p>클래스 인스턴스를 형변환할 때는 키워드 <code>as</code>를 사용합니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 부모클래스</span></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">var</span> name: String) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 자식클래스</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span></span>(name: String, <span class="keyword">var</span> team: String): Person(name) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printTeam</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Team: <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> player: Player = Player(<span class="string">&quot;Messi&quot;</span>, <span class="string">&quot;35&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 자식클래스를 부모클래스로 형변환</span></span><br><span class="line"><span class="keyword">var</span> person: Person = player <span class="keyword">as</span> Person</span><br><span class="line"></span><br><span class="line">person.printName()</span><br></pre></td></tr></table></figure>
 <p>부모클래스가 <code>Nullable</code>타입이면 키워드 <code>as?</code>를 사용합니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">var</span> name: String) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span></span>(name: String, <span class="keyword">var</span> team: String): Person(name) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printTeam</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Team: <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> player: Player? = Player(<span class="string">&quot;Messi&quot;</span>, <span class="string">&quot;35&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> person: Person? = player <span class="keyword">as</span>? Person</span><br><span class="line"></span><br><span class="line">person?.printName()</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서 <code>형 변환(Type Casting)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/01/kotlin/190201-error-handling/">Kotlin의 에러 처리</a>에 대해 알아보겠습니다.</p>
+
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 <code>형 변환(Type Casting)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/01/kotlin/190201-error-handling/">코틀린의 에러 처리(Error Handling)</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -330,9 +335,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/30/kotlin/190130-by-lazy/"
-                            aria-label=": [Kotlin] 늦은 초기화 - (2) by lazy"
+                            aria-label=": [코틀린] 늦은 초기화 - (2) by lazy"
                         >
-                            [Kotlin] 늦은 초기화 - (2) by lazy
+                            [코틀린] 늦은 초기화 - (2) by lazy
                         </a>
                     
                 </h1>
@@ -354,19 +359,21 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h3 id="늦은-초기화-Late-Initialization"><a href="#늦은-초기화-Late-Initialization" class="headerlink" title="늦은 초기화(Late Initialization)"></a>늦은 초기화(Late Initialization)</h3><p>Kotlin에서 변수나 상수는 원칙적으로 선언과 동시에 초기화해야합니다. 값이 없다면 <code>null</code>으로라도 초기화해야합니다. (관련 내용은 <a href="/ko/2019/01/19/kotlin/190119-null-1/">이 곳</a>에서 확인하실 수 있습니다.)</p>
-<p>그러나 Kotlin은 선언만 먼저 하고 초기화는 나중에 하는 방법을 제공합니다. 이를 <code>늦은 초기화(Late Initialization)</code>라고 합니다.</p>
-<p>이번 포스트에서는 <code>늦은 초기화(Late Initialization)</code>의 두 번째 방법인 <code>by lazy</code>에 대해 알아보겠습니다. (첫 번째 방법인 <code>lateinit by</code>는 <a href="/ko/2019/01/29/kotlin/190129-lateinit-var/">이 곳</a>에서 확인할 수 있습니다.)</p>
-<h2 id="by-lazy"><a href="#by-lazy" class="headerlink" title="by lazy"></a>by lazy</h2><p>키워드 <code>by lazy</code>를 상수 앞에 붙이면 <code>상수</code>에 접근할 때 초기화됩니다. 접근하기 전에는 값이 초기화되지 않으므로 메모리를 아낄 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name: String <span class="keyword">by</span> lazy &#123;</span><br><span class="line">    println(<span class="string">&quot;Initializing....&quot;</span>)</span><br><span class="line">    <span class="string">&quot;Paul&quot;</span>  <span class="comment">// 블럭의 마지막 값이 할당된다.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print(name) <span class="comment">// 이 시점에 상수 name이 초기화됩니다.</span></span><br></pre></td></tr></table></figure>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<hr>
+<h1 id="늦은-초기화-Late-Initialization"><a href="#늦은-초기화-Late-Initialization" class="headerlink" title="늦은 초기화(Late Initialization)"></a>늦은 초기화(Late Initialization)</h1><p>코틀린에서 변수나 상수는 원칙적으로 선언과 동시에 초기화해야합니다. 값이 없다면 <code>null</code>로 초기화 해야합니다. (관련 내용은 <a href="/ko/2019/01/19/kotlin/190119-null-1/">이 곳</a>에서 확인하실 수 있습니다.)</p>
+<p>그러나 코틀린은 선언만 먼저 하고 초기화는 나중에 하는 방법을 제공합니다. 이를 <code>늦은 초기화(Late Initialization)</code>라고 합니다.</p>
+<p>이번 포스트에서는 늦은 초기화의 두 번째 방법인 <span class="highlight-text red">by lazy</span>에 대해 알아보겠습니다.(첫 번째 방법인 <code>lateinit</code>은 <a href="/ko/2019/01/29/kotlin/190129-lateinit-var/">이 곳</a>에서 확인할 수 있습니다.)</p>
+<h1 id="by-lazy"><a href="#by-lazy" class="headerlink" title="by lazy"></a>by lazy</h1><p>키워드 <code>by lazy</code>를 상수 앞에 붙이면 상수에 접근할 때 값이 초기화됩니다. 접근하기 전에는 값이 초기화되지 않으므로 메모리를 절약할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name: String <span class="keyword">by</span> lazy &#123;</span><br><span class="line">    println(<span class="string">&quot;Initializing....&quot;</span>)</span><br><span class="line">    <span class="string">&quot;Paul&quot;</span>  <span class="comment">// 블럭의 마지막 값이 할당된다.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print(name) <span class="comment">// 상수에 접근하는 이 시점에 상수 name이 초기화됩니다.</span></span><br></pre></td></tr></table></figure>
 
 <p>보통 안드로이드 앱을 개발할 때 다음과 같이 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> loginButton: Button <span class="keyword">by</span> lazy &#123; findViewById&lt;Button&gt;(R.id.login_button) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        loginButton.setOnClickListener &#123;</span><br><span class="line">            println(<span class="string">&quot;LoginButton Clicked.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서 <code>늦은 초기화</code>와 <code>by lazy</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/31/kotlin/190131-type-casting/">형 변환(Type Casting)</a>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 <code>늦은 초기화</code>와 <code>by lazy</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/31/kotlin/190131-type-casting/">형 변환(Type Casting)</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -400,9 +407,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/29/kotlin/190129-lateinit-var/"
-                            aria-label=": [Kotlin] 늦은 초기화 - (1) lateinit var"
+                            aria-label=": [코틀린] 늦은 초기화 - (1) lateinit var"
                         >
-                            [Kotlin] 늦은 초기화 - (1) lateinit var
+                            [코틀린] 늦은 초기화 - (1) lateinit var
                         </a>
                     
                 </h1>
@@ -424,25 +431,29 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h3 id="늦은-초기화-Late-Initialization"><a href="#늦은-초기화-Late-Initialization" class="headerlink" title="늦은 초기화(Late Initialization)"></a>늦은 초기화(Late Initialization)</h3><p>Kotlin에서 변수나 상수는 원칙적으로 선언과 동시에 초기화해야합니다. 값이 없다면 <code>null</code>으로라도 초기화해야합니다. (관련 내용은 <a href="/ko/2019/01/19/kotlin/190119-null-1/">이 곳</a>에서 확인하실 수 있습니다.)</p>
-<p>그러나 Kotlin은 선언만 먼저 하고 초기화는 나중에 하는 방법을 제공합니다. 이를 <code>늦은 초기화(Late Initialization)</code>라고 합니다.</p>
-<p>이번 포스트에서는 <code>늦은 초기화(Late Initialization)</code>의 첫 번째 방법인 <code>lateinit var</code>에 대해 알아보겠습니다.</p>
-<h3 id="var"><a href="#var" class="headerlink" title="var"></a>var</h3><p>우선 Kotlin에서 변수는 초기화하지 않으면 컴파일 자체가 안됩니다.</p>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<hr>
+<h1 id="늦은-초기화-Late-Initialization"><a href="#늦은-초기화-Late-Initialization" class="headerlink" title="늦은 초기화(Late Initialization)"></a>늦은 초기화(Late Initialization)</h1><p>코틀린에서 변수나 상수는 원칙적으로 선언과 동시에 초기화해야합니다. 값이 없다면 <code>null</code>로 초기화 해야합니다. (관련 내용은 <a href="/ko/2019/01/19/kotlin/190119-null-1/">이 곳</a>에서 확인하실 수 있습니다.)</p>
+<p>그러나 코틀린은 선언만 먼저 하고 초기화는 나중에 하는 방법을 제공합니다. 이를 <code>늦은 초기화(Late Initialization)</code>라고 합니다.</p>
+<p>이번 포스트에서는 늦은 초기화의 첫 번째 방법인 <span class="highlight-text red">lateinit var</span>에 대해 알아보겠습니다.</p>
+<h1 id="var"><a href="#var" class="headerlink" title="var"></a>var</h1><p>코틀린에서의 변수는 초기화하지 않으면 컴파일 자체가 안됩니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 기본 데이터타입 Int</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="built_in">Int</span>        <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line"><span class="keyword">var</span> person: Person  <span class="comment">// Property must be initialized or be abstract</span></span><br></pre></td></tr></table></figure>
-<p>데이터 타입을 <code>Nullable</code>로 선언하여 <code>null</code>이라도 할당해주어야 합니다.</p>
+<p>데이터 타입을 <code>Nullable</code>로 선언하고 <code>null</code>이라도 할당해주어야 합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age: <span class="built_in">Int</span>? = <span class="literal">null</span></span><br><span class="line"><span class="keyword">var</span> person: Person? = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="lateinit-var"><a href="#lateinit-var" class="headerlink" title="lateinit var"></a>lateinit var</h3><p><code>lateinit var</code>는 값의 생성 및 초기화를 나중에 할 수 있도록 합니다. 기본 자료형에는 사용할 수 없으며 <code>클래스의 인스턴스</code>에만 사용 가능합니다.</p>
+<h1 id="lateinit-var"><a href="#lateinit-var" class="headerlink" title="lateinit var"></a>lateinit var</h1><p><code>lateinit var</code>는 값의 생성 및 초기화를 나중에 할 수 있도록 합니다. 기본 자료형에는 사용할 수 없으며 클래스의 인스턴스에만 사용 가능합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(name: String, age: <span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">lateinit</span> <span class="keyword">var</span> person: Person     <span class="comment">// 컴파일 에러가 발생하지 않습니다.</span></span><br><span class="line"></span><br><span class="line">person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br></pre></td></tr></table></figure>
 <p>문자열 <code>String</code>도 클래스이므로 사용할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lateinit</span> <span class="keyword">var</span> name: String</span><br><span class="line">name = <span class="string">&quot;Ronaldo&quot;</span></span><br></pre></td></tr></table></figure>
 <p>보통 안드로이드 앱을 개발할 때 다음과 같이 사용합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> loginButton: Button</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        </span><br><span class="line">        loginButton = findViewById(R.id.login_button)</span><br><span class="line"></span><br><span class="line">        loginButton.setOnClickListener &#123;</span><br><span class="line">            println(<span class="string">&quot;LoginButton Clicked.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서 <code>늦은 초기화</code>와 <code>lateinit var</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/30/kotlin/190130-by-lazy/">by lazy</a>에 대해 알아보겠습니다.</p>
+
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 <code>늦은 초기화</code>와 <code>lateinit var</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/30/kotlin/190130-by-lazy/">by lazy</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -476,9 +487,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/28/kotlin/190128-val-const/"
-                            aria-label=": [Kotlin] 상수(val, const)"
+                            aria-label=": [코틀린] 상수(val, const)"
                         >
-                            [Kotlin] 상수(val, const)
+                            [코틀린] 상수(val, const)
                         </a>
                     
                 </h1>
@@ -500,23 +511,26 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>우리는 이전 포스트에서 <a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">스코프 함수</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>상수 (val, const)</code>에 대해 알아보겠습니다. </p>
-<h3 id="변수-var"><a href="#변수-var" class="headerlink" title="변수 var"></a>변수 var</h3><p><code>변수</code>를 선언할 때는 키워드 <code>var</code>를 사용합니다. <code>변수</code>는 런타임에서 값을 수시로 변경할 수 있습니다.</p>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>우리는 이전 포스트에서 <a href="/ko/2019/01/27/kotlin/190127-this-in-kotlin/">코틀린에서의 this</a>에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 <span class="highlight-text red">상수(val, const)</span>에 대해 알아보겠습니다. </p>
+<hr>
+<h1 id="var"><a href="#var" class="headerlink" title="var"></a>var</h1><p><code>변수</code>를 선언할 때 키워드 <code>var</code>를 사용합니다. 변수는 런타임에 값을 수시로 변경할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 값 변경</span></span><br><span class="line">name = <span class="string">&quot;John&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="상수-val"><a href="#상수-val" class="headerlink" title="상수 val"></a>상수 val</h3><p><code>val</code>은 <strong>런타임</strong>에 값이 결정되는 <code>상수</code>입니다. <code>상수</code>는 한 번 값이 할당되면 변경할 수 없습니다. </p>
+<h1 id="val"><a href="#val" class="headerlink" title="val"></a>val</h1><p><code>val</code>은 <b>런타임에 값이 결정되는 상수</b>입니다. 상수는 한 번 값이 할당되면 변경할 수 없습니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 기본타입의 상수 선언</span></span><br><span class="line"><span class="keyword">var</span> age: <span class="built_in">Int</span> = <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 에러, 값 변경 불가능</span></span><br><span class="line">age = <span class="number">31</span></span><br></pre></td></tr></table></figure>
 <p><code>val</code>은 문자열도 할당할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 문자열 타입의 상수 선언</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 에러, 값 변경 불가능</span></span><br><span class="line">name = <span class="string">&quot;John&quot;</span></span><br></pre></td></tr></table></figure>
 <p><code>val</code>는 클래스의 인스턴스도 할당할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 에러, 물론 다른 인스턴스를 할당할 수도 없습니다.</span></span><br><span class="line">person = Person(<span class="string">&quot;John&quot;</span>, <span class="number">25</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="const-val"><a href="#const-val" class="headerlink" title="const val"></a>const val</h3><p><code>const val</code>는 <strong>컴파일 타임</strong>에 값이 결정되는 <code>상수</code>입니다. 인스턴스를 할당할 수 없으며, <code>기본 자료형</code>과 <code>문자열</code>만 할당할 수 있습니다. <code>const val</code>상수의 이름은 통상 <code>대문자</code>와 <code>언더바</code>를 통해 선언합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> DEVICE_WIDTH: <span class="built_in">Int</span> = <span class="number">1400</span>  <span class="comment">// 성공</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> URL: String = <span class="string">&quot;http://www.naver.com&quot;</span>  <span class="comment">// 성공</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> person: Person = Person(<span class="string">&quot;ronaldo&quot;</span>, <span class="number">34</span>)  <span class="comment">// 에러</span></span><br></pre></td></tr></table></figure>
+<h1 id="const-val"><a href="#const-val" class="headerlink" title="const val"></a>const val</h1><p><code>const val</code>는 <b>컴파일 타임에 값이 결정되는 상수</b>입니다. 인스턴스를 할당할 수 없으며, 기본 자료형과 문자열만 할당할 수 있습니다. 상수의 이름은 통상 <b>대문자</b>와 <b>언더바</b>를 통해 선언합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> DEVICE_WIDTH: <span class="built_in">Int</span> = <span class="number">1400</span>                  <span class="comment">// 성공</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> URL: String = <span class="string">&quot;http://www.naver.com&quot;</span>      <span class="comment">// 성공</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">val</span> person: Person = Person(<span class="string">&quot;ronaldo&quot;</span>, <span class="number">34</span>)    <span class="comment">// 에러</span></span><br></pre></td></tr></table></figure>
 <p>클래스 안에서 사용할 때는 <a href="/ko/2019/01/15/kotlin/190115-object/">companion object</a> 블럭 안에 정의합니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MediaQueryMananger</span> </span>&#123;</span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">val</span> DEVICE_WIDTH: <span class="built_in">Int</span> = <span class="number">1400</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 클래스의 인스턴스를 생성하지 않고 사용 가능합니다.</span></span><br><span class="line">println(MediaQueryManager.DEVICE_WIDTH)</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>상수(val, const)</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/29/kotlin/190129-lateinit-var/">늦은 초기화의 lateinit</a>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>상수(val, const)</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/29/kotlin/190129-lateinit-var/">늦은 초기화의 lateinit</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -550,9 +564,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/27/kotlin/190127-this-in-kotlin/"
-                            aria-label=": [Kotlin] Kotlin에서의 this"
+                            aria-label=": [코틀린] 코틀린에서의 this"
                         >
-                            [Kotlin] Kotlin에서의 this
+                            [코틀린] 코틀린에서의 this
                         </a>
                     
                 </h1>
@@ -574,32 +588,38 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>키워드 this는 크게 3가지 용도로 사용됩니다.</p>
-<h1 id="1-클래스에서의-this"><a href="#1-클래스에서의-this" class="headerlink" title="1. 클래스에서의 this"></a>1. 클래스에서의 this</h1><p>클래스에서 this는 해당 위치에서 가장 가까운 클래스의 인스턴스를 의미합니다. 아래 예제를 살펴봅시다.</p>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에는 <a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">스코프 함수</a>에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 <span class="highlight-text red">this</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="1-클래스에서의-this"><a href="#1-클래스에서의-this" class="headerlink" title="(1) 클래스에서의 this"></a>(1) 클래스에서의 this</h1><p>클래스에서 <code>this</code>는 해당 위치에서 가장 가까운 클래스의 인스턴스를 의미합니다. 아래 예제를 살펴봅시다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">constructor</span>(name: String) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printSomething</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>생성자 constructor()와 메소드 printSomething()에서 키워드 this를 사용하고 있습니다. 여기서 this는 클래스 Person의 인스턴스를 의미합니다. 키워드 this는 다음과 같이 생략할 수 있습니다.</p>
+<p>위 코드에서의 <code>this</code>는 <code>Person</code>클래스의 인스턴스를 의미합니다. 키워드 <code>this</code>는 생략할 수도 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">constructor</span>(name: String) &#123;</span><br><span class="line">        <span class="comment">// this.name = name</span></span><br><span class="line">        name = name</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printSomething</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// println(this.name)</span></span><br><span class="line">        println(name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="2-확장함수에서의-this"><a href="#2-확장함수에서의-this" class="headerlink" title="2. 확장함수에서의 this"></a>2. 확장함수에서의 this</h1><p><a href="/ko/2019/02/08/kotlin/190208-extension-function/">확장 함수</a>에서 this는 확장 함수를 호출한 클래스의 인스턴스를 의미합니다. 아래와 같은 클래스가 있다고 가정합시다.</p>
+<h1 id="2-확장-함수에서의-this"><a href="#2-확장-함수에서의-this" class="headerlink" title="(2) 확장 함수에서의 this"></a>(2) 확장 함수에서의 this</h1><p><a href="/ko/2019/02/08/kotlin/190208-extension-function/">확장 함수</a>에서의 <code>this</code>는 확장 함수를 호출한 클래스의 인스턴스를 의미합니다. 다음과 같은 클래스가 있다고 가정합시다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> name: String, <span class="keyword">val</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;this.name&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Age: <span class="subst">$&#123;this.age&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>확장 함수를 추가해봅시다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Person.<span class="title">printInformation</span><span class="params">()</span></span> &#123;</span><br><span class="line">    print(<span class="string">&quot;<span class="subst">$&#123;this.name&#125;</span> is <span class="subst">$&#123;this.age&#125;</span> years old.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>확장 함수에서 this는 점(.)의 왼쪽에 위치하는, 확장 함수를 호출한 클래스를 의미합니다.</p>
-<h1 id="3-스코프-함수에서의-this"><a href="#3-스코프-함수에서의-this" class="headerlink" title="3. 스코프 함수에서의 this"></a>3. 스코프 함수에서의 this</h1><p><a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">스코프 함수</a>에서 this는 리시버(Receiver)를 의미합니다. 리시버(Receiver)는 스코프 호출을 호출한, 점(.)의 왼쪽에 위치하는 대상을 의미합니다. 우선 스코프 함수 run()의 예제는 아래와 같습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line">person.run &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">&quot;John&quot;</span></span><br><span class="line">    <span class="keyword">this</span>.age = <span class="number">33</span></span><br><span class="line">    println(<span class="string">&quot;His name is <span class="subst">$&#123;this.name&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>스코프 함수 with()의 예제는 아래와 같습니다.</p>
+<p>확장 함수에서 <code>this</code>는 <code>점(.)</code>의 왼쪽에 위치하는 <u>확장 함수를 호출한 클래스</u>를 의미합니다.</p>
+<h1 id="3-스코프-함수에서의-this"><a href="#3-스코프-함수에서의-this" class="headerlink" title="(3) 스코프 함수에서의 this"></a>(3) 스코프 함수에서의 this</h1><p><a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">스코프 함수</a>에서의 <code>this</code>는 리시버를 의미합니다. <code>리시버(Receiver)</code>는 스코프 호출을 호출한, <code>점(.)</code>의 왼쪽에 위치하는 대상입니다.</p>
+<p>우선 스코프 함수 <a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">run()</a>의 예제는 아래와 같습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 스코프 함수</span></span><br><span class="line">person.run &#123;</span><br><span class="line">    <span class="comment">// this는 person을 의미합니다.</span></span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">&quot;John&quot;</span></span><br><span class="line">    <span class="keyword">this</span>.age = <span class="number">33</span></span><br><span class="line">    println(<span class="string">&quot;His name is <span class="subst">$&#123;this.name&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>스코프 함수 <a href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/">with()</a>의 예제는 아래와 같습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 스코프 함수</span></span><br><span class="line">with(person) &#123;</span><br><span class="line">    <span class="comment">// this는 person을 의미합니다.</span></span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">&quot;John&quot;</span></span><br><span class="line">    <span class="keyword">this</span>.age = <span class="number">35</span></span><br><span class="line">    println(<span class="string">&quot;His name is <span class="subst">$&#123;this.name&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Qualified-this"><a href="#Qualified-this" class="headerlink" title="Qualified this"></a>Qualified this</h1><p>아래 코드를 살펴봅시다. 클래스 내부에 내부 클래스가 있고, 내부 클래스 안에 확장 함수가 있습니다.</p>
+<h1 id="4-Qualified-this"><a href="#4-Qualified-this" class="headerlink" title="(4) Qualified this"></a>(4) Qualified this</h1><p>아래 코드를 살펴봅시다. 클래스 안에 내부 클래스가 있고, 내부 클래스 안에 확장 함수가 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">multiple</span><span class="params">(a: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> a*b</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이때 확장 함수에서의 this는 무엇을 가리킬까요?</p>
+<p>이때 확장 함수에서의 <code>this</code>는 무엇을 가리킬까요?</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">multiple</span><span class="params">(a: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">            <span class="keyword">val</span> what = <span class="keyword">this</span>     <span class="comment">// this는 무엇을 가리킬까요?</span></span><br><span class="line">            <span class="keyword">return</span> a*b</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>확장 함수에서의 this는 확장 함수를 호출하는 리시버인 Int를 가리킵니다. 그럼 확장 함수 안에서 클래스 Outer와 클래스 Inner에는 어떻게 접근할 수 있을까요? 이러한 경우에 Qualifed this를 사용합니다. Qualifed this는 <code>this@클래스이름</code> 형태로 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">multiple</span><span class="params">(a: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">            <span class="keyword">val</span> what = <span class="keyword">this</span>     <span class="comment">// Int</span></span><br><span class="line">            <span class="keyword">val</span> i = <span class="keyword">this</span><span class="symbol">@Inner</span>  <span class="comment">// Inner</span></span><br><span class="line">            <span class="keyword">val</span> o = <span class="keyword">this</span><span class="symbol">@Outer</span>  <span class="comment">// Outer</span></span><br><span class="line">            <span class="keyword">return</span> a*b</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>확장 함수에서의 <code>this</code>는 확장 함수를 호출하는 리시버인 <b>Int</b>입니다.</p>
+<p>그럼 확장 함수 안에서 <b>Outer</b>클래스와 <b>Inner</b>클래스는 어떻게 접근할 수 있을까요? 이러한 경우에 <code>Qualifed this</code>를 사용합니다. <code>Qualifed this</code>는 <b><code>this@클래스이름</code></b> 형태로 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">multiple</span><span class="params">(a: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">            <span class="keyword">val</span> what = <span class="keyword">this</span>     <span class="comment">// Int</span></span><br><span class="line">            <span class="keyword">val</span> <span class="keyword">inner</span> = <span class="keyword">this</span><span class="symbol">@Inner</span>  <span class="comment">// Inner</span></span><br><span class="line">            <span class="keyword">val</span> outer = <span class="keyword">this</span><span class="symbol">@Outer</span>  <span class="comment">// Outer</span></span><br><span class="line">            <span class="keyword">return</span> a*b</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>아래 코드는 안드로이드에서 자주 사용하는 패턴으로 버튼을 눌렀을 때 특정 로직을 수행하는 코드입니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span>: <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> buttonSayHello: Button</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(saveInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(saveInstanceState)</span><br><span class="line"></span><br><span class="line">        buttonSayHello = findViewById(R.id.activity_main_button_say_hello) <span class="keyword">as</span> Button</span><br><span class="line"></span><br><span class="line">        buttonSayHello.setOnClickListener(<span class="keyword">object</span>: View.OnClickListener &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onClick</span><span class="params">(view: <span class="type">View</span>)</span></span> &#123;</span><br><span class="line">                Toast.makeText(<span class="keyword">this</span><span class="symbol">@MainActivity</span>, <span class="string">&quot;Hello&quot;</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>onClick() 메소드 안에서의 this는 View.OnClickListener를 가리킵니다. 따라서 액티비티의 인스턴스를 참조하기 위해 this@MyActivity를 사용합니다.</p>
+<p><b>onClick()</b>메소드 안에서의 <code>this</code>는 <b>View.OnClickListener</b>를 가리킵니다. 따라서 액티비티의 인스턴스를 참조하기 위해 <code>this@MyActivity</code>를 사용합니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 <code>코틀린에서의 this</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/28/kotlin/190128-val-const/">코틀린의 상수</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -633,9 +653,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/"
-                            aria-label=": [Kotlin] 스코프 함수 - (5) with"
+                            aria-label=": [코틀린] 스코프 함수 - (5) with"
                         >
-                            [Kotlin] 스코프 함수 - (5) with
+                            [코틀린] 스코프 함수 - (5) with
                         </a>
                     
                 </h1>
@@ -657,10 +677,11 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 <code>5개</code>의 <code>스코프 함수(Scope function)</code>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 우리는 5개의 포스트에서 스코프 함수에 대해 알아보고 있습니다. 이번 마지막 포스트에서는 <code>with()</code>함수에 대해 알아보겠습니다. </p>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 다섯 개의 <span class="highlight-text red">스코프 함수(Scope function)</span>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 다섯 개의 포스트에서 스코프 함수에 대해 알아보고있습니다.</p>
 <ol>
 <li><a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">run()</a></li>
 <li><a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a></li>
@@ -668,13 +689,15 @@
 <li><a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a></li>
 <li>with()  ⬅️ ⬅️ ⬅️</li>
 </ol>
-<h3 id="with-함수"><a href="#with-함수" class="headerlink" title="with() 함수"></a>with() 함수</h3><p><code>with() 함수</code>는 <strong>run()</strong> 함수와 유사합니다. 차이점은 인스턴스 뒤에 점(.)을 붙여 호출하지 않고 <strong>with()</strong> 함수의 인자로 인스턴스를 전달합니다. </p>
+<hr>
+<h1 id="with"><a href="#with" class="headerlink" title="with()"></a>with()</h1><p><code>with()</code>는 <code>run()</code>과 유사합니다. 차이점은 인스턴스 뒤에 <code>점(.)</code>을 붙여 호출하지 않고 함수의 인자로 인스턴스를 전달합니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age = with(person) &#123;</span><br><span class="line">    incrementAge()</span><br><span class="line">    printAge()</span><br><span class="line">    age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>개발을 하다보면 다음과 같이 반복적으로 객체의 속성에 접근하거나 객체의 메소드를 호출하는 경우가 많습니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> settings = webView.settings</span><br><span class="line"></span><br><span class="line">settings.javaScriptEnabled = <span class="literal">true</span></span><br><span class="line">settings.useWideViewPort = <span class="literal">true</span></span><br><span class="line">settings.domStorageEnabled = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>이때 with()를 유용하게 사용할 수 있습니다.</p>
+<p>이때 <code>with()</code>를 유용하게 사용할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> settings = webView.settings</span><br><span class="line"></span><br><span class="line">with(settings) &#123;</span><br><span class="line">    javaScriptEnabled = <span class="literal">true</span></span><br><span class="line">    useWideViewPort = <span class="literal">true</span></span><br><span class="line">    domStorageEnabled = <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>우리는 5개의 포스트에서 스코프 함수(Scope Function)에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/28/kotlin/190128-val-const/">상수 (val, const)</a>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>우리는 다섯 개의 포스트에서 <code>스코프 함수(Scope Function)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/27/kotlin/190127-this-in-kotlin/">코틀린에서의 this</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -708,9 +731,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/"
-                            aria-label=": [Kotlin] 스코프 함수 - (4) also"
+                            aria-label=": [코틀린] 스코프 함수 - (4) also"
                         >
-                            [Kotlin] 스코프 함수 - (4) also
+                            [코틀린] 스코프 함수 - (4) also
                         </a>
                     
                 </h1>
@@ -732,23 +755,26 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 <code>5개</code>의 <code>스코프 함수(Scope function)</code>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 우리는 5개의 포스트에서 스코프 함수에 대해 알아보고 있습니다. 이번 네 번째 포스트에서는 <code>also()</code>함수에 대해 알아보겠습니다. </p>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 다섯 개의 <span class="highlight-text red">스코프 함수(Scope function)</span>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 다섯 개의 포스트에서 스코프 함수에 대해 알아보고있습니다.</p>
 <ol>
 <li><a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">run()</a></li>
 <li><a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a></li>
-<li><a href="/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/">apply()</a></li>
-<li>also()  ⬅️ ⬅️ ⬅️</li>
+<li>apply()  ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a></li>
 <li><a href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/">with()</a></li>
 </ol>
-<h3 id="also-함수"><a href="#also-함수" class="headerlink" title="also() 함수"></a>also() 함수</h3><p><code>also()</code>함수는 <code>apply()</code>함수와 유사합니다. 다만 함수를 호출하는 객체를 <code>인자</code>의 형태로 <code>코드 블록&#123;&#125;</code>에 넘깁니다. 전달 받은 객체 자체를 반환한다는 점은 동일합니다.</p>
+<hr>
+<h1 id="also"><a href="#also" class="headerlink" title="also()"></a>also()</h1><p><code>also()</code>는 <u>함수를 호출하는 객체</u>가 <u>인자</u>의 형태로 <u>코드 블록</u>으로 전달된다는 점에서 <code>apply()</code>함수와 유사합니다. 그리고 전달 받은 객체가 반환됩니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Age; <span class="subst">$&#123;age&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).also &#123; person -&gt;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성된 클래스의 인스턴스(person)가 람다의 인자로 전달됩니다.</span></span><br><span class="line">    person.name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    person.age = <span class="number">35</span></span><br><span class="line">    person.incrementAge()</span><br><span class="line">    person.printAge()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>인자가 하나인 경우 <code>it</code>을 사용하여 코드를 더 간략하게 할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).also &#123; </span><br><span class="line"></span><br><span class="line">    it.name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    it.age = <span class="number">35</span></span><br><span class="line">    it.incrementAge()</span><br><span class="line">    it.printAge()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서 스코프 함수 중 <code>apply()</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/">with()</a>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 스코프 함수 중 <code>apply()</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/">with()</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -782,9 +808,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/"
-                            aria-label=": [Kotlin] 스코프 함수 - (3) apply"
+                            aria-label=": [코틀린] 스코프 함수 - (3) apply"
                         >
-                            [Kotlin] 스코프 함수 - (3) apply
+                            [코틀린] 스코프 함수 - (3) apply
                         </a>
                     
                 </h1>
@@ -806,10 +832,11 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 <code>5개</code>의 <code>스코프 함수(Scope function)</code>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 우리는 5개의 포스트에서 스코프 함수에 대해 알아보고 있습니다. 이번 세 번째 포스트에서는 <code>apply()</code>함수에 대해 알아보겠습니다. </p>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 다섯 개의 <span class="highlight-text red">스코프 함수(Scope function)</span>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 다섯 개의 포스트에서 스코프 함수에 대해 알아보고있습니다.</p>
 <ol>
 <li><a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">run()</a></li>
 <li><a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a></li>
@@ -817,12 +844,11 @@
 <li><a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a></li>
 <li><a href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/">with()</a></li>
 </ol>
-<h3 id="apply-함수"><a href="#apply-함수" class="headerlink" title="apply() 함수"></a>apply() 함수</h3><p><code>apply()</code>는 <code>run()</code>함수와 유사하게 <code>코드 블록&#123;&#125;</code>으로 <code>함수를 호출한 객체</code>가 암시적으로 전달됩니다. 다만 전달 받은 객체 자체를 반환한다는 점에서 차이가 있습니다. </p>
+<hr>
+<h1 id="apply"><a href="#apply" class="headerlink" title="apply()"></a>apply()</h1><p><code>apply()</code>는 <code>코드 블록</code>으로 <code>함수를 호출한 객체</code>가 암시적으로 전달된다는 점에서 <code>run()</code>과 유사됩니다. 다만 전달 받은 객체 자체를 반환한다는 점에서 차이가 있습니다. </p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">incrementAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        age += <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Age: <span class="subst">$&#123;age&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).apply &#123;</span><br><span class="line">    name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    age = <span class="number">35</span></span><br><span class="line">    incrementAge()</span><br><span class="line">    printAge()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>다음과 같이 사용할 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line">person.apply &#123;</span><br><span class="line">    incrementAge()</span><br><span class="line">    printAge()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서 스코프 함수 중 <code>apply()</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a>에 대해 알아보겠습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).apply &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    <span class="keyword">this</span>.age = <span class="number">35</span></span><br><span class="line">    <span class="keyword">this</span>.incrementAge()</span><br><span class="line">    <span class="keyword">this</span>.printAge()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 스코프 함수 중 <code>apply()</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -856,9 +882,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/"
-                            aria-label=": [Kotlin] 스코프 함수 - (2) let"
+                            aria-label=": [코틀린] 스코프 함수 - (2) let"
                         >
-                            [Kotlin] 스코프 함수 - (2) let
+                            [코틀린] 스코프 함수 - (2) let
                         </a>
                     
                 </h1>
@@ -880,10 +906,11 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 <code>5개</code>의 <code>스코프 함수(Scope function)</code>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 우리는 5개의 포스트에서 스코프 함수에 대해 알아보고 있습니다. 이번 두 번째 포스트에서는 <code>let()</code>함수에 대해 알아보겠습니다. </p>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 다섯 개의 <span class="highlight-text red">스코프 함수(Scope function)</span>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 다섯 개의 포스트에서 스코프 함수에 대해 알아보고있습니다.</p>
 <ol>
 <li><a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">run()</a>  </li>
 <li>let() ⬅️ ⬅️ ⬅️</li>
@@ -891,18 +918,14 @@
 <li><a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a></li>
 <li><a href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/">with()</a></li>
 </ol>
-<h3 id="let-함수"><a href="#let-함수" class="headerlink" title="let() 함수"></a>let() 함수</h3><p><code>let()</code>함수는 <code>run()</code>함수와 유사합니다. 다만 함수를 호출하는 객체를 <code>인자</code>의 형태로 <code>코드 블록&#123;&#125;</code>에 넘깁니다. <code>코드 블록&#123;&#125;</code>의 수행결과가 반환되는 건 동일합니다.</p>
+<hr>
+<h1 id="let"><a href="#let" class="headerlink" title="let()"></a>let()</h1><span class="highlight-text red">let()</span>은 함수를 호출하는 객체가 <b>인자</b>의 형태로 코드 블록에 전달됩니다. 
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">incrementAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        age += <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Age: <span class="subst">$&#123;age&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).let &#123; person -&gt;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 멤버변수에 접근</span></span><br><span class="line">    person.name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    person.age = <span class="number">35</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 메소드를 호출</span></span><br><span class="line">    person.incrementAge()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 마지막 구문의 결과값이 반환</span></span><br><span class="line">    person.age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">println(age)    <span class="comment">// 36</span></span><br></pre></td></tr></table></figure>
 <p>인자가 하나인 경우 <code>it</code>을 사용하여 코드를 더 간략하게 할 수 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).let &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 멤버변수에 접근</span></span><br><span class="line">    it.name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    it.age = <span class="number">35</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 메소드를 호출</span></span><br><span class="line">    it.incrementAge()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 마지막 구문의 결과값이 반환</span></span><br><span class="line">    it.age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">println(age)    <span class="comment">// 36</span></span><br></pre></td></tr></table></figure>
-<p>다음과 같이 사용할 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line">person.let &#123;</span><br><span class="line">    it.printAge()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Null-Check"><a href="#Null-Check" class="headerlink" title="Null Check"></a>Null Check</h3><p><code>let() 함수</code>와 <code>Safe Call(?.)</code>을 사용하면 <code>if (null != person) ...</code>을 대체할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> person: Person? = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">33</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (person != <span class="literal">null</span>) &#123;</span><br><span class="line">    person!!.printName()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위 코드는 아래 코드와 동일합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> person: Person? = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">33</span>)</span><br><span class="line"></span><br><span class="line">person?.let &#123;</span><br><span class="line">    it.printName()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서 스코프 함수 중 <code>let()</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/">apply()</a>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 스코프 함수 중 <code>let()</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/">apply()</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -936,9 +959,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/"
-                            aria-label=": [Kotlin] 스코프 함수 - (1) run"
+                            aria-label=": [코틀린] 스코프 함수 - (1) run"
                         >
-                            [Kotlin] 스코프 함수 - (1) run
+                            [코틀린] 스코프 함수 - (1) run
                         </a>
                     
                 </h1>
@@ -960,10 +983,11 @@
             </div>
             
                 <div class="postShorten-content">
-                    <blockquote>
-<p>Kotlin의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h3 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h3><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 <code>5개</code>의 <code>스코프 함수(Scope function)</code>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 앞으로 5개의 포스트에서 <code>스코프 함수</code>에 대해 알아보려고 합니다.</p>
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 다섯 개의 <span class="highlight-text red">스코프 함수(Scope function)</span>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 앞으로 다섯 개의 포스트에서 스코프 함수에 대해 알아보려고 합니다.</p>
 <ol>
 <li>run() ⬅️ ⬅️ ⬅️</li>
 <li><a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a></li>
@@ -971,16 +995,17 @@
 <li><a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a></li>
 <li><a href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/">with()</a></li>
 </ol>
-<p>이번 포스트에서는 <code>run()</code>함수에 대해 알아보겠습니다. </p>
-<h3 id="run-함수"><a href="#run-함수" class="headerlink" title="run() 함수"></a>run() 함수</h3><p><code>run()</code>함수는 <code>run()함수를 호출한 객체</code>가 <code>코드 블록&#123;&#125;</code>으로 <strong>암시적</strong>으로 전달됩니다. 따라서 코드 블록에서 <code>호출 객체의 멤버변수와 메소드</code>에 접근할 수 있습니다. 또한 코드 블록의 수행결과가 반환됩니다.</p>
+<hr>
+<h1 id="run"><a href="#run" class="headerlink" title="run()"></a>run()</h1><span class="highlight-text red">run()</span>은 <u>함수를 호출한 객체</u>가 <u>코드 블록</u>으로 <b>암시적</b>으로 전달됩니다. 따라서 코드 블록 안에서 호출 객체의 멤버변수와 메소드에 접근할 수 있습니다. 또한 코드 블록의 수행결과가 반환됩니다.
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">incrementAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        age += <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Age: <span class="subst">$&#123;age&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).run &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 멤버변수에 접근</span></span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    <span class="keyword">this</span>.age = <span class="number">35</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 메소드를 호출</span></span><br><span class="line">    <span class="keyword">this</span>.incrementAge()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 마지막 구문의 결과값이 반환</span></span><br><span class="line">    <span class="keyword">this</span>.age     </span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">println(age)    <span class="comment">// 36</span></span><br></pre></td></tr></table></figure>
-<p>주목할 점은 람다식 안에서 run()을 호출한 Person 객체에 키워드 <code>this</code>로 접근할 수 있다는 것입니다. run()을 호출한 Person객체를 Receiver라고 하며, 이 때문에 스코프 함수는 수신객체 지정 람다(Lambda with Receiver)라고도 불립니다.</p>
-<p>물론 다음과 같이 this를 생략할 수도 있습니다.</p>
+<p><code>run()</code>을 호출한 객체는 <a href="/ko/2019/02/02/kotlin/190202-lamda/">람다</a> 안에서 키워드 <code>this</code>로 접근할 수 있습니다. 함수를 호출한 객체를 <code>Receiver</code>라고 하며, 이 때문에 스코프 함수는 <code>수신객체 지정 람다(Lambda with Receiver)</code>라고도 합니다.</p>
+<p>키워드 <code>this</code>를 생략할 수도 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).run &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 멤버변수에 접근</span></span><br><span class="line">    name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    age = <span class="number">35</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 메소드를 호출</span></span><br><span class="line">    incrementAge()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 마지막 구문의 결과값이 반환</span></span><br><span class="line">    age     </span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">println(age)    <span class="comment">// 36</span></span><br></pre></td></tr></table></figure>
-<p>다음처럼 반환값이 없이도 사용할 수도 있습니다.</p>
+<p>반환값 없이도 사용할 수도 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line">person.run &#123;</span><br><span class="line">    printAge()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서 스코프 함수 중 <code>run()</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 스코프 함수 중 <code>run()</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -1067,7 +1092,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

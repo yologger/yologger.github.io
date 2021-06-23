@@ -6,27 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Android] 그레이들 - (9) 코드에서 환경변수 분리하기 - .properties 파일 - Yologger&#39;s Blog</title>
+    <title>[안드로이드] 그래들 - (9) 코드에서 환경변수 분리하기 - .properties 파일 - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 BuildConfig에 대해 알아봤습니다. 이번 포스트에서는 .properties 파일에 대해 알아보겠습니다.\n왜 환경변수를 코드에서 분리해야할까?많은 어플리케이션이 Google, Facebook과 같은 SNS 계정을 통한 로그인을 지원합니다. 개발자는 SNS 로그인 API를 사용하기 위해 키를 발급받는데, 이를 소스코드에 포함시키면 여러 보안 이슈가 발생할 수 있습니다. \n이번 포스트에서는 별도의 환경설정파일을 만들고, 이 곳에 키처럼 유출되면 안되는 정보를 저장하는 법에 대해 알아보겠습니다. \n.properties 파일 만들기프로젝트의 루트 디렉토리에 config.properties파일을 생성합니다.\n내용은 다음과 같습니다.\n12CLIENT_ID&#x3D;&quot;your_client_id&quot;CLIENT_SECRET&#x3D;&quot;your_client_secret&quot;\n모듈 수준의 build.gradle 설정하기build.gradle 파일에서 다음과 같이 config.properties 파일을 읽어올 수 있습니다.\n12345def configPropertiesFile = rootProject.file(&quot;config.properties&quot;)def configProperties = new Properties()configProperties.load(new FileInputStream(configPropertiesFile))// ...\n이제 configProperties[&#39;your_key&#39;]형태로 값을 읽어올 수 있습니다.\n1234567891011121314151617181920// ...android &#123;    defaultConfig &#123;        applicationId &quot;com.example.simple_memo&quot;        minSdkVersion 21        targetSdkVersion 30        versionCode 1        versionName &quot;1.0&quot;        testInstrumentationRunner &quot;androidx.test.runner.AndroidJUnitRunner&quot;        // for xml file        resValue &quot;string&quot;, &quot;CLIENT_ID&quot;, configProperties[&#x27;CLIENT_ID&#x27;]        resValue &quot;string&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#x27;CLIENT_SECRET&#x27;]        // for source file        buildConfigField(&quot;String&quot;, &quot;CLIENT_ID&quot;, configProperties[&#x27;CLIENT_ID&#x27;])        buildConfigField(&quot;String&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#x27;CLIENT_SECRET&#x27;])    &#125;&#125;\n소스코드에서 값을 사용하기모듈 수준의 build.gradle 파일에 등록했다면 소스 코드에서 다음과 같이 사용할 수 있습니다.\n123456789class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val clientId = BuildConfig.CLIENT_ID            // your_client_id        val clientSecret = BuildConfig.CLIENT_SECRET    // your_client_secret    &#125;&#125;\nxml 파일에서 값을 사용하기모듈 수준의 build.gradle 파일에 등록했다면 xml 파일에서도 접근할 수 있습니다.\n12&lt;TextView android:text=&quot;@string/CLIENT_ID&quot;/&gt;&lt;TextView android:text=&quot;@string/CLIENT_SECRET&quot;/&gt;\n\n.gitignore파일에 추가하기config.properties처럼 민감한 데이터가 포함된 파일은 보통 원격 저장소에 업로드하지 않습니다. .gitignore에 config.properties파일을 추가하여 Github에 Push할 때 제외되도록 합시다.\n123&#x2F;&#x2F; .gitignoreconfig.properties...\n마치며이번 포스트에서는 .properties 파일에 대해 알아봤습니다. 다음 포스트에서는 빌드 타입(BuildType)에 대해 알아보겠습니다.\n","dateCreated":"2018-12-11T20:16:30+09:00","dateModified":"2021-06-10T23:20:22+09:00","datePublished":"2018-12-11T20:16:30+09:00","description":"","headline":"[Android] 그레이들 - (9) 코드에서 환경변수 분리하기 - .properties 파일","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/12/11/android/181211-properties/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2018/12/11/android/181211-properties/","keywords":"Android, Gradle"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 BuildConfig에 대해 알아봤습니다. 이번 포스트에서는 .properties 파일에 대해 알아보겠습니다.\n왜 환경변수를 코드에서 분리해야할까?많은 어플리케이션이 Google, Facebook과 같은 SNS 계정을 통한 로그인을 지원합니다. 개발자는 SNS 로그인 API를 사용하기 위해 키를 발급받는데, 이를 소스코드에 포함시키면 여러 보안 이슈가 발생할 수 있습니다. \n이번 포스트에서는 별도의 환경설정파일을 만들고, 이 곳에 키처럼 유출되면 안되는 정보를 저장하는 법에 대해 알아보겠습니다. \n.properties 파일 만들기프로젝트의 루트 디렉토리에 config.properties파일을 생성합니다.\n내용은 다음과 같습니다.\n12CLIENT_ID&#x3D;&quot;your_client_id&quot;CLIENT_SECRET&#x3D;&quot;your_client_secret&quot;\n모듈 수준의 build.gradle 설정하기build.gradle 파일에서 다음과 같이 config.properties 파일을 읽어올 수 있습니다.\n12345def configPropertiesFile = rootProject.file(&quot;config.properties&quot;)def configProperties = new Properties()configProperties.load(new FileInputStream(configPropertiesFile))// ...\n이제 configProperties[&#39;your_key&#39;]형태로 값을 읽어올 수 있습니다.\n1234567891011121314151617181920// ...android &#123;    defaultConfig &#123;        applicationId &quot;com.example.simple_memo&quot;        minSdkVersion 21        targetSdkVersion 30        versionCode 1        versionName &quot;1.0&quot;        testInstrumentationRunner &quot;androidx.test.runner.AndroidJUnitRunner&quot;        // for xml file        resValue &quot;string&quot;, &quot;CLIENT_ID&quot;, configProperties[&#x27;CLIENT_ID&#x27;]        resValue &quot;string&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#x27;CLIENT_SECRET&#x27;]        // for source file        buildConfigField(&quot;String&quot;, &quot;CLIENT_ID&quot;, configProperties[&#x27;CLIENT_ID&#x27;])        buildConfigField(&quot;String&quot;, &quot;CLIENT_SECRET&quot;, configProperties[&#x27;CLIENT_SECRET&#x27;])    &#125;&#125;\n소스코드에서 값을 사용하기모듈 수준의 build.gradle 파일에 등록했다면 소스 코드에서 다음과 같이 사용할 수 있습니다.\n123456789class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val clientId = BuildConfig.CLIENT_ID            // your_client_id        val clientSecret = BuildConfig.CLIENT_SECRET    // your_client_secret    &#125;&#125;\nxml 파일에서 값을 사용하기모듈 수준의 build.gradle 파일에 등록했다면 xml 파일에서도 접근할 수 있습니다.\n12&lt;TextView android:text=&quot;@string/CLIENT_ID&quot;/&gt;&lt;TextView android:text=&quot;@string/CLIENT_SECRET&quot;/&gt;\n\n.gitignore파일에 추가하기config.properties처럼 민감한 데이터가 포함된 파일은 보통 원격 저장소에 업로드하지 않습니다. .gitignore에 config.properties파일을 추가하여 Github에 Push할 때 제외되도록 합시다.\n123&#x2F;&#x2F; .gitignoreconfig.properties...\n마치며이번 포스트에서는 .properties 파일에 대해 알아봤습니다. 다음 포스트에서는 빌드 타입(BuildType)에 대해 알아보겠습니다.\n","dateCreated":"2018-12-11T20:16:30+09:00","dateModified":"2021-06-21T14:07:18+09:00","datePublished":"2018-12-11T20:16:30+09:00","description":"","headline":"[안드로이드] 그래들 - (9) 코드에서 환경변수 분리하기 - .properties 파일","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/12/11/android/181211-properties/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/12/11/android/181211-properties/","keywords":"Gradle, Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 BuildConfig에 대해 알아봤습니다. 이번 포스트에서는 .properties 파일에 대해 알아보겠습니다. 왜 환경변수를 코드에서 분리해야할까?많은 어플리케이션이 Google, Facebook과 같은 SNS 계정을 통한 로그인을">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Android] 그레이들 - (9) 코드에서 환경변수 분리하기 - .properties 파일">
+<meta property="og:title" content="[안드로이드] 그래들 - (9) 코드에서 환경변수 분리하기 - .properties 파일">
 <meta property="og:url" content="https://yologger.github.io/ko/2018/12/11/android/181211-properties/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 BuildConfig에 대해 알아봤습니다. 이번 포스트에서는 .properties 파일에 대해 알아보겠습니다. 왜 환경변수를 코드에서 분리해야할까?많은 어플리케이션이 Google, Facebook과 같은 SNS 계정을 통한 로그인을">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/properties/properties.png">
 <meta property="article:published_time" content="2018-12-11T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-06-10T14:20:22.228Z">
+<meta property="article:modified_time" content="2021-06-21T05:07:18.648Z">
 <meta property="article:author" content="yologger">
-<meta property="article:tag" content="Android">
 <meta property="article:tag" content="Gradle">
+<meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/android/properties/properties.png">
     
@@ -39,7 +39,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -230,7 +230,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -259,7 +259,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Android] 그레이들 - (9) 코드에서 환경변수 분리하기 - .properties 파일
+            [안드로이드] 그래들 - (9) 코드에서 환경변수 분리하기 - .properties 파일
         </h1>
     
     
@@ -540,7 +540,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

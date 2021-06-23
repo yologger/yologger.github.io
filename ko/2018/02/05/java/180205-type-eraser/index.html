@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function)\n제너릭의 와일드 카드(Wildcard)\n타입 소거(Type Erasure) ⬅️ ⬅️ ⬅️\n\n이번 마지막 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아보겠습니다.\n타입 소거(Type Erasure)타입 소거(Type Erasure)는 제너릭의 타입 파라미터를 구체화된 자료형으로 대체하는 작업을 의미합니다. 자바 컴파일러는 소스 코드를 컴파일할 때 타입 소거를 수행합니다. \n\n타입 파라미터가 Unbounded Type인지 Bounded Type인지에 따라 소거 방식이 다릅니다.\n\n1. Unbounded Type의 타입소거Unbounded Type은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한하지 않은 것을 의미합니다. &lt;?&gt;, &lt;T&gt; 형태의 타입 파라미터라고 생각하시면 됩니다. \n\n&lt;?&gt;, &lt;T&gt;는 Object로 대체됩니다.\n\nUnbounded Type 예제를 먼저 살펴보겠습니다. \n123456// 컴파일 전 (타입 소거 전) public class Test&lt;T&gt; &#123;    public void test(T test) &#123;        System.out.println(test.toString());    &#125;&#125;\n123456// 컴파일 후 (타입 소거 후)public class Test &#123;    public void test(Object test) &#123;        System.out.println(test.toString());    &#125;&#125;\n타입 파라미터가 소거되고 Object클래스로 대치되었습니다.\n2. Bounded Type의 타입소거Bounded Type은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한한 것을 의미합니다. &lt;E extends Something&gt; 형태의 타입 파라미터라고 생각하시면 됩니다.\n\n&lt;E extends Something&gt;)은 Object가 아닌 Something로 대치합니다.\n\nBounded Type 예제를 살펴보겠습니다. \n1234567891011public class Test&lt;T extends Observable&lt;T&gt;&gt; &#123;    private T data;    public T getData() &#123;        return data;    &#125;    public void setData(T data) &#123;        this.data = data;    &#125;&#125;\n타입 파라미터를 포함한 Observable가 Observable로 소거되었습니다. \n1234567891011public class Test &#123;    private Observable data;    public Observable getData() &#123;        return data;    &#125;    public void setData(Observable data) &#123;        this.data = data;    &#125;&#125;\n마치며이번 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아보았습니다. 다음 포스트에서는 리플렉션(Reflection)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-05T20:16:30+09:00","dateModified":"2021-05-12T18:08:45+09:00","datePublished":"2018-02-05T20:16:30+09:00","description":"","headline":"[Java] 제너릭과 타입 소거(Type Erasure)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function)\n제너릭의 와일드 카드(Wildcard)\n타입 소거(Type Erasure) ⬅️ ⬅️ ⬅️\n\n이번 마지막 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아보겠습니다.\n타입 소거(Type Erasure)타입 소거(Type Erasure)는 제너릭의 타입 파라미터를 구체화된 자료형으로 대체하는 작업을 의미합니다. 자바 컴파일러는 소스 코드를 컴파일할 때 타입 소거를 수행합니다. \n\n타입 파라미터가 Unbounded Type인지 Bounded Type인지에 따라 소거 방식이 다릅니다.\n\n1. Unbounded Type의 타입소거Unbounded Type은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한하지 않은 것을 의미합니다. &lt;?&gt;, &lt;T&gt; 형태의 타입 파라미터라고 생각하시면 됩니다. \n\n&lt;?&gt;, &lt;T&gt;는 Object로 대체됩니다.\n\nUnbounded Type 예제를 먼저 살펴보겠습니다. \n123456// 컴파일 전 (타입 소거 전) public class Test&lt;T&gt; &#123;    public void test(T test) &#123;        System.out.println(test.toString());    &#125;&#125;\n123456// 컴파일 후 (타입 소거 후)public class Test &#123;    public void test(Object test) &#123;        System.out.println(test.toString());    &#125;&#125;\n타입 파라미터가 소거되고 Object클래스로 대치되었습니다.\n2. Bounded Type의 타입소거Bounded Type은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한한 것을 의미합니다. &lt;E extends Something&gt; 형태의 타입 파라미터라고 생각하시면 됩니다.\n\n&lt;E extends Something&gt;)은 Object가 아닌 Something로 대치합니다.\n\nBounded Type 예제를 살펴보겠습니다. \n1234567891011public class Test&lt;T extends Observable&lt;T&gt;&gt; &#123;    private T data;    public T getData() &#123;        return data;    &#125;    public void setData(T data) &#123;        this.data = data;    &#125;&#125;\n타입 파라미터를 포함한 Observable가 Observable로 소거되었습니다. \n1234567891011public class Test &#123;    private Observable data;    public Observable getData() &#123;        return data;    &#125;    public void setData(Observable data) &#123;        this.data = data;    &#125;&#125;\n마치며이번 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아보았습니다. 다음 포스트에서는 리플렉션(Reflection)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-05T20:16:30+09:00","dateModified":"2021-05-12T18:08:45+09:00","datePublished":"2018-02-05T20:16:30+09:00","description":"","headline":"[Java] 제너릭과 타입 소거(Type Erasure)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/","keywords":"Java"}</script>
     <meta name="description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.  제너릭(Generic)의 개념과 장점 제너릭 클래스(Generic Class) 제너릭 함수(Generic Function) 제너릭의 와일드 카드(Wildcard) 타입 소거(T">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Java] 제너릭과 타입 소거(Type Erasure)">
@@ -36,7 +36,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -227,7 +227,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -549,7 +549,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

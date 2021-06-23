@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며3개의 포스트에 걸쳐 어노테이션(Annotation)에 대해 알아보고있습니다.\n\n어노테이션(Annotation)이란?\n어노테이션(Annotation) 사용 방법  ⬅️ ⬅️ ⬅️\n어노테이션 프로세서(Annotation Processor)\n\n커스텀 어노테이션 만들기커스텀 어노테이션을 만들 때는 키워드 @interface를 사용합니다.\n123@interface CustomAnnotation &#123;    // ..&#125;\n어노테이션의 위치우선 클래스에 어노테이션을 붙일 수 있습니다.\n1234@CustomAnnotationclass Person &#123;    // ..&#125;\n클래스의 멤버변수에도 어노테이션을 붙일 수 있습니다.\n123456789class Person &#123;        @CustomAnnotation     String name;        Person() &#123;        this.name =&quot;&quot;;    &#125;&#125;\n메소드에도 어노테이션을 붙일 수 있습니다.\n123456789class Person &#123;    // ...    @CustomAnnotation    void printName() &#123;        // ...    &#125;&#125;\n메소드 인자에도 어노테이션을 붙일 수 있습니다.\n123456class Person &#123;    void printSomething(@CustomAnnotation String something) &#123;        // ...    &#125;&#125;\n마치며위 예제를 다시 한번 살펴봅시다. \n12345int sum(@IntRange(from = 0, to = 10) int a, @IntRange(from = 0, to = 10) int b) &#123;    return a+b;&#125;int result = sum(30, 10)\n어노테이션 @IntRange를 통해 데이터 유효성을 검증하고 있습니다. 그렇다면 실제로 유효성을 검사하는 코드는 어디에 존재할까요? 이를 이해하기 위해서는 어노테이션 프로세서에 대해 알아야합니다. 다음 포스트에서는 어노테이션 프로세서(Annotation Processor)에 대해 알아보겠습니다. \n","dateCreated":"2018-03-03T20:16:30+09:00","dateModified":"2021-05-12T18:21:06+09:00","datePublished":"2018-03-03T20:16:30+09:00","description":"","headline":"[Java] 어노테이션 사용 방법","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/03/03/java/180303-annotation2/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2018/03/03/java/180303-annotation2/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며3개의 포스트에 걸쳐 어노테이션(Annotation)에 대해 알아보고있습니다.\n\n어노테이션(Annotation)이란?\n어노테이션(Annotation) 사용 방법  ⬅️ ⬅️ ⬅️\n어노테이션 프로세서(Annotation Processor)\n\n커스텀 어노테이션 만들기커스텀 어노테이션을 만들 때는 키워드 @interface를 사용합니다.\n123@interface CustomAnnotation &#123;    // ..&#125;\n어노테이션의 위치우선 클래스에 어노테이션을 붙일 수 있습니다.\n1234@CustomAnnotationclass Person &#123;    // ..&#125;\n클래스의 멤버변수에도 어노테이션을 붙일 수 있습니다.\n123456789class Person &#123;        @CustomAnnotation     String name;        Person() &#123;        this.name =&quot;&quot;;    &#125;&#125;\n메소드에도 어노테이션을 붙일 수 있습니다.\n123456789class Person &#123;    // ...    @CustomAnnotation    void printName() &#123;        // ...    &#125;&#125;\n메소드 인자에도 어노테이션을 붙일 수 있습니다.\n123456class Person &#123;    void printSomething(@CustomAnnotation String something) &#123;        // ...    &#125;&#125;\n마치며위 예제를 다시 한번 살펴봅시다. \n12345int sum(@IntRange(from = 0, to = 10) int a, @IntRange(from = 0, to = 10) int b) &#123;    return a+b;&#125;int result = sum(30, 10)\n어노테이션 @IntRange를 통해 데이터 유효성을 검증하고 있습니다. 그렇다면 실제로 유효성을 검사하는 코드는 어디에 존재할까요? 이를 이해하기 위해서는 어노테이션 프로세서에 대해 알아야합니다. 다음 포스트에서는 어노테이션 프로세서(Annotation Processor)에 대해 알아보겠습니다. \n","dateCreated":"2018-03-03T20:16:30+09:00","dateModified":"2021-05-12T18:21:06+09:00","datePublished":"2018-03-03T20:16:30+09:00","description":"","headline":"[Java] 어노테이션 사용 방법","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/03/03/java/180303-annotation2/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/03/03/java/180303-annotation2/","keywords":"Java"}</script>
     <meta name="description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며3개의 포스트에 걸쳐 어노테이션(Annotation)에 대해 알아보고있습니다.  어노테이션(Annotation)이란? 어노테이션(Annotation) 사용 방법  ⬅️ ⬅️ ⬅️ 어노테이션 프로세서(Annotation Processor)  커스텀 어노테이션">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Java] 어노테이션 사용 방법">
@@ -36,7 +36,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -227,7 +227,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -538,7 +538,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

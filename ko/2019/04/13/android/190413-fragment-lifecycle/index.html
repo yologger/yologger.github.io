@@ -6,24 +6,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Yologger&#39;s Blog">
-    <title>[Android] 프래그먼트 - (4) 프래그먼트 생명주기 함수(Lifecycle Method) - Yologger&#39;s Blog</title>
+    <title>[안드로이드] 프래그먼트 - (4) 프래그먼트 생명주기 함수(Lifecycle Method) - Yologger&#39;s Blog</title>
     <meta name="author" content="yologger">
     
     
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n프래그먼트의 생명주기 함수프래그먼트로 액티비티와 마찬가지로 생명주기 함수를 가지고 있습니다.\n(1) onAttach()프래그먼트는 액티비티 위에서 동작합니다. 따라서 액티비티와 연관된 생명주기 함수를 가집니다. onAttach()는 액티비티와 프래그먼트가 연관될 때 호출됩니다.\n(2) onCreate()프래그먼트의 인스턴스가 생성될 때 호출됩니다.\n액티비티의 onCreate()와 마찬가지로 초기화 작업을 이 곳에서 실행하면 됩니다. 다만 프래그먼트의 onCreate()에서는 뷰(View)와 관련된 UI 작업을 수행할 수 없습니다. 루트 뷰가 아직 인플레이트되지 않았기 때문입니다.\n(3) onCreateView()프래그먼트의 루트 뷰(Root View)를 인플레이트하여 반환합니다. \n12345678class FragmentA : Fragment() &#123;        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? &#123;        // Inflate the layout for this fragment        val rootView: View = inflater.inflate(R.layout.fragment_a, container, false)        return rootView    &#125;&#125;\n(4) onViewCreated()프래그먼트의 루트 뷰와 자식 뷰가 화면에 그려진 후 호출됩니다. 이 메소드에서부터는 getView()나 requireView()를 통해 프래그먼트의 루트 뷰에 접근할 수 있습니다. 또한 루트 뷰의 findViewById()를 사용하여 자식 뷰에 접근할 수 있습니다.\n123456789101112131415class FragmentB : Fragment() &#123;    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? &#123;        // Inflate the layout for this fragment        val view = inflater.inflate(R.layout.fragment_b, container, false)        return view    &#125;    override fun onViewCreated(view: View, savedInstanceState: Bundle?) &#123;        super.onViewCreated(view, savedInstanceState)        val rootView = requireView()        val textView = rootView.findViewById&lt;TextView&gt;(R.id.fragment_b_tv)        textView.setText(&quot;Hello&quot;)    &#125;&#125;\n(5) onStart()액티비티의 onStart()와 유사합니다. 프래그먼트가 시작될 때 호출되며, 사용자에게 프래그먼트가 보여집니다.\n(6) onResume()액티비티의 onResume()과 유사합니다. 프래그먼트가 사용자와 상호작용할 수 있을 때 호출됩니다.\n(7) onPause()액티비티의 onPause()와 유사합니다. 프래그먼트가 사용자와 상호작용할 수 없을 때 호출됩니다.\n(8) onStop()액티비티의 onStop()과 유사합니다. 프래그먼트가 다른 프래그먼트나 액티비티에 의해 가려졌을 때 호출됩니다.\n(9) onDestroyView()프래그먼트의 루트 뷰가 제거될 때 호출됩니다. 프래그먼트 백 스택(Fragment Back Stack)을 사용하면 프래그먼트의 인스턴스는 삭제하지 않고 재사용하는데, 이 때는 onDestroy()가 아니라 onDestroyView()까지만 호출됩니다. 이후 프래그먼트를 재사용하면 onCreate()가 아니라 onCreateView()를 실행합니다.\n(10) onDestroy()프래그먼트의 뷰가 제거된 후, 프래그먼트의 인스턴스가 소멸할 때 호출됩니다. 프래그먼트 백 스택을 사용하지 않으면, 프래그먼트의 뷰 뿐만 아니라 인스턴스까지 삭제됩니다. 또한 onDestroyView() 이후 onDestroy()까지 호출됩니다.\n(11) onDetach()프래그먼트가 소멸되고, 액티비티와의 연결도 끊어질 때 호출됩니다.\n","dateCreated":"2019-04-13T20:16:30+09:00","dateModified":"2021-06-15T15:07:21+09:00","datePublished":"2019-04-13T20:16:30+09:00","description":"","headline":"[Android] 프래그먼트 - (4) 프래그먼트 생명주기 함수(Lifecycle Method)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/13/android/190413-fragment-lifecycle/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2019/04/13/android/190413-fragment-lifecycle/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n프래그먼트의 생명주기 함수프래그먼트로 액티비티와 마찬가지로 생명주기 함수를 가지고 있습니다.\n(1) onAttach()프래그먼트는 액티비티 위에서 동작합니다. 따라서 액티비티와 연관된 생명주기 함수를 가집니다. onAttach()는 액티비티와 프래그먼트가 연관될 때 호출됩니다.\n(2) onCreate()프래그먼트의 인스턴스가 생성될 때 호출됩니다.\n액티비티의 onCreate()와 마찬가지로 초기화 작업을 이 곳에서 실행하면 됩니다. 다만 프래그먼트의 onCreate()에서는 뷰(View)와 관련된 UI 작업을 수행할 수 없습니다. 루트 뷰가 아직 인플레이트되지 않았기 때문입니다.\n(3) onCreateView()프래그먼트의 루트 뷰(Root View)를 인플레이트하여 반환합니다. \n12345678class FragmentA : Fragment() &#123;        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? &#123;        // Inflate the layout for this fragment        val rootView: View = inflater.inflate(R.layout.fragment_a, container, false)        return rootView    &#125;&#125;\n(4) onViewCreated()프래그먼트의 루트 뷰와 자식 뷰가 화면에 그려진 후 호출됩니다. 이 메소드에서부터는 getView()나 requireView()를 통해 프래그먼트의 루트 뷰에 접근할 수 있습니다. 또한 루트 뷰의 findViewById()를 사용하여 자식 뷰에 접근할 수 있습니다.\n123456789101112131415class FragmentB : Fragment() &#123;    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? &#123;        // Inflate the layout for this fragment        val view = inflater.inflate(R.layout.fragment_b, container, false)        return view    &#125;    override fun onViewCreated(view: View, savedInstanceState: Bundle?) &#123;        super.onViewCreated(view, savedInstanceState)        val rootView = requireView()        val textView = rootView.findViewById&lt;TextView&gt;(R.id.fragment_b_tv)        textView.setText(&quot;Hello&quot;)    &#125;&#125;\n(5) onStart()액티비티의 onStart()와 유사합니다. 프래그먼트가 시작될 때 호출되며, 사용자에게 프래그먼트가 보여집니다.\n(6) onResume()액티비티의 onResume()과 유사합니다. 프래그먼트가 사용자와 상호작용할 수 있을 때 호출됩니다.\n(7) onPause()액티비티의 onPause()와 유사합니다. 프래그먼트가 사용자와 상호작용할 수 없을 때 호출됩니다.\n(8) onStop()액티비티의 onStop()과 유사합니다. 프래그먼트가 다른 프래그먼트나 액티비티에 의해 가려졌을 때 호출됩니다.\n(9) onDestroyView()프래그먼트의 루트 뷰가 제거될 때 호출됩니다. 프래그먼트 백 스택(Fragment Back Stack)을 사용하면 프래그먼트의 인스턴스는 삭제하지 않고 재사용하는데, 이 때는 onDestroy()가 아니라 onDestroyView()까지만 호출됩니다. 이후 프래그먼트를 재사용하면 onCreate()가 아니라 onCreateView()를 실행합니다.\n(10) onDestroy()프래그먼트의 뷰가 제거된 후, 프래그먼트의 인스턴스가 소멸할 때 호출됩니다. 프래그먼트 백 스택을 사용하지 않으면, 프래그먼트의 뷰 뿐만 아니라 인스턴스까지 삭제됩니다. 또한 onDestroyView() 이후 onDestroy()까지 호출됩니다.\n(11) onDetach()프래그먼트가 소멸되고, 액티비티와의 연결도 끊어질 때 호출됩니다.\n","dateCreated":"2019-04-13T20:16:30+09:00","dateModified":"2021-06-21T14:12:43+09:00","datePublished":"2019-04-13T20:16:30+09:00","description":"","headline":"[안드로이드] 프래그먼트 - (4) 프래그먼트 생명주기 함수(Lifecycle Method)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/13/android/190413-fragment-lifecycle/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/13/android/190413-fragment-lifecycle/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  프래그먼트의 생명주기 함수프래그먼트로 액티비티와 마찬가지로 생명주기 함수를 가지고 있습니다. (1) onAttach()프래그먼트는 액티비티 위에서 동작합니다. 따라서 액티비티와 연관된 생명주기 함수를 가집니다. onAttach()는 액티비티와 프래그먼트가 연">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="[Android] 프래그먼트 - (4) 프래그먼트 생명주기 함수(Lifecycle Method)">
+<meta property="og:title" content="[안드로이드] 프래그먼트 - (4) 프래그먼트 생명주기 함수(Lifecycle Method)">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/04/13/android/190413-fragment-lifecycle/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
 <meta property="og:description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  프래그먼트의 생명주기 함수프래그먼트로 액티비티와 마찬가지로 생명주기 함수를 가지고 있습니다. (1) onAttach()프래그먼트는 액티비티 위에서 동작합니다. 따라서 액티비티와 연관된 생명주기 함수를 가집니다. onAttach()는 액티비티와 프래그먼트가 연">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/fragment-lifecycle/1.png">
 <meta property="article:published_time" content="2019-04-13T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-06-15T06:07:21.422Z">
+<meta property="article:modified_time" content="2021-06-21T05:12:43.033Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -38,7 +38,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -229,7 +229,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -258,7 +258,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            [Android] 프래그먼트 - (4) 프래그먼트 생명주기 함수(Lifecycle Method)
+            [안드로이드] 프래그먼트 - (4) 프래그먼트 생명주기 함수(Lifecycle Method)
         </h1>
     
     
@@ -536,7 +536,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

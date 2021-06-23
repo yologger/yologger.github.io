@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function) ⬅️ ⬅️ ⬅️\n제너릭의 와일드 카드(Wildcard)\n타입 소거(Type Erasure)\n\n이번 세 번째 포스트에서는 제너릭 함수(Generic Function에 대해 알아보겠습니다.\n제너릭 함수제너릭은 클래스 뿐만 아니라 함수에서도 사용할 수 있습니다. 함수의 선언부에 타입 파라미터를 사용할 수 있으며, 이러한 함수를 제너릭 함수(Generic Function)라고 합니다. \n반환값이 없는 제너릭 함수는 다음과 같이 정의하고 사용합니다. 반환 타입 앞에 타입 파라미터를 적어주면 됩니다.\n123456&lt;T&gt; void printElement(ArrayList&lt;T&gt; list) &#123;    for (int i=0; i&lt;list.size(); i++) &#123;        System.out.println(list.get(i).toString());    &#125;    return;&#125;\n이렇게 정의한 제너릭 함수는 다음과 같이 호출할 수 있습니다.\n123456ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();numbers.add(1);numbers.add(2);numbers.add(3);printElement(numbers);\n123456ArrayList&lt;String&gt; players = new ArrayList&lt;String&gt;();players.add(&quot;Paul&quot;);players.add(&quot;John&quot;);players.add(&quot;Smith&quot;);printElement(players);\n반환값이 있는 제너릭 함수는 다음과 같이 정의하고 사용합니다. \n123&lt;T&gt; T getFirstElement(ArrayList&lt;T&gt; list) &#123;    return list.get(0);&#125;\n제너릭 클래스 안에서 제너릭 함수를 사용할 땐 주의해야합니다. 아래 코드를 살펴봅시다.\n12345678class Manager&lt;T&gt; &#123;    &lt;T&gt; void printElements(ArrayList&lt;T&gt; list) &#123;        for (int i=0; i&lt;list.size(); i++) &#123;            System.out.println(list.get(i).toString());        &#125;        return;    &#125;&#125;\nManager&lt;T&gt;의 T와 &lt;T&gt; void printElements(ArrayList&lt;T&gt; list)의 T는 다르기 때문입니다. 따라서 다음과 같이 타입 파라미터의 문자를 구분하는 것을 권장합니다.\n12345678class Manager&lt;T&gt; &#123;    &lt;E&gt; void printElements(ArrayList&lt;E&gt; list) &#123;        for (int i=0; i&lt;list.size(); i++) &#123;            System.out.println(list.get(i).toString());        &#125;        return;    &#125;&#125;\n마치며이번 포스트에서는 Java의 제네릭 함수(Generic Function)에 대해 알아봤습니다. 다음 포스트에서는 제너릭의 와일드카드(Wildcard)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-03T20:16:30+09:00","dateModified":"2021-05-12T18:07:13+09:00","datePublished":"2018-02-03T20:16:30+09:00","description":"","headline":"[Java] 제네릭 함수(Generic Function)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/03/java/180203-generic-method/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/"]},"url":"https://yologger.github.io/ko/2018/02/03/java/180203-generic-method/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nJava의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function) ⬅️ ⬅️ ⬅️\n제너릭의 와일드 카드(Wildcard)\n타입 소거(Type Erasure)\n\n이번 세 번째 포스트에서는 제너릭 함수(Generic Function에 대해 알아보겠습니다.\n제너릭 함수제너릭은 클래스 뿐만 아니라 함수에서도 사용할 수 있습니다. 함수의 선언부에 타입 파라미터를 사용할 수 있으며, 이러한 함수를 제너릭 함수(Generic Function)라고 합니다. \n반환값이 없는 제너릭 함수는 다음과 같이 정의하고 사용합니다. 반환 타입 앞에 타입 파라미터를 적어주면 됩니다.\n123456&lt;T&gt; void printElement(ArrayList&lt;T&gt; list) &#123;    for (int i=0; i&lt;list.size(); i++) &#123;        System.out.println(list.get(i).toString());    &#125;    return;&#125;\n이렇게 정의한 제너릭 함수는 다음과 같이 호출할 수 있습니다.\n123456ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();numbers.add(1);numbers.add(2);numbers.add(3);printElement(numbers);\n123456ArrayList&lt;String&gt; players = new ArrayList&lt;String&gt;();players.add(&quot;Paul&quot;);players.add(&quot;John&quot;);players.add(&quot;Smith&quot;);printElement(players);\n반환값이 있는 제너릭 함수는 다음과 같이 정의하고 사용합니다. \n123&lt;T&gt; T getFirstElement(ArrayList&lt;T&gt; list) &#123;    return list.get(0);&#125;\n제너릭 클래스 안에서 제너릭 함수를 사용할 땐 주의해야합니다. 아래 코드를 살펴봅시다.\n12345678class Manager&lt;T&gt; &#123;    &lt;T&gt; void printElements(ArrayList&lt;T&gt; list) &#123;        for (int i=0; i&lt;list.size(); i++) &#123;            System.out.println(list.get(i).toString());        &#125;        return;    &#125;&#125;\nManager&lt;T&gt;의 T와 &lt;T&gt; void printElements(ArrayList&lt;T&gt; list)의 T는 다르기 때문입니다. 따라서 다음과 같이 타입 파라미터의 문자를 구분하는 것을 권장합니다.\n12345678class Manager&lt;T&gt; &#123;    &lt;E&gt; void printElements(ArrayList&lt;E&gt; list) &#123;        for (int i=0; i&lt;list.size(); i++) &#123;            System.out.println(list.get(i).toString());        &#125;        return;    &#125;&#125;\n마치며이번 포스트에서는 Java의 제네릭 함수(Generic Function)에 대해 알아봤습니다. 다음 포스트에서는 제너릭의 와일드카드(Wildcard)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-03T20:16:30+09:00","dateModified":"2021-05-12T18:07:13+09:00","datePublished":"2018-02-03T20:16:30+09:00","description":"","headline":"[Java] 제네릭 함수(Generic Function)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/03/java/180203-generic-method/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/02/03/java/180203-generic-method/","keywords":"Java"}</script>
     <meta name="description" content="Java의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며앞으로 5개의 포스트에 걸쳐 제너릭(Generic)에 대해 알아보고자 합니다.  제너릭(Generic)의 개념과 장점 제너릭 클래스(Generic Class) 제너릭 함수(Generic Function) ⬅️ ⬅️ ⬅️ 제너릭의 와일드 카드(Wildcard">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[Java] 제네릭 함수(Generic Function)">
@@ -36,7 +36,7 @@
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/ko/assets/css/style-63wykz6h6mmxpgcotrhbb3sgjjbr986rfukrlgr2ye7uf6i4sckgz9mwea5c.min.css">
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
 
     <!--STYLES END-->
     
@@ -227,7 +227,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="https://github.com/"
+                            href="https://github.com/yologger"
                             
                                 target="_blank"
                             
@@ -541,7 +541,7 @@
 <div id="cover" style="background-image:url('/ko/assets/images/cover2.png');"></div>
         <!--SCRIPTS-->
 
-<script src="/ko/assets/js/script-gj5mjgzsyrjn8fotiiomemxg34pfihkdsk7qkko1bebx6ci3ieryrdikrgxc.min.js"></script>
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
 
 <!--SCRIPTS END-->
 

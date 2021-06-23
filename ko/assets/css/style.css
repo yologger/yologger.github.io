@@ -9412,7 +9412,7 @@ blockquote {
     font-family: 'Font Awesome 5 Free';
     font-weight: 600;
     content: '\f0da';
-    font-size: 1.3rem; }
+    font-size: 1.4rem; }
 
 .boxes {
   margin-top: 20px; }
@@ -9475,13 +9475,13 @@ blockquote {
   padding: 8px 15px; }
 
 .btn--small {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   padding: 8px 15px; }
 
 .caption {
   display: block;
   font-family: "Merriweather", serif;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: #81929d;
   text-align: center;
   font-style: italic;
@@ -9735,7 +9735,7 @@ figure.highlight,
     font-family: "Open Sans";
     font-style: italic;
     background: rgba(0, 0, 0, 0.75);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: white;
     padding: 0.5em 1.5em;
     z-index: 1; }
@@ -9789,43 +9789,43 @@ a.fancybox {
 
 @media only screen and (min-width: 1024px) {
   .markdown h1 {
-    font-size: 3rem; }
+    font-size: 3.4rem; }
   .markdown h2 {
-    font-size: 2.7rem; }
+    font-size: 3.1rem; }
   .markdown h3 {
-    font-size: 2.4rem; }
+    font-size: 2.75rem; }
   .markdown h4 {
-    font-size: 2.1rem; }
+    font-size: 2.4rem; }
   .markdown h5 {
-    font-size: 1.9rem; }
+    font-size: 2.05rem; }
   .markdown h6 {
     font-size: 1.7rem; } }
 
 @media only screen and (max-width: 767px) {
   .markdown h1 {
-    font-size: 2.65rem; }
+    font-size: 3.05rem; }
   .markdown h2 {
-    font-size: 2.35rem; }
+    font-size: 2.75rem; }
   .markdown h3 {
-    font-size: 2.05rem; }
+    font-size: 2.4rem; }
   .markdown h4 {
-    font-size: 1.75rem; }
+    font-size: 2.05rem; }
   .markdown h5 {
-    font-size: 1.55rem; }
+    font-size: 1.7rem; }
   .markdown h6 {
     font-size: 1.35rem; } }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .markdown h1 {
-    font-size: 2.8rem; }
+    font-size: 3.2rem; }
   .markdown h2 {
-    font-size: 2.5rem; }
+    font-size: 2.9rem; }
   .markdown h3 {
-    font-size: 2.2rem; }
+    font-size: 2.55rem; }
   .markdown h4 {
-    font-size: 1.9rem; }
+    font-size: 2.2rem; }
   .markdown h5 {
-    font-size: 1.7rem; }
+    font-size: 1.85rem; }
   .markdown h6 {
     font-size: 1.5rem; } }
 
@@ -9926,7 +9926,7 @@ a.fancybox {
       margin-right: 10px; }
     .pagination-bar .pagination .pagination-number {
       float: right;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: #9eabb3; }
 
 .post {
@@ -9943,7 +9943,7 @@ a.fancybox {
   .post .post-meta {
     line-height: 1.5em;
     font-family: "Open Sans", sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 400;
     color: #9eabb3; }
     .post .post-meta a {
@@ -9951,7 +9951,7 @@ a.fancybox {
   .post .post-content {
     text-rendering: optimizelegibility;
     letter-spacing: -0.3px;
-    font-family: "Merriweather", serif;
+    font-family: Menlo, Consolas, monospace;
     color: #5d686f;
     margin-top: 20px;
     font-weight: 400;
@@ -10231,13 +10231,13 @@ a.fancybox {
   .postShorten .postShorten-readingtime,
   .postShorten .postShorten-excerpt_link {
     font-family: "Open Sans", sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 400; }
   .postShorten .postShorten-excerpt,
   .postShorten .postShorten-content {
     text-rendering: optimizelegibility;
     letter-spacing: -0.3px;
-    font-family: "Merriweather", serif;
+    font-family: Menlo, Consolas, monospace;
     color: #5d686f;
     font-weight: 400;
     overflow: hidden;
@@ -10431,12 +10431,12 @@ a.tag--danger,
 
 a.tag--default,
 .tag--default {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   padding: 4.5px 15px; }
 
 a.tag--small,
 .tag--small {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   padding: 2px 10px; }
 
 .text-left {
@@ -10464,10 +10464,10 @@ a.tag--small,
   text-transform: capitalize !important; }
 
 .text-xsmall {
-  font-size: 1rem !important; }
+  font-size: 1.3rem !important; }
 
 .text-small {
-  font-size: 1.3rem !important; }
+  font-size: 1.4rem !important; }
 
 .text-medium {
   font-size: 1.5rem !important; }
