@@ -1,0 +1,599 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Yologger&#39;s Blog">
+    <title>[안드로이드] 앱 출시하기 - (2) Google Play Store에 출시하기 - Yologger&#39;s Blog</title>
+    <meta name="author" content="yologger">
+    
+    
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며3개의 포스트에 걸쳐 앱을 출시하는 방법에 대해 알아보고 있습니다.\n\n서명된 릴리즈 APK 생성\nGoogle Play Store에 출시하기  ⬅️ ⬅️ ⬅️\n새로운 버전 출시하기\n\n\n개발자 계정 만들기구글 플레이스토어에 앱을 출시하려면 구글 개발자 계정을 만들어야 합니다. http://play.google.com/apps/publish/signup을 방문하여 구글 개발자 계정을 생성합니다. (현재는 미화로 25달러를 결제해야하며, 한번 결제 시 평생 이용할 수 있습니다.)\n\n앱 생성하기구글 플레이 개발자 콘솔 계정을 만들었다면 구글 플레이 콘솔(Google Play Console)에 접속합니다. 그리고 Create app 버튼을 클릭합니다.\nApp details의 항목들을 입력합니다.\n\nApp name: 플레이 스토어에 출시되는 앱 이름\nDefault language: 기본 언어\nApp or game: 게임 앱인 경우 game, 그 외에는 App\nFree or paid: 무료 앱인 경우 free, 유료 앱인 경우 paid (무료 선택 시 추후에 유료로 변경할 수 없습니다.)\n\nDeclarations 항목들을 입력합니다.개발자 프로그램 정책과 미국 수출법규에 동의한다는 내용입니다.\n이제 오른쪽 하단의 create app 버튼을 클릭하면 앱이 생성됩니다. 생성된 앱은 왼쪽 사이드 바 메뉴에의 All apps를 선택하면 확인할 수 있습니다.\n\n앱 설정하기All apps에서 생성한 앱을 선택합니다.왼쪽 사이드바 메뉴에 Dashboard를 클릭합니다.Dashboard 페이지에서는 앱 출시를 위해 입력해야할 정보가 단계별로 기재되어 있습니다. 하나씩 선택하고 입력하면 됩니다.\n또한 Dashboard에서는 각 단계의 진행상황을 확인할 수 있습니다.\n1. Start testing now2. Set up your app다음 7개 항목을 입력해야합니다.\n(a) App accessAll functionality is available without special access를 체크하고 저장합니다. 특별한 접근 권한 없이 모든 이용이 가능하다는 뜻입니다.\n(b) Ads광고 여부를 체크합니다. 앱 내에 광고가 있으면 “Yes, my app contains adds”를, 광고가 없으면 “No, my app does not contain ads”를 선택하고 저장합니다.\n(c) Content ratings콘텐츠의 등급을 설정합니다. Start new questionaire를 클릭하여 설문을 시작합니다.이 단계에서는 이메일 주소와 앱 카테고리, 앱의 적합성을 조사합니다.모든 단계가 끝나면 각 국가에서의 등급을 확인할 수 있습니다.\n(d) Target audience and content앱을 사용할 연령층과 어린이 관심 유도 여부 등을 확인합니다. 설문을 모두 완료합시다.\n(e) News Apps뉴스 앱인지를 체크합니다.\n(f) App category &amp; Contact앱의 카테고리을 입력합니다.개발자 연락처를 입력하고, 외부 마케팅 여부를 클릭합니다.\n(g) Main store listing앱 스토어에 표시될 앱 정보를 입력합니다.\n\nApp name: 플레이 스토어에 표시되는 앱 이름\nShort description: 간단한 앱 설명\nFull description: 자세한 앱 설명\n\n\n\nApp icon: 플레이스토어에 표시되는 앱 아이콘 이미지 (512x512px)\nFeature graphic: 출시된 앱을 공유했을 때 나타나는 섬네일 이미지 (1024x500px)\n\n스마트폰과 태블릿에 대한 스크린샷을 업로드\n\n앱 출시하기이제 Dashboard로 돌아와 Release your app 항목을 입력합시다.\n(a) Select countries and regions(b) Select testers(c) Create a new release(d) Review and roll out the releasehttps://wp.swing2app.co.kr/knowledgebase/playstore-apprelease/\n","dateCreated":"2018-12-24T20:16:30+09:00","dateModified":"2021-06-21T14:10:27+09:00","datePublished":"2018-12-24T20:16:30+09:00","description":"","headline":"[안드로이드] 앱 출시하기 - (2) Google Play Store에 출시하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/","keywords":"Android"}</script>
+    <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며3개의 포스트에 걸쳐 앱을 출시하는 방법에 대해 알아보고 있습니다.  서명된 릴리즈 APK 생성 Google Play Store에 출시하기  ⬅️ ⬅️ ⬅️ 새로운 버전 출시하기   개발자 계정 만들기구글 플레이스토어에 앱을 출시하려면 구글 개발자 계">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[안드로이드] 앱 출시하기 - (2) Google Play Store에 출시하기">
+<meta property="og:url" content="https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/index.html">
+<meta property="og:site_name" content="Yologger&#39;s Blog">
+<meta property="og:description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며3개의 포스트에 걸쳐 앱을 출시하는 방법에 대해 알아보고 있습니다.  서명된 릴리즈 APK 생성 Google Play Store에 출시하기  ⬅️ ⬅️ ⬅️ 새로운 버전 출시하기   개발자 계정 만들기구글 플레이스토어에 앱을 출시하려면 구글 개발자 계">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/1.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/2.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/3.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/4.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/5.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/6.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/34.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/20.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/21.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/22.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/23.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/24.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/25.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/26.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/27.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/28.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/29.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/30.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/31.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/33.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/35.png">
+<meta property="article:published_time" content="2018-12-24T11:16:30.000Z">
+<meta property="article:modified_time" content="2021-06-21T05:10:27.559Z">
+<meta property="article:author" content="yologger">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/android/app-release-playstore/1.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
+
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYKNWR810R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-QYKNWR810R');
+    </script>
+
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/ko/"
+            aria-label=""
+        >
+            Yologger&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="링크 열기: /ko/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://yologger.github.io"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="English"
+                        >
+                        <i class="sidebar-button-icon fa fa-globe" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">English</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/java"
+                            
+                            rel="noopener"
+                            title="Java"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/yologger"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Github"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [안드로이드] 앱 출시하기 - (2) Google Play Store에 출시하기
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2018-12-24T20:16:30+09:00">
+	
+		    2018/12/24
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <hr>
+<blockquote>
+<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>3개의 포스트에 걸쳐 앱을 출시하는 방법에 대해 알아보고 있습니다.</p>
+<ol>
+<li><a href="/ko/2018/12/23/android/181223-app-release-signed-apk/">서명된 릴리즈 APK 생성</a></li>
+<li>Google Play Store에 출시하기  ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2018/12/25/android/181225-app-release-new-apk/">새로운 버전 출시하기</a></li>
+</ol>
+<hr>
+<h1 id="개발자-계정-만들기"><a href="#개발자-계정-만들기" class="headerlink" title="개발자 계정 만들기"></a>개발자 계정 만들기</h1><p>구글 플레이스토어에 앱을 출시하려면 <code>구글 개발자 계정</code>을 만들어야 합니다. <a target="_blank" rel="noopener" href="http://play.google.com/apps/publish/signup">http://play.google.com/apps/publish/signup</a>을 방문하여 <code>구글 개발자 계정</code>을 생성합니다. (현재는 미화로 25달러를 결제해야하며, 한번 결제 시 평생 이용할 수 있습니다.)</p>
+<hr>
+<h1 id="앱-생성하기"><a href="#앱-생성하기" class="headerlink" title="앱 생성하기"></a>앱 생성하기</h1><p>구글 플레이 개발자 콘솔 계정을 만들었다면 <a target="_blank" rel="noopener" href="https://play.google.com/console/developers">구글 플레이 콘솔(Google Play Console)</a>에 접속합니다. 그리고 Create app 버튼을 클릭합니다.<br><img src="/ko/images/posts/android/app-release-playstore/1.png"></p>
+<p>App details의 항목들을 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/2.png"></p>
+<ol>
+<li>App name: 플레이 스토어에 출시되는 앱 이름</li>
+<li>Default language: 기본 언어</li>
+<li>App or game: 게임 앱인 경우 game, 그 외에는 App</li>
+<li>Free or paid: 무료 앱인 경우 free, 유료 앱인 경우 paid (무료 선택 시 추후에 유료로 변경할 수 없습니다.)</li>
+</ol>
+<p>Declarations 항목들을 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/3.png"><br>개발자 프로그램 정책과 미국 수출법규에 동의한다는 내용입니다.</p>
+<p>이제 오른쪽 하단의 create app 버튼을 클릭하면 앱이 생성됩니다. 생성된 앱은 왼쪽 사이드 바 메뉴에의 All apps를 선택하면 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/4.png"></p>
+<hr>
+<h1 id="앱-설정하기"><a href="#앱-설정하기" class="headerlink" title="앱 설정하기"></a>앱 설정하기</h1><p>All apps에서 생성한 앱을 선택합니다.<br><img src="/ko/images/posts/android/app-release-playstore/5.png"><br>왼쪽 사이드바 메뉴에 Dashboard를 클릭합니다.<br><img src="/ko/images/posts/android/app-release-playstore/6.png"><br>Dashboard 페이지에서는 앱 출시를 위해 입력해야할 정보가 단계별로 기재되어 있습니다. 하나씩 선택하고 입력하면 됩니다.</p>
+<p>또한 Dashboard에서는 각 단계의 진행상황을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/34.png"></p>
+<h4 id="1-Start-testing-now"><a href="#1-Start-testing-now" class="headerlink" title="1. Start testing now"></a>1. Start testing now</h4><h4 id="2-Set-up-your-app"><a href="#2-Set-up-your-app" class="headerlink" title="2. Set up your app"></a>2. Set up your app</h4><p>다음 7개 항목을 입력해야합니다.<br><img src="/ko/images/posts/android/app-release-playstore/20.png"></p>
+<h6 id="a-App-access"><a href="#a-App-access" class="headerlink" title="(a) App access"></a>(a) App access</h6><p><img src="/ko/images/posts/android/app-release-playstore/21.png"><br><code>All functionality is available without special access</code>를 체크하고 저장합니다. 특별한 접근 권한 없이 모든 이용이 가능하다는 뜻입니다.</p>
+<h6 id="b-Ads"><a href="#b-Ads" class="headerlink" title="(b) Ads"></a>(b) Ads</h6><p><img src="/ko/images/posts/android/app-release-playstore/22.png"><br>광고 여부를 체크합니다. 앱 내에 광고가 있으면 “Yes, my app contains adds”를, 광고가 없으면 “No, my app does not contain ads”를 선택하고 저장합니다.</p>
+<h6 id="c-Content-ratings"><a href="#c-Content-ratings" class="headerlink" title="(c) Content ratings"></a>(c) Content ratings</h6><p>콘텐츠의 등급을 설정합니다. Start new questionaire를 클릭하여 설문을 시작합니다.<br><img src="/ko/images/posts/android/app-release-playstore/23.png"><br>이 단계에서는 이메일 주소와 앱 카테고리, 앱의 적합성을 조사합니다.<br><img src="/ko/images/posts/android/app-release-playstore/24.png"><br>모든 단계가 끝나면 각 국가에서의 등급을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/25.png"></p>
+<h6 id="d-Target-audience-and-content"><a href="#d-Target-audience-and-content" class="headerlink" title="(d) Target audience and content"></a>(d) Target audience and content</h6><p>앱을 사용할 연령층과 어린이 관심 유도 여부 등을 확인합니다. 설문을 모두 완료합시다.<br><img src="/ko/images/posts/android/app-release-playstore/26.png"></p>
+<h6 id="e-News-Apps"><a href="#e-News-Apps" class="headerlink" title="(e) News Apps"></a>(e) News Apps</h6><p>뉴스 앱인지를 체크합니다.<br><img src="/ko/images/posts/android/app-release-playstore/27.png"></p>
+<h6 id="f-App-category-amp-Contact"><a href="#f-App-category-amp-Contact" class="headerlink" title="(f) App category &amp; Contact"></a>(f) App category &amp; Contact</h6><p>앱의 카테고리을 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/28.png"><br>개발자 연락처를 입력하고, 외부 마케팅 여부를 클릭합니다.<br><img src="/ko/images/posts/android/app-release-playstore/29.png"></p>
+<h6 id="g-Main-store-listing"><a href="#g-Main-store-listing" class="headerlink" title="(g) Main store listing"></a>(g) Main store listing</h6><p>앱 스토어에 표시될 앱 정보를 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/30.png"></p>
+<ul>
+<li>App name: 플레이 스토어에 표시되는 앱 이름</li>
+<li>Short description: 간단한 앱 설명</li>
+<li>Full description: 자세한 앱 설명</li>
+</ul>
+<p><img src="/ko/images/posts/android/app-release-playstore/31.png"></p>
+<ul>
+<li>App icon: 플레이스토어에 표시되는 앱 아이콘 이미지 (512x512px)</li>
+<li>Feature graphic: 출시된 앱을 공유했을 때 나타나는 섬네일 이미지 (1024x500px)</li>
+</ul>
+<p><img src="/ko/images/posts/android/app-release-playstore/33.png"><br>스마트폰과 태블릿에 대한 스크린샷을 업로드</p>
+<hr>
+<h1 id="앱-출시하기"><a href="#앱-출시하기" class="headerlink" title="앱 출시하기"></a>앱 출시하기</h1><p>이제 Dashboard로 돌아와 Release your app 항목을 입력합시다.<br><img src="/ko/images/posts/android/app-release-playstore/35.png"></p>
+<h6 id="a-Select-countries-and-regions"><a href="#a-Select-countries-and-regions" class="headerlink" title="(a) Select countries and regions"></a>(a) Select countries and regions</h6><h6 id="b-Select-testers"><a href="#b-Select-testers" class="headerlink" title="(b) Select testers"></a>(b) Select testers</h6><h6 id="c-Create-a-new-release"><a href="#c-Create-a-new-release" class="headerlink" title="(c) Create a new release"></a>(c) Create a new release</h6><h6 id="d-Review-and-roll-out-the-release"><a href="#d-Review-and-roll-out-the-release" class="headerlink" title="(d) Review and roll out the release"></a>(d) Review and roll out the release</h6><p><a target="_blank" rel="noopener" href="https://wp.swing2app.co.kr/knowledgebase/playstore-apprelease/">https://wp.swing2app.co.kr/knowledgebase/playstore-apprelease/</a></p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">태그</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Android/" rel="tag">Android</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 yologger. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"
+                        aria-label="Facebook에 공유하기"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"
+                        aria-label="Twitter에 공유하기"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2018/12/24/android/181224-app-release-playstore/"
+                        aria-label="Google+에 공유하기"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">yologger</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/ko/assets/images/cover3.png');"></div>
+        <!--SCRIPTS-->
+
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
