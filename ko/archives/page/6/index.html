@@ -256,274 +256,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/02/20/kotlin/190220-repl/"
-                            aria-label=": [코틀린] 안드로이드 스튜디오에서 코틀린 연습하기 - (1) Kotlin REPL"
-                        >
-                            [코틀린] 안드로이드 스튜디오에서 코틀린 연습하기 - (1) Kotlin REPL
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-20T20:16:30+09:00">
-	
-		    2019/02/20
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이번 포스트에서는 안드로이드 스튜디오의 <span class="highlight-text red">REPL</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="REPL"><a href="#REPL" class="headerlink" title="REPL"></a>REPL</h1><span class="highlight-text red">REPL</span>은 <b>Read-Eval-Print Loop</b>의 줄임말로 리눅스 터미널이나 윈도우 명령 프롬프트처럼 코드를 한 줄씩 실행하고 결과를 확인할 수 있는 프로그래밍 환경입니다. 
-
-<p>안드로이드 스튜디오에서 <code>Tools &gt; Kotlin &gt; Kotlin REPL</code>를 선택하면 하단에 REPL창이 나옵니다.<br><img src="/ko/images/posts/kotlin/repl/repl1.png"><br>이제 코드를 작성하고 실행버튼을 누르면 됩니다.<br><img src="/ko/images/posts/kotlin/repl/repl2.png"></p>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>REPL</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/21/kotlin/190221-scratch-file/"><code>Scratch File</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/20/kotlin/190220-repl/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/19/android/190219-activity-lifecycle/"
-                            aria-label=": [안드로이드] 액티비티 - (5) 액티비티 생명주기 메소드(Lifecycle method)"
-                        >
-                            [안드로이드] 액티비티 - (5) 액티비티 생명주기 메소드(Lifecycle method)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-19T20:16:30+09:00">
-	
-		    2019/02/19
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="액티비티의-상태"><a href="#액티비티의-상태" class="headerlink" title="액티비티의 상태"></a>액티비티의 상태</h1><p>어플리케이션이 실행되는 동안 액티비티는 다음과 같은 상태를 거칩니다.</p>
-<h5 id="1-Active-Running"><a href="#1-Active-Running" class="headerlink" title="(1) Active / Running"></a>(1) Active / Running</h5><p>액티비티가 태스크의 가장 위에 있고, 화면에서 볼 수 있으며, 사용자와 상호작용할 수 있는 상태입니다.</p>
-<h5 id="2-Paused"><a href="#2-Paused" class="headerlink" title="(2) Paused"></a>(2) Paused</h5><p>액티비티를 화면에서 볼 수 있지만 사용자와 상호작용할 수 없는 상태입니다. 다른 액티비티가 이 액티비티를 부분적으로 가리고 있는 경우입니다.</p>
-<h5 id="3-Stopped"><a href="#3-Stopped" class="headerlink" title="(3) Stopped"></a>(3) Stopped</h5><p>다른 액티비티가 화면 전체를 가려 사용자가 볼 수 없는 상태입니다.</p>
-<h5 id="4-Killed"><a href="#4-Killed" class="headerlink" title="(4) Killed"></a>(4) Killed</h5><p>안드로이드 운영체제가 액티비티를 메모리에서 해제한 상태입니다.</p>
-<h1 id="액티비티-생명주기-메소드"><a href="#액티비티-생명주기-메소드" class="headerlink" title="액티비티 생명주기 메소드"></a>액티비티 생명주기 메소드</h1><p><code>Activity</code> 클래스에는 액티비티의 상태가 변할 때 호출되는 <code>생명주기 메소드(Lifecycle Method)</code>가 정의되어있습니다.<br><img src="/ko/images/posts/android/activity-lifecycle/1.png"><br>안드로이드 운영체제는 액티비티의 상태가 변하면 생명주기 메소드를 호출합니다.</p>
-<h5 id="1-onCreate"><a href="#1-onCreate" class="headerlink" title="(1) onCreate()"></a>(1) onCreate()</h5><p>액티비티가 생성될 때 호출되며, 보통 다음과 같은 작업을 수행합니다.</p>
-<ul>
-<li>사용자 인터페이스 선언</li>
-<li>ViewModel 초기화</li>
-<li>데이터 바인딩</li>
-<li>기타 초기화 작업</li>
-</ul>
-<p>예제 코드를 살펴봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span>: <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> viewModel: MainViewModel</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> button: Button</span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> textView: TextView</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 사용자 인터페이스 선언</span></span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ViewModel 초기화</span></span><br><span class="line">        viewModel = ViewModelProviders.of(<span class="keyword">this</span>).<span class="keyword">get</span>(MainViewModel::<span class="keyword">class</span>.java)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 데이터 바인딩</span></span><br><span class="line">        button = findViewById(R.id.button)</span><br><span class="line">        textView = findViewById(R.id.textview)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-onstart"><a href="#2-onstart" class="headerlink" title="(2) onstart()"></a>(2) onstart()</h5><p>액티비티가 화면에 표시될 때 호출됩니다. 보통 이 메소드에서 UI 작업을 수행합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span>: <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> button: Button</span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> textView: TextView</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStart</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onStart()</span><br><span class="line"></span><br><span class="line">        button.setBackgroundColor(Color.parseColor(<span class="string">&quot;#2596be&quot;</span>))</span><br><span class="line">        button.setTextColor(Color.parseColor(<span class="string">&quot;#eab676&quot;</span>))</span><br><span class="line"></span><br><span class="line">        textView.text = <span class="string">&quot;Hello World&quot;</span></span><br><span class="line">        textView.hint = <span class="string">&quot;textView&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="3-onResume"><a href="#3-onResume" class="headerlink" title="(3) onResume()"></a>(3) onResume()</h5><p>액티비티가 사용자와 상호작용할 수 있을 때 호출됩니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span>: <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResume</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="4-onPause"><a href="#4-onPause" class="headerlink" title="(4) onPause()"></a>(4) onPause()</h5><p>액티비티가 사용자와 상호작용할 수 없을 때 호출됩니다. 보통 다른 액티비티가 이 액티비티의 일부를 가려서 포커스를 잃었을 때 호출됩니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span>: <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResume</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="5-onStop"><a href="#5-onStop" class="headerlink" title="(5) onStop()"></a>(5) onStop()</h5><p>다른 액티비티가 이 액티비티 전체를 가려 화면이 보이지 않을 때 호출됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span>: <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStop</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onStop()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="6-onDestroy"><a href="#6-onDestroy" class="headerlink" title="(6) onDestroy()"></a>(6) onDestroy()</h5><p>액티비티가 메모리에서 해제될 때 호출됩니다. 보통 onCreate()에서 초기화했던 자원을 해제하는데 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span>: <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="7-onRestart"><a href="#7-onRestart" class="headerlink" title="(7) onRestart()"></a>(7) onRestart()</h5><p>정지(Stopped)된 액티비티가 다시 시작되기 전에 호출됩니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span>: <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onRestart</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onRestart()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h1><p>이제 다양한 상황에서 액티비티 생명주기 메소드가 어떻게 호출되는지 알아보기 위해 예제 프로젝트를 만듭니다.<br><img src="/ko/images/posts/android/activity-lifecycle/2.png"></p>
-<p>코드는 다음과 같습니다.</p>
-<h5 id="AndroidManifest-xml"><a href="#AndroidManifest-xml" class="headerlink" title="AndroidManifest.xml"></a>AndroidManifest.xml</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.lifecycle&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &lt;application</span><br><span class="line">        android:allowBackup=&quot;true&quot;</span><br><span class="line">        android:icon=&quot;@mipmap/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;</span><br><span class="line">        android:supportsRtl=&quot;true&quot;</span><br><span class="line">        android:theme=&quot;@style/Theme.Lifecycle&quot;&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.MainActivity&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.SubActivity&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.PopUpActivity&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:theme</span>=<span class="string">&quot;@android:style/Theme.Dialog&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="activity-main-xml"><a href="#activity-main-xml" class="headerlink" title="activity_main.xml"></a>activity_main.xml</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">&quot;.MainActivity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/activity_main_tv_label&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;This is MainActivity&quot;</span><br><span class="line">        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintRight_toRightOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintTop_toTopOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintBottom_toTopOf=&quot;@+id/activity_main_btn_open_pop_up_activity&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Button</span><br><span class="line">        android:id=&quot;@+id/activity_main_btn_open_pop_up_activity&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;Open PopUpActivity&quot;</span><br><span class="line">        android:textAllCaps=&quot;false&quot;</span><br><span class="line">        app:layout_constraintTop_toBottomOf=&quot;@+id/activity_main_tv_label&quot;</span><br><span class="line">        app:layout_constraintStart_toStartOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintEnd_toEndOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintBottom_toTopOf=&quot;@+id/activity_main_btn_open_sub_activity&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Button</span><br><span class="line">        android:id=&quot;@+id/activity_main_btn_open_sub_activity&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;Open SubActivity&quot;</span><br><span class="line">        android:textAllCaps=&quot;false&quot;</span><br><span class="line">        app:layout_constraintTop_toBottomOf=&quot;@+id/activity_main_btn_open_pop_up_activity&quot;</span><br><span class="line">        app:layout_constraintStart_toStartOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintEnd_toEndOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;/&gt;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="MainActivity-kt"><a href="#MainActivity-kt" class="headerlink" title="MainActivity.kt"></a>MainActivity.kt</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> textViewLabel: TextView</span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> buttonOpenPopUpActivity: Button</span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> buttonOpenSubActivity: Button</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;[MainActivity] onCreate()&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        buttonOpenPopUpActivity = findViewById(R.id.activity_main_btn_open_pop_up_activity)</span><br><span class="line">        buttonOpenSubActivity = findViewById(R.id.activity_main_btn_open_sub_activity)</span><br><span class="line"></span><br><span class="line">        buttonOpenPopUpActivity.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">val</span> nextIntent = Intent(<span class="keyword">this</span>, PopUpActivity::<span class="keyword">class</span>.java)</span><br><span class="line">            startActivity(nextIntent)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        buttonOpenSubActivity.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">val</span> nextIntent = Intent(<span class="keyword">this</span>, SubActivity::<span class="keyword">class</span>.java)</span><br><span class="line">            startActivity(nextIntent)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStart</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onStart()</span><br><span class="line">        println(<span class="string">&quot;[MainActivity] onStart()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResume</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume()</span><br><span class="line">        println(<span class="string">&quot;[MainActivity] onResume()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPause</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onPause()</span><br><span class="line">        println(<span class="string">&quot;[MainActivity] onPause()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStop</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onStop()</span><br><span class="line">        println(<span class="string">&quot;[MainActivity] onStop()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy()</span><br><span class="line">        println(<span class="string">&quot;[MainActivity] onDestroy()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="activity-sub-xml"><a href="#activity-sub-xml" class="headerlink" title="activity_sub.xml"></a>activity_sub.xml</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">&quot;.SubActivity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/activity_sub_tv_label&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;This is SubActivity&quot;</span><br><span class="line">        app:layout_constraintTop_toTopOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintStart_toStartOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintEnd_toEndOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintBottom_toTopOf=&quot;@+id/activity_sub_btn_close&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Button</span><br><span class="line">        android:id=&quot;@+id/activity_sub_btn_close&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;Close&quot;</span><br><span class="line">        app:layout_constraintTop_toBottomOf=&quot;@+id/activity_sub_tv_label&quot;</span><br><span class="line">        app:layout_constraintStart_toStartOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintEnd_toEndOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;/&gt;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="SubActivity-kt"><a href="#SubActivity-kt" class="headerlink" title="SubActivity.kt"></a>SubActivity.kt</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SubActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> buttonClose: Button</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;[SubActivity] onCreate()&quot;</span>)</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_sub)</span><br><span class="line"></span><br><span class="line">        buttonClose = findViewById(R.id.activity_sub_btn_close)</span><br><span class="line"></span><br><span class="line">        buttonClose.setOnClickListener &#123;</span><br><span class="line">            finish()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStart</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onStart()</span><br><span class="line">        println(<span class="string">&quot;[SubActivity] onStart()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResume</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume()</span><br><span class="line">        println(<span class="string">&quot;[SubActivity] onResume()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPause</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onPause()</span><br><span class="line">        println(<span class="string">&quot;[SubActivity] onPause()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStop</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onStop()</span><br><span class="line">        println(<span class="string">&quot;[SubActivity] onStop()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy()</span><br><span class="line">        println(<span class="string">&quot;[SubActivity] onDestroy()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="activity-pop-up-xml"><a href="#activity-pop-up-xml" class="headerlink" title="activity_pop_up.xml"></a>activity_pop_up.xml</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;300dp&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;500dp&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">&quot;@color/white&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">&quot;.PopUpActivity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/activity_pop_up_tv_label&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;This is PopUpActivity&quot;</span><br><span class="line">        app:layout_constraintTop_toTopOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintStart_toStartOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintEnd_toEndOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintBottom_toTopOf=&quot;@+id/activity_pop_up_btn_close&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Button</span><br><span class="line">        android:id=&quot;@+id/activity_pop_up_btn_close&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;Close&quot;</span><br><span class="line">        app:layout_constraintTop_toBottomOf=&quot;@+id/activity_pop_up_tv_label&quot;</span><br><span class="line">        app:layout_constraintStart_toStartOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintEnd_toEndOf=&quot;parent&quot;</span><br><span class="line">        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;/&gt;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="PopUpActivity-kt"><a href="#PopUpActivity-kt" class="headerlink" title="PopUpActivity.kt"></a>PopUpActivity.kt</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PopUpActivity</span> : <span class="type">Activity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> buttonClose: Button</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;[PopUpActivity] onStart()&quot;</span>)</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        requestWindowFeature(Window.FEATURE_NO_TITLE)</span><br><span class="line">        setContentView(R.layout.activity_pop_up)</span><br><span class="line"></span><br><span class="line">        buttonClose = findViewById(R.id.activity_pop_up_btn_close)</span><br><span class="line"></span><br><span class="line">        buttonClose.setOnClickListener &#123;</span><br><span class="line">            finish()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStart</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onStart()</span><br><span class="line">        println(<span class="string">&quot;[PopUpActivity] onStart()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResume</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume()</span><br><span class="line">        println(<span class="string">&quot;[PopUpActivity] onResume()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPause</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onPause()</span><br><span class="line">        println(<span class="string">&quot;[PopUpActivity] onPause()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStop</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onStop()</span><br><span class="line">        println(<span class="string">&quot;[PopUpActivity] onStop()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy()</span><br><span class="line">        println(<span class="string">&quot;[PopUpActivity] onDestroy()&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이제 앱을 실행하면 루트 액티비티인 MainActivity가 화면에 나오고 다음과 같이 출력됩니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[MainActivity] onCreate()</span><br><span class="line">[MainActivity] onStart()</span><br><span class="line">[MainActivity] onResume()</span><br></pre></td></tr></table></figure>
-<p>안드로이드 운영체제는 하단에 3개의 소프트웨어 버튼을 제공합니다. 이 영역을 <code>Soft Keys</code>라고 부릅니다.<br><img src="/ko/images/posts/android/activity-lifecycle/3.png"></p>
-<p><code>홈 버튼</code>을 누르면 어떻게 될까요?<br><img src="/ko/images/posts/android/activity-lifecycle/4.png"></p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[MainActivity] onPause()</span><br><span class="line">[MainActivity] onStop()</span><br></pre></td></tr></table></figure>
-<p>다시 앱으로 돌아오면 다음과 같이 출력됩니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[MainActivity] onRestart()</span><br><span class="line">[MainActivity] onStart()</span><br><span class="line">[MainActivity] onResume()</span><br></pre></td></tr></table></figure>
-<p><code>최근 앱 목록 버튼</code>을 눌러도 다음과 같이 출력됩니다.<br><img src="/ko/images/posts/android/activity-lifecycle/6.png"></p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[MainActivity] onPause()</span><br><span class="line">[MainActivity] onStop()</span><br></pre></td></tr></table></figure>
-<p>다시 앱으로 돌아오면 다음과 같이 출력됩니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[MainActivity] onRestart()</span><br><span class="line">[MainActivity] onStart()</span><br><span class="line">[MainActivity] onResume()</span><br></pre></td></tr></table></figure>
-<p><code>백 버튼</code>을 눌러봅시다.<br><img src="/ko/images/posts/android/activity-lifecycle/5.png"><br>앱이 종료되고 다음과 같이 출력됩니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[MainActivity] onStart()</span><br><span class="line">[MainActivity] onResume()</span><br><span class="line">[MainActivity] onDestroy()</span><br></pre></td></tr></table></figure>
-<p>다시 앱을 실행하면 다음과 같이 출력됩니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[MainActivity] onCreate()</span><br><span class="line">[MainActivity] onStart()</span><br><span class="line">[MainActivity] onResume()</span><br></pre></td></tr></table></figure>
-<p>이제 SubActivity를 실행해봅시다.<br><img src="/ko/images/posts/android/activity-lifecycle/7.png"></p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[MainActivity] onPause()</span><br><span class="line">[SubActivity] onCreate()</span><br><span class="line">[SubActivity] onStart()</span><br><span class="line">[SubActivity] onResume()</span><br><span class="line">[MainActivity] onStop()</span><br></pre></td></tr></table></figure>
-<p>CLOSE 버튼을 눌러 SubActivity를 종료해봅시다.<br><img src="/ko/images/posts/android/activity-lifecycle/8.png"></p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[SubActivity] onPause()</span><br><span class="line">[MainActivity] onRestart()</span><br><span class="line">[MainActivity] onStart()</span><br><span class="line">[MainActivity] onResume()</span><br><span class="line">[SubActivity] onStop()</span><br><span class="line">[SubActivity] onDestroy()</span><br></pre></td></tr></table></figure>
-<p>이번엔 화면의 일부만 가리는 PopUpActivity를 호출해봅시다.<br><img src="/ko/images/posts/android/activity-lifecycle/9.png"></p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[MainActivity] onPause()</span><br><span class="line">[PopUpActivity] onCreate()</span><br><span class="line">[PopUpActivity] onStart()</span><br><span class="line">[PopUpActivity] onResume()</span><br></pre></td></tr></table></figure>
-<p>이때 MainActivity는 <code>onStop()</code>이 아닌 <code>onPause()</code>까지만 호출됩니다.</p>
-<p>이제 PopUpActivity를 닫아봅시다.<br><img src="/ko/images/posts/android/activity-lifecycle/10.png"></p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[PopUpActivity] onPause()</span><br><span class="line">[MainActivity] onResume()</span><br><span class="line">[PopUpActivity] onStop()</span><br><span class="line">[PopUpActivity] onDestroy()</span><br></pre></td></tr></table></figure>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>액티비티의 생명주기 메소드</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/03/01/android/190301-explicit-intent/">인텐트(Intent)</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/19/android/190219-activity-lifecycle/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/19/kotlin/190219-annotation-2/"
-                            aria-label=": [코틀린] 어노테이션(Annotation) 사용 방법"
-                        >
-                            [코틀린] 어노테이션(Annotation) 사용 방법
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-19T20:16:30+09:00">
-	
-		    2019/02/19
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><div class="alert warning icon"><p>이 포스트에 앞서 <a href="/ko/2018/03/02/java/180302-annotation/">자바의 어노테이션</a>에 대해 꼭 읽어보시길 권장드립니다.</p>
-</div>
-
-<p>이전 포스트에서는 <a href="/ko/2019/02/19/kotlin/190219-annotation-2/">코틀린의 어노테이션 선언 방법</a>에 대해 알아봤습니다. 이번 포스트에서는 어노테이션을 어떻게 사용하는지에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="어노테이션은-어디에-위치할까요"><a href="#어노테이션은-어디에-위치할까요" class="headerlink" title="어노테이션은 어디에 위치할까요?"></a>어노테이션은 어디에 위치할까요?</h1><p>우선 어노테이션은 클래스 앞에 붙일 수 있습니다</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MyAnnotation</span> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>어노테이션은 메소드 앞에도 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MyClass &#123;</span><br><span class="line">    <span class="meta">@MyAnnotation</span> <span class="function"><span class="keyword">fun</span> <span class="title">myMethod</span><span class="params">(myProperty: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>어노테이션을 생성자 앞에 사용하려면 constructor 키워드 명시해야 한다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> <span class="meta">@MyAnnotation</span> <span class="keyword">constructor</span></span>(dependency: ... )</span><br></pre></td></tr></table></figure>
-<p>어노테이션은 클래스의 멤버변수 앞에도 붙일 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Inject</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> cat: Cat</span><br></pre></td></tr></table></figure>
-<p>메소드의 매개변수 앞에도 붙일 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">myMethod</span><span class="params">(<span class="meta">@MyAnnotation</span> myProperty: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>함수의 반환값 앞에도 붙일 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">myMethod</span><span class="params">(myProperty: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ( <span class="meta">@MyAnnotation</span> <span class="number">1</span> )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/19/kotlin/190219-annotation-2/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2019/02/18/android/190218-intent-flag/"
                             aria-label=": [안드로이드] 액티비티 - (4) 인텐트 플래그(Intent Flag)"
                         >
@@ -1107,6 +839,254 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/15/kotlin/190215-reified/"
+                            aria-label=": [코틀린] reified란 무엇인가"
+                        >
+                            [코틀린] reified란 무엇인가
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-15T20:16:30+09:00">
+	
+		    2019/02/15
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트에 걸쳐 <code>제네릭(Generic)</code>에 대해 알아보겠습니다.</p>
+<ol>
+<li><a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)과 제네릭 클래스(Generic Class)</a></li>
+<li><a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a></li>
+<li><a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">키워드 in, out</a></li>
+<li><a href="/ko/2019/02/15/kotlin/190215-reified/">reified란 무엇인가?</a> ⬅️ ⬅️ ⬅️</li>
+</ol>
+<div class="alert warning icon"><p><b>reified</b>를 이해하려면 <a href="/ko/2019/02/11/kotlin/190211-generic/">제너릭(Generic)</a>, <a href="/ko/2018/02/05/java/180205-type-eraser/">타입 소거(Type Eraser)</a>, <a href="/ko/2019/02/07/kotlin/190207-reflection/">리플렉션(Reflection)</a>에 대해 알아야 합니다. 해당 포스트를 먼저 참고하시길 권장합니다.</p>
+</div>
+
+<hr>
+<h1 id="타입-소거"><a href="#타입-소거" class="headerlink" title="타입 소거"></a>타입 소거</h1><p>제너릭의 타입 파라미터는 컴파일 타임에 존재하지만 런타임에는 접근할 수 없습니다. 바로 <a href="/ko/2018/02/05/java/180205-type-eraser/">타입 소거</a> 때문입니다. 다음 예제를 살펴봅시다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">printType</span><span class="params">(value: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> (T::<span class="class"><span class="keyword">class</span>) </span>&#123;   <span class="comment">// Error, Cannot use &#x27;T&#x27; as reified type parameter. Use a class instead.</span></span><br><span class="line">        String::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is String type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is Int type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">printType&lt;String&gt;(name)</span><br></pre></td></tr></table></figure>
+<p>위 코드는 <code>T:class</code> 형태로 클래스 타입을 읽으려 하고있습니다. 그러나 이 코드를 컴파일하면 에러가 발생합니다. 타입 파라미터인 <code>T</code>는 런타임에 접근할 수 없기 때문입니다. 따라서 보통 다음과 같이 별도의 인자로 클래스 타입을 전달하여 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T: Any&gt;</span> <span class="title">printType</span><span class="params">(value: <span class="type">T</span>, classType: <span class="type">KClass</span>&lt;<span class="type">T</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (classType) &#123;</span><br><span class="line">        String::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is String type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is Int type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">printType&lt;String&gt;(name, String::<span class="class"><span class="keyword">class</span>)</span></span><br></pre></td></tr></table></figure>
+<p>하지만 키워드 <code>reified</code>를 타입 파라미터 앞에 붙여주고 <code>inline</code>함수 형태로 사용하면 <code>Kclass</code>를 인자로 전달할 필요 없이 런타임에 타입 <code>T</code>에 접근할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;<span class="keyword">reified</span> T: Any&gt;</span> <span class="title">printType</span><span class="params">(value: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (T::<span class="class"><span class="keyword">class</span>) </span>&#123;</span><br><span class="line">        String::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is String type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is Int type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">printType&lt;String&gt;(name)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>네 개의 포스트에서 걸쳐 <code>제네릭(Generic)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/16/kotlin/190216-type-alias/">타입 별칭(Type Alias)</a>에 대해 알아보겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/15/kotlin/190215-reified/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/13/kotlin/190213-generic-in-out/"
+                            aria-label=": [코틀린] 제네릭(Generic)의 in, out"
+                        >
+                            [코틀린] 제네릭(Generic)의 in, out
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-13T20:16:30+09:00">
+	
+		    2019/02/13
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트에 걸쳐 <code>제네릭(Generic)</code>에 대해 알아보겠습니다.</p>
+<ol>
+<li><a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)과 제네릭 클래스(Generic Class)</a></li>
+<li><a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a></li>
+<li><a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">키워드 in, out</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/02/15/kotlin/190215-reified/">reified란 무엇인가?</a></li>
+</ol>
+<div class="alert warning icon"><p>제네릭의 <b>in</b>과 <b>out</b>에 대해 이해하기 전에 자바의 <a href="/ko/2018/01/30/java/180130-type-eraser/">타입 소거(Type Eraser)</a>와 <a href="/ko/2018/01/28/java/180128-wildcard/">와일드 카드(Wild Card)</a>에 대해 먼저 공부하시길 권장합니다.</p>
+</div>
+<hr>
+<h1 id="in"><a href="#in" class="headerlink" title="in"></a>in</h1><p>키워드<code>in</code>은 자바 제네릭의 <code>super</code>와 유사합니다. 키워드<code>in</code>은 제네릭의 타입 파라미터를 특정 클래스와 그 클래스의 <strong>조상 클래스</strong>로 제한합니다.</p>
+<p>아래 예제를 살펴봅시다. <code>Programmer</code>클래스는 <code>Person</code>를 상속하고 <code>AppProgrammer</code>는 <code>Programmer</code>를 상속하고 있습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">constructor</span></span>(name: String, <span class="keyword">var</span> company: String) : Person(name)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppProgrammer</span> <span class="keyword">constructor</span></span>(name: String, company: String, <span class="keyword">var</span> field: String) : Programmer(name, company)</span><br></pre></td></tr></table></figure>
+<p>이제 아래 코드를 살펴봅시다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printArrayList</span><span class="params">(arrayList: <span class="type">ArrayList</span>&lt;<span class="type">in</span> <span class="type">Programmer</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(arrayList.toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>&lt;in Programmer&gt;</code>를 통해 <code>Programmer</code>와 그 부모 클래스인 <code>Person</code>클래스만 들어올 수 있도록 하고 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Person&gt;()</span><br><span class="line">printArrayList(people)          <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Programmer&gt;()</span><br><span class="line">printArrayList(programmers)     <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;AppProgrammer&gt;()</span><br><span class="line">printArrayList(appProgrammer)   <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="out"><a href="#out" class="headerlink" title="out"></a>out</h1><p>키워드<code>out</code>은 Java 제너릭의 <code>extends</code>와 유사합니다. 키워드<code>out</code>는 타입 파라미터의 실제 타입을 특정 클래스와 특정 클래스의 <strong>자손 클래스</strong>로 제한합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">constructor</span></span>(name: String, <span class="keyword">var</span> company: String) : Person(name)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppProgrammer</span> <span class="keyword">constructor</span></span>(name: String, company: String, <span class="keyword">var</span> field: String) : Programmer(name, company)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printArrayList</span><span class="params">(arrayList: <span class="type">ArrayList</span>&lt;<span class="type">out</span> <span class="type">Programmer</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(arrayList.toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Person&gt;()</span><br><span class="line">printArrayList(people)          <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Prograammer&gt;()</span><br><span class="line">printArrayList(programmers)     <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;AppProgrammer&gt;()</span><br><span class="line">printArrayList(appProgrammer)   <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>제너릭(Generic)의 in, out</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/15/kotlin/190215-reified/">reified</a>에 대해 알아보겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/13/kotlin/190213-generic-in-out/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/12/kotlin/190212-generic-function/"
+                            aria-label=": [코틀린] 제네릭 함수(Generic Function)"
+                        >
+                            [코틀린] 제네릭 함수(Generic Function)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-12T20:16:30+09:00">
+	
+		    2019/02/12
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트에 걸쳐 <code>제네릭(Generic)</code>에 대해 알아보겠습니다.</p>
+<ol>
+<li><a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)과 제네릭 클래스(Generic Class)</a></li>
+<li><a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">키워드 in, out</a></li>
+<li><a href="/ko/2019/02/15/kotlin/190215-reified/">reified란 무엇인가?</a></li>
+</ol>
+<hr>
+<h1 id="제네릭-함수"><a href="#제네릭-함수" class="headerlink" title="제네릭 함수"></a>제네릭 함수</h1><p>제네릭은 클래스 뿐만 아니라 함수에도 사용할 수 있습니다. </p>
+<h4 id="1-함수의-파라미터"><a href="#1-함수의-파라미터" class="headerlink" title="(1) 함수의 파라미터"></a>(1) 함수의 파라미터</h4><p>우선 함수에서 제네릭을 사용할 땐 키워드 <strong>fun</strong>과 <strong>함수명</strong> 사이에 <code>타입 파라미터</code>를 명시합니다.  </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">printElement</span><span class="params">(element: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">printElement(<span class="number">1</span>)</span><br><span class="line">printElement(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">printElement(Person())</span><br></pre></td></tr></table></figure>
+<h4 id="2-반환-값"><a href="#2-반환-값" class="headerlink" title="(2) 반환 값"></a>(2) 반환 값</h4><p>함수의 반환 값에도 <code>타입 파라미터</code>를 사용할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">getElement</span><span class="params">(element: <span class="type">T</span>)</span></span>: T &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element1 = getElement(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> element2 = getElement(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> element3 = getElement(Person())</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>제네릭 함수(Generic Function)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">제네릭의 in, out</a>에 대해 알아보겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/12/kotlin/190212-generic-function/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1133,7 +1113,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 6 of 18</li>
+        <li class="pagination-number">page 6 of 19</li>
     </ul>
 </div>
 
@@ -1178,7 +1158,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover3.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset1.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

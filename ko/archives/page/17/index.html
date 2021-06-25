@@ -256,6 +256,160 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/ko/2018/01/22/java/180122-iteration/"
+                            aria-label=": [자바] 반복문"
+                        >
+                            [자바] 반복문
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-22T20:16:30+09:00">
+	
+		    2018/01/22
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/21/java/180121-error-handling/">에러 처리(Error Handling)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">반복문</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="for"><a href="#for" class="headerlink" title="for"></a>for</h1><p><code>for</code>구문은 다음과 같이 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> idx=<span class="number">0</span>; idx&lt;<span class="number">10</span>; idx++) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>for</code>구문은 <code>:</code>과 함께 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Person[] people = &#123;</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Son&quot;</span>, <span class="string">&quot;Korea&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Kane&quot;</span>, <span class="string">&quot;England&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Messi&quot;</span>, <span class="string">&quot;Argentina&quot;</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Person person: people) &#123;</span><br><span class="line">    person.printName();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Son</span></span><br><span class="line"><span class="comment">// Kane</span></span><br><span class="line"><span class="comment">// Messi</span></span><br></pre></td></tr></table></figure>
+<h1 id="while"><a href="#while" class="headerlink" title="while"></a>while</h1><p><code>while</code>구문은 조건이 만족할 때 까지 <code>블럭(&#123; .. &#125;)</code>을 반복 수행합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (idx &lt; <span class="number">10</span>) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">    idx ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>while</code>구문은 <code>break</code>나 <code>continue</code>와도 자주 사용됩니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">    idx ++;</span><br><span class="line">    <span class="keyword">if</span> (idx &gt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>반복문</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/23/java/180123-comparison/">비교문</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/22/java/180122-iteration/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/21/java/180121-error-handling/"
+                            aria-label=": [자바] 에러 처리(Exception &amp; Error Handling)"
+                        >
+                            [자바] 에러 처리(Exception &amp; Error Handling)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-21T20:16:30+09:00">
+	
+		    2018/01/21
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/20/java/180120-enum/">열거형(enum)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">에러 처리(Error Handling)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a>Throwable</h1><p>자바는 오류가 발생하면 <code>Error</code>나 <code>Exception</code>을 발생시킵니다. <code>Error</code>와 <code>Exception</code>은 모두 <code>Throwable</code>클래스를 상속받습니다.<br><img src="/ko/images/posts/kotlin/exception/exception.png"></p>
+<h4 id="1-Error"><a href="#1-Error" class="headerlink" title="(1) Error"></a>(1) Error</h4><p><code>Error</code>는 코드에서 잡아낼 수 없으며 어플리케이션 자체가 다운됩니다. 대표적으로 메모리가 부족하여 발생하는 <code>OutOfMemoryError</code>, <code>StackOveflowError</code>가 있습니다.</p>
+<h4 id="2-Exception"><a href="#2-Exception" class="headerlink" title="(2) Exception"></a>(2) Exception</h4><p><code>Exception</code>은 <code>try-catch</code>구문으로 잡아낼 수 있으며 프로그램이 다운되지 않도록 처리할 수 있습니다. 대표적으로 값이 <code>null</code>인 변수에 접근하면 발생하는 <code>NullPointException</code>이 있습니다.</p>
+<p>아래 코드를 살펴봅시다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 값이 null인 변수에 접근하고 있습니다.</span></span><br><span class="line">person.printName();</span><br></pre></td></tr></table></figure>
+<p>값이 <code>null</code>인 변수에 접근하고 있습니다. 위 코드는 <code>NullPointException</code>이 발생하고 어플리케이션이 다운됩니다. </p>
+<p>이때 <code>try-catch</code>구문으로 <code>Exception</code>이 발생할 가능성이 있는 부분을 감싸주면 <code>Exception</code>이 발생해도 어플리케이션을 다운시키지 않고 에러 처리를 할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 값이 null인 변수에 접근하고 있습니다.</span></span><br><span class="line">    person.printName();</span><br><span class="line">&#125; <span class="keyword">catch</span> (NullPointerException nullPointerException) &#123;</span><br><span class="line">    nullPointerException.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>개발자가 직접 <code>Exception</code>을 정의하고 발생시킬 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</span><br><span class="line">    CustomException(String message) &#123;</span><br><span class="line">        <span class="keyword">super</span>(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>직접 <code>Exception</code>을 발생시킬 때는 키워드<code>throw</code>를 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> CustomException(<span class="string">&quot;CustomException&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (CustomException customException) &#123;</span><br><span class="line">    customException.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Exception</code>을 발생시킬 가능성이 있는 함수 뒤에는 키워드<code>throws</code>를 사용하여 가능성을 표기할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> <span class="keyword">throws</span> CustomException </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> CustomException(<span class="string">&quot;Custom Exception&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이 함수는 <code>try-catch</code>구문 안에서 사용해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    doSomething();</span><br><span class="line">&#125; <span class="keyword">catch</span> (CustomException customException) &#123;</span><br><span class="line">    customException.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>에러 처리(Error Handling)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/22/java/180122-iteration/">반복문</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/21/java/180121-error-handling/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/ko/2018/01/20/java/180120-enum/"
                             aria-label=": [자바] 열거형(enum)"
                         >
@@ -838,156 +992,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/12/java/180112-static/"
-                            aria-label=": [자바] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)"
-                        >
-                            [자바] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-12T20:16:30+09:00">
-	
-		    2018/01/12
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/11/java/180111-constructor/">클래스의 생성자, 멤버변수, 메소드</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">정적 멤버변수(Static Variable)</span>와 <span class="highlight-text red">정적 메소드(Static Method)</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>키워드 <code>static</code>은 클래스의 멤버변수와 메소드 앞에 붙일 수 있습니다. 이렇게 <code>static</code>이 붙은 멤버변수와 메소드를 <strong>정적 멤버변수</strong>와 <strong>정적 메소드</strong>라고 합니다. </p>
-<p><strong>정적 멤버변수</strong>와 <strong>정적 메소드</strong>는 다음과 같은 특징이 있습니다.</p>
-<ul>
-<li>클래스의 인스턴스를 생성하지 않고도 <strong>정적 메소드</strong>를 호출할 수 있습니다.</li>
-<li>클래스의 인스턴스를 생성하지 않고도 <strong>정적 멤버변수</strong>에 접근할 수 있습니다.</li>
-<li>클래스의 모든 인스턴스가 <strong>정적 멤버변수</strong>를 공유합니다.</li>
-</ul>
-<h1 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h1><p>정적 멤버변수와 정적 메소드는 키워드 <code>static</code>을 붙여서 선언합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 멤버변수</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    Counter() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decrement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>정적 멤버변수와 정적 메소드는 다음과 같이 인스턴스를 생성하지 않고 사용할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Counter.printCount();   <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.printCount();   <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 클래스의 <code>정적 멤버변수(Static Variable)</code>과 <code>정적 메소드(Static Method)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/13/java/180113-initialization_block/">초기화 구문(Initialization Block)</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/12/java/180112-static/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/11/java/180111-constructor/"
-                            aria-label=": [자바] 클래스의 생성자, 멤버변수, 메소드"
-                        >
-                            [자바] 클래스의 생성자, 멤버변수, 메소드
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-11T22:16:30+09:00">
-	
-		    2018/01/11
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/11/java/180111-class/">클래스(Class), 인스턴스(Instance), 객체(Object)</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">생성자(Constructor)</span>, <span class="highlight-text red">멤버변수(Member Variable)</span>, <span class="highlight-text red">메소드(Method)</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="생성자"><a href="#생성자" class="headerlink" title="생성자"></a>생성자</h1><p><code>생성자(Constructor)</code>는 클래스의 인스턴스를 생성할 때 호출되는 구문입니다. 보통 생성자에서는 초기화 작업을 수행합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    Person() &#123;</span><br><span class="line">        <span class="comment">// 멤버변수 초기화</span></span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;Paul&quot;</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;Constructor has occurred.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>생성자는 인스턴스를 생성할 때 호출됩니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person();   <span class="comment">// Constructor has occurred.</span></span><br></pre></td></tr></table></figure>
-<p>생성자는 매개변수를 전달받을 수도 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 매개변수가 없는 생성자</span></span><br><span class="line">    Person() &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 매개변수가 있는 생성자</span></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="멤버변수와-메소드"><a href="#멤버변수와-메소드" class="headerlink" title="멤버변수와 메소드"></a>멤버변수와 메소드</h1><p><code>멤버변수</code>와 <code>메소드</code>는 클래스 내부에 다음과 같이 선언합니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String nation;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    Person(String name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>멤버변수와 메소드는 다음과 같이 사용할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>);</span><br><span class="line"></span><br><span class="line">person.printName();</span><br><span class="line"></span><br><span class="line">String name = person.name;</span><br></pre></td></tr></table></figure>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 클래스의 <code>생성자(Constructor)</code>, <code>멤버변수(Member Variable)</code>, <code>메소드(Method)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/12/java/180112-static/">정적 메소드(Static Method)와 정적 멤버변수(Static Variable)</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/11/java/180111-constructor/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1014,7 +1018,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 17 of 18</li>
+        <li class="pagination-number">page 17 of 19</li>
     </ul>
 </div>
 
@@ -1059,7 +1063,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover3.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset1.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

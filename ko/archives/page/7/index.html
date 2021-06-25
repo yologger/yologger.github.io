@@ -256,254 +256,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/02/15/kotlin/190215-reified/"
-                            aria-label=": [코틀린] reified란 무엇인가"
-                        >
-                            [코틀린] reified란 무엇인가
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-15T20:16:30+09:00">
-	
-		    2019/02/15
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트에 걸쳐 <code>제네릭(Generic)</code>에 대해 알아보겠습니다.</p>
-<ol>
-<li><a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)과 제네릭 클래스(Generic Class)</a></li>
-<li><a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a></li>
-<li><a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">키워드 in, out</a></li>
-<li><a href="/ko/2019/02/15/kotlin/190215-reified/">reified란 무엇인가?</a> ⬅️ ⬅️ ⬅️</li>
-</ol>
-<div class="alert warning icon"><p><b>reified</b>를 이해하려면 <a href="/ko/2019/02/11/kotlin/190211-generic/">제너릭(Generic)</a>, <a href="/ko/2018/02/05/java/180205-type-eraser/">타입 소거(Type Eraser)</a>, <a href="/ko/2019/02/07/kotlin/190207-reflection/">리플렉션(Reflection)</a>에 대해 알아야 합니다. 해당 포스트를 먼저 참고하시길 권장합니다.</p>
-</div>
-
-<hr>
-<h1 id="타입-소거"><a href="#타입-소거" class="headerlink" title="타입 소거"></a>타입 소거</h1><p>제너릭의 타입 파라미터는 컴파일 타임에 존재하지만 런타임에는 접근할 수 없습니다. 바로 <a href="/ko/2018/02/05/java/180205-type-eraser/">타입 소거</a> 때문입니다. 다음 예제를 살펴봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">printType</span><span class="params">(value: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> (T::<span class="class"><span class="keyword">class</span>) </span>&#123;   <span class="comment">// Error, Cannot use &#x27;T&#x27; as reified type parameter. Use a class instead.</span></span><br><span class="line">        String::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is String type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is Int type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">printType&lt;String&gt;(name)</span><br></pre></td></tr></table></figure>
-<p>위 코드는 <code>T:class</code> 형태로 클래스 타입을 읽으려 하고있습니다. 그러나 이 코드를 컴파일하면 에러가 발생합니다. 타입 파라미터인 <code>T</code>는 런타임에 접근할 수 없기 때문입니다. 따라서 보통 다음과 같이 별도의 인자로 클래스 타입을 전달하여 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T: Any&gt;</span> <span class="title">printType</span><span class="params">(value: <span class="type">T</span>, classType: <span class="type">KClass</span>&lt;<span class="type">T</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (classType) &#123;</span><br><span class="line">        String::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is String type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is Int type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">printType&lt;String&gt;(name, String::<span class="class"><span class="keyword">class</span>)</span></span><br></pre></td></tr></table></figure>
-<p>하지만 키워드 <code>reified</code>를 타입 파라미터 앞에 붙여주고 <code>inline</code>함수 형태로 사용하면 <code>Kclass</code>를 인자로 전달할 필요 없이 런타임에 타입 <code>T</code>에 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;<span class="keyword">reified</span> T: Any&gt;</span> <span class="title">printType</span><span class="params">(value: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (T::<span class="class"><span class="keyword">class</span>) </span>&#123;</span><br><span class="line">        String::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is String type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is Int type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">printType&lt;String&gt;(name)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>네 개의 포스트에서 걸쳐 <code>제네릭(Generic)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/16/kotlin/190216-type-alias/">타입 별칭(Type Alias)</a>에 대해 알아보겠습니다. </p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/15/kotlin/190215-reified/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/13/kotlin/190213-generic-in-out/"
-                            aria-label=": [코틀린] 제네릭(Generic)의 in, out"
-                        >
-                            [코틀린] 제네릭(Generic)의 in, out
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-13T20:16:30+09:00">
-	
-		    2019/02/13
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트에 걸쳐 <code>제네릭(Generic)</code>에 대해 알아보겠습니다.</p>
-<ol>
-<li><a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)과 제네릭 클래스(Generic Class)</a></li>
-<li><a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a></li>
-<li><a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">키워드 in, out</a> ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2019/02/15/kotlin/190215-reified/">reified란 무엇인가?</a></li>
-</ol>
-<div class="alert warning icon"><p>제네릭의 <b>in</b>과 <b>out</b>에 대해 이해하기 전에 자바의 <a href="/ko/2018/01/30/java/180130-type-eraser/">타입 소거(Type Eraser)</a>와 <a href="/ko/2018/01/28/java/180128-wildcard/">와일드 카드(Wild Card)</a>에 대해 먼저 공부하시길 권장합니다.</p>
-</div>
-<hr>
-<h1 id="in"><a href="#in" class="headerlink" title="in"></a>in</h1><p>키워드<code>in</code>은 자바 제네릭의 <code>super</code>와 유사합니다. 키워드<code>in</code>은 제네릭의 타입 파라미터를 특정 클래스와 그 클래스의 <strong>조상 클래스</strong>로 제한합니다.</p>
-<p>아래 예제를 살펴봅시다. <code>Programmer</code>클래스는 <code>Person</code>를 상속하고 <code>AppProgrammer</code>는 <code>Programmer</code>를 상속하고 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">constructor</span></span>(name: String, <span class="keyword">var</span> company: String) : Person(name)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppProgrammer</span> <span class="keyword">constructor</span></span>(name: String, company: String, <span class="keyword">var</span> field: String) : Programmer(name, company)</span><br></pre></td></tr></table></figure>
-<p>이제 아래 코드를 살펴봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printArrayList</span><span class="params">(arrayList: <span class="type">ArrayList</span>&lt;<span class="type">in</span> <span class="type">Programmer</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(arrayList.toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>&lt;in Programmer&gt;</code>를 통해 <code>Programmer</code>와 그 부모 클래스인 <code>Person</code>클래스만 들어올 수 있도록 하고 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Person&gt;()</span><br><span class="line">printArrayList(people)          <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Programmer&gt;()</span><br><span class="line">printArrayList(programmers)     <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;AppProgrammer&gt;()</span><br><span class="line">printArrayList(appProgrammer)   <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="out"><a href="#out" class="headerlink" title="out"></a>out</h1><p>키워드<code>out</code>은 Java 제너릭의 <code>extends</code>와 유사합니다. 키워드<code>out</code>는 타입 파라미터의 실제 타입을 특정 클래스와 특정 클래스의 <strong>자손 클래스</strong>로 제한합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">constructor</span></span>(name: String, <span class="keyword">var</span> company: String) : Person(name)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppProgrammer</span> <span class="keyword">constructor</span></span>(name: String, company: String, <span class="keyword">var</span> field: String) : Programmer(name, company)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printArrayList</span><span class="params">(arrayList: <span class="type">ArrayList</span>&lt;<span class="type">out</span> <span class="type">Programmer</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(arrayList.toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Person&gt;()</span><br><span class="line">printArrayList(people)          <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Prograammer&gt;()</span><br><span class="line">printArrayList(programmers)     <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;AppProgrammer&gt;()</span><br><span class="line">printArrayList(appProgrammer)   <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>제너릭(Generic)의 in, out</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/15/kotlin/190215-reified/">reified</a>에 대해 알아보겠습니다. </p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/13/kotlin/190213-generic-in-out/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/12/kotlin/190212-generic-function/"
-                            aria-label=": [코틀린] 제네릭 함수(Generic Function)"
-                        >
-                            [코틀린] 제네릭 함수(Generic Function)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-12T20:16:30+09:00">
-	
-		    2019/02/12
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트에 걸쳐 <code>제네릭(Generic)</code>에 대해 알아보겠습니다.</p>
-<ol>
-<li><a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)과 제네릭 클래스(Generic Class)</a></li>
-<li><a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a> ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">키워드 in, out</a></li>
-<li><a href="/ko/2019/02/15/kotlin/190215-reified/">reified란 무엇인가?</a></li>
-</ol>
-<hr>
-<h1 id="제네릭-함수"><a href="#제네릭-함수" class="headerlink" title="제네릭 함수"></a>제네릭 함수</h1><p>제네릭은 클래스 뿐만 아니라 함수에도 사용할 수 있습니다. </p>
-<h4 id="1-함수의-파라미터"><a href="#1-함수의-파라미터" class="headerlink" title="(1) 함수의 파라미터"></a>(1) 함수의 파라미터</h4><p>우선 함수에서 제네릭을 사용할 땐 키워드 <strong>fun</strong>과 <strong>함수명</strong> 사이에 <code>타입 파라미터</code>를 명시합니다.  </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">printElement</span><span class="params">(element: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">printElement(<span class="number">1</span>)</span><br><span class="line">printElement(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">printElement(Person())</span><br></pre></td></tr></table></figure>
-<h4 id="2-반환-값"><a href="#2-반환-값" class="headerlink" title="(2) 반환 값"></a>(2) 반환 값</h4><p>함수의 반환 값에도 <code>타입 파라미터</code>를 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">getElement</span><span class="params">(element: <span class="type">T</span>)</span></span>: T &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element1 = getElement(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> element2 = getElement(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> element3 = getElement(Person())</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>제네릭 함수(Generic Function)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">제네릭의 in, out</a>에 대해 알아보겠습니다. </p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/12/kotlin/190212-generic-function/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2019/02/11/kotlin/190211-generic/"
                             aria-label=": [코틀린] 제네릭(Generic)과 제네릭 클래스(Generic Class)"
                         >
@@ -1059,6 +811,243 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/05/android/190205-permission-dispatcher/"
+                            aria-label=": [안드로이드] 권한 - (4) Permission Dispatcher 라이브러리"
+                        >
+                            [안드로이드] 권한 - (4) Permission Dispatcher 라이브러리
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-05T20:16:30+09:00">
+	
+		    2019/02/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/PermissionDispatcher/">PermissionDispatcher</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 3개의 포스트에 걸쳐 권한(Permission)을 관리하는 방법에 대해 알아보겠습니다.</p>
+<ol>
+<li><a href="/ko/2019/02/01/android/190201-permission/">일반 권한과 위험 권한</a></li>
+<li><a href="/ko/2019/02/02/android/190202-multi-permission/">여러 권한 동시에 요청하기</a></li>
+<li>TedPermission 라이브러리 ⬅️ ⬅️ ⬅️</li>
+</ol>
+<hr>
+<h1 id="TedPermission-라이브러리"><a href="#TedPermission-라이브러리" class="headerlink" title="TedPermission 라이브러리"></a>TedPermission 라이브러리</h1><p><a target="_blank" rel="noopener" href="https://github.com/ParkSangGwon/TedPermission"><code>TedPermission</code></a>는 대한민국의 개발자 박상권님께서 개발하신 권한 설정 라이브러리입니다. 이 라이브러리를 사용하면 권한 설정을 좀 더 쉽게 구현할 수 있습니다.</p>
+<h1 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h1><p>모듈 수준의 build.gradle파일에 다음과 같이 의존성을 추가합니다.</p>
+<h5 id="build-gradle-Module-my-project-app"><a href="#build-gradle-Module-my-project-app" class="headerlink" title="build.gradle(Module: my_project.app)"></a>build.gradle(Module: my_project.app)</h5><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    implementation <span class="string">&#x27;gun0912.ted:tedpermission:2.2.0&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="사용-방법"><a href="#사용-방법" class="headerlink" title="사용 방법"></a>사용 방법</h1><p>우리는 <a href="/ko/2019/01/05/android/190105-permission-managerment/">이전 포스트</a>에서 카메라의 권한을 확인하고, 권한이 없으면 요청하고, 권한을 얻었을 때 카메라를 여는 예제를 살펴봤습니다.<br><img src="/ko/images/posts/android/permission/permission-2.png"><br>이제 동일한 내용을 TedPermission 라이브러리를 사용해서 구현해보겠습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonOpenCamera: Button <span class="keyword">by</span> lazy &#123;</span><br><span class="line">        findViewById&lt;Button&gt;(R.id.button_open_camera)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        buttonOpenCamera.setOnClickListener &#123;</span><br><span class="line">            TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">                <span class="comment">// 요청할 권한 나열하기</span></span><br><span class="line">                .setPermissions(Manifest.permission.CAMERA)</span><br><span class="line">                <span class="comment">// 권한 요청 결과에 대한 리스너 등록</span></span><br><span class="line">                .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">                    <span class="comment">// 권한을 승인했을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 카메라 열기</span></span><br><span class="line">                        openCamera()</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 권한을 승인하지 않았을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 앱 종료</span></span><br><span class="line">                        finish()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">// 권한을 거부할 경우 나타나는 Alert dialog의 메시지</span></span><br><span class="line">                .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">                <span class="comment">// 권한 요청하기</span></span><br><span class="line">                .check()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">openCamera</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)</span><br><span class="line">        startActivity(intent)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이제 앱을 실행하고 버튼을 누르면 다음과 같이 권한 설정 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/5.png"></p>
+<p><code>앱 사용 중에만 허용</code>을 누르면 <code>onPermissionGranted()</code>메소드가 호출되며, 앱을 종료하고 다시 시작해도 권한 설정 대화가 나오지 않습니다. <code>이번만 허용</code>을 눌러도 <code>onPermissionGranted()</code> 메소드가 호출됩니다. 차이점은 앱 종료 후 다시 시작할 때마다 권한 설정 대화상자가 다시 나옵니다.</p>
+<p>만약 <code>거부</code>를 누르면 <code>setDeniedMessage()</code>메소드에서 설정한 메시지와 함께 설정 또는 닫기를 선택할 수 있는 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/6.png"></p>
+<p>여기서도 <code>닫기</code>를 누르면 <code>onPermissionDenied()</code>가 호출됩니다. 만약 설정을 누르면 다음과 같이 앱 설정 화면으로 이동합니다.</p>
+<p><img src="/ko/images/posts/android/permission/7.png"></p>
+<p>여기서 권한을 모두 부여하고 뒤로가기를 누르면 <code>onPermissionGranted()</code>이 호출됩니다. 그러나 하나라도 권한을 부여하지 않으면 <code>onPermissionDenied()</code>이 호출됩니다.</p>
+<h1 id="다중-권한-요청"><a href="#다중-권한-요청" class="headerlink" title="다중 권한 요청"></a>다중 권한 요청</h1><p>여러 권한이 필요할 때 다음과 같이 동시에 요청할 수도 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">    <span class="comment">// 권한 여러개 설정</span></span><br><span class="line">    .setPermissions(Manifest.permission.CAMERA, Manifest.permission.READ_CALENDAR)</span><br><span class="line">    .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">    .check()</span><br></pre></td></tr></table></figure>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>TedPermission</code>라이브러리에 대해 알아봤습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/05/android/190205-permission-dispatcher/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/04/android/190204-ted-permission/"
+                            aria-label=": [안드로이드] 권한 - (3) TedPermission 라이브러리"
+                        >
+                            [안드로이드] 권한 - (3) TedPermission 라이브러리
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-04T20:16:30+09:00">
+	
+		    2019/02/04
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/TedPermission/">TedPermission</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 3개의 포스트에 걸쳐 권한(Permission)을 관리하는 방법에 대해 알아보겠습니다.</p>
+<ol>
+<li><a href="/ko/2019/02/01/android/190201-permission/">일반 권한과 위험 권한</a></li>
+<li><a href="/ko/2019/02/02/android/190202-multi-permission/">여러 권한 동시에 요청하기</a></li>
+<li>TedPermission 라이브러리 ⬅️ ⬅️ ⬅️</li>
+</ol>
+<hr>
+<h1 id="TedPermission-라이브러리"><a href="#TedPermission-라이브러리" class="headerlink" title="TedPermission 라이브러리"></a>TedPermission 라이브러리</h1><p><a target="_blank" rel="noopener" href="https://github.com/ParkSangGwon/TedPermission"><code>TedPermission</code></a>는 대한민국의 개발자 박상권님께서 개발하신 권한 설정 라이브러리입니다. 이 라이브러리를 사용하면 권한 설정을 좀 더 쉽게 구현할 수 있습니다.</p>
+<h1 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h1><p>모듈 수준의 build.gradle파일에 다음과 같이 의존성을 추가합니다.</p>
+<h5 id="build-gradle-Module-my-project-app"><a href="#build-gradle-Module-my-project-app" class="headerlink" title="build.gradle(Module: my_project.app)"></a>build.gradle(Module: my_project.app)</h5><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    implementation <span class="string">&#x27;gun0912.ted:tedpermission:2.2.0&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="사용-방법"><a href="#사용-방법" class="headerlink" title="사용 방법"></a>사용 방법</h1><p>우리는 <a href="/ko/2019/01/05/android/190105-permission-managerment/">이전 포스트</a>에서 카메라의 권한을 확인하고, 권한이 없으면 요청하고, 권한을 얻었을 때 카메라를 여는 예제를 살펴봤습니다.<br><img src="/ko/images/posts/android/permission/permission-2.png"><br>이제 동일한 내용을 TedPermission 라이브러리를 사용해서 구현해보겠습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonOpenCamera: Button <span class="keyword">by</span> lazy &#123;</span><br><span class="line">        findViewById&lt;Button&gt;(R.id.button_open_camera)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        buttonOpenCamera.setOnClickListener &#123;</span><br><span class="line">            TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">                <span class="comment">// 요청할 권한 나열하기</span></span><br><span class="line">                .setPermissions(Manifest.permission.CAMERA)</span><br><span class="line">                <span class="comment">// 권한 요청 결과에 대한 리스너 등록</span></span><br><span class="line">                .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">                    <span class="comment">// 권한을 승인했을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 카메라 열기</span></span><br><span class="line">                        openCamera()</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 권한을 승인하지 않았을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 앱 종료</span></span><br><span class="line">                        finish()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">// 권한을 거부할 경우 나타나는 Alert dialog의 메시지</span></span><br><span class="line">                .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">                <span class="comment">// 권한 요청하기</span></span><br><span class="line">                .check()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">openCamera</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)</span><br><span class="line">        startActivity(intent)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이제 앱을 실행하고 버튼을 누르면 다음과 같이 권한 설정 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/5.png"></p>
+<p><code>앱 사용 중에만 허용</code>을 누르면 <code>onPermissionGranted()</code>메소드가 호출되며, 앱을 종료하고 다시 시작해도 권한 설정 대화가 나오지 않습니다. <code>이번만 허용</code>을 눌러도 <code>onPermissionGranted()</code> 메소드가 호출됩니다. 차이점은 앱 종료 후 다시 시작할 때마다 권한 설정 대화상자가 다시 나옵니다.</p>
+<p>만약 <code>거부</code>를 누르면 <code>setDeniedMessage()</code>메소드에서 설정한 메시지와 함께 설정 또는 닫기를 선택할 수 있는 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/6.png"></p>
+<p>여기서도 <code>닫기</code>를 누르면 <code>onPermissionDenied()</code>가 호출됩니다. 만약 설정을 누르면 다음과 같이 앱 설정 화면으로 이동합니다.</p>
+<p><img src="/ko/images/posts/android/permission/7.png"></p>
+<p>여기서 권한을 모두 부여하고 뒤로가기를 누르면 <code>onPermissionGranted()</code>이 호출됩니다. 그러나 하나라도 권한을 부여하지 않으면 <code>onPermissionDenied()</code>이 호출됩니다.</p>
+<h1 id="다중-권한-요청"><a href="#다중-권한-요청" class="headerlink" title="다중 권한 요청"></a>다중 권한 요청</h1><p>여러 권한이 필요할 때 다음과 같이 동시에 요청할 수도 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">    <span class="comment">// 권한 여러개 설정</span></span><br><span class="line">    .setPermissions(Manifest.permission.CAMERA, Manifest.permission.READ_CALENDAR)</span><br><span class="line">    .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">    .check()</span><br></pre></td></tr></table></figure>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>TedPermission</code>라이브러리에 대해 알아봤습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/04/android/190204-ted-permission/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/04/kotlin/190204-unit/"
+                            aria-label=": [코틀린] Unit 이란?"
+                        >
+                            [코틀린] Unit 이란?
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-04T20:16:30+09:00">
+	
+		    2019/02/04
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/03/kotlin/190203-first-class-citizen/"><code>일급 객체</code>와 <code>함수형 프로그래밍</code></a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">Unit</span>에 대해 알아보겠습니다. </p>
+<hr>
+<h1 id="Unit"><a href="#Unit" class="headerlink" title="Unit"></a>Unit</h1><p><code>Unit</code>은 <u>함수의 반환값이 없음</u>을 의미합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printSomething</span><span class="params">(something: <span class="type">String</span>)</span></span>: <span class="built_in">Unit</span> &#123;</span><br><span class="line">    println(something)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printSomething(<span class="string">&quot;Hello&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>Unit</code>은 <a href="/ko/2019/01/16/kotlin/190116-object/">싱글톤</a>이기도 합니다. 인스턴스를 생성하지 않고도 접근할 수 있으며, 인스턴스 또한 생성할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> unit: <span class="built_in">Unit</span> = <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+<p><code>Unit</code>은 <code>RxKotlin</code>에서 다음과 같이 사용하기도 합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> didLogOut = PublishSubject.create&lt;<span class="built_in">Unit</span>&gt;()</span><br><span class="line">didLogOut.onNext(<span class="built_in">Unit</span>)</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>Unit</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/06/kotlin/190206-access-modifier/"><code>접근 제한자(Access Modifier)</code></a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/04/kotlin/190204-unit/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1085,7 +1074,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 7 of 18</li>
+        <li class="pagination-number">page 7 of 19</li>
     </ul>
 </div>
 
@@ -1130,7 +1119,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover3.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset1.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

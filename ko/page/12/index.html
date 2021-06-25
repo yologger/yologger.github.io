@@ -255,228 +255,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/07/kotlin/190107-constructor/"
-                            aria-label=": [코틀린] 클래스의 생성자(Constructor)"
-                        >
-                            [코틀린] 클래스의 생성자(Constructor)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-07T20:16:30+09:00">
-	
-		    2019/01/07
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에는 <a href="/ko/2019/01/07/kotlin/190107-class-instance-object/">객체지향 프로그래밍, 클래스, 인스턴스, 객체</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">생성자(Constructor)</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="생성자-Constructor-란"><a href="#생성자-Constructor-란" class="headerlink" title="생성자(Constructor)란?"></a>생성자(Constructor)란?</h1><p><b>생성자</b>는 클래스의 인스턴스를 생성할 때 호출되는 구문입니다. 보통 초기화 작업을 생성자에서 수행합니다. 생성자는 키워드<code>constructor</code>를 사용하여 정의합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String name</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="comment">// 멤버변수 초기화 작업 수행   </span></span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;Paul&quot;</span> </span><br><span class="line">        println(<span class="string">&quot;This is constructor.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이 초기화 구문은 클래스의 인스턴스를 생성할 때 호출됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person person = person()</span><br><span class="line"><span class="comment">// This is constructor.</span></span><br></pre></td></tr></table></figure>
-<p>생성자에는 두 가지가 있습니다.</p>
-<h1 id="1-기본-생성자"><a href="#1-기본-생성자" class="headerlink" title="(1) 기본 생성자"></a>(1) 기본 생성자</h1><p><strong>기본 생성자</strong>는 클래스 이름 뒤에 키워드<code>constructor</code>를 붙여서 만듭니다. 주의할 점은 기본 생성자는 별도의 초기화 구문이 존재하지 않습니다. 이 때는 <code>init</code>구문을 사용할 수 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(name: String) &#123;	</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수 선언</span></span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line">	    </span><br><span class="line">    <span class="comment">// 초기화 작업 수행</span></span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;This is constructor.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스의 인스턴스 생성</span></span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>)		</span><br><span class="line"></span><br><span class="line">print(person.name)</span><br></pre></td></tr></table></figure>
-<p>키워드<code>constructor</code>는 생략 가능합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(name: String) &#123;	</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수 선언</span></span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line">	    </span><br><span class="line">    <span class="comment">// 초기화 구문</span></span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>)		</span><br><span class="line"></span><br><span class="line">print(person.name)</span><br></pre></td></tr></table></figure>
-<p>맴버변수 선언도 생성자 안에서 할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>(<span class="keyword">var</span> name: String) &#123;</span><br><span class="line">    <span class="comment">// var name: String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위처럼 코드를 작성하는 경우, 클래스를 생성할 때 전달한 값 전달인자가 매개변수에 자동으로 초기화됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>)</span><br><span class="line"></span><br><span class="line">print(person.name)</span><br></pre></td></tr></table></figure>
-<h1 id="2-보조-생성자"><a href="#2-보조-생성자" class="headerlink" title="(2) 보조 생성자"></a>(2) 보조 생성자</h1><p>기본 생성자를 정의하지 않고 아래와 같이 <strong>보조 생성자</strong>만을 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 보조 생성자</span></span><br><span class="line">    <span class="keyword">constructor</span>(name: String) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>) </span><br><span class="line">println(person.name)</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 클래스의 <code>생성자</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/08/kotlin/190108-class-method/">클래스의 멤버변수와 메소드</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/07/kotlin/190107-constructor/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/01/07/kotlin/190107-class-instance-object/"
-                            aria-label=": [코틀린] 객체지향 프로그래밍, 클래스, 인스턴스, 객체"
-                        >
-                            [코틀린] 객체지향 프로그래밍, 클래스, 인스턴스, 객체
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-07T20:13:30+09:00">
-	
-		    2019/01/07
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에는 <a href="/ko/2019/01/06/kotlin/190106-vararg/">가변인자(vararg)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">객체지향 프로그래밍(Object-oriented Programming)</span>, <span class="highlight-text red">클래스(Class)</span>, <span class="highlight-text red">인스턴스(Instance)</span>, <span class="highlight-text red">객체(Object)</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="객체지향-프로그래밍"><a href="#객체지향-프로그래밍" class="headerlink" title="객체지향 프로그래밍"></a>객체지향 프로그래밍</h1><p>코틀린은 모든 대상을 <b>객체(Object)</b>로 바라봅니다. 이러한 점에서 코틀린은 객체지향 프로그래밍 언어입니다. 객체지향 프로그래밍을 이해하려면 클래스와 인스턴스에 대해 알아야합니다. </p>
-<h1 id="클래스와-인스턴스"><a href="#클래스와-인스턴스" class="headerlink" title="클래스와 인스턴스"></a>클래스와 인스턴스</h1><p>클래스와 인스턴스를 설명할 때 와플 기계와 와플을 예로 많이 듭니다.<br><img src="/ko/images/posts/kotlin/class/waffle.png"><br><strong>클래스</strong>는 인스턴스를 만드는 틀, <strong>인스턴스</strong>는 클래스로 만든 무언가입니다. 즉 클래스는 와플 기계, 인스턴스 와플입니다. 클래스를 코드로 표현하면 다음과 같습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Waffle</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>인스턴스는 다음과 같이 생성합니다. 클래스 이름 뒤에 <code>()</code>를 붙여주면 됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> waffle = Waffle()</span><br></pre></td></tr></table></figure>
-<p>이렇게 만든 인스턴스는 <b>객체</b>라고도 불립니다.</p>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 객체지향 프로그래밍, 클래스, 인스턴스, 객체에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/07/kotlin/190107-constructor/">클래스의 생성자(Constructor)</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/07/kotlin/190107-class-instance-object/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/01/06/kotlin/190106-vararg/"
-                            aria-label=": [코틀린] 가변인자(vararg)"
-                        >
-                            [코틀린] 가변인자(vararg)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-06T21:16:30+09:00">
-	
-		    2019/01/06
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/05/kotlin/190105-argument-parameter/">매개변수(Parameter)와 전달인자(Argument)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">가변인자(vararg)</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="가변인자-vararg"><a href="#가변인자-vararg" class="headerlink" title="가변인자(vararg)"></a>가변인자(vararg)</h1><p>함수의 매개변수가 몇 개일지 모를 수도 있습니다. 이때 키워드<code>vararg</code>를 사용할 수 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sum</span><span class="params">(<span class="keyword">vararg</span> numbers: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>vararg</code>가 붙은 매개변수는 함수 몸체에서 마치 <a href="/ko/2019/01/03/kotlin/190103-array/">배열(Array)</a>처럼 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sum</span><span class="params">(<span class="keyword">vararg</span> numbers: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// numbers는 array</span></span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (n <span class="keyword">in</span> numbers) &#123;</span><br><span class="line">        sum += n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이제 함수를 호출할 때 인자를 유연하게 전달할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)  <span class="comment">// 6</span></span><br><span class="line"><span class="keyword">var</span> result2 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 키워드 <code>vararg</code>에 대해 알아보았습니다. 다음 포스트에서는 <a href="/ko/2019/01/07/kotlin/190107-class-instance-object/">클래스(Class), 인스턴스(Instance), 객체(Object)</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/06/kotlin/190106-vararg/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2019/01/05/kotlin/190105-argument-parameter/"
                             aria-label=": [코틀린] 매개변수(Parameter)와 전달인자(Argument)의 차이점"
                         >
@@ -1024,6 +802,220 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/01/kotlin/190101-variable-constant/"
+                            aria-label=": [코틀린] 변수(Variable)와 상수(Constant)"
+                        >
+                            [코틀린] 변수(Variable)와 상수(Constant)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-01T20:16:30+09:00">
+	
+		    2019/01/01
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이번 포스트에서는 코틀린의 <span class="highlight-text red">변수(Variable)</span>와 <span class="highlight-text red">상수(Constant)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h2 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h2><p>변수를 선언할 때는 키워드<code>var</code>를 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line"><span class="comment">// 변수 초기화</span></span><br><span class="line">name = <span class="string">&quot;Paul&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 변수 선언과 동시에 초기화</span></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br></pre></td></tr></table></figure>
+<p>변수는 값을 초기화한 후 변경할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">name = <span class="string">&quot;Jane&quot;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="상수"><a href="#상수" class="headerlink" title="상수"></a>상수</h2><p>상수를 선언할 때는 키워드 <code>val</code>을 사용합니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 상수 선언과 초기화</span></span><br><span class="line"><span class="keyword">val</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br></pre></td></tr></table></figure>
+<p>상수는 초기화한 후 값을 변경할 수 없습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&quot;Jane&quot;</span>       <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<p>또한 상수는 선언과 초기화를 동시에 해야합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> nation: String = <span class="string">&quot;Republic of Korea&quot;</span>    <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> name: String    <span class="comment">// Error</span></span><br><span class="line">name = <span class="string">&quot;Son&quot;</span>        <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <b>변수</b>와 <b>상수</b>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/02/kotlin/190102-datatype/">자료형(Data Type)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/01/kotlin/190101-variable-constant/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/01/kotlin/190100-paid-java/"
+                            aria-label=": [코틀린] 코틀린(Kotlin)이란?"
+                        >
+                            [코틀린] 코틀린(Kotlin)이란?
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-01T08:16:30+09:00">
+	
+		    2019/01/01
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+
+<h1 id="코틀린-Kotlin"><a href="#코틀린-Kotlin" class="headerlink" title="코틀린(Kotlin)"></a>코틀린(Kotlin)</h1><span class="highlight-text red">코틀린(Kotlin)</span>은 Android Studio와 IntelliJ를 만든 JetBrains사에서 2010년에 출시한 프로그래밍 언어입니다. Google은 2017년 안드로이드 공식 언어로 코틀린으로 추가합니다. 
+
+<p><a href="/ko/2018/04/03/java/180403-oraclejdk-openjdk/">자바 유료화</a>, 그리고 자바 API 저작권에 대한 Google과 Oracle의 기나긴 소송의 여파로 보는 시각이 많습니다. </p>
+<p>자바에 익숙한 많은 개발자들이 코틀린이라는 새로운 언어를 배우는데 부담을 느끼고 있습니다. 그러나 자바를 알고있다면 코틀린도 쉽게 배울 수 있습니다. 앞으로 코틀린의 특징과 개념에 대해 다루도록 하겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/01/kotlin/190100-paid-java/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/12/30/android/181230-app-bundle/"
+                            aria-label=": [안드로이드] 앱 출시 - (8) 앱 번들이란?"
+                        >
+                            [안드로이드] 앱 출시 - (8) 앱 번들이란?
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-12-30T20:16:30+09:00">
+	
+		    2018/12/30
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 3개의 포스트에 걸쳐 앱을 출시하는 방법에 대해 알아보겠습니다.</p>
+<ol>
+<li><p><a href="/ko/2018/12/23/android/181223-app-release-signed-apk/">서명된 릴리즈 APK 생성</a>  ⬅️ ⬅️ ⬅️</p>
+</li>
+<li><p><a href="/ko/2018/12/24/android/181224-app-release-playstore/">Google Play Store에 출시하기</a></p>
+</li>
+<li><p><a href="/ko/2018/12/25/android/181225-app-release-new-apk/">새로운 버전 출시하기</a></p>
+<p>versionCode 1<br>versionName “1.0”</p>
+</li>
+</ol>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/12/30/android/181230-app-bundle/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1050,7 +1042,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 12 of 18</li>
+        <li class="pagination-number">page 12 of 19</li>
     </ul>
 </div>
 
@@ -1094,7 +1086,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/cover3.png');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset1.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
