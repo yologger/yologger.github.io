@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n스레드란?스레드(Thread)는 프로세스(Process) 내에서 실행되는 흐름을 말합니다. 일반적으로 하나의 프로세스에는 하나의 기본 스레드가 존재합니다. 이를 매인 스레드라고 합니다.이제 하나의 스레드에서 두 개의 작업을 순차적으로 수행한다고 가정해봅시다.Job #1은 매우 긴 시간이 소요되는 작업입니다. 반면 Job #2는 상대적으로 짧은 시간이 소요되는 작업입니다. 그러나 Job #1이 먼저 실행되었으므로 Job #2는 Job #1이 끝날 때 까지 기다려야합니다. \n이제 스레드를 한 개 더 생성해보겠습니다.\n이처럼 스레드를 여러 개 추가하여 프로세스를 병렬 처리하는 것을 멀티 스레드라고 합니다. \n안드로이드에서의 스레드안드로이드 애플리케이션이 처음 시작되면, 안드로이드 운영체제는 하나의 프로세스와 하나의 매인 스레드를 생성합니다. 애플리케이션의 모든 컴포넌트는 매인 스레드 내에서 실행됩니다. \n매인 스레드의 역할매인 스레드의 주된 역할은 사용자 인터페이스를 처리하는 것입니다. 그러나 매인 스레드에서 시간이 오래 걸리는 작업을 수행하면, 그 작업이 끝날 때까지 애플리캐이션 전체가 멈춘 것처럼 보이게 됩니다.\n예제를 살펴보겠습니다. TOAST 버튼을 누르면 토스트 매시지를 보여줍니다. STOP 버튼을 누르면 매인 스래드를 10초 동안 정지합니다.\n123456789101112131415161718class MainActivity : AppCompatActivity() &#123;    val buttonToast: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn_toast) &#125;    val buttonStop: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn_stop) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        buttonToast.setOnClickListener &#123;            Toast.makeText(this, &quot;Hello World&quot;, Toast.LENGTH_SHORT).show()        &#125;        buttonStop.setOnClickListener &#123;            Thread.sleep(10 * 1000)     //  10 seconds        &#125;    &#125;&#125;\n이제 STOP 버튼을 누르면 안드로이드 시스템이 10초 동안 정지합니다. 이 때 TOAST 버튼을 누르면 다음과 같은 에러가 발생합니다.\n따라서 시간이 오래 걸리는 작업은 별도의 스래드에서 실행해야합니다. Runnable클래스와 Thread클래스를 사용하여 별도의 스레드를 생성합시다.\n12345678buttonStop.setOnClickListener &#123;    var runnable = Runnable &#123;        Thread.sleep(10 * 1000)     //  10 seconds    &#125;    var thread = Thread(runnable)    thread.start()&#125;\n이제 STOP 버튼을 눌러도 앱이 멈추지 않습니다. 10초 정지 작업을 별도의 스레드에서 실행하기 때문에 매인 스레드는 사용자 인터페이스를 처리할 수 있습니다.\n스레드 핸들러스레드와 관련해서 주의할 점이 하나 더 있습니다. 매인 스레드 외의 다른 스레드에서는 사용자 인터페이스(UI) 요소를 변경해서는 안된다는 것입니다. 다른 스레드에서 UI를 변경해야 하는 경우, 메인 스레드에 선언된 핸들러(Handler)로 메시지를 보내야 합니다.\n우선 android.os.Handler클래스를 사용하여 매인 스레드에 핸들러를 정의합니다. handleMessage()는 다른 스레드에서 메시지를 전송했을 때 호출됩니다.\n1234567891011121314import android.os.Handlerclass MainActivity : AppCompatActivity() &#123;    val button: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn) &#125;    val textView: TextView by lazy &#123; findViewById&lt;TextView&gt;(R.id.activity_main_tv) &#125;    val handler = object: Handler() &#123;        override fun handleMessage(msg: Message) &#123;            super.handleMessage(msg)            // ...        &#125;    &#125;&#125;\n새로 생성한 스레드에서는 10초 후에 매인 스레드로 메시지를 전송합니다.\n12345678910111213141516171819202122232425class MainActivity : AppCompatActivity() &#123;    val button: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button.setOnClickListener &#123;            var runnable = Runnable &#123;                Thread.sleep(10 * 1000)     //  10 seconds                val message = handler.obtainMessage()                val bundle = Bundle()                bundle.putString(&quot;text&quot;, &quot;Hello World&quot;)                message.data = bundle                handler.sendMessage(message)            &#125;            var thread = Thread(runnable)            thread.start()        &#125;    &#125;&#125;\nHandler클래스의 obtainMessage()를 호출하여 메시지를 생성하비다. 이후 Bundle 객체를 사용하여 전송할 데이터를 추가합니다. 마지막으로 sendMessage()를 호출하면 메시지가 전송됩니다.\n이제 매인 스레드에서 메시지를 수신한 후 UI를 변경하겠습니다.\n12345678910111213class MainActivity : AppCompatActivity() &#123;    val handler = object: Handler() &#123;        override fun handleMessage(msg: Message) &#123;            super.handleMessage(msg)            val bundle = msg.data            val string = bundle.getString(&quot;text&quot;)            string?.let &#123;                textView.text = it            &#125;        &#125;    &#125;&#125;\n버튼을 클릭하면 10초 후 텍스트 뷰가 변경됩니다.\n","dateCreated":"2019-04-02T02:16:30+09:00","dateModified":"2021-06-21T14:12:13+09:00","datePublished":"2019-04-02T02:16:30+09:00","description":"","headline":"[안드로이드] 스레드(Thread)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/02/android/190401-02-thread/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/02/android/190401-02-thread/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n스레드란?스레드(Thread)는 프로세스(Process) 내에서 실행되는 흐름을 말합니다. 일반적으로 하나의 프로세스에는 하나의 기본 스레드가 존재합니다. 이를 매인 스레드라고 합니다.이제 하나의 스레드에서 두 개의 작업을 순차적으로 수행한다고 가정해봅시다.Job #1은 매우 긴 시간이 소요되는 작업입니다. 반면 Job #2는 상대적으로 짧은 시간이 소요되는 작업입니다. 그러나 Job #1이 먼저 실행되었으므로 Job #2는 Job #1이 끝날 때 까지 기다려야합니다. \n이제 스레드를 한 개 더 생성해보겠습니다.\n이처럼 스레드를 여러 개 추가하여 프로세스를 병렬 처리하는 것을 멀티 스레드라고 합니다. \n안드로이드에서의 스레드안드로이드 애플리케이션이 처음 시작되면, 안드로이드 운영체제는 하나의 프로세스와 하나의 매인 스레드를 생성합니다. 애플리케이션의 모든 컴포넌트는 매인 스레드 내에서 실행됩니다. \n매인 스레드의 역할매인 스레드의 주된 역할은 사용자 인터페이스를 처리하는 것입니다. 그러나 매인 스레드에서 시간이 오래 걸리는 작업을 수행하면, 그 작업이 끝날 때까지 애플리캐이션 전체가 멈춘 것처럼 보이게 됩니다.\n예제를 살펴보겠습니다. TOAST 버튼을 누르면 토스트 매시지를 보여줍니다. STOP 버튼을 누르면 매인 스래드를 10초 동안 정지합니다.\n123456789101112131415161718class MainActivity : AppCompatActivity() &#123;    val buttonToast: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn_toast) &#125;    val buttonStop: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn_stop) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        buttonToast.setOnClickListener &#123;            Toast.makeText(this, &quot;Hello World&quot;, Toast.LENGTH_SHORT).show()        &#125;        buttonStop.setOnClickListener &#123;            Thread.sleep(10 * 1000)     //  10 seconds        &#125;    &#125;&#125;\n이제 STOP 버튼을 누르면 안드로이드 시스템이 10초 동안 정지합니다. 이 때 TOAST 버튼을 누르면 다음과 같은 에러가 발생합니다.\n따라서 시간이 오래 걸리는 작업은 별도의 스래드에서 실행해야합니다. Runnable클래스와 Thread클래스를 사용하여 별도의 스레드를 생성합시다.\n12345678buttonStop.setOnClickListener &#123;    var runnable = Runnable &#123;        Thread.sleep(10 * 1000)     //  10 seconds    &#125;    var thread = Thread(runnable)    thread.start()&#125;\n이제 STOP 버튼을 눌러도 앱이 멈추지 않습니다. 10초 정지 작업을 별도의 스레드에서 실행하기 때문에 매인 스레드는 사용자 인터페이스를 처리할 수 있습니다.\n스레드 핸들러스레드와 관련해서 주의할 점이 하나 더 있습니다. 매인 스레드 외의 다른 스레드에서는 사용자 인터페이스(UI) 요소를 변경해서는 안된다는 것입니다. 다른 스레드에서 UI를 변경해야 하는 경우, 메인 스레드에 선언된 핸들러(Handler)로 메시지를 보내야 합니다.\n우선 android.os.Handler클래스를 사용하여 매인 스레드에 핸들러를 정의합니다. handleMessage()는 다른 스레드에서 메시지를 전송했을 때 호출됩니다.\n1234567891011121314import android.os.Handlerclass MainActivity : AppCompatActivity() &#123;    val button: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn) &#125;    val textView: TextView by lazy &#123; findViewById&lt;TextView&gt;(R.id.activity_main_tv) &#125;    val handler = object: Handler() &#123;        override fun handleMessage(msg: Message) &#123;            super.handleMessage(msg)            // ...        &#125;    &#125;&#125;\n새로 생성한 스레드에서는 10초 후에 매인 스레드로 메시지를 전송합니다.\n12345678910111213141516171819202122232425class MainActivity : AppCompatActivity() &#123;    val button: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button.setOnClickListener &#123;            var runnable = Runnable &#123;                Thread.sleep(10 * 1000)     //  10 seconds                val message = handler.obtainMessage()                val bundle = Bundle()                bundle.putString(&quot;text&quot;, &quot;Hello World&quot;)                message.data = bundle                handler.sendMessage(message)            &#125;            var thread = Thread(runnable)            thread.start()        &#125;    &#125;&#125;\nHandler클래스의 obtainMessage()를 호출하여 메시지를 생성하비다. 이후 Bundle 객체를 사용하여 전송할 데이터를 추가합니다. 마지막으로 sendMessage()를 호출하면 메시지가 전송됩니다.\n이제 매인 스레드에서 메시지를 수신한 후 UI를 변경하겠습니다.\n12345678910111213class MainActivity : AppCompatActivity() &#123;    val handler = object: Handler() &#123;        override fun handleMessage(msg: Message) &#123;            super.handleMessage(msg)            val bundle = msg.data            val string = bundle.getString(&quot;text&quot;)            string?.let &#123;                textView.text = it            &#125;        &#125;    &#125;&#125;\n버튼을 클릭하면 10초 후 텍스트 뷰가 변경됩니다.\n","dateCreated":"2019-04-02T02:16:30+09:00","dateModified":"2021-06-21T14:12:13+09:00","datePublished":"2019-04-02T02:16:30+09:00","description":"","headline":"[안드로이드] 스레드(Thread)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/02/android/190401-02-thread/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/02/android/190401-02-thread/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   스레드란?스레드(Thread)는 프로세스(Process) 내에서 실행되는 흐름을 말합니다. 일반적으로 하나의 프로세스에는 하나의 기본 스레드가 존재합니다. 이를 매인 스레드라고 합니다.이제 하나의 스레드에서 두 개의 작업을 순차적으로 수행한다고 가정해봅시다">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 스레드(Thread)">
@@ -71,7 +71,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -98,7 +98,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -165,7 +165,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -179,7 +179,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -187,20 +187,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -252,7 +238,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -405,7 +391,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -467,7 +453,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -544,7 +530,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

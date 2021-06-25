@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며다섯 개의 포스트에 걸쳐 제너릭(Generic)에 대해 살펴보고있습니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function) \n제너릭의 와일드 카드(Wildcard) ⬅️ ⬅️ ⬅️\n타입 소거(Type Erasure)\n\n\n와일드 카드와일드 카드(Wildcard)는 제네릭 클래스의 인스턴스를 함수의 인자로 전달할 때, 그 인스턴스의 타입 파라미터를 제한하는 것을 의미합니다. 개념이 어려우므로 예제를 통해 살펴보겠습니다.\n\n와일드 카드(?)와 extends다음과 같은 함수가 있다고 가정합시다. printElements()함수는 인자로 ArrayList타입의 데이터를 입력받습니다. \n123void printElements(ArrayList list) &#123;    // ..&#125;\nPerson클래스를 선언합니다.\n1234567class Person &#123;    String name;    Person(String name) &#123;        this.name = name;    &#125;&#125;\nPerson클래스를 상속하는 Player클래스를 선언합니다.\n12345678class Player extends Person &#123;    String team;    Player(String name, String team) &#123;        super(name);        this.team = team;    &#125;&#125;\n이제 세 개의 ArrayList를 생성하고 printElements(ArrayList list)메소드의 매개변수로 전달해봅시다.\n12345678// 제네릭 클래스 ArrayList의 타입 변수로 String, Person, Player가 모두 올 수 있습니다.ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);printElements(list2);printElements(list3);\n그런데 인자로 전달되는 ArrayList에 저장되는 데이터를 제한할 수 있습니다. 아래와 같이 물음표(?)와 키워드 extends를 사용하면 됩니다. 물음표는 와일드카드(Wild Card)라고 불리며, 타입이 아직 정해지지 않았음을 의미합니다.\n123void printElements(ArrayList&lt;? extends Person&gt; list) &#123;    // ..&#125;\n&lt;? extends Person&gt;는 Person객체 또는 Person객체를 상속한 객체를 데이터로 가지고 있는 ArrayList객체만 함수의 인자로 전달될 수 있음을 의미합니다. 따라서 아래 코드에서 Person객체를 상속하지 않은 list1 때문에 컴파일 에러가 발생합니다.\n1234567ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);   // 에러printElements(list2);printElements(list3);\nsuper키워드 super를 사용하면 특정 클래스와 부모 클래스만 인자로 제한할 수 있습니다.\n1234567891011void printElements(ArrayList&lt;? super Person&gt; list) &#123;    // ..&#125;ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);   // 에러printElements(list2);printElements(list3);\n와일드 카드&lt;?&gt;의 종류\n&lt;? extends T&gt; 와일드 카드의 상한 제한(upper bound) - T와 그 자손들을 구현한 객체들만 타입 매개변수로 올 수 있습니다.\n&lt;? super T&gt; 와일드 카드의 하한 제한(lower bound) - T와 그 조상들을 구현한 객체들만 타입 매개변수로 올 수 있습니다.\n&lt;?&gt; 타입 매개변수에 제한 없습니다.\n\n\n이번 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아봤습니다. 다음 포스트에서는 제너릭의 타입 소거(Type Erasure)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-04T20:16:30+09:00","dateModified":"2021-06-23T20:52:54+09:00","datePublished":"2018-02-04T20:16:30+09:00","description":"","headline":"[자바] 제너릭의 와일드 카드(Wildcard)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/04/java/180204-wildcard/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/02/04/java/180204-wildcard/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며다섯 개의 포스트에 걸쳐 제너릭(Generic)에 대해 살펴보고있습니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function) \n제너릭의 와일드 카드(Wildcard) ⬅️ ⬅️ ⬅️\n타입 소거(Type Erasure)\n\n\n와일드 카드와일드 카드(Wildcard)는 제네릭 클래스의 인스턴스를 함수의 인자로 전달할 때, 그 인스턴스의 타입 파라미터를 제한하는 것을 의미합니다. 개념이 어려우므로 예제를 통해 살펴보겠습니다.\n\n와일드 카드(?)와 extends다음과 같은 함수가 있다고 가정합시다. printElements()함수는 인자로 ArrayList타입의 데이터를 입력받습니다. \n123void printElements(ArrayList list) &#123;    // ..&#125;\nPerson클래스를 선언합니다.\n1234567class Person &#123;    String name;    Person(String name) &#123;        this.name = name;    &#125;&#125;\nPerson클래스를 상속하는 Player클래스를 선언합니다.\n12345678class Player extends Person &#123;    String team;    Player(String name, String team) &#123;        super(name);        this.team = team;    &#125;&#125;\n이제 세 개의 ArrayList를 생성하고 printElements(ArrayList list)메소드의 매개변수로 전달해봅시다.\n12345678// 제네릭 클래스 ArrayList의 타입 변수로 String, Person, Player가 모두 올 수 있습니다.ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);printElements(list2);printElements(list3);\n그런데 인자로 전달되는 ArrayList에 저장되는 데이터를 제한할 수 있습니다. 아래와 같이 물음표(?)와 키워드 extends를 사용하면 됩니다. 물음표는 와일드카드(Wild Card)라고 불리며, 타입이 아직 정해지지 않았음을 의미합니다.\n123void printElements(ArrayList&lt;? extends Person&gt; list) &#123;    // ..&#125;\n&lt;? extends Person&gt;는 Person객체 또는 Person객체를 상속한 객체를 데이터로 가지고 있는 ArrayList객체만 함수의 인자로 전달될 수 있음을 의미합니다. 따라서 아래 코드에서 Person객체를 상속하지 않은 list1 때문에 컴파일 에러가 발생합니다.\n1234567ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);   // 에러printElements(list2);printElements(list3);\nsuper키워드 super를 사용하면 특정 클래스와 부모 클래스만 인자로 제한할 수 있습니다.\n1234567891011void printElements(ArrayList&lt;? super Person&gt; list) &#123;    // ..&#125;ArrayList&lt;String&gt; list1 = new ArrayList&lt;String&gt;();ArrayList&lt;Person&gt; list2 = new ArrayList&lt;Person&gt;();ArrayList&lt;Player&gt; list3 = new ArrayList&lt;Player&gt;();printElements(list1);   // 에러printElements(list2);printElements(list3);\n와일드 카드&lt;?&gt;의 종류\n&lt;? extends T&gt; 와일드 카드의 상한 제한(upper bound) - T와 그 자손들을 구현한 객체들만 타입 매개변수로 올 수 있습니다.\n&lt;? super T&gt; 와일드 카드의 하한 제한(lower bound) - T와 그 조상들을 구현한 객체들만 타입 매개변수로 올 수 있습니다.\n&lt;?&gt; 타입 매개변수에 제한 없습니다.\n\n\n이번 포스트에서는 제너릭의 와일드 카드(Wildcard)에 대해 알아봤습니다. 다음 포스트에서는 제너릭의 타입 소거(Type Erasure)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-04T20:16:30+09:00","dateModified":"2021-06-23T20:52:54+09:00","datePublished":"2018-02-04T20:16:30+09:00","description":"","headline":"[자바] 제너릭의 와일드 카드(Wildcard)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/04/java/180204-wildcard/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/02/04/java/180204-wildcard/","keywords":"Java"}</script>
     <meta name="description" content="자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며다섯 개의 포스트에 걸쳐 제너릭(Generic)에 대해 살펴보고있습니다.  제너릭(Generic)의 개념과 장점 제너릭 클래스(Generic Class) 제너릭 함수(Generic Function)  제너릭의 와일드 카드(Wildcard) ⬅️ ⬅️ ⬅️ 타입 소">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[자바] 제너릭의 와일드 카드(Wildcard)">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -409,7 +395,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -471,7 +457,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -548,7 +534,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

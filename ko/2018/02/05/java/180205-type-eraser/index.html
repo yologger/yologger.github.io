@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며다섯 개의 포스트에 걸쳐 제너릭(Generic)에 대해 살펴보고있습니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function)\n제너릭의 와일드 카드(Wildcard)\n타입 소거(Type Erasure) ⬅️ ⬅️ ⬅️\n\n\n타입 소거타입 소거(Type Erasure)는 제네릭의 타입 파라미터를 구체화된 자료형으로 대체하는 작업을 의미합니다. 자바 컴파일러는 소스 코드를 컴파일할 때 타입 소거를 수행합니다. \n\n\n타입 파라미터가 Unbounded Type인지 Bounded Type인지에 따라 소거 방식이 다릅니다.\n\n\n\n(1) Unbounded Type의 타입소거Unbounded Type은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한하지 않은 것을 의미합니다. &lt;?&gt;, &lt;T&gt; 형태의 타입 파라미터라고 생각하시면 됩니다. \nUnbounded Type 예제를 살펴봅시다.\n123456// 컴파일 전 (타입 소거 전) public class Test&lt;T&gt; &#123;    public void test(T test) &#123;        System.out.println(test.toString());    &#125;&#125;\n컴파일러는 위 코드는 아래와 같이 변환합니다.\n123456// 컴파일 후 (타입 소거 후)public class Test &#123;    public void test(Object test) &#123;        System.out.println(test.toString());    &#125;&#125;\n컴파일러는 타입 파라미터를 소거하고 Unbounded Type인 &lt;?&gt;, &lt;T&gt;를 Object로 대체합니다.\n(2) Bounded Type의 타입소거Bounded Type은 형식 타입 파라미터로 전달되는 실 타입 파라미터의 범위를 제한한 것을 의미합니다. &lt;E extends Something&gt; 형태의 타입 파라미터라고 생각하시면 됩니다.\nBounded Type 예제를 살펴보겠습니다. \n1234567891011public class Test&lt;T extends Observable&lt;T&gt;&gt; &#123;    private T data;    public T getData() &#123;        return data;    &#125;    public void setData(T data) &#123;        this.data = data;    &#125;&#125;\n컴파일러는 위 코드를 아래와 같이 변환합니다.\n1234567891011public class Test &#123;    private Observable data;    public Observable getData() &#123;        return data;    &#125;    public void setData(Observable data) &#123;        this.data = data;    &#125;&#125;\n타입 파라미터를 포함한 Observable&lt;T&gt;는 Observable로 소거되었습니다. &lt;E extends Something&gt;은 Object가 아닌 Something로 대치되는 것입니다.\n\n마치며다섯 개의 포스트에서 제너릭(Generic)에 대해 알아보았습니다. 다음 포스트에서는 리플렉션(Reflection)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-05T20:16:30+09:00","dateModified":"2021-06-23T18:46:29+09:00","datePublished":"2018-02-05T20:16:30+09:00","description":"","headline":"[자바] 제너릭과 타입 소거(Type Erasure)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며다섯 개의 포스트에 걸쳐 제너릭(Generic)에 대해 살펴보고있습니다.\n\n제너릭(Generic)의 개념과 장점\n제너릭 클래스(Generic Class)\n제너릭 함수(Generic Function)\n제너릭의 와일드 카드(Wildcard)\n타입 소거(Type Erasure) ⬅️ ⬅️ ⬅️\n\n\n타입 소거타입 소거(Type Erasure)는 제네릭의 타입 파라미터를 구체화된 자료형으로 대체하는 작업을 의미합니다. 자바 컴파일러는 소스 코드를 컴파일할 때 타입 소거를 수행합니다. \n\n\n타입 파라미터가 Unbounded Type인지 Bounded Type인지에 따라 소거 방식이 다릅니다.\n\n\n\n(1) Unbounded Type의 타입소거Unbounded Type은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한하지 않은 것을 의미합니다. &lt;?&gt;, &lt;T&gt; 형태의 타입 파라미터라고 생각하시면 됩니다. \nUnbounded Type 예제를 살펴봅시다.\n123456// 컴파일 전 (타입 소거 전) public class Test&lt;T&gt; &#123;    public void test(T test) &#123;        System.out.println(test.toString());    &#125;&#125;\n컴파일러는 위 코드는 아래와 같이 변환합니다.\n123456// 컴파일 후 (타입 소거 후)public class Test &#123;    public void test(Object test) &#123;        System.out.println(test.toString());    &#125;&#125;\n컴파일러는 타입 파라미터를 소거하고 Unbounded Type인 &lt;?&gt;, &lt;T&gt;를 Object로 대체합니다.\n(2) Bounded Type의 타입소거Bounded Type은 형식 타입 파라미터로 전달되는 실 타입 파라미터의 범위를 제한한 것을 의미합니다. &lt;E extends Something&gt; 형태의 타입 파라미터라고 생각하시면 됩니다.\nBounded Type 예제를 살펴보겠습니다. \n1234567891011public class Test&lt;T extends Observable&lt;T&gt;&gt; &#123;    private T data;    public T getData() &#123;        return data;    &#125;    public void setData(T data) &#123;        this.data = data;    &#125;&#125;\n컴파일러는 위 코드를 아래와 같이 변환합니다.\n1234567891011public class Test &#123;    private Observable data;    public Observable getData() &#123;        return data;    &#125;    public void setData(Observable data) &#123;        this.data = data;    &#125;&#125;\n타입 파라미터를 포함한 Observable&lt;T&gt;는 Observable로 소거되었습니다. &lt;E extends Something&gt;은 Object가 아닌 Something로 대치되는 것입니다.\n\n마치며다섯 개의 포스트에서 제너릭(Generic)에 대해 알아보았습니다. 다음 포스트에서는 리플렉션(Reflection)에 대해 알아보겠습니다.\n","dateCreated":"2018-02-05T20:16:30+09:00","dateModified":"2021-06-23T18:46:29+09:00","datePublished":"2018-02-05T20:16:30+09:00","description":"","headline":"[자바] 제너릭과 타입 소거(Type Erasure)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/02/05/java/180205-type-eraser/","keywords":"Java"}</script>
     <meta name="description" content="자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며다섯 개의 포스트에 걸쳐 제너릭(Generic)에 대해 살펴보고있습니다.  제너릭(Generic)의 개념과 장점 제너릭 클래스(Generic Class) 제너릭 함수(Generic Function) 제너릭의 와일드 카드(Wildcard) 타입 소거(Type Era">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[자바] 제너릭과 타입 소거(Type Erasure)">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -407,7 +393,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -469,7 +455,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -546,7 +532,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

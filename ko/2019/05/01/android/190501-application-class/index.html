@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nApplication 클래스Application클래스는 앱의 실행과 동시에 생성되는 객체입니다. Application클래스는 메모리에 오직 하나의 인스턴스로만 존재하는 싱글톤 객체며, 주로 컴포넌트 사이에서 데이터를 공유하는데 사용할 수 있습니다.\n사용 방법우선 Application클래스를 상속하는 서브클래스를 정의합니다.\n123456789101112131415161718192021// App.javapackage com.yologger.exampleimport android.app.Application;import android.content.res.Configuration;public class App extends Application &#123;        public String url = &quot;https://www.naver.com&quot;;    @Override    public void onCreate() &#123;        super.onCreate();    &#125;    @Override    public void onConfigurationChanged(Configuration newConfig) &#123;        super.onConfigurationChanged(newConfig);    &#125;&#125;\n이제 AndroidManifest.xml에 등록합니다.\n123456789&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;package=&quot;com.yologger.example&quot;&gt;    &lt;application        android:name=&quot;com.yologger.example.App&quot;&gt;            &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 getApplication()메소드를 사용하면 어느 컴포넌트에서든 공유 클래스에 접근할 수 있습니다.\n123456789101112131415// MainActivity.javapublic class MainActivity extends Activity &#123;    private App app;        @Override    protected void onCreate(Bundle savedInstanceState) &#123;        super.onCreate(savedInstanceState);        setContentView(R.layout.activity_main);        app = (App)getApplication();        String apiUrl = app.url    &#125;&#125;","dateCreated":"2019-05-01T20:16:30+09:00","dateModified":"2021-06-21T14:12:46+09:00","datePublished":"2019-05-01T20:16:30+09:00","description":"","headline":"[안드로이드] Application 클래스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/05/01/android/190501-application-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/05/01/android/190501-application-class/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nApplication 클래스Application클래스는 앱의 실행과 동시에 생성되는 객체입니다. Application클래스는 메모리에 오직 하나의 인스턴스로만 존재하는 싱글톤 객체며, 주로 컴포넌트 사이에서 데이터를 공유하는데 사용할 수 있습니다.\n사용 방법우선 Application클래스를 상속하는 서브클래스를 정의합니다.\n123456789101112131415161718192021// App.javapackage com.yologger.exampleimport android.app.Application;import android.content.res.Configuration;public class App extends Application &#123;        public String url = &quot;https://www.naver.com&quot;;    @Override    public void onCreate() &#123;        super.onCreate();    &#125;    @Override    public void onConfigurationChanged(Configuration newConfig) &#123;        super.onConfigurationChanged(newConfig);    &#125;&#125;\n이제 AndroidManifest.xml에 등록합니다.\n123456789&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;package=&quot;com.yologger.example&quot;&gt;    &lt;application        android:name=&quot;com.yologger.example.App&quot;&gt;            &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 getApplication()메소드를 사용하면 어느 컴포넌트에서든 공유 클래스에 접근할 수 있습니다.\n123456789101112131415// MainActivity.javapublic class MainActivity extends Activity &#123;    private App app;        @Override    protected void onCreate(Bundle savedInstanceState) &#123;        super.onCreate(savedInstanceState);        setContentView(R.layout.activity_main);        app = (App)getApplication();        String apiUrl = app.url    &#125;&#125;","dateCreated":"2019-05-01T20:16:30+09:00","dateModified":"2021-06-21T14:12:46+09:00","datePublished":"2019-05-01T20:16:30+09:00","description":"","headline":"[안드로이드] Application 클래스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/05/01/android/190501-application-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/05/01/android/190501-application-class/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  Application 클래스Application클래스는 앱의 실행과 동시에 생성되는 객체입니다. Application클래스는 메모리에 오직 하나의 인스턴스로만 존재하는 싱글톤 객체며, 주로 컴포넌트 사이에서 데이터를 공유하는데 사용할 수 있습니다. 사용 방법">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] Application 클래스">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -383,7 +369,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -445,7 +431,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -522,7 +508,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

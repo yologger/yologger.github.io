@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 네 개의 포스트를 통해 코틀린의 null 처리 방법에 대해 알아보려고 합니다.\n\nNotNull과 Nullable ⬅️ ⬅️ ⬅️\nNull Check\n엘비스 연산자(Elvis Operator)\n스코프 함수를 통한 Null Check\n\n\nNotNull 타입코틀린은 변수를 초기화하지 않으면 컴파일 자체가 안됩니다.\n123var name: String// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.// Property must be initialized or be abstract\n클래스의 멤버변수 역시 초기화하지 않으면 컴파일 자체가 안됩니다.\n1234class Person &#123;    private var name: String    // Property must be initialized or be abstract    private var nation: String  // Property must be initialized or be abstract&#125;\nNotNull 타입의 변수는 null로 초기화할 수도 없습니다.\n123var name: String = null\t// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.// Null can not be a value of a non-null type String\n1234class Person &#123;    private var name: String = null     // Null can not be a value of a non-null type String    private var nation: String = null   // Null can not be a value of a non-null type String&#125;\nNullable 타입코틀린에서 null을 할당하기 위해서는 변수를 Nullable타입으로 선언해야합니다. 타입 뒤에 물음표(?)를 붙이면 됩니다.\n123456var name: String? = nullclass Person &#123;    private var name: String? = null    private var nation: String? = null&#125;\n물론 Nullable타입이라도 초기화하지 않으면 컴파일 자체가 되지 않습니다.\n12var name: String?   // 다음과 같은 에러가 발생합니다.// Property must be initialized or be abstract\n1234class Person &#123;    private var name: String?       // Property must be initialized or be abstract    private var nation: String?     // Property must be initialized or be abstract&#125;\n\n마치며이번 포스트에서는 NotNull과 Nullable에 대해 알아봤습니다. 다음 포스트에서는 코틀린의 Null Check 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-01-19T20:16:30+09:00","dateModified":"2021-06-23T11:04:51+09:00","datePublished":"2019-01-19T20:16:30+09:00","description":"","headline":"[코틀린] null 처리 - (1) NotNull과 Nullable","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/19/kotlin/190119-null-1/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/19/kotlin/190119-null-1/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 네 개의 포스트를 통해 코틀린의 null 처리 방법에 대해 알아보려고 합니다.\n\nNotNull과 Nullable ⬅️ ⬅️ ⬅️\nNull Check\n엘비스 연산자(Elvis Operator)\n스코프 함수를 통한 Null Check\n\n\nNotNull 타입코틀린은 변수를 초기화하지 않으면 컴파일 자체가 안됩니다.\n123var name: String// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.// Property must be initialized or be abstract\n클래스의 멤버변수 역시 초기화하지 않으면 컴파일 자체가 안됩니다.\n1234class Person &#123;    private var name: String    // Property must be initialized or be abstract    private var nation: String  // Property must be initialized or be abstract&#125;\nNotNull 타입의 변수는 null로 초기화할 수도 없습니다.\n123var name: String = null\t// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.// Null can not be a value of a non-null type String\n1234class Person &#123;    private var name: String = null     // Null can not be a value of a non-null type String    private var nation: String = null   // Null can not be a value of a non-null type String&#125;\nNullable 타입코틀린에서 null을 할당하기 위해서는 변수를 Nullable타입으로 선언해야합니다. 타입 뒤에 물음표(?)를 붙이면 됩니다.\n123456var name: String? = nullclass Person &#123;    private var name: String? = null    private var nation: String? = null&#125;\n물론 Nullable타입이라도 초기화하지 않으면 컴파일 자체가 되지 않습니다.\n12var name: String?   // 다음과 같은 에러가 발생합니다.// Property must be initialized or be abstract\n1234class Person &#123;    private var name: String?       // Property must be initialized or be abstract    private var nation: String?     // Property must be initialized or be abstract&#125;\n\n마치며이번 포스트에서는 NotNull과 Nullable에 대해 알아봤습니다. 다음 포스트에서는 코틀린의 Null Check 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-01-19T20:16:30+09:00","dateModified":"2021-06-23T11:04:51+09:00","datePublished":"2019-01-19T20:16:30+09:00","description":"","headline":"[코틀린] null 처리 - (1) NotNull과 Nullable","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/19/kotlin/190119-null-1/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/19/kotlin/190119-null-1/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며앞으로 네 개의 포스트를 통해 코틀린의 null 처리 방법에 대해 알아보려고 합니다.  NotNull과 Nullable ⬅️ ⬅️ ⬅️ Null Check 엘비스 연산자(Elvis Operator) 스코프 함수를 통한 Null Check   NotNull 타">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] null 처리 - (1) NotNull과 Nullable">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -399,7 +385,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -461,7 +447,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -538,7 +524,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

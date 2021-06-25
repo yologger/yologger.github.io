@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nADB(Android Debug Bridge)를 사용하면 현재 앱에서 실행 중인 모든 서비스를 확인할 수 있습니다.\n우선 adb shell 명령어를 사용하여 ADB 쉘에 접속합니다.\n1$ adb shell \n이제 dumpsys 명령어를 사용하면 모든 서비스를 확인할 수 있습니다.\n1&gt; dumpsys \n다음과 같이 호출할 수도 있습니다.\n1$ adb shell dumpsys \n현재 기기에서 실행 중인 태스크와 액티비티만을 확인할 수 있습니다.\n1$ adb shell dumpsys activity activities\n특정 앱의 태스크와 액티비티만 확인할 수도 있습니다.\n123$ adb shell dumpsys activity activities | grep -i &quot;your_package_name&quot; | grep -i Hist$ adb shell dumpsys activity activities | grep -i com.yologger.activity | grep -i Hist","dateCreated":"2019-01-18T20:16:30+09:00","dateModified":"2021-06-21T14:10:42+09:00","datePublished":"2019-01-18T20:16:30+09:00","description":"","headline":"[안드로이드] 액티비티 스택(Activity Stack) 확인하는 방법","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/18/android/190118-check-activity_stack/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/18/android/190118-check-activity_stack/","keywords":"Android, Module"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nADB(Android Debug Bridge)를 사용하면 현재 앱에서 실행 중인 모든 서비스를 확인할 수 있습니다.\n우선 adb shell 명령어를 사용하여 ADB 쉘에 접속합니다.\n1$ adb shell \n이제 dumpsys 명령어를 사용하면 모든 서비스를 확인할 수 있습니다.\n1&gt; dumpsys \n다음과 같이 호출할 수도 있습니다.\n1$ adb shell dumpsys \n현재 기기에서 실행 중인 태스크와 액티비티만을 확인할 수 있습니다.\n1$ adb shell dumpsys activity activities\n특정 앱의 태스크와 액티비티만 확인할 수도 있습니다.\n123$ adb shell dumpsys activity activities | grep -i &quot;your_package_name&quot; | grep -i Hist$ adb shell dumpsys activity activities | grep -i com.yologger.activity | grep -i Hist","dateCreated":"2019-01-18T20:16:30+09:00","dateModified":"2021-06-21T14:10:42+09:00","datePublished":"2019-01-18T20:16:30+09:00","description":"","headline":"[안드로이드] 액티비티 스택(Activity Stack) 확인하는 방법","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/18/android/190118-check-activity_stack/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/18/android/190118-check-activity_stack/","keywords":"Android, Module"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  ADB(Android Debug Bridge)를 사용하면 현재 앱에서 실행 중인 모든 서비스를 확인할 수 있습니다. 우선 adb shell 명령어를 사용하여 ADB 쉘에 접속합니다. 1$ adb shell  이제 dumpsys 명령어를 사용하면 모든 서비스를">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 액티비티 스택(Activity Stack) 확인하는 방법">
@@ -65,7 +65,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -92,7 +92,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -159,7 +159,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -173,7 +173,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -181,20 +181,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -246,7 +232,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -388,7 +374,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -450,7 +436,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -527,7 +513,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

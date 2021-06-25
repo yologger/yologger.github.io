@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며5개의 포스트를 통해 인텐트(Intent)에 대해 알아보고 있습니다.\n\n명시적 인텐트와 화면 전환\n액티비티 사이의 데이터 전달\n암시적 인텐트 ⬅️ ⬅️ ⬅️\n인텐트 필터\n브로드캐스트 인텐트와 브로드케스트 리시버\n\n\n인텐트(Intent)란?인텐트는 안드로이드 시스템에 특정 작업을 요청하는데 사용됩니다. 크게 5가지 용도로 사용됩니다.\n\n같은 어플리케이션의 다른 액티비티 실행\n다른 어플리케이션의 액티비티 실행\n데이터 전송\n브로드캐스트 전달\n서비스 실행\n\n인텐트는 크게 명시적 인텐트와 암시적 인텐트 두 종류가 있습니다.\n암시적 인텐트암시적 인텐트는 수행할 액션과 실행할 액티비티에 의해 처리되는 데이터 및 데이터 타입을 지정하여 다른 앱의 액티비티를 실행시킵니다. 실행할 액티비티에 의해 처리되는 데이터 및 데이터 타입은 Uri 클래스를 사용하여 정의합니다.\n(1) 전화 앱 예제우선 전화번호 데이터를 처리할 수 있는 앱을 실행해보겠습니다. 아래 코드를 살펴봅시다.\n12345678910val intent = Intent()// 액션 설정intent.action = Intent.ACTION_DIAL// 수신 액티비티에 의해 처리될 데이터 설정intent.data = Uri.parse(&quot;tel:02-111-1111&quot;)// 액티비티 실행startActivity(intent)\nIntent.ACTION_DIAL가 액션이고 Uri.parse(&quot;tel:02-111-1111&quot;)가 실행할 액티비티에 의해 처리되는 데이터 및 데이터의 타입입니다. 안드로이드 시스템은 설치된 앱을 살펴보고 Intent.ACTION_DIAL 액션과 tel:02-111-1111 데이터를 처리할 수 있는 앱을 실행합니다. \n위 구문은 아래와 같이 단축할 수 있습니다.\n12val intent = Intent(Intent.ACTION_DIAL, Uri.parse(&quot;tel:02-111-1111&quot;))startActivity(intent)\n전화 앱은 Intent.ACTION_DIAL 액션과 Uri 데이터을 처리할 수 있는 앱입니다.따라서 다음과 같이 전화 앱이 실행되고, 데이터가 처리되어 화면에 출력됩니다.\n(2) 웹 브라우저 앱 예제예제를 하나 더 살펴봅시다. 웹 브라우저를 실행시키는 암시적 인텐트 예제입니다. Intent.ACTION_VIEW가 액션이고 Uri.parse(&quot;http://www.google.com&quot;)가 실행할 액티비티에 의해 처리되는 데이터 및 데이터 타입입니다. \n12val intent = Intent(Intent.ACTION_VIEW, Uri.parse(&quot;http://www.google.com&quot;))startActivity(intent)\n이제 앱을 실행하면 다음과 같은 대화상자가 나옵니다. 액션과 데이터를 처리할 수 있는 앱이 2개 이상인 경우 다음과 같이 대화상자가 나오게 됩니다.인텐트를 처리할 수 있는 앱이 없는 경우 안드로이드 시스템은 ActivityNotFoundException을 발생시킵니다. 따라서 다음과 같이 예외 처리를 할 수 있습니다.\n12345try &#123;    startActivity(intent)&#125; catch (e: ActivityNotFoundException) &#123;    // 예외 처리&#125;\n(3) 오디오 플레이어 앱 예제버튼을 누르면 오디오 플레이어 앱을 실행하는 예제입니다.안드로이드 시스템에는 현재 2개의 오디오 플레이어 앱이 설치되어 있습니다.Intent.createChooser()메소드를 사용하면 오디오 플레이어를 처리할 수 있는 앱이 여러 개일 때 선택할 수 있는 대화상자를 표시할 수 있습니다.\n123456789101112131415161718192021class MainActivity : AppCompatActivity() &#123;    val button: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.button) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button.setOnClickListener &#123;            var intent = Intent(Intent.ACTION_VIEW)            var uri = Uri.parse(&quot;content:///sdcard/Download/music.mp3&quot;)            intent.setDataAndType(uri, &quot;audio/mp3&quot;)            // Chooser 생성            val chooser = Intent.createChooser(intent, &quot;Open with&quot;)            startActivity(chooser)        &#125;    &#125;&#125;\n이제 버튼을 누르면 다음과 같이 대화창이 나옵니다.\n마치며이번 포스트에서는 암시적 인텐트에 대해 알아봤습니다. 그런데 전화 앱, 브라우저 앱, 오디오 앱은 인텐트가 자신과 관련되었는지 어떻게 식별할 수 있을까요? 이때 인텐트 필터를 사용합니다. 다음 포스트에서는 인텐트 필터(Intent filter)에 대해 알아보겠습니다.\n","dateCreated":"2019-03-03T20:16:30+09:00","dateModified":"2021-06-21T14:11:30+09:00","datePublished":"2019-03-03T20:16:30+09:00","description":"","headline":"[안드로이드] 인텐트 - (3) 암시적 인텐트","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/03/03/android/190303-implicit-intent/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/03/03/android/190303-implicit-intent/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며5개의 포스트를 통해 인텐트(Intent)에 대해 알아보고 있습니다.\n\n명시적 인텐트와 화면 전환\n액티비티 사이의 데이터 전달\n암시적 인텐트 ⬅️ ⬅️ ⬅️\n인텐트 필터\n브로드캐스트 인텐트와 브로드케스트 리시버\n\n\n인텐트(Intent)란?인텐트는 안드로이드 시스템에 특정 작업을 요청하는데 사용됩니다. 크게 5가지 용도로 사용됩니다.\n\n같은 어플리케이션의 다른 액티비티 실행\n다른 어플리케이션의 액티비티 실행\n데이터 전송\n브로드캐스트 전달\n서비스 실행\n\n인텐트는 크게 명시적 인텐트와 암시적 인텐트 두 종류가 있습니다.\n암시적 인텐트암시적 인텐트는 수행할 액션과 실행할 액티비티에 의해 처리되는 데이터 및 데이터 타입을 지정하여 다른 앱의 액티비티를 실행시킵니다. 실행할 액티비티에 의해 처리되는 데이터 및 데이터 타입은 Uri 클래스를 사용하여 정의합니다.\n(1) 전화 앱 예제우선 전화번호 데이터를 처리할 수 있는 앱을 실행해보겠습니다. 아래 코드를 살펴봅시다.\n12345678910val intent = Intent()// 액션 설정intent.action = Intent.ACTION_DIAL// 수신 액티비티에 의해 처리될 데이터 설정intent.data = Uri.parse(&quot;tel:02-111-1111&quot;)// 액티비티 실행startActivity(intent)\nIntent.ACTION_DIAL가 액션이고 Uri.parse(&quot;tel:02-111-1111&quot;)가 실행할 액티비티에 의해 처리되는 데이터 및 데이터의 타입입니다. 안드로이드 시스템은 설치된 앱을 살펴보고 Intent.ACTION_DIAL 액션과 tel:02-111-1111 데이터를 처리할 수 있는 앱을 실행합니다. \n위 구문은 아래와 같이 단축할 수 있습니다.\n12val intent = Intent(Intent.ACTION_DIAL, Uri.parse(&quot;tel:02-111-1111&quot;))startActivity(intent)\n전화 앱은 Intent.ACTION_DIAL 액션과 Uri 데이터을 처리할 수 있는 앱입니다.따라서 다음과 같이 전화 앱이 실행되고, 데이터가 처리되어 화면에 출력됩니다.\n(2) 웹 브라우저 앱 예제예제를 하나 더 살펴봅시다. 웹 브라우저를 실행시키는 암시적 인텐트 예제입니다. Intent.ACTION_VIEW가 액션이고 Uri.parse(&quot;http://www.google.com&quot;)가 실행할 액티비티에 의해 처리되는 데이터 및 데이터 타입입니다. \n12val intent = Intent(Intent.ACTION_VIEW, Uri.parse(&quot;http://www.google.com&quot;))startActivity(intent)\n이제 앱을 실행하면 다음과 같은 대화상자가 나옵니다. 액션과 데이터를 처리할 수 있는 앱이 2개 이상인 경우 다음과 같이 대화상자가 나오게 됩니다.인텐트를 처리할 수 있는 앱이 없는 경우 안드로이드 시스템은 ActivityNotFoundException을 발생시킵니다. 따라서 다음과 같이 예외 처리를 할 수 있습니다.\n12345try &#123;    startActivity(intent)&#125; catch (e: ActivityNotFoundException) &#123;    // 예외 처리&#125;\n(3) 오디오 플레이어 앱 예제버튼을 누르면 오디오 플레이어 앱을 실행하는 예제입니다.안드로이드 시스템에는 현재 2개의 오디오 플레이어 앱이 설치되어 있습니다.Intent.createChooser()메소드를 사용하면 오디오 플레이어를 처리할 수 있는 앱이 여러 개일 때 선택할 수 있는 대화상자를 표시할 수 있습니다.\n123456789101112131415161718192021class MainActivity : AppCompatActivity() &#123;    val button: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.button) &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button.setOnClickListener &#123;            var intent = Intent(Intent.ACTION_VIEW)            var uri = Uri.parse(&quot;content:///sdcard/Download/music.mp3&quot;)            intent.setDataAndType(uri, &quot;audio/mp3&quot;)            // Chooser 생성            val chooser = Intent.createChooser(intent, &quot;Open with&quot;)            startActivity(chooser)        &#125;    &#125;&#125;\n이제 버튼을 누르면 다음과 같이 대화창이 나옵니다.\n마치며이번 포스트에서는 암시적 인텐트에 대해 알아봤습니다. 그런데 전화 앱, 브라우저 앱, 오디오 앱은 인텐트가 자신과 관련되었는지 어떻게 식별할 수 있을까요? 이때 인텐트 필터를 사용합니다. 다음 포스트에서는 인텐트 필터(Intent filter)에 대해 알아보겠습니다.\n","dateCreated":"2019-03-03T20:16:30+09:00","dateModified":"2021-06-21T14:11:30+09:00","datePublished":"2019-03-03T20:16:30+09:00","description":"","headline":"[안드로이드] 인텐트 - (3) 암시적 인텐트","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/03/03/android/190303-implicit-intent/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/03/03/android/190303-implicit-intent/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며5개의 포스트를 통해 인텐트(Intent)에 대해 알아보고 있습니다.  명시적 인텐트와 화면 전환 액티비티 사이의 데이터 전달 암시적 인텐트 ⬅️ ⬅️ ⬅️ 인텐트 필터 브로드캐스트 인텐트와 브로드케스트 리시버   인텐트(Intent)란?인텐트는 안드">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 인텐트 - (3) 암시적 인텐트">
@@ -71,7 +71,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -98,7 +98,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -165,7 +165,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -179,7 +179,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -187,20 +187,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -252,7 +238,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -417,7 +403,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -479,7 +465,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -556,7 +542,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

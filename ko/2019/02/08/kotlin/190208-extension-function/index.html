@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 리플렉션(Reflection)에 대해 알아봤습니다. 이번 포스트에서는 확장 함수(Extension Function)에 대해 알아보겠습니다. \n\n확장 함수확장 함수(Extension Function)는 기존에 정의된 클래스에 함수를 추가하는 것입니다. \n1234567891011121314151617class Person constructor(val name: String, val age: Int) &#123;    fun printName() &#123;        println(&quot;Name: $&#123;name&#125;&quot;)    &#125;    fun printAge() &#123;        println(&quot;Age: $&#123;age&#125;&quot;)    &#125;&#125;fun Person.printInformation() &#123;    print(&quot;$&#123;name&#125; is $&#123;age&#125; years old.&quot;)&#125;val person: Person = Person(&quot;Paul&quot;, 35)person.printInformation()\n보통 자바 API나 다른 사람이 만든 라이브러리처럼 코드를 직접 변경하기 어려운 경우 확장 함수을 사용합니다. 다음은 Int클래스에 홀수인지 짝수인지 판단해주는 함수를 추가하는 예제입니다.\n12345678910fun Int.isEven() = this % 2 == 0fun Int.isOdd() &#123;    return this % 2 !== 0&#125;\tval age: Int = 5\tprintln(a.isEven())   // falseprintln(a.isOdd())    // true\n\n마치며이번 포스트에서는 확장 함수(Extension Function)에 대해 알아봤습니다. 다음 포스트에서는 중위 함수(Infix Function)에 대해 알아보겠습니다. \n","dateCreated":"2019-02-08T20:16:30+09:00","dateModified":"2021-06-23T13:01:12+09:00","datePublished":"2019-02-08T20:16:30+09:00","description":"","headline":"[코틀린] 확장 함수(Extension Function)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/08/kotlin/190208-extension-function/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/08/kotlin/190208-extension-function/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 리플렉션(Reflection)에 대해 알아봤습니다. 이번 포스트에서는 확장 함수(Extension Function)에 대해 알아보겠습니다. \n\n확장 함수확장 함수(Extension Function)는 기존에 정의된 클래스에 함수를 추가하는 것입니다. \n1234567891011121314151617class Person constructor(val name: String, val age: Int) &#123;    fun printName() &#123;        println(&quot;Name: $&#123;name&#125;&quot;)    &#125;    fun printAge() &#123;        println(&quot;Age: $&#123;age&#125;&quot;)    &#125;&#125;fun Person.printInformation() &#123;    print(&quot;$&#123;name&#125; is $&#123;age&#125; years old.&quot;)&#125;val person: Person = Person(&quot;Paul&quot;, 35)person.printInformation()\n보통 자바 API나 다른 사람이 만든 라이브러리처럼 코드를 직접 변경하기 어려운 경우 확장 함수을 사용합니다. 다음은 Int클래스에 홀수인지 짝수인지 판단해주는 함수를 추가하는 예제입니다.\n12345678910fun Int.isEven() = this % 2 == 0fun Int.isOdd() &#123;    return this % 2 !== 0&#125;\tval age: Int = 5\tprintln(a.isEven())   // falseprintln(a.isOdd())    // true\n\n마치며이번 포스트에서는 확장 함수(Extension Function)에 대해 알아봤습니다. 다음 포스트에서는 중위 함수(Infix Function)에 대해 알아보겠습니다. \n","dateCreated":"2019-02-08T20:16:30+09:00","dateModified":"2021-06-23T13:01:12+09:00","datePublished":"2019-02-08T20:16:30+09:00","description":"","headline":"[코틀린] 확장 함수(Extension Function)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/08/kotlin/190208-extension-function/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/08/kotlin/190208-extension-function/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 리플렉션(Reflection)에 대해 알아봤습니다. 이번 포스트에서는 확장 함수(Extension Function)에 대해 알아보겠습니다.   확장 함수확장 함수(Extension Function)는 기존에 정의된 클래스에 함수를 추가하는">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] 확장 함수(Extension Function)">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -385,7 +371,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -447,7 +433,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -524,7 +510,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n설정 앱설정(Settings) 앱에서는 안드로이드와 관련된 환경 설정을 할 수 있습니다.설정 &gt; 어플리케이션에서는 설치된 어플리케이션을 확인할 수 있습니다.특정 앱을 선택하고 권한을 클릭하면 앱이 필요로 하는 권한을 확인할 수 있습니다.ALLOWED 항목에는 허용된 권한이 포함됩니다.DENIED 항목에는 거부된 권한이 포함됩니다.DENIED 항목의 권한을 선택하면 다음과 같이 권한을 부여할 수 있습니다.\n액티비티에서 설정 앱 시작하기인텐트를 사용하면 액티비티에서 설정 앱을 바로 시작할 수 있습니다. \n버튼을 누르면 다음과 같이 설정 앱을 바로 시작할 수 있습니다.\n123456789101112131415class MainActivity : AppCompatActivity() &#123;    private val buttonOpenSettings: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn_open_settings) &#125;    private val REQUEST_CODE = 0    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        buttonOpenSettings.setOnClickListener &#123;            val intent = Intent(android.provider.Settings.ACTION_SETTINGS)            startActivityForResult(intent, REQUEST_CODE)        &#125;    &#125;&#125;\n설정 &gt; 위치로 이동할 수도 있습니다. \n12val intent = Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)startActivityForResult(intent, REQUEST_CODE)\n설정 &gt; 앱으로 이동할 수도 있습니다. \n12val intent = Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS)startActivityForResult(intent, REQUEST_CODE)\n설정 &gt; 앱 &gt; 특정 앱으로 이동할 수도 있습니다. 이 때는 인텐트에 패키지 이름을 추가해야합니다.\n123val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)intent.data = Uri.parse(&quot;package:$&#123;packageName&#125;&quot;)startActivityForResult(intent, REQUEST_CODE)\n\n","dateCreated":"2019-02-03T20:16:30+09:00","dateModified":"2021-06-21T14:11:02+09:00","datePublished":"2019-02-03T20:16:30+09:00","description":"","headline":"[안드로이드] 권한 - (3) 액티비티에서 설정 앱 시작하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/03/android/190203-open-settings/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/03/android/190203-open-settings/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n설정 앱설정(Settings) 앱에서는 안드로이드와 관련된 환경 설정을 할 수 있습니다.설정 &gt; 어플리케이션에서는 설치된 어플리케이션을 확인할 수 있습니다.특정 앱을 선택하고 권한을 클릭하면 앱이 필요로 하는 권한을 확인할 수 있습니다.ALLOWED 항목에는 허용된 권한이 포함됩니다.DENIED 항목에는 거부된 권한이 포함됩니다.DENIED 항목의 권한을 선택하면 다음과 같이 권한을 부여할 수 있습니다.\n액티비티에서 설정 앱 시작하기인텐트를 사용하면 액티비티에서 설정 앱을 바로 시작할 수 있습니다. \n버튼을 누르면 다음과 같이 설정 앱을 바로 시작할 수 있습니다.\n123456789101112131415class MainActivity : AppCompatActivity() &#123;    private val buttonOpenSettings: Button by lazy &#123; findViewById&lt;Button&gt;(R.id.activity_main_btn_open_settings) &#125;    private val REQUEST_CODE = 0    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        buttonOpenSettings.setOnClickListener &#123;            val intent = Intent(android.provider.Settings.ACTION_SETTINGS)            startActivityForResult(intent, REQUEST_CODE)        &#125;    &#125;&#125;\n설정 &gt; 위치로 이동할 수도 있습니다. \n12val intent = Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)startActivityForResult(intent, REQUEST_CODE)\n설정 &gt; 앱으로 이동할 수도 있습니다. \n12val intent = Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS)startActivityForResult(intent, REQUEST_CODE)\n설정 &gt; 앱 &gt; 특정 앱으로 이동할 수도 있습니다. 이 때는 인텐트에 패키지 이름을 추가해야합니다.\n123val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)intent.data = Uri.parse(&quot;package:$&#123;packageName&#125;&quot;)startActivityForResult(intent, REQUEST_CODE)\n\n","dateCreated":"2019-02-03T20:16:30+09:00","dateModified":"2021-06-21T14:11:02+09:00","datePublished":"2019-02-03T20:16:30+09:00","description":"","headline":"[안드로이드] 권한 - (3) 액티비티에서 설정 앱 시작하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/03/android/190203-open-settings/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/03/android/190203-open-settings/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  설정 앱설정(Settings) 앱에서는 안드로이드와 관련된 환경 설정을 할 수 있습니다.설정 &gt; 어플리케이션에서는 설치된 어플리케이션을 확인할 수 있습니다.특정 앱을 선택하고 권한을 클릭하면 앱이 필요로 하는 권한을 확인할 수 있습니다.ALLOWED 항">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 권한 - (3) 액티비티에서 설정 앱 시작하기">
@@ -75,7 +75,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -102,7 +102,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -169,7 +169,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -183,7 +183,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -191,20 +191,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -256,7 +242,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -399,7 +385,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -461,7 +447,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -538,7 +524,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

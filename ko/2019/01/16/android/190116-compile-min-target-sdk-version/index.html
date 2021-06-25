@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 런타임에서 SDK 버전을 확인하는 방법에 대해 알아봤습니다. 이번 포스트에서는 compileSdkVersion, minSdkVersion, targetSdkVersion의 차이점에 대해 알아보겠습니다.\n(1) compileSdkVersion안드로이드 스튜디오에서 앱을 빌드할 때 어떤 SDK 버전을 사용할 것인지 지정합니다. 즉 comileSdkVersion은 지원할 수 있는 가장 높은 버전을 의미합니다.\n123456// 모듈 수준의 build.gradleandroid &#123;    compileSdkVersion 30    // ...&#125;\n안드로이드 스튜디오의 SDK Manager에 해당 SDK가 설치되어있어야 합니다.\n(2) minSdkVersion최소 지원 SDK 버전을 의미합니다. 즉 해당 버전 이하의 안드로이드 운영체제가 설치된 기기에서는 앱을 설치할 수 없습니다.\n123456789android &#123;    compileSdkVersion 30    // ...    defaultConfig &#123;        minSdkVersion 25        // ...    &#125;&#125;\n(3) targetSdkVersion앱을 실제 기기에 설치하고 실행할 때 어떤 SDK 버전을 사용할지 지정합니다. 기능은 똑같아도 SDK 버전에 따라 다르게 동작하는 API도 있습니다. 이때는 targetSdkVersion 값에 맞는 API를 사용하게 됩니다.\n12345678910android &#123;    compileSdkVersion 30    // ...    defaultConfig &#123;        minSdkVersion 25        targetSdkVersion 27        // ...    &#125;&#125;\ntargetSdkVersion을 지정하지 않으면 기본 값은 minSdkVersion과 동일하게 적용됩니다. \n예제모듈 수준의 build.gradle파일에서 다음과 같이 SDK 버전 설정을 설정합니다.\n1234567891011// 모듈 수준의 build.gradleandroid &#123;    compileSdkVersion 30    // ...    defaultConfig &#123;        minSdkVersion 25        targetSdkVersion 27        // ...    &#125;&#125;\n이는 SDK 버전이 25 이상 30 이하에서만 이 앱이 실행될 수 있음을 의미합니다. 또한 실제 동작은 27 버전으로 동작하게 됩니다. 보통 실무에서는 \n\nminSdkVersion &lt;= targetSdkVersion == compileSdkVersion\n\n로 SDK 버전을 설정합니다.\n마치며이번 포스트에서는 compileSdkVersion, minSdkVersion, targetSdkVersion 차이점에 대해 알아봤습니다. 다음 포스트에서는 ADB(Android Debug Bridge)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-16T20:16:30+09:00","dateModified":"2021-06-21T14:10:34+09:00","datePublished":"2019-01-16T20:16:30+09:00","description":"","headline":"[안드로이드] compileSdkVersion, minSdkVersion, targetSdkVersion 차이점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/16/android/190116-compile-min-target-sdk-version/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/16/android/190116-compile-min-target-sdk-version/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 런타임에서 SDK 버전을 확인하는 방법에 대해 알아봤습니다. 이번 포스트에서는 compileSdkVersion, minSdkVersion, targetSdkVersion의 차이점에 대해 알아보겠습니다.\n(1) compileSdkVersion안드로이드 스튜디오에서 앱을 빌드할 때 어떤 SDK 버전을 사용할 것인지 지정합니다. 즉 comileSdkVersion은 지원할 수 있는 가장 높은 버전을 의미합니다.\n123456// 모듈 수준의 build.gradleandroid &#123;    compileSdkVersion 30    // ...&#125;\n안드로이드 스튜디오의 SDK Manager에 해당 SDK가 설치되어있어야 합니다.\n(2) minSdkVersion최소 지원 SDK 버전을 의미합니다. 즉 해당 버전 이하의 안드로이드 운영체제가 설치된 기기에서는 앱을 설치할 수 없습니다.\n123456789android &#123;    compileSdkVersion 30    // ...    defaultConfig &#123;        minSdkVersion 25        // ...    &#125;&#125;\n(3) targetSdkVersion앱을 실제 기기에 설치하고 실행할 때 어떤 SDK 버전을 사용할지 지정합니다. 기능은 똑같아도 SDK 버전에 따라 다르게 동작하는 API도 있습니다. 이때는 targetSdkVersion 값에 맞는 API를 사용하게 됩니다.\n12345678910android &#123;    compileSdkVersion 30    // ...    defaultConfig &#123;        minSdkVersion 25        targetSdkVersion 27        // ...    &#125;&#125;\ntargetSdkVersion을 지정하지 않으면 기본 값은 minSdkVersion과 동일하게 적용됩니다. \n예제모듈 수준의 build.gradle파일에서 다음과 같이 SDK 버전 설정을 설정합니다.\n1234567891011// 모듈 수준의 build.gradleandroid &#123;    compileSdkVersion 30    // ...    defaultConfig &#123;        minSdkVersion 25        targetSdkVersion 27        // ...    &#125;&#125;\n이는 SDK 버전이 25 이상 30 이하에서만 이 앱이 실행될 수 있음을 의미합니다. 또한 실제 동작은 27 버전으로 동작하게 됩니다. 보통 실무에서는 \n\nminSdkVersion &lt;= targetSdkVersion == compileSdkVersion\n\n로 SDK 버전을 설정합니다.\n마치며이번 포스트에서는 compileSdkVersion, minSdkVersion, targetSdkVersion 차이점에 대해 알아봤습니다. 다음 포스트에서는 ADB(Android Debug Bridge)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-16T20:16:30+09:00","dateModified":"2021-06-21T14:10:34+09:00","datePublished":"2019-01-16T20:16:30+09:00","description":"","headline":"[안드로이드] compileSdkVersion, minSdkVersion, targetSdkVersion 차이점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/16/android/190116-compile-min-target-sdk-version/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/16/android/190116-compile-min-target-sdk-version/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 런타임에서 SDK 버전을 확인하는 방법에 대해 알아봤습니다. 이번 포스트에서는 compileSdkVersion, minSdkVersion, targetSdkVersion의 차이점에 대해 알아보겠습니다. (1) compileSdkVer">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] compileSdkVersion, minSdkVersion, targetSdkVersion 차이점">
@@ -66,7 +66,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -93,7 +93,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -160,7 +160,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -174,7 +174,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -182,20 +182,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -247,7 +233,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -396,7 +382,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -458,7 +444,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -535,7 +521,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

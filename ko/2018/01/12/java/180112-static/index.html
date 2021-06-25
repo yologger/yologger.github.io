@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 클래스의 생성자, 멤버변수, 메소드에 대해 알아봤습니다. 이번 포스트에서는 클래스의 정적 멤버변수(Static Variable)와 정적 메소드(Static Method)에 대해 알아보겠습니다.\n\nstatic키워드 static은 클래스의 멤버변수와 메소드 앞에 붙일 수 있습니다. 이렇게 static이 붙은 멤버변수와 메소드를 정적 멤버변수와 정적 메소드라고 합니다. \n정적 멤버변수와 정적 메소드는 다음과 같은 특징이 있습니다.\n\n클래스의 인스턴스를 생성하지 않고도 정적 메소드를 호출할 수 있습니다.\n클래스의 인스턴스를 생성하지 않고도 정적 멤버변수에 접근할 수 있습니다.\n클래스의 모든 인스턴스가 정적 멤버변수를 공유합니다.\n\n예제정적 멤버변수와 정적 메소드는 키워드 static을 붙여서 선언합니다.\n12345678910111213141516171819202122232425class Counter &#123;    // 정적 멤버변수    static int count = 0;    // 생성자    Counter() &#123;    &#125;    // 정적 메소드    static void increment() &#123;        count++;    &#125;    // 정적 메소드    static void decrement() &#123;        count--;    &#125;    // 정적 메소드    static void printCount() &#123;        System.out.println(count);    &#125;&#125;\n정적 멤버변수와 정적 메소드는 다음과 같이 인스턴스를 생성하지 않고 사용할 수 있습니다.\n123456Counter.printCount();   // 0Counter.increment();Counter.increment();Counter.increment();Counter.printCount();   // 3\n\n마치며이번 포스트에서는 클래스의 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)에 대해 알아봤습니다. 다음 포스트에서는 초기화 구문(Initialization Block)에 대해 알아보겠습니다.\n","dateCreated":"2018-01-12T20:16:30+09:00","dateModified":"2021-06-23T16:47:06+09:00","datePublished":"2018-01-12T20:16:30+09:00","description":"","headline":"[자바] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/12/java/180112-static/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/01/12/java/180112-static/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 클래스의 생성자, 멤버변수, 메소드에 대해 알아봤습니다. 이번 포스트에서는 클래스의 정적 멤버변수(Static Variable)와 정적 메소드(Static Method)에 대해 알아보겠습니다.\n\nstatic키워드 static은 클래스의 멤버변수와 메소드 앞에 붙일 수 있습니다. 이렇게 static이 붙은 멤버변수와 메소드를 정적 멤버변수와 정적 메소드라고 합니다. \n정적 멤버변수와 정적 메소드는 다음과 같은 특징이 있습니다.\n\n클래스의 인스턴스를 생성하지 않고도 정적 메소드를 호출할 수 있습니다.\n클래스의 인스턴스를 생성하지 않고도 정적 멤버변수에 접근할 수 있습니다.\n클래스의 모든 인스턴스가 정적 멤버변수를 공유합니다.\n\n예제정적 멤버변수와 정적 메소드는 키워드 static을 붙여서 선언합니다.\n12345678910111213141516171819202122232425class Counter &#123;    // 정적 멤버변수    static int count = 0;    // 생성자    Counter() &#123;    &#125;    // 정적 메소드    static void increment() &#123;        count++;    &#125;    // 정적 메소드    static void decrement() &#123;        count--;    &#125;    // 정적 메소드    static void printCount() &#123;        System.out.println(count);    &#125;&#125;\n정적 멤버변수와 정적 메소드는 다음과 같이 인스턴스를 생성하지 않고 사용할 수 있습니다.\n123456Counter.printCount();   // 0Counter.increment();Counter.increment();Counter.increment();Counter.printCount();   // 3\n\n마치며이번 포스트에서는 클래스의 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)에 대해 알아봤습니다. 다음 포스트에서는 초기화 구문(Initialization Block)에 대해 알아보겠습니다.\n","dateCreated":"2018-01-12T20:16:30+09:00","dateModified":"2021-06-23T16:47:06+09:00","datePublished":"2018-01-12T20:16:30+09:00","description":"","headline":"[자바] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/12/java/180112-static/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/01/12/java/180112-static/","keywords":"Java"}</script>
     <meta name="description" content="자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 클래스의 생성자, 멤버변수, 메소드에 대해 알아봤습니다. 이번 포스트에서는 클래스의 정적 멤버변수(Static Variable)와 정적 메소드(Static Method)에 대해 알아보겠습니다.  static키워드 static은 클래스의 멤버변수와">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[자바] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -392,7 +378,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -454,7 +440,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -531,7 +517,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

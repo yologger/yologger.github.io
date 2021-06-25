@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n컨텍스트(Context)란?우선 공식 문서에 의하면 다음과 같습니다.\n\nInterface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.\n\n컨텍스트(Context)는 어플리케이션이나 액티비티의 현재 상태에 대한 정보를 의미합니다. 다시 말해 컨텍스트에는 어플리케이션이나 액티비티에서 지금 어떤 일이 일어나는지에 대한 정보가 있습니다. \n어플리케이션이나 액티비티의 현재 상태는 시시각각 변합니다. 그러나 개발 단계에서는 컨텍스트에 어떠한 정보가 올지 알 수 없기 때문에 인터페이스 형태로 컨텍스트에 접근합니다. 런타임에서는 안드로이드 시스템이 어플리케이션이나 액티비티의 현재 상태 정보를 가진 구현체를 직접 주입해줍니다.\n컨텍스트의 종류안드로이드에는 크게 두 가지의 컨텍스트가 있습니다.\n(1) Application Context어플리케이션 전체에 대한 맥락을 가지고 있습니다. 이 컨텍스트는 어플리케이션의 라이프사이클과 연결되어 있으며, getApplicationContext()를 호출하여 접근할 수 있습니다. \n(2) Activity Context특정 액티비티에 대한 맥락을 가지고 있습니다. 이 컨텍스트는 액티비티의 라이프사이클과 연결되어 있습니다. 따라서 액티비티의 onDestroy()가 호출될 때 해당 컨텍스트도 메모리에서 사라지게 됩니다.\n모든 Activity클래스는 Context클래스를 상속합니다. 따라서 액티비티 안에서 this를 사용하여 액티비티 컨텍스트에 접근할 수 있습니다.\n컨텍스트의 활용우선 컨텍스트는 새로운 객체 생성하는데 사용됩니다.\n123456// 새로운 뷰 생성val textView = TextView(this)val button = Button(this)// 어답터 생성var cursorAdapter = SimpleCursorAdapter(getApplicationContext(), ..)\n시스템 서비스나 SharedPreferences에 접근하는데 사용됩니다.\n12345// 시스템 서비스 - 레이아웃 인플레이터var inflater = context.getSystemService(LAYOUT_INFLATER_SERVICE)// SharedPreferencesgetApplicationContext().getSharedPreferences(*name*, *mode*)\n다른 컴포넌트를 호출하는데도 사용됩니다.\n1234567// 액티비티 호출val intent = Intent(this, SubActivity::class.java)startActivity(intent)// 컨텐트 프로바이더val contextResolver = getApplicationContext().getContentResolver()contextResolver.query(uri, ...)\n자원에 접근하는데 사용할 수도 있습니다.\n12var appPackageName: String = getApplicationContext().getPackageName()var resources: Resources = getApplicationContext().getResources()","dateCreated":"2019-05-02T20:16:30+09:00","dateModified":"2021-06-21T14:12:48+09:00","datePublished":"2019-05-02T20:16:30+09:00","description":"","headline":"[안드로이드] 컨텍스트(Context)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/05/02/android/190502-context/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/05/02/android/190502-context/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n컨텍스트(Context)란?우선 공식 문서에 의하면 다음과 같습니다.\n\nInterface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.\n\n컨텍스트(Context)는 어플리케이션이나 액티비티의 현재 상태에 대한 정보를 의미합니다. 다시 말해 컨텍스트에는 어플리케이션이나 액티비티에서 지금 어떤 일이 일어나는지에 대한 정보가 있습니다. \n어플리케이션이나 액티비티의 현재 상태는 시시각각 변합니다. 그러나 개발 단계에서는 컨텍스트에 어떠한 정보가 올지 알 수 없기 때문에 인터페이스 형태로 컨텍스트에 접근합니다. 런타임에서는 안드로이드 시스템이 어플리케이션이나 액티비티의 현재 상태 정보를 가진 구현체를 직접 주입해줍니다.\n컨텍스트의 종류안드로이드에는 크게 두 가지의 컨텍스트가 있습니다.\n(1) Application Context어플리케이션 전체에 대한 맥락을 가지고 있습니다. 이 컨텍스트는 어플리케이션의 라이프사이클과 연결되어 있으며, getApplicationContext()를 호출하여 접근할 수 있습니다. \n(2) Activity Context특정 액티비티에 대한 맥락을 가지고 있습니다. 이 컨텍스트는 액티비티의 라이프사이클과 연결되어 있습니다. 따라서 액티비티의 onDestroy()가 호출될 때 해당 컨텍스트도 메모리에서 사라지게 됩니다.\n모든 Activity클래스는 Context클래스를 상속합니다. 따라서 액티비티 안에서 this를 사용하여 액티비티 컨텍스트에 접근할 수 있습니다.\n컨텍스트의 활용우선 컨텍스트는 새로운 객체 생성하는데 사용됩니다.\n123456// 새로운 뷰 생성val textView = TextView(this)val button = Button(this)// 어답터 생성var cursorAdapter = SimpleCursorAdapter(getApplicationContext(), ..)\n시스템 서비스나 SharedPreferences에 접근하는데 사용됩니다.\n12345// 시스템 서비스 - 레이아웃 인플레이터var inflater = context.getSystemService(LAYOUT_INFLATER_SERVICE)// SharedPreferencesgetApplicationContext().getSharedPreferences(*name*, *mode*)\n다른 컴포넌트를 호출하는데도 사용됩니다.\n1234567// 액티비티 호출val intent = Intent(this, SubActivity::class.java)startActivity(intent)// 컨텐트 프로바이더val contextResolver = getApplicationContext().getContentResolver()contextResolver.query(uri, ...)\n자원에 접근하는데 사용할 수도 있습니다.\n12var appPackageName: String = getApplicationContext().getPackageName()var resources: Resources = getApplicationContext().getResources()","dateCreated":"2019-05-02T20:16:30+09:00","dateModified":"2021-06-21T14:12:48+09:00","datePublished":"2019-05-02T20:16:30+09:00","description":"","headline":"[안드로이드] 컨텍스트(Context)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/05/02/android/190502-context/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/05/02/android/190502-context/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  컨텍스트(Context)란?우선 공식 문서에 의하면 다음과 같습니다.  Interface to global information about an application environment. This is an abstract class whose implem">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 컨텍스트(Context)란?">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -394,7 +380,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -456,7 +442,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -533,7 +519,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

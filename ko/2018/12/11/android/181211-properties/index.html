@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 BuildConfig에 대해 알아봤습니다. 이번 포스트에서는 properties 파일에 대해 알아보겠습니다.\n\n왜 환경변수를 코드에서 분리해야할까?많은 어플리케이션이 Google, Facebook과 같은 SNS 계정을 통한 로그인을 지원합니다. 개발자는 SNS 로그인 API를 사용하기 위해 키(Key)를 발급받는데, 이를 소스코드에 포함시키면 여러 보안 이슈가 발생할 수 있습니다. \nproperties 파일을 사용하면 민감한 데이터를 코드에서 분리하여 이 파일에 저장할 수 있습니다.\n.properties 파일 만들기프로젝트의 루트 디렉토리에 config.properties파일을 생성합니다.\n  config.properties12CLIENT_ID=\"your_client_id\"CLIENT_SECRET=\"your_client_secret\"\n\n모듈 수준의 build.gradle 설정하기build.gradle에서 다음과 같이 config.properties파일을 읽어올 수 있습니다.  build.gradlegroovy123def configPropertiesFile = rootProject.file(\"config.properties\")def configProperties = new Properties()configProperties.load(new FileInputStream(configPropertiesFile))\n이제 configProperties[&#39;your_key&#39;]형태로 값을 읽어올 수 있습니다.\n  build.gradlegroovy123456789101112131415161718android {    defaultConfig {        applicationId \"com.example.simple_memo\"        minSdkVersion 21        targetSdkVersion 30        versionCode 1        versionName \"1.0\"        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"        // for xml file        resValue \"string\", \"CLIENT_ID\", configProperties['CLIENT_ID']        resValue \"string\", \"CLIENT_SECRET\", configProperties['CLIENT_SECRET']        // for source file        buildConfigField(\"String\", \"CLIENT_ID\", configProperties['CLIENT_ID'])        buildConfigField(\"String\", \"CLIENT_SECRET\", configProperties['CLIENT_SECRET'])    }}\n\n소스코드에서 값을 사용하기이제 소스 코드에서 다음과 같이 사용할 수 있습니다.\n123456789class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val clientId = BuildConfig.CLIENT_ID            // your_client_id        val clientSecret = BuildConfig.CLIENT_SECRET    // your_client_secret    &#125;&#125;\nxml 파일에서 값을 사용하기xml 파일에서도 접근할 수 있습니다.\n12&lt;TextView android:text=&quot;@string/CLIENT_ID&quot;/&gt;&lt;TextView android:text=&quot;@string/CLIENT_SECRET&quot;/&gt;\n\n.gitignore파일에 추가하기보통 properties처럼 민감한 데이터가 포함된 파일은 원격 저장소에 업로드하지 않습니다. .gitignore에 config.properties파일을 추가합시다.\n  .gitignore1config.properties\n\n\n마치며이번 포스트에서는 properties 파일에 대해 알아봤습니다. 다음 포스트에서는 빌드 타입(BuildType)에 대해 알아보겠습니다.\n","dateCreated":"2018-12-11T20:16:30+09:00","dateModified":"2021-06-24T21:00:27+09:00","datePublished":"2018-12-11T20:16:30+09:00","description":"","headline":"[안드로이드] 그래들 - (9) 코드에서 환경변수 분리하기 - properties 파일","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/12/11/android/181211-properties/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/12/11/android/181211-properties/","keywords":"Gradle, Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 BuildConfig에 대해 알아봤습니다. 이번 포스트에서는 properties 파일에 대해 알아보겠습니다.\n\n왜 환경변수를 코드에서 분리해야할까?많은 어플리케이션이 Google, Facebook과 같은 SNS 계정을 통한 로그인을 지원합니다. 개발자는 SNS 로그인 API를 사용하기 위해 키(Key)를 발급받는데, 이를 소스코드에 포함시키면 여러 보안 이슈가 발생할 수 있습니다. \nproperties 파일을 사용하면 민감한 데이터를 코드에서 분리하여 이 파일에 저장할 수 있습니다.\n.properties 파일 만들기프로젝트의 루트 디렉토리에 config.properties파일을 생성합니다.\n  config.properties12CLIENT_ID=\"your_client_id\"CLIENT_SECRET=\"your_client_secret\"\n\n모듈 수준의 build.gradle 설정하기build.gradle에서 다음과 같이 config.properties파일을 읽어올 수 있습니다.  build.gradlegroovy123def configPropertiesFile = rootProject.file(\"config.properties\")def configProperties = new Properties()configProperties.load(new FileInputStream(configPropertiesFile))\n이제 configProperties[&#39;your_key&#39;]형태로 값을 읽어올 수 있습니다.\n  build.gradlegroovy123456789101112131415161718android {    defaultConfig {        applicationId \"com.example.simple_memo\"        minSdkVersion 21        targetSdkVersion 30        versionCode 1        versionName \"1.0\"        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"        // for xml file        resValue \"string\", \"CLIENT_ID\", configProperties['CLIENT_ID']        resValue \"string\", \"CLIENT_SECRET\", configProperties['CLIENT_SECRET']        // for source file        buildConfigField(\"String\", \"CLIENT_ID\", configProperties['CLIENT_ID'])        buildConfigField(\"String\", \"CLIENT_SECRET\", configProperties['CLIENT_SECRET'])    }}\n\n소스코드에서 값을 사용하기이제 소스 코드에서 다음과 같이 사용할 수 있습니다.\n123456789class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val clientId = BuildConfig.CLIENT_ID            // your_client_id        val clientSecret = BuildConfig.CLIENT_SECRET    // your_client_secret    &#125;&#125;\nxml 파일에서 값을 사용하기xml 파일에서도 접근할 수 있습니다.\n12&lt;TextView android:text=&quot;@string/CLIENT_ID&quot;/&gt;&lt;TextView android:text=&quot;@string/CLIENT_SECRET&quot;/&gt;\n\n.gitignore파일에 추가하기보통 properties처럼 민감한 데이터가 포함된 파일은 원격 저장소에 업로드하지 않습니다. .gitignore에 config.properties파일을 추가합시다.\n  .gitignore1config.properties\n\n\n마치며이번 포스트에서는 properties 파일에 대해 알아봤습니다. 다음 포스트에서는 빌드 타입(BuildType)에 대해 알아보겠습니다.\n","dateCreated":"2018-12-11T20:16:30+09:00","dateModified":"2021-06-24T21:00:27+09:00","datePublished":"2018-12-11T20:16:30+09:00","description":"","headline":"[안드로이드] 그래들 - (9) 코드에서 환경변수 분리하기 - properties 파일","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/12/11/android/181211-properties/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/12/11/android/181211-properties/","keywords":"Gradle, Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 BuildConfig에 대해 알아봤습니다. 이번 포스트에서는 properties 파일에 대해 알아보겠습니다.  왜 환경변수를 코드에서 분리해야할까?많은 어플리케이션이 Google, Facebook과 같은 SNS 계정을 통한 로그인을 지">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 그래들 - (9) 코드에서 환경변수 분리하기 - properties 파일">
@@ -67,7 +67,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -94,7 +94,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -161,7 +161,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -175,7 +175,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -183,20 +183,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -248,7 +234,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -401,7 +387,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -463,7 +449,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -540,7 +526,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

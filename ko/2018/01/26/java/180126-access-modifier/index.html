@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 형 변환(Type Casting)에 대해 알아봤습니다. 이번 포스트에서는 접근 제한자(Access Modifier)에 대해 알아보겠습니다.\n\n접근 제한자접근 제한자는 외부에서 클래스 내부의 메소드나 멤버변수에 접근하는 것을 제한하는 것입니다. 자바는 private, protected, default, public이라는 네 개의 접근 제한자를 지원합니다. 접근 제한자는 클래스, 생성자, 메소드, 멤버변수 앞에 붙일 수 있습니다.\n(1) privateprivate은 같은 클래스 내에서만 접근이 가능합니다. 클래스에는 붙일 수 없으며 멤버변수, 메소드, 생성자 앞에만 붙일 수 있습니다. \n12345678910111213141516171819class Person &#123;    // private 변수 name    private String name;    Person(String name) &#123;        this.name = name;    &#125;    void printName() &#123;        // 같은 클래스에서는 name에 접근할 수 있습니다.        System.out.println(name);    &#125;&#125;Person person = new Person(&quot;Paul&quot;);person.name;    // 클래스 외부에서는 접근할 수 없습니다. 다음과 같은 에러가 발생합니다.// &#x27;name&#x27; has private access in Person\n(2) default접근 제한자를 생략하면 기본적으로 default 접근 제한자가 적용됩니다. default는 동일한 패키지 내에서만 접근을 허용합니다. 멤버변수, 메소드, 생성자 뿐만 아니라 클래스 앞에도 붙일 수 있습니다. \nPerson클래스는 com.yologger.person패키지에 정의되어있고 접근 제한자는 default입니다.\n12345package com.yologger.person;class Person &#123;    // ...&#125;\n따라서 다른 패키지인 com.yologger.app에서 접근할 수 없습니다. \n1234package com.yologger.app;Person person = new Person();   // 다음과 같은 에러가 발생합니다. // &#x27;com.yologger.person.Person&#x27; is not public in &#x27;com.yologger.person&#x27;. Cannot be accessed from outside package\n(3) protectedprotected는 같은 패키지에서 상속 관계에 있는 클래스에서만 접근을 허용합니다. 클래스에는 붙일 수 없으며 멤버변수, 메소드, 생성자 앞에만 붙일 수 있습니다.\n12345678910// 부모 클래스class Person &#123;    // protected 변수    protected String name;    Person(String name) &#123;        this.name = name;    &#125;&#125;\n123456789101112// 자식 클래스class Programmer extends Person &#123;    Programmer(String name) &#123;        super(name);    &#125;    void printName() &#123;        // 자식 클래스에서 부모 클래스의 protected 멤버변수에 접근 가능        System.out.println(name);    &#125;&#125;\n(4) publicpublic은 다른 패키지라도 어디에서든 접근이 가능합니다.\n12345package com.yologger.person;public class Person &#123;    // ...&#125;\n다른 패키지인 com.yologger.app에서도 접근할 수 있습니다. \n123package com.yologger.app;Person person = new Person();\n\n마치며이번 포스트에서는 Java의 접근 제한자(Access Modifier)에 대해 알아봤습니다. 다음 포스트에서는 Object 클래스에 대해 알아보겠습니다.\n","dateCreated":"2018-01-26T20:16:30+09:00","dateModified":"2021-06-23T17:41:51+09:00","datePublished":"2018-01-26T20:16:30+09:00","description":"","headline":"[자바] 접근 제한자(public, private, protected, default)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/26/java/180126-access-modifier/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/01/26/java/180126-access-modifier/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 형 변환(Type Casting)에 대해 알아봤습니다. 이번 포스트에서는 접근 제한자(Access Modifier)에 대해 알아보겠습니다.\n\n접근 제한자접근 제한자는 외부에서 클래스 내부의 메소드나 멤버변수에 접근하는 것을 제한하는 것입니다. 자바는 private, protected, default, public이라는 네 개의 접근 제한자를 지원합니다. 접근 제한자는 클래스, 생성자, 메소드, 멤버변수 앞에 붙일 수 있습니다.\n(1) privateprivate은 같은 클래스 내에서만 접근이 가능합니다. 클래스에는 붙일 수 없으며 멤버변수, 메소드, 생성자 앞에만 붙일 수 있습니다. \n12345678910111213141516171819class Person &#123;    // private 변수 name    private String name;    Person(String name) &#123;        this.name = name;    &#125;    void printName() &#123;        // 같은 클래스에서는 name에 접근할 수 있습니다.        System.out.println(name);    &#125;&#125;Person person = new Person(&quot;Paul&quot;);person.name;    // 클래스 외부에서는 접근할 수 없습니다. 다음과 같은 에러가 발생합니다.// &#x27;name&#x27; has private access in Person\n(2) default접근 제한자를 생략하면 기본적으로 default 접근 제한자가 적용됩니다. default는 동일한 패키지 내에서만 접근을 허용합니다. 멤버변수, 메소드, 생성자 뿐만 아니라 클래스 앞에도 붙일 수 있습니다. \nPerson클래스는 com.yologger.person패키지에 정의되어있고 접근 제한자는 default입니다.\n12345package com.yologger.person;class Person &#123;    // ...&#125;\n따라서 다른 패키지인 com.yologger.app에서 접근할 수 없습니다. \n1234package com.yologger.app;Person person = new Person();   // 다음과 같은 에러가 발생합니다. // &#x27;com.yologger.person.Person&#x27; is not public in &#x27;com.yologger.person&#x27;. Cannot be accessed from outside package\n(3) protectedprotected는 같은 패키지에서 상속 관계에 있는 클래스에서만 접근을 허용합니다. 클래스에는 붙일 수 없으며 멤버변수, 메소드, 생성자 앞에만 붙일 수 있습니다.\n12345678910// 부모 클래스class Person &#123;    // protected 변수    protected String name;    Person(String name) &#123;        this.name = name;    &#125;&#125;\n123456789101112// 자식 클래스class Programmer extends Person &#123;    Programmer(String name) &#123;        super(name);    &#125;    void printName() &#123;        // 자식 클래스에서 부모 클래스의 protected 멤버변수에 접근 가능        System.out.println(name);    &#125;&#125;\n(4) publicpublic은 다른 패키지라도 어디에서든 접근이 가능합니다.\n12345package com.yologger.person;public class Person &#123;    // ...&#125;\n다른 패키지인 com.yologger.app에서도 접근할 수 있습니다. \n123package com.yologger.app;Person person = new Person();\n\n마치며이번 포스트에서는 Java의 접근 제한자(Access Modifier)에 대해 알아봤습니다. 다음 포스트에서는 Object 클래스에 대해 알아보겠습니다.\n","dateCreated":"2018-01-26T20:16:30+09:00","dateModified":"2021-06-23T17:41:51+09:00","datePublished":"2018-01-26T20:16:30+09:00","description":"","headline":"[자바] 접근 제한자(public, private, protected, default)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/26/java/180126-access-modifier/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/01/26/java/180126-access-modifier/","keywords":"Java"}</script>
     <meta name="description" content="자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 형 변환(Type Casting)에 대해 알아봤습니다. 이번 포스트에서는 접근 제한자(Access Modifier)에 대해 알아보겠습니다.  접근 제한자접근 제한자는 외부에서 클래스 내부의 메소드나 멤버변수에 접근하는 것을 제한하는 것입니다. 자">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[자바] 접근 제한자(public, private, protected, default)">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -396,7 +382,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -458,7 +444,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -535,7 +521,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

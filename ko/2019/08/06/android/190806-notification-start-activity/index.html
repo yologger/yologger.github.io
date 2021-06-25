@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기  ⬅️ ⬅️ ⬅️\n알림에 액션 추가하기\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기\n\n\n현재는 알림 패널에서 알림을 클릭해도 아무 일이 일어나지 않습니다.알림을 클릭했을 때 특정 액티비티가 실행되도록 할 수 있습니다.\n우선 실행할 액티비티를 포함하는 명시적 인텐트를 생성합니다.\n1val resultIntent = Intent(this@MainActivity, ResultActivity::class.java)\n그리고 이 인텐트를 PendingIntent에 포함시킵니다.\n123val REQUEST_CODE = 1val pendingIntent = PendingIntent.getActivity(this@MainActivity, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)\n마지막으로 NotificationBuilder클래스의 setContentIntent()메소드를 호출하면서 인자로 pendingIntent를 전달합니다.\n1notificationBuilder.setContentIntent(pendingIntent)\n전체 코드는 다음과 같습니다.\n12345678910111213141516171819202122232425262728293031323334353637383940414243444546class MainActivity : AppCompatActivity() &#123;    lateinit var button: Button    val REQUEST_CODE = 1    val NOTIFICATION_ID = 1    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById&lt;Button&gt;(R.id.activity_main_btn)        button.setOnClickListener &#123;            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;                val channelId = &quot;channel_id&quot;                val channelName = &quot;channel_name&quot;                val channelDescription = &quot;channel_description&quot;                val importance = NotificationManager.IMPORTANCE_HIGH                val notificationChannel = NotificationChannel(channelId, channelName, importance)                notificationChannel.description = channelDescription                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager                notificationManager.createNotificationChannel(notificationChannel)                val notificationBuilder = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;A Notification&quot;)                        .setContentText(&quot;This is a notification&quot;)                val resultIntent = Intent(this@MainActivity, ResultActivity::class.java)                val pendingIntent = PendingIntent.getActivity(this@MainActivity, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)                notificationBuilder.setContentIntent(pendingIntent)                val notification = notificationBuilder.build()                notificationManager.notify(NOTIFICATION_ID, notification)            &#125; else &#123;                // ...            &#125;        &#125;    &#125;&#125;\n이제 알림 패널에서 알림을 클릭하면 ResultActivity가 실행됩니다.\n마치며이번 포스트에서는 알림에서 액티비티를 실행하는 방법에 대해 알아봤습니다. 다음 포스트에서는 알림에 액션을 추가하는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-06T20:16:30+09:00","dateModified":"2021-06-21T14:13:32+09:00","datePublished":"2019-08-06T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (2) 알림에서 액티비티 시작시키기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/06/android/190806-notification-start-activity/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/06/android/190806-notification-start-activity/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기  ⬅️ ⬅️ ⬅️\n알림에 액션 추가하기\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기\n\n\n현재는 알림 패널에서 알림을 클릭해도 아무 일이 일어나지 않습니다.알림을 클릭했을 때 특정 액티비티가 실행되도록 할 수 있습니다.\n우선 실행할 액티비티를 포함하는 명시적 인텐트를 생성합니다.\n1val resultIntent = Intent(this@MainActivity, ResultActivity::class.java)\n그리고 이 인텐트를 PendingIntent에 포함시킵니다.\n123val REQUEST_CODE = 1val pendingIntent = PendingIntent.getActivity(this@MainActivity, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)\n마지막으로 NotificationBuilder클래스의 setContentIntent()메소드를 호출하면서 인자로 pendingIntent를 전달합니다.\n1notificationBuilder.setContentIntent(pendingIntent)\n전체 코드는 다음과 같습니다.\n12345678910111213141516171819202122232425262728293031323334353637383940414243444546class MainActivity : AppCompatActivity() &#123;    lateinit var button: Button    val REQUEST_CODE = 1    val NOTIFICATION_ID = 1    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById&lt;Button&gt;(R.id.activity_main_btn)        button.setOnClickListener &#123;            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;                val channelId = &quot;channel_id&quot;                val channelName = &quot;channel_name&quot;                val channelDescription = &quot;channel_description&quot;                val importance = NotificationManager.IMPORTANCE_HIGH                val notificationChannel = NotificationChannel(channelId, channelName, importance)                notificationChannel.description = channelDescription                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager                notificationManager.createNotificationChannel(notificationChannel)                val notificationBuilder = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;A Notification&quot;)                        .setContentText(&quot;This is a notification&quot;)                val resultIntent = Intent(this@MainActivity, ResultActivity::class.java)                val pendingIntent = PendingIntent.getActivity(this@MainActivity, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)                notificationBuilder.setContentIntent(pendingIntent)                val notification = notificationBuilder.build()                notificationManager.notify(NOTIFICATION_ID, notification)            &#125; else &#123;                // ...            &#125;        &#125;    &#125;&#125;\n이제 알림 패널에서 알림을 클릭하면 ResultActivity가 실행됩니다.\n마치며이번 포스트에서는 알림에서 액티비티를 실행하는 방법에 대해 알아봤습니다. 다음 포스트에서는 알림에 액션을 추가하는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-06T20:16:30+09:00","dateModified":"2021-06-21T14:13:32+09:00","datePublished":"2019-08-06T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (2) 알림에서 액티비티 시작시키기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/06/android/190806-notification-start-activity/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/06/android/190806-notification-start-activity/","keywords":"Android"}</script>
     <meta name="description" content="들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.  로컬 알림 알림에서 액티비티 시작하기  ⬅️ ⬅️ ⬅️ 알림에 액션 추가하기 알림 메시지 묶기 원격 알림 포그라운드 상태에서 원격 알림 받기   현재는 알림 패널에서 알림을 클릭해도 아무 일이 일어나지 않습니다.알림을 클릭했을 때 특정 액티비티가 실행되도록 할 수 있습니다">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 알림(Notification) - (2) 알림에서 액티비티 시작시키기">
@@ -67,7 +67,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -94,7 +94,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -161,7 +161,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -175,7 +175,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -183,20 +183,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -248,7 +234,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -398,7 +384,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -460,7 +446,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -537,7 +523,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

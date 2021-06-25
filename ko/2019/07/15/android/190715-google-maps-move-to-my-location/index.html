@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.\n\n구글 지도 띄우기\n지도 타입 변경하기\n마커 보여주기\n지도 확대와 축소(줌-인과 줌-아웃)\n지도에 내 위치 보여주기\n내 위치로 카메라 이동하기  ⬅️ ⬅️ ⬅️\n맵 컨트롤\n\n\n위치 권한내 위치 정보를 가져오려면 권한이 필요합니다. AndroidManifest.xml에 권한을 추가합니다.\n12345678910&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.example_android_google_maps&quot;&gt;    &lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot;/&gt;    &lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;    &lt;!-- ... --&gt;&lt;/manifest&gt;\n시스템 서비스의 LocationManager를 사용하면 현재 위치를 가져올 수 있습니다. \n1val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager\n위치는 두 가지 방법으로 가져올 수 있습니다.\n(1) GPS 기반의 위치인공위성으로 현재 위치를 알아냅니다. GPS로 위치를 알아낼 수 있는지 여부는 다음과 같이 확인할 수 있습니다.\n1234567val isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)if (isGPSEnable) &#123;    val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)&#125; else &#123;    // ...&#125;\n\n(2) NETWORK 기반의 위치기기 주변의 Cell Tower나 Wi-Fi Access Point로 현재 위치를 알아냅니다. 네트워크로 위치를 알아낼 수 있는지의 여부는 다음과 같이 확인할 수 있습니다. \n1234567val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)if (isNetworkEnabled) &#123;    val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)&#125; else &#123;    // ...&#125;\n예제버튼을 눌렀을 때 권한을 체크하고, 권한이 있으면 현재 위치로 이동하는 예제입니다.위치 정보는 위험 권한이므로 런타임에서 권한 체크를 해야합니다. 버튼을 눌렀을 때 권한을 먼저 확인합시다.\n12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061class MainActivity : AppCompatActivity(), OnMapReadyCallback &#123;    private var mMap: GoogleMap? = null    private val buttonCurrentLocation: FloatingActionButton by lazy &#123; findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_current_location) &#125;    companion object &#123;        const val REQUEST_CODE_PERMISSIONS = 1    &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_fragment_map) as SupportMapFragment        mapFragment.getMapAsync(this)        // 버튼을 눌렀을 때        buttonCurrentLocation.setOnClickListener &#123;            moveToCurrentPosition()        &#125;    &#125;    private fun moveToCurrentPosition() &#123;        val hasFineLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)        val hasCoarseLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)        if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED &amp;&amp; hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) &#123;            // 권한이 없을 경우 권한 요청            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_CODE_PERMISSIONS)        &#125; else &#123;            // 권한이 있을 경우            // ...        &#125;    &#125;    override fun onMapReady(googleMap: GoogleMap) &#123;        mMap = googleMap        val sydney = LatLng(-33.8688, 151.2093)        mMap.addMarker(MarkerOptions().position(sydney).title(&quot;Marker in Sydney&quot;))    &#125;    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array&lt;out String&gt;, grantResults: IntArray) &#123;        super.onRequestPermissionsResult(requestCode, permissions, grantResults)        when (requestCode) &#123;            REQUEST_CODE_PERMISSIONS -&gt; &#123;                if(grantResults.isNotEmpty()) &#123;                    for ((i, permission) in permissions.withIndex()) &#123;                        isPermissionsGranted = grantResults[i] == PackageManager.PERMISSION_GRANTED                    &#125;                &#125;            &#125;            else -&gt; &#123;                Toast.makeText(this@MainActivity, &quot;Permissions denied.&quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;    &#125;&#125;\n이제 권한이 있으면 LocationManager클래스의 getLastKnownLocation()메소드를 호출하여 현재 위치를 가져올 수 있습니다. GoogleMap클래스의 moveCamera()에 위치 정보를 전달하면 구글 지도의 위치를 현재 위치로 이동시킬 수 있습니다.\n123456789101112131415161718192021222324252627282930313233343536373839404142class MainActivity : AppCompatActivity(), OnMapReadyCallback &#123;    // ...    private fun moveToCurrentPosition() &#123;        val hasFineLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)        val hasCoarseLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)        if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED &amp;&amp; hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) &#123;            // 권한이 없으면 권한 요청            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_CODE_PERMISSIONS)        &#125; else &#123;            // 권한이 있으면 위치정보 가져오기            val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager            val isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)            val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)            if (isGPSEnable) &#123;                val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)                location?.run &#123;                    val latitude = location.latitude                    val longitude  = location.longitude                    val myLocation = LatLng(latitude, longitude)                    mMap?.moveCamera(CameraUpdateFactory.newLatLng(myLocation))                &#125;            &#125; else if (isNetworkEnabled) &#123;                val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)                location?.run &#123;                    val latitude = location.latitude                    val longitude  = location.longitude                    val myLocation = LatLng(latitude, longitude)                    mMap?.moveCamera(CameraUpdateFactory.newLatLng(myLocation))                &#125;            &#125; else &#123;                Toast.makeText(this@MainActivity, &quot;Your device doesn&#x27;t support location service.&quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;    &#125;    // ... \n이제 버튼을 누르고 권한을 허락하면 현재 위치로 지도가 이동합니다.\n마치며이번 포스트에서는 카메라를 내 위치로 옮기는 방법에 대해 알아봤습니다. 다음 포스트에서는 맵 컨트롤에 대해 알아보겠습니다.\n","dateCreated":"2019-07-15T20:16:30+09:00","dateModified":"2021-06-21T14:13:09+09:00","datePublished":"2019-07-15T20:16:30+09:00","description":"","headline":"[안드로이드] 구글 지도(Google Maps) - (6) 내 위치로 카메라 이동하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/07/15/android/190715-google-maps-move-to-my-location/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/07/15/android/190715-google-maps-move-to-my-location/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.\n\n구글 지도 띄우기\n지도 타입 변경하기\n마커 보여주기\n지도 확대와 축소(줌-인과 줌-아웃)\n지도에 내 위치 보여주기\n내 위치로 카메라 이동하기  ⬅️ ⬅️ ⬅️\n맵 컨트롤\n\n\n위치 권한내 위치 정보를 가져오려면 권한이 필요합니다. AndroidManifest.xml에 권한을 추가합니다.\n12345678910&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.example_android_google_maps&quot;&gt;    &lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot;/&gt;    &lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;    &lt;!-- ... --&gt;&lt;/manifest&gt;\n시스템 서비스의 LocationManager를 사용하면 현재 위치를 가져올 수 있습니다. \n1val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager\n위치는 두 가지 방법으로 가져올 수 있습니다.\n(1) GPS 기반의 위치인공위성으로 현재 위치를 알아냅니다. GPS로 위치를 알아낼 수 있는지 여부는 다음과 같이 확인할 수 있습니다.\n1234567val isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)if (isGPSEnable) &#123;    val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)&#125; else &#123;    // ...&#125;\n\n(2) NETWORK 기반의 위치기기 주변의 Cell Tower나 Wi-Fi Access Point로 현재 위치를 알아냅니다. 네트워크로 위치를 알아낼 수 있는지의 여부는 다음과 같이 확인할 수 있습니다. \n1234567val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)if (isNetworkEnabled) &#123;    val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)&#125; else &#123;    // ...&#125;\n예제버튼을 눌렀을 때 권한을 체크하고, 권한이 있으면 현재 위치로 이동하는 예제입니다.위치 정보는 위험 권한이므로 런타임에서 권한 체크를 해야합니다. 버튼을 눌렀을 때 권한을 먼저 확인합시다.\n12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061class MainActivity : AppCompatActivity(), OnMapReadyCallback &#123;    private var mMap: GoogleMap? = null    private val buttonCurrentLocation: FloatingActionButton by lazy &#123; findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_current_location) &#125;    companion object &#123;        const val REQUEST_CODE_PERMISSIONS = 1    &#125;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_fragment_map) as SupportMapFragment        mapFragment.getMapAsync(this)        // 버튼을 눌렀을 때        buttonCurrentLocation.setOnClickListener &#123;            moveToCurrentPosition()        &#125;    &#125;    private fun moveToCurrentPosition() &#123;        val hasFineLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)        val hasCoarseLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)        if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED &amp;&amp; hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) &#123;            // 권한이 없을 경우 권한 요청            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_CODE_PERMISSIONS)        &#125; else &#123;            // 권한이 있을 경우            // ...        &#125;    &#125;    override fun onMapReady(googleMap: GoogleMap) &#123;        mMap = googleMap        val sydney = LatLng(-33.8688, 151.2093)        mMap.addMarker(MarkerOptions().position(sydney).title(&quot;Marker in Sydney&quot;))    &#125;    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array&lt;out String&gt;, grantResults: IntArray) &#123;        super.onRequestPermissionsResult(requestCode, permissions, grantResults)        when (requestCode) &#123;            REQUEST_CODE_PERMISSIONS -&gt; &#123;                if(grantResults.isNotEmpty()) &#123;                    for ((i, permission) in permissions.withIndex()) &#123;                        isPermissionsGranted = grantResults[i] == PackageManager.PERMISSION_GRANTED                    &#125;                &#125;            &#125;            else -&gt; &#123;                Toast.makeText(this@MainActivity, &quot;Permissions denied.&quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;    &#125;&#125;\n이제 권한이 있으면 LocationManager클래스의 getLastKnownLocation()메소드를 호출하여 현재 위치를 가져올 수 있습니다. GoogleMap클래스의 moveCamera()에 위치 정보를 전달하면 구글 지도의 위치를 현재 위치로 이동시킬 수 있습니다.\n123456789101112131415161718192021222324252627282930313233343536373839404142class MainActivity : AppCompatActivity(), OnMapReadyCallback &#123;    // ...    private fun moveToCurrentPosition() &#123;        val hasFineLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)        val hasCoarseLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)        if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED &amp;&amp; hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) &#123;            // 권한이 없으면 권한 요청            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_CODE_PERMISSIONS)        &#125; else &#123;            // 권한이 있으면 위치정보 가져오기            val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager            val isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)            val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)            if (isGPSEnable) &#123;                val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)                location?.run &#123;                    val latitude = location.latitude                    val longitude  = location.longitude                    val myLocation = LatLng(latitude, longitude)                    mMap?.moveCamera(CameraUpdateFactory.newLatLng(myLocation))                &#125;            &#125; else if (isNetworkEnabled) &#123;                val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)                location?.run &#123;                    val latitude = location.latitude                    val longitude  = location.longitude                    val myLocation = LatLng(latitude, longitude)                    mMap?.moveCamera(CameraUpdateFactory.newLatLng(myLocation))                &#125;            &#125; else &#123;                Toast.makeText(this@MainActivity, &quot;Your device doesn&#x27;t support location service.&quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;    &#125;    // ... \n이제 버튼을 누르고 권한을 허락하면 현재 위치로 지도가 이동합니다.\n마치며이번 포스트에서는 카메라를 내 위치로 옮기는 방법에 대해 알아봤습니다. 다음 포스트에서는 맵 컨트롤에 대해 알아보겠습니다.\n","dateCreated":"2019-07-15T20:16:30+09:00","dateModified":"2021-06-21T14:13:09+09:00","datePublished":"2019-07-15T20:16:30+09:00","description":"","headline":"[안드로이드] 구글 지도(Google Maps) - (6) 내 위치로 카메라 이동하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/07/15/android/190715-google-maps-move-to-my-location/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/07/15/android/190715-google-maps-move-to-my-location/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며7개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고 있습니다.  구글 지도 띄우기 지도 타입 변경하기 마커 보여주기 지도 확대와 축소(줌-인과 줌-아웃) 지도에 내 위치 보여주기 내 위치로 카메라 이동하기  ⬅️ ⬅️ ⬅️ 맵 컨트">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 구글 지도(Google Maps) - (6) 내 위치로 카메라 이동하기">
@@ -66,7 +66,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -93,7 +93,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -160,7 +160,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -174,7 +174,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -182,20 +182,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -247,7 +233,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -406,7 +392,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -468,7 +454,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -545,7 +531,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

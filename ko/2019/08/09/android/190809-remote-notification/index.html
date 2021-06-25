@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기\n알림 메시지 묶기\n원격 알림 ⬅️ ⬅️ ⬅️\n포그라운드 상태에서 원격 알림 받기\n\n\n원격 알림구글 파이어베이스의 클라우드 메시징(Cloud Messaging)서비스를 사용하면 원격 알림(Remote Notification)을 구현할 수 있습니다.\n1. 파이어베이스 프로젝트 만들기우선 파이어베이스에 접속하여 로그인합니다. 계정이 없다면 회원가입을 먼저 합니다. 이후 오른쪽 상단의 Go to console을 클릭합니다.Add Project를 클릭하여 파이어베이스 프로젝트를 생성합니다.\n프로젝트 이름을 입력하고 계속을 누릅니다.구글 에널리틱스를 사용할 것인지를 물어봅니다. 이때는 구글 에널리틱스 계정이 필요합니다. 일단 사용하지 않음을 선택하고 프로젝트를 생성합시다.프로젝트가 정상적으로 생성되면 다음과 같은 화면이 나옵니다.\n2. 안드로이드 스튜디오 프로젝트와 파이어베이스 프로젝트 연동이제 안드로이드 스튜디오 프로젝트에서 Tool &gt; Firebase를 선택합니다.오른쪽 패널의 Assistant 도구 창에서 Cloud Messaging 항목을 찾습니다. 그리고 Set up Firebase Cloud Messaging을 클릭합니다.Connect to Firebase를 눌러 안드로이드 스튜디오 프로젝트와 파이어베이스 프로젝트를 연결합니다. 다음과 같은 화면이 나오면 정상적으로 연결된 것입니다.두 프로젝트가 연결되면 자동으로 google-services.json파일이 생성됩니다. 이 파일은 Firebase에서 안드로이드 프로젝트를 고유하게 식별하는 정보가 담겨있습니다. 프로젝트 도구창을 Android 뷰에서 Project 뷰로 전환합니다.프로젝트의 app 모듈 아래에서 google-service.json파일을 확인할 수 있습니다.\n3. 파이어베이스 라이브러리 추가이제 파이어베이스 라이브러리를 안드로이드 스튜디오 프로젝트에 추가해야합니다. 다시오른쪽 패널의 Assistant 도구 창에서 Cloud Messaging 항목을 찾습니다. 그리고 Set up Firebase Cloud Messaging을 클릭합니다.Add FCM to your app을 클릭합니다.프로젝트에 추가되는 것들은 다음과 같습니다. 우선 프로젝트 수준의 build.gradle에 구글 서비스 라이브러리가 추가됩니다.\n123456buildscript &#123;    dependencies &#123;        classpath &#x27;com.google.gms:google-services:4.3.8&#x27;        // ...    &#125;&#125;\n모듈 수준의 build.gradle에는 Firebase 메시징 라이브러리와 구글 서비스 라이브러리 플러그인이 추가됩니다.\n123456789plugins &#123;    id &#x27;com.google.gms.google-services&#x27;    // ...&#125;dependencies &#123;    implementation &#x27;com.google.firebase:firebase-messaging:22.0.0&#x27;    // ...&#125;\n4. 알림 보내기앱을 실제 기기나 에뮬레이터에서 실행합니다. 그리고 홈 버튼을 눌러서 앱이 백그라운드에서 실행되도록 합니다. 앱이 실행 중이지 않거나 백그라운드에 있을 때만 원격 알림을 수신하기 때문입니다.\n파이어베이스 콘솔에 접속하여 앞에서 생성한 프로젝트를 선택합니다.왼쪽 사이드 바 메뉴에서 Cloud Messaging을 선택합니다.Send your first message를 클릭합니다.다음과 같이 알림 제목과 알림 텍스트를 입력합니다. 알림 이미지와 알림 이름은 선택사항입니다. 오른 쪽에서 어떻게 알림이 나올 지 확인할 수 있습니다. 이후 Next버튼을 누릅니다.이제 어떤 앱과 어떤 사용자에게 알림을 보낼 지 설정합니다. User segment로 설정하면 앱의 모든 사용자에게 알림이 전송됩니다. 또한 어떤 앱에 알림을 보낼지 앱도 선택하고 Next 버튼을 누릅니다.알림을 언제 보낼지를 설정할 수 있습니다. Now로 설정하고 Next버튼을 누릅니다.Additional options는 선택사항입니다. 일단 비워두고 Review버튼을 누릅니다.이제 검토창에서 게시를 누르면 알림이 발송됩니다.알림을 클릭하면 백그라운드 상태이던 앱이 포그라운드로 실행됩니다.\n4. 알림에 데이터 포함시키기알림을 보낼 때 키-값 형태의 데이터를 추가할 수 있습니다. Additional Option 항목에서 데이터를 추가할 수 있습니다.앱이 백그라운드에 진입하면 onPause()메소드가 호출됩니다. 알림을 클릭하여 앱이 포그라운드 상태로 변하면 onRestart() &gt; onStart() &gt; onResume()메소드가 순서대로 실행됩니다. 이 메소드 중 한 곳에서 데이터를 읽어올 수 있습니다. 데이터를 전달받아 토스트 메시지로 화면에 출력하겠습니다.\n123456789101112131415161718192021class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)    &#125;    override fun onStart() &#123;        super.onStart()        val extras = intent.extras        extras?.run &#123;            val name = getString(&quot;name&quot;)            val nation = getString(&quot;nation&quot;)            if (name != null &amp;&amp; nation != null) &#123;                Toast.makeText(this@MainActivity, &quot;$&#123;name&#125; comes from $&#123;nation&#125;. &quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;    &#125;&#125;\n이제 앱을 실행하고 백그라운드 모드로 변경한 후 알림을 전송합시다. 알림을 클릭하면 다음과 같이 토스트 메시지가 나옵니다.\n\n마치며이번 포스트에서는 원격 알림(Remote Notification)에 대해 알아봤습니다. 다음 포스트에서는 포그라운드 상태에서 원격 알림을 받는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-09T20:16:30+09:00","dateModified":"2021-06-21T15:15:49+09:00","datePublished":"2019-08-09T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (5) 원격 알림","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/09/android/190809-remote-notification/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/09/android/190809-remote-notification/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기\n알림 메시지 묶기\n원격 알림 ⬅️ ⬅️ ⬅️\n포그라운드 상태에서 원격 알림 받기\n\n\n원격 알림구글 파이어베이스의 클라우드 메시징(Cloud Messaging)서비스를 사용하면 원격 알림(Remote Notification)을 구현할 수 있습니다.\n1. 파이어베이스 프로젝트 만들기우선 파이어베이스에 접속하여 로그인합니다. 계정이 없다면 회원가입을 먼저 합니다. 이후 오른쪽 상단의 Go to console을 클릭합니다.Add Project를 클릭하여 파이어베이스 프로젝트를 생성합니다.\n프로젝트 이름을 입력하고 계속을 누릅니다.구글 에널리틱스를 사용할 것인지를 물어봅니다. 이때는 구글 에널리틱스 계정이 필요합니다. 일단 사용하지 않음을 선택하고 프로젝트를 생성합시다.프로젝트가 정상적으로 생성되면 다음과 같은 화면이 나옵니다.\n2. 안드로이드 스튜디오 프로젝트와 파이어베이스 프로젝트 연동이제 안드로이드 스튜디오 프로젝트에서 Tool &gt; Firebase를 선택합니다.오른쪽 패널의 Assistant 도구 창에서 Cloud Messaging 항목을 찾습니다. 그리고 Set up Firebase Cloud Messaging을 클릭합니다.Connect to Firebase를 눌러 안드로이드 스튜디오 프로젝트와 파이어베이스 프로젝트를 연결합니다. 다음과 같은 화면이 나오면 정상적으로 연결된 것입니다.두 프로젝트가 연결되면 자동으로 google-services.json파일이 생성됩니다. 이 파일은 Firebase에서 안드로이드 프로젝트를 고유하게 식별하는 정보가 담겨있습니다. 프로젝트 도구창을 Android 뷰에서 Project 뷰로 전환합니다.프로젝트의 app 모듈 아래에서 google-service.json파일을 확인할 수 있습니다.\n3. 파이어베이스 라이브러리 추가이제 파이어베이스 라이브러리를 안드로이드 스튜디오 프로젝트에 추가해야합니다. 다시오른쪽 패널의 Assistant 도구 창에서 Cloud Messaging 항목을 찾습니다. 그리고 Set up Firebase Cloud Messaging을 클릭합니다.Add FCM to your app을 클릭합니다.프로젝트에 추가되는 것들은 다음과 같습니다. 우선 프로젝트 수준의 build.gradle에 구글 서비스 라이브러리가 추가됩니다.\n123456buildscript &#123;    dependencies &#123;        classpath &#x27;com.google.gms:google-services:4.3.8&#x27;        // ...    &#125;&#125;\n모듈 수준의 build.gradle에는 Firebase 메시징 라이브러리와 구글 서비스 라이브러리 플러그인이 추가됩니다.\n123456789plugins &#123;    id &#x27;com.google.gms.google-services&#x27;    // ...&#125;dependencies &#123;    implementation &#x27;com.google.firebase:firebase-messaging:22.0.0&#x27;    // ...&#125;\n4. 알림 보내기앱을 실제 기기나 에뮬레이터에서 실행합니다. 그리고 홈 버튼을 눌러서 앱이 백그라운드에서 실행되도록 합니다. 앱이 실행 중이지 않거나 백그라운드에 있을 때만 원격 알림을 수신하기 때문입니다.\n파이어베이스 콘솔에 접속하여 앞에서 생성한 프로젝트를 선택합니다.왼쪽 사이드 바 메뉴에서 Cloud Messaging을 선택합니다.Send your first message를 클릭합니다.다음과 같이 알림 제목과 알림 텍스트를 입력합니다. 알림 이미지와 알림 이름은 선택사항입니다. 오른 쪽에서 어떻게 알림이 나올 지 확인할 수 있습니다. 이후 Next버튼을 누릅니다.이제 어떤 앱과 어떤 사용자에게 알림을 보낼 지 설정합니다. User segment로 설정하면 앱의 모든 사용자에게 알림이 전송됩니다. 또한 어떤 앱에 알림을 보낼지 앱도 선택하고 Next 버튼을 누릅니다.알림을 언제 보낼지를 설정할 수 있습니다. Now로 설정하고 Next버튼을 누릅니다.Additional options는 선택사항입니다. 일단 비워두고 Review버튼을 누릅니다.이제 검토창에서 게시를 누르면 알림이 발송됩니다.알림을 클릭하면 백그라운드 상태이던 앱이 포그라운드로 실행됩니다.\n4. 알림에 데이터 포함시키기알림을 보낼 때 키-값 형태의 데이터를 추가할 수 있습니다. Additional Option 항목에서 데이터를 추가할 수 있습니다.앱이 백그라운드에 진입하면 onPause()메소드가 호출됩니다. 알림을 클릭하여 앱이 포그라운드 상태로 변하면 onRestart() &gt; onStart() &gt; onResume()메소드가 순서대로 실행됩니다. 이 메소드 중 한 곳에서 데이터를 읽어올 수 있습니다. 데이터를 전달받아 토스트 메시지로 화면에 출력하겠습니다.\n123456789101112131415161718192021class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)    &#125;    override fun onStart() &#123;        super.onStart()        val extras = intent.extras        extras?.run &#123;            val name = getString(&quot;name&quot;)            val nation = getString(&quot;nation&quot;)            if (name != null &amp;&amp; nation != null) &#123;                Toast.makeText(this@MainActivity, &quot;$&#123;name&#125; comes from $&#123;nation&#125;. &quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;    &#125;&#125;\n이제 앱을 실행하고 백그라운드 모드로 변경한 후 알림을 전송합시다. 알림을 클릭하면 다음과 같이 토스트 메시지가 나옵니다.\n\n마치며이번 포스트에서는 원격 알림(Remote Notification)에 대해 알아봤습니다. 다음 포스트에서는 포그라운드 상태에서 원격 알림을 받는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-09T20:16:30+09:00","dateModified":"2021-06-21T15:15:49+09:00","datePublished":"2019-08-09T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (5) 원격 알림","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/09/android/190809-remote-notification/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/09/android/190809-remote-notification/","keywords":"Android"}</script>
     <meta name="description" content="들어가며6개의 포스트에서 알림(Notification)에 대해 알아보고 있습니다.  로컬 알림 알림에서 액티비티 시작하기 알림에 액션 추가하기 알림 메시지 묶기 원격 알림 ⬅️ ⬅️ ⬅️ 포그라운드 상태에서 원격 알림 받기   원격 알림구글 파이어베이스의 클라우드 메시징(Cloud Messaging)서비스를 사용하면 원격 알림(Remote Notifica">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 알림(Notification) - (5) 원격 알림">
@@ -87,7 +87,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -114,7 +114,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -181,7 +181,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -195,7 +195,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -203,20 +203,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -268,7 +254,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -422,7 +408,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -484,7 +470,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -561,7 +547,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

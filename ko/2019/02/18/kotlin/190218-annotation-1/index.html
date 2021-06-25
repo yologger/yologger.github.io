@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에는 비구조화 할당에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 어노테이션(Annotation)에 대해 알아보겠습니다.\n이 포스트에 앞서 자바의 어노테이션에 대해 꼭 읽어보시길 권장드립니다.\n\n\n\n어노테이션 클래스 선언방법코틀린에서 어노테이션은 다음과 같이 선언할 수 있습니다.\n1annotation class IsAvailable\n이렇게 선언한 어노테이션은 다음과 같이 사용합니다.\n1234fun main() &#123;    // 어노테이션 사용    @IsAvailable var name: String = &quot;name&quot;   &#125;\n어노테이션은 데이터를 가질 수도 있습니다.\n1annotation class IsAvailable(val message: String)\n다음과 같이 선언할 수도 있습니다.\n123annotation class IsAvailable &#123;    val message: String&#125;\n데이터가 있는 어노테이션은 다음과 같이 사용합니다.\n123fun main() &#123;    @IsAvailable(&quot;IsNameAvailabe&quot;) var name: String = &quot;name&quot;   &#125;\n마치며이번 포스트에서는 어노테이션과 어노테이션 클래스에 대해 알아봤습니다. 다음 포스트에서는 어노테이션의 위치에 대해 알아보겠습니다.\n","dateCreated":"2019-02-18T20:16:30+09:00","dateModified":"2021-06-23T14:03:03+09:00","datePublished":"2019-02-18T20:16:30+09:00","description":"","headline":"[코틀린] 어노테이션(Annotation)이란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/18/kotlin/190218-annotation-1/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/18/kotlin/190218-annotation-1/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에는 비구조화 할당에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 어노테이션(Annotation)에 대해 알아보겠습니다.\n이 포스트에 앞서 자바의 어노테이션에 대해 꼭 읽어보시길 권장드립니다.\n\n\n\n어노테이션 클래스 선언방법코틀린에서 어노테이션은 다음과 같이 선언할 수 있습니다.\n1annotation class IsAvailable\n이렇게 선언한 어노테이션은 다음과 같이 사용합니다.\n1234fun main() &#123;    // 어노테이션 사용    @IsAvailable var name: String = &quot;name&quot;   &#125;\n어노테이션은 데이터를 가질 수도 있습니다.\n1annotation class IsAvailable(val message: String)\n다음과 같이 선언할 수도 있습니다.\n123annotation class IsAvailable &#123;    val message: String&#125;\n데이터가 있는 어노테이션은 다음과 같이 사용합니다.\n123fun main() &#123;    @IsAvailable(&quot;IsNameAvailabe&quot;) var name: String = &quot;name&quot;   &#125;\n마치며이번 포스트에서는 어노테이션과 어노테이션 클래스에 대해 알아봤습니다. 다음 포스트에서는 어노테이션의 위치에 대해 알아보겠습니다.\n","dateCreated":"2019-02-18T20:16:30+09:00","dateModified":"2021-06-23T14:03:03+09:00","datePublished":"2019-02-18T20:16:30+09:00","description":"","headline":"[코틀린] 어노테이션(Annotation)이란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/18/kotlin/190218-annotation-1/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/18/kotlin/190218-annotation-1/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에는 비구조화 할당에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 어노테이션(Annotation)에 대해 알아보겠습니다. 이 포스트에 앞서 자바의 어노테이션에 대해 꼭 읽어보시길 권장드립니다.    어노테이션 클래스 선언방법코틀린에서 어노테이">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] 어노테이션(Annotation)이란?">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -393,7 +379,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -455,7 +441,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -532,7 +518,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

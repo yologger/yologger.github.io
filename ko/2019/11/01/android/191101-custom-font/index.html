@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이번 포스트에서는 커스텀 폰트(Custom Font)를 적용하는 방법에 대해 알아보겠습니다.\n1. 폰트 다운로드우선 눈누(https://noonnu.cc/)라는 무료 폰트 사이트에서 한글 폰트를 다운로드 받습니다. 저는 산돌 삼립호빵체를 선택했습니다. 산돌 살림호빵체는 basic버전과 outline버전이 있습니다.폰트 파일은 2가지 종류 *.ttf와 *.otf가 있는데 어느 것을 다운로드 받아도 상관없습니다.\n이제 아래와 같이 /res/font폴더를 생성하고, 2개의 폰트 파일(basic과 outline)을 추가합니다. 주의할 점은 폰트 파일의 이름을 소문자로 변경해야합니다.\n2. font.xml 생성/res/font폴더 아래에 font.xml파일을 생성하고 다음과 같이 다운로드받은 폰트를 추가합니다.\n1234567891011&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;font-family xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;    &lt;font        android:fontStyle = &quot;normal&quot;        android:fontWeight = &quot;400&quot;        android:font = &quot;@font/sandoll_basic&quot;/&gt;    &lt;font        android:fontStyle = &quot;normal&quot;        android:fontWeight = &quot;400&quot;        android:font = &quot;@font/sandoll_outline&quot;/&gt;&lt;/font-family&gt;\n위과 같이 &lt;font-family&gt;태그 안에 &lt;font&gt;태그를 추가하고 다운받은 폰트를 등록합니다. font의 속성값은 @font/폰트파일이름 형식으로 지정합니다.\n3. 폰트 사용하기이제 레이아웃 파일에서 fontFamily속성값으로 폰트를 사용할 수 있습니다.\n123456789101112131415161718192021222324252627282930313233&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;TextView        android:id=&quot;@+id/textview1&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:text=&quot;@string/textview_welcome&quot;        android:fontFamily=&quot;@font/sandoll_basic&quot;        android:textSize=&quot;50dp&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintBottom_toTopOf=&quot;@+id/textview2&quot;/&gt;    &lt;TextView        android:id=&quot;@+id/textview2&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:text=&quot;@string/textview_welcome&quot;        android:fontFamily=&quot;@font/sandoll_outline&quot;        android:textSize=&quot;50dp&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintTop_toBottomOf=&quot;@+id/textview1&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n화면은 아래와 같습니다.\n","dateCreated":"2019-11-01T20:16:30+09:00","dateModified":"2021-06-21T14:13:46+09:00","datePublished":"2019-11-01T20:16:30+09:00","description":"","headline":"[안드로이드] 커스텀 폰트(Custom Font) 적용하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/11/01/android/191101-custom-font/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/11/01/android/191101-custom-font/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이번 포스트에서는 커스텀 폰트(Custom Font)를 적용하는 방법에 대해 알아보겠습니다.\n1. 폰트 다운로드우선 눈누(https://noonnu.cc/)라는 무료 폰트 사이트에서 한글 폰트를 다운로드 받습니다. 저는 산돌 삼립호빵체를 선택했습니다. 산돌 살림호빵체는 basic버전과 outline버전이 있습니다.폰트 파일은 2가지 종류 *.ttf와 *.otf가 있는데 어느 것을 다운로드 받아도 상관없습니다.\n이제 아래와 같이 /res/font폴더를 생성하고, 2개의 폰트 파일(basic과 outline)을 추가합니다. 주의할 점은 폰트 파일의 이름을 소문자로 변경해야합니다.\n2. font.xml 생성/res/font폴더 아래에 font.xml파일을 생성하고 다음과 같이 다운로드받은 폰트를 추가합니다.\n1234567891011&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;font-family xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;    &lt;font        android:fontStyle = &quot;normal&quot;        android:fontWeight = &quot;400&quot;        android:font = &quot;@font/sandoll_basic&quot;/&gt;    &lt;font        android:fontStyle = &quot;normal&quot;        android:fontWeight = &quot;400&quot;        android:font = &quot;@font/sandoll_outline&quot;/&gt;&lt;/font-family&gt;\n위과 같이 &lt;font-family&gt;태그 안에 &lt;font&gt;태그를 추가하고 다운받은 폰트를 등록합니다. font의 속성값은 @font/폰트파일이름 형식으로 지정합니다.\n3. 폰트 사용하기이제 레이아웃 파일에서 fontFamily속성값으로 폰트를 사용할 수 있습니다.\n123456789101112131415161718192021222324252627282930313233&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;TextView        android:id=&quot;@+id/textview1&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:text=&quot;@string/textview_welcome&quot;        android:fontFamily=&quot;@font/sandoll_basic&quot;        android:textSize=&quot;50dp&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintBottom_toTopOf=&quot;@+id/textview2&quot;/&gt;    &lt;TextView        android:id=&quot;@+id/textview2&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        android:text=&quot;@string/textview_welcome&quot;        android:fontFamily=&quot;@font/sandoll_outline&quot;        android:textSize=&quot;50dp&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintTop_toBottomOf=&quot;@+id/textview1&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n화면은 아래와 같습니다.\n","dateCreated":"2019-11-01T20:16:30+09:00","dateModified":"2021-06-21T14:13:46+09:00","datePublished":"2019-11-01T20:16:30+09:00","description":"","headline":"[안드로이드] 커스텀 폰트(Custom Font) 적용하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/11/01/android/191101-custom-font/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/11/01/android/191101-custom-font/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이번 포스트에서는 커스텀 폰트(Custom Font)를 적용하는 방법에 대해 알아보겠습니다. 1. 폰트 다운로드우선 눈누(https:&#x2F;&#x2F;noonnu.cc&#x2F;)라는 무료 폰트 사이트에서 한글 폰트를 다운로드 받습니다. 저는 산돌 삼립호빵체를 선택했습니다.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 커스텀 폰트(Custom Font) 적용하기">
@@ -69,7 +69,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -96,7 +96,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -163,7 +163,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -177,7 +177,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -185,20 +185,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -250,7 +236,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -391,7 +377,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -453,7 +439,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -530,7 +516,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

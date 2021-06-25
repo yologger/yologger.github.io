@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n프래그먼트란?프래그먼트(Fragment)는 액티비티 내부에서 독립적으로 애플리케이션의 UI를 관리하는 객체입니다. 모든 프래그먼트는 Fragment클래스를 구현합니다.   프래그먼트는 두 가지 방법으로 생성할 수 있습니다.\n1. 레이아웃 XML 파일에 프래그먼트 추가하기프래그먼트는 &lt;fragmemt&gt;태그를 사용하여 레이아웃 XML 파일에 추가할 수 있습니다.\n우선 다음과 같이 MainFragment를 생성합시다.\nMainFragment.kt1234567891011121314class MainFragment : Fragment() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)    &#125;    override fun onCreateView(        inflater: LayoutInflater, container: ViewGroup?,        savedInstanceState: Bundle?    ): View? &#123;        // Inflate the layout for this fragment        return inflater.inflate(R.layout.fragment_main, container, false)    &#125;&#125;\nMainFragment에 대한 레이아웃 파일은 다음과 같습니다.\nfragment_main.xml12345678910111213141516171819&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    android:background=&quot;#BB86FC&quot;    tools:context=&quot;.MainFragment&quot;&gt;    &lt;TextView android:text=&quot;This is MainFragment&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n이제 MainActivity에 대한 레이아웃 파일에 다음과 같이 프래그먼트를 추가합니다.\nactivity_main.xml123456789101112131415161718&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;fragment android:id=&quot;@+id/fragment&quot;        android:name=&quot;com.yologger.fragment.MainFragment&quot;        android:layout_width=&quot;match_parent&quot;        android:layout_height=&quot;500dp&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n앱을 실행하면 다음과 같습니다. 흰 부분은 액티비티 영역이고 보라색 부분은 프래그먼트 영역입니다.\n2. 코드로 프래그먼트 추가하기프래그먼트는 코드에서 추가할 수도 있습니다. 순서는 다음과 같습니다. \n\n프래그먼트의 인스턴스를 생성합니다.\n액티비티에서 프래그먼트 매니저 객체의 참조를 얻어옵니다.\n프래그먼트 매니저의 beginTransaction()메소드를 호출하여 프래그먼트 트랜잭션 인스턴스를 생성합니다.\n프래그먼트 트랜잭션 인스턴스에서 add()메소드를 호출합니다. 이때 프래그먼트가 추가될 뷰 그룹과 프래그먼트를 인자로 전달합니다.\n프래그먼트 트랜잭션 인스턴스에서 commit()메소드를 호출합니다.\n\n우선 MainActivity의 레이아웃 파일은 다음과 같습니다. &lt;FrameLayout&gt;은 프래그먼트가 추가될 뷰 그룹입니다.\nactivity_main.xml123456789101112131415161718&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;FrameLayout android:id=&quot;@+id/activity_main_container&quot;        android:layout_width=&quot;match_parent&quot;        android:layout_height=&quot;500dp&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;&gt;    &lt;/FrameLayout&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n이제 코드에서 프래그먼트를 추가합시다.\nMainActivity.kt12345678910111213141516171819202122class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        // 프래그먼트의 인스턴스를 생성합니다.        val fragment = MainFragment()        // 액티비티에서 프래그먼트 매니저 객체의 참조를 얻어옵니다.        val fragmentManager = supportFragmentManager        // 프래그먼트 트랜잭션 인스턴스를 생성합니다.        val fragmentTransaction = fragmentManager.beginTransaction()        // 프래그먼트 트랜잭션 인스턴스에서 add()메소드를 호출합니다.        fragmentTransaction.add(R.id.activity_main_container, fragment)        // 프래그먼트 트랜잭션 인스턴스에서 commit()메소드를 호출합니다.        fragmentTransaction.commit()    &#125;&#125;\n마치며이번 포스트에서는 프래그먼트(Fragment)에 대해 알아봤습니다. 다음 포스트에서는 프래그먼트 매니저(Fragment Manager)에 대해 알아보겠습니다.\n","dateCreated":"2019-04-10T20:16:30+09:00","dateModified":"2021-06-21T14:12:32+09:00","datePublished":"2019-04-10T20:16:30+09:00","description":"","headline":"[안드로이드] 프래그먼트 - (1) 프래그먼트(Fragment)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/10/android/190410-fragment/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/10/android/190410-fragment/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n프래그먼트란?프래그먼트(Fragment)는 액티비티 내부에서 독립적으로 애플리케이션의 UI를 관리하는 객체입니다. 모든 프래그먼트는 Fragment클래스를 구현합니다.   프래그먼트는 두 가지 방법으로 생성할 수 있습니다.\n1. 레이아웃 XML 파일에 프래그먼트 추가하기프래그먼트는 &lt;fragmemt&gt;태그를 사용하여 레이아웃 XML 파일에 추가할 수 있습니다.\n우선 다음과 같이 MainFragment를 생성합시다.\nMainFragment.kt1234567891011121314class MainFragment : Fragment() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)    &#125;    override fun onCreateView(        inflater: LayoutInflater, container: ViewGroup?,        savedInstanceState: Bundle?    ): View? &#123;        // Inflate the layout for this fragment        return inflater.inflate(R.layout.fragment_main, container, false)    &#125;&#125;\nMainFragment에 대한 레이아웃 파일은 다음과 같습니다.\nfragment_main.xml12345678910111213141516171819&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    android:background=&quot;#BB86FC&quot;    tools:context=&quot;.MainFragment&quot;&gt;    &lt;TextView android:text=&quot;This is MainFragment&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n이제 MainActivity에 대한 레이아웃 파일에 다음과 같이 프래그먼트를 추가합니다.\nactivity_main.xml123456789101112131415161718&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;fragment android:id=&quot;@+id/fragment&quot;        android:name=&quot;com.yologger.fragment.MainFragment&quot;        android:layout_width=&quot;match_parent&quot;        android:layout_height=&quot;500dp&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n앱을 실행하면 다음과 같습니다. 흰 부분은 액티비티 영역이고 보라색 부분은 프래그먼트 영역입니다.\n2. 코드로 프래그먼트 추가하기프래그먼트는 코드에서 추가할 수도 있습니다. 순서는 다음과 같습니다. \n\n프래그먼트의 인스턴스를 생성합니다.\n액티비티에서 프래그먼트 매니저 객체의 참조를 얻어옵니다.\n프래그먼트 매니저의 beginTransaction()메소드를 호출하여 프래그먼트 트랜잭션 인스턴스를 생성합니다.\n프래그먼트 트랜잭션 인스턴스에서 add()메소드를 호출합니다. 이때 프래그먼트가 추가될 뷰 그룹과 프래그먼트를 인자로 전달합니다.\n프래그먼트 트랜잭션 인스턴스에서 commit()메소드를 호출합니다.\n\n우선 MainActivity의 레이아웃 파일은 다음과 같습니다. &lt;FrameLayout&gt;은 프래그먼트가 추가될 뷰 그룹입니다.\nactivity_main.xml123456789101112131415161718&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;FrameLayout android:id=&quot;@+id/activity_main_container&quot;        android:layout_width=&quot;match_parent&quot;        android:layout_height=&quot;500dp&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;&gt;    &lt;/FrameLayout&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n이제 코드에서 프래그먼트를 추가합시다.\nMainActivity.kt12345678910111213141516171819202122class MainActivity : AppCompatActivity() &#123;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        // 프래그먼트의 인스턴스를 생성합니다.        val fragment = MainFragment()        // 액티비티에서 프래그먼트 매니저 객체의 참조를 얻어옵니다.        val fragmentManager = supportFragmentManager        // 프래그먼트 트랜잭션 인스턴스를 생성합니다.        val fragmentTransaction = fragmentManager.beginTransaction()        // 프래그먼트 트랜잭션 인스턴스에서 add()메소드를 호출합니다.        fragmentTransaction.add(R.id.activity_main_container, fragment)        // 프래그먼트 트랜잭션 인스턴스에서 commit()메소드를 호출합니다.        fragmentTransaction.commit()    &#125;&#125;\n마치며이번 포스트에서는 프래그먼트(Fragment)에 대해 알아봤습니다. 다음 포스트에서는 프래그먼트 매니저(Fragment Manager)에 대해 알아보겠습니다.\n","dateCreated":"2019-04-10T20:16:30+09:00","dateModified":"2021-06-21T14:12:32+09:00","datePublished":"2019-04-10T20:16:30+09:00","description":"","headline":"[안드로이드] 프래그먼트 - (1) 프래그먼트(Fragment)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/10/android/190410-fragment/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/10/android/190410-fragment/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  프래그먼트란?프래그먼트(Fragment)는 액티비티 내부에서 독립적으로 애플리케이션의 UI를 관리하는 객체입니다. 모든 프래그먼트는 Fragment클래스를 구현합니다.   프래그먼트는 두 가지 방법으로 생성할 수 있습니다. 1. 레이아웃 XML 파일에 프래그">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 프래그먼트 - (1) 프래그먼트(Fragment)란?">
@@ -66,7 +66,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -93,7 +93,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -160,7 +160,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -174,7 +174,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -182,20 +182,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -247,7 +233,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -401,7 +387,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -463,7 +449,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -540,7 +526,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

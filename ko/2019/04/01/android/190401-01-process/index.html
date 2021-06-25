@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n어플리케이션과 프로세스리눅스 기반의 운영체제인 안드로이드에서는 어플리케이션이 리눅스 프로세스(Linux Process)로 실행됩니다. 이때 프로세스 이름을 별도로 지정하지 않으면 패키지 이름을 프로세스 이름으로 사용합니다.\n패키지 이름은 AndroidManifest.xml에서 확인할 수 있습니다.\n12345678910&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.your_project_name&quot;&gt;    &lt;application&gt;        &lt;!-- .. --&gt;    &lt;/application&gt;&lt;/manifest&gt; \n이제 에뮬레이터나 연결된 기기에 앱을 설치합니다. 그리고 ADB를 통해 실제 프로세스 이름을 확인해봅시다.\n12345$ adb shell&gt; ps -ef | grep &quot;com.yologger.your_project_name&quot;u0_a289   14996   850 0 15:08:05 ?   00:00:01 com.yologger.your_project_name...\n&lt;application&gt;태그 안에서 android:process속성을 사용하여 프로세스 이름을 직접 지정할 수도 있습니다.\n12345678910&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.your_project_name&quot;&gt;    &lt;application android:process=&quot;com.yologger.your_process_name&quot;&gt;        &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt; \n다시 프로세스 이름을 확인해봅시다.\n12345$ adb shell&gt; ps -ef | grep &quot;com.yologger.your_process_name&quot;            u0_a289   18014   850 1 15:14:50 ?   00:00:01 com.yologger.your_process_name...\n컴포넌트와 프로세스하나의 애플리케이션은 여러 컴포넌트로 구성됩니다. 거의 대부분 이 컴포넌트들은 같은 프로세스에서 실행됩니다. 그러나 컴포넌트를 다른 프로세스에서 실행할 수도 있습니다. 이때는 컴포넌트에서 android:process속성을 사용하면 됩니다.\n1234567891011121314151617181920212223242526272829303132333435363738&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.your_project&quot;&gt;    &lt;application android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Your_Project&quot;&gt;        &lt;activity android:name=&quot;.MainActivity&quot;            android:process=&quot;com.yolo&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        &lt;activity             android:name=&quot;.ActivityA&quot;            android:process=&quot;com.yolo.process1&quot;&gt;        &lt;/activity&gt;         &lt;activity             android:name=&quot;.ActivityB&quot;            android:process=&quot;com.yolo.process2&quot;&gt;        &lt;/activity&gt;          &lt;service            android:name=&quot;.MyService&quot;            android:enabled=&quot;true&quot;            android:exported=&quot;true&quot;            android:process=&quot;com.yolo.process3&quot;&gt;        &lt;/service&gt;    &lt;/application&gt;&lt;/manifest&gt;\n** \n마치며이번 포스트에서는 프로세스(Process)에 대해 알아봤습니다. 다음 포스트에서는 스레드(Thread)에 대해 알아보겠습니다.\n","dateCreated":"2019-04-01T01:16:30+09:00","dateModified":"2021-06-21T14:12:10+09:00","datePublished":"2019-04-01T01:16:30+09:00","description":"","headline":"[안드로이드] 프로세스(Process)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/01/android/190401-01-process/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/all-tags","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/01/android/190401-01-process/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n어플리케이션과 프로세스리눅스 기반의 운영체제인 안드로이드에서는 어플리케이션이 리눅스 프로세스(Linux Process)로 실행됩니다. 이때 프로세스 이름을 별도로 지정하지 않으면 패키지 이름을 프로세스 이름으로 사용합니다.\n패키지 이름은 AndroidManifest.xml에서 확인할 수 있습니다.\n12345678910&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.your_project_name&quot;&gt;    &lt;application&gt;        &lt;!-- .. --&gt;    &lt;/application&gt;&lt;/manifest&gt; \n이제 에뮬레이터나 연결된 기기에 앱을 설치합니다. 그리고 ADB를 통해 실제 프로세스 이름을 확인해봅시다.\n12345$ adb shell&gt; ps -ef | grep &quot;com.yologger.your_project_name&quot;u0_a289   14996   850 0 15:08:05 ?   00:00:01 com.yologger.your_project_name...\n&lt;application&gt;태그 안에서 android:process속성을 사용하여 프로세스 이름을 직접 지정할 수도 있습니다.\n12345678910&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.your_project_name&quot;&gt;    &lt;application android:process=&quot;com.yologger.your_process_name&quot;&gt;        &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt; \n다시 프로세스 이름을 확인해봅시다.\n12345$ adb shell&gt; ps -ef | grep &quot;com.yologger.your_process_name&quot;            u0_a289   18014   850 1 15:14:50 ?   00:00:01 com.yologger.your_process_name...\n컴포넌트와 프로세스하나의 애플리케이션은 여러 컴포넌트로 구성됩니다. 거의 대부분 이 컴포넌트들은 같은 프로세스에서 실행됩니다. 그러나 컴포넌트를 다른 프로세스에서 실행할 수도 있습니다. 이때는 컴포넌트에서 android:process속성을 사용하면 됩니다.\n1234567891011121314151617181920212223242526272829303132333435363738&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.your_project&quot;&gt;    &lt;application android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Your_Project&quot;&gt;        &lt;activity android:name=&quot;.MainActivity&quot;            android:process=&quot;com.yolo&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        &lt;activity             android:name=&quot;.ActivityA&quot;            android:process=&quot;com.yolo.process1&quot;&gt;        &lt;/activity&gt;         &lt;activity             android:name=&quot;.ActivityB&quot;            android:process=&quot;com.yolo.process2&quot;&gt;        &lt;/activity&gt;          &lt;service            android:name=&quot;.MyService&quot;            android:enabled=&quot;true&quot;            android:exported=&quot;true&quot;            android:process=&quot;com.yolo.process3&quot;&gt;        &lt;/service&gt;    &lt;/application&gt;&lt;/manifest&gt;\n** \n마치며이번 포스트에서는 프로세스(Process)에 대해 알아봤습니다. 다음 포스트에서는 스레드(Thread)에 대해 알아보겠습니다.\n","dateCreated":"2019-04-01T01:16:30+09:00","dateModified":"2021-06-21T14:12:10+09:00","datePublished":"2019-04-01T01:16:30+09:00","description":"","headline":"[안드로이드] 프로세스(Process)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/01/android/190401-01-process/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/01/android/190401-01-process/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   어플리케이션과 프로세스리눅스 기반의 운영체제인 안드로이드에서는 어플리케이션이 리눅스 프로세스(Linux Process)로 실행됩니다. 이때 프로세스 이름을 별도로 지정하지 않으면 패키지 이름을 프로세스 이름으로 사용합니다. 패키지 이름은 AndroidMan">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 프로세스(Process)">
@@ -64,7 +64,7 @@
 
     
 
-<header id="header" data-behavior="5">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a
@@ -91,7 +91,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="5">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
         
@@ -158,7 +158,7 @@
                             rel="noopener"
                             title="Java"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Java</span>
                     </a>
             </li>
@@ -172,7 +172,7 @@
                             rel="noopener"
                             title="Kotlin"
                         >
-                        <i class="sidebar-button-icon " aria-hidden="true"></i>
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Kotlin</span>
                     </a>
             </li>
@@ -180,20 +180,6 @@
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -245,7 +231,7 @@
 </nav>
 
             
-            <div id="main" data-behavior="5"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
@@ -391,7 +377,7 @@
 
             </div>
             
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
                     <div class="post-actions-wrap">
 
     <ul class="post-actions post-action-share">
@@ -453,7 +439,7 @@
 
                 </div>
                 
-    <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
         <i id="btn-close-shareoptions" class="fa fa-times"></i>
         <ul class="share-options">
             
@@ -530,7 +516,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/sunset10.png');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
