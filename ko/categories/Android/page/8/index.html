@@ -256,115 +256,10 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/12/24/android/181224-alpha-test/"
-                            aria-label=": [안드로이드] 앱 출시 - (2) 알파 테스트"
-                        >
-                            [안드로이드] 앱 출시 - (2) 알파 테스트
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-12-24T20:16:30+09:00">
-	
-		    2018/12/24
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>3개의 포스트에 걸쳐 앱을 출시하는 방법에 대해 알아보고 있습니다.</p>
-<ol>
-<li><a href="/ko/2018/12/23/android/181223-app-release-signed-apk/">서명된 릴리즈 APK 생성</a></li>
-<li>Google Play Store에 출시하기  ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2018/12/25/android/181225-app-release-new-apk/">새로운 버전 출시하기</a></li>
-</ol>
-<hr>
-<h1 id="개발자-계정-만들기"><a href="#개발자-계정-만들기" class="headerlink" title="개발자 계정 만들기"></a>개발자 계정 만들기</h1><p>구글 플레이스토어에 앱을 출시하려면 <code>구글 개발자 계정</code>을 만들어야 합니다. <a target="_blank" rel="noopener" href="http://play.google.com/apps/publish/signup">http://play.google.com/apps/publish/signup</a>을 방문하여 <code>구글 개발자 계정</code>을 생성합니다. (현재는 미화로 25달러를 결제해야하며, 한번 결제 시 평생 이용할 수 있습니다.)</p>
-<hr>
-<h1 id="앱-생성하기"><a href="#앱-생성하기" class="headerlink" title="앱 생성하기"></a>앱 생성하기</h1><p>구글 플레이 개발자 콘솔 계정을 만들었다면 <a target="_blank" rel="noopener" href="https://play.google.com/console/developers">구글 플레이 콘솔(Google Play Console)</a>에 접속합니다. 그리고 Create app 버튼을 클릭합니다.<br><img src="/ko/images/posts/android/app-release-playstore/1.png"></p>
-<p>App details의 항목들을 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/2.png"></p>
-<ol>
-<li>App name: 플레이 스토어에 출시되는 앱 이름</li>
-<li>Default language: 기본 언어</li>
-<li>App or game: 게임 앱인 경우 game, 그 외에는 App</li>
-<li>Free or paid: 무료 앱인 경우 free, 유료 앱인 경우 paid (무료 선택 시 추후에 유료로 변경할 수 없습니다.)</li>
-</ol>
-<p>Declarations 항목들을 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/3.png"><br>개발자 프로그램 정책과 미국 수출법규에 동의한다는 내용입니다.</p>
-<p>이제 오른쪽 하단의 create app 버튼을 클릭하면 앱이 생성됩니다. 생성된 앱은 왼쪽 사이드 바 메뉴에의 All apps를 선택하면 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/4.png"></p>
-<hr>
-<h1 id="앱-설정하기"><a href="#앱-설정하기" class="headerlink" title="앱 설정하기"></a>앱 설정하기</h1><p>All apps에서 생성한 앱을 선택합니다.<br><img src="/ko/images/posts/android/app-release-playstore/5.png"><br>왼쪽 사이드바 메뉴에 Dashboard를 클릭합니다.<br><img src="/ko/images/posts/android/app-release-playstore/6.png"><br>Dashboard 페이지에서는 앱 출시를 위해 입력해야할 정보가 단계별로 기재되어 있습니다. 하나씩 선택하고 입력하면 됩니다.</p>
-<p>또한 Dashboard에서는 각 단계의 진행상황을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/34.png"></p>
-<h4 id="1-Start-testing-now"><a href="#1-Start-testing-now" class="headerlink" title="1. Start testing now"></a>1. Start testing now</h4><h4 id="2-Set-up-your-app"><a href="#2-Set-up-your-app" class="headerlink" title="2. Set up your app"></a>2. Set up your app</h4><p>다음 7개 항목을 입력해야합니다.<br><img src="/ko/images/posts/android/app-release-playstore/20.png"></p>
-<h6 id="a-App-access"><a href="#a-App-access" class="headerlink" title="(a) App access"></a>(a) App access</h6><p><img src="/ko/images/posts/android/app-release-playstore/21.png"><br><code>All functionality is available without special access</code>를 체크하고 저장합니다. 특별한 접근 권한 없이 모든 이용이 가능하다는 뜻입니다.</p>
-<h6 id="b-Ads"><a href="#b-Ads" class="headerlink" title="(b) Ads"></a>(b) Ads</h6><p><img src="/ko/images/posts/android/app-release-playstore/22.png"><br>광고 여부를 체크합니다. 앱 내에 광고가 있으면 “Yes, my app contains adds”를, 광고가 없으면 “No, my app does not contain ads”를 선택하고 저장합니다.</p>
-<h6 id="c-Content-ratings"><a href="#c-Content-ratings" class="headerlink" title="(c) Content ratings"></a>(c) Content ratings</h6><p>콘텐츠의 등급을 설정합니다. Start new questionaire를 클릭하여 설문을 시작합니다.<br><img src="/ko/images/posts/android/app-release-playstore/23.png"><br>이 단계에서는 이메일 주소와 앱 카테고리, 앱의 적합성을 조사합니다.<br><img src="/ko/images/posts/android/app-release-playstore/24.png"><br>모든 단계가 끝나면 각 국가에서의 등급을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/25.png"></p>
-<h6 id="d-Target-audience-and-content"><a href="#d-Target-audience-and-content" class="headerlink" title="(d) Target audience and content"></a>(d) Target audience and content</h6><p>앱을 사용할 연령층과 어린이 관심 유도 여부 등을 확인합니다. 설문을 모두 완료합시다.<br><img src="/ko/images/posts/android/app-release-playstore/26.png"></p>
-<h6 id="e-News-Apps"><a href="#e-News-Apps" class="headerlink" title="(e) News Apps"></a>(e) News Apps</h6><p>뉴스 앱인지를 체크합니다.<br><img src="/ko/images/posts/android/app-release-playstore/27.png"></p>
-<h6 id="f-App-category-amp-Contact"><a href="#f-App-category-amp-Contact" class="headerlink" title="(f) App category &amp; Contact"></a>(f) App category &amp; Contact</h6><p>앱의 카테고리을 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/28.png"><br>개발자 연락처를 입력하고, 외부 마케팅 여부를 클릭합니다.<br><img src="/ko/images/posts/android/app-release-playstore/29.png"></p>
-<h6 id="g-Main-store-listing"><a href="#g-Main-store-listing" class="headerlink" title="(g) Main store listing"></a>(g) Main store listing</h6><p>앱 스토어에 표시될 앱 정보를 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/30.png"></p>
-<ul>
-<li>App name: 플레이 스토어에 표시되는 앱 이름</li>
-<li>Short description: 간단한 앱 설명</li>
-<li>Full description: 자세한 앱 설명</li>
-</ul>
-<p><img src="/ko/images/posts/android/app-release-playstore/31.png"></p>
-<ul>
-<li>App icon: 플레이스토어에 표시되는 앱 아이콘 이미지 (512x512px)</li>
-<li>Feature graphic: 출시된 앱을 공유했을 때 나타나는 섬네일 이미지 (1024x500px)</li>
-</ul>
-<p><img src="/ko/images/posts/android/app-release-playstore/33.png"><br>스마트폰과 태블릿에 대한 스크린샷을 업로드</p>
-<hr>
-<h1 id="앱-출시하기"><a href="#앱-출시하기" class="headerlink" title="앱 출시하기"></a>앱 출시하기</h1><p>이제 Dashboard로 돌아와 Release your app 항목을 입력합시다.<br><img src="/ko/images/posts/android/app-release-playstore/35.png"></p>
-<h6 id="a-Select-countries-and-regions"><a href="#a-Select-countries-and-regions" class="headerlink" title="(a) Select countries and regions"></a>(a) Select countries and regions</h6><h6 id="b-Select-testers"><a href="#b-Select-testers" class="headerlink" title="(b) Select testers"></a>(b) Select testers</h6><h6 id="c-Create-a-new-release"><a href="#c-Create-a-new-release" class="headerlink" title="(c) Create a new release"></a>(c) Create a new release</h6><h6 id="d-Review-and-roll-out-the-release"><a href="#d-Review-and-roll-out-the-release" class="headerlink" title="(d) Review and roll out the release"></a>(d) Review and roll out the release</h6><p><a target="_blank" rel="noopener" href="https://wp.swing2app.co.kr/knowledgebase/playstore-apprelease/">https://wp.swing2app.co.kr/knowledgebase/playstore-apprelease/</a></p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/12/24/android/181224-alpha-test/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2018/12/23/android/181223-signed-apk/"
-                            aria-label=": [안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성"
+                            aria-label=": [안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성하기"
                         >
-                            [안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성
+                            [안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성하기
                         </a>
                     
                 </h1>
@@ -387,36 +282,41 @@
             
                 <div class="postShorten-content">
                     <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 3개의 포스트에 걸쳐 앱을 출시하는 방법에 대해 알아보겠습니다.</p>
-<ol>
-<li>서명된 릴리즈 APK 생성 ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2018/12/24/android/181224-app-release-playstore/">Google Play Store에 출시하기</a></li>
-<li><a href="/ko/2018/12/25/android/181225-app-release-new-apk/">새로운 버전 출시하기</a></li>
-</ol>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
+<ul>
+<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
+<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a></li>
+<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
+<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
+<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
+<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
+<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
+</ul>
 <hr>
-<h1 id="앱-출시-프로세스"><a href="#앱-출시-프로세스" class="headerlink" title="앱 출시 프로세스"></a>앱 출시 프로세스</h1><p>구글 플레이 스토어에 앱을 출시할 때는 다음 과정을 거칩니다.</p>
+<h1 id="서명된-릴리즈-APK-파일"><a href="#서명된-릴리즈-APK-파일" class="headerlink" title="서명된 릴리즈 APK 파일"></a>서명된 릴리즈 APK 파일</h1><p>구글 플레이스토어에 앱을 출시하는 과정은 다음과 같습니다.</p>
 <ol>
 <li>디버그 모드 대신 릴리스 모드로 변경</li>
-<li>앱 최적화와 역공학 방지를 위한 추가 작업</li>
-<li>개인 키를 사용하여 앱에 서명하고 빌드</li>
-<li>구글 플레이 스토어에 서명된 APK 파일 업로드</li>
+<li>개인 키를 사용하여 앱에 서명하고 빌드하여 APK 파일 생성</li>
+<li>구글 플레이스토어에 서명된 APK 파일 업로드</li>
 </ol>
-<h1 id="1-디버그-모드"><a href="#1-디버그-모드" class="headerlink" title="1. 디버그 모드"></a>1. 디버그 모드</h1><p>개발 단계에서는 <code>디버그 모드</code>로 앱을 빌드하고 실행합니다.<br><img src="/ko/images/posts/android/app-release/1.png"></p>
-<p>안드로이드 스튜디오는 디버그 모드일 때 디버그용 키를 사용하여 앱을 자동으로 서명합니다. 따라서 에뮬레이터나 연결된 실제 기기에 앱을 설치하고 실행할 때 별도의 서명 정보 입력이 필요없습니다.</p>
-<blockquote>
-<p>안드로이드 스튜디오는 프로젝트를 처음 실행하면 디버그용 키를 자동으로 생성합니다. 이 키가 저장된 키 스토어의 위치는 <code>$HOME/.android/debug.keystore</code>입니다.</p>
-</blockquote>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/.android</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">debug.keystore</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>디버그용 키는 설계상 보안이 유지되지 않습니다. 따라서 구글 플레이 스토어를 포함한 대부분의 앱 스토어는 디버그용 키로 서명한 앱을 게시하는 것을 허용하지 않습니다.</p>
-<h1 id="2-릴리즈-모드"><a href="#2-릴리즈-모드" class="headerlink" title="2. 릴리즈 모드"></a>2. 릴리즈 모드</h1><p>플레이 스토어에 앱을 출시하려면 서명된 APK 파일을 업로드 해야합니다. 서명된 APK 파일을 생성하려면 <a href="/ko/2018/12/14/android/181214-buildtypes/">빌드 타입(BuildType)</a>를 릴리즈 모드로 변경해야합니다.<br><img src="/ko/images/posts/android/app-release/2.png"></p>
-<h1 id="3-키스토어-및-키-생성"><a href="#3-키스토어-및-키-생성" class="headerlink" title="3. 키스토어 및 키 생성"></a>3. 키스토어 및 키 생성</h1><p>소스코드와 리소스 파일을 빌드하고 개인 키로 서명하면 <code>서명된 APK 파일</code>이 생성됩니다. 이 개인 키가 저장되는 곳을 <code>키 스토어(Key Store)</code>라고 합니다.</p>
-<p>우선 키 스토어를 생성합시다. <code>Build &gt; Generate Signed APK</code> 메뉴로 들어갑니다.<br><img src="/ko/images/posts/android/app-release/3.png"></p>
+<h3 id="1-디버그-모드"><a href="#1-디버그-모드" class="headerlink" title="(1) 디버그 모드"></a>(1) 디버그 모드</h3><p>애플리캐이션을 개발할 때는 <code>디버그 모드</code>로 앱을 빌드하고 실행합니다.<br><img src="/ko/images/posts/android/app-release/1.png"></p>
+<p>안드로이드 스튜디오는 디버그 모드일 때 디버그용 키를 사용하여 앱을 자동으로 서명합니다. 따라서 에뮬레이터나 연결된 실제 기기에 앱을 설치하고 실행할 때 별도의 서명 정보를 입력할 필요가 없습니다.</p>
+<div class="alert warning icon"><p>안드로이드 스튜디오는 프로젝트를 처음 실행하면 디버그용 키를 자동으로 생성합니다. 이 키가 저장된 <b>키 스토어</b>의 위치는 <code>$HOME/.android/debug.keystore</code>입니다.</p>
+</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~&#x2F;.android</span><br><span class="line"></span><br><span class="line">$ ls</span><br><span class="line">debug.keystore</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>디버그용 키는 설계상 보안이 유지되지 않습니다. 따라서 구글 플레이스토어를 포함한 대부분의 앱 스토어는 디버그용 키로 서명한 앱을 게시하는 것을 허용하지 않습니다.</p>
+<h3 id="2-릴리즈-모드"><a href="#2-릴리즈-모드" class="headerlink" title="(2) 릴리즈 모드"></a>(2) 릴리즈 모드</h3><p>플레이스토어에 앱을 출시하려면 서명된 APK 파일을 업로드 해야합니다. 서명된 APK 파일을 생성하려면 <a href="/ko/2018/12/14/android/181214-buildtypes/">빌드 타입(BuildType)</a>를 릴리즈 모드로 변경해야합니다.<br><img src="/ko/images/posts/android/app-release/2.png"></p>
+<h3 id="3-키스토어-및-키-생성"><a href="#3-키스토어-및-키-생성" class="headerlink" title="(3) 키스토어 및 키 생성"></a>(3) 키스토어 및 키 생성</h3><p>앱을 빌드하고 <code>개인 키</code>로 서명하면 서명된 APK 파일이 생성됩니다. 이 개인 키가 저장되는 곳을 <code>키 스토어(Key Store)</code>라고 합니다.</p>
+<p><code>Build &gt; Generate Signed APK</code> 메뉴로 들어갑니다.<br><img src="/ko/images/posts/android/app-release/3.png"></p>
 <p>대화 상자에서 APK를 선택합니다.<br><img src="/ko/images/posts/android/app-release/4.png"></p>
-<p>먼저 키 스토어를 생성합시다. <code>Create new</code>버튼을 클릭합니다. 만약 이전에 키 스토어를 만들었다면 <code>Choose existing</code>버튼을 클릭하여 기존의 키 스토어를 사용합니다.<br><img src="/ko/images/posts/android/app-release/5.png"><br><code>New Key Store</code> 대화상자는 두 개의 색션으로 나뉘어 있습니다. 첫 번째 색션은 <code>키 스토어</code> 파일과 관련있습니다. 키 스토어 파일의 위치와 비밀번호를 입력합니다.<br><img src="/ko/images/posts/android/app-release/6.png"><br>두 번째 색션은 키 스토어에 저장될 <code>개인 키</code>와 관련있습니다. 별칭(Alias), 비밀번호, 유효기간은 필수로 입력해야합니다. 나머지 필드는 최소 하나의 필드에 정보를 입력합니다.<br><img src="/ko/images/posts/android/app-release/7.png"><br>간혹 다음과 같은 경고 문구가 발생합니다. jks 키 저장소의 형식의 사용을 권장하는 경고문인데 APK 파일에 서명하는데 전혀 지장없으므로 무시하셔도 됩니다.<br><img src="/ko/images/posts/android/app-release/8.png"><br>정보가 제대로 입력되었는지 확인하고 <code>Next</code>버튼을 누릅니다.<br><img src="/ko/images/posts/android/app-release/9.png"><br><code>Destination Folder</code>에서는 APK 파일이 생성될 경로를 지정합니다. 기본값은 프로젝트의 app 폴더입니다. <code>Build Variants</code>는 release를 선택합니다. <code>Signature Version</code>은 V2를 선택하고 Finish 버튼을 누릅니다.<br><img src="/ko/images/posts/android/app-release/10.png"><br>이제 app 폴더를 확인해봅시다. <code>[your_project]/app/release</code> 폴더 안에 서명된 APK 파일이 생성되었습니다.<br><img src="/ko/images/posts/android/app-release/11.png"></p>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>서명된 APK 파일을 생성하는 법</code>에 대해 알아보았습니다. 다음 포스트에서는 <a href="/ko/2018/12/24/android/181224-app-release-playstore/"><code>구글 플레이 스토어에 앱을 출시하는 방법</code></a>에 대해 알아보겠습니다.</p>
+<p>먼저 <code>키 스토어(Key Store)</code>를 생성합시다. <code>Create new</code>버튼을 클릭합니다. 만약 이전에 키 스토어를 만들었다면 <code>Choose existing</code>버튼을 클릭하여 기존의 키 스토어를 사용합니다.<br><img src="/ko/images/posts/android/app-release/5.png"><br><code>New Key Store</code> 대화상자는 두 개의 섹션으로 나뉘어 있습니다. 첫 번째 섹션은 키 스토어 파일과 관련있습니다. 키 스토어 파일의 위치와 비밀번호를 입력합니다.<br><img src="/ko/images/posts/android/app-release/6.png"><br>두 번째 섹션은 키 스토어에 저장될 <code>개인 키</code>와 관련있습니다. 별칭(Alias), 비밀번호, 유효기간은 필수로 입력해야합니다. 나머지 필드는 최소 하나의 필드에 정보를 입력합니다.<br><img src="/ko/images/posts/android/app-release/7.png"><br>간혹 다음과 같은 경고 문구가 발생합니다. 특정 형식의 사용을 권장하는 경고문인데 서명하는데 아무 지장없으므로 무시합니다.<br><img src="/ko/images/posts/android/app-release/8.png"><br>정보가 제대로 입력되었는지 확인하고 <code>Next</code>버튼을 누릅니다.<br><img src="/ko/images/posts/android/app-release/9.png"><br><code>Destination Folder</code>에서는 APK 파일이 생성될 경로를 지정합니다. 기본값은 프로젝트의 <code>app</code>폴더입니다. <code>Build Variants</code>는 <code>release</code>를 선택합니다. <code>Signature Version</code>은 <code>V2</code>를 선택하고 <code>Finish</code>버튼을 누릅니다.<br><img src="/ko/images/posts/android/app-release/10.png"><br>이제 <code>app</code>폴더를 확인해봅시다. <code>[your_project]/app/release</code> 폴더 안에 서명된 APK 파일이 생성되었습니다.<br><img src="/ko/images/posts/android/app-release/11.png"></p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>서명된 APK 파일을 생성하는 법</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/24/android/181224-alpha-test/"><code>알파 테스트</code></a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -1091,6 +991,67 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/12/05/android/181205-task/"
+                            aria-label=": [안드로이드] 그래들 - (5) 태스크(Task)"
+                        >
+                            [안드로이드] 그래들 - (5) 태스크(Task)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-12-05T20:16:30+09:00">
+	
+		    2018/12/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/12/05/android/181205-task/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1162,7 +1123,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/sunset1.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

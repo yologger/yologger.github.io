@@ -573,6 +573,85 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/ko/2019/04/03/android/190403-intent_service/"
+                            aria-label=": [안드로이드] 서비스 - (2) 인텐트 서비스(Intent Service)"
+                        >
+                            [안드로이드] 서비스 - (2) 인텐트 서비스(Intent Service)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-04-03T20:16:30+09:00">
+	
+		    2019/04/03
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>4개의 포스트에서 걸쳐서 서비스에 대해 알아보고 있습니다.</p>
+<ol>
+<li><a href="/ko/2019/04/02/android/190402-start-service/">스타트 서비스(Start Service)</a></li>
+<li>인텐트 서비스(Intent Service)  ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/04/03/android/190404-bound_service/">바운드 서비스(Bound Service)</a></li>
+<li><a href="/ko/2019/04/05/android/190405-service-lifecycle/">서비스의 생명주기 메소드</a></li>
+</ol>
+<hr>
+<h1 id="인텐트-서비스"><a href="#인텐트-서비스" class="headerlink" title="인텐트 서비스"></a>인텐트 서비스</h1><p><code>인텐트 서비스(Intent Service)</code>를 사용하면 별도의 스레드를 생성하지 않아도 서비스가 새로운 스레드에서 실행됩니다.</p>
+<p>인텐트 서비스는 <code>IntentService</code>클래스를 구현하고 <code>onHandleIntent()</code>메소드를 오버라이딩합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyIntentService</span> : <span class="type">IntentService</span></span>(<span class="string">&quot;MyIntentService&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onHandleIntent</span><span class="params">(intent: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>onHandleIntent()</code>메소드에서는 별도의 스레드에서 백그라운드로 실행할 작업을 구현합니다. 3초에 한 번씩 문자열 “This is intent service.”를 출력하겠습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyIntentService</span> : <span class="type">IntentService</span></span>(<span class="string">&quot;MyIntentService&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onHandleIntent</span><span class="params">(intent: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            Log.d(<span class="string">&quot;TEST&quot;</span>, <span class="string">&quot;This is intent service.&quot;</span>)</span><br><span class="line">            Thread.sleep(<span class="number">1000</span> * <span class="number">3</span>)     <span class="comment">// 10 seconds</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>액티비티에서는 <code>startService()</code>메소드를 사용하여 서비스를 시작합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> buttonShowToast: Button</span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> buttonIntentService: Button</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        buttonShowToast = findViewById(R.id.activity_main_show_toast)</span><br><span class="line">        buttonIntentService = findViewById(R.id.activity_main_intent_service)</span><br><span class="line"></span><br><span class="line">        buttonStartService.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">var</span> intent = Intent(<span class="keyword">this</span>, MyIntentService::<span class="keyword">class</span>.java)</span><br><span class="line">            startService(intent)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        buttonShowToast.setOnClickListener &#123;</span><br><span class="line">            Toast.makeText(<span class="keyword">this</span><span class="symbol">@MainActivity</span>, <span class="string">&quot;Toast Message&quot;</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이제 앱을 실행하고 버튼을 클릭합니다. 로그에 “This is intent service.”가 3초에 한번씩 출력됩니다. 또한 서비스가 실행된 상태에서 토스트 메시지 버튼을 눌러도 앱이 멈추거나 종료되지 않습니다. 인텐트 서비스는 별도의 작업 스레드를 생성하여 실행하기 때문입니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>인텐트 서비스(Intent Service)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/04/03/android/190404-bound_service/"><code>바운드 서비스(Bound Service)</code></a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/04/03/android/190403-intent_service/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/ko/2019/04/03/android/190404-bound_service/"
                             aria-label=": [안드로이드] 서비스 - (3) 바운드 서비스(Bound Service)"
                         >
@@ -681,85 +760,6 @@
                         <p>
                             <a
                                 href="/ko/2019/04/03/android/190404-bound_service/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/04/03/android/190403-intent_service/"
-                            aria-label=": [안드로이드] 서비스 - (2) 인텐트 서비스(Intent Service)"
-                        >
-                            [안드로이드] 서비스 - (2) 인텐트 서비스(Intent Service)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-04-03T20:16:30+09:00">
-	
-		    2019/04/03
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>4개의 포스트에서 걸쳐서 서비스에 대해 알아보고 있습니다.</p>
-<ol>
-<li><a href="/ko/2019/04/02/android/190402-start-service/">스타트 서비스(Start Service)</a></li>
-<li>인텐트 서비스(Intent Service)  ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2019/04/03/android/190404-bound_service/">바운드 서비스(Bound Service)</a></li>
-<li><a href="/ko/2019/04/05/android/190405-service-lifecycle/">서비스의 생명주기 메소드</a></li>
-</ol>
-<hr>
-<h1 id="인텐트-서비스"><a href="#인텐트-서비스" class="headerlink" title="인텐트 서비스"></a>인텐트 서비스</h1><p><code>인텐트 서비스(Intent Service)</code>를 사용하면 별도의 스레드를 생성하지 않아도 서비스가 새로운 스레드에서 실행됩니다.</p>
-<p>인텐트 서비스는 <code>IntentService</code>클래스를 구현하고 <code>onHandleIntent()</code>메소드를 오버라이딩합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyIntentService</span> : <span class="type">IntentService</span></span>(<span class="string">&quot;MyIntentService&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onHandleIntent</span><span class="params">(intent: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>onHandleIntent()</code>메소드에서는 별도의 스레드에서 백그라운드로 실행할 작업을 구현합니다. 3초에 한 번씩 문자열 “This is intent service.”를 출력하겠습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyIntentService</span> : <span class="type">IntentService</span></span>(<span class="string">&quot;MyIntentService&quot;</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onHandleIntent</span><span class="params">(intent: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            Log.d(<span class="string">&quot;TEST&quot;</span>, <span class="string">&quot;This is intent service.&quot;</span>)</span><br><span class="line">            Thread.sleep(<span class="number">1000</span> * <span class="number">3</span>)     <span class="comment">// 10 seconds</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>액티비티에서는 <code>startService()</code>메소드를 사용하여 서비스를 시작합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> buttonShowToast: Button</span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> buttonIntentService: Button</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        buttonShowToast = findViewById(R.id.activity_main_show_toast)</span><br><span class="line">        buttonIntentService = findViewById(R.id.activity_main_intent_service)</span><br><span class="line"></span><br><span class="line">        buttonStartService.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">var</span> intent = Intent(<span class="keyword">this</span>, MyIntentService::<span class="keyword">class</span>.java)</span><br><span class="line">            startService(intent)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        buttonShowToast.setOnClickListener &#123;</span><br><span class="line">            Toast.makeText(<span class="keyword">this</span><span class="symbol">@MainActivity</span>, <span class="string">&quot;Toast Message&quot;</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이제 앱을 실행하고 버튼을 클릭합니다. 로그에 “This is intent service.”가 3초에 한번씩 출력됩니다. 또한 서비스가 실행된 상태에서 토스트 메시지 버튼을 눌러도 앱이 멈추거나 종료되지 않습니다. 인텐트 서비스는 별도의 작업 스레드를 생성하여 실행하기 때문입니다.</p>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>인텐트 서비스(Intent Service)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/04/03/android/190404-bound_service/"><code>바운드 서비스(Bound Service)</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/04/03/android/190403-intent_service/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -1294,7 +1294,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/sunset1.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

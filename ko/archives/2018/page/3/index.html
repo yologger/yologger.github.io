@@ -256,109 +256,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/12/02/android/181202-gradle/"
-                            aria-label=": [안드로이드] 그래들 - (2) 그래들(Gradle)이란?"
-                        >
-                            [안드로이드] 그래들 - (2) 그래들(Gradle)이란?
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-12-02T20:16:30+09:00">
-	
-		    2018/12/02
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-<hr>
-<h1 id="그래들"><a href="#그래들" class="headerlink" title="그래들"></a>그래들</h1><p><code>그래들(Gradle)</code>은 그루비 언어를 기반으로 한 <a href="/ko/2018/12/01/android/181201-compile-build/">빌드 도구</a>입니다. <code>Ant</code>나 <code>Maven</code>같은 이전 세대의 빌드 도구의 단점을 보완하고 장점을 취합하여 만든 오픈소스 빌드 도구가 그래들입니다.</p>
-<h1 id="그래들-설치"><a href="#그래들-설치" class="headerlink" title="그래들 설치"></a>그래들 설치</h1><p>그래들은 <a target="_blank" rel="noopener" href="https://gradle.org/releases/">이 곳</a>에서 다운받을 수 있습니다. </p>
-<div class="alert success icon"><p>Mac OS를 기준으로 설명합니다.</p>
-</div>
-
-<p>압출 파일을 다운받고 적절한 경로에 설치해봅시다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/yologger/Library/gradle-5.2.1-all/gradle-5.2.1</span><br><span class="line"> </span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">LICENSE			</span><br><span class="line">NOTICE			</span><br><span class="line">bin				</span><br><span class="line">docs				</span><br><span class="line">getting-started.html</span><br><span class="line">init.d</span><br><span class="line">lib</span><br><span class="line">media</span><br><span class="line">samples</span><br><span class="line">src</span><br></pre></td></tr></table></figure>
-<p>설치가 완료되면 경로를 설정을 해야합니다. <code>~/.bash_profile</code>파일을 오픈합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim ~/.bash_profile</span></span><br></pre></td></tr></table></figure>
-<p>경로를 추가합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=&quot;/Users/yologger/Library/gradle-5.2.1-all/gradle-5.2.1/bin:$&#123;PATH&#125;&quot;</span><br></pre></td></tr></table></figure>
-<p>변경사항을 적용합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> ~/.bash_profile</span></span><br></pre></td></tr></table></figure>
-<p>이제 어디서든 그래들 명령어를 사용할 수 있습니다. 그래들의 설치여부와 버전을 확인해봅시다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle --v</span></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">Gradle 5.2.1</span><br><span class="line">------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Build time:   2019-02-08 19:00:10 UTC</span><br><span class="line">Revision:     f02764e074c32ee8851a4e1877dd1fea8ffb7183</span><br><span class="line"></span><br><span class="line">Kotlin DSL:   1.1.3</span><br><span class="line">Kotlin:       1.3.20</span><br><span class="line">Groovy:       2.5.4</span><br><span class="line">Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018</span><br><span class="line">JVM:          10.0.1 (&quot;Oracle Corporation&quot; 10.0.1+10)</span><br><span class="line">OS:           Mac OS X 10.14.5 x86_64</span><br></pre></td></tr></table></figure>
-<h1 id="그래들을-사용하여-프로젝트-초기화하기"><a href="#그래들을-사용하여-프로젝트-초기화하기" class="headerlink" title="그래들을 사용하여 프로젝트 초기화하기"></a>그래들을 사용하여 프로젝트 초기화하기</h1><p>간단한 프로젝트를 생성해보겠습니다. 디렉토리를 생성하고 생성한 디렉토리로 이동합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir myProject</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> myProject</span></span><br></pre></td></tr></table></figure>
-<p><code>src/yolo</code> 디렉토리를 생성합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p src/yolo/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> src/yolo</span></span><br></pre></td></tr></table></figure>
-<p><code>Person.java</code>파일을 생성하고 아래와 같이 코드를 작성합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        name = <span class="string">&quot;Yologrammer&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>다시 프로젝트의 루트 디렉토리로 이동합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ../..</span></span><br></pre></td></tr></table></figure>
-<p>그래들 명령어 <code>gradle init</code>을 입력합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle init</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Task :<span class="built_in">help</span></span></span><br><span class="line">Welcome to Gradle 5.2.1.</span><br><span class="line">To run a build, run gradle &lt;task&gt; ...</span><br><span class="line">To see a list of available tasks, run gradle tasks</span><br><span class="line">To see a list of command-line options, run gradle --help</span><br><span class="line">To see more detail about a task, run gradle help --task &lt;task&gt;</span><br><span class="line">        </span><br><span class="line">For troubleshooting, visit https://help.gradle.org</span><br><span class="line">    </span><br><span class="line">BUILD SUCCESSFUL in 0s</span><br><span class="line">1 actionable task: 1 executed</span><br></pre></td></tr></table></figure>
-<p>또한 <code>.gradle</code> 디렉토리가 생성됩니다. 그래들이 이 프로젝트를 관리하고 있다는 의미입니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">.gradle     // 그래들 관련 데이터가 이 디렉토리에 저장됩니다.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h1 id="그래들을-사용하여-프로젝트-빌드하기"><a href="#그래들을-사용하여-프로젝트-빌드하기" class="headerlink" title="그래들을 사용하여 프로젝트 빌드하기"></a>그래들을 사용하여 프로젝트 빌드하기</h1><p>그래들을 사용하여 수행할 수 있는 <a href="/ko/2018/12/05/android/181205-task/">태스크(Task)</a>을 확인할 수 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle tasks</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Task :tasks</span></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">Tasks runnable from root project</span><br><span class="line">------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Build Setup tasks</span><br><span class="line">-----------------</span><br><span class="line">init - Initializes a new Gradle build.</span><br><span class="line">wrapper - Generates Gradle wrapper files.</span><br><span class="line"></span><br><span class="line">Help tasks</span><br><span class="line">----------</span><br><span class="line">buildEnvironment - Displays all buildscript dependencies declared in root project &#x27;myProject&#x27;.</span><br><span class="line">components - Displays the components produced by root project &#x27;myProject&#x27;. [incubating]</span><br><span class="line">dependencies - Displays all dependencies declared in root project &#x27;myProject&#x27;.</span><br><span class="line">dependencyInsight - Displays the insight into a specific dependency in root project &#x27;myProject&#x27;.</span><br><span class="line">dependentComponents - Displays the dependent components of components in root project &#x27;myProject&#x27;.</span><br><span class="line">    </span><br><span class="line">[incubating]</span><br><span class="line">help - Displays a help message.</span><br><span class="line">model - Displays the configuration model of root project &#x27;myProject&#x27;. [incubating]</span><br><span class="line">projects - Displays the sub-projects of root project &#x27;myProject&#x27;.</span><br><span class="line">properties - Displays the properties of root project &#x27;myProject&#x27;.</span><br><span class="line">tasks - Displays the tasks runnable from root project &#x27;myProject&#x27;.</span><br><span class="line"></span><br><span class="line">To see all tasks and more detail, run gradle tasks --all</span><br><span class="line"></span><br><span class="line">To see more detail about a task, run gradle help --task &lt;task&gt;</span><br><span class="line"></span><br><span class="line">BUILD SUCCESSFUL in 0s</span><br><span class="line">1 actionable task: 1 executed</span><br></pre></td></tr></table></figure>
-<p>이제 <a href="/ko/2018/12/04/android/181204-build-gradle/"><code>build.gradle</code></a>파일을 생성합니다. 이 파일은 <strong>빌드 스크립트</strong>라고 하며 <u>프로젝트를 어떤 방법으로 빌드를 할 것인지</u> 명시할 수 있습니다. 우리는 Java로 작성된 소스코드를 빌드해야하므로 <code>그래들 자바 플러그인</code>을 추가합시다.</p>
-<figure class="codeblock codeblock--tabbed"><figcaption><span>build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 그래들 자바 플러그인</span></span><br><span class="line">apply <span class="attr">plugin:</span> <span class="string">'java'</span></span><br></pre></td></tr></tbody></table></figure></div></figure>
-<p>이제 그래들 명령어를 사용하여 프로젝트를 빌드해보겠습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gradle build</span><br></pre></td></tr></table></figure>
-<p>빌드가 정상적으로 수행되었다면 다음과 같은 결과물이 출력됩니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BUILD SUCCESSFUL in 0s</span><br><span class="line">1 actionable task: 1 executed</span><br></pre></td></tr></table></figure>
-<p>이제 프로젝트의 루트 디렉토리를 확인해보면 <code>build</code> 디렉토리가 생성되었음을 확인할 수 있습니다. 이 곳에 컴파일된 코드가 위치합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">build   build.gradle    src</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <strong>그래들</strong>에 대해 알아봤습니다. </p>
-<p>그런데 안드로이드 스튜디오를 사용하는 개발자는 의문이 생길 수도 있습니다. 그래들을 별도로 설치하지 않았지만 프로젝트를 빌드할 수 있기 때문입니다. 이를 가능하게 하는 것이 <strong>그래들 래퍼</strong>입니다. 다음 포스트에서는 안드로이드 스튜디오와 <a href="/ko/2018/12/03/android/181203-gradle-wrapper/"><code>그래들 래퍼(Gradle Wrapper)</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/12/02/android/181202-gradle/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2018/12/01/android/181201-compile-build/"
                             aria-label=": [안드로이드] 그래들 - (1) 컴파일과 빌드의 차이점"
                         >
@@ -1104,6 +1001,95 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/03/01/java/180301-reflection/"
+                            aria-label=": [자바] 리플렉션(Reflection)"
+                        >
+                            [자바] 리플렉션(Reflection)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-03-01T20:16:30+09:00">
+	
+		    2018/03/01
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><span class="highlight-text red">리플렉션(Reflection)</span>은 <u>런타임에서 구체적인 클래스 타입을 몰라도 그 클래스의 멤버변수, 메소드 등에 접근할 수 있도록 하는 자바 API와 기법</u>입니다. 리플렉션과 관련된 API는 <span class="highlight-text" style="background-color:#F6F7F7;">java.lang.reflect.*</span> 패키지에 있습니다.
+
+<hr>
+<h1 id="Class클래스와-클래스-참조"><a href="#Class클래스와-클래스-참조" class="headerlink" title="Class클래스와 클래스 참조"></a>Class클래스와 클래스 참조</h1><p>자바의 모든 클래스와 인터페이스는 컴파일 후 <code>.class</code>파일로 변환됩니다. 이 파일에는 생성자, 멤버변수, 메서드 등 객체의 정보가 포함되어있는데 <code>Class</code>클래스를 사용하면 이 파일에서 가져온 객체의 정보를 담을 수 있습니다. 이를 <code>클래스 참조(Class Reference)</code>라고 합니다.</p>
+<p><code>Class</code>클래스에 정보를 담는 방법에는 세 가지가 있습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스에 .class를 붙여서 객체 정보 가져오기</span></span><br><span class="line">Class c1 = String.class</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Class클래스의 forName()메소드를 사용하여 객체 정보 가져오기</span></span><br><span class="line">Class c1 = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 인스턴스에서 getClass()를 호출하여 객체 정보 가져오기</span></span><br><span class="line">String string = <span class="keyword">new</span> String();</span><br><span class="line">Class c1 = string.getClass();</span><br></pre></td></tr></table></figure>
+
+<h1 id="리플렉션"><a href="#리플렉션" class="headerlink" title="리플렉션"></a>리플렉션</h1><p>코드를 작성하다보면 작성 시점에 데이터의 타입을 모를 수도 있습니다. 이때 <code>리플렉션(Reflection)</code>을 사용할 수 있습니다. </p>
+<p>다음과 같은 클래스가 있다고 가정해봅시다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line">    String nation;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 기본 생성자</span></span><br><span class="line">    Person() &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">this</span>.nation = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 보조 생성자</span></span><br><span class="line">    Person(String name, String nation) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.nation = nation;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printNation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(nation);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printSomething</span><span class="params">(String something)</span> </span>&#123;</span><br><span class="line">        System.out.println(something);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Class</code>클래스의 인스턴스에는 클래스 정보를 저장할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line"><span class="comment">// 또는 Class personClass = Class.forName(&quot;Person&quot;);</span></span><br></pre></td></tr></table></figure>
+<p>이 <code>Class</code>타입의 인스턴스로 클래스의 인스턴스를 생성할 수도 있습니다. 이 때는 <code>newInstance()</code>메소드를 사용합니다. 다만 반드시 매개변수가 없는 <code>기본생성자</code>가 존재해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Person person = (Person) personClass.newInstance();</span><br><span class="line">&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="클래스의-멤버변수-가져오기"><a href="#클래스의-멤버변수-가져오기" class="headerlink" title="클래스의 멤버변수 가져오기"></a>클래스의 멤버변수 가져오기</h1><p>클래스의 멤버변수 정보를 읽어올 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line">Field[] fields = personClass.getDeclaredFields();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;fields.length; i++) &#123;</span><br><span class="line">    System.out.println(fields[i].getName());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// name</span></span><br><span class="line"><span class="comment">// nation</span></span><br></pre></td></tr></table></figure>
+<h1 id="클래스의-생성자-가져오기"><a href="#클래스의-생성자-가져오기" class="headerlink" title="클래스의 생성자 가져오기"></a>클래스의 생성자 가져오기</h1><p>클래스의 생성자 정보를 읽어올 수도 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line">Constructor[] constructors = personClass.getDeclaredConstructors();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;constructors.length; i++) &#123;</span><br><span class="line">    System.out.println(constructors[i].getName());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// com.my_project.Person</span></span><br><span class="line"><span class="comment">// com.my_project.Person</span></span><br></pre></td></tr></table></figure>
+<h2 id="클래스의-메소드-가져오기"><a href="#클래스의-메소드-가져오기" class="headerlink" title="클래스의 메소드 가져오기"></a>클래스의 메소드 가져오기</h2><p>클래스의 모든 메소드들은 다음과 같이 가져올 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line">Method[] methods = personClass.getDeclaredMethods();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;methods.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 메소드 이름 출력</span></span><br><span class="line">    System.out.println(methods[i].getName());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// printName</span></span><br><span class="line"><span class="comment">// printNation</span></span><br><span class="line"><span class="comment">// printSomething</span></span><br><span class="line"><span class="comment">// printHello</span></span><br></pre></td></tr></table></figure>
+<p>특정 메소드 한 개만 가져올 수도 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Method method = personClass.getDeclaredMethod(<span class="string">&quot;printSomething&quot;</span>);</span><br><span class="line">    System.out.println(method.getName());   <span class="comment">// printSomething</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>클래스의 메소드를 가져오면 이를 통해 호출도 할 수도 있습니다. 이 때는 <code>invoke()</code>메소드를 호출합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>, <span class="string">&quot;America&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Method printHelloMethod = personClass.getDeclaredMethod(<span class="string">&quot;printHello&quot;</span>);</span><br><span class="line">    printHelloMethod.invoke(person);    <span class="comment">// Hello</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 <code>리플렉션(Reflection)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/03/02/java/180302-annotation/">어노테이션(Annotation)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/03/01/java/180301-reflection/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1130,7 +1116,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 3 of 7</li>
+        <li class="pagination-number">page 3 of 6</li>
     </ul>
 </div>
 
@@ -1175,7 +1161,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/sunset1.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>

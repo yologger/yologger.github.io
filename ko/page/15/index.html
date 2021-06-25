@@ -255,81 +255,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/12/01/android/181201-compile-build/"
-                            aria-label=": [안드로이드] 그래들 - (1) 컴파일과 빌드의 차이점"
-                        >
-                            [안드로이드] 그래들 - (1) 컴파일과 빌드의 차이점
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-12-01T20:16:30+09:00">
-	
-		    2018/12/01
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-<hr>
-<h1 id="컴파일"><a href="#컴파일" class="headerlink" title="컴파일"></a>컴파일</h1><span class="highlight-text red">컴파일(Compile)</span>은 <u>개발자가 작성한 소스코드를 컴퓨터가 이해할 수 있는 기계어로 변환하는 과정</u>을 의미합니다. 
-
-<p>C의 경우 <code>gcc</code>라는 컴파일러가 <code>*.c</code>파일을 컴파일하여 <code>*.o</code>파일을 생성합니다. Java의 경우 <a href="/ko/2018/01/01/java/180101-jvm-jre-jdk/"><code>자바 컴파일러(Java Compiler)</code></a>가 <code>*.java</code>파일을 컴파일하여 <code>자바 바이트코드</code>를 생성합니다.</p>
-<h1 id="빌드"><a href="#빌드" class="headerlink" title="빌드"></a>빌드</h1><p>프로젝트를 진행하다보면 여러 개의 소스코드 파일이 생성됩니다. 만약 A라는 소스코드 파일에서 B라는 소스코드 파일을 참조한다고 가정해봅시다. 이때 파일 A와 파일 B를 각각 컴파일하면 A에서 B를 찾지 못하므로 참조할 수가 없습니다. 따라서 파일 A와 파일 B를 연결하는 작업이 필요한데 이를 <span class="highlight-text red">링크(Link)</span>라고 합니다.<br><br></p>
-<span class="highlight-text red">빌드(Build)</span>는 이러한 컴파일, 링크 등을 모두 포함하여 <u>실행 가능한 소프트웨어로 만드는 과정</u>을 의미합니다.
-
-
-<div class="alert warning icon"><p>안드로이드 스튜디오에서 소스코드를 빌드하면 안드로이드 운영체제에서 실행할 수 있는 <a href="/ko/2018/12/18/android/181218-apk/">APK</a> 파일이 생성됩니다.</p>
-</div>
-
-<h1 id="빌드-도구"><a href="#빌드-도구" class="headerlink" title="빌드 도구"></a>빌드 도구</h1><span class="highlight-text red">빌드 도구(Build Tool)</span>는 소스코드를 실행 가능한 소프트웨어로 만들어주는 도구입니다. 요즘의 빌드 도구는 빌드 작업뿐만 아니라 테스트, 빌드 자동화, 배포 등 다양한 기능을 제공하기도 합니다. 자바나 코틀린의 빌드 도구에는 <span class="highlight-text" style="background-color:#F6F7F7;">Ant</span>, <span class="highlight-text" style="background-color:#F6F7F7;">Maven</span>, <span class="highlight-text" style="background-color:#F6F7F7;">Gradle</span> 등이 있습니다. 
-
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <span class="highlight-text" style="background-color:#F6F7F7;">컴파일</span>과 <span class="highlight-text" style="background-color:#F6F7F7;">빌드</span>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/02/android/181202-gradle/"><code>그래들(Gradle)</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/12/01/android/181201-compile-build/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2018/04/03/java/180403-oraclejdk-openjdk/"
                             aria-label=": [Java] 자바 유료화? Oracle JDK와 OpenJDK"
                         >
@@ -1089,6 +1014,97 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/02/05/java/180205-type-eraser/"
+                            aria-label=": [자바] 제너릭과 타입 소거(Type Erasure)"
+                        >
+                            [자바] 제너릭과 타입 소거(Type Erasure)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-02-05T20:16:30+09:00">
+	
+		    2018/02/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 <code>제너릭(Generic)</code>에 대해 살펴보고있습니다.</p>
+<ol>
+<li><a href="/ko/2018/02/01/java/180201-generic/">제너릭(Generic)의 개념과 장점</a></li>
+<li><a href="/ko/2018/02/02/java/180202-generic-class/">제너릭 클래스(Generic Class)</a></li>
+<li><a href="/ko/2018/02/03/java/180203-generic-method/">제너릭 함수(Generic Function)</a></li>
+<li><a href="/ko/2018/02/04/java/180204-wildcard/">제너릭의 와일드 카드(Wildcard)</a></li>
+<li>타입 소거(Type Erasure) ⬅️ ⬅️ ⬅️</li>
+</ol>
+<hr>
+<h1 id="타입-소거"><a href="#타입-소거" class="headerlink" title="타입 소거"></a>타입 소거</h1><span class="highlight-text red">타입 소거(Type Erasure)</span>는 제네릭의 타입 파라미터를 구체화된 자료형으로 대체하는 작업을 의미합니다. 자바 컴파일러는 소스 코드를 컴파일할 때 타입 소거를 수행합니다. 
+
+
+<div class="alert info icon"><p>타입 파라미터가 <b>Unbounded Type</b>인지 <b>Bounded Type</b>인지에 따라 소거 방식이 다릅니다.</p>
+</div>
+
+
+<h3 id="1-Unbounded-Type의-타입소거"><a href="#1-Unbounded-Type의-타입소거" class="headerlink" title="(1) Unbounded Type의 타입소거"></a>(1) Unbounded Type의 타입소거</h3><p><code>Unbounded Type</code>은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한하지 않은 것을 의미합니다. <code>&lt;?&gt;</code>, <code>&lt;T&gt;</code> 형태의 타입 파라미터라고 생각하시면 됩니다. </p>
+<p><code>Unbounded Type</code> 예제를 살펴봅시다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 전 (타입 소거 전) </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(T test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>컴파일러는 위 코드는 아래와 같이 변환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 후 (타입 소거 후)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Object test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>컴파일러는 타입 파라미터를 소거하고 <code>Unbounded Type</code>인 <code>&lt;?&gt;</code>, <code>&lt;T&gt;</code>를 <code>Object</code>로 대체합니다.</p>
+<h3 id="2-Bounded-Type의-타입소거"><a href="#2-Bounded-Type의-타입소거" class="headerlink" title="(2) Bounded Type의 타입소거"></a>(2) Bounded Type의 타입소거</h3><p><code>Bounded Type</code>은 <u>형식 타입 파라미터로 전달되는 실 타입 파라미터의 범위를 제한한 것</u>을 의미합니다. <code>&lt;E extends Something&gt;</code> 형태의 타입 파라미터라고 생각하시면 됩니다.</p>
+<p><code>Bounded Type</code> 예제를 살펴보겠습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Observable</span>&lt;<span class="title">T</span>&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>컴파일러는 위 코드를 아래와 같이 변환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Observable data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Observable <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Observable data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>타입 파라미터를 포함한 <code>Observable&lt;T&gt;</code>는 <code>Observable</code>로 소거되었습니다. <code>&lt;E extends Something&gt;</code>은 <code>Object</code>가 아닌 <code>Something</code>로 대치되는 것입니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>다섯 개의 포스트에서 <code>제너릭(Generic)</code>에 대해 알아보았습니다. 다음 포스트에서는 <a href="/ko/2018/03/01/java/180301-reflection/"><code>리플렉션(Reflection)</code></a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/02/05/java/180205-type-eraser/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1115,7 +1131,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 15 of 19</li>
+        <li class="pagination-number">page 15 of 18</li>
     </ul>
 </div>
 
@@ -1159,7 +1175,7 @@
 
         
         
-<div id="cover" style="background-image:url('/ko/assets/images/sunset1.jpg');"></div>
+<div id="cover" style="background-image:url('/ko/assets/images/night10.jpg');"></div>
         <!--SCRIPTS-->
 
 <script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
