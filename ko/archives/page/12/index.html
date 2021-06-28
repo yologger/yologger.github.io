@@ -242,6 +242,77 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/ko/2019/01/06/kotlin/190106-vararg/"
+                            aria-label=": [코틀린] 가변인자(vararg)"
+                        >
+                            [코틀린] 가변인자(vararg)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-06T21:16:30+09:00">
+	
+		    2019/01/06
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/05/kotlin/190105-argument-parameter/">매개변수(Parameter)와 전달인자(Argument)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">가변인자(vararg)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="가변인자-vararg"><a href="#가변인자-vararg" class="headerlink" title="가변인자(vararg)"></a>가변인자(vararg)</h1><p>함수의 매개변수가 몇 개일지 모를 수도 있습니다. 이때 키워드<code>vararg</code>를 사용할 수 있습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sum</span><span class="params">(<span class="keyword">vararg</span> numbers: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>vararg</code>가 붙은 매개변수는 함수 몸체에서 마치 <a href="/ko/2019/01/03/kotlin/190103-array/">배열(Array)</a>처럼 사용할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">sum</span><span class="params">(<span class="keyword">vararg</span> numbers: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="comment">// numbers는 array</span></span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (n <span class="keyword">in</span> numbers) &#123;</span><br><span class="line">        sum += n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이제 함수를 호출할 때 인자를 유연하게 전달할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)  <span class="comment">// 6</span></span><br><span class="line"><span class="keyword">var</span> result2 = sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)  <span class="comment">// 21</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 키워드 <code>vararg</code>에 대해 알아보았습니다. 다음 포스트에서는 <a href="/ko/2019/01/07/kotlin/190107-class-instance-object/">클래스(Class), 인스턴스(Instance), 객체(Object)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/06/kotlin/190106-vararg/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/ko/2019/01/05/kotlin/190105-argument-parameter/"
                             aria-label=": [코틀린] 매개변수(Parameter)와 전달인자(Argument)의 차이점"
                         >
@@ -932,79 +1003,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/12/30/android/181230-app-bundle/"
-                            aria-label=": [안드로이드] 앱 출시 - (8) 앱 번들이란?"
-                        >
-                            [안드로이드] 앱 출시 - (8) 앱 번들이란?
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-12-30T20:16:30+09:00">
-	
-		    2018/12/30
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
-<ul>
-<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a> ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
-<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a></li>
-<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
-<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
-<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
-<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
-<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
-</ul>
-<hr>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/12/30/android/181230-app-bundle/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1031,7 +1029,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 12 of 18</li>
+        <li class="pagination-number">page 12 of 19</li>
     </ul>
 </div>
 

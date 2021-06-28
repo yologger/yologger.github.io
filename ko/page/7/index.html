@@ -241,6 +241,86 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/ko/2019/02/12/kotlin/190212-generic-function/"
+                            aria-label=": [코틀린] 제네릭 함수(Generic Function)"
+                        >
+                            [코틀린] 제네릭 함수(Generic Function)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-12T20:16:30+09:00">
+	
+		    2019/02/12
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트에 걸쳐 <code>제네릭(Generic)</code>에 대해 알아보겠습니다.</p>
+<ol>
+<li><a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)과 제네릭 클래스(Generic Class)</a></li>
+<li><a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">키워드 in, out</a></li>
+<li><a href="/ko/2019/02/15/kotlin/190215-reified/">reified란 무엇인가?</a></li>
+</ol>
+<hr>
+<h1 id="제네릭-함수"><a href="#제네릭-함수" class="headerlink" title="제네릭 함수"></a>제네릭 함수</h1><p>제네릭은 클래스 뿐만 아니라 함수에도 사용할 수 있습니다. </p>
+<h4 id="1-함수의-파라미터"><a href="#1-함수의-파라미터" class="headerlink" title="(1) 함수의 파라미터"></a>(1) 함수의 파라미터</h4><p>우선 함수에서 제네릭을 사용할 땐 키워드 <strong>fun</strong>과 <strong>함수명</strong> 사이에 <code>타입 파라미터</code>를 명시합니다.  </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">printElement</span><span class="params">(element: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">printElement(<span class="number">1</span>)</span><br><span class="line">printElement(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">printElement(Person())</span><br></pre></td></tr></table></figure>
+<h4 id="2-반환-값"><a href="#2-반환-값" class="headerlink" title="(2) 반환 값"></a>(2) 반환 값</h4><p>함수의 반환 값에도 <code>타입 파라미터</code>를 사용할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">getElement</span><span class="params">(element: <span class="type">T</span>)</span></span>: T &#123;</span><br><span class="line">    println(<span class="string">&quot;Element: <span class="subst">$&#123;element.toString()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element1 = getElement(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> element2 = getElement(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> element3 = getElement(Person())</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>제네릭 함수(Generic Function)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">제네릭의 in, out</a>에 대해 알아보겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/12/kotlin/190212-generic-function/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/ko/2019/02/11/kotlin/190211-generic/"
                             aria-label=": [코틀린] 제네릭(Generic)과 제네릭 클래스(Generic Class)"
                         >
@@ -348,7 +428,7 @@
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Android/">Android</a>
 
 
     
@@ -358,9 +438,34 @@
             
                 <div class="postShorten-content">
                     <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>안드로이드 애플리캐이션은 여러 컴포넌트로 구성됩니다. 안드로이드의 대표적인 컴포넌트에는 <code>액티비티(Activity)</code>, <code>서비스(Service)</code>, <code>브로드캐스트 리시버(BroadCast Receiver)</code>, <code>컨텐트 프로바이더(Content Provider)</code>가 있습니다. 안드로이드의 4대 컴포넌트는 <code>인텐트(Intent)</code>라는 메시징 시스템을 통해 상호작용합니다.</p>
+<hr>
+<h1 id="액티비티"><a href="#액티비티" class="headerlink" title="액티비티"></a>액티비티</h1><ol>
+<li><a href="/ko/2019/02/15/android/190215-activity/">액티비티(Activity)란?</a></li>
+<li><a href="/ko/2019/02/16/android/190216-activity-stack/">태스크(Task)와 액티비티 스택(Activity Stack)</a></li>
+<li><a href="/ko/2019/02/17/android/190217-launchmode/">taskAffinity와 launchMode</a></li>
+<li><a href="/ko/2019/02/18/android/190218-intent-flag/">인텐트 플래그(Intent Flag)</a></li>
+<li><a href="/ko/2019/02/19/android/190219-activity-lifecycle/">액티비티 생명주기 함수</a></li>
+</ol>
+<h1 id="인텐트와-브로드캐스트-리시버"><a href="#인텐트와-브로드캐스트-리시버" class="headerlink" title="인텐트와 브로드캐스트 리시버"></a>인텐트와 브로드캐스트 리시버</h1><ol>
+<li><a href="/ko/2019/03/01/android/190301-explicit-intent/">명시적 인텐트와 화면 전환</a></li>
+<li><a href="/ko/2019/03/02/android/190302-intent-data-transfer/">액티비티 사이의 데이터 전달</a></li>
+<li><a href="/ko/2019/03/03/android/190303-implicit-intent/">암시적 인텐트</a></li>
+<li><a href="/ko/2019/03/04/android/190304-intent-filter/">인텐트 필터</a></li>
+<li><a href="/ko/2019/03/05/android/190305-broadcast-intent/">브로드캐스트 인텐트와 브로드케스트 리시버</a></li>
+</ol>
+<h1 id="서비스"><a href="#서비스" class="headerlink" title="서비스"></a>서비스</h1><ol>
+<li><a href="/ko/2019/04/02/android/190402-start-service/">스타트 서비스 (Start Service)</a></li>
+<li><a href="/ko/2019/04/03/android/190403-intent_service/">인텐트 서비스 (Intent Service)</a></li>
+<li><a href="/ko/2019/04/03/android/190404-bound_service/">바운드 서비스 (Bound Service)</a></li>
+<li><a href="/ko/2019/04/05/android/190405-service-lifecycle/">서비스의 생명주기 메소드</a></li>
+</ol>
+<h1 id="컨텐트-프로바이더"><a href="#컨텐트-프로바이더" class="headerlink" title="컨텐트 프로바이더"></a>컨텐트 프로바이더</h1><ol>
+<li><a href="/ko/2019/04/09/android/190409-content_provider/">컨텐트 프로바이더와 컨텐트 리시버</a></li>
+</ol>
 
                     
                         
@@ -806,9 +911,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/02/05/android/190205-permission-dispatcher/"
-                            aria-label=": [안드로이드] 권한 - (4) Permission Dispatcher 라이브러리"
+                            aria-label=": [안드로이드] 권한 - (5) PermissionDispatcher 라이브러리"
                         >
-                            [안드로이드] 권한 - (4) Permission Dispatcher 라이브러리
+                            [안드로이드] 권한 - (5) PermissionDispatcher 라이브러리
                         </a>
                     
                 </h1>
@@ -821,7 +926,7 @@
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/PermissionDispatcher/">PermissionDispatcher</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Permission/">Permission</a>
 
 
     
@@ -831,29 +936,19 @@
             
                 <div class="postShorten-content">
                     <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 3개의 포스트에 걸쳐 권한(Permission)을 관리하는 방법에 대해 알아보겠습니다.</p>
-<ol>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 <code>권한(Permission)</code>에 대해 알아보고있습니다.</p>
+<ul>
 <li><a href="/ko/2019/02/01/android/190201-permission/">일반 권한과 위험 권한</a></li>
 <li><a href="/ko/2019/02/02/android/190202-multi-permission/">여러 권한 동시에 요청하기</a></li>
-<li>TedPermission 라이브러리 ⬅️ ⬅️ ⬅️</li>
-</ol>
+<li><a href="/ko/2019/02/03/android/190203-open-settings/">액티비티에서 설정 앱 시작하기</a></li>
+<li><a href="/ko/2019/02/04/android/190204-ted-permission/">TedPermission 라이브러리</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/02/05/android/190205-permission-dispatcher/">PermissionDispatcher 라이브러리</a></li>
+</ul>
 <hr>
-<h1 id="TedPermission-라이브러리"><a href="#TedPermission-라이브러리" class="headerlink" title="TedPermission 라이브러리"></a>TedPermission 라이브러리</h1><p><a target="_blank" rel="noopener" href="https://github.com/ParkSangGwon/TedPermission"><code>TedPermission</code></a>는 대한민국의 개발자 박상권님께서 개발하신 권한 설정 라이브러리입니다. 이 라이브러리를 사용하면 권한 설정을 좀 더 쉽게 구현할 수 있습니다.</p>
-<h1 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h1><p>모듈 수준의 build.gradle파일에 다음과 같이 의존성을 추가합니다.</p>
-<h5 id="build-gradle-Module-my-project-app"><a href="#build-gradle-Module-my-project-app" class="headerlink" title="build.gradle(Module: my_project.app)"></a>build.gradle(Module: my_project.app)</h5><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    implementation <span class="string">&#x27;gun0912.ted:tedpermission:2.2.0&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="사용-방법"><a href="#사용-방법" class="headerlink" title="사용 방법"></a>사용 방법</h1><p>우리는 <a href="/ko/2019/01/05/android/190105-permission-managerment/">이전 포스트</a>에서 카메라의 권한을 확인하고, 권한이 없으면 요청하고, 권한을 얻었을 때 카메라를 여는 예제를 살펴봤습니다.<br><img src="/ko/images/posts/android/permission/permission-2.png"><br>이제 동일한 내용을 TedPermission 라이브러리를 사용해서 구현해보겠습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonOpenCamera: Button <span class="keyword">by</span> lazy &#123;</span><br><span class="line">        findViewById&lt;Button&gt;(R.id.button_open_camera)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        buttonOpenCamera.setOnClickListener &#123;</span><br><span class="line">            TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">                <span class="comment">// 요청할 권한 나열하기</span></span><br><span class="line">                .setPermissions(Manifest.permission.CAMERA)</span><br><span class="line">                <span class="comment">// 권한 요청 결과에 대한 리스너 등록</span></span><br><span class="line">                .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">                    <span class="comment">// 권한을 승인했을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 카메라 열기</span></span><br><span class="line">                        openCamera()</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 권한을 승인하지 않았을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 앱 종료</span></span><br><span class="line">                        finish()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">// 권한을 거부할 경우 나타나는 Alert dialog의 메시지</span></span><br><span class="line">                .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">                <span class="comment">// 권한 요청하기</span></span><br><span class="line">                .check()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">openCamera</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)</span><br><span class="line">        startActivity(intent)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이제 앱을 실행하고 버튼을 누르면 다음과 같이 권한 설정 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/5.png"></p>
-<p><code>앱 사용 중에만 허용</code>을 누르면 <code>onPermissionGranted()</code>메소드가 호출되며, 앱을 종료하고 다시 시작해도 권한 설정 대화가 나오지 않습니다. <code>이번만 허용</code>을 눌러도 <code>onPermissionGranted()</code> 메소드가 호출됩니다. 차이점은 앱 종료 후 다시 시작할 때마다 권한 설정 대화상자가 다시 나옵니다.</p>
-<p>만약 <code>거부</code>를 누르면 <code>setDeniedMessage()</code>메소드에서 설정한 메시지와 함께 설정 또는 닫기를 선택할 수 있는 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/6.png"></p>
-<p>여기서도 <code>닫기</code>를 누르면 <code>onPermissionDenied()</code>가 호출됩니다. 만약 설정을 누르면 다음과 같이 앱 설정 화면으로 이동합니다.</p>
-<p><img src="/ko/images/posts/android/permission/7.png"></p>
-<p>여기서 권한을 모두 부여하고 뒤로가기를 누르면 <code>onPermissionGranted()</code>이 호출됩니다. 그러나 하나라도 권한을 부여하지 않으면 <code>onPermissionDenied()</code>이 호출됩니다.</p>
-<h1 id="다중-권한-요청"><a href="#다중-권한-요청" class="headerlink" title="다중 권한 요청"></a>다중 권한 요청</h1><p>여러 권한이 필요할 때 다음과 같이 동시에 요청할 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">    <span class="comment">// 권한 여러개 설정</span></span><br><span class="line">    .setPermissions(Manifest.permission.CAMERA, Manifest.permission.READ_CALENDAR)</span><br><span class="line">    .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">    .check()</span><br></pre></td></tr></table></figure>
+<h1 id="PermissionDispatcher-라이브러리"><a href="#PermissionDispatcher-라이브러리" class="headerlink" title="PermissionDispatcher 라이브러리"></a>PermissionDispatcher 라이브러리</h1><hr>
 <h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>TedPermission</code>라이브러리에 대해 알아봤습니다. </p>
 
                     
@@ -888,9 +983,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/02/04/android/190204-ted-permission/"
-                            aria-label=": [안드로이드] 권한 - (3) TedPermission 라이브러리"
+                            aria-label=": [안드로이드] 권한 - (4) TedPermission 라이브러리"
                         >
-                            [안드로이드] 권한 - (3) TedPermission 라이브러리
+                            [안드로이드] 권한 - (4) TedPermission 라이브러리
                         </a>
                     
                 </h1>
@@ -903,7 +998,7 @@
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/TedPermission/">TedPermission</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Permission/">Permission</a>
 
 
     
@@ -913,30 +1008,32 @@
             
                 <div class="postShorten-content">
                     <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 3개의 포스트에 걸쳐 권한(Permission)을 관리하는 방법에 대해 알아보겠습니다.</p>
-<ol>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 <code>권한(Permission)</code>에 대해 알아보고있습니다.</p>
+<ul>
 <li><a href="/ko/2019/02/01/android/190201-permission/">일반 권한과 위험 권한</a></li>
 <li><a href="/ko/2019/02/02/android/190202-multi-permission/">여러 권한 동시에 요청하기</a></li>
-<li>TedPermission 라이브러리 ⬅️ ⬅️ ⬅️</li>
-</ol>
+<li><a href="/ko/2019/02/03/android/190203-open-settings/">액티비티에서 설정 앱 시작하기</a></li>
+<li><a href="/ko/2019/02/04/android/190204-ted-permission/">TedPermission 라이브러리</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/02/05/android/190205-permission-dispatcher/">PermissionDispatcher 라이브러리</a></li>
+</ul>
 <hr>
 <h1 id="TedPermission-라이브러리"><a href="#TedPermission-라이브러리" class="headerlink" title="TedPermission 라이브러리"></a>TedPermission 라이브러리</h1><p><a target="_blank" rel="noopener" href="https://github.com/ParkSangGwon/TedPermission"><code>TedPermission</code></a>는 대한민국의 개발자 박상권님께서 개발하신 권한 설정 라이브러리입니다. 이 라이브러리를 사용하면 권한 설정을 좀 더 쉽게 구현할 수 있습니다.</p>
-<h1 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h1><p>모듈 수준의 build.gradle파일에 다음과 같이 의존성을 추가합니다.</p>
-<h5 id="build-gradle-Module-my-project-app"><a href="#build-gradle-Module-my-project-app" class="headerlink" title="build.gradle(Module: my_project.app)"></a>build.gradle(Module: my_project.app)</h5><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    implementation <span class="string">&#x27;gun0912.ted:tedpermission:2.2.0&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="사용-방법"><a href="#사용-방법" class="headerlink" title="사용 방법"></a>사용 방법</h1><p>우리는 <a href="/ko/2019/01/05/android/190105-permission-managerment/">이전 포스트</a>에서 카메라의 권한을 확인하고, 권한이 없으면 요청하고, 권한을 얻었을 때 카메라를 여는 예제를 살펴봤습니다.<br><img src="/ko/images/posts/android/permission/permission-2.png"><br>이제 동일한 내용을 TedPermission 라이브러리를 사용해서 구현해보겠습니다.</p>
+<h1 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h1><p>모듈 수준의 <code>build.gradle</code>에 의존성을 추가합니다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>build.gradle(Module: my_project.app)</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies {</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    implementation <span class="string">'gun0912.ted:tedpermission:2.2.0'</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure></p>
+<h1 id="사용-방법"><a href="#사용-방법" class="headerlink" title="사용 방법"></a>사용 방법</h1><p>우리는 <a href="/ko/2019/01/05/android/190105-permission-managerment/">이전 포스트</a>에서 카메라의 권한을 확인하고, 권한이 없으면 요청하고, 권한을 얻었을 때 카메라를 여는 예제를 살펴봤습니다.<br><img src="/ko/images/posts/android/permission/permission-2.png"><br>이제 동일한 내용을 <code>TedPermission 라이브러리</code>를 사용해서 구현해보겠습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonOpenCamera: Button <span class="keyword">by</span> lazy &#123;</span><br><span class="line">        findViewById&lt;Button&gt;(R.id.button_open_camera)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        buttonOpenCamera.setOnClickListener &#123;</span><br><span class="line">            TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">                <span class="comment">// 요청할 권한 나열하기</span></span><br><span class="line">                .setPermissions(Manifest.permission.CAMERA)</span><br><span class="line">                <span class="comment">// 권한 요청 결과에 대한 리스너 등록</span></span><br><span class="line">                .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">                    <span class="comment">// 권한을 승인했을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 카메라 열기</span></span><br><span class="line">                        openCamera()</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 권한을 승인하지 않았을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 앱 종료</span></span><br><span class="line">                        finish()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">// 권한을 거부할 경우 나타나는 Alert dialog의 메시지</span></span><br><span class="line">                .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">                <span class="comment">// 권한 요청하기</span></span><br><span class="line">                .check()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">openCamera</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)</span><br><span class="line">        startActivity(intent)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>이제 앱을 실행하고 버튼을 누르면 다음과 같이 권한 설정 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/5.png"></p>
-<p><code>앱 사용 중에만 허용</code>을 누르면 <code>onPermissionGranted()</code>메소드가 호출되며, 앱을 종료하고 다시 시작해도 권한 설정 대화가 나오지 않습니다. <code>이번만 허용</code>을 눌러도 <code>onPermissionGranted()</code> 메소드가 호출됩니다. 차이점은 앱 종료 후 다시 시작할 때마다 권한 설정 대화상자가 다시 나옵니다.</p>
+<p><code>앱 사용 중에만 허용</code>을 누르면 <code>onPermissionGranted()</code>메소드가 호출되며, 앱을 종료하고 다시 시작해도 권한 설정 대화상자가 나오지 않습니다. <code>이번만 허용</code>을 눌러도 <code>onPermissionGranted()</code> 메소드가 호출됩니다. 차이점은 앱 종료 후 다시 시작할 때마다 권한 설정 대화상자가 다시 나오느냐 입니다.</p>
 <p>만약 <code>거부</code>를 누르면 <code>setDeniedMessage()</code>메소드에서 설정한 메시지와 함께 설정 또는 닫기를 선택할 수 있는 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/6.png"></p>
 <p>여기서도 <code>닫기</code>를 누르면 <code>onPermissionDenied()</code>가 호출됩니다. 만약 설정을 누르면 다음과 같이 앱 설정 화면으로 이동합니다.</p>
 <p><img src="/ko/images/posts/android/permission/7.png"></p>
 <p>여기서 권한을 모두 부여하고 뒤로가기를 누르면 <code>onPermissionGranted()</code>이 호출됩니다. 그러나 하나라도 권한을 부여하지 않으면 <code>onPermissionDenied()</code>이 호출됩니다.</p>
 <h1 id="다중-권한-요청"><a href="#다중-권한-요청" class="headerlink" title="다중 권한 요청"></a>다중 권한 요청</h1><p>여러 권한이 필요할 때 다음과 같이 동시에 요청할 수도 있습니다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">    <span class="comment">// 권한 여러개 설정</span></span><br><span class="line">    .setPermissions(Manifest.permission.CAMERA, Manifest.permission.READ_CALENDAR)</span><br><span class="line">    .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">    .check()</span><br></pre></td></tr></table></figure>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>TedPermission</code>라이브러리에 대해 알아봤습니다. </p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>TedPermission 라이브러리</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/05/android/190205-permission-dispatcher/">PermissionDispatcher 라이브러리</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -947,79 +1044,6 @@
                         <p>
                             <a
                                 href="/ko/2019/02/04/android/190204-ted-permission/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/04/kotlin/190204-unit/"
-                            aria-label=": [코틀린] Unit 이란?"
-                        >
-                            [코틀린] Unit 이란?
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-04T20:16:30+09:00">
-	
-		    2019/02/04
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/03/kotlin/190203-first-class-citizen/"><code>일급 객체</code>와 <code>함수형 프로그래밍</code></a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">Unit</span>에 대해 알아보겠습니다. </p>
-<hr>
-<h1 id="Unit"><a href="#Unit" class="headerlink" title="Unit"></a>Unit</h1><p><code>Unit</code>은 <u>함수의 반환값이 없음</u>을 의미합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printSomething</span><span class="params">(something: <span class="type">String</span>)</span></span>: <span class="built_in">Unit</span> &#123;</span><br><span class="line">    println(something)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printSomething(<span class="string">&quot;Hello&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><code>Unit</code>은 <a href="/ko/2019/01/16/kotlin/190116-object/">싱글톤</a>이기도 합니다. 인스턴스를 생성하지 않고도 접근할 수 있으며, 인스턴스 또한 생성할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> unit: <span class="built_in">Unit</span> = <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
-<p><code>Unit</code>은 <code>RxKotlin</code>에서 다음과 같이 사용하기도 합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> didLogOut = PublishSubject.create&lt;<span class="built_in">Unit</span>&gt;()</span><br><span class="line">didLogOut.onNext(<span class="built_in">Unit</span>)</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>Unit</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/06/kotlin/190206-access-modifier/"><code>접근 제한자(Access Modifier)</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/04/kotlin/190204-unit/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -1059,7 +1083,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 7 of 18</li>
+        <li class="pagination-number">page 7 of 19</li>
     </ul>
 </div>
 

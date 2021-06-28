@@ -242,464 +242,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/02/17/kotlin/190217-destructuring-declaration/"
-                            aria-label=": [코틀린] 비구조화 할당(구조분해, Destructuring Declaration)이란?"
-                        >
-                            [코틀린] 비구조화 할당(구조분해, Destructuring Declaration)이란?
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-17T20:16:30+09:00">
-	
-		    2019/02/17
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에는 <a href="/ko/2019/02/16/kotlin/190216-type-alias/">타입 별칭(Type Alias)</a>에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 <span class="highlight-text red">비구조화 할당</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h2 id="Destructuring-Declaration"><a href="#Destructuring-Declaration" class="headerlink" title="Destructuring Declaration"></a>Destructuring Declaration</h2><p><code>Destructuring Declaration</code>는 한국말로 <code>비구조화 할당</code> 또는 <code>구조분해</code>로 번역됩니다. 용어는 어렵지만 개념은 매우 쉽습니다. 어떤 객체의 데이터를 변수들에 대입하는 기술입니다.</p>
-<p>아래 예제를 살펴봅시다. <code>Person</code>클래스의 멤버변수 name, age를 새로운 변수에 할당하고 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">val</span> name: String, <span class="keyword">val</span> age: <span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">24</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = person.name</span><br><span class="line"><span class="keyword">var</span> age = person.age</span><br></pre></td></tr></table></figure>
-<p>이를 <code>Destructuring Declaration</code>을 사용하면 다음과 같이 단축할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">val</span> name: String, <span class="keyword">val</span> age: <span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">24</span>)</span><br><span class="line"><span class="keyword">val</span> (name, age) = person   <span class="comment">// 비구조화 할당</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 <code>코틀린에서의 this</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/18/kotlin/190218-annotation-1/">어노테이션(Annotation)</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/17/kotlin/190217-destructuring-declaration/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/16/android/190216-activity-stack/"
-                            aria-label=": [안드로이드] 액티비티 - (2) 태스크(Task)와 액티비티 스택(Activity Stack)"
-                        >
-                            [안드로이드] 액티비티 - (2) 태스크(Task)와 액티비티 스택(Activity Stack)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-16T20:16:30+09:00">
-	
-		    2019/02/16
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 안드로이드의 <a href="/ko/2019/02/15/android/190215-activity/">액티비티(Activity)</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>액티비티 스택(Activity Task)</code>에 대해 알아보겠습니다.</p>
-<h1 id="액티비티-스택"><a href="#액티비티-스택" class="headerlink" title="액티비티 스택"></a>액티비티 스택</h1><p>액티비티는 같은 앱의 다른 액티비티를 호출할 수 있습니다. 이때 액티비티는 스택의 형태로 관리됩니다. 즉 Activity A가 Activity B를 호출하면 위에 쌓이고, Activity B가 Activity C를 호출하면 또 위에 쌓입니다.<br><img src="/ko/images/posts/android/activity-stack/1.png"></p>
-<p>그러나 액티비티는 다른 앱의 액티비티도 호출할 수 있습니다.<br><img src="/ko/images/posts/android/activity-stack/2.png"><br>이처럼 여러 앱 사이의 경계가 없이 다른 액티비티를 호출하다보니, 액티비티는 앱 단위가 아닌 태스크 단위로 관리됩니다. <code>태스크(Task)</code>는 스택 형태로 구성되며, 새로운 액티비티를 실행하면 스택의 가장 위에 추가됩니다. 이러한 점에서 태스크는 <code>액티비티 스택(Activity Stack)</code>이라고도 불립니다.</p>
-<p>보통 <code>홈 화면</code>이나 <code>앱스</code>, <code>앱 런처</code>에서 앱 아이콘을 클릭하여 앱을 실행하면 메모리에 새로운 태스크가 생성됩니다.<br><img src="/ko/images/posts/android/activity-stack/3.png"><br>그리고 이 태스크를 시작한 액티비티가 태스크의 가장 하단에 놓이게됩니다. 이를 <code>루트 액티비티(Root Activity)</code>라고 합니다.<br><img src="/ko/images/posts/android/activity-stack/4.png"><br>루트 액티비티는 다음과 같이 <code>AndroidManifest.xml</code>에 <a href="/ko/2019/03/04/android/190304-intent-filter/">intent filter</a>를 통해 지정합니다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.activity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span> <span class="attr">...</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.ActivityA&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- Activity A를 루트 액티비티로 지정--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>이제 다른 액티비티를 실행하면, 새로운 액티비티가 스택의 가장 위에 놓이게 됩니다.<br><img src="/ko/images/posts/android/activity-stack/5.png"><br>스택의 가장 위에 있는 액티비티는 화면에 표시되고 사용자와 상호작용할 수 있습니다. 이러한 상태를 <code>foreground</code>라고 합니다. 반면 아래에 놓인 액티비티의 화면은 위에 있는 액티비티에 의해 가려지며, 사용자와의 상호작용도 할 수 없게 됩니다. 이러한 상태를 <code>background</code>라고 합니다.</p>
-<p>이제 <code>뒤로 가기(Back) 버튼</code>을 누르면 가장 위의 액티비티가 태스크에서 사라지고 이전 화면으로 이동합니다.<br><img src="/ko/images/posts/android/activity-stack/6.png"></p>
-<blockquote>
-<p>[참고] 액티비티가 태스크에 생성되거나 background 상태에 진입하거나 foreground 상태로 돌아오거나 태스크에서 사라지면 <a href="/ko/2019/02/19/android/190219-activity-lifecycle/">액티비티의 생명주기 메소드</a>가 호출됩니다.</p>
-</blockquote>
-<p>사용자가 <code>홈(Home) 버튼</code>을 누르면 홈 화면이 등장합니다. 그리고 액티비티가 쌓여있는 태스크가 통째로 background 상태로 진입합니다. </p>
-<p>태스크는 메모리 상에 동시에 여러 개 존재할 수 있습니다. 태스크 A가 활성화된 상태에서 홈 화면으로 이동합니다. 이후 다른 앱을 실행하면 태스크 B가 시작됩니다. 태스크 A는 background 상태가 되고 태스크 B는 foreground 상태가 됩니다.</p>
-<p><img src="/ko/images/posts/android/activity-stack/7.png"></p>
-<p>주의할 점은 홈 화면으로 이동한다고 해서 태스크가 메모리에서 사라지는 것은 아니라는 것입니다. <code>최근 사용한 앱 버튼(Recent List) 버튼</code>을 클릭하면 현재 메모리에 있는 태스크를 확인할 수 있습니다.<br><img src="/ko/images/posts/android/activity-stack/8.png"></p>
-<p>이제 다시 홈 화면으로 이동한 후 태스크 A로 돌아가봅시다. 이 때는 새로운 태스크를 생성하는게 아니라 기존에 존재하던 태스크 A를 foreground 상태로 변경합니다. 물론 태스크 B는 메모리에서 없어지지 않고 background 상태로 진입합니다.<br><img src="/ko/images/posts/android/activity-stack/9.png"></p>
-<p>보통 안드로이드 운영체제는 background 상태에 진입한 태스크의 상태를 유지합니다. 따라서 다른 태스크로 이동했다가 돌아와도 동일한 액티비티에 위치해있습니다. </p>
-<p>그러나 주의할 점이 있습니다. 태스크의 스택 상태는 유지되지만 최상위 액티비티의 상태가 유지되는 것은 아닙니다. 이러한 경우 액티비티 상태를 복구하기 위해 onSaveInstanceState() 메소드를 사용할 수 있습니다.</p>
-<p>만약 메모리가 부족하거나 사용자가 해당 태스크를 오랫동안 활성화하지 않는 경우, 안드로이드 운영체제가 자동으로 태스크를 종료시키기도 합니다. 이땐 보통 background 상태의 태스크를 우선적으로 종료시킵니다.</p>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>태스크(Task)와 액티비티 스택(Activity Stack)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/17/android/190217-launchmode/"><code>Task Affinity</code>와 <code>Launch Mode</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/16/android/190216-activity-stack/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/16/kotlin/190216-type-alias/"
-                            aria-label=": [코틀린] 타입 별칭(Type Alias)"
-                        >
-                            [코틀린] 타입 별칭(Type Alias)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-16T20:16:30+09:00">
-	
-		    2019/02/16
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에는 <a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)</a>에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 <span class="highlight-text red">타입 별칭(Type Alias)</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="타입-별칭"><a href="#타입-별칭" class="headerlink" title="타입 별칭"></a>타입 별칭</h1><p>타입 별칭을 사용하면 타입의 이름이 길 때 간단한 이름으로 대체할 수 있습니다. 타입 별칭를 정의할 때는 키워드<code>typealias</code>를 사용합니다. </p>
-<p>기본자료형에 타입 별칭를 적용한 예제는 다음과 같습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typealias</span> Number = <span class="built_in">Int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> number: Number = <span class="number">3</span></span><br></pre></td></tr></table></figure>
-<p>클래스에 타입 별칭를 적용한 예제는 다음과 같습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">typealias</span> Man = Person</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> man: Man = Person(<span class="string">&quot;Harry&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>타입 별칭은 타입에 제네릭 타입 파라미터가 포함됐을 때 유용하게 사용할 수 있습니다. 아래 코드를 살펴봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> users: MutableList&lt;MutableMap&lt;String, String&gt;&gt; = mutableListOf(</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Paul&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;John&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Jenny&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Park&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Lee&quot;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>변수 user의 데이터 타입은 <code>MutableList&lt;MutableMap&lt;String, String&gt;&gt;</code>입니다. 이를 타입 별칭를 사용하여 <code>User</code>로 축약해보겠습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typealias</span> Users = MutableList&lt;MutableMap&lt;String, String&gt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> users: Users = mutableListOf(</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Paul&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;John&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Jenny&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Park&quot;</span>),</span><br><span class="line">        mutableMapOf(<span class="string">&quot;name&quot;</span> to <span class="string">&quot;Lee&quot;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>타입 별칭(Type Alias)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/17/kotlin/190217-destructuring-declaration/"><code>비구조화 할당(구조분해, Destructuring Declaration)</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/16/kotlin/190216-type-alias/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/15/android/190215-activity/"
-                            aria-label=": [안드로이드] 액티비티 - (1) 액티비티(Activity)란?"
-                        >
-                            [안드로이드] 액티비티 - (1) 액티비티(Activity)란?
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-15T20:16:30+09:00">
-	
-		    2019/02/15
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 안드로이드의 <a href="/ko/2019/02/01/android/190201-permission/">권한(Permission)</a>에 대해 알아봤습니다. 이번 포스트에서는 <code>액티비티(Activity)</code>에 대해 알아보겠습니다.</p>
-<h1 id="액티비티-Activity-란"><a href="#액티비티-Activity-란" class="headerlink" title="액티비티(Activity)란?"></a>액티비티(Activity)란?</h1><p>안드로이드 애플리케이션은 하나 이상의 액티비티로 구성됩니다. <code>액티비티(Activity)</code>는 애플리케이션을 구성하는 구성요소입니다. 액티비티는 하나의 <code>사용자 인터페이스 화면</code> 및 그것의 <code>기능</code>으로 구성됩니다.</p>
-<p>예를 들어 다음 메모장 앱을 살펴봅시다.<br><img src="/ko/images/posts/android/activity/1.png"><br><img src="/ko/images/posts/android/activity/2.png"><br>이 메모장 앱은 <code>목록을 보여주는 화면</code>과 <code>글을 작성하는 화면</code>으로 구성되어있습니다. 따라서 2개의 액티비티로 구성되어있습니다.</p>
-<p>액티비티는 사용자 인터페이스 화면을 담당하는 <code>xml 파일</code>과 그것의 기능을 명세하는 <code>.kt 파일 (또는 .java 파일)</code>로 구성되어있습니다. 안드로이드 스튜디오에서 새로운 프로젝트를 만들면 기본으로 생성되는 activity_main.xml과 MainActivity.kt이 바로 그것입니다.<br><img src="/ko/images/posts/android/activity/3.png"></p>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>액티비티(Activity)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/16/android/190216-activity-stack/"><code>태스크(Task)와 액티비티 스택(Activity Stack)</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/15/android/190215-activity/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/15/kotlin/190215-reified/"
-                            aria-label=": [코틀린] reified란 무엇인가"
-                        >
-                            [코틀린] reified란 무엇인가
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-15T20:16:30+09:00">
-	
-		    2019/02/15
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트에 걸쳐 <code>제네릭(Generic)</code>에 대해 알아보겠습니다.</p>
-<ol>
-<li><a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)과 제네릭 클래스(Generic Class)</a></li>
-<li><a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a></li>
-<li><a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">키워드 in, out</a></li>
-<li><a href="/ko/2019/02/15/kotlin/190215-reified/">reified란 무엇인가?</a> ⬅️ ⬅️ ⬅️</li>
-</ol>
-<div class="alert warning icon"><p><b>reified</b>를 이해하려면 <a href="/ko/2019/02/11/kotlin/190211-generic/">제너릭(Generic)</a>, <a href="/ko/2018/02/05/java/180205-type-eraser/">타입 소거(Type Eraser)</a>, <a href="/ko/2019/02/07/kotlin/190207-reflection/">리플렉션(Reflection)</a>에 대해 알아야 합니다. 해당 포스트를 먼저 참고하시길 권장합니다.</p>
-</div>
-
-<hr>
-<h1 id="타입-소거"><a href="#타입-소거" class="headerlink" title="타입 소거"></a>타입 소거</h1><p>제너릭의 타입 파라미터는 컴파일 타임에 존재하지만 런타임에는 접근할 수 없습니다. 바로 <a href="/ko/2018/02/05/java/180205-type-eraser/">타입 소거</a> 때문입니다. 다음 예제를 살펴봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> <span class="title">printType</span><span class="params">(value: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">when</span> (T::<span class="class"><span class="keyword">class</span>) </span>&#123;   <span class="comment">// Error, Cannot use &#x27;T&#x27; as reified type parameter. Use a class instead.</span></span><br><span class="line">        String::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is String type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is Int type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">printType&lt;String&gt;(name)</span><br></pre></td></tr></table></figure>
-<p>위 코드는 <code>T:class</code> 형태로 클래스 타입을 읽으려 하고있습니다. 그러나 이 코드를 컴파일하면 에러가 발생합니다. 타입 파라미터인 <code>T</code>는 런타임에 접근할 수 없기 때문입니다. 따라서 보통 다음과 같이 별도의 인자로 클래스 타입을 전달하여 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T: Any&gt;</span> <span class="title">printType</span><span class="params">(value: <span class="type">T</span>, classType: <span class="type">KClass</span>&lt;<span class="type">T</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (classType) &#123;</span><br><span class="line">        String::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is String type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is Int type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">printType&lt;String&gt;(name, String::<span class="class"><span class="keyword">class</span>)</span></span><br></pre></td></tr></table></figure>
-<p>하지만 키워드 <code>reified</code>를 타입 파라미터 앞에 붙여주고 <code>inline</code>함수 형태로 사용하면 <code>Kclass</code>를 인자로 전달할 필요 없이 런타임에 타입 <code>T</code>에 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;<span class="keyword">reified</span> T: Any&gt;</span> <span class="title">printType</span><span class="params">(value: <span class="type">T</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (T::<span class="class"><span class="keyword">class</span>) </span>&#123;</span><br><span class="line">        String::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is String type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Int</span>::<span class="class"><span class="keyword">class</span> -&gt; </span>&#123;</span><br><span class="line">            print(<span class="string">&quot;value is Int type.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name: String = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">printType&lt;String&gt;(name)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>네 개의 포스트에서 걸쳐 <code>제네릭(Generic)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/16/kotlin/190216-type-alias/">타입 별칭(Type Alias)</a>에 대해 알아보겠습니다. </p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/15/kotlin/190215-reified/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/02/13/kotlin/190213-generic-in-out/"
-                            aria-label=": [코틀린] 제네릭(Generic)의 in, out"
-                        >
-                            [코틀린] 제네릭(Generic)의 in, out
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-13T20:16:30+09:00">
-	
-		    2019/02/13
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트에 걸쳐 <code>제네릭(Generic)</code>에 대해 알아보겠습니다.</p>
-<ol>
-<li><a href="/ko/2019/02/11/kotlin/190211-generic/">제네릭(Generic)과 제네릭 클래스(Generic Class)</a></li>
-<li><a href="/ko/2019/02/12/kotlin/190212-generic-function/">제네릭 함수(Generic Function)</a></li>
-<li><a href="/ko/2019/02/13/kotlin/190213-generic-in-out/">키워드 in, out</a> ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2019/02/15/kotlin/190215-reified/">reified란 무엇인가?</a></li>
-</ol>
-<div class="alert warning icon"><p>제네릭의 <b>in</b>과 <b>out</b>에 대해 이해하기 전에 자바의 <a href="/ko/2018/01/30/java/180130-type-eraser/">타입 소거(Type Eraser)</a>와 <a href="/ko/2018/01/28/java/180128-wildcard/">와일드 카드(Wild Card)</a>에 대해 먼저 공부하시길 권장합니다.</p>
-</div>
-<hr>
-<h1 id="in"><a href="#in" class="headerlink" title="in"></a>in</h1><p>키워드<code>in</code>은 자바 제네릭의 <code>super</code>와 유사합니다. 키워드<code>in</code>은 제네릭의 타입 파라미터를 특정 클래스와 그 클래스의 <strong>조상 클래스</strong>로 제한합니다.</p>
-<p>아래 예제를 살펴봅시다. <code>Programmer</code>클래스는 <code>Person</code>를 상속하고 <code>AppProgrammer</code>는 <code>Programmer</code>를 상속하고 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">constructor</span></span>(name: String, <span class="keyword">var</span> company: String) : Person(name)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppProgrammer</span> <span class="keyword">constructor</span></span>(name: String, company: String, <span class="keyword">var</span> field: String) : Programmer(name, company)</span><br></pre></td></tr></table></figure>
-<p>이제 아래 코드를 살펴봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printArrayList</span><span class="params">(arrayList: <span class="type">ArrayList</span>&lt;<span class="type">in</span> <span class="type">Programmer</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(arrayList.toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>&lt;in Programmer&gt;</code>를 통해 <code>Programmer</code>와 그 부모 클래스인 <code>Person</code>클래스만 들어올 수 있도록 하고 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Person&gt;()</span><br><span class="line">printArrayList(people)          <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Programmer&gt;()</span><br><span class="line">printArrayList(programmers)     <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;AppProgrammer&gt;()</span><br><span class="line">printArrayList(appProgrammer)   <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="out"><a href="#out" class="headerlink" title="out"></a>out</h1><p>키워드<code>out</code>은 Java 제너릭의 <code>extends</code>와 유사합니다. 키워드<code>out</code>는 타입 파라미터의 실제 타입을 특정 클래스와 특정 클래스의 <strong>자손 클래스</strong>로 제한합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">var</span> name: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Programmer</span> <span class="keyword">constructor</span></span>(name: String, <span class="keyword">var</span> company: String) : Person(name)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppProgrammer</span> <span class="keyword">constructor</span></span>(name: String, company: String, <span class="keyword">var</span> field: String) : Programmer(name, company)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printArrayList</span><span class="params">(arrayList: <span class="type">ArrayList</span>&lt;<span class="type">out</span> <span class="type">Programmer</span>&gt;)</span></span> &#123;</span><br><span class="line">    println(arrayList.toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Person&gt;()</span><br><span class="line">printArrayList(people)          <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;Prograammer&gt;()</span><br><span class="line">printArrayList(programmers)     <span class="comment">// Success</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> people = arrayListOf&lt;AppProgrammer&gt;()</span><br><span class="line">printArrayList(appProgrammer)   <span class="comment">// Success</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>제너릭(Generic)의 in, out</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/15/kotlin/190215-reified/">reified</a>에 대해 알아보겠습니다. </p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/13/kotlin/190213-generic-in-out/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2019/02/12/kotlin/190212-generic-function/"
                             aria-label=": [코틀린] 제네릭 함수(Generic Function)"
                         >
@@ -887,7 +429,7 @@
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Android/">Android</a>
 
 
     
@@ -897,9 +439,34 @@
             
                 <div class="postShorten-content">
                     <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>안드로이드 애플리캐이션은 여러 컴포넌트로 구성됩니다. 안드로이드의 대표적인 컴포넌트에는 <code>액티비티(Activity)</code>, <code>서비스(Service)</code>, <code>브로드캐스트 리시버(BroadCast Receiver)</code>, <code>컨텐트 프로바이더(Content Provider)</code>가 있습니다. 안드로이드의 4대 컴포넌트는 <code>인텐트(Intent)</code>라는 메시징 시스템을 통해 상호작용합니다.</p>
+<hr>
+<h1 id="액티비티"><a href="#액티비티" class="headerlink" title="액티비티"></a>액티비티</h1><ol>
+<li><a href="/ko/2019/02/15/android/190215-activity/">액티비티(Activity)란?</a></li>
+<li><a href="/ko/2019/02/16/android/190216-activity-stack/">태스크(Task)와 액티비티 스택(Activity Stack)</a></li>
+<li><a href="/ko/2019/02/17/android/190217-launchmode/">taskAffinity와 launchMode</a></li>
+<li><a href="/ko/2019/02/18/android/190218-intent-flag/">인텐트 플래그(Intent Flag)</a></li>
+<li><a href="/ko/2019/02/19/android/190219-activity-lifecycle/">액티비티 생명주기 함수</a></li>
+</ol>
+<h1 id="인텐트와-브로드캐스트-리시버"><a href="#인텐트와-브로드캐스트-리시버" class="headerlink" title="인텐트와 브로드캐스트 리시버"></a>인텐트와 브로드캐스트 리시버</h1><ol>
+<li><a href="/ko/2019/03/01/android/190301-explicit-intent/">명시적 인텐트와 화면 전환</a></li>
+<li><a href="/ko/2019/03/02/android/190302-intent-data-transfer/">액티비티 사이의 데이터 전달</a></li>
+<li><a href="/ko/2019/03/03/android/190303-implicit-intent/">암시적 인텐트</a></li>
+<li><a href="/ko/2019/03/04/android/190304-intent-filter/">인텐트 필터</a></li>
+<li><a href="/ko/2019/03/05/android/190305-broadcast-intent/">브로드캐스트 인텐트와 브로드케스트 리시버</a></li>
+</ol>
+<h1 id="서비스"><a href="#서비스" class="headerlink" title="서비스"></a>서비스</h1><ol>
+<li><a href="/ko/2019/04/02/android/190402-start-service/">스타트 서비스 (Start Service)</a></li>
+<li><a href="/ko/2019/04/03/android/190403-intent_service/">인텐트 서비스 (Intent Service)</a></li>
+<li><a href="/ko/2019/04/03/android/190404-bound_service/">바운드 서비스 (Bound Service)</a></li>
+<li><a href="/ko/2019/04/05/android/190405-service-lifecycle/">서비스의 생명주기 메소드</a></li>
+</ol>
+<h1 id="컨텐트-프로바이더"><a href="#컨텐트-프로바이더" class="headerlink" title="컨텐트 프로바이더"></a>컨텐트 프로바이더</h1><ol>
+<li><a href="/ko/2019/04/09/android/190409-content_provider/">컨텐트 프로바이더와 컨텐트 리시버</a></li>
+</ol>
 
                     
                         
@@ -1023,6 +590,474 @@
         
     </article>
     
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/09/kotlin/190209-infix-function/"
+                            aria-label=": [코틀린] 중위 함수(Infix Function)"
+                        >
+                            [코틀린] 중위 함수(Infix Function)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-09T20:16:30+09:00">
+	
+		    2019/02/09
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/07/kotlin/190207-reflection/">확장 함수(Extension Function)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">중위 함수(Infix Function)</span>에 대해 알아보겠습니다. </p>
+<hr>
+<h1 id="확장-함수"><a href="#확장-함수" class="headerlink" title="확장 함수"></a>확장 함수</h1><p>이전 포스트에서는 확장 함수에 대해 배웠습니다. 확장 함수를 사용하여 두 정수의 곱을 반환하는 메소드를 <code>Int</code>클래스에 추가해보겠습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">multiply</span><span class="params">(x: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> * x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> three = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수 호출</span></span><br><span class="line"><span class="keyword">var</span> result = three.multiply(<span class="number">5</span>)  <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
+<h2 id="중위-함수"><a href="#중위-함수" class="headerlink" title="중위 함수"></a>중위 함수</h2><p>일반적으로 메소드를 호출할 땐 <code>점(.)</code>, <code>함수 이름</code>, <code>소괄호</code>를 사용하여 호출합니다. 이때 중위 함수를 사용하면 <code>점(.)</code>과 <code>소괄호</code>를 생략하고 <code>함수 이름</code>이로 호출할 수 있습니다. </p>
+<p>중위 함수는 다음과 같이 선언합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">infix</span> <span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">multiply</span><span class="params">(x: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> * x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>중위 함수는 다음과 같이 호출합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> three = <span class="number">3</span></span><br><span class="line"><span class="comment">// 점과 괄호를 생략하여 호출</span></span><br><span class="line"><span class="keyword">var</span> result = three multiply <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>중위 함수를 사용하려면 세 가지 조건을 충족해야합니다.</p>
+<ol>
+<li>중위함수는 클래스의 메소드 또는 확장 함수의 형태여야 합니다.</li>
+<li>오직 하나의 인자만 가져야합니다.</li>
+<li>키워드 <code>infix</code>를 붙여줍니다.</li>
+</ol>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>중위 함수(Infix Function)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/10/kotlin/190210-inline-function/"><code>인라인 함수(Inline Function)</code></a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/09/kotlin/190209-infix-function/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/08/kotlin/190208-extension-function/"
+                            aria-label=": [코틀린] 확장 함수(Extension Function)"
+                        >
+                            [코틀린] 확장 함수(Extension Function)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-08T20:16:30+09:00">
+	
+		    2019/02/08
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/07/kotlin/190207-reflection/"><code>리플렉션(Reflection)</code></a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">확장 함수(Extension Function)</span>에 대해 알아보겠습니다. </p>
+<hr>
+<h1 id="확장-함수"><a href="#확장-함수" class="headerlink" title="확장 함수"></a>확장 함수</h1><p><code>확장 함수(Extension Function)</code>는 기존에 정의된 클래스에 함수를 추가하는 것입니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(<span class="keyword">val</span> name: String, <span class="keyword">val</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Age: <span class="subst">$&#123;age&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Person.<span class="title">printInformation</span><span class="params">()</span></span> &#123;</span><br><span class="line">    print(<span class="string">&quot;<span class="subst">$&#123;name&#125;</span> is <span class="subst">$&#123;age&#125;</span> years old.&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> person: Person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line">person.printInformation()</span><br></pre></td></tr></table></figure>
+<p>보통 자바 API나 다른 사람이 만든 라이브러리처럼 코드를 직접 변경하기 어려운 경우 <code>확장 함수</code>을 사용합니다. 다음은 <code>Int</code>클래스에 홀수인지 짝수인지 판단해주는 함수를 추가하는 예제입니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">isEven</span><span class="params">()</span></span> = <span class="keyword">this</span> % <span class="number">2</span> == <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="built_in">Int</span>.<span class="title">isOdd</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> % <span class="number">2</span> !== <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">val</span> age: <span class="built_in">Int</span> = <span class="number">5</span>	</span><br><span class="line"></span><br><span class="line">println(a.isEven())   <span class="comment">// false</span></span><br><span class="line">println(a.isOdd())    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>확장 함수(Extension Function)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/09/kotlin/190209-infix-function/"><code>중위 함수(Infix Function)</code></a>에 대해 알아보겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/08/kotlin/190208-extension-function/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/07/kotlin/190207-reflection/"
+                            aria-label=": [코틀린] 리플렉션(Reflection)"
+                        >
+                            [코틀린] 리플렉션(Reflection)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-07T20:16:30+09:00">
+	
+		    2019/02/07
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><span class="highlight-text red">리플렉션(Reflection)</span>은 런타임에서 구체적인 클래스 타입을 몰라도 그 클래스의 멤버변수, 메소드 등에 접근할 수 있도록 하는 API입니다. 
+
+<hr>
+<h1 id="Class와-KClass"><a href="#Class와-KClass" class="headerlink" title="Class와 KClass"></a>Class와 KClass</h1><p>우선 <strong>코틀린의 리플렉션</strong>을 이해하려면 <strong>자바의 리플랙션</strong>에 대해 알아볼 필요가 있습니다. (자바의 리플랙션은 <a href="/ko/2018/03/01/java/180301-reflection/">이 포스트</a>를 참고하시기 바랍니다.) </p>
+<p>자바에서는 클래스에 대한 정보를 <code>Class</code>클래스에 저장할 수 있습니다. 이를 <code>클래스 참조(Class Reference)</code>라고 하며, 여러가지 방법이 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .class를 사용하여 클래스에서 객체 정보 가져오기</span></span><br><span class="line">Class c1 = String.class</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// forName()메소드를 사용하여 클래스에서 객체 정보 가져오기</span></span><br><span class="line">Class c1 = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 인스턴스로부터 객체 정보 가져오기</span></span><br><span class="line">String string = <span class="keyword">new</span> String();</span><br><span class="line">Class c1 = string.getClass();</span><br></pre></td></tr></table></figure>
+<p>반면 코틀린에서는 <code>더블콜론(::)</code>을 사용하여 클래스에 대한 정보를 가져올 수 있습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스에서 객체 정보 가져오기</span></span><br><span class="line"><span class="keyword">var</span> kc1: KClass&lt;Person&gt; = Person::<span class="class"><span class="keyword">class</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 인스턴스에서 객체 정보 가져오기</span></span><br><span class="line"><span class="keyword">var</span> kc1: KClass&lt;Person&gt; = Person::<span class="class"><span class="keyword">class</span></span></span><br></pre></td></tr></table></figure>
+<p>주의할 점은 <code>Class</code>클래스가 아닌 <code>KClass</code>라는 클래스에 정보가 저장된다는 점입니다. 이는 자바에서 사용하는 클래스와 코틀린에서 사용하는 클래스가 다르기 때문입니다. </p>
+<p>코틀린의 <code>Kclass</code>를 자바의 Class로 변환하려면 <code>.java</code>를 뒤에 붙여주면 됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> kc1: KClass&lt;Person&gt; = Person::<span class="class"><span class="keyword">class</span></span></span><br><span class="line"><span class="keyword">var</span> c1: Class&lt;Person&gt; = kc.java</span><br></pre></td></tr></table></figure>
+<h1 id="리플렉션을-사용하여-멤버-변수-참조"><a href="#리플렉션을-사용하여-멤버-변수-참조" class="headerlink" title="리플렉션을 사용하여 멤버 변수 참조"></a>리플렉션을 사용하여 멤버 변수 참조</h1><p>다음과 같은 클래스가 있다고 가정해봅시다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">&quot;Ronaldo&quot;</span></span><br><span class="line">    <span class="keyword">var</span> nation = <span class="string">&quot;Portugal&quot;</span></span><br><span class="line">    <span class="keyword">var</span> team = <span class="string">&quot;Juventus&quot;</span></span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">35</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>리플렉션을 사용하면 다음과 같이 클래스의 멤버변수에 접근할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> player: Player = Player()</span><br><span class="line"><span class="keyword">val</span> kclass: KClass&lt;Player&gt; = p::<span class="class"><span class="keyword">class</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// KClass를 사용하여 Player 클래스의 멤버변수를 알아내고 있습니다.</span></span><br><span class="line">kclass.memberProperties.forEach &#123;</span><br><span class="line">    print(<span class="string">&quot;<span class="subst">$&#123;it.name&#125;</span> :: <span class="subst">$&#123;it.getter.get(p)&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// name :: Ronaldo</span></span><br><span class="line"><span class="comment">// nation :: Portugal</span></span><br><span class="line"><span class="comment">// team :: Juventus</span></span><br><span class="line"><span class="comment">// age :: 35</span></span><br></pre></td></tr></table></figure>
+<h1 id="리플렉션을-사용하여-함수-참조"><a href="#리플렉션을-사용하여-함수-참조" class="headerlink" title="리플렉션을 사용하여 함수 참조"></a>리플렉션을 사용하여 함수 참조</h1><p>리플렉션은 함수를 참조하는데 사용할 수도 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">(name: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">    println(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수를 변수에 저장하는데 리플렉션 사용</span></span><br><span class="line"><span class="keyword">var</span> myFun = ::printName</span><br><span class="line">myFun(<span class="string">&quot;ronaldo&quot;</span>)  </span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">isOdd</span><span class="params">(x: <span class="type">Int</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> x % <span class="number">2</span> !=<span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> numbers = listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수를 함수의 인자로 전달하는데 리플렉션 사용</span></span><br><span class="line">println(numbers.filter(::isOdd)) </span><br></pre></td></tr></table></figure>
+<h1 id="초기화-여부-확인"><a href="#초기화-여부-확인" class="headerlink" title="초기화 여부 확인"></a>초기화 여부 확인</h1><p>리플렉션을 사용하여 멤버변수가 초기화되었는지 확인할 수도 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> phone: Phone</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">getPhone</span><span class="params">()</span></span>: Phone &#123;</span><br><span class="line">        <span class="comment">//  변수가 초기화 됐는지 확인</span></span><br><span class="line">        <span class="keyword">if</span>(::phone.isInitialized) &#123;	</span><br><span class="line">            <span class="keyword">return</span> phone</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.phone = Phone()</span><br><span class="line">            <span class="keyword">return</span> phone</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>리플렉션(Reflection)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/08/kotlin/190208-extension-function/"><code>확장 함수(Extension Function)</code></a>에 대해 알아보겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/07/kotlin/190207-reflection/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/06/kotlin/190206-access-modifier/"
+                            aria-label=": [코틀린] 접근 제한자(Access Modifiers)"
+                        >
+                            [코틀린] 접근 제한자(Access Modifiers)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-06T20:16:30+09:00">
+	
+		    2019/02/06
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="접근-제한자"><a href="#접근-제한자" class="headerlink" title="접근 제한자"></a>접근 제한자</h1><span class="highlight-text red">접근 제한자(Access Modifiers)</span>는 <u>외부에서 클래스 내부의 메소드나 멤버변수에 접근하는 것을 제한하는 것</u>입니다. 코틀린은 네 개의 접근 제한자를 지원합니다.
+
+<h3 id="1-private"><a href="#1-private" class="headerlink" title="(1) private"></a>(1) private</h3><p><code>private</code>으로 선언된 변수는 해당 클래스 내부에서만 접근이 가능합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> name: String) &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// 해당 클래스 내부에서 private 변수 name에 접근할 수 있습니다.</span></span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> name = person.name      <span class="comment">// (에러) 클래스 내부가 아니므로 접근 불가능합니다.</span></span><br></pre></td></tr></table></figure>
+<p><code>private</code>으로 선언된 변수는 상속받는 자식 클래스에서도 접근이 불가능합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> name: String) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span></span>(name: String, <span class="keyword">private</span> <span class="keyword">var</span> team: String): Person(name) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printTeam</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Team: <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printInformation</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;<span class="subst">$&#123;name&#125;</span> works in <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment">// (에러) 부모클래스에 선언된 private 변수 name에 접근할 수 없고 컴파일되지 않습니다.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-protected"><a href="#2-protected" class="headerlink" title="(2) protected"></a>(2) protected</h3><p><code>protected</code>로 선언된 변수는 해당 클래스와 자식 클래스에서 접근이 가능합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">protected</span> <span class="keyword">val</span> name: String) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span></span>(name: String, <span class="keyword">private</span> <span class="keyword">var</span> team: String): Person(name) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printTeam</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Team: <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printInformation</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;<span class="subst">$&#123;name&#125;</span> works in <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment">// 부모클래스에 선언된 protected 변수 name에 접근할 수 있습니다.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-internal"><a href="#3-internal" class="headerlink" title="(3) internal"></a>(3) internal</h3><p><code>internal</code>로 선언된 변수는 같은 모듈 내에서는 어디서 접근이 가능합니다. 코틀린 공식 문서에서 말하는 같은 <a href="/ko/2018/12/07/android/181207-module/">모듈</a>은 아래 상황을 뜻합니다.</p>
+<ol>
+<li>Android Studio Module</li>
+<li>IntelliJ IDEA Module</li>
+<li>Maven Project</li>
+</ol>
+<p>쉽게 말하면 안드로이드 스튜디오 프로젝트의 같은 모듈에서는 접근이 가능하다고 보면 되겠습니다.</p>
+<h3 id="4-public-default"><a href="#4-public-default" class="headerlink" title="(4) public (default)"></a>(4) public (default)</h3><p>어디서든 접근이 가능합니다. 접근 제한자를 붙이지 않으면 기본적으로 <code>public</code>입니다. </p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>접근 제한자</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/07/kotlin/190207-reflection/"><code>리플렉션(Reflection)</code></a>에 대해 알아보겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/06/kotlin/190206-access-modifier/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/05/android/190205-permission-dispatcher/"
+                            aria-label=": [안드로이드] 권한 - (5) PermissionDispatcher 라이브러리"
+                        >
+                            [안드로이드] 권한 - (5) PermissionDispatcher 라이브러리
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-05T20:16:30+09:00">
+	
+		    2019/02/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Permission/">Permission</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 <code>권한(Permission)</code>에 대해 알아보고있습니다.</p>
+<ul>
+<li><a href="/ko/2019/02/01/android/190201-permission/">일반 권한과 위험 권한</a></li>
+<li><a href="/ko/2019/02/02/android/190202-multi-permission/">여러 권한 동시에 요청하기</a></li>
+<li><a href="/ko/2019/02/03/android/190203-open-settings/">액티비티에서 설정 앱 시작하기</a></li>
+<li><a href="/ko/2019/02/04/android/190204-ted-permission/">TedPermission 라이브러리</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/02/05/android/190205-permission-dispatcher/">PermissionDispatcher 라이브러리</a></li>
+</ul>
+<hr>
+<h1 id="PermissionDispatcher-라이브러리"><a href="#PermissionDispatcher-라이브러리" class="headerlink" title="PermissionDispatcher 라이브러리"></a>PermissionDispatcher 라이브러리</h1><hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>TedPermission</code>라이브러리에 대해 알아봤습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/05/android/190205-permission-dispatcher/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/04/android/190204-ted-permission/"
+                            aria-label=": [안드로이드] 권한 - (4) TedPermission 라이브러리"
+                        >
+                            [안드로이드] 권한 - (4) TedPermission 라이브러리
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-04T20:16:30+09:00">
+	
+		    2019/02/04
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Permission/">Permission</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 <code>권한(Permission)</code>에 대해 알아보고있습니다.</p>
+<ul>
+<li><a href="/ko/2019/02/01/android/190201-permission/">일반 권한과 위험 권한</a></li>
+<li><a href="/ko/2019/02/02/android/190202-multi-permission/">여러 권한 동시에 요청하기</a></li>
+<li><a href="/ko/2019/02/03/android/190203-open-settings/">액티비티에서 설정 앱 시작하기</a></li>
+<li><a href="/ko/2019/02/04/android/190204-ted-permission/">TedPermission 라이브러리</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/02/05/android/190205-permission-dispatcher/">PermissionDispatcher 라이브러리</a></li>
+</ul>
+<hr>
+<h1 id="TedPermission-라이브러리"><a href="#TedPermission-라이브러리" class="headerlink" title="TedPermission 라이브러리"></a>TedPermission 라이브러리</h1><p><a target="_blank" rel="noopener" href="https://github.com/ParkSangGwon/TedPermission"><code>TedPermission</code></a>는 대한민국의 개발자 박상권님께서 개발하신 권한 설정 라이브러리입니다. 이 라이브러리를 사용하면 권한 설정을 좀 더 쉽게 구현할 수 있습니다.</p>
+<h1 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h1><p>모듈 수준의 <code>build.gradle</code>에 의존성을 추가합니다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>build.gradle(Module: my_project.app)</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies {</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    implementation <span class="string">'gun0912.ted:tedpermission:2.2.0'</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure></p>
+<h1 id="사용-방법"><a href="#사용-방법" class="headerlink" title="사용 방법"></a>사용 방법</h1><p>우리는 <a href="/ko/2019/01/05/android/190105-permission-managerment/">이전 포스트</a>에서 카메라의 권한을 확인하고, 권한이 없으면 요청하고, 권한을 얻었을 때 카메라를 여는 예제를 살펴봤습니다.<br><img src="/ko/images/posts/android/permission/permission-2.png"><br>이제 동일한 내용을 <code>TedPermission 라이브러리</code>를 사용해서 구현해보겠습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> buttonOpenCamera: Button <span class="keyword">by</span> lazy &#123;</span><br><span class="line">        findViewById&lt;Button&gt;(R.id.button_open_camera)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        buttonOpenCamera.setOnClickListener &#123;</span><br><span class="line">            TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">                <span class="comment">// 요청할 권한 나열하기</span></span><br><span class="line">                .setPermissions(Manifest.permission.CAMERA)</span><br><span class="line">                <span class="comment">// 권한 요청 결과에 대한 리스너 등록</span></span><br><span class="line">                .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">                    <span class="comment">// 권한을 승인했을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 카메라 열기</span></span><br><span class="line">                        openCamera()</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 권한을 승인하지 않았을 경우</span></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">                        <span class="comment">// 앱 종료</span></span><br><span class="line">                        finish()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">// 권한을 거부할 경우 나타나는 Alert dialog의 메시지</span></span><br><span class="line">                .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">                <span class="comment">// 권한 요청하기</span></span><br><span class="line">                .check()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">openCamera</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)</span><br><span class="line">        startActivity(intent)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이제 앱을 실행하고 버튼을 누르면 다음과 같이 권한 설정 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/5.png"></p>
+<p><code>앱 사용 중에만 허용</code>을 누르면 <code>onPermissionGranted()</code>메소드가 호출되며, 앱을 종료하고 다시 시작해도 권한 설정 대화상자가 나오지 않습니다. <code>이번만 허용</code>을 눌러도 <code>onPermissionGranted()</code> 메소드가 호출됩니다. 차이점은 앱 종료 후 다시 시작할 때마다 권한 설정 대화상자가 다시 나오느냐 입니다.</p>
+<p>만약 <code>거부</code>를 누르면 <code>setDeniedMessage()</code>메소드에서 설정한 메시지와 함께 설정 또는 닫기를 선택할 수 있는 대화상자가 나옵니다.<br><img src="/ko/images/posts/android/permission/6.png"></p>
+<p>여기서도 <code>닫기</code>를 누르면 <code>onPermissionDenied()</code>가 호출됩니다. 만약 설정을 누르면 다음과 같이 앱 설정 화면으로 이동합니다.</p>
+<p><img src="/ko/images/posts/android/permission/7.png"></p>
+<p>여기서 권한을 모두 부여하고 뒤로가기를 누르면 <code>onPermissionGranted()</code>이 호출됩니다. 그러나 하나라도 권한을 부여하지 않으면 <code>onPermissionDenied()</code>이 호출됩니다.</p>
+<h1 id="다중-권한-요청"><a href="#다중-권한-요청" class="headerlink" title="다중 권한 요청"></a>다중 권한 요청</h1><p>여러 권한이 필요할 때 다음과 같이 동시에 요청할 수도 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">TedPermission.with(<span class="keyword">this</span>)</span><br><span class="line">    <span class="comment">// 권한 여러개 설정</span></span><br><span class="line">    .setPermissions(Manifest.permission.CAMERA, Manifest.permission.READ_CALENDAR)</span><br><span class="line">    .setPermissionListener(<span class="keyword">object</span>: PermissionListener &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPermissionGranted</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> 역<span class="params">(deniedPermissions: <span class="type">ArrayList</span>&lt;<span class="type">String</span>&gt;?)</span></span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .setDeniedMessage(<span class="string">&quot;If you reject permission, you can not use this service. \n\nPlease turn on permissions at [Setting] &gt; [Permission]&quot;</span>)</span><br><span class="line">    .check()</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>TedPermission 라이브러리</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/05/android/190205-permission-dispatcher/">PermissionDispatcher 라이브러리</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/04/android/190204-ted-permission/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1049,7 +1084,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 6 of 12</li>
+        <li class="pagination-number">page 6 of 11</li>
     </ul>
 </div>
 

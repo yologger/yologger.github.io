@@ -241,6 +241,97 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/ko/2018/02/05/java/180205-type-eraser/"
+                            aria-label=": [자바] 제너릭과 타입 소거(Type Erasure)"
+                        >
+                            [자바] 제너릭과 타입 소거(Type Erasure)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-02-05T20:16:30+09:00">
+	
+		    2018/02/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 <code>제너릭(Generic)</code>에 대해 살펴보고있습니다.</p>
+<ol>
+<li><a href="/ko/2018/02/01/java/180201-generic/">제너릭(Generic)의 개념과 장점</a></li>
+<li><a href="/ko/2018/02/02/java/180202-generic-class/">제너릭 클래스(Generic Class)</a></li>
+<li><a href="/ko/2018/02/03/java/180203-generic-method/">제너릭 함수(Generic Function)</a></li>
+<li><a href="/ko/2018/02/04/java/180204-wildcard/">제너릭의 와일드 카드(Wildcard)</a></li>
+<li>타입 소거(Type Erasure) ⬅️ ⬅️ ⬅️</li>
+</ol>
+<hr>
+<h1 id="타입-소거"><a href="#타입-소거" class="headerlink" title="타입 소거"></a>타입 소거</h1><span class="highlight-text red">타입 소거(Type Erasure)</span>는 제네릭의 타입 파라미터를 구체화된 자료형으로 대체하는 작업을 의미합니다. 자바 컴파일러는 소스 코드를 컴파일할 때 타입 소거를 수행합니다. 
+
+
+<div class="alert info icon"><p>타입 파라미터가 <b>Unbounded Type</b>인지 <b>Bounded Type</b>인지에 따라 소거 방식이 다릅니다.</p>
+</div>
+
+
+<h3 id="1-Unbounded-Type의-타입소거"><a href="#1-Unbounded-Type의-타입소거" class="headerlink" title="(1) Unbounded Type의 타입소거"></a>(1) Unbounded Type의 타입소거</h3><p><code>Unbounded Type</code>은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한하지 않은 것을 의미합니다. <code>&lt;?&gt;</code>, <code>&lt;T&gt;</code> 형태의 타입 파라미터라고 생각하시면 됩니다. </p>
+<p><code>Unbounded Type</code> 예제를 살펴봅시다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 전 (타입 소거 전) </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(T test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>컴파일러는 위 코드는 아래와 같이 변환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 후 (타입 소거 후)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Object test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>컴파일러는 타입 파라미터를 소거하고 <code>Unbounded Type</code>인 <code>&lt;?&gt;</code>, <code>&lt;T&gt;</code>를 <code>Object</code>로 대체합니다.</p>
+<h3 id="2-Bounded-Type의-타입소거"><a href="#2-Bounded-Type의-타입소거" class="headerlink" title="(2) Bounded Type의 타입소거"></a>(2) Bounded Type의 타입소거</h3><p><code>Bounded Type</code>은 <u>형식 타입 파라미터로 전달되는 실 타입 파라미터의 범위를 제한한 것</u>을 의미합니다. <code>&lt;E extends Something&gt;</code> 형태의 타입 파라미터라고 생각하시면 됩니다.</p>
+<p><code>Bounded Type</code> 예제를 살펴보겠습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Observable</span>&lt;<span class="title">T</span>&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>컴파일러는 위 코드를 아래와 같이 변환합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Observable data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Observable <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Observable data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>타입 파라미터를 포함한 <code>Observable&lt;T&gt;</code>는 <code>Observable</code>로 소거되었습니다. <code>&lt;E extends Something&gt;</code>은 <code>Object</code>가 아닌 <code>Something</code>로 대치되는 것입니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>다섯 개의 포스트에서 <code>제너릭(Generic)</code>에 대해 알아보았습니다. 다음 포스트에서는 <a href="/ko/2018/03/01/java/180301-reflection/"><code>리플렉션(Reflection)</code></a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/02/05/java/180205-type-eraser/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/ko/2018/02/04/java/180204-wildcard/"
                             aria-label=": [자바] 제너릭의 와일드 카드(Wildcard)"
                         >
@@ -1005,79 +1096,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/01/22/java/180122-iteration/"
-                            aria-label=": [자바] 반복문"
-                        >
-                            [자바] 반복문
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-22T20:16:30+09:00">
-	
-		    2018/01/22
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/21/java/180121-error-handling/">에러 처리(Error Handling)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">반복문</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="for"><a href="#for" class="headerlink" title="for"></a>for</h1><p><code>for</code>구문은 다음과 같이 사용할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> idx=<span class="number">0</span>; idx&lt;<span class="number">10</span>; idx++) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>for</code>구문은 <code>:</code>과 함께 사용할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Person[] people = &#123;</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Son&quot;</span>, <span class="string">&quot;Korea&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Kane&quot;</span>, <span class="string">&quot;England&quot;</span>),</span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">&quot;Messi&quot;</span>, <span class="string">&quot;Argentina&quot;</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Person person: people) &#123;</span><br><span class="line">    person.printName();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Son</span></span><br><span class="line"><span class="comment">// Kane</span></span><br><span class="line"><span class="comment">// Messi</span></span><br></pre></td></tr></table></figure>
-<h1 id="while"><a href="#while" class="headerlink" title="while"></a>while</h1><p><code>while</code>구문은 조건이 만족할 때 까지 <code>블럭(&#123; .. &#125;)</code>을 반복 수행합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (idx &lt; <span class="number">10</span>) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">    idx ++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>while</code>구문은 <code>break</code>나 <code>continue</code>와도 자주 사용됩니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">    System.out.println(idx);</span><br><span class="line">    idx ++;</span><br><span class="line">    <span class="keyword">if</span> (idx &gt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>반복문</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/23/java/180123-comparison/">비교문</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/22/java/180122-iteration/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1104,7 +1122,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 16 of 18</li>
+        <li class="pagination-number">page 16 of 19</li>
     </ul>
 </div>
 

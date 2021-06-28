@@ -241,6 +241,82 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/ko/2018/01/12/java/180112-static/"
+                            aria-label=": [자바] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)"
+                        >
+                            [자바] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-12T20:16:30+09:00">
+	
+		    2018/01/12
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/11/java/180111-constructor/">클래스의 생성자, 멤버변수, 메소드</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">정적 멤버변수(Static Variable)</span>와 <span class="highlight-text red">정적 메소드(Static Method)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>키워드 <code>static</code>은 클래스의 멤버변수와 메소드 앞에 붙일 수 있습니다. 이렇게 <code>static</code>이 붙은 멤버변수와 메소드를 <strong>정적 멤버변수</strong>와 <strong>정적 메소드</strong>라고 합니다. </p>
+<p><strong>정적 멤버변수</strong>와 <strong>정적 메소드</strong>는 다음과 같은 특징이 있습니다.</p>
+<ul>
+<li>클래스의 인스턴스를 생성하지 않고도 <strong>정적 메소드</strong>를 호출할 수 있습니다.</li>
+<li>클래스의 인스턴스를 생성하지 않고도 <strong>정적 멤버변수</strong>에 접근할 수 있습니다.</li>
+<li>클래스의 모든 인스턴스가 <strong>정적 멤버변수</strong>를 공유합니다.</li>
+</ul>
+<h1 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h1><p>정적 멤버변수와 정적 메소드는 키워드 <code>static</code>을 붙여서 선언합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 멤버변수</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    Counter() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decrement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 정적 메소드</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>정적 멤버변수와 정적 메소드는 다음과 같이 인스턴스를 생성하지 않고 사용할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Counter.printCount();   <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.printCount();   <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 클래스의 <code>정적 멤버변수(Static Variable)</code>과 <code>정적 메소드(Static Method)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/13/java/180113-initialization_block/">초기화 구문(Initialization Block)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/12/java/180112-static/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/ko/2018/01/11/java/180111-constructor/"
                             aria-label=": [자바] 클래스의 생성자, 멤버변수, 메소드"
                         >
@@ -920,138 +996,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/1111/11/11/markdown/"
-                            aria-label=": 마크다운"
-                        >
-                            마크다운
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="1111-11-11T20:17:22+08:27">
-	
-		    1111/11/11
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert danger no-icon"><p>danger alert without icon</p>
-</div>
-
-<div class="alert danger icon"><p>a danger alert with icon</p>
-</div>
-
-<div class="alert info icon"><p>a info alert with icon</p>
-</div>
-
-<div class="alert success icon"><p>a success alert with icon</p>
-</div>
-
-<div class="alert warning icon"><p>a warning alert with icon</p>
-</div>
-
-<hr>
-<br />
-<br />
-<span class="highlight-text red">your red text</span>
-<br />
-<br />
-<span class="highlight-text green">your green text</span>
-<br />
-<br />
-<span class="highlight-text blue">your blue text</span>
-<br />
-<br />
-<span class="highlight-text purple">your purple text</span>
-<br />
-<br />
-<span class="highlight-text orange">your orange text</span>
-<br />
-<br />
-<span class="highlight-text yellow">your yellow text</span>
-<br />
-<br />
-<span class="highlight-text cyan">your cyan text</span>
-<br />
-<br />
-<span class="highlight-text primary">your primary text</span>
-<br />
-<br />
-<span class="highlight-text success">your success text</span>
-<br />
-<br />
-<span class="highlight-text warning">your warning text</span>
-<br />
-<br />
-<span class="highlight-text danger">your danger text</span>
-<br />
-<br />
-<span class="highlight-text" style="background-color:#00FFFF;">your #00FFFF text</span>
-<br />
-<br />
-<span class="highlight-text" style="background-color:#F6F7F7;">your <b>bold</b> text</span>
-<br />
-<br />
-
-
-<p><code>구글 맵스 API</code>는 여러 타입의 지도를 제공합니다. <code>setMapType()</code>메서드를 사용하면 지도의 타입을 변경할 수 있습니다. 우선 인공위성 타입의 지도입니다.</p>
-<hr>
-  <figure class="codeblock codeblock--tabbed"><figcaption><a target="_blank" rel="noopener" href="http://example.com">example</a><ul class="tabs"><li class="tab active">js</li><li class="tab">css</li></ul></figcaption><div class="tabs-content"><figure class="highlight js" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="string">'test'</span>;</span><br></pre></td></tr></tbody></table></figure><figure class="highlight css" style="display: none;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn</span> {</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-  <figure class="codeblock codeblock--tabbed"><figcaption><a target="_blank" rel="noopener" href="http://example.com">example</a><ul class="tabs"><li class="tab active">kotlin</li><li class="tab">java</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="string">'test'</span>;</span><br></pre></td></tr></tbody></table></figure><figure class="highlight java" style="display: none;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.btn {</span><br><span class="line">    color: red;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-  <figure class="codeblock codeblock--tabbed"><figcaption><span>MainActivity.kt</span><ul class="tabs"><li class="tab active">kotlin</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"Ronaldo"</span></span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-  <figure class="codeblock codeblock--tabbed"><figcaption><span>BuildConfig.java</span><ul class="tabs"><li class="tab active">java</li></ul></figcaption><div class="tabs-content"><figure class="highlight java" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"Ronaldo"</span></span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-  <figure class="codeblock codeblock--tabbed"><figcaption><span>activity_main.xml</span><ul class="tabs"><li class="tab active">xml</li></ul></figcaption><div class="tabs-content"><figure class="highlight xml" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-<ul>
-<li><input checked="" disabled="" type="checkbox"> Write the press release</li>
-<li><input disabled="" type="checkbox"> Update the website</li>
-<li><input disabled="" type="checkbox"> Contact the media</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim ./~zshrc</span><br></pre></td></tr></table></figure>
-<p><strong>Lorem Ipsum</strong> is simply <em>dummy</em> <u>text</u> of the printing and typesetting industry. </p>
-<span class="highlight-text success">Lorem Ipsum</span> has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/1111/11/11/markdown/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1067,7 +1011,18 @@
           </li>
         
         
-        <li class="pagination-number">page 18 of 18</li>
+          <li class="pagination-next">
+            <a
+                class="btn btn--default btn--small"
+                href="/ko/page/19/"
+                aria-label="이전 포스트"
+            >
+              <span>이전 포스트</span>
+              <i class="fa fa-angle-right text-base icon-ml"></i>
+            </a>
+          </li>
+        
+        <li class="pagination-number">page 18 of 19</li>
     </ul>
 </div>
 
