@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며네 개의 포스트에서 걸쳐서 서비스에 대해 알아보고 있습니다.\n\n스타트 서비스 (Start Service)\n인텐트 서비스 (Intent Service)\n바운드 서비스 (Bound Service)\n서비스의 생명주기 메소드  ⬅️ ⬅️ ⬅️\n\n\n서비스의 생명주기 메소드서비스도 액티비티와 마찬가지로 생명주기 메소드가 존재합니다. 다만 서비스의 종류에 따라 호출되는 메소드가 다릅니다.\n\n스타트 서비스스타트 서비스(Start Service)는 startService()메소드를 호출하여 실행합니다.스타트 서비스가 시작되면 다음과 같은 순서로 서비스의 생명주기 함수가 호출됩니다.\n(1) onCreate()서비스가 처음 생성될 때 한 번 호출됩니다. \n(2) onStartCommand()다른 액티비티가 startService()를 호출하면 이 메소드가 호출됩니다. 이 메소드에서는 서비스가 백그라운드에서 실행할 작업을 구현합니다. \n스타트 서비스는 한번 실행하면 액티비티 종료와 무관하게 무한히 실행됩니다. 따라서 stopSelf()나 stopService()를 호출하면 서비스를 종료할 수 있습니다.\n(3) onDestroy()stopSelf()나 stopService()가 호출되어 서비스가 소멸할 때 호출됩니다.\n\n바운드 서비스바운드 서비스(Bound Service)는 bindService()메소드를 호출하여 실행합니다.바운드 서비스가 시작되면 다음과 같은 순서로 서비스의 생명주기 메소드가 호출됩니다.\n(1) onCreate()서비스가 처음 생성될 때 한 번 호출됩니다. \n(2) onBind()액티비티에서 bindService()를 호출하면 이 메소드가 호출됩니다. 이 메소드는 IBinder객체를 반환하며, 액티비티는 이 객체를 사용하여 서비스와 통신합니다. 참고로 바운드 서비스에는 여러 액티비티가 바인딩될 수 있습니다.\n(3) onUnbind()액티비티에서 unbindService()를 호출하여 서비스와의 바인딩을 끊을 수 있습니다. 이후 서비스의 onUnbind()메소드가 호출됩니다.\n(4) onDestroy()서비스가 소멸할 때 호출됩니다. 바운드 서비스는 stopSelf()나 stopService()를 호출하지 않아도 됩니다. 서비스에 바인딩된 액티비티가 모두 연결을 끊으면 서비스도 소멸합니다.\n\n마치며네 개의 포스트에 걸쳐서 서비스(Service)에 대해 알아봤습니다. 다음 포스트에서는 SQLite에 대해 알아보겠습니다.\n","dateCreated":"2019-04-05T20:16:30+09:00","dateModified":"2021-06-28T17:04:56+09:00","datePublished":"2019-04-05T20:16:30+09:00","description":"","headline":"[안드로이드] 서비스 - (4) 서비스의 생명주기 함수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/05/android/190405-service-lifecycle/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/05/android/190405-service-lifecycle/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며네 개의 포스트에서 걸쳐서 서비스에 대해 알아보고 있습니다.\n\n스타트 서비스 (Start Service)\n인텐트 서비스 (Intent Service)\n바운드 서비스 (Bound Service)\n서비스의 생명주기 메소드  ⬅️ ⬅️ ⬅️\n\n\n서비스의 생명주기 메소드서비스도 액티비티와 마찬가지로 생명주기 메소드가 존재합니다. 다만 서비스의 종류에 따라 호출되는 메소드가 다릅니다.\n\n스타트 서비스스타트 서비스(Start Service)는 startService()메소드를 호출하여 실행합니다.스타트 서비스가 시작되면 다음과 같은 순서로 서비스의 생명주기 함수가 호출됩니다.\n(1) onCreate()서비스가 처음 생성될 때 한 번 호출됩니다. \n(2) onStartCommand()다른 액티비티가 startService()를 호출하면 이 메소드가 호출됩니다. 이 메소드에서는 서비스가 백그라운드에서 실행할 작업을 구현합니다. \n스타트 서비스는 한번 실행하면 액티비티 종료와 무관하게 무한히 실행됩니다. 따라서 stopSelf()나 stopService()를 호출하면 서비스를 종료할 수 있습니다.\n(3) onDestroy()stopSelf()나 stopService()가 호출되어 서비스가 소멸할 때 호출됩니다.\n\n바운드 서비스바운드 서비스(Bound Service)는 bindService()메소드를 호출하여 실행합니다.바운드 서비스가 시작되면 다음과 같은 순서로 서비스의 생명주기 메소드가 호출됩니다.\n(1) onCreate()서비스가 처음 생성될 때 한 번 호출됩니다. \n(2) onBind()액티비티에서 bindService()를 호출하면 이 메소드가 호출됩니다. 이 메소드는 IBinder객체를 반환하며, 액티비티는 이 객체를 사용하여 서비스와 통신합니다. 참고로 바운드 서비스에는 여러 액티비티가 바인딩될 수 있습니다.\n(3) onUnbind()액티비티에서 unbindService()를 호출하여 서비스와의 바인딩을 끊을 수 있습니다. 이후 서비스의 onUnbind()메소드가 호출됩니다.\n(4) onDestroy()서비스가 소멸할 때 호출됩니다. 바운드 서비스는 stopSelf()나 stopService()를 호출하지 않아도 됩니다. 서비스에 바인딩된 액티비티가 모두 연결을 끊으면 서비스도 소멸합니다.\n\n마치며네 개의 포스트에 걸쳐서 서비스(Service)에 대해 알아봤습니다. 다음 포스트에서는 SQLite에 대해 알아보겠습니다.\n","dateCreated":"2019-04-05T20:16:30+09:00","dateModified":"2021-06-28T17:04:56+09:00","datePublished":"2019-04-05T20:16:30+09:00","description":"","headline":"[안드로이드] 서비스 - (4) 서비스의 생명주기 함수","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/05/android/190405-service-lifecycle/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/05/android/190405-service-lifecycle/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며네 개의 포스트에서 걸쳐서 서비스에 대해 알아보고 있습니다.  스타트 서비스 (Start Service) 인텐트 서비스 (Intent Service) 바운드 서비스 (Bound Service) 서비스의 생명주기 메소드  ⬅️ ⬅️ ⬅️   서비스의 생명">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 서비스 - (4) 서비스의 생명주기 함수">
@@ -120,37 +120,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -180,9 +152,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

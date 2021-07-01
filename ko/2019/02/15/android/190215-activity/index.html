@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 다섯 개의 포스트에 걸쳐 액티비티(Activity)에 대해 알아보겠습니다.\n\n액티비티(Activity)란?  ⬅️ ⬅️ ⬅️\n태스크(Task)와 액티비티 스택(Activity Stack)\ntaskAffinity와 launchMode\n인텐트 플래그(Intent Flag)\n액티비티 생명주기 함수\n\n\n액티비티란?안드로이드 애플리케이션은 하나 이상의 액티비티로 구성됩니다. 액티비티(Activity)는 애플리케이션을 구성하는 구성요소입니다. 액티비티는 하나의 사용자 인터페이스 화면 및 그것의 기능으로 구성됩니다.\n예를 들어 다음 메모장 앱을 살펴봅시다.이 메모장 앱은 목록을 보여주는 화면과 글을 작성하는 화면으로 구성되어있습니다. 따라서 두 개의 액티비티로 구성되어있습니다.\n액티비티는 사용자 인터페이스 화면을 담당하는 xml 파일과 그것의 기능을 명세하는 .kt 파일 (또는 .java 파일)로 구성되어있습니다. 안드로이드 스튜디오에서 새로운 프로젝트를 만들면 기본으로 생성되는 activity_main.xml과 MainActivity.kt이 바로 그것입니다.\n마치며이번 포스트에서는 액티비티(Activity)에 대해 알아봤습니다. 다음 포스트에서는 태스크(Task)와 액티비티 스택(Activity Stack)에 대해 알아보겠습니다.\n","dateCreated":"2019-02-15T20:16:30+09:00","dateModified":"2021-06-28T14:04:10+09:00","datePublished":"2019-02-15T20:16:30+09:00","description":"","headline":"[안드로이드] 액티비티 - (1) 액티비티(Activity)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/15/android/190215-activity/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/15/android/190215-activity/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 다섯 개의 포스트에 걸쳐 액티비티(Activity)에 대해 알아보겠습니다.\n\n액티비티(Activity)란?  ⬅️ ⬅️ ⬅️\n태스크(Task)와 액티비티 스택(Activity Stack)\ntaskAffinity와 launchMode\n인텐트 플래그(Intent Flag)\n액티비티 생명주기 함수\n\n\n액티비티란?안드로이드 애플리케이션은 하나 이상의 액티비티로 구성됩니다. 액티비티(Activity)는 애플리케이션을 구성하는 구성요소입니다. 액티비티는 하나의 사용자 인터페이스 화면 및 그것의 기능으로 구성됩니다.\n예를 들어 다음 메모장 앱을 살펴봅시다.이 메모장 앱은 목록을 보여주는 화면과 글을 작성하는 화면으로 구성되어있습니다. 따라서 두 개의 액티비티로 구성되어있습니다.\n액티비티는 사용자 인터페이스 화면을 담당하는 xml 파일과 그것의 기능을 명세하는 .kt 파일 (또는 .java 파일)로 구성되어있습니다. 안드로이드 스튜디오에서 새로운 프로젝트를 만들면 기본으로 생성되는 activity_main.xml과 MainActivity.kt이 바로 그것입니다.\n마치며이번 포스트에서는 액티비티(Activity)에 대해 알아봤습니다. 다음 포스트에서는 태스크(Task)와 액티비티 스택(Activity Stack)에 대해 알아보겠습니다.\n","dateCreated":"2019-02-15T20:16:30+09:00","dateModified":"2021-06-28T14:04:10+09:00","datePublished":"2019-02-15T20:16:30+09:00","description":"","headline":"[안드로이드] 액티비티 - (1) 액티비티(Activity)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/15/android/190215-activity/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/15/android/190215-activity/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며앞으로 다섯 개의 포스트에 걸쳐 액티비티(Activity)에 대해 알아보겠습니다.  액티비티(Activity)란?  ⬅️ ⬅️ ⬅️ 태스크(Task)와 액티비티 스택(Activity Stack) taskAffinity와 launchMode 인텐트 플래그">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 액티비티 - (1) 액티비티(Activity)란?">
@@ -121,37 +121,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -181,9 +153,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

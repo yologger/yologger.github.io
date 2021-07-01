@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 여섯 개의 포스트에서 알림(Notification)에 대해 알아보겠습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기\n알림 메시지 묶기  ⬅️ ⬅️ ⬅️\n원격 알림\n포그라운드 상태에서 원격 알림 받기\n\n\n버튼을 눌렀을 때 다음과 같이 세 개의 알림을 보내봅시다.\n12345678910111213141516171819202122232425262728button.setOnClickListener &#123;     val NOTIFICATION_1_ID = 1    val NOTIFICATION_2_ID = 2    val NOTIFICATION_3_ID = 3    val notification1 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 1&quot;)        .setContentText(&quot;This is a notification 1&quot;)        .build()    val notification2 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 2&quot;)        .setContentText(&quot;This is a notification 2&quot;)        .build()    val notification3 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 3&quot;)        .setContentText(&quot;This is a notification 3&quot;)        .build()    notificationManager.notify(NOTIFICATION_1_ID, notification1)    notificationManager.notify(NOTIFICATION_2_ID, notification2)    notificationManager.notify(NOTIFICATION_3_ID, notification3)&#125;\n이제 버튼을 누르면 상단 상태바에 세 개의 알림을 확인할 수 있습니다.알람 패널에도 세 개의 알림이 있습니다.NotificationCompat.Builder클래스의 setGroup()과 setGroupSummary()를 사용하면 연관된 알람들을 한 개의 알람으로 묶을 수 있습니다. 코드를 다음과 같이 수정해봅시다.\n12345678910111213141516171819202122232425262728293031323334353637383940414243button.setOnClickListener &#123;     val NOTIFICATION_GROUP_ID = 0    val NOTIFICATION_1_ID = 1    val NOTIFICATION_2_ID = 2    val NOTIFICATION_3_ID = 3    val NOTIFICATION_GROUP_KEY = &quot;notification_group_key&quot;    val notification1 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 1&quot;)        .setContentText(&quot;This is a notification 1&quot;)        .setGroup(NOTIFICATION_GROUP_KEY)        .build()    val notification2 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 2&quot;)        .setContentText(&quot;This is a notification 2&quot;)        .setGroup(NOTIFICATION_GROUP_KEY)        .build()    val notification3 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 3&quot;)        .setContentText(&quot;This is a notification 3&quot;)        .setGroup(NOTIFICATION_GROUP_KEY)        .build()    val summaryNotification = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;Summary Notification&quot;)        .setContentText(&quot;This is a summary notification&quot;)        .setGroup(NOTIFICATION_GROUP_KEY)        .setGroupSummary(true)        .build()    notificationManager.notify(NOTIFICATION_1_ID, notification1)    notificationManager.notify(NOTIFICATION_2_ID, notification2)    notificationManager.notify(NOTIFICATION_3_ID, notification3)    notificationManager.notify(NOTIFICATION_GROUP_ID, summaryNotification)&#125;\n이제 앱을 실행합니다. 버튼을 클릭하면 상단 상태바에 한 개의 알람만 확인할 수 있습니다.알람 패널에는 연관된 세 개의 알람이 그룹으로 묶여있습니다.그룹을 클릭하면 세 개의 알람을 모두 확인할 수 있습니다.전체 코드는 다음과 같습니다.\n1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071class MainActivity : AppCompatActivity() &#123;    lateinit var button: Button    val NOTIFICATION_GROUP_ID = 0    val NOTIFICATION_1_ID = 1    val NOTIFICATION_2_ID = 2    val NOTIFICATION_3_ID = 3    val NOTIFICATION_GROUP_KEY = &quot;notification_group_key&quot;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById&lt;Button&gt;(R.id.activity_main_btn)        button.setOnClickListener &#123;            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;                val channelId = &quot;channel_id&quot;                val channelName = &quot;channel_name&quot;                val channelDescription = &quot;channel_description&quot;                val importance = NotificationManager.IMPORTANCE_HIGH                val notificationChannel = NotificationChannel(channelId, channelName, importance)                notificationChannel.description = channelDescription                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager                notificationManager.createNotificationChannel(notificationChannel)                val notification1 = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;A Notification 1&quot;)                        .setContentText(&quot;This is a notification 1&quot;)                        .setGroup(NOTIFICATION_GROUP_KEY)                        .build()                val notification2 = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;A Notification 2&quot;)                        .setContentText(&quot;This is a notification 2&quot;)                        .setGroup(NOTIFICATION_GROUP_KEY)                        .build()                val notification3 = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;A Notification 3&quot;)                        .setContentText(&quot;This is a notification 3&quot;)                        .setGroup(NOTIFICATION_GROUP_KEY)                        .build()                val summaryNotification = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;Summary Notification&quot;)                        .setContentText(&quot;This is a summary notification&quot;)                        .setGroup(NOTIFICATION_GROUP_KEY)                        .setGroupSummary(true)                        .build()                notificationManager.notify(NOTIFICATION_1_ID, notification1)                notificationManager.notify(NOTIFICATION_2_ID, notification2)                notificationManager.notify(NOTIFICATION_3_ID, notification3)                notificationManager.notify(NOTIFICATION_GROUP_ID, summaryNotification)            &#125; else &#123;                // ..            &#125;        &#125;    &#125;&#125;\n\n마치며이번 포스트에서는 알림 메시지를 묶는 방법에 대해 알아보겠습니다. 다음 포스트에서는 원격 알림(Remote Notification)에 대해 알아보겠습니다.\n","dateCreated":"2019-08-08T20:16:30+09:00","dateModified":"2021-06-28T22:21:58+09:00","datePublished":"2019-08-08T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (4) 알림 메시지 묶기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/08/android/190808-notification-group/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/08/android/190808-notification-group/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 여섯 개의 포스트에서 알림(Notification)에 대해 알아보겠습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기\n알림 메시지 묶기  ⬅️ ⬅️ ⬅️\n원격 알림\n포그라운드 상태에서 원격 알림 받기\n\n\n버튼을 눌렀을 때 다음과 같이 세 개의 알림을 보내봅시다.\n12345678910111213141516171819202122232425262728button.setOnClickListener &#123;     val NOTIFICATION_1_ID = 1    val NOTIFICATION_2_ID = 2    val NOTIFICATION_3_ID = 3    val notification1 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 1&quot;)        .setContentText(&quot;This is a notification 1&quot;)        .build()    val notification2 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 2&quot;)        .setContentText(&quot;This is a notification 2&quot;)        .build()    val notification3 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 3&quot;)        .setContentText(&quot;This is a notification 3&quot;)        .build()    notificationManager.notify(NOTIFICATION_1_ID, notification1)    notificationManager.notify(NOTIFICATION_2_ID, notification2)    notificationManager.notify(NOTIFICATION_3_ID, notification3)&#125;\n이제 버튼을 누르면 상단 상태바에 세 개의 알림을 확인할 수 있습니다.알람 패널에도 세 개의 알림이 있습니다.NotificationCompat.Builder클래스의 setGroup()과 setGroupSummary()를 사용하면 연관된 알람들을 한 개의 알람으로 묶을 수 있습니다. 코드를 다음과 같이 수정해봅시다.\n12345678910111213141516171819202122232425262728293031323334353637383940414243button.setOnClickListener &#123;     val NOTIFICATION_GROUP_ID = 0    val NOTIFICATION_1_ID = 1    val NOTIFICATION_2_ID = 2    val NOTIFICATION_3_ID = 3    val NOTIFICATION_GROUP_KEY = &quot;notification_group_key&quot;    val notification1 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 1&quot;)        .setContentText(&quot;This is a notification 1&quot;)        .setGroup(NOTIFICATION_GROUP_KEY)        .build()    val notification2 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 2&quot;)        .setContentText(&quot;This is a notification 2&quot;)        .setGroup(NOTIFICATION_GROUP_KEY)        .build()    val notification3 = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;A Notification 3&quot;)        .setContentText(&quot;This is a notification 3&quot;)        .setGroup(NOTIFICATION_GROUP_KEY)        .build()    val summaryNotification = NotificationCompat.Builder(this, channelId)        .setSmallIcon(android.R.drawable.ic_dialog_info)        .setContentTitle(&quot;Summary Notification&quot;)        .setContentText(&quot;This is a summary notification&quot;)        .setGroup(NOTIFICATION_GROUP_KEY)        .setGroupSummary(true)        .build()    notificationManager.notify(NOTIFICATION_1_ID, notification1)    notificationManager.notify(NOTIFICATION_2_ID, notification2)    notificationManager.notify(NOTIFICATION_3_ID, notification3)    notificationManager.notify(NOTIFICATION_GROUP_ID, summaryNotification)&#125;\n이제 앱을 실행합니다. 버튼을 클릭하면 상단 상태바에 한 개의 알람만 확인할 수 있습니다.알람 패널에는 연관된 세 개의 알람이 그룹으로 묶여있습니다.그룹을 클릭하면 세 개의 알람을 모두 확인할 수 있습니다.전체 코드는 다음과 같습니다.\n1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071class MainActivity : AppCompatActivity() &#123;    lateinit var button: Button    val NOTIFICATION_GROUP_ID = 0    val NOTIFICATION_1_ID = 1    val NOTIFICATION_2_ID = 2    val NOTIFICATION_3_ID = 3    val NOTIFICATION_GROUP_KEY = &quot;notification_group_key&quot;    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById&lt;Button&gt;(R.id.activity_main_btn)        button.setOnClickListener &#123;            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;                val channelId = &quot;channel_id&quot;                val channelName = &quot;channel_name&quot;                val channelDescription = &quot;channel_description&quot;                val importance = NotificationManager.IMPORTANCE_HIGH                val notificationChannel = NotificationChannel(channelId, channelName, importance)                notificationChannel.description = channelDescription                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager                notificationManager.createNotificationChannel(notificationChannel)                val notification1 = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;A Notification 1&quot;)                        .setContentText(&quot;This is a notification 1&quot;)                        .setGroup(NOTIFICATION_GROUP_KEY)                        .build()                val notification2 = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;A Notification 2&quot;)                        .setContentText(&quot;This is a notification 2&quot;)                        .setGroup(NOTIFICATION_GROUP_KEY)                        .build()                val notification3 = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;A Notification 3&quot;)                        .setContentText(&quot;This is a notification 3&quot;)                        .setGroup(NOTIFICATION_GROUP_KEY)                        .build()                val summaryNotification = NotificationCompat.Builder(this, channelId)                        .setSmallIcon(android.R.drawable.ic_dialog_info)                        .setContentTitle(&quot;Summary Notification&quot;)                        .setContentText(&quot;This is a summary notification&quot;)                        .setGroup(NOTIFICATION_GROUP_KEY)                        .setGroupSummary(true)                        .build()                notificationManager.notify(NOTIFICATION_1_ID, notification1)                notificationManager.notify(NOTIFICATION_2_ID, notification2)                notificationManager.notify(NOTIFICATION_3_ID, notification3)                notificationManager.notify(NOTIFICATION_GROUP_ID, summaryNotification)            &#125; else &#123;                // ..            &#125;        &#125;    &#125;&#125;\n\n마치며이번 포스트에서는 알림 메시지를 묶는 방법에 대해 알아보겠습니다. 다음 포스트에서는 원격 알림(Remote Notification)에 대해 알아보겠습니다.\n","dateCreated":"2019-08-08T20:16:30+09:00","dateModified":"2021-06-28T22:21:58+09:00","datePublished":"2019-08-08T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (4) 알림 메시지 묶기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/08/android/190808-notification-group/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/08/android/190808-notification-group/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며앞으로 여섯 개의 포스트에서 알림(Notification)에 대해 알아보겠습니다.  로컬 알림 알림에서 액티비티 시작하기 알림에 액션 추가하기 알림 메시지 묶기  ⬅️ ⬅️ ⬅️ 원격 알림 포그라운드 상태에서 원격 알림 받기   버튼을 눌렀을 때 다음과">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 알림(Notification) - (4) 알림 메시지 묶기">
@@ -123,37 +123,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -183,9 +155,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

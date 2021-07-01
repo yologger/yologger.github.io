@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며네 개의 포스트에서 걸쳐서 프래그먼트(Fragment)에 대해 알아보고 있습니다.\n\n프래그먼트(Fragment)란?\n프래그먼트 매니저\n프래그먼트 백 스택  ⬅️ ⬅️ ⬅️\n프래그먼트의 생명주기 메소드\n\n\n프래그먼트 백 스택(Back Stack)액티비티는 태스크에 스택 형태로 유지됩니다. 이 때문에 백 버튼을 누르면 스택의 최상단 액티비티를 종료하고 이전 액티비티로 돌아올 수 있습니다.\n프래그먼트 백 스택(Fragment Back Stack)은 프래그먼트에서도 액티비티와 유사하게 이전 프래그먼트 상태로 돌아가는 것을 가능하게 합니다. 백 스택을 사용하면 트랜잭션을 백 스택이라는 공간에 유지합니다. 따라서 백 버튼이나 Fragment.popBackStack()을 호출하면 이전 프래그먼트의 상태로 돌아올 수 있습니다.\n예제우선 MainActivity의 레이아웃는 다음과 같습니다.\nactivity_main.xmlxml1234567891011121314151617181920212223242526272829&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"    xmlns:app=\"http://schemas.android.com/apk/res-auto\"    xmlns:tools=\"http://schemas.android.com/tools\"    android:layout_width=\"match_parent\"    android:layout_height=\"match_parent\"    tools:context=\".MainActivity\"&gt;    &lt;Button android:id=\"@+id/activity_main_btn\"        android:layout_margin=\"16dp\"        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:textAllCaps=\"false\"        app:layout_constraintTop_toTopOf=\"parent\"        app:layout_constraintBottom_toTopOf=\"@+id/activity_main_fl\"        app:layout_constraintStart_toStartOf=\"parent\"        app:layout_constraintEnd_toEndOf=\"parent\"        android:text=\"Start Transaction\"/&gt;    &lt;FrameLayout android:id=\"@+id/activity_main_fl\"        android:layout_width=\"match_parent\"        android:layout_height=\"200dp\"        app:layout_constraintTop_toBottomOf=\"@+id/activity_main_btn\"        app:layout_constraintBottom_toBottomOf=\"parent\"        app:layout_constraintStart_toStartOf=\"parent\"        app:layout_constraintEnd_toEndOf=\"parent\"&gt;    &lt;/FrameLayout&gt;    &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n버튼을 누르면 다음과 같이 네 개의 트랜잭션을 실행하겠습니다. 백 스택에 트랜잭션을 추가할 때는 addToBackStack(null)메소드를 사용합니다. \nMainActivity.ktkotlin1234567891011121314151617181920212223242526272829303132333435363738394041424344class MainActivity : AppCompatActivity() {    lateinit var button: Button    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById(R.id.activity_main_btn)        button.setOnClickListener {            // 첫 번째 트랜잭션             // Fragment A 추가            var fragmentA = FragmentA()            val transaction1 = supportFragmentManager.beginTransaction()            transaction1.add(R.id.activity_main_fl, fragmentA)            transaction1.addToBackStack(null)            transaction1.commit()            // 두 번째 트랜잭션            // Fragment A 삭제            val transaction2 = supportFragmentManager.beginTransaction()            transaction2.remove(fragmentA)            transaction2.addToBackStack(null)            transaction2.commit()            // 세 번째 트랜잭션             // Fragment B 추가            val fragmentB = FragmentB()            val transaction3 = supportFragmentManager.beginTransaction()            transaction3.add(R.id.activity_main_fl, fragmentB)            transaction3.addToBackStack(null)            transaction3.commit()            // 네 번째 트랜잭션            // Fragment B를 Fragment A로 교체            val transaction4 = supportFragmentManager.beginTransaction()            transaction4.replace(R.id.activity_main_fl, fragmentA)            transaction4.addToBackStack(null)            transaction4.commit()        }    }}\n\n이제 앱을 실행합시다. 백 버튼을 누를 때 마다 이전 상태로 돌아가는 것을 확인할 수 있습니다.\n만약 백 스택에 트랜잭션을 추가하지 않았다면, 백 버튼을 눌렀을 때 이전 상태로 돌아가지 않고 앱이 종료됩니다.\n백 버튼 대신 popBackStack()메소드를 사용할 수도 있습니다.\nOnBackStackChangedListenerOnBackStackChangedListener를 사용하면 백 스택의 변화를 감지할 수 있습니다.\n1234567var fragmentManager = supportFragmentManagerfragmentManager.addOnBackStackChangedListener(object: FragmentManager.OnBackStackChangedListener &#123;    override fun onBackStackChanged() &#123;        // Do something when back stack changed.    &#125;&#125;)\n\n마치며이번 포스트에서는 프래그먼트 백 스택에 대해 알아봤습니다. 다음 포스트에서는 프래그먼트의 생명주기 함수에 대해 알아보겠습니다.\n","dateCreated":"2019-04-12T20:16:30+09:00","dateModified":"2021-06-28T17:32:28+09:00","datePublished":"2019-04-12T20:16:30+09:00","description":"","headline":"[안드로이드] 프래그먼트 - (3) 프래그먼트 백 스택(Fragment Back Stack)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/12/android/190412-fragment_backstack/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/12/android/190412-fragment_backstack/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며네 개의 포스트에서 걸쳐서 프래그먼트(Fragment)에 대해 알아보고 있습니다.\n\n프래그먼트(Fragment)란?\n프래그먼트 매니저\n프래그먼트 백 스택  ⬅️ ⬅️ ⬅️\n프래그먼트의 생명주기 메소드\n\n\n프래그먼트 백 스택(Back Stack)액티비티는 태스크에 스택 형태로 유지됩니다. 이 때문에 백 버튼을 누르면 스택의 최상단 액티비티를 종료하고 이전 액티비티로 돌아올 수 있습니다.\n프래그먼트 백 스택(Fragment Back Stack)은 프래그먼트에서도 액티비티와 유사하게 이전 프래그먼트 상태로 돌아가는 것을 가능하게 합니다. 백 스택을 사용하면 트랜잭션을 백 스택이라는 공간에 유지합니다. 따라서 백 버튼이나 Fragment.popBackStack()을 호출하면 이전 프래그먼트의 상태로 돌아올 수 있습니다.\n예제우선 MainActivity의 레이아웃는 다음과 같습니다.\nactivity_main.xmlxml1234567891011121314151617181920212223242526272829&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"    xmlns:app=\"http://schemas.android.com/apk/res-auto\"    xmlns:tools=\"http://schemas.android.com/tools\"    android:layout_width=\"match_parent\"    android:layout_height=\"match_parent\"    tools:context=\".MainActivity\"&gt;    &lt;Button android:id=\"@+id/activity_main_btn\"        android:layout_margin=\"16dp\"        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:textAllCaps=\"false\"        app:layout_constraintTop_toTopOf=\"parent\"        app:layout_constraintBottom_toTopOf=\"@+id/activity_main_fl\"        app:layout_constraintStart_toStartOf=\"parent\"        app:layout_constraintEnd_toEndOf=\"parent\"        android:text=\"Start Transaction\"/&gt;    &lt;FrameLayout android:id=\"@+id/activity_main_fl\"        android:layout_width=\"match_parent\"        android:layout_height=\"200dp\"        app:layout_constraintTop_toBottomOf=\"@+id/activity_main_btn\"        app:layout_constraintBottom_toBottomOf=\"parent\"        app:layout_constraintStart_toStartOf=\"parent\"        app:layout_constraintEnd_toEndOf=\"parent\"&gt;    &lt;/FrameLayout&gt;    &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n버튼을 누르면 다음과 같이 네 개의 트랜잭션을 실행하겠습니다. 백 스택에 트랜잭션을 추가할 때는 addToBackStack(null)메소드를 사용합니다. \nMainActivity.ktkotlin1234567891011121314151617181920212223242526272829303132333435363738394041424344class MainActivity : AppCompatActivity() {    lateinit var button: Button    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById(R.id.activity_main_btn)        button.setOnClickListener {            // 첫 번째 트랜잭션             // Fragment A 추가            var fragmentA = FragmentA()            val transaction1 = supportFragmentManager.beginTransaction()            transaction1.add(R.id.activity_main_fl, fragmentA)            transaction1.addToBackStack(null)            transaction1.commit()            // 두 번째 트랜잭션            // Fragment A 삭제            val transaction2 = supportFragmentManager.beginTransaction()            transaction2.remove(fragmentA)            transaction2.addToBackStack(null)            transaction2.commit()            // 세 번째 트랜잭션             // Fragment B 추가            val fragmentB = FragmentB()            val transaction3 = supportFragmentManager.beginTransaction()            transaction3.add(R.id.activity_main_fl, fragmentB)            transaction3.addToBackStack(null)            transaction3.commit()            // 네 번째 트랜잭션            // Fragment B를 Fragment A로 교체            val transaction4 = supportFragmentManager.beginTransaction()            transaction4.replace(R.id.activity_main_fl, fragmentA)            transaction4.addToBackStack(null)            transaction4.commit()        }    }}\n\n이제 앱을 실행합시다. 백 버튼을 누를 때 마다 이전 상태로 돌아가는 것을 확인할 수 있습니다.\n만약 백 스택에 트랜잭션을 추가하지 않았다면, 백 버튼을 눌렀을 때 이전 상태로 돌아가지 않고 앱이 종료됩니다.\n백 버튼 대신 popBackStack()메소드를 사용할 수도 있습니다.\nOnBackStackChangedListenerOnBackStackChangedListener를 사용하면 백 스택의 변화를 감지할 수 있습니다.\n1234567var fragmentManager = supportFragmentManagerfragmentManager.addOnBackStackChangedListener(object: FragmentManager.OnBackStackChangedListener &#123;    override fun onBackStackChanged() &#123;        // Do something when back stack changed.    &#125;&#125;)\n\n마치며이번 포스트에서는 프래그먼트 백 스택에 대해 알아봤습니다. 다음 포스트에서는 프래그먼트의 생명주기 함수에 대해 알아보겠습니다.\n","dateCreated":"2019-04-12T20:16:30+09:00","dateModified":"2021-06-28T17:32:28+09:00","datePublished":"2019-04-12T20:16:30+09:00","description":"","headline":"[안드로이드] 프래그먼트 - (3) 프래그먼트 백 스택(Fragment Back Stack)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/12/android/190412-fragment_backstack/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/12/android/190412-fragment_backstack/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며네 개의 포스트에서 걸쳐서 프래그먼트(Fragment)에 대해 알아보고 있습니다.  프래그먼트(Fragment)란? 프래그먼트 매니저 프래그먼트 백 스택  ⬅️ ⬅️ ⬅️ 프래그먼트의 생명주기 메소드   프래그먼트 백 스택(Back Stack)액티비티는">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 프래그먼트 - (3) 프래그먼트 백 스택(Fragment Back Stack)">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

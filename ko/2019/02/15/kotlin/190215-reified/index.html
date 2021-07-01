@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n\n들어가며앞으로 네 개의 포스트에 걸쳐 제네릭(Generic)에 대해 알아보겠습니다.\n\n제네릭(Generic)과 제네릭 클래스(Generic Class)\n제네릭 함수(Generic Function)\n키워드 in, out\nreified란 무엇인가? ⬅️ ⬅️ ⬅️\n\nreified를 이해하려면 제너릭(Generic), 타입 소거(Type Eraser), 리플렉션(Reflection)에 대해 알아야 합니다. 해당 포스트를 먼저 참고하시길 권장합니다.\n\n\n\n타입 소거제너릭의 타입 파라미터는 컴파일 타임에 존재하지만 런타임에는 접근할 수 없습니다. 바로 타입 소거 때문입니다. 다음 예제를 살펴봅시다.\n1234567891011121314fun &lt;T&gt; printType(value: T) &#123;    when (T::class) &#123;   // Error, Cannot use &#x27;T&#x27; as reified type parameter. Use a class instead.        String::class -&gt; &#123;            print(&quot;value is String type.&quot;)        &#125;        Int::class -&gt; &#123;            print(&quot;value is Int type.&quot;)        &#125;    &#125;&#125;var name: String = &quot;Paul&quot;printType&lt;String&gt;(name)\n위 코드는 T:class 형태로 클래스 타입을 읽으려 하고있습니다. 그러나 이 코드를 컴파일하면 에러가 발생합니다. 타입 파라미터인 T는 런타임에 접근할 수 없기 때문입니다. 따라서 보통 다음과 같이 별도의 인자로 클래스 타입을 전달하여 사용합니다.\n12345678910111213fun &lt;T: Any&gt; printType(value: T, classType: KClass&lt;T&gt;) &#123;    when (classType) &#123;        String::class -&gt; &#123;            print(&quot;value is String type.&quot;)        &#125;        Int::class -&gt; &#123;            print(&quot;value is Int type.&quot;)        &#125;    &#125;&#125;var name: String = &quot;Paul&quot;printType&lt;String&gt;(name, String::class)\n하지만 키워드 reified를 타입 파라미터 앞에 붙여주고 inline함수 형태로 사용하면 Kclass를 인자로 전달할 필요 없이 런타임에 타입 T에 접근할 수 있습니다.\n12345678910111213inline fun &lt;reified T: Any&gt; printType(value: T) &#123;    when (T::class) &#123;        String::class -&gt; &#123;            print(&quot;value is String type.&quot;)        &#125;        Int::class -&gt; &#123;            print(&quot;value is Int type.&quot;)        &#125;    &#125;&#125;var name: String = &quot;Paul&quot;printType&lt;String&gt;(name)\n\n\n마치며네 개의 포스트에서 걸쳐 제네릭(Generic)에 대해 알아봤습니다. 다음 포스트에서는 타입 별칭(Type Alias)에 대해 알아보겠습니다. \n","dateCreated":"2019-02-15T20:16:30+09:00","dateModified":"2021-06-23T13:45:55+09:00","datePublished":"2019-02-15T20:16:30+09:00","description":"","headline":"[코틀린] reified란 무엇인가","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/15/kotlin/190215-reified/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/15/kotlin/190215-reified/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n\n들어가며앞으로 네 개의 포스트에 걸쳐 제네릭(Generic)에 대해 알아보겠습니다.\n\n제네릭(Generic)과 제네릭 클래스(Generic Class)\n제네릭 함수(Generic Function)\n키워드 in, out\nreified란 무엇인가? ⬅️ ⬅️ ⬅️\n\nreified를 이해하려면 제너릭(Generic), 타입 소거(Type Eraser), 리플렉션(Reflection)에 대해 알아야 합니다. 해당 포스트를 먼저 참고하시길 권장합니다.\n\n\n\n타입 소거제너릭의 타입 파라미터는 컴파일 타임에 존재하지만 런타임에는 접근할 수 없습니다. 바로 타입 소거 때문입니다. 다음 예제를 살펴봅시다.\n1234567891011121314fun &lt;T&gt; printType(value: T) &#123;    when (T::class) &#123;   // Error, Cannot use &#x27;T&#x27; as reified type parameter. Use a class instead.        String::class -&gt; &#123;            print(&quot;value is String type.&quot;)        &#125;        Int::class -&gt; &#123;            print(&quot;value is Int type.&quot;)        &#125;    &#125;&#125;var name: String = &quot;Paul&quot;printType&lt;String&gt;(name)\n위 코드는 T:class 형태로 클래스 타입을 읽으려 하고있습니다. 그러나 이 코드를 컴파일하면 에러가 발생합니다. 타입 파라미터인 T는 런타임에 접근할 수 없기 때문입니다. 따라서 보통 다음과 같이 별도의 인자로 클래스 타입을 전달하여 사용합니다.\n12345678910111213fun &lt;T: Any&gt; printType(value: T, classType: KClass&lt;T&gt;) &#123;    when (classType) &#123;        String::class -&gt; &#123;            print(&quot;value is String type.&quot;)        &#125;        Int::class -&gt; &#123;            print(&quot;value is Int type.&quot;)        &#125;    &#125;&#125;var name: String = &quot;Paul&quot;printType&lt;String&gt;(name, String::class)\n하지만 키워드 reified를 타입 파라미터 앞에 붙여주고 inline함수 형태로 사용하면 Kclass를 인자로 전달할 필요 없이 런타임에 타입 T에 접근할 수 있습니다.\n12345678910111213inline fun &lt;reified T: Any&gt; printType(value: T) &#123;    when (T::class) &#123;        String::class -&gt; &#123;            print(&quot;value is String type.&quot;)        &#125;        Int::class -&gt; &#123;            print(&quot;value is Int type.&quot;)        &#125;    &#125;&#125;var name: String = &quot;Paul&quot;printType&lt;String&gt;(name)\n\n\n마치며네 개의 포스트에서 걸쳐 제네릭(Generic)에 대해 알아봤습니다. 다음 포스트에서는 타입 별칭(Type Alias)에 대해 알아보겠습니다. \n","dateCreated":"2019-02-15T20:16:30+09:00","dateModified":"2021-06-23T13:45:55+09:00","datePublished":"2019-02-15T20:16:30+09:00","description":"","headline":"[코틀린] reified란 무엇인가","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/15/kotlin/190215-reified/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/15/kotlin/190215-reified/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.     들어가며앞으로 네 개의 포스트에 걸쳐 제네릭(Generic)에 대해 알아보겠습니다.  제네릭(Generic)과 제네릭 클래스(Generic Class) 제네릭 함수(Generic Function) 키워드 in, out reified란 무엇인가? ⬅️ ⬅️ ⬅️">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] reified란 무엇인가">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

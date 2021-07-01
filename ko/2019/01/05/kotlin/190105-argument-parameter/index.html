@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 함수(Function)에 대해 알아봤습니다. 이번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보겠습니다.\n\n매개변수(Parameter)코틀린에서는 함수를 다음과 같이 선언합니다. \n123fun printSomething(something: String): Int &#123;    // ...&#125;\n여기서 something을 매개변수라고 합니다. 변수라는 말 그대로 함수의 실행구문 내에서 변수처럼 접근이 가능합니다.\n12345fun printSomething(something: String): Int &#123;    // 변수처럼 something에 접근    println(something)    return something.length&#125;\n전달인자(Argument)함수를 호출할 때 매개변수로 전달되는 실제 값을 의미합니다. 위에서 선언한 함수는 다음과 같이 호출합니다.\n1printSomething(&quot;Hello World!&quot;)\n여기서 실제로 전달되는 문자열 Hello World가 바로 전달인자입니다.\n\n마치며이번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보았습니다. 다음 포스트에서는 가변인자(vararg)에 대해 알아보겠습니다. \n","dateCreated":"2019-01-05T21:16:30+09:00","dateModified":"2021-06-23T10:47:15+09:00","datePublished":"2019-01-05T21:16:30+09:00","description":"","headline":"[코틀린] 매개변수(Parameter)와 전달인자(Argument)의 차이점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n들어가며이전 포스트에서는 함수(Function)에 대해 알아봤습니다. 이번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보겠습니다.\n\n매개변수(Parameter)코틀린에서는 함수를 다음과 같이 선언합니다. \n123fun printSomething(something: String): Int &#123;    // ...&#125;\n여기서 something을 매개변수라고 합니다. 변수라는 말 그대로 함수의 실행구문 내에서 변수처럼 접근이 가능합니다.\n12345fun printSomething(something: String): Int &#123;    // 변수처럼 something에 접근    println(something)    return something.length&#125;\n전달인자(Argument)함수를 호출할 때 매개변수로 전달되는 실제 값을 의미합니다. 위에서 선언한 함수는 다음과 같이 호출합니다.\n1printSomething(&quot;Hello World!&quot;)\n여기서 실제로 전달되는 문자열 Hello World가 바로 전달인자입니다.\n\n마치며이번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보았습니다. 다음 포스트에서는 가변인자(vararg)에 대해 알아보겠습니다. \n","dateCreated":"2019-01-05T21:16:30+09:00","dateModified":"2021-06-23T10:47:15+09:00","datePublished":"2019-01-05T21:16:30+09:00","description":"","headline":"[코틀린] 매개변수(Parameter)와 전달인자(Argument)의 차이점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-argument-parameter/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  들어가며이전 포스트에서는 함수(Function)에 대해 알아봤습니다. 이번 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보겠습니다.  매개변수(Parameter)코틀린에서는 함수를 다음과 같이 선언합니다.  123fun p">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] 매개변수(Parameter)와 전달인자(Argument)의 차이점">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

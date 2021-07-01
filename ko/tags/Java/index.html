@@ -112,37 +112,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -172,9 +144,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     
@@ -232,6 +260,165 @@
                         ">
                 
     <section class="postShorten-group main-content-wrap">
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/04/05/java/180405-jar/"
+                            aria-label=": [Java] JAR 파일이란?"
+                        >
+                            [Java] JAR 파일이란?
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-04-05T08:16:30+09:00">
+	
+		    2018/04/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<hr>
+<h1 id="JAR"><a href="#JAR" class="headerlink" title="JAR"></a>JAR</h1><p><code>JAR(Java Archive)</code>파일은 자바 애플리캐이션을 효율적으로 배포하기 위해 만들어진 파일입니다. <code>JAR</code>파일은 여러 클래스 파일, 리소스 파일, 매니페스트 파일로 구성되어있습니다.</p>
+<h1 id="JAR-생성하기"><a href="#JAR-생성하기" class="headerlink" title="JAR 생성하기"></a>JAR 생성하기</h1><p>우선 <code>MyProject</code>폴더를 생성하고 이 폴더로 이동합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir MyProject</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> MyProject</span></span><br></pre></td></tr></table></figure>
+<p>앱의 시작점 역할을 할 <code>MyProject.java</code>를 생성합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> library.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProject</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; \</span><br><span class="line">        MyLibrary library = <span class="keyword">new</span> MyLibrary();</span><br><span class="line">        library.printSomething(<span class="string">&quot;Something&quot;</span>);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>library</code>폴더를 생성하고 이 폴더로 이동합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir library</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> library</span></span><br></pre></td></tr></table></figure>
+<p><code>MyLibrary.java</code>를 생성합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> library;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLibrary</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printSomething</span><span class="params">(String something)</span> </span>&#123;</span><br><span class="line">        System.out.println(something);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>생성된 디렉토리의 구조는 다음과 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ tree </span><br><span class="line">. </span><br><span class="line">├── library</span><br><span class="line">│  └── MyLibrary.java</span><br><span class="line">├── manifest.txt</span><br><span class="line">└── MyProject.java</span><br><span class="line"></span><br><span class="line">1 directories, 2 files</span><br></pre></td></tr></table></figure>
+<p><code>MyLibrary</code>와 <code>MyProject</code>를 컴파일합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> javac MyLibrary.java</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ..</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> javac MyProject.java</span></span><br></pre></td></tr></table></figure>
+
+<p><code>manifest.txt</code>를 생성합니다. 이 파일에는 앱의 시작점 역할을 하는 파일, 클래스 파일 등의 정보를 작성합니다.</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim manifest.txt</span><br><span class="line">Main-class: MyProject</span><br></pre></td></tr></table></figure>
+<p>다음 명령어를 입력하여 <code>JAR</code>파일을 생성합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jar -cvmf manifest.txt MyProject.jar MyProject.class library&#x2F;MyLibrary.class</span><br></pre></td></tr></table></figure>
+<p><code>MyProject.jar</code>가 생성되었습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ls </span><br><span class="line">MyProject.jar   </span><br><span class="line">MyProject.class </span><br><span class="line">MyProject.java  </span><br><span class="line">ibrary         </span><br><span class="line">manifest.txt</span><br></pre></td></tr></table></figure>
+<h1 id="JAR-실행하기"><a href="#JAR-실행하기" class="headerlink" title="JAR 실행하기"></a>JAR 실행하기</h1><p>이제 아래 명령어를 입력하여 <code>JAR</code>파일을 실행할 수 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java -jar MyProject.jar</span><br><span class="line">something</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/04/05/java/180405-jar/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/04/04/java/180404-mac-java/"
+                            aria-label=": [Java] (Mac OS) 터미널에서 자바를 컴파일하고 실행하기"
+                        >
+                            [Java] (Mac OS) 터미널에서 자바를 컴파일하고 실행하기
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-04-04T08:16:30+09:00">
+	
+		    2018/04/04
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<hr>
+<h1 id="Java-설치-확인"><a href="#Java-설치-확인" class="headerlink" title="Java 설치 확인"></a>Java 설치 확인</h1><p>Mac OS에는 Java가 기본적으로 설치되어있습니다. </p>
+<div class="alert warning icon"><p>Windows나 Linux 환경에서는 Java를 직접 설치해야합니다.</p>
+</div>
+<p>터미널에서 다음 명령어를 입력합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ java --version</span><br></pre></td></tr></table></figure>
+<p>아래와 같이 출력되면 Java가 설치되어있는 것입니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java 13.0.1 2019-10-15</span><br><span class="line">Java(TM) SE Runtime Environment (build 13.0.1+9)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 13.0.1+9, mixed mode, sharing)</span><br></pre></td></tr></table></figure>
+<p><code>MyProject.java</code>파일을 생성합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProject</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<p><a href="/ko/2018/01/01/java/180101-jvm-jre-jdk/">자바 컴파일러</a>를 사용하여 소스 코드를 컴파일합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ javac MyProject.java</span><br></pre></td></tr></table></figure>
+<p>정상적으로 컴파일이 되면 자바 클래스 파일이 생성됩니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">MyProject.java      // 자바 소스 파일</span><br><span class="line">MyProject.class     // 자바 클래스 파일</span><br></pre></td></tr></table></figure>
+<p>다음 명령어를 입력하여 자바 클래스 파일을 실행할 수 있습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java MyProject</span><br><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/04/04/java/180404-mac-java/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
     
     
     <article class="postShorten postShorten--thumbnailimg-bottom">
@@ -912,186 +1099,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/03/01/java/180301-reflection/"
-                            aria-label=": [자바] 리플렉션(Reflection)"
-                        >
-                            [자바] 리플렉션(Reflection)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-03-01T20:16:30+09:00">
-	
-		    2018/03/01
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><span class="highlight-text red">리플렉션(Reflection)</span>은 <u>런타임에서 구체적인 클래스 타입을 몰라도 그 클래스의 멤버변수, 메소드 등에 접근할 수 있도록 하는 자바 API와 기법</u>입니다. 리플렉션과 관련된 API는 <span class="highlight-text" style="background-color:#F6F7F7;">java.lang.reflect.*</span> 패키지에 있습니다.
-
-<hr>
-<h1 id="Class클래스와-클래스-참조"><a href="#Class클래스와-클래스-참조" class="headerlink" title="Class클래스와 클래스 참조"></a>Class클래스와 클래스 참조</h1><p>자바의 모든 클래스와 인터페이스는 컴파일 후 <code>.class</code>파일로 변환됩니다. 이 파일에는 생성자, 멤버변수, 메서드 등 객체의 정보가 포함되어있는데 <code>Class</code>클래스를 사용하면 이 파일에서 가져온 객체의 정보를 담을 수 있습니다. 이를 <code>클래스 참조(Class Reference)</code>라고 합니다.</p>
-<p><code>Class</code>클래스에 정보를 담는 방법에는 세 가지가 있습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스에 .class를 붙여서 객체 정보 가져오기</span></span><br><span class="line">Class c1 = String.class</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Class클래스의 forName()메소드를 사용하여 객체 정보 가져오기</span></span><br><span class="line">Class c1 = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 인스턴스에서 getClass()를 호출하여 객체 정보 가져오기</span></span><br><span class="line">String string = <span class="keyword">new</span> String();</span><br><span class="line">Class c1 = string.getClass();</span><br></pre></td></tr></table></figure>
-
-<h1 id="리플렉션"><a href="#리플렉션" class="headerlink" title="리플렉션"></a>리플렉션</h1><p>코드를 작성하다보면 작성 시점에 데이터의 타입을 모를 수도 있습니다. 이때 <code>리플렉션(Reflection)</code>을 사용할 수 있습니다. </p>
-<p>다음과 같은 클래스가 있다고 가정해봅시다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line">    String nation;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 기본 생성자</span></span><br><span class="line">    Person() &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">this</span>.nation = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 보조 생성자</span></span><br><span class="line">    Person(String name, String nation) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.nation = nation;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printNation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(nation);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printSomething</span><span class="params">(String something)</span> </span>&#123;</span><br><span class="line">        System.out.println(something);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>Class</code>클래스의 인스턴스에는 클래스 정보를 저장할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line"><span class="comment">// 또는 Class personClass = Class.forName(&quot;Person&quot;);</span></span><br></pre></td></tr></table></figure>
-<p>이 <code>Class</code>타입의 인스턴스로 클래스의 인스턴스를 생성할 수도 있습니다. 이 때는 <code>newInstance()</code>메소드를 사용합니다. 다만 반드시 매개변수가 없는 <code>기본생성자</code>가 존재해야합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Person person = (Person) personClass.newInstance();</span><br><span class="line">&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="클래스의-멤버변수-가져오기"><a href="#클래스의-멤버변수-가져오기" class="headerlink" title="클래스의 멤버변수 가져오기"></a>클래스의 멤버변수 가져오기</h1><p>클래스의 멤버변수 정보를 읽어올 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line">Field[] fields = personClass.getDeclaredFields();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;fields.length; i++) &#123;</span><br><span class="line">    System.out.println(fields[i].getName());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// name</span></span><br><span class="line"><span class="comment">// nation</span></span><br></pre></td></tr></table></figure>
-<h1 id="클래스의-생성자-가져오기"><a href="#클래스의-생성자-가져오기" class="headerlink" title="클래스의 생성자 가져오기"></a>클래스의 생성자 가져오기</h1><p>클래스의 생성자 정보를 읽어올 수도 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line">Constructor[] constructors = personClass.getDeclaredConstructors();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;constructors.length; i++) &#123;</span><br><span class="line">    System.out.println(constructors[i].getName());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// com.my_project.Person</span></span><br><span class="line"><span class="comment">// com.my_project.Person</span></span><br></pre></td></tr></table></figure>
-<h2 id="클래스의-메소드-가져오기"><a href="#클래스의-메소드-가져오기" class="headerlink" title="클래스의 메소드 가져오기"></a>클래스의 메소드 가져오기</h2><p>클래스의 모든 메소드들은 다음과 같이 가져올 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line">Method[] methods = personClass.getDeclaredMethods();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;methods.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 메소드 이름 출력</span></span><br><span class="line">    System.out.println(methods[i].getName());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// printName</span></span><br><span class="line"><span class="comment">// printNation</span></span><br><span class="line"><span class="comment">// printSomething</span></span><br><span class="line"><span class="comment">// printHello</span></span><br></pre></td></tr></table></figure>
-<p>특정 메소드 한 개만 가져올 수도 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Method method = personClass.getDeclaredMethod(<span class="string">&quot;printSomething&quot;</span>);</span><br><span class="line">    System.out.println(method.getName());   <span class="comment">// printSomething</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>클래스의 메소드를 가져오면 이를 통해 호출도 할 수도 있습니다. 이 때는 <code>invoke()</code>메소드를 호출합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class personClass = Person.class;</span><br><span class="line">Person person = <span class="keyword">new</span> Person(<span class="string">&quot;Paul&quot;</span>, <span class="string">&quot;America&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Method printHelloMethod = personClass.getDeclaredMethod(<span class="string">&quot;printHello&quot;</span>);</span><br><span class="line">    printHelloMethod.invoke(person);    <span class="comment">// Hello</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 <code>리플렉션(Reflection)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/03/02/java/180302-annotation/">어노테이션(Annotation)</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/03/01/java/180301-reflection/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/02/05/java/180205-type-eraser/"
-                            aria-label=": [자바] 제너릭과 타입 소거(Type Erasure)"
-                        >
-                            [자바] 제너릭과 타입 소거(Type Erasure)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-02-05T20:16:30+09:00">
-	
-		    2018/02/05
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 <code>제너릭(Generic)</code>에 대해 살펴보고있습니다.</p>
-<ol>
-<li><a href="/ko/2018/02/01/java/180201-generic/">제너릭(Generic)의 개념과 장점</a></li>
-<li><a href="/ko/2018/02/02/java/180202-generic-class/">제너릭 클래스(Generic Class)</a></li>
-<li><a href="/ko/2018/02/03/java/180203-generic-method/">제너릭 함수(Generic Function)</a></li>
-<li><a href="/ko/2018/02/04/java/180204-wildcard/">제너릭의 와일드 카드(Wildcard)</a></li>
-<li>타입 소거(Type Erasure) ⬅️ ⬅️ ⬅️</li>
-</ol>
-<hr>
-<h1 id="타입-소거"><a href="#타입-소거" class="headerlink" title="타입 소거"></a>타입 소거</h1><span class="highlight-text red">타입 소거(Type Erasure)</span>는 제네릭의 타입 파라미터를 구체화된 자료형으로 대체하는 작업을 의미합니다. 자바 컴파일러는 소스 코드를 컴파일할 때 타입 소거를 수행합니다. 
-
-
-<div class="alert info icon"><p>타입 파라미터가 <b>Unbounded Type</b>인지 <b>Bounded Type</b>인지에 따라 소거 방식이 다릅니다.</p>
-</div>
-
-
-<h3 id="1-Unbounded-Type의-타입소거"><a href="#1-Unbounded-Type의-타입소거" class="headerlink" title="(1) Unbounded Type의 타입소거"></a>(1) Unbounded Type의 타입소거</h3><p><code>Unbounded Type</code>은 형식 타입 파라미터로 전달받게될 실 타입 파라미터의 범위를 제한하지 않은 것을 의미합니다. <code>&lt;?&gt;</code>, <code>&lt;T&gt;</code> 형태의 타입 파라미터라고 생각하시면 됩니다. </p>
-<p><code>Unbounded Type</code> 예제를 살펴봅시다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 전 (타입 소거 전) </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(T test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>컴파일러는 위 코드는 아래와 같이 변환합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴파일 후 (타입 소거 후)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Object test)</span> </span>&#123;</span><br><span class="line">        System.out.println(test.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>컴파일러는 타입 파라미터를 소거하고 <code>Unbounded Type</code>인 <code>&lt;?&gt;</code>, <code>&lt;T&gt;</code>를 <code>Object</code>로 대체합니다.</p>
-<h3 id="2-Bounded-Type의-타입소거"><a href="#2-Bounded-Type의-타입소거" class="headerlink" title="(2) Bounded Type의 타입소거"></a>(2) Bounded Type의 타입소거</h3><p><code>Bounded Type</code>은 <u>형식 타입 파라미터로 전달되는 실 타입 파라미터의 범위를 제한한 것</u>을 의미합니다. <code>&lt;E extends Something&gt;</code> 형태의 타입 파라미터라고 생각하시면 됩니다.</p>
-<p><code>Bounded Type</code> 예제를 살펴보겠습니다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Observable</span>&lt;<span class="title">T</span>&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>컴파일러는 위 코드를 아래와 같이 변환합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Observable data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Observable <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Observable data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>타입 파라미터를 포함한 <code>Observable&lt;T&gt;</code>는 <code>Observable</code>로 소거되었습니다. <code>&lt;E extends Something&gt;</code>은 <code>Object</code>가 아닌 <code>Something</code>로 대치되는 것입니다.</p>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>다섯 개의 포스트에서 <code>제너릭(Generic)</code>에 대해 알아보았습니다. 다음 포스트에서는 <a href="/ko/2018/03/01/java/180301-reflection/"><code>리플렉션(Reflection)</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/02/05/java/180205-type-eraser/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1107,7 +1114,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 1 of 4</li>
+        <li class="pagination-number">page 1 of 5</li>
     </ul>
 </div>
 

@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n사용자 인터페이스사용자는 사용자 인터페이스(User Interface)를 통해 애플리캐이션과 상호작용합니다. 따라서 사용자 인터페이스의 디자인과 생성은 애플리캐이션 개발의 핵심 요소입니다. \n안드로이드에서 사용자 인터페이스는 뷰(View), 뷰 그룹(View Group), 레이아웃(Layout)으로 구성됩니다.\n뷰 (View)안드로이드에서 사용자 인터페이스의 모든 요소는 android.view.View클래스의 서브 클래스입니다. Button, TextView, ImageView CheckBox, EditText 등은 모두 View클래스를 상속합니다. 이러한 클래스들은 위젯(Widget)이라고도 합니다.\n뷰 그룹 (View Group)뷰는 여러 개의 다른 뷰로 구성될 수 있습니다. 이처럼 다른 뷰를 포함하는 뷰를 뷰 그룹(View Group)이라고 합니다. 뷰 그룹은 android.view.ViewGroup을 상속합니다. RadioGroup이 대표적인 뷰 그룹입니다.\nRadioGroup은 여러 개의 RadioButton중에서 하나만 선택할 수 있는 뷰 그룹입니다.RadioGroup은 다음과 같이 사용합니다.\n1234567891011121314151617181920212223242526&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;RadioGroup android:id=&quot;@+id/activity_main_rg&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;&gt;        &lt;RadioButton android:text=&quot;Male&quot;             android:layout_width=&quot;wrap_content&quot;            android:layout_height=&quot;wrap_content&quot;/&gt;        &lt;RadioButton android:text=&quot;Female&quot;            android:layout_width=&quot;wrap_content&quot;            android:layout_height=&quot;wrap_content&quot;/&gt;    &lt;/RadioGroup&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n뷰 그룹 역시 사용자 인터페이스의 요소이므로 View클래스를 상속합니다.\nRadioGroup처럼 다른 뷰들을 포함하는 뷰는 부모 뷰 또는 컨테이너 뷰라고 합니다. 부모 뷰에 포함된 뷰는 자식 뷰라고 합니다.\n레이아웃 (Layout)안드로이드는 뷰와 뷰 그룹 뿐만 아니라 레이아웃(Layout)이라는 뷰들도 제공합니다. 레이아웃은 내부에 여러 자식 뷰를 포함할 수 있으며, 자식 뷰를 효율적으로 배치하기 위해 설계되었습니다. 레이아웃 역시 View와 ViewGroup클래스를 상속합니다.\n인터페이스 디자인에 자주 사용하는 레이아웃은 다음과 같습니다.\n\nLinearLayout\nConstraintLayout\nTableLayout\nFrameLayout\nRelativeLayout\nCoordinatorLayout\n\n\n마치며이번 포스트에 걸쳐 뷰(View), 뷰 그룹(View Group), 레이아웃(Layout)에 대해 알아봤습니다. 다음 포스트에서는 레이아웃 인플레이트에 대해 알아보겠습니다.\n","dateCreated":"2019-11-03T20:16:30+09:00","dateModified":"2021-06-28T22:44:17+09:00","datePublished":"2019-11-03T20:16:30+09:00","description":"","headline":"[안드로이드] 뷰(View), 뷰 그룹(View Group), 레이아웃(Layout)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/11/03/android/191103-view_viewgroup/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/11/03/android/191103-view_viewgroup/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n사용자 인터페이스사용자는 사용자 인터페이스(User Interface)를 통해 애플리캐이션과 상호작용합니다. 따라서 사용자 인터페이스의 디자인과 생성은 애플리캐이션 개발의 핵심 요소입니다. \n안드로이드에서 사용자 인터페이스는 뷰(View), 뷰 그룹(View Group), 레이아웃(Layout)으로 구성됩니다.\n뷰 (View)안드로이드에서 사용자 인터페이스의 모든 요소는 android.view.View클래스의 서브 클래스입니다. Button, TextView, ImageView CheckBox, EditText 등은 모두 View클래스를 상속합니다. 이러한 클래스들은 위젯(Widget)이라고도 합니다.\n뷰 그룹 (View Group)뷰는 여러 개의 다른 뷰로 구성될 수 있습니다. 이처럼 다른 뷰를 포함하는 뷰를 뷰 그룹(View Group)이라고 합니다. 뷰 그룹은 android.view.ViewGroup을 상속합니다. RadioGroup이 대표적인 뷰 그룹입니다.\nRadioGroup은 여러 개의 RadioButton중에서 하나만 선택할 수 있는 뷰 그룹입니다.RadioGroup은 다음과 같이 사용합니다.\n1234567891011121314151617181920212223242526&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    tools:context=&quot;.MainActivity&quot;&gt;    &lt;RadioGroup android:id=&quot;@+id/activity_main_rg&quot;        android:layout_width=&quot;wrap_content&quot;        android:layout_height=&quot;wrap_content&quot;        app:layout_constraintTop_toTopOf=&quot;parent&quot;        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;        app:layout_constraintStart_toStartOf=&quot;parent&quot;        app:layout_constraintEnd_toEndOf=&quot;parent&quot;&gt;        &lt;RadioButton android:text=&quot;Male&quot;             android:layout_width=&quot;wrap_content&quot;            android:layout_height=&quot;wrap_content&quot;/&gt;        &lt;RadioButton android:text=&quot;Female&quot;            android:layout_width=&quot;wrap_content&quot;            android:layout_height=&quot;wrap_content&quot;/&gt;    &lt;/RadioGroup&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n뷰 그룹 역시 사용자 인터페이스의 요소이므로 View클래스를 상속합니다.\nRadioGroup처럼 다른 뷰들을 포함하는 뷰는 부모 뷰 또는 컨테이너 뷰라고 합니다. 부모 뷰에 포함된 뷰는 자식 뷰라고 합니다.\n레이아웃 (Layout)안드로이드는 뷰와 뷰 그룹 뿐만 아니라 레이아웃(Layout)이라는 뷰들도 제공합니다. 레이아웃은 내부에 여러 자식 뷰를 포함할 수 있으며, 자식 뷰를 효율적으로 배치하기 위해 설계되었습니다. 레이아웃 역시 View와 ViewGroup클래스를 상속합니다.\n인터페이스 디자인에 자주 사용하는 레이아웃은 다음과 같습니다.\n\nLinearLayout\nConstraintLayout\nTableLayout\nFrameLayout\nRelativeLayout\nCoordinatorLayout\n\n\n마치며이번 포스트에 걸쳐 뷰(View), 뷰 그룹(View Group), 레이아웃(Layout)에 대해 알아봤습니다. 다음 포스트에서는 레이아웃 인플레이트에 대해 알아보겠습니다.\n","dateCreated":"2019-11-03T20:16:30+09:00","dateModified":"2021-06-28T22:44:17+09:00","datePublished":"2019-11-03T20:16:30+09:00","description":"","headline":"[안드로이드] 뷰(View), 뷰 그룹(View Group), 레이아웃(Layout)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/11/03/android/191103-view_viewgroup/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/11/03/android/191103-view_viewgroup/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.    사용자 인터페이스사용자는 사용자 인터페이스(User Interface)를 통해 애플리캐이션과 상호작용합니다. 따라서 사용자 인터페이스의 디자인과 생성은 애플리캐이션 개발의 핵심 요소입니다.  안드로이드에서 사용자 인터페이스는 뷰(View), 뷰 그룹(View">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 뷰(View), 뷰 그룹(View Group), 레이아웃(Layout)">
@@ -119,37 +119,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -179,9 +151,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 빌드 타입(BuildType)에 대해 알아봤습니다. 이번 포스트에서는 빌드 변형의 프로덕트 플래이버(Product Flavor)에 대해 알아보겠습니다.\n\nProduct Flavor스마트폰용 앱과 태블릿용 앱을 출시한다고 가정합시다. 두 앱은 레이아웃만 약간 다르고 기능적으로는 차이가 없습니다. 이러한 경우 프로덕트 플래이버(Product Flavor)를 사용할 수 있습니다.\nbuild.gradle에 프로덕트 플래이버 추가하기모듈 수준의 build.gradle에 두 개의 프로덕트 플래이버를 추가합니다.  build.gradlegroovy1234567891011121314151617181920212223242526272829303132android {    buildTypes {        debug {            // ...        }        release {            // ...        }    }    flavorDimensions \"mode\"    productFlavors {        phone {            dimension \"mode\"            versionCode 101            versionName \"1.0.1\"            applicationIdSuffix \".phone\"            versionNameSuffix \"-phone\"        }        tablet {            dimension \"mode\"            versionCode 213            versionName \"2.1.3\"            applicationIdSuffix \".tablet\"            versionNameSuffix \"-tablet\"        }    }    // ... }\n이제 Sync Now를 클릭하여 동기화 후 왼쪽 하단의 Build Variant탭을 확인해봅시다.\n총 네 개의 빌드 변형이 추가되었습니다. 그래들은 Build Type과 Product Flavor에 따라 자동으로 빌드 변형을 생성하고 &lt;product-flavor&gt;&lt;Build-Type&gt;로 빌드 변형의 이름을 지정합니다.\n(1) applicationIdSuffixapplicationId에 추가되는 접미사입니다. applicationId가 com.yologger.example고 applicationIdSuffix가 .phone이면 이 빌드 변형의 applicationId는 com.yologger.example.phone이 됩니다.\n(2) versionNameSuffixversionName에 추가되는 접미사입니다. versionName이 2.1.3고 versionNameSuffix가 -tablet이면 이 빌드 변형의 versionName은 2.1.3-tablet이 됩니다.\n빌드 플레이버에 따라 다른 리소스 사용하기프로젝트 도구 창을 Android 뷰에서 Project 뷰로 변경합니다.your_project &gt; app &gt; src에 네 개의 디렉토리를 생성합니다\n\nphone/res/values\nphone/res/layout\ntablet/res/values\ntablet/res/layout\n\nmain/res/values/strings.xml과 main/res/layout/activity_main.xml을 위 디렉토리로 복사합니다.코드를 변경합니다.\nphone/res/values/string.xmlxml1234&lt;resources&gt;    &lt;string name=\"app_name\"&gt;flavor for phone&lt;/string&gt;    &lt;string name=\"title\"&gt;flavor for phone&lt;/string&gt;&lt;/resources&gt;\nphone/res/layout/activity_main.xmlxml123456789101112131415161718&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=\"http://schemas.android.com/apk/res/android\"    xmlns:app=\"http://schemas.android.com/apk/res-auto\"    xmlns:tools=\"http://schemas.android.com/tools\"    android:layout_width=\"match_parent\"    android:layout_height=\"match_parent\"    tools:context=\".MainActivity\"&gt;    &lt;TextView        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:text=\"@string/title\"        app:layout_constraintBottom_toBottomOf=\"parent\"        app:layout_constraintLeft_toLeftOf=\"parent\"        app:layout_constraintRight_toRightOf=\"parent\"        app:layout_constraintTop_toTopOf=\"parent\" /&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n\ntablet/res/values/string.xmlxml1234&lt;resources&gt;    &lt;string name=\"app_name\"&gt;flavor for tablet&lt;/string&gt;    &lt;string name=\"title\"&gt;flavor for tablet&lt;/string&gt;&lt;/resources&gt;\n\n\ntablet/res/values/activity_main.xmlxml123456789101112131415161718&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=\"http://schemas.android.com/apk/res/android\"    xmlns:app=\"http://schemas.android.com/apk/res-auto\"    xmlns:tools=\"http://schemas.android.com/tools\"    android:layout_width=\"match_parent\"    android:layout_height=\"match_parent\"    tools:context=\".MainActivity\"&gt;    &lt;TextView        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:text=\"@string/title\"        app:layout_constraintBottom_toBottomOf=\"parent\"        app:layout_constraintLeft_toLeftOf=\"parent\"        app:layout_constraintRight_toRightOf=\"parent\"        app:layout_constraintTop_toTopOf=\"parent\" /&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt; \n이제 빌드 변형를 debugPhone으로 변경하고 실행하면 다음과 같습니다.\n\n빌드 변형를 debugTablet으로 변경하고 실행하면 다음과 같습니다.\n두 개의 빌드 변형이 설치되었음을 확인할 수 있습니다.\n프로덕트 플레이버에 따라 다른 소스파일 사용하기리소스뿐만 아니라 프로덕트 플레이버에 따라 다른 소스파일을 사용할 수도 있습니다. \n두 개의 디렉토리를 생성합니다.\n\nphone/java\ntablet/java\n\n\n각각의 폴더에 동일한 패키지를 생성합니다.\nmain/java/com/yologger/example의 MainActivity.kt파일을 phone/java/com/yologger/example과 tablet/java/com/yologger/example에 복사합니다. 복사 후 main/java/com/yologger/example/MainActivity.kt는 삭제합니다. 코드는 다음과 같습니다.\nphone/java/com/yologger/example/MainActivity.ktkotlin1234567891011121314class MainActivity : AppCompatActivity() {    lateinit var container: ConstraintLayout    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        container = findViewById(R.id.activity_main_container)        // 배경화면 빨간색        container.setBackgroundColor(Color.RED)    }}\n\ntablet/java/com/yologger/example/MainActivity.ktkotlin1234567891011121314class MainActivity : AppCompatActivity() {    lateinit var container: ConstraintLayout    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        container = findViewById(R.id.activity_main_container)        // 배경화면 파란색        container.setBackgroundColor(Color.BLUE)    }}\n\n이제 빌드 변형을 phoneDebug로 실행하면 다음과 같습니다.\n\n빌드 변형을 tabletDebug로 실행하면 다음과 같습니다.\n\n이처럼 프로덕트 플래이버를 사용하면 빌드 변형에 따라 다른 리소스 파일과 소스 파일을 사용할 수 있습니다.\n\n마치며이번 포스트에서는 프로덕트 플레이버(Product Flavor)에 대해 알아봤습니다. 다음 포스트에서는 프로가드(ProGuard)에 대해 알아보겠습니다.\n","dateCreated":"2018-12-15T20:16:30+09:00","dateModified":"2021-06-28T14:18:25+09:00","datePublished":"2018-12-15T20:16:30+09:00","description":"","headline":"[안드로이드] 그래들 - (11) 빌드 변형(Build Variant) - Product Flavor","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/12/15/android/181215-product-flavor/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/12/15/android/181215-product-flavor/","keywords":"Gradle, Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 빌드 타입(BuildType)에 대해 알아봤습니다. 이번 포스트에서는 빌드 변형의 프로덕트 플래이버(Product Flavor)에 대해 알아보겠습니다.\n\nProduct Flavor스마트폰용 앱과 태블릿용 앱을 출시한다고 가정합시다. 두 앱은 레이아웃만 약간 다르고 기능적으로는 차이가 없습니다. 이러한 경우 프로덕트 플래이버(Product Flavor)를 사용할 수 있습니다.\nbuild.gradle에 프로덕트 플래이버 추가하기모듈 수준의 build.gradle에 두 개의 프로덕트 플래이버를 추가합니다.  build.gradlegroovy1234567891011121314151617181920212223242526272829303132android {    buildTypes {        debug {            // ...        }        release {            // ...        }    }    flavorDimensions \"mode\"    productFlavors {        phone {            dimension \"mode\"            versionCode 101            versionName \"1.0.1\"            applicationIdSuffix \".phone\"            versionNameSuffix \"-phone\"        }        tablet {            dimension \"mode\"            versionCode 213            versionName \"2.1.3\"            applicationIdSuffix \".tablet\"            versionNameSuffix \"-tablet\"        }    }    // ... }\n이제 Sync Now를 클릭하여 동기화 후 왼쪽 하단의 Build Variant탭을 확인해봅시다.\n총 네 개의 빌드 변형이 추가되었습니다. 그래들은 Build Type과 Product Flavor에 따라 자동으로 빌드 변형을 생성하고 &lt;product-flavor&gt;&lt;Build-Type&gt;로 빌드 변형의 이름을 지정합니다.\n(1) applicationIdSuffixapplicationId에 추가되는 접미사입니다. applicationId가 com.yologger.example고 applicationIdSuffix가 .phone이면 이 빌드 변형의 applicationId는 com.yologger.example.phone이 됩니다.\n(2) versionNameSuffixversionName에 추가되는 접미사입니다. versionName이 2.1.3고 versionNameSuffix가 -tablet이면 이 빌드 변형의 versionName은 2.1.3-tablet이 됩니다.\n빌드 플레이버에 따라 다른 리소스 사용하기프로젝트 도구 창을 Android 뷰에서 Project 뷰로 변경합니다.your_project &gt; app &gt; src에 네 개의 디렉토리를 생성합니다\n\nphone/res/values\nphone/res/layout\ntablet/res/values\ntablet/res/layout\n\nmain/res/values/strings.xml과 main/res/layout/activity_main.xml을 위 디렉토리로 복사합니다.코드를 변경합니다.\nphone/res/values/string.xmlxml1234&lt;resources&gt;    &lt;string name=\"app_name\"&gt;flavor for phone&lt;/string&gt;    &lt;string name=\"title\"&gt;flavor for phone&lt;/string&gt;&lt;/resources&gt;\nphone/res/layout/activity_main.xmlxml123456789101112131415161718&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=\"http://schemas.android.com/apk/res/android\"    xmlns:app=\"http://schemas.android.com/apk/res-auto\"    xmlns:tools=\"http://schemas.android.com/tools\"    android:layout_width=\"match_parent\"    android:layout_height=\"match_parent\"    tools:context=\".MainActivity\"&gt;    &lt;TextView        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:text=\"@string/title\"        app:layout_constraintBottom_toBottomOf=\"parent\"        app:layout_constraintLeft_toLeftOf=\"parent\"        app:layout_constraintRight_toRightOf=\"parent\"        app:layout_constraintTop_toTopOf=\"parent\" /&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n\ntablet/res/values/string.xmlxml1234&lt;resources&gt;    &lt;string name=\"app_name\"&gt;flavor for tablet&lt;/string&gt;    &lt;string name=\"title\"&gt;flavor for tablet&lt;/string&gt;&lt;/resources&gt;\n\n\ntablet/res/values/activity_main.xmlxml123456789101112131415161718&lt;androidx.constraintlayout.widget.ConstraintLayout     xmlns:android=\"http://schemas.android.com/apk/res/android\"    xmlns:app=\"http://schemas.android.com/apk/res-auto\"    xmlns:tools=\"http://schemas.android.com/tools\"    android:layout_width=\"match_parent\"    android:layout_height=\"match_parent\"    tools:context=\".MainActivity\"&gt;    &lt;TextView        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:text=\"@string/title\"        app:layout_constraintBottom_toBottomOf=\"parent\"        app:layout_constraintLeft_toLeftOf=\"parent\"        app:layout_constraintRight_toRightOf=\"parent\"        app:layout_constraintTop_toTopOf=\"parent\" /&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt; \n이제 빌드 변형를 debugPhone으로 변경하고 실행하면 다음과 같습니다.\n\n빌드 변형를 debugTablet으로 변경하고 실행하면 다음과 같습니다.\n두 개의 빌드 변형이 설치되었음을 확인할 수 있습니다.\n프로덕트 플레이버에 따라 다른 소스파일 사용하기리소스뿐만 아니라 프로덕트 플레이버에 따라 다른 소스파일을 사용할 수도 있습니다. \n두 개의 디렉토리를 생성합니다.\n\nphone/java\ntablet/java\n\n\n각각의 폴더에 동일한 패키지를 생성합니다.\nmain/java/com/yologger/example의 MainActivity.kt파일을 phone/java/com/yologger/example과 tablet/java/com/yologger/example에 복사합니다. 복사 후 main/java/com/yologger/example/MainActivity.kt는 삭제합니다. 코드는 다음과 같습니다.\nphone/java/com/yologger/example/MainActivity.ktkotlin1234567891011121314class MainActivity : AppCompatActivity() {    lateinit var container: ConstraintLayout    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        container = findViewById(R.id.activity_main_container)        // 배경화면 빨간색        container.setBackgroundColor(Color.RED)    }}\n\ntablet/java/com/yologger/example/MainActivity.ktkotlin1234567891011121314class MainActivity : AppCompatActivity() {    lateinit var container: ConstraintLayout    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        container = findViewById(R.id.activity_main_container)        // 배경화면 파란색        container.setBackgroundColor(Color.BLUE)    }}\n\n이제 빌드 변형을 phoneDebug로 실행하면 다음과 같습니다.\n\n빌드 변형을 tabletDebug로 실행하면 다음과 같습니다.\n\n이처럼 프로덕트 플래이버를 사용하면 빌드 변형에 따라 다른 리소스 파일과 소스 파일을 사용할 수 있습니다.\n\n마치며이번 포스트에서는 프로덕트 플레이버(Product Flavor)에 대해 알아봤습니다. 다음 포스트에서는 DEX파일과 APK파일에 대해 알아보겠습니다.\n","dateCreated":"2018-12-15T20:16:30+09:00","dateModified":"2021-06-29T20:52:41+09:00","datePublished":"2018-12-15T20:16:30+09:00","description":"","headline":"[안드로이드] 그래들 - (11) 빌드 변형(Build Variant) - Product Flavor","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/12/15/android/181215-product-flavor/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/12/15/android/181215-product-flavor/","keywords":"Gradle, Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 빌드 타입(BuildType)에 대해 알아봤습니다. 이번 포스트에서는 빌드 변형의 프로덕트 플래이버(Product Flavor)에 대해 알아보겠습니다.  Product Flavor스마트폰용 앱과 태블릿용 앱을 출시한다고 가정합시다. 두">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 그래들 - (11) 빌드 변형(Build Variant) - Product Flavor">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/product-flavor/11.png">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/product-flavor/12.png">
 <meta property="article:published_time" content="2018-12-15T11:16:30.000Z">
-<meta property="article:modified_time" content="2021-06-28T05:18:25.747Z">
+<meta property="article:modified_time" content="2021-06-29T11:52:41.930Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Gradle">
 <meta property="article:tag" content="Android">
@@ -130,37 +130,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -190,9 +162,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     
@@ -330,7 +358,7 @@
 <p><img src="/ko/images/posts/android/product-flavor/12.png"></p>
 <p>이처럼 <code>프로덕트 플래이버</code>를 사용하면 빌드 변형에 따라 다른 <code>리소스 파일</code>과 <code>소스 파일</code>을 사용할 수 있습니다.</p>
 <hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>프로덕트 플레이버(Product Flavor)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/17/android/181217-proguard/">프로가드(ProGuard)</a>에 대해 알아보겠습니다.</p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>프로덕트 플레이버(Product Flavor)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/18/android/181218-apk/">DEX파일과 APK파일</a>에 대해 알아보겠습니다.</p>
 
             
 

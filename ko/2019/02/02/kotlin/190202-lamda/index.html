@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n람다식(익명함수)람다식(Lambda Expression)은 익명함수(Anonymous Function)라고도 불리며 **이름이 없는 함수**를 의미합니다. \n\n람다식을 사용할 때는 &#123;&#125;를 사용합니다.\n12345val sayHello: () -&gt; Unit = &#123;    println(&quot;Hello.&quot;)&#125;sayHello()\n람다식에 매개변수가 있는 경우 &#123; 인자1, 인자2, ... -&gt; &#125;을 사용합니다.\n12345val printInformation: (name: String, age: Int) -&gt; Unit = &#123; name: String, age: Int -&gt;    println(&quot;$&#123;name&#125; is $&#123;age&#125; years old.&quot;)&#125;printInformation(&quot;Paul&quot;, 35)\n반환값이 있는 경우 다음과 같이 사용합니다. 람다식에서 값을 반환할 땐 키워드 return을 사용하지 않아도 마지막 구문이 자동으로 반환됩니다.\n123456val sum: (a: Int, b: Int) -&gt; Int = &#123; a: Int, b: Int -&gt;    a+b&#125;var result = sum(3, 5)println(result)\n람다식도 자동으로 타입 추론이 되므로 매개변수의 자료형과 함수타입을 생략할 수 있습니다. 위 코드와 아래 코드는 동일합니다.\n123456val sum = &#123; a, b -&gt;    a+b&#125;var result = sum(3, 5)println(result)\n매개변수가 한 개인 경우, 매개변수와 -&gt;을 생략하고 it로 대체할 수 있습니다. 아래 두 코드는 동일합니다.\n123val printName = &#123; name -&gt;    println(name)&#125;\n123val printName = &#123;     println(it)&#125;\nTrailing함수의 맨 마지막 인자가 람다식이라면 괄호()에서 빼내어 밖에 표현할 수 있습니다.\n1234people.maxBy(&#123;p: Person -&gt; p.age&#125;) // Trailingpeople.maxBy() &#123;p: Person -&gt; p.age&#125; \n함수의 인자가 1개고 그 인자가 익명함수라면 괄호()까지 생략할 수 있습니다.\n1people.maxBy &#123;p: Person -&gt; p.age&#125; \n람다의 인자가 1개라면 그 인자는 익명함수 내부에서 it으로 받을 수 있습니다.\n1people.maxBy &#123;it.age&#125;\n예제안드로이드 앱에서 버튼과 같은 위젯을 클릭했을 때 처리할 내용을 람다식으로 구현합니다. 아래 코드들은 모두 동일합니다.\n123456// 익명 클래스 사용button.setOnClickListener(object: View.OnClickListener &#123;    override fun onClick(v: View?) &#123;        // 클릭 시 처리    &#125;&#125;)\n1234// 익명클래스의 구현해야 할 매서드가 1개 뿐인 인터페이스는 람다식으로 대체할 수 있다.button.setOnClickListener(&#123; v: View? -&gt;    // 클릭 시 처리&#125;)\n1234// 트레일링button.setOnClickListener() &#123; v: View? -&gt;    // 클릭 시 처리&#125;\n1234// 파라미터가 하나인 경우, 괄호생략 가능button.setOnClickListener &#123; v: View? -&gt;    // 클릭 시 처리&#125;\n1234// 자료형 추론button.setOnClickListener &#123; v -&gt;    // ...&#125;\n\n마치며이번 포스트에서는 람다식(Lambda Expression)과 익명함수(Anonymous Function)에 대해 알아봤습니다. 다음 포스트에서는 일급 객체, 함수형 프로그래밍에 대해 알아보겠습니다.\n","dateCreated":"2019-02-02T20:16:30+09:00","dateModified":"2021-06-23T12:32:41+09:00","datePublished":"2019-02-02T20:16:30+09:00","description":"","headline":"[코틀린] 람다식(익명함수)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/02/kotlin/190202-lamda/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/02/kotlin/190202-lamda/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n람다식(익명함수)람다식(Lambda Expression)은 익명함수(Anonymous Function)라고도 불리며 **이름이 없는 함수**를 의미합니다. \n\n람다식을 사용할 때는 &#123;&#125;를 사용합니다.\n12345val sayHello: () -&gt; Unit = &#123;    println(&quot;Hello.&quot;)&#125;sayHello()\n람다식에 매개변수가 있는 경우 &#123; 인자1, 인자2, ... -&gt; &#125;을 사용합니다.\n12345val printInformation: (name: String, age: Int) -&gt; Unit = &#123; name: String, age: Int -&gt;    println(&quot;$&#123;name&#125; is $&#123;age&#125; years old.&quot;)&#125;printInformation(&quot;Paul&quot;, 35)\n반환값이 있는 경우 다음과 같이 사용합니다. 람다식에서 값을 반환할 땐 키워드 return을 사용하지 않아도 마지막 구문이 자동으로 반환됩니다.\n123456val sum: (a: Int, b: Int) -&gt; Int = &#123; a: Int, b: Int -&gt;    a+b&#125;var result = sum(3, 5)println(result)\n람다식도 자동으로 타입 추론이 되므로 매개변수의 자료형과 함수타입을 생략할 수 있습니다. 위 코드와 아래 코드는 동일합니다.\n123456val sum = &#123; a, b -&gt;    a+b&#125;var result = sum(3, 5)println(result)\n매개변수가 한 개인 경우, 매개변수와 -&gt;을 생략하고 it로 대체할 수 있습니다. 아래 두 코드는 동일합니다.\n123val printName = &#123; name -&gt;    println(name)&#125;\n123val printName = &#123;     println(it)&#125;\nTrailing함수의 맨 마지막 인자가 람다식이라면 괄호()에서 빼내어 밖에 표현할 수 있습니다.\n1234people.maxBy(&#123;p: Person -&gt; p.age&#125;) // Trailingpeople.maxBy() &#123;p: Person -&gt; p.age&#125; \n함수의 인자가 1개고 그 인자가 익명함수라면 괄호()까지 생략할 수 있습니다.\n1people.maxBy &#123;p: Person -&gt; p.age&#125; \n람다의 인자가 1개라면 그 인자는 익명함수 내부에서 it으로 받을 수 있습니다.\n1people.maxBy &#123;it.age&#125;\n예제안드로이드 앱에서 버튼과 같은 위젯을 클릭했을 때 처리할 내용을 람다식으로 구현합니다. 아래 코드들은 모두 동일합니다.\n123456// 익명 클래스 사용button.setOnClickListener(object: View.OnClickListener &#123;    override fun onClick(v: View?) &#123;        // 클릭 시 처리    &#125;&#125;)\n1234// 익명클래스의 구현해야 할 매서드가 1개 뿐인 인터페이스는 람다식으로 대체할 수 있다.button.setOnClickListener(&#123; v: View? -&gt;    // 클릭 시 처리&#125;)\n1234// 트레일링button.setOnClickListener() &#123; v: View? -&gt;    // 클릭 시 처리&#125;\n1234// 파라미터가 하나인 경우, 괄호생략 가능button.setOnClickListener &#123; v: View? -&gt;    // 클릭 시 처리&#125;\n1234// 자료형 추론button.setOnClickListener &#123; v -&gt;    // ...&#125;\n\n마치며이번 포스트에서는 람다식(Lambda Expression)과 익명함수(Anonymous Function)에 대해 알아봤습니다. 다음 포스트에서는 일급 객체, 함수형 프로그래밍에 대해 알아보겠습니다.\n","dateCreated":"2019-02-02T20:16:30+09:00","dateModified":"2021-06-23T12:32:41+09:00","datePublished":"2019-02-02T20:16:30+09:00","description":"","headline":"[코틀린] 람다식(익명함수)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/02/kotlin/190202-lamda/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/02/kotlin/190202-lamda/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   람다식(익명함수)람다식(Lambda Expression)은 익명함수(Anonymous Function)라고도 불리며 **이름이 없는 함수**를 의미합니다.   람다식을 사용할 때는 &amp;#123;&amp;#125;를 사용합니다. 12345val sayHello: () -&amp;gt">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] 람다식(익명함수)">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

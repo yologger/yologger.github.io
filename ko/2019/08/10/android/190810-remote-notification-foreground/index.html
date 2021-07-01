@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 여섯 개의 포스트에서 알림(Notification)에 대해 알아보겠습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기  ⬅️ ⬅️ ⬅️\n\n\n포그라운드 상태에서 알람 받기이전 포스트에서 이야기한 것처럼, 현재 포그라운드로 실행되고 있는 앱은 Firebase 알림을 받지 못합니다. \n포그라운드 상태에서 알림을 받으려면 FirebaseMessagingService클래스를 구현하고 onMessageReceived()메서드를 오버라이딩 해야합니다.\nMyFBMessageService라는 클래스를 다음과 같이 구현합니다.\n1234567class MyFBMessageService : FirebaseMessagingService() &#123;    override fun onMessageReceived(remoteMessage: RemoteMessage) &#123;        super.onMessageReceived(remoteMessage)        // Do somthing when you receive a message.    &#125;&#125;\nonMessageReceived()메소드가 호출될 때는 RemoteMessage객체를 인자로 받습니다. 이 객체에는 알림의 제목과 내용같은 정보가 담겨있습니다. \n제목과 내용을 로그에 출력해보겠습니다.\n123456789101112131415class MyFBMessageService : FirebaseMessagingService() &#123;    override fun onMessageReceived(remoteMessage: RemoteMessage) &#123;        super.onMessageReceived(remoteMessage)        // 제목        val title = remoteMessage.notification?.title        // 내용        val body = remoteMessage.notification?.body        Log.d(&quot;TEST&quot;, &quot;title: $&#123;title&#125;&quot;)        Log.d(&quot;TEST&quot;, &quot;body: $&#123;body&#125;&quot;)    &#125;&#125;\n마지막으로 AndroidManifest.xml에 Firebase 메시징과 관련된 액션을 수신할 수 있도록 인텐트 필터를 추가합니다.\n1234567891011121314151617181920212223&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.remote_notification&quot;&gt;    &lt;application android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Remote_notification&quot;&gt;        &lt;service android:name=&quot;.MyFBMessageService&quot;            android:enabled=&quot;true&quot;            android:exported=&quot;true&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;com.google.firebase.MESSAGING_EVENT&quot;/&gt;            &lt;/intent-filter&gt;        &lt;/service&gt;        &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 앱을 실행시킵니다. 홈 버튼을 누르지 않고 앱을 포그라운드 상태로 유지합니다.\nFirebase 콘솔에서 알림을 보냅시다.그러면 로그에 다음과 같은 내용이 출력됩니다.\n\n마치며여섯 개의 포스트에 걸쳐 알림(Notification)에 대해 알아봤습니다. 다음 포스트에서는 커스텀 폰트 적용방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-10T20:16:30+09:00","dateModified":"2021-06-28T22:30:56+09:00","datePublished":"2019-08-10T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/10/android/190810-remote-notification-foreground/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/10/android/190810-remote-notification-foreground/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 여섯 개의 포스트에서 알림(Notification)에 대해 알아보겠습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기  ⬅️ ⬅️ ⬅️\n\n\n포그라운드 상태에서 알람 받기이전 포스트에서 이야기한 것처럼, 현재 포그라운드로 실행되고 있는 앱은 Firebase 알림을 받지 못합니다. \n포그라운드 상태에서 알림을 받으려면 FirebaseMessagingService클래스를 구현하고 onMessageReceived()메서드를 오버라이딩 해야합니다.\nMyFBMessageService라는 클래스를 다음과 같이 구현합니다.\n1234567class MyFBMessageService : FirebaseMessagingService() &#123;    override fun onMessageReceived(remoteMessage: RemoteMessage) &#123;        super.onMessageReceived(remoteMessage)        // Do somthing when you receive a message.    &#125;&#125;\nonMessageReceived()메소드가 호출될 때는 RemoteMessage객체를 인자로 받습니다. 이 객체에는 알림의 제목과 내용같은 정보가 담겨있습니다. \n제목과 내용을 로그에 출력해보겠습니다.\n123456789101112131415class MyFBMessageService : FirebaseMessagingService() &#123;    override fun onMessageReceived(remoteMessage: RemoteMessage) &#123;        super.onMessageReceived(remoteMessage)        // 제목        val title = remoteMessage.notification?.title        // 내용        val body = remoteMessage.notification?.body        Log.d(&quot;TEST&quot;, &quot;title: $&#123;title&#125;&quot;)        Log.d(&quot;TEST&quot;, &quot;body: $&#123;body&#125;&quot;)    &#125;&#125;\n마지막으로 AndroidManifest.xml에 Firebase 메시징과 관련된 액션을 수신할 수 있도록 인텐트 필터를 추가합니다.\n1234567891011121314151617181920212223&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.remote_notification&quot;&gt;    &lt;application android:allowBackup=&quot;true&quot;        android:icon=&quot;@mipmap/ic_launcher&quot;        android:label=&quot;@string/app_name&quot;        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;        android:supportsRtl=&quot;true&quot;        android:theme=&quot;@style/Theme.Remote_notification&quot;&gt;        &lt;service android:name=&quot;.MyFBMessageService&quot;            android:enabled=&quot;true&quot;            android:exported=&quot;true&quot;&gt;            &lt;intent-filter&gt;                &lt;action android:name=&quot;com.google.firebase.MESSAGING_EVENT&quot;/&gt;            &lt;/intent-filter&gt;        &lt;/service&gt;        &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 앱을 실행시킵니다. 홈 버튼을 누르지 않고 앱을 포그라운드 상태로 유지합니다.\nFirebase 콘솔에서 알림을 보냅시다.그러면 로그에 다음과 같은 내용이 출력됩니다.\n\n마치며여섯 개의 포스트에 걸쳐 알림(Notification)에 대해 알아봤습니다. 다음 포스트에서는 커스텀 폰트 적용방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-10T20:16:30+09:00","dateModified":"2021-06-28T22:30:56+09:00","datePublished":"2019-08-10T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/10/android/190810-remote-notification-foreground/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/10/android/190810-remote-notification-foreground/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며앞으로 여섯 개의 포스트에서 알림(Notification)에 대해 알아보겠습니다.  로컬 알림 알림에서 액티비티 시작하기 알림에 액션 추가하기 알림 메시지 묶기 원격 알림 포그라운드 상태에서 원격 알림 받기  ⬅️ ⬅️ ⬅️   포그라운드 상태에서 알람">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 알림(Notification) - (6) 포그라운드 상태에서 원격 알림 받기">
@@ -121,37 +121,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -181,9 +153,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

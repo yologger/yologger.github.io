@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 일급 객체, 함수형 프로그래밍에 대해 알아봤습니다. 이번 포스트에서는 람다식(익명함수), 함수형 인터페이스에 대해 알아보겠습니다.\n\n람다식람다식(Lambda Expression)은 함수를 하나의 식(expression)으로 표현한 것입니다. 함수를 람다식으로 표현하면 메소드의 이름이 필요 없기 때문에 익명 함수(Anonymous Function)라고도 불립니다.\n코틀린에서의 람다식코틀린(Kotlin), 스위프트(Swift)처럼 비교적 최근에 개발된 프로그래밍 언어는 자체적으로 람다식을 지원합니다. 그럼 코틀린 먼저 예제를 살펴보겠습니다. 보통 코틀린에서 함수는 다음과 같이 선언합니다. \n123fun printName(name: String) &#123;    println(name)&#125;\n위 코드를 람다식으로 표현하면 다음과 같습니다. \n123&#123; name: String -&gt;    println(name)&#125;\n코틀린은 함수를 일급 객체로 취급하므로 람다식을 다음 코드와 같이 변수에 저장할 수 있습니다. 이는 언어 자체에서 함수 타입을 지원하기 때문입니다. 정수 타입에는 정수를 할당하는 것처럼 함수 타입에는 함수를 할당할 수 있습니다. \n123var printName: (name: String) -&gt; Unit = &#123; name: String -&gt;    println(name)&#125;\n위 코드에서 (name: String) -&gt; Unit가 바로 함수 타입입니다. \n또한 함수의 매개변수로도 전달할 수 있습니다. 아래 코드는 run()이라는 함수의 매개변수로 람다식을 전달하고 있습니다.\n123run(&#123; name: String -&gt;     printName()&#125;)\n\n자바에서의 람다식자바는 코틀린, 스위프트 같은 언어에 비해 비교적 오래되었습니다. 또한 객체지향 프로그래밍을 패러다임으로 만들어졌기 때문에 람다식과 함수형 프로그래밍을 지원하지 않았습니다. 그러나 2014년 발표된 Java 8부터 함수형 프로그래밍을 지원하기 위한 자바 API가 추가되었습니다.\n아쉽게도 자바는 함수 타입이 없으므로 람다식을 변수에 저장하거나 매개변수로 전달할 수 없습니다. 이를 해결하기 위해 도입된 개념이 @FunctionalInterface어노테이션 입니다.\n@FunctionInterface함수형 인터페이스를 구현하기 위해서는 인터페이스를 정의하고 그 내부에는 한 개 뿐인 추상 메소드를 선언하고, @FunctionalInterface 어노테이션을 붙여주면 됩니다.\n1234@FunctionalInterfaceinterface PrintNameLambda &#123;    void printName(String name);&#125;\n이제 마치 변수에 함수를 할당하는 것처럼 사용할 수 있습니다.\n12345PrintNameLambda lambda = (String name) -&gt; &#123;    System.out.println(name);&#125;;lambda.printName(&quot;Paul&quot;);\n자바 API에서는 자주 사용될 것 같은 함수형 인터페이스가 이미 정의되어있습니다.\n(1) Supplier 매개변수 없이 반환값만 갖는 함수형 인터페이스입니다. Supplier는 T get()을 추상 메소드로 갖고 있습니다. \n123456789// 정의@FunctionalInterfacepublic interface Supplier&lt;T&gt; &#123;    T get();&#125;// 사용 방법Supplier&lt;String&gt; supplier = () -&gt; &quot;Hello World!&quot;;System.out.println(supplier.get());\n(2) Consumer 매개변수가 있고 반환값은 없는 함수형 인터페이스입니다. Consumer는 void accept(T t)를 추상메소드로 갖고 있습니다.\n1234567891011121314151617// 정의@FunctionalInterfacepublic interface Consumer&lt;T&gt; &#123;    void accept(T t);    default Consumer&lt;T&gt; andThen(Consumer&lt;? super T&gt; after) &#123;        Objects.requireNonNull(after);        return (T t) -&gt; &#123; accept(t); after.accept(t); &#125;;    &#125;&#125;Consumer&lt;String&gt; consumer = (String name) -&gt; &#123;    System.out.println(name);&#125;;consumer.accept(&quot;Hello World&quot;);\n(3) Function &lt;T, R&gt;매개변수도 있고 반환값도 있는 함수형 인터페이스입니다. Function은 R apply(T t)를 추상 메소드로 가지고 있습니다.\n1234567891011121314151617181920212223242526// 정의@FunctionalInterfacepublic interface Function&lt;T, R&gt; &#123;    R apply(T t);    default &lt;V&gt; Function&lt;V, R&gt; compose(Function&lt;? super V, ? extends T&gt; before) &#123;        Objects.requireNonNull(before);        return (V v) -&gt; apply(before.apply(v));    &#125;    default &lt;V&gt; Function&lt;T, V&gt; andThen(Function&lt;? super R, ? extends V&gt; after) &#123;        Objects.requireNonNull(after);        return (T t) -&gt; after.apply(apply(t));    &#125;    static &lt;T&gt; Function&lt;T, T&gt; identity() &#123;        return t -&gt; t;    &#125;&#125;// 예시, 메소드 참조로 간소화 가능(String::length;)Function&lt;String, Integer&gt; function = (String str) -&gt; &#123;    str.length();&#125;function.apply(&quot;Hello World&quot;);\n(4) Predicate 매개변수가 있고 boolean타입의 값을 반환합니다. Supplier는 boolean test(T t)을 추상 메소드로 갖고 있습니다. \n12345678910111213141516171819202122232425262728293031// 정의@FunctionalInterfacepublic interface Predicate&lt;T&gt; &#123;    boolean test(T t);    default Predicate&lt;T&gt; and(Predicate&lt;? super T&gt; other) &#123;        Objects.requireNonNull(other);        return (t) -&gt; test(t) &amp;&amp; other.test(t);    &#125;    default Predicate&lt;T&gt; negate() &#123;        return (t) -&gt; !test(t);    &#125;    default Predicate&lt;T&gt; or(Predicate&lt;? super T&gt; other) &#123;        Objects.requireNonNull(other);        return (t) -&gt; test(t) || other.test(t);    &#125;    static &lt;T&gt; Predicate&lt;T&gt; isEqual(Object targetRef) &#123;        return (null == targetRef)                ? Objects::isNull                : object -&gt; targetRef.equals(object);    &#125;    &#125;// 예시Predicate&lt;String&gt; predicate = (str) -&gt; str.equals(&quot;Hello World&quot;);predicate.test(&quot;Hello World&quot;);\n안드로이드에서의 람다식람다식은 안드로이드 어플리케이션 개발에서도 자주 사용합니다. 보통 버튼같은 위젯을 클릭했을 때 실행할 구문을 람다식 안에 구현합니다. \n우선 람다식을 사용하지 않고 익명 클래스를 사용하여 특정 버튼을 클릭했을 때 실행할 구문을 등록해보겠습니다. \n12345678Button button = findViewById(R.id.button);button.setOnTouchListener(new View.OnTouchListener() &#123;    @Override    public boolean onTouch(View v, MotionEvent event) &#123;        return false;    &#125;&#125;);\n람다식을 사용하면 다음과 같습니다. \n123button.setOnTouchListener((View v, MotionEvent event) -&gt; &#123;    return false;&#125;);\n데이터 타입 생략도 가능합니다.\n123button.setOnTouchListener((v, event) -&gt; &#123;    return false;&#125;);\n함수의 몸체가 한 줄일 때는 중괄호&#123;&#125;도 생략하며, 한 줄로 표현할 수 있습니다.\n1button.setOnTouchListener((v, event) -&gt; false);\n매개변수가 한 개일 때는 소괄호()도 생략할 수 있습니다.\n1button.setOnClickListener(v -&gt; System.out.println(&quot;Button clicked.&quot;));\n\n마치며이번 포스트에서는 람다식(익명함수)와 함수형 인터페이스에 대해 알아봤습니다.\n","dateCreated":"2018-03-16T20:16:30+09:00","dateModified":"2021-06-23T20:41:25+09:00","datePublished":"2018-03-16T20:16:30+09:00","description":"","headline":"[자바] 람다식(익명함수)와 함수형 인터페이스(Functional Interface)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/03/16/java/180316-lambda/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/03/16/java/180316-lambda/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 일급 객체, 함수형 프로그래밍에 대해 알아봤습니다. 이번 포스트에서는 람다식(익명함수), 함수형 인터페이스에 대해 알아보겠습니다.\n\n람다식람다식(Lambda Expression)은 함수를 하나의 식(expression)으로 표현한 것입니다. 함수를 람다식으로 표현하면 메소드의 이름이 필요 없기 때문에 익명 함수(Anonymous Function)라고도 불립니다.\n코틀린에서의 람다식코틀린(Kotlin), 스위프트(Swift)처럼 비교적 최근에 개발된 프로그래밍 언어는 자체적으로 람다식을 지원합니다. 그럼 코틀린 먼저 예제를 살펴보겠습니다. 보통 코틀린에서 함수는 다음과 같이 선언합니다. \n123fun printName(name: String) &#123;    println(name)&#125;\n위 코드를 람다식으로 표현하면 다음과 같습니다. \n123&#123; name: String -&gt;    println(name)&#125;\n코틀린은 함수를 일급 객체로 취급하므로 람다식을 다음 코드와 같이 변수에 저장할 수 있습니다. 이는 언어 자체에서 함수 타입을 지원하기 때문입니다. 정수 타입에는 정수를 할당하는 것처럼 함수 타입에는 함수를 할당할 수 있습니다. \n123var printName: (name: String) -&gt; Unit = &#123; name: String -&gt;    println(name)&#125;\n위 코드에서 (name: String) -&gt; Unit가 바로 함수 타입입니다. \n또한 함수의 매개변수로도 전달할 수 있습니다. 아래 코드는 run()이라는 함수의 매개변수로 람다식을 전달하고 있습니다.\n123run(&#123; name: String -&gt;     printName()&#125;)\n\n자바에서의 람다식자바는 코틀린, 스위프트 같은 언어에 비해 비교적 오래되었습니다. 또한 객체지향 프로그래밍을 패러다임으로 만들어졌기 때문에 람다식과 함수형 프로그래밍을 지원하지 않았습니다. 그러나 2014년 발표된 Java 8부터 함수형 프로그래밍을 지원하기 위한 자바 API가 추가되었습니다.\n아쉽게도 자바는 함수 타입이 없으므로 람다식을 변수에 저장하거나 매개변수로 전달할 수 없습니다. 이를 해결하기 위해 도입된 개념이 @FunctionalInterface어노테이션 입니다.\n@FunctionInterface함수형 인터페이스를 구현하기 위해서는 인터페이스를 정의하고 그 내부에는 한 개 뿐인 추상 메소드를 선언하고, @FunctionalInterface 어노테이션을 붙여주면 됩니다.\n1234@FunctionalInterfaceinterface PrintNameLambda &#123;    void printName(String name);&#125;\n이제 마치 변수에 함수를 할당하는 것처럼 사용할 수 있습니다.\n12345PrintNameLambda lambda = (String name) -&gt; &#123;    System.out.println(name);&#125;;lambda.printName(&quot;Paul&quot;);\n자바 API에서는 자주 사용될 것 같은 함수형 인터페이스가 이미 정의되어있습니다.\n(1) Supplier 매개변수 없이 반환값만 갖는 함수형 인터페이스입니다. Supplier는 T get()을 추상 메소드로 갖고 있습니다. \n123456789// 정의@FunctionalInterfacepublic interface Supplier&lt;T&gt; &#123;    T get();&#125;// 사용 방법Supplier&lt;String&gt; supplier = () -&gt; &quot;Hello World!&quot;;System.out.println(supplier.get());\n(2) Consumer 매개변수가 있고 반환값은 없는 함수형 인터페이스입니다. Consumer는 void accept(T t)를 추상메소드로 갖고 있습니다.\n1234567891011121314151617// 정의@FunctionalInterfacepublic interface Consumer&lt;T&gt; &#123;    void accept(T t);    default Consumer&lt;T&gt; andThen(Consumer&lt;? super T&gt; after) &#123;        Objects.requireNonNull(after);        return (T t) -&gt; &#123; accept(t); after.accept(t); &#125;;    &#125;&#125;Consumer&lt;String&gt; consumer = (String name) -&gt; &#123;    System.out.println(name);&#125;;consumer.accept(&quot;Hello World&quot;);\n(3) Function &lt;T, R&gt;매개변수도 있고 반환값도 있는 함수형 인터페이스입니다. Function은 R apply(T t)를 추상 메소드로 가지고 있습니다.\n1234567891011121314151617181920212223242526// 정의@FunctionalInterfacepublic interface Function&lt;T, R&gt; &#123;    R apply(T t);    default &lt;V&gt; Function&lt;V, R&gt; compose(Function&lt;? super V, ? extends T&gt; before) &#123;        Objects.requireNonNull(before);        return (V v) -&gt; apply(before.apply(v));    &#125;    default &lt;V&gt; Function&lt;T, V&gt; andThen(Function&lt;? super R, ? extends V&gt; after) &#123;        Objects.requireNonNull(after);        return (T t) -&gt; after.apply(apply(t));    &#125;    static &lt;T&gt; Function&lt;T, T&gt; identity() &#123;        return t -&gt; t;    &#125;&#125;// 예시, 메소드 참조로 간소화 가능(String::length;)Function&lt;String, Integer&gt; function = (String str) -&gt; &#123;    str.length();&#125;function.apply(&quot;Hello World&quot;);\n(4) Predicate 매개변수가 있고 boolean타입의 값을 반환합니다. Supplier는 boolean test(T t)을 추상 메소드로 갖고 있습니다. \n12345678910111213141516171819202122232425262728293031// 정의@FunctionalInterfacepublic interface Predicate&lt;T&gt; &#123;    boolean test(T t);    default Predicate&lt;T&gt; and(Predicate&lt;? super T&gt; other) &#123;        Objects.requireNonNull(other);        return (t) -&gt; test(t) &amp;&amp; other.test(t);    &#125;    default Predicate&lt;T&gt; negate() &#123;        return (t) -&gt; !test(t);    &#125;    default Predicate&lt;T&gt; or(Predicate&lt;? super T&gt; other) &#123;        Objects.requireNonNull(other);        return (t) -&gt; test(t) || other.test(t);    &#125;    static &lt;T&gt; Predicate&lt;T&gt; isEqual(Object targetRef) &#123;        return (null == targetRef)                ? Objects::isNull                : object -&gt; targetRef.equals(object);    &#125;    &#125;// 예시Predicate&lt;String&gt; predicate = (str) -&gt; str.equals(&quot;Hello World&quot;);predicate.test(&quot;Hello World&quot;);\n안드로이드에서의 람다식람다식은 안드로이드 어플리케이션 개발에서도 자주 사용합니다. 보통 버튼같은 위젯을 클릭했을 때 실행할 구문을 람다식 안에 구현합니다. \n우선 람다식을 사용하지 않고 익명 클래스를 사용하여 특정 버튼을 클릭했을 때 실행할 구문을 등록해보겠습니다. \n12345678Button button = findViewById(R.id.button);button.setOnTouchListener(new View.OnTouchListener() &#123;    @Override    public boolean onTouch(View v, MotionEvent event) &#123;        return false;    &#125;&#125;);\n람다식을 사용하면 다음과 같습니다. \n123button.setOnTouchListener((View v, MotionEvent event) -&gt; &#123;    return false;&#125;);\n데이터 타입 생략도 가능합니다.\n123button.setOnTouchListener((v, event) -&gt; &#123;    return false;&#125;);\n함수의 몸체가 한 줄일 때는 중괄호&#123;&#125;도 생략하며, 한 줄로 표현할 수 있습니다.\n1button.setOnTouchListener((v, event) -&gt; false);\n매개변수가 한 개일 때는 소괄호()도 생략할 수 있습니다.\n1button.setOnClickListener(v -&gt; System.out.println(&quot;Button clicked.&quot;));\n\n마치며이번 포스트에서는 람다식(익명함수)와 함수형 인터페이스에 대해 알아봤습니다.\n","dateCreated":"2018-03-16T20:16:30+09:00","dateModified":"2021-06-23T20:41:25+09:00","datePublished":"2018-03-16T20:16:30+09:00","description":"","headline":"[자바] 람다식(익명함수)와 함수형 인터페이스(Functional Interface)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/03/16/java/180316-lambda/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/03/16/java/180316-lambda/","keywords":"Java"}</script>
     <meta name="description" content="자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 일급 객체, 함수형 프로그래밍에 대해 알아봤습니다. 이번 포스트에서는 람다식(익명함수), 함수형 인터페이스에 대해 알아보겠습니다.  람다식람다식(Lambda Expression)은 함수를 하나의 식(expression)으로 표현한 것입니다. 함수">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[자바] 람다식(익명함수)와 함수형 인터페이스(Functional Interface)">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

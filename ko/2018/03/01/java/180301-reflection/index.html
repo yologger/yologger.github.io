@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며리플렉션(Reflection)은 런타임에서 구체적인 클래스 타입을 몰라도 그 클래스의 멤버변수, 메소드 등에 접근할 수 있도록 하는 자바 API와 기법입니다. 리플렉션과 관련된 API는 java.lang.reflect.* 패키지에 있습니다.\n\n\nClass클래스와 클래스 참조자바의 모든 클래스와 인터페이스는 컴파일 후 .class파일로 변환됩니다. 이 파일에는 생성자, 멤버변수, 메서드 등 객체의 정보가 포함되어있는데 Class클래스를 사용하면 이 파일에서 가져온 객체의 정보를 담을 수 있습니다. 이를 클래스 참조(Class Reference)라고 합니다.\nClass클래스에 정보를 담는 방법에는 세 가지가 있습니다. \n12// 클래스에 .class를 붙여서 객체 정보 가져오기Class c1 = String.class\n12// Class클래스의 forName()메소드를 사용하여 객체 정보 가져오기Class c1 = Class.forName(&quot;java.lang.String&quot;);\n123// 인스턴스에서 getClass()를 호출하여 객체 정보 가져오기String string = new String();Class c1 = string.getClass();\n\n리플렉션코드를 작성하다보면 작성 시점에 데이터의 타입을 모를 수도 있습니다. 이때 리플렉션(Reflection)을 사용할 수 있습니다. \n다음과 같은 클래스가 있다고 가정해봅시다.\n123456789101112131415161718192021222324252627282930313233class Person &#123;    String name;    String nation;    // 기본 생성자    Person() &#123;        this.name = &quot;&quot;;        this.nation = &quot;&quot;;    &#125;    // 보조 생성자    Person(String name, String nation) &#123;        this.name = name;        this.nation = nation;    &#125;    void printName() &#123;        System.out.println(name);    &#125;    void printNation() &#123;        System.out.println(nation);    &#125;    void printSomething(String something) &#123;        System.out.println(something);    &#125;    void printHello() &#123;        System.out.println(&quot;Hello&quot;);    &#125;&#125;\nClass클래스의 인스턴스에는 클래스 정보를 저장할 수 있습니다.\n12Class personClass = Person.class;// 또는 Class personClass = Class.forName(&quot;Person&quot;);\n이 Class타입의 인스턴스로 클래스의 인스턴스를 생성할 수도 있습니다. 이 때는 newInstance()메소드를 사용합니다. 다만 반드시 매개변수가 없는 기본생성자가 존재해야합니다.\n123456789Class personClass = Person.class;try &#123;    Person person = (Person) personClass.newInstance();&#125; catch (IllegalAccessException e) &#123;    e.printStackTrace();&#125; catch (InstantiationException e) &#123;    e.printStackTrace();&#125;\n클래스의 멤버변수 가져오기클래스의 멤버변수 정보를 읽어올 수 있습니다.\n12345678import java.lang.reflect.Field;Field[] fields = personClass.getDeclaredFields();for (int i=0; i&lt;fields.length; i++) &#123;    System.out.println(fields[i].getName());&#125;// name// nation\n클래스의 생성자 가져오기클래스의 생성자 정보를 읽어올 수도 있습니다.\n12345678910import java.lang.reflect.Constructor;Class personClass = Person.class;Constructor[] constructors = personClass.getDeclaredConstructors();for (int i=0; i&lt;constructors.length; i++) &#123;    System.out.println(constructors[i].getName());&#125;// com.my_project.Person// com.my_project.Person\n클래스의 메소드 가져오기클래스의 모든 메소드들은 다음과 같이 가져올 수 있습니다.\n12345678910111213import java.lang.reflect.Method;Class personClass = Person.class;Method[] methods = personClass.getDeclaredMethods();for (int i=0; i&lt;methods.length; i++) &#123;    // 메소드 이름 출력    System.out.println(methods[i].getName());&#125;// printName// printNation// printSomething// printHello\n특정 메소드 한 개만 가져올 수도 있습니다.\n12345678Class personClass = Person.class;try &#123;    Method method = personClass.getDeclaredMethod(&quot;printSomething&quot;);    System.out.println(method.getName());   // printSomething&#125; catch (NoSuchMethodException e) &#123;    e.printStackTrace();&#125;\n클래스의 메소드를 가져오면 이를 통해 호출도 할 수도 있습니다. 이 때는 invoke()메소드를 호출합니다.\n1234567891011121314Class personClass = Person.class;Person person = new Person(&quot;Paul&quot;, &quot;America&quot;);try &#123;    Method printHelloMethod = personClass.getDeclaredMethod(&quot;printHello&quot;);    printHelloMethod.invoke(person);    // Hello&#125; catch (NoSuchMethodException e) &#123;    e.printStackTrace();&#125; catch (IllegalAccessException e) &#123;    e.printStackTrace();&#125; catch (InvocationTargetException e) &#123;    e.printStackTrace();&#125;\n\n마치며이번 포스트에서 리플렉션(Reflection)에 대해 알아봤습니다. 다음 포스트에서는 어노테이션(Annotation)에 대해 알아보겠습니다.\n","dateCreated":"2018-03-01T20:16:30+09:00","dateModified":"2021-06-23T19:55:25+09:00","datePublished":"2018-03-01T20:16:30+09:00","description":"","headline":"[자바] 리플렉션(Reflection)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/03/01/java/180301-reflection/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/03/01/java/180301-reflection/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며리플렉션(Reflection)은 런타임에서 구체적인 클래스 타입을 몰라도 그 클래스의 멤버변수, 메소드 등에 접근할 수 있도록 하는 자바 API와 기법입니다. 리플렉션과 관련된 API는 java.lang.reflect.* 패키지에 있습니다.\n\n\nClass클래스와 클래스 참조자바의 모든 클래스와 인터페이스는 컴파일 후 .class파일로 변환됩니다. 이 파일에는 생성자, 멤버변수, 메서드 등 객체의 정보가 포함되어있는데 Class클래스를 사용하면 이 파일에서 가져온 객체의 정보를 담을 수 있습니다. 이를 클래스 참조(Class Reference)라고 합니다.\nClass클래스에 정보를 담는 방법에는 세 가지가 있습니다. \n12// 클래스에 .class를 붙여서 객체 정보 가져오기Class c1 = String.class\n12// Class클래스의 forName()메소드를 사용하여 객체 정보 가져오기Class c1 = Class.forName(&quot;java.lang.String&quot;);\n123// 인스턴스에서 getClass()를 호출하여 객체 정보 가져오기String string = new String();Class c1 = string.getClass();\n\n리플렉션코드를 작성하다보면 작성 시점에 데이터의 타입을 모를 수도 있습니다. 이때 리플렉션(Reflection)을 사용할 수 있습니다. \n다음과 같은 클래스가 있다고 가정해봅시다.\n123456789101112131415161718192021222324252627282930313233class Person &#123;    String name;    String nation;    // 기본 생성자    Person() &#123;        this.name = &quot;&quot;;        this.nation = &quot;&quot;;    &#125;    // 보조 생성자    Person(String name, String nation) &#123;        this.name = name;        this.nation = nation;    &#125;    void printName() &#123;        System.out.println(name);    &#125;    void printNation() &#123;        System.out.println(nation);    &#125;    void printSomething(String something) &#123;        System.out.println(something);    &#125;    void printHello() &#123;        System.out.println(&quot;Hello&quot;);    &#125;&#125;\nClass클래스의 인스턴스에는 클래스 정보를 저장할 수 있습니다.\n12Class personClass = Person.class;// 또는 Class personClass = Class.forName(&quot;Person&quot;);\n이 Class타입의 인스턴스로 클래스의 인스턴스를 생성할 수도 있습니다. 이 때는 newInstance()메소드를 사용합니다. 다만 반드시 매개변수가 없는 기본생성자가 존재해야합니다.\n123456789Class personClass = Person.class;try &#123;    Person person = (Person) personClass.newInstance();&#125; catch (IllegalAccessException e) &#123;    e.printStackTrace();&#125; catch (InstantiationException e) &#123;    e.printStackTrace();&#125;\n클래스의 멤버변수 가져오기클래스의 멤버변수 정보를 읽어올 수 있습니다.\n12345678import java.lang.reflect.Field;Field[] fields = personClass.getDeclaredFields();for (int i=0; i&lt;fields.length; i++) &#123;    System.out.println(fields[i].getName());&#125;// name// nation\n클래스의 생성자 가져오기클래스의 생성자 정보를 읽어올 수도 있습니다.\n12345678910import java.lang.reflect.Constructor;Class personClass = Person.class;Constructor[] constructors = personClass.getDeclaredConstructors();for (int i=0; i&lt;constructors.length; i++) &#123;    System.out.println(constructors[i].getName());&#125;// com.my_project.Person// com.my_project.Person\n클래스의 메소드 가져오기클래스의 모든 메소드들은 다음과 같이 가져올 수 있습니다.\n12345678910111213import java.lang.reflect.Method;Class personClass = Person.class;Method[] methods = personClass.getDeclaredMethods();for (int i=0; i&lt;methods.length; i++) &#123;    // 메소드 이름 출력    System.out.println(methods[i].getName());&#125;// printName// printNation// printSomething// printHello\n특정 메소드 한 개만 가져올 수도 있습니다.\n12345678Class personClass = Person.class;try &#123;    Method method = personClass.getDeclaredMethod(&quot;printSomething&quot;);    System.out.println(method.getName());   // printSomething&#125; catch (NoSuchMethodException e) &#123;    e.printStackTrace();&#125;\n클래스의 메소드를 가져오면 이를 통해 호출도 할 수도 있습니다. 이 때는 invoke()메소드를 호출합니다.\n1234567891011121314Class personClass = Person.class;Person person = new Person(&quot;Paul&quot;, &quot;America&quot;);try &#123;    Method printHelloMethod = personClass.getDeclaredMethod(&quot;printHello&quot;);    printHelloMethod.invoke(person);    // Hello&#125; catch (NoSuchMethodException e) &#123;    e.printStackTrace();&#125; catch (IllegalAccessException e) &#123;    e.printStackTrace();&#125; catch (InvocationTargetException e) &#123;    e.printStackTrace();&#125;\n\n마치며이번 포스트에서 리플렉션(Reflection)에 대해 알아봤습니다. 다음 포스트에서는 어노테이션(Annotation)에 대해 알아보겠습니다.\n","dateCreated":"2018-03-01T20:16:30+09:00","dateModified":"2021-06-23T19:55:25+09:00","datePublished":"2018-03-01T20:16:30+09:00","description":"","headline":"[자바] 리플렉션(Reflection)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/03/01/java/180301-reflection/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/03/01/java/180301-reflection/","keywords":"Java"}</script>
     <meta name="description" content="자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며리플렉션(Reflection)은 런타임에서 구체적인 클래스 타입을 몰라도 그 클래스의 멤버변수, 메소드 등에 접근할 수 있도록 하는 자바 API와 기법입니다. 리플렉션과 관련된 API는 java.lang.reflect.* 패키지에 있습니다.   Class클래스와">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[자바] 리플렉션(Reflection)">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

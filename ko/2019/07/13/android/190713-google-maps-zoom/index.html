@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며일곱 개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고자 합니다.\n\n구글 지도 띄우기\n지도 타입 변경하기\n마커 보여주기\n지도 확대와 축소 (줌-인과 줌-아웃) ⬅️ ⬅️ ⬅️\n지도에 내 위치 보여주기\n내 위치로 카메라 이동하기\n맵 컨트롤\n\n\n줌-인, 줌-아웃지도를 확대하는 것을 줌-인(Zoom-in), 축소하는 것을 줌-아웃(Zoom-out)이라고 합니다. 예제를 만들면서 줌-인과 줌-아웃에 대해 알아보겠습니다.\n예제우선 다음과 같이 두 개의 버튼을 추가합니다.레이아웃 파일은 다음과 같습니다.\nactivity_main.xmlxml12345678910111213141516171819202122232425262728293031323334353637&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"    xmlns:app=\"http://schemas.android.com/apk/res-auto\"    xmlns:tools=\"http://schemas.android.com/tools\"    android:layout_width=\"match_parent\"    android:layout_height=\"match_parent\"    tools:context=\".MainActivity\"&gt;    &lt;fragment xmlns:android=\"http://schemas.android.com/apk/res/android\"        xmlns:tools=\"http://schemas.android.com/tools\"        android:layout_width=\"match_parent\"        android:layout_height=\"match_parent\"        android:id=\"@+id/activity_main_fragment_map\"        tools:context=\".MapsActivity\"        android:name=\"com.google.android.gms.maps.SupportMapFragment\" /&gt;    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton        android:id=\"@+id/activity_fab_zoom_in\"        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:clickable=\"true\"        app:srcCompat=\"@drawable/ic_baseline_add_24\"        app:layout_constraintTop_toTopOf=\"parent\"        app:layout_constraintEnd_toEndOf=\"parent\"        android:layout_margin=\"16dp\"/&gt;    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton        android:id=\"@+id/activity_fab_zoom_out\"        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:clickable=\"true\"        app:srcCompat=\"@drawable/ic_baseline_remove_24\"        app:layout_constraintTop_toBottomOf=\"@+id/activity_fab_zoom_in\"        app:layout_constraintEnd_toEndOf=\"parent\"        android:layout_margin=\"16dp\"/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n\n코드는 다음과 같습니다. 카메라 위치를 바꿀 때는 GoogleMap클래스의 moveCamera()메소드를 호출합니다. 이 때 줌-인을 하려면 CameraUpdateFactory.zoomIn()을 줌-아웃을 하려면 CameraUpdateFactory.zoomOut()을 인자로 전달합니다.\nMainActivity.ktkotlin1234567891011121314151617181920212223242526class MainActivity : AppCompatActivity(), OnMapReadyCallback {    private lateinit var mMap: GoogleMap    private val buttonZoomIn: FloatingActionButton by lazy { findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_zoom_in) }    private val buttonZoomOut: FloatingActionButton by lazy { findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_zoom_out) }    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_fragment_map) as SupportMapFragment        mapFragment.getMapAsync(this)        buttonZoomIn.setOnClickListener {            mMap.moveCamera(CameraUpdateFactory.zoomIn())        }        buttonZoomOut.setOnClickListener {            mMap.moveCamera(CameraUpdateFactory.zoomOut())        }    }    override fun onMapReady(googleMap: GoogleMap) {        mMap = googleMap        val sydney = LatLng(37.5665, 126.9780)    }}\n\n\n이제 (+) 버튼을 누르면 줌-인, (-) 버튼을 누르면 줌-아웃이 됩니다. zoomTo()메소드를 사용하면 특정 줌으로 이동할 수 있습니다.\n\n마치며이번 포스트에서는 줌-인과 줌-아웃 기능에 대해 알아봤습니다. 다음 포스트에서는 지도에 내 위치를 보여주는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-07-13T20:16:30+09:00","dateModified":"2021-06-28T18:05:21+09:00","datePublished":"2019-07-13T20:16:30+09:00","description":"","headline":"[안드로이드] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/07/13/android/190713-google-maps-zoom/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/07/13/android/190713-google-maps-zoom/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며일곱 개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고자 합니다.\n\n구글 지도 띄우기\n지도 타입 변경하기\n마커 보여주기\n지도 확대와 축소 (줌-인과 줌-아웃) ⬅️ ⬅️ ⬅️\n지도에 내 위치 보여주기\n내 위치로 카메라 이동하기\n맵 컨트롤\n\n\n줌-인, 줌-아웃지도를 확대하는 것을 줌-인(Zoom-in), 축소하는 것을 줌-아웃(Zoom-out)이라고 합니다. 예제를 만들면서 줌-인과 줌-아웃에 대해 알아보겠습니다.\n예제우선 다음과 같이 두 개의 버튼을 추가합니다.레이아웃 파일은 다음과 같습니다.\nactivity_main.xmlxml12345678910111213141516171819202122232425262728293031323334353637&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"    xmlns:app=\"http://schemas.android.com/apk/res-auto\"    xmlns:tools=\"http://schemas.android.com/tools\"    android:layout_width=\"match_parent\"    android:layout_height=\"match_parent\"    tools:context=\".MainActivity\"&gt;    &lt;fragment xmlns:android=\"http://schemas.android.com/apk/res/android\"        xmlns:tools=\"http://schemas.android.com/tools\"        android:layout_width=\"match_parent\"        android:layout_height=\"match_parent\"        android:id=\"@+id/activity_main_fragment_map\"        tools:context=\".MapsActivity\"        android:name=\"com.google.android.gms.maps.SupportMapFragment\" /&gt;    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton        android:id=\"@+id/activity_fab_zoom_in\"        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:clickable=\"true\"        app:srcCompat=\"@drawable/ic_baseline_add_24\"        app:layout_constraintTop_toTopOf=\"parent\"        app:layout_constraintEnd_toEndOf=\"parent\"        android:layout_margin=\"16dp\"/&gt;    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton        android:id=\"@+id/activity_fab_zoom_out\"        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:clickable=\"true\"        app:srcCompat=\"@drawable/ic_baseline_remove_24\"        app:layout_constraintTop_toBottomOf=\"@+id/activity_fab_zoom_in\"        app:layout_constraintEnd_toEndOf=\"parent\"        android:layout_margin=\"16dp\"/&gt;&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n\n코드는 다음과 같습니다. 카메라 위치를 바꿀 때는 GoogleMap클래스의 moveCamera()메소드를 호출합니다. 이 때 줌-인을 하려면 CameraUpdateFactory.zoomIn()을 줌-아웃을 하려면 CameraUpdateFactory.zoomOut()을 인자로 전달합니다.\nMainActivity.ktkotlin1234567891011121314151617181920212223242526class MainActivity : AppCompatActivity(), OnMapReadyCallback {    private lateinit var mMap: GoogleMap    private val buttonZoomIn: FloatingActionButton by lazy { findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_zoom_in) }    private val buttonZoomOut: FloatingActionButton by lazy { findViewById&lt;FloatingActionButton&gt;(R.id.activity_fab_zoom_out) }    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_fragment_map) as SupportMapFragment        mapFragment.getMapAsync(this)        buttonZoomIn.setOnClickListener {            mMap.moveCamera(CameraUpdateFactory.zoomIn())        }        buttonZoomOut.setOnClickListener {            mMap.moveCamera(CameraUpdateFactory.zoomOut())        }    }    override fun onMapReady(googleMap: GoogleMap) {        mMap = googleMap        val sydney = LatLng(37.5665, 126.9780)    }}\n\n\n이제 (+) 버튼을 누르면 줌-인, (-) 버튼을 누르면 줌-아웃이 됩니다. zoomTo()메소드를 사용하면 특정 줌으로 이동할 수 있습니다.\n\n마치며이번 포스트에서는 줌-인과 줌-아웃 기능에 대해 알아봤습니다. 다음 포스트에서는 지도에 내 위치를 보여주는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-07-13T20:16:30+09:00","dateModified":"2021-06-28T18:05:21+09:00","datePublished":"2019-07-13T20:16:30+09:00","description":"","headline":"[안드로이드] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/07/13/android/190713-google-maps-zoom/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/07/13/android/190713-google-maps-zoom/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며일곱 개의 포스트에 걸쳐 구글 지도(Google Maps)에 대해 알아보고자 합니다.  구글 지도 띄우기 지도 타입 변경하기 마커 보여주기 지도 확대와 축소 (줌-인과 줌-아웃) ⬅️ ⬅️ ⬅️ 지도에 내 위치 보여주기 내 위치로 카메라 이동하기 맵 컨">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 구글 지도(Google Maps) - (4) 지도 확대와 축소 (줌-인과 줌-아웃)">
@@ -119,37 +119,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -179,9 +151,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

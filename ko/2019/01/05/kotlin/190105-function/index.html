@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며저번 포스트에서는 집합자료형의 List, Set, Map에 대해 알아봤습니다. 이번 포스트에서는 함수(Function)에 대해 알아보겠습니다.\n\n함수(Function)란함수는 특정 값을 입력받아 작업을 수행하고 결과를 반환합니다. 아래 예제를 살펴보겠습니다.\n1234// 함수 정의fun printSomething() &#123;    println(something)&#125;\n위 함수는 문자열을 화면에 출력하는 함수입니다. 함수를 정의할 땐 키워드fun을 사용하며, 값을 반환할 때는 키워드return을 사용합니다. \n이렇게 정의한 함수는 아래와 같이 호출합니다.\n1printSomething(&quot;Hello World!&quot;)  // Hello World!\n함수 호출 시 값을 전달할 수 있습니다. 이를 매개변수(Parameter)라고 합니다. \n1234567// 함수 선언fun printSomething(something: String) &#123;    println(something);  &#125; // 함수 호출printSomething(&quot;Hello World!&quot;)\n함수는 값을 반환할 수도 있습니다. 값을 반환할 땐 키워드 return을 사용합니다. 반환값이 있는 경우 함수에 타입을 반드시 명시해야합니다.\n1234567// 함수 선언fun getLength(something: String): Int &#123;    return something.length&#125;// 함수 호출var length = getLength(&quot;Hello World!&quot;)\nNamed argument함수를 호출할 때 매개변수의 이름을 명시할 수 있습니다.\n123456789101112fun printName(name: String, age: Int) &#123;    println(name)&#125;// 매개변수의 이름을 명시하지 않고 호출printName(&quot;John&quot;, 35)    // 매개변수의 이름을 명시하고 호출printName(name=&quot;John&quot;, age=35)// 매개변수의 이름을 명시하면 매개변수의 순서를 바꿔서 호출할 수 있습니다. printName(age=35, name=&quot;John&quot;)   \n\n기본값함수를 정의할 때 매개변수의 기본값을 선언할 수 있습니다.\n123fun printName(name: String = &quot;John&quot;) &#123;    println(name)&#125;\n함수로 값을 전달하지 않으면 기본값이 매개변수에 할당됩니다.\n12printName()         // JohnprintName(&quot;Kane&quot;)   // Kane\n\n단일 표현식함수의 실행코드가 한 줄인 경우 대입문(=)처럼 단축할 수 있습니다. 이를 단일 표현식이라고 합니다.\n123fun getDescription(name: String): String &#123;    return &quot;Name: $&#123;name&#125;&quot;&#125;\n위 구문은 실행코드가 반환문 한 줄입니다. 이는 다음과 같이 단일 표현식으로 표현할 수 있습니다. \n1fun getDescription(name: String) = &quot;Name: $&#123;name&#125;&quot;\n함수의 반환문이 없어도 실행코드가 한 줄인 경우 단일 표현식으로 표현할 수 있습니다. \n123fun printDescription(name: String) &#123;    print(&quot;Name: $&#123;name&#125;&quot;)&#125; \n위 구문은 다음과 같이 단축할 수 있습니다.\n1fun printDescription(name: String) = print(&quot;Name: $&#123;name&#125;&quot;)\n\n\n마치며이번 포스트에서는 함수(Function)에 대해 알아봤습니다. 다음 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보겠습니다.\n","dateCreated":"2019-01-05T20:15:30+09:00","dateModified":"2021-06-23T10:47:11+09:00","datePublished":"2019-01-05T20:15:30+09:00","description":"","headline":"[코틀린] 함수(Function)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-function/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-function/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며저번 포스트에서는 집합자료형의 List, Set, Map에 대해 알아봤습니다. 이번 포스트에서는 함수(Function)에 대해 알아보겠습니다.\n\n함수(Function)란함수는 특정 값을 입력받아 작업을 수행하고 결과를 반환합니다. 아래 예제를 살펴보겠습니다.\n1234// 함수 정의fun printSomething() &#123;    println(something)&#125;\n위 함수는 문자열을 화면에 출력하는 함수입니다. 함수를 정의할 땐 키워드fun을 사용하며, 값을 반환할 때는 키워드return을 사용합니다. \n이렇게 정의한 함수는 아래와 같이 호출합니다.\n1printSomething(&quot;Hello World!&quot;)  // Hello World!\n함수 호출 시 값을 전달할 수 있습니다. 이를 매개변수(Parameter)라고 합니다. \n1234567// 함수 선언fun printSomething(something: String) &#123;    println(something);  &#125; // 함수 호출printSomething(&quot;Hello World!&quot;)\n함수는 값을 반환할 수도 있습니다. 값을 반환할 땐 키워드 return을 사용합니다. 반환값이 있는 경우 함수에 타입을 반드시 명시해야합니다.\n1234567// 함수 선언fun getLength(something: String): Int &#123;    return something.length&#125;// 함수 호출var length = getLength(&quot;Hello World!&quot;)\nNamed argument함수를 호출할 때 매개변수의 이름을 명시할 수 있습니다.\n123456789101112fun printName(name: String, age: Int) &#123;    println(name)&#125;// 매개변수의 이름을 명시하지 않고 호출printName(&quot;John&quot;, 35)    // 매개변수의 이름을 명시하고 호출printName(name=&quot;John&quot;, age=35)// 매개변수의 이름을 명시하면 매개변수의 순서를 바꿔서 호출할 수 있습니다. printName(age=35, name=&quot;John&quot;)   \n\n기본값함수를 정의할 때 매개변수의 기본값을 선언할 수 있습니다.\n123fun printName(name: String = &quot;John&quot;) &#123;    println(name)&#125;\n함수로 값을 전달하지 않으면 기본값이 매개변수에 할당됩니다.\n12printName()         // JohnprintName(&quot;Kane&quot;)   // Kane\n\n단일 표현식함수의 실행코드가 한 줄인 경우 대입문(=)처럼 단축할 수 있습니다. 이를 단일 표현식이라고 합니다.\n123fun getDescription(name: String): String &#123;    return &quot;Name: $&#123;name&#125;&quot;&#125;\n위 구문은 실행코드가 반환문 한 줄입니다. 이는 다음과 같이 단일 표현식으로 표현할 수 있습니다. \n1fun getDescription(name: String) = &quot;Name: $&#123;name&#125;&quot;\n함수의 반환문이 없어도 실행코드가 한 줄인 경우 단일 표현식으로 표현할 수 있습니다. \n123fun printDescription(name: String) &#123;    print(&quot;Name: $&#123;name&#125;&quot;)&#125; \n위 구문은 다음과 같이 단축할 수 있습니다.\n1fun printDescription(name: String) = print(&quot;Name: $&#123;name&#125;&quot;)\n\n\n마치며이번 포스트에서는 함수(Function)에 대해 알아봤습니다. 다음 포스트에서는 매개변수(Parameter)와 전달인자(Argument)의 차이점에 대해 알아보겠습니다.\n","dateCreated":"2019-01-05T20:15:30+09:00","dateModified":"2021-06-23T10:47:11+09:00","datePublished":"2019-01-05T20:15:30+09:00","description":"","headline":"[코틀린] 함수(Function)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-function/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/05/kotlin/190105-function/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며저번 포스트에서는 집합자료형의 List, Set, Map에 대해 알아봤습니다. 이번 포스트에서는 함수(Function)에 대해 알아보겠습니다.  함수(Function)란함수는 특정 값을 입력받아 작업을 수행하고 결과를 반환합니다. 아래 예제를 살펴보겠습니다.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] 함수(Function)">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

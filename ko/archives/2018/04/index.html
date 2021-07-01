@@ -112,37 +112,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -172,9 +144,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     
@@ -232,6 +260,165 @@
                         ">
                 
     <section class="postShorten-group main-content-wrap">
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/04/05/java/180405-jar/"
+                            aria-label=": [Java] JAR 파일이란?"
+                        >
+                            [Java] JAR 파일이란?
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-04-05T08:16:30+09:00">
+	
+		    2018/04/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<hr>
+<h1 id="JAR"><a href="#JAR" class="headerlink" title="JAR"></a>JAR</h1><p><code>JAR(Java Archive)</code>파일은 자바 애플리캐이션을 효율적으로 배포하기 위해 만들어진 파일입니다. <code>JAR</code>파일은 여러 클래스 파일, 리소스 파일, 매니페스트 파일로 구성되어있습니다.</p>
+<h1 id="JAR-생성하기"><a href="#JAR-생성하기" class="headerlink" title="JAR 생성하기"></a>JAR 생성하기</h1><p>우선 <code>MyProject</code>폴더를 생성하고 이 폴더로 이동합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir MyProject</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> MyProject</span></span><br></pre></td></tr></table></figure>
+<p>앱의 시작점 역할을 할 <code>MyProject.java</code>를 생성합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> library.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProject</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; \</span><br><span class="line">        MyLibrary library = <span class="keyword">new</span> MyLibrary();</span><br><span class="line">        library.printSomething(<span class="string">&quot;Something&quot;</span>);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>library</code>폴더를 생성하고 이 폴더로 이동합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir library</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> library</span></span><br></pre></td></tr></table></figure>
+<p><code>MyLibrary.java</code>를 생성합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> library;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLibrary</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printSomething</span><span class="params">(String something)</span> </span>&#123;</span><br><span class="line">        System.out.println(something);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>생성된 디렉토리의 구조는 다음과 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ tree </span><br><span class="line">. </span><br><span class="line">├── library</span><br><span class="line">│  └── MyLibrary.java</span><br><span class="line">├── manifest.txt</span><br><span class="line">└── MyProject.java</span><br><span class="line"></span><br><span class="line">1 directories, 2 files</span><br></pre></td></tr></table></figure>
+<p><code>MyLibrary</code>와 <code>MyProject</code>를 컴파일합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> javac MyLibrary.java</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ..</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> javac MyProject.java</span></span><br></pre></td></tr></table></figure>
+
+<p><code>manifest.txt</code>를 생성합니다. 이 파일에는 앱의 시작점 역할을 하는 파일, 클래스 파일 등의 정보를 작성합니다.</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim manifest.txt</span><br><span class="line">Main-class: MyProject</span><br></pre></td></tr></table></figure>
+<p>다음 명령어를 입력하여 <code>JAR</code>파일을 생성합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jar -cvmf manifest.txt MyProject.jar MyProject.class library&#x2F;MyLibrary.class</span><br></pre></td></tr></table></figure>
+<p><code>MyProject.jar</code>가 생성되었습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ls </span><br><span class="line">MyProject.jar   </span><br><span class="line">MyProject.class </span><br><span class="line">MyProject.java  </span><br><span class="line">ibrary         </span><br><span class="line">manifest.txt</span><br></pre></td></tr></table></figure>
+<h1 id="JAR-실행하기"><a href="#JAR-실행하기" class="headerlink" title="JAR 실행하기"></a>JAR 실행하기</h1><p>이제 아래 명령어를 입력하여 <code>JAR</code>파일을 실행할 수 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java -jar MyProject.jar</span><br><span class="line">something</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/04/05/java/180405-jar/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/04/04/java/180404-mac-java/"
+                            aria-label=": [Java] (Mac OS) 터미널에서 자바를 컴파일하고 실행하기"
+                        >
+                            [Java] (Mac OS) 터미널에서 자바를 컴파일하고 실행하기
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-04-04T08:16:30+09:00">
+	
+		    2018/04/04
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<hr>
+<h1 id="Java-설치-확인"><a href="#Java-설치-확인" class="headerlink" title="Java 설치 확인"></a>Java 설치 확인</h1><p>Mac OS에는 Java가 기본적으로 설치되어있습니다. </p>
+<div class="alert warning icon"><p>Windows나 Linux 환경에서는 Java를 직접 설치해야합니다.</p>
+</div>
+<p>터미널에서 다음 명령어를 입력합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ java --version</span><br></pre></td></tr></table></figure>
+<p>아래와 같이 출력되면 Java가 설치되어있는 것입니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java 13.0.1 2019-10-15</span><br><span class="line">Java(TM) SE Runtime Environment (build 13.0.1+9)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 13.0.1+9, mixed mode, sharing)</span><br></pre></td></tr></table></figure>
+<p><code>MyProject.java</code>파일을 생성합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProject</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<p><a href="/ko/2018/01/01/java/180101-jvm-jre-jdk/">자바 컴파일러</a>를 사용하여 소스 코드를 컴파일합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ javac MyProject.java</span><br></pre></td></tr></table></figure>
+<p>정상적으로 컴파일이 되면 자바 클래스 파일이 생성됩니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">MyProject.java      // 자바 소스 파일</span><br><span class="line">MyProject.class     // 자바 클래스 파일</span><br></pre></td></tr></table></figure>
+<p>다음 명령어를 입력하여 자바 클래스 파일을 실행할 수 있습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java MyProject</span><br><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/04/04/java/180404-mac-java/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
     
     
     <article class="postShorten postShorten--thumbnailimg-bottom">

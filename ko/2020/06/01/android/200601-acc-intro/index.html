@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nShared PreferenceShared Preference를 사용하면 비교적 간단한 값을 저장할 수 있습니다. Shared Preference는 파일 형태로 아래 경로에 저장됩니다.\n\ndata/data/[pacakge_name]/shared_prefs/[file_name].xml\n\nShared Preference 파일에 저장된 데이터는 앱이 삭제되기 전까지 유지됩니다.\nShared Preference 객체 생성하기Context클래스에는 getSharedPreferences()메소드와 getPreferences()메소드가 선언되어있습니다.\n1234567// Context.javapackage android.content;public abstract class Context &#123;    public abstract SharedPreferences getSharedPreferences(String name, @PreferencesMode int mode);    public abstract SharedPreferences getSharedPreferences(File file, @PreferencesMode int mode);&#125;\n따라서 Context를 구현한 객체에서는 둘 중 하나의 메서드를 호출하여 새로운 Shared Preference 파일을 생성하거나 기존 파일에 접근할 수 있습니다. 액티비티(Activity)도 Context클래스를 구현하므로 두 메소드를 호출할 수 있습니다.\n(1) getSharedPreferences()getSharedPreferences()는 함수의 첫 번째 인자로 전달되는 이름으로 파일을 생성하거나 구분합니다.\n12private val YOUR_KEY = &quot;your_key&quot;val sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)\n(2) getPreferences()액티비티에서 하나의 Shared Preference 파일만 사용해야하는 경우 getPreferences()메서드를 사용합니다. 이 메서드는 액티비티에 포함된 기본 Shared Preference 파일을 자동으로 검색하므로 첫 번째 인자로 파일의 이름을 제공할 필요가 없습니다.\n1val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE)\nShared Prefenreces에 쓰기SharedPreference의 edit()메소드를 호출하여 Editor객체를 생성합니다.\n1234private val YOUR_KEY = &quot;your_key&quot;val sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)val editor = sharedPref.edit()\n이제 put○○○()을 호출하여 데이터를 저장할 수 있습니다.\n1234edit.putString(&quot;name&quot;, &quot;Monica&quot;)edit.putInt(&quot;age&quot;, 35)edit.putBoolean(&quot;is_married&quot;, false)edit.putFloat(168.3)\n마지막으로 commit()을 호출하여 동기화합니다.\n1edit.commit()\nShared Prefrences에서 읽기SharedPreferences객체의 get○○○()를 호출하여 데이터를 읽어올 수 있습니다. 이 때 두 번째 인자로 값이 없을 때의 기본값을 지정합니다.\n1234567private val YOUR_KEY = &quot;your_key&quot;val sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)val name = sharedPref.getString(&quot;name&quot;, &quot;&quot;)val age = sharedPref.getInt(&quot;age&quot;, 0)val isMarred = sharedPref.getBoolean(&quot;is_married&quot;, false)val height = sharedPref.getFloat(&quot;height&quot;, 0.0)\nContext를 구현하지 않은 클래스에서는 어떻게?개발을 하다보면 Context클래스를 구현하지 않은 클래스에서도 Shared Preferences에 접근할 필요가 있습니다. 이 때는 Application클래스를 사용할 수 있습니다.\n우선 Application클래스를 상속하는 App클래스를 정의합니다.\n1234567891011121314151617import android.app.Applicationclass App: Application() &#123;    companion object &#123;        private lateinit var instance: App        fun newInstance(): App &#123;            return instance        &#125;    &#125;    override fun onCreate() &#123;        super.onCreate()        instance = this    &#125;&#125;\nAndroidManifest.xml파일에 App클래스를 지정합니다.\n123456789&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.shared_preference&quot;&gt;    &lt;application android:name=&quot;com.yologger.shared_preference.App&quot;&gt;            &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 다음과 같이 Shared Preferences에 접근할 수 있습니다.\n123class YourClass &#123;    private val sharedPreference = App.newInstance().getSharedPreferences(&quot;your_file_key&quot;, Context.MODE_PRIVATE)&#125;","dateCreated":"2020-06-01T20:16:30+09:00","dateModified":"2021-06-21T14:45:25+09:00","datePublished":"2020-06-01T20:16:30+09:00","description":"","headline":"[안드로이드] ACC(Android Architecture Component) - (1) 개요","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/06/01/android/200601-acc-intro/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2020/06/01/android/200601-acc-intro/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n\nAndroid의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\nShared PreferenceShared Preference를 사용하면 비교적 간단한 값을 저장할 수 있습니다. Shared Preference는 파일 형태로 아래 경로에 저장됩니다.\n\ndata/data/[pacakge_name]/shared_prefs/[file_name].xml\n\nShared Preference 파일에 저장된 데이터는 앱이 삭제되기 전까지 유지됩니다.\nShared Preference 객체 생성하기Context클래스에는 getSharedPreferences()메소드와 getPreferences()메소드가 선언되어있습니다.\n1234567// Context.javapackage android.content;public abstract class Context &#123;    public abstract SharedPreferences getSharedPreferences(String name, @PreferencesMode int mode);    public abstract SharedPreferences getSharedPreferences(File file, @PreferencesMode int mode);&#125;\n따라서 Context를 구현한 객체에서는 둘 중 하나의 메서드를 호출하여 새로운 Shared Preference 파일을 생성하거나 기존 파일에 접근할 수 있습니다. 액티비티(Activity)도 Context클래스를 구현하므로 두 메소드를 호출할 수 있습니다.\n(1) getSharedPreferences()getSharedPreferences()는 함수의 첫 번째 인자로 전달되는 이름으로 파일을 생성하거나 구분합니다.\n12private val YOUR_KEY = &quot;your_key&quot;val sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)\n(2) getPreferences()액티비티에서 하나의 Shared Preference 파일만 사용해야하는 경우 getPreferences()메서드를 사용합니다. 이 메서드는 액티비티에 포함된 기본 Shared Preference 파일을 자동으로 검색하므로 첫 번째 인자로 파일의 이름을 제공할 필요가 없습니다.\n1val sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE)\nShared Prefenreces에 쓰기SharedPreference의 edit()메소드를 호출하여 Editor객체를 생성합니다.\n1234private val YOUR_KEY = &quot;your_key&quot;val sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)val editor = sharedPref.edit()\n이제 put○○○()을 호출하여 데이터를 저장할 수 있습니다.\n1234edit.putString(&quot;name&quot;, &quot;Monica&quot;)edit.putInt(&quot;age&quot;, 35)edit.putBoolean(&quot;is_married&quot;, false)edit.putFloat(168.3)\n마지막으로 commit()을 호출하여 동기화합니다.\n1edit.commit()\nShared Prefrences에서 읽기SharedPreferences객체의 get○○○()를 호출하여 데이터를 읽어올 수 있습니다. 이 때 두 번째 인자로 값이 없을 때의 기본값을 지정합니다.\n1234567private val YOUR_KEY = &quot;your_key&quot;val sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)val name = sharedPref.getString(&quot;name&quot;, &quot;&quot;)val age = sharedPref.getInt(&quot;age&quot;, 0)val isMarred = sharedPref.getBoolean(&quot;is_married&quot;, false)val height = sharedPref.getFloat(&quot;height&quot;, 0.0)\nContext를 구현하지 않은 클래스에서는 어떻게?개발을 하다보면 Context클래스를 구현하지 않은 클래스에서도 Shared Preferences에 접근할 필요가 있습니다. 이 때는 Application클래스를 사용할 수 있습니다.\n우선 Application클래스를 상속하는 App클래스를 정의합니다.\n1234567891011121314151617import android.app.Applicationclass App: Application() &#123;    companion object &#123;        private lateinit var instance: App        fun newInstance(): App &#123;            return instance        &#125;    &#125;    override fun onCreate() &#123;        super.onCreate()        instance = this    &#125;&#125;\nAndroidManifest.xml파일에 App클래스를 지정합니다.\n123456789&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    package=&quot;com.yologger.shared_preference&quot;&gt;    &lt;application android:name=&quot;com.yologger.shared_preference.App&quot;&gt;            &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n이제 다음과 같이 Shared Preferences에 접근할 수 있습니다.\n123class YourClass &#123;    private val sharedPreference = App.newInstance().getSharedPreferences(&quot;your_file_key&quot;, Context.MODE_PRIVATE)&#125;","dateCreated":"2020-06-01T20:16:30+09:00","dateModified":"2021-06-21T14:45:25+09:00","datePublished":"2020-06-01T20:16:30+09:00","description":"","headline":"[안드로이드] ACC(Android Architecture Component) - (1) 개요","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/06/01/android/200601-acc-intro/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2020/06/01/android/200601-acc-intro/","keywords":"Android"}</script>
     <meta name="description" content="Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.  Shared PreferenceShared Preference를 사용하면 비교적 간단한 값을 저장할 수 있습니다. Shared Preference는 파일 형태로 아래 경로에 저장됩니다.  data&#x2F;data&#x2F;[pacakge_name]&#x2F;shared_prefs&#x2F;[">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] ACC(Android Architecture Component) - (1) 개요">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

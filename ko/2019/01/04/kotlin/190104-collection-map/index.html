@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 집합자료형의 집합(Set)에 대해 알아봤습니다. 이번 포스트에서는 맵(Map)에 대해 알아보겠습니다. \n\n맵(Map)Map은 키(Key)와 값(Value)으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할 수 있습니다.\n우선 변경 불가능한 Map을 선언할 때는 mapOf()메소드를 사용합니다.\n1var map: Map&lt;String, String&gt; = mapOf(&quot;name&quot; to &quot;paul&quot;, &quot;job&quot; to &quot;programmer&quot;)\n다음과 같이 키를 사용하여 값을 읽어올 수 있습니다.\n12map[&quot;name&quot;]     // paulmap[&quot;job&quot;]      // programmer\n변경 가능한 Map를 선언할 때는 mutableMapOf()메소드를 사용합니다.\n1var mutableMap: MutableSet&lt;String, String&gt; = mutableMapOf(&quot;name&quot; to &quot;paul&quot;, &quot;job&quot; to &quot;programmer&quot;)\n다음과 같이 키를 사용하여 값을 변경할 수 도 있습니다.\n1mutableMap[&quot;job&quot;] = &quot;designer&quot;\n\n마치며이번 포스트에서는 맵(Map)에 대해 알아봤습니다. 다음 포스트에서는 함수(Function)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-04T22:16:30+09:00","dateModified":"2021-06-23T10:47:20+09:00","datePublished":"2019-01-04T22:16:30+09:00","description":"","headline":"[코틀린] 집합자료형(Collection) - (3) Map","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/04/kotlin/190104-collection-map/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/04/kotlin/190104-collection-map/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 집합자료형의 집합(Set)에 대해 알아봤습니다. 이번 포스트에서는 맵(Map)에 대해 알아보겠습니다. \n\n맵(Map)Map은 키(Key)와 값(Value)으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할 수 있습니다.\n우선 변경 불가능한 Map을 선언할 때는 mapOf()메소드를 사용합니다.\n1var map: Map&lt;String, String&gt; = mapOf(&quot;name&quot; to &quot;paul&quot;, &quot;job&quot; to &quot;programmer&quot;)\n다음과 같이 키를 사용하여 값을 읽어올 수 있습니다.\n12map[&quot;name&quot;]     // paulmap[&quot;job&quot;]      // programmer\n변경 가능한 Map를 선언할 때는 mutableMapOf()메소드를 사용합니다.\n1var mutableMap: MutableSet&lt;String, String&gt; = mutableMapOf(&quot;name&quot; to &quot;paul&quot;, &quot;job&quot; to &quot;programmer&quot;)\n다음과 같이 키를 사용하여 값을 변경할 수 도 있습니다.\n1mutableMap[&quot;job&quot;] = &quot;designer&quot;\n\n마치며이번 포스트에서는 맵(Map)에 대해 알아봤습니다. 다음 포스트에서는 함수(Function)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-04T22:16:30+09:00","dateModified":"2021-06-23T10:47:20+09:00","datePublished":"2019-01-04T22:16:30+09:00","description":"","headline":"[코틀린] 집합자료형(Collection) - (3) Map","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/04/kotlin/190104-collection-map/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/04/kotlin/190104-collection-map/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 집합자료형의 집합(Set)에 대해 알아봤습니다. 이번 포스트에서는 맵(Map)에 대해 알아보겠습니다.   맵(Map)Map은 키(Key)와 값(Value)으로 구성된 집합자료형입니다. 키를 통해 값을 저장하거나 읽어오거나 변경하거나 삭제할">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] 집합자료형(Collection) - (3) Map">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

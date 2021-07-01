@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 Application클래스에 대해 알아봤습니다. 이번 포스트에서는 컨텍스트(Context)에 대해 알아보겠습니다.\n\n컨텍스트란?우선 공식 문서에 의하면 다음과 같습니다.\nInterface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.\n\n\n\n컨텍스트(Context)는 어플리케이션이나 액티비티의 현재 상태에 대한 정보를 의미합니다. 다시 말해 컨텍스트에는 어플리케이션이나 액티비티에서 지금 어떤 일이 일어나는지에 대한 정보가 있습니다. \n어플리케이션이나 액티비티의 현재 상태는 시시각각 변합니다. 그러나 개발 단계에서는 컨텍스트에 어떠한 정보가 올지 알 수 없기 때문에 인터페이스 형태로 컨텍스트에 접근합니다. 런타임에서는 안드로이드 시스템이 어플리케이션이나 액티비티의 현재 상태 정보를 가진 구현체를 직접 주입해줍니다.\n컨텍스트의 종류안드로이드에는 크게 두 가지의 컨텍스트가 있습니다.\n(1) Application Context어플리케이션 전체에 대한 맥락을 가지고 있습니다. 이 컨텍스트는 어플리케이션의 라이프사이클과 연결되어 있으며, getApplicationContext()를 호출하여 접근할 수 있습니다. \n(2) Activity Context특정 액티비티에 대한 맥락을 가지고 있습니다. 이 컨텍스트는 액티비티의 라이프사이클과 연결되어 있습니다. 따라서 액티비티의 onDestroy()가 호출될 때 해당 컨텍스트도 메모리에서 사라지게 됩니다.\n모든 Activity클래스는 Context클래스를 상속합니다. 따라서 액티비티 안에서 this를 사용하여 액티비티 컨텍스트에 접근할 수 있습니다.\n컨텍스트의 활용우선 컨텍스트는 새로운 객체 생성하는데 사용됩니다.\n123456// 새로운 뷰 생성val textView = TextView(this)val button = Button(this)// 어답터 생성var cursorAdapter = SimpleCursorAdapter(getApplicationContext(), ..)\n시스템 서비스나 SharedPreferences에 접근하는데 사용됩니다.\n12345// 시스템 서비스 - 레이아웃 인플레이터var inflater = context.getSystemService(LAYOUT_INFLATER_SERVICE)// SharedPreferencesgetApplicationContext().getSharedPreferences(*name*, *mode*)\n다른 컴포넌트를 호출하는데도 사용됩니다.\n1234567// 액티비티 호출val intent = Intent(this, SubActivity::class.java)startActivity(intent)// 컨텐트 프로바이더val contextResolver = getApplicationContext().getContentResolver()contextResolver.query(uri, ...)\n자원에 접근하는데 사용할 수도 있습니다.\n12var appPackageName: String = getApplicationContext().getPackageName()var resources: Resources = getApplicationContext().getResources()\n\n마치며이번 포스트에서는 컨텍스트(Context)에 대해 알아봤습니다. 다음 포스트에서는 구글 맵스(Google Maps)에 대해 알아보겠습니다.\n","dateCreated":"2019-05-02T20:16:30+09:00","dateModified":"2021-06-28T17:47:07+09:00","datePublished":"2019-05-02T20:16:30+09:00","description":"","headline":"[안드로이드] 컨텍스트(Context)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/05/02/android/190502-context/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/05/02/android/190502-context/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 Application클래스에 대해 알아봤습니다. 이번 포스트에서는 컨텍스트(Context)에 대해 알아보겠습니다.\n\n컨텍스트란?우선 공식 문서에 의하면 다음과 같습니다.\nInterface to global information about an application environment. This is an abstract class whose implementation is provided by the Android system. It allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents, etc.\n\n\n\n컨텍스트(Context)는 어플리케이션이나 액티비티의 현재 상태에 대한 정보를 의미합니다. 다시 말해 컨텍스트에는 어플리케이션이나 액티비티에서 지금 어떤 일이 일어나는지에 대한 정보가 있습니다. \n어플리케이션이나 액티비티의 현재 상태는 시시각각 변합니다. 그러나 개발 단계에서는 컨텍스트에 어떠한 정보가 올지 알 수 없기 때문에 인터페이스 형태로 컨텍스트에 접근합니다. 런타임에서는 안드로이드 시스템이 어플리케이션이나 액티비티의 현재 상태 정보를 가진 구현체를 직접 주입해줍니다.\n컨텍스트의 종류안드로이드에는 크게 두 가지의 컨텍스트가 있습니다.\n(1) Application Context어플리케이션 전체에 대한 맥락을 가지고 있습니다. 이 컨텍스트는 어플리케이션의 라이프사이클과 연결되어 있으며, getApplicationContext()를 호출하여 접근할 수 있습니다. \n(2) Activity Context특정 액티비티에 대한 맥락을 가지고 있습니다. 이 컨텍스트는 액티비티의 라이프사이클과 연결되어 있습니다. 따라서 액티비티의 onDestroy()가 호출될 때 해당 컨텍스트도 메모리에서 사라지게 됩니다.\n모든 Activity클래스는 Context클래스를 상속합니다. 따라서 액티비티 안에서 this를 사용하여 액티비티 컨텍스트에 접근할 수 있습니다.\n컨텍스트의 활용우선 컨텍스트는 새로운 객체 생성하는데 사용됩니다.\n123456// 새로운 뷰 생성val textView = TextView(this)val button = Button(this)// 어답터 생성var cursorAdapter = SimpleCursorAdapter(getApplicationContext(), ..)\n시스템 서비스나 SharedPreferences에 접근하는데 사용됩니다.\n12345// 시스템 서비스 - 레이아웃 인플레이터var inflater = context.getSystemService(LAYOUT_INFLATER_SERVICE)// SharedPreferencesgetApplicationContext().getSharedPreferences(*name*, *mode*)\n다른 컴포넌트를 호출하는데도 사용됩니다.\n1234567// 액티비티 호출val intent = Intent(this, SubActivity::class.java)startActivity(intent)// 컨텐트 프로바이더val contextResolver = getApplicationContext().getContentResolver()contextResolver.query(uri, ...)\n자원에 접근하는데 사용할 수도 있습니다.\n12var appPackageName: String = getApplicationContext().getPackageName()var resources: Resources = getApplicationContext().getResources()\n\n마치며이번 포스트에서는 컨텍스트(Context)에 대해 알아봤습니다. 다음 포스트에서는 구글 맵스(Google Maps)에 대해 알아보겠습니다.\n","dateCreated":"2019-05-02T20:16:30+09:00","dateModified":"2021-06-28T17:47:07+09:00","datePublished":"2019-05-02T20:16:30+09:00","description":"","headline":"[안드로이드] 컨텍스트(Context)란?","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/05/02/android/190502-context/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/05/02/android/190502-context/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 Application클래스에 대해 알아봤습니다. 이번 포스트에서는 컨텍스트(Context)에 대해 알아보겠습니다.  컨텍스트란?우선 공식 문서에 의하면 다음과 같습니다. Interface to global information abou">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 컨텍스트(Context)란?">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

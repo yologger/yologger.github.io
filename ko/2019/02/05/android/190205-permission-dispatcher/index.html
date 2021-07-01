@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며다섯 개의 포스트에 걸쳐 권한(Permission)에 대해 알아보고있습니다.\n\n일반 권한과 위험 권한\n여러 권한 동시에 요청하기\n액티비티에서 설정 앱 시작하기\nTedPermission 라이브러리 ⬅️ ⬅️ ⬅️\nPermissionDispatcher 라이브러리\n\n\nPermissionDispatcher 라이브러리\n마치며이번 포스트에서는 TedPermission라이브러리에 대해 알아봤습니다. \n","dateCreated":"2019-02-05T20:16:30+09:00","dateModified":"2021-06-28T11:57:15+09:00","datePublished":"2019-02-05T20:16:30+09:00","description":"","headline":"[안드로이드] 권한 - (5) PermissionDispatcher 라이브러리","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/05/android/190205-permission-dispatcher/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/05/android/190205-permission-dispatcher/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며다섯 개의 포스트에 걸쳐 권한(Permission)에 대해 알아보고있습니다.\n\n일반 권한과 위험 권한\n여러 권한 동시에 요청하기\n액티비티에서 설정 앱 시작하기\nTedPermission 라이브러리 ⬅️ ⬅️ ⬅️\nPermissionDispatcher 라이브러리\n\n\nPermissionDispatcher 라이브러리\n마치며이번 포스트에서는 TedPermission라이브러리에 대해 알아봤습니다. \n","dateCreated":"2019-02-05T20:16:30+09:00","dateModified":"2021-06-28T11:57:15+09:00","datePublished":"2019-02-05T20:16:30+09:00","description":"","headline":"[안드로이드] 권한 - (5) PermissionDispatcher 라이브러리","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/05/android/190205-permission-dispatcher/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/05/android/190205-permission-dispatcher/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며다섯 개의 포스트에 걸쳐 권한(Permission)에 대해 알아보고있습니다.  일반 권한과 위험 권한 여러 권한 동시에 요청하기 액티비티에서 설정 앱 시작하기 TedPermission 라이브러리 ⬅️ ⬅️ ⬅️ PermissionDispatcher 라이">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 권한 - (5) PermissionDispatcher 라이브러리">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

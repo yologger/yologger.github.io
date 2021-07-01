@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 안드로이드 SDK에 대해 알아봤습니다. 이번 포스트에서는 런타임에서 SDK 버전을 확인하는 방법에 대해 알아보겠습니다.\n\n런타임에서 현재 기기의 SDK 버전 확인하기런타임에서 현재 기기의 SDK 버전을 확인할 수 있습니다.  MainActivity.ktkotlin123456class MainActivity : AppCompatActivity() {    override fun onCreate(savedInstanceState: Bundle?) {        println(Build.VERSION.SDK_INT)  // 기기의 SDK Version 확인    }}안드로이드 API에는 SDK의 버전이 상수 값으로 정의되어있습니다.\n  MainActivity.ktkotlin1234567891011121314151617181920212223242526272829303132333435class MainActivity : AppCompatActivity() {    override fun onCreate(savedInstanceState: Bundle?) {        println(Build.VERSION_CODES.BASE)                   // 1        println(Build.VERSION_CODES.BASE_1_1)               // 2        println(Build.VERSION_CODES.CUPCAKE)                // 3        println(Build.VERSION_CODES.DONUT)                  // 4        println(Build.VERSION_CODES.ECLAIR)                 // 5        println(Build.VERSION_CODES.ECLAIR_0_1)             // 6        println(Build.VERSION_CODES.ECLAIR_MR1)             // 7        println(Build.VERSION_CODES.FROYO)                  // 8        println(Build.VERSION_CODES.GINGERBREAD)            // 9        println(Build.VERSION_CODES.GINGERBREAD_MR1)        // 10        println(Build.VERSION_CODES.HONEYCOMB)              // 11        println(Build.VERSION_CODES.HONEYCOMB_MR1)          // 12        println(Build.VERSION_CODES.HONEYCOMB_MR2)          // 13        println(Build.VERSION_CODES.ICE_CREAM_SANDWICH)     // 14        println(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) // 15        println(Build.VERSION_CODES.JELLY_BEAN)             // 16        println(Build.VERSION_CODES.JELLY_BEAN_MR1)         // 17        println(Build.VERSION_CODES.JELLY_BEAN_MR2)         // 18        println(Build.VERSION_CODES.KITKAT)                 // 19        println(Build.VERSION_CODES.KITKAT_WATCH)           // 20        println(Build.VERSION_CODES.LOLLIPOP)               // 21        println(Build.VERSION_CODES.LOLLIPOP_MR1)           // 22        println(Build.VERSION_CODES.M)                      // 23        println(Build.VERSION_CODES.N)                      // 24        println(Build.VERSION_CODES.N_MR1)                  // 25        println(Build.VERSION_CODES.O)                      // 26        println(Build.VERSION_CODES.O_MR1)                  // 27        println(Build.VERSION_CODES.P)                      // 28        println(Build.VERSION_CODES.Q)                      // 29        println(Build.VERSION_CODES.R)                      // 30    }}\n\n\n\n\n비교문을 사용하여 버전에 따른 분기처리를 할 수 있습니다.\n  MainActivity.ktkotlin12345if (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) {    // do something when os version is lower than Marshmallow(23).} else {    // do something when os version is equal or higher than Marshmallow(23).}\n\n\n마치며이번 포스트에서는 런타임에서 SDK 버전을 확인하는 방법에 대해 알아봤습니다. 다음 포스트에서는 compileSdkVersion, minSdkVersion, targetSdkVersion 차이점에 대해 알아보겠습니다.\n","dateCreated":"2019-01-16T10:16:30+09:00","dateModified":"2021-06-28T10:48:00+09:00","datePublished":"2019-01-16T10:16:30+09:00","description":"","headline":"[안드로이드] 런타임에서 SDK 버전 확인하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/16/android/190116-sdk-version/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/16/android/190116-sdk-version/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 안드로이드 SDK에 대해 알아봤습니다. 이번 포스트에서는 런타임에서 SDK 버전을 확인하는 방법에 대해 알아보겠습니다.\n\n런타임에서 현재 기기의 SDK 버전 확인하기런타임에서 현재 기기의 SDK 버전을 확인할 수 있습니다.  MainActivity.ktkotlin123456class MainActivity : AppCompatActivity() {    override fun onCreate(savedInstanceState: Bundle?) {        println(Build.VERSION.SDK_INT)  // 기기의 SDK Version 확인    }}안드로이드 API에는 SDK의 버전이 상수 값으로 정의되어있습니다.\n  MainActivity.ktkotlin1234567891011121314151617181920212223242526272829303132333435class MainActivity : AppCompatActivity() {    override fun onCreate(savedInstanceState: Bundle?) {        println(Build.VERSION_CODES.BASE)                   // 1        println(Build.VERSION_CODES.BASE_1_1)               // 2        println(Build.VERSION_CODES.CUPCAKE)                // 3        println(Build.VERSION_CODES.DONUT)                  // 4        println(Build.VERSION_CODES.ECLAIR)                 // 5        println(Build.VERSION_CODES.ECLAIR_0_1)             // 6        println(Build.VERSION_CODES.ECLAIR_MR1)             // 7        println(Build.VERSION_CODES.FROYO)                  // 8        println(Build.VERSION_CODES.GINGERBREAD)            // 9        println(Build.VERSION_CODES.GINGERBREAD_MR1)        // 10        println(Build.VERSION_CODES.HONEYCOMB)              // 11        println(Build.VERSION_CODES.HONEYCOMB_MR1)          // 12        println(Build.VERSION_CODES.HONEYCOMB_MR2)          // 13        println(Build.VERSION_CODES.ICE_CREAM_SANDWICH)     // 14        println(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) // 15        println(Build.VERSION_CODES.JELLY_BEAN)             // 16        println(Build.VERSION_CODES.JELLY_BEAN_MR1)         // 17        println(Build.VERSION_CODES.JELLY_BEAN_MR2)         // 18        println(Build.VERSION_CODES.KITKAT)                 // 19        println(Build.VERSION_CODES.KITKAT_WATCH)           // 20        println(Build.VERSION_CODES.LOLLIPOP)               // 21        println(Build.VERSION_CODES.LOLLIPOP_MR1)           // 22        println(Build.VERSION_CODES.M)                      // 23        println(Build.VERSION_CODES.N)                      // 24        println(Build.VERSION_CODES.N_MR1)                  // 25        println(Build.VERSION_CODES.O)                      // 26        println(Build.VERSION_CODES.O_MR1)                  // 27        println(Build.VERSION_CODES.P)                      // 28        println(Build.VERSION_CODES.Q)                      // 29        println(Build.VERSION_CODES.R)                      // 30    }}\n\n\n\n\n비교문을 사용하여 버전에 따른 분기처리를 할 수 있습니다.\n  MainActivity.ktkotlin12345if (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) {    // do something when os version is lower than Marshmallow(23).} else {    // do something when os version is equal or higher than Marshmallow(23).}\n\n\n마치며이번 포스트에서는 런타임에서 SDK 버전을 확인하는 방법에 대해 알아봤습니다. 다음 포스트에서는 compileSdkVersion, minSdkVersion, targetSdkVersion 차이점에 대해 알아보겠습니다.\n","dateCreated":"2019-01-16T10:16:30+09:00","dateModified":"2021-06-28T10:48:00+09:00","datePublished":"2019-01-16T10:16:30+09:00","description":"","headline":"[안드로이드] 런타임에서 SDK 버전 확인하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/16/android/190116-sdk-version/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/16/android/190116-sdk-version/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 안드로이드 SDK에 대해 알아봤습니다. 이번 포스트에서는 런타임에서 SDK 버전을 확인하는 방법에 대해 알아보겠습니다.  런타임에서 현재 기기의 SDK 버전 확인하기런타임에서 현재 기기의 SDK 버전을 확인할 수 있습니다.  MainA">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 런타임에서 SDK 버전 확인하기">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

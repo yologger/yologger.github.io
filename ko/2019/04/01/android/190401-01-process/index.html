@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n어플리케이션과 프로세스리눅스 기반의 운영체제인 안드로이드에서는 어플리케이션이 리눅스 프로세스(Linux Process)로 실행됩니다. 이때 프로세스 이름을 별도로 지정하지 않으면 패키지 이름을 프로세스 이름으로 사용합니다.\n패키지 이름은 AndroidManifest.xml에서 확인할 수 있습니다.\nAndroidManifest.xmlxml12345678910&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;manifest     xmlns:android=\"http://schemas.android.com/apk/res/android\"    package=\"com.yologger.your_project_name\"&gt;    &lt;application&gt;        &lt;!-- .. --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n\n이제 에뮬레이터나 연결된 기기에 앱을 설치합니다. 그리고 ADB를 통해 실제 프로세스 이름을 확인해봅시다.\n12345$ adb shell&gt; ps -ef | grep &quot;com.yologger.your_project_name&quot;u0_a289   14996   850 0 15:08:05 ?   00:00:01 com.yologger.your_project_name...\n&lt;application&gt;태그 안에서 android:process속성을 사용하여 프로세스 이름을 직접 지정할 수도 있습니다.\nAndroidManifest.xmlxml12345678910&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;manifest     xmlns:android=\"http://schemas.android.com/apk/res/android\"    package=\"com.yologger.your_project_name\"&gt;    &lt;application android:process=\"com.yologger.your_process_name\"&gt;        &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n\n다시 프로세스 이름을 확인해봅시다.\n12345$ adb shell&gt; ps -ef | grep &quot;com.yologger.your_process_name&quot;            u0_a289   18014   850 1 15:14:50 ?   00:00:01 com.yologger.your_process_name...\n컴포넌트와 프로세스하나의 애플리케이션은 여러 컴포넌트로 구성됩니다. 거의 대부분 이 컴포넌트들은 같은 프로세스에서 실행됩니다. 그러나 컴포넌트를 다른 프로세스에서 실행할 수도 있습니다. 이때는 컴포넌트에서 android:process속성을 사용하면 됩니다.\nAndroidManifest.xmlxml1234567891011121314151617181920212223242526272829303132333435363738&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"    package=\"com.yologger.your_project\"&gt;    &lt;application android:allowBackup=\"true\"        android:icon=\"@mipmap/ic_launcher\"        android:label=\"@string/app_name\"        android:roundIcon=\"@mipmap/ic_launcher_round\"        android:supportsRtl=\"true\"        android:theme=\"@style/Theme.Your_Project\"&gt;        &lt;activity android:name=\".MainActivity\"            android:process=\"com.yolo\"&gt;            &lt;intent-filter&gt;                &lt;action android:name=\"android.intent.action.MAIN\" /&gt;                &lt;category android:name=\"android.intent.category.LAUNCHER\" /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        &lt;activity             android:name=\".ActivityA\"            android:process=\"com.yolo.process1\"&gt;        &lt;/activity&gt;         &lt;activity             android:name=\".ActivityB\"            android:process=\"com.yolo.process2\"&gt;        &lt;/activity&gt;          &lt;service            android:name=\".MyService\"            android:enabled=\"true\"            android:exported=\"true\"            android:process=\"com.yolo.process3\"&gt;        &lt;/service&gt;    &lt;/application&gt;&lt;/manifest&gt;\n\n\n\n마치며이번 포스트에서는 프로세스(Process)에 대해 알아봤습니다. 다음 포스트에서는 스레드(Thread)에 대해 알아보겠습니다.\n","dateCreated":"2019-04-01T01:16:30+09:00","dateModified":"2021-06-28T22:31:51+09:00","datePublished":"2019-04-01T01:16:30+09:00","description":"","headline":"[안드로이드] 프로세스(Process)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/01/android/190401-01-process/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/01/android/190401-01-process/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n어플리케이션과 프로세스리눅스 기반의 운영체제인 안드로이드에서는 어플리케이션이 리눅스 프로세스(Linux Process)로 실행됩니다. 이때 프로세스 이름을 별도로 지정하지 않으면 패키지 이름을 프로세스 이름으로 사용합니다.\n패키지 이름은 AndroidManifest.xml에서 확인할 수 있습니다.\nAndroidManifest.xmlxml12345678910&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;manifest     xmlns:android=\"http://schemas.android.com/apk/res/android\"    package=\"com.yologger.your_project_name\"&gt;    &lt;application&gt;        &lt;!-- .. --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n\n이제 에뮬레이터나 연결된 기기에 앱을 설치합니다. 그리고 ADB를 통해 실제 프로세스 이름을 확인해봅시다.\n12345$ adb shell&gt; ps -ef | grep &quot;com.yologger.your_project_name&quot;u0_a289   14996   850 0 15:08:05 ?   00:00:01 com.yologger.your_project_name...\n&lt;application&gt;태그 안에서 android:process속성을 사용하여 프로세스 이름을 직접 지정할 수도 있습니다.\nAndroidManifest.xmlxml12345678910&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;manifest     xmlns:android=\"http://schemas.android.com/apk/res/android\"    package=\"com.yologger.your_project_name\"&gt;    &lt;application android:process=\"com.yologger.your_process_name\"&gt;        &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n\n다시 프로세스 이름을 확인해봅시다.\n12345$ adb shell&gt; ps -ef | grep &quot;com.yologger.your_process_name&quot;            u0_a289   18014   850 1 15:14:50 ?   00:00:01 com.yologger.your_process_name...\n컴포넌트와 프로세스하나의 애플리케이션은 여러 컴포넌트로 구성됩니다. 거의 대부분 이 컴포넌트들은 같은 프로세스에서 실행됩니다. 그러나 컴포넌트를 다른 프로세스에서 실행할 수도 있습니다. 이때는 컴포넌트에서 android:process속성을 사용하면 됩니다.\nAndroidManifest.xmlxml1234567891011121314151617181920212223242526272829303132333435363738&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"    package=\"com.yologger.your_project\"&gt;    &lt;application android:allowBackup=\"true\"        android:icon=\"@mipmap/ic_launcher\"        android:label=\"@string/app_name\"        android:roundIcon=\"@mipmap/ic_launcher_round\"        android:supportsRtl=\"true\"        android:theme=\"@style/Theme.Your_Project\"&gt;        &lt;activity android:name=\".MainActivity\"            android:process=\"com.yolo\"&gt;            &lt;intent-filter&gt;                &lt;action android:name=\"android.intent.action.MAIN\" /&gt;                &lt;category android:name=\"android.intent.category.LAUNCHER\" /&gt;            &lt;/intent-filter&gt;        &lt;/activity&gt;        &lt;activity             android:name=\".ActivityA\"            android:process=\"com.yolo.process1\"&gt;        &lt;/activity&gt;         &lt;activity             android:name=\".ActivityB\"            android:process=\"com.yolo.process2\"&gt;        &lt;/activity&gt;          &lt;service            android:name=\".MyService\"            android:enabled=\"true\"            android:exported=\"true\"            android:process=\"com.yolo.process3\"&gt;        &lt;/service&gt;    &lt;/application&gt;&lt;/manifest&gt;\n\n\n\n마치며이번 포스트에서는 프로세스(Process)에 대해 알아봤습니다. 다음 포스트에서는 스레드(Thread)에 대해 알아보겠습니다.\n","dateCreated":"2019-04-01T01:16:30+09:00","dateModified":"2021-06-28T22:31:51+09:00","datePublished":"2019-04-01T01:16:30+09:00","description":"","headline":"[안드로이드] 프로세스(Process)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/01/android/190401-01-process/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/01/android/190401-01-process/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.    어플리케이션과 프로세스리눅스 기반의 운영체제인 안드로이드에서는 어플리케이션이 리눅스 프로세스(Linux Process)로 실행됩니다. 이때 프로세스 이름을 별도로 지정하지 않으면 패키지 이름을 프로세스 이름으로 사용합니다. 패키지 이름은 AndroidMani">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 프로세스(Process)">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

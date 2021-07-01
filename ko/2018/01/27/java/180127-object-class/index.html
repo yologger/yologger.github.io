@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 접근 제한자(Access Modifier)에 대해 알아봤습니다. 이번 포스트에서는 Object 클래스에 대해 알아보겠습니다.\n\njava.lang 패키지java.lang 패키지는 자바에서 가장 기본적인 동작을 수행하는 클래스들의 집합입니다. java.lang 패키지에 있는 클래스는 import하지 않아도 바로 사용할 수 있습니다. \nObject 클래스Object클래스는 모든 자바 클래스의 최고 조상 클래스입니다. 자바의 모든 클래스는 암시적으로든 명시적으로든 Object클래스를 상속받고 있습니다. Object클래스는 java.lang패키지에 포함되며, Object클래스는 여러 메소드를 제공하고 있습니다.\n(1) equals()메소드를 호출하는 객체와 인자로 전달받은 객체가 동일한지 여부를 반환합니다. 다만 Object클래스를 상속받는 클래스에서는 equals()을 직접 구현해야합니다.\n12345678910111213141516171819class Person &#123;    String name;    Person(String name) &#123;        this.name = name;    &#125;    // equal()메소드를 직접 구현    @Override    public boolean equals(Object obj) &#123;        if (obj instanceof Person) &#123;            return name == ((Person) obj).name;        &#125; else &#123;            return false;        &#125;    &#125;&#125;\n다음과 같이 인스턴스를 비교할 수 있습니다.\n1234Person p1 = new Person(&quot;Paul&quot;);Person p2 = new Person(&quot;Paul&quot;);boolean result = p1.equals(p2); // true\n(2) getClass()인스턴스의 클래스 타입을 반환합니다. \n12345Person person = new Person(&quot;Paul&quot;);System.out.println(person.getClass());  // class com.test.example.PersonPhone phone = new Phone();System.out.println(phone.getClass());   // class com.test.example.Phone\n(3) hashcode()hashcode()는 객체의 해시코드를 반환합니다. 해시코드는 객체의 주소값을 해시함수에 넣어 반환된 고유한 정수값입니다. 따라서 두 객체가 동일한 객체인지 비교할 때 사용할 수 있습니다.\n1234567Person p1 = new Person(&quot;Paul&quot;);Person p2 = p1;Person p3 = new Person(&quot;John&quot;);System.out.println(p1.hashCode());  // 214520509System.out.println(p2.hashCode());  // 214520509System.out.println(p3.hashCode());  // 68944050\n(4) toString() 메소드해당 객체의 정보를 문자열로 반환합니다.\n123Person person = new Person(&quot;Paul&quot;);System.out.println(person.toString());  // com.test.Person@cc952bd\n(5) 그 외그 외에 Object 클래스는 clone(), finalize(), notify(), notifyAll(), wait() 메소드도 제공합니다.\n\n마치며이번 포스트에서 Object클래스에 대해 알아봤습니다. 다음 포스트에서는 제네릭(Generic)에 대해 알아보겠습니다.\n","dateCreated":"2018-01-27T20:16:30+09:00","dateModified":"2021-06-23T17:48:50+09:00","datePublished":"2018-01-27T20:16:30+09:00","description":"","headline":"[자바] Object 클래스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/27/java/180127-object-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/01/27/java/180127-object-class/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 접근 제한자(Access Modifier)에 대해 알아봤습니다. 이번 포스트에서는 Object 클래스에 대해 알아보겠습니다.\n\njava.lang 패키지java.lang 패키지는 자바에서 가장 기본적인 동작을 수행하는 클래스들의 집합입니다. java.lang 패키지에 있는 클래스는 import하지 않아도 바로 사용할 수 있습니다. \nObject 클래스Object클래스는 모든 자바 클래스의 최고 조상 클래스입니다. 자바의 모든 클래스는 암시적으로든 명시적으로든 Object클래스를 상속받고 있습니다. Object클래스는 java.lang패키지에 포함되며, Object클래스는 여러 메소드를 제공하고 있습니다.\n(1) equals()메소드를 호출하는 객체와 인자로 전달받은 객체가 동일한지 여부를 반환합니다. 다만 Object클래스를 상속받는 클래스에서는 equals()을 직접 구현해야합니다.\n12345678910111213141516171819class Person &#123;    String name;    Person(String name) &#123;        this.name = name;    &#125;    // equal()메소드를 직접 구현    @Override    public boolean equals(Object obj) &#123;        if (obj instanceof Person) &#123;            return name == ((Person) obj).name;        &#125; else &#123;            return false;        &#125;    &#125;&#125;\n다음과 같이 인스턴스를 비교할 수 있습니다.\n1234Person p1 = new Person(&quot;Paul&quot;);Person p2 = new Person(&quot;Paul&quot;);boolean result = p1.equals(p2); // true\n(2) getClass()인스턴스의 클래스 타입을 반환합니다. \n12345Person person = new Person(&quot;Paul&quot;);System.out.println(person.getClass());  // class com.test.example.PersonPhone phone = new Phone();System.out.println(phone.getClass());   // class com.test.example.Phone\n(3) hashcode()hashcode()는 객체의 해시코드를 반환합니다. 해시코드는 객체의 주소값을 해시함수에 넣어 반환된 고유한 정수값입니다. 따라서 두 객체가 동일한 객체인지 비교할 때 사용할 수 있습니다.\n1234567Person p1 = new Person(&quot;Paul&quot;);Person p2 = p1;Person p3 = new Person(&quot;John&quot;);System.out.println(p1.hashCode());  // 214520509System.out.println(p2.hashCode());  // 214520509System.out.println(p3.hashCode());  // 68944050\n(4) toString() 메소드해당 객체의 정보를 문자열로 반환합니다.\n123Person person = new Person(&quot;Paul&quot;);System.out.println(person.toString());  // com.test.Person@cc952bd\n(5) 그 외그 외에 Object 클래스는 clone(), finalize(), notify(), notifyAll(), wait() 메소드도 제공합니다.\n\n마치며이번 포스트에서 Object클래스에 대해 알아봤습니다. 다음 포스트에서는 제네릭(Generic)에 대해 알아보겠습니다.\n","dateCreated":"2018-01-27T20:16:30+09:00","dateModified":"2021-06-23T17:48:50+09:00","datePublished":"2018-01-27T20:16:30+09:00","description":"","headline":"[자바] Object 클래스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/27/java/180127-object-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/01/27/java/180127-object-class/","keywords":"Java"}</script>
     <meta name="description" content="자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 접근 제한자(Access Modifier)에 대해 알아봤습니다. 이번 포스트에서는 Object 클래스에 대해 알아보겠습니다.  java.lang 패키지java.lang 패키지는 자바에서 가장 기본적인 동작을 수행하는 클래스들의 집합입니다. jav">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[자바] Object 클래스">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

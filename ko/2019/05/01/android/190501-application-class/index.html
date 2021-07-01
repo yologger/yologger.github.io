@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 프래그먼트(Fragment)에 대해 알아봤습니다. 이번 포스트에서는 Application클래스에 대해 알아보겠습니다.\n\nApplication 클래스Application클래스는 앱의 실행과 동시에 생성되는 객체입니다. Application클래스는 메모리에 오직 하나의 인스턴스로만 존재하는 싱글톤 객체며, 주로 컴포넌트 사이에서 데이터를 공유하는데 사용할 수 있습니다.\n사용 방법우선 Application클래스를 상속하는 서브클래스를 정의합니다.\nApp.javakotlin12345678910111213141516171819package com.yologger.exampleimport android.app.Application;import android.content.res.Configuration;public class App extends Application {        public String url = \"https://www.naver.com\";    @Override    public void onCreate() {        super.onCreate();    }    @Override    public void onConfigurationChanged(Configuration newConfig) {        super.onConfigurationChanged(newConfig);    }}\n\n\n이제 AndroidManifest.xml에 등록합니다.\nAndroidManifest.xmlxml123456789&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"package=\"com.yologger.example\"&gt;    &lt;application        android:name=\"com.yologger.example.App\"&gt;            &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n\n\n이제 getApplication()메소드를 사용하면 어느 컴포넌트에서든 공유 클래스에 접근할 수 있습니다.\nMainActivity.ktkotlin12345678910111213public class MainActivity extends Activity {    private App app;        @Override    protected void onCreate(Bundle savedInstanceState) {        super.onCreate(savedInstanceState);        setContentView(R.layout.activity_main);        app = (App)getApplication();        String apiUrl = app.url    }}\n\n\n\n마치며이번 포스트에서는 Application클래스에 대해 알아봤습니다. 다음 포스트에서는 컨텍스트(Context)에 대해 알아보겠습니다.\n","dateCreated":"2019-05-01T20:16:30+09:00","dateModified":"2021-06-28T17:44:47+09:00","datePublished":"2019-05-01T20:16:30+09:00","description":"","headline":"[안드로이드] Application 클래스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/05/01/android/190501-application-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/05/01/android/190501-application-class/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 프래그먼트(Fragment)에 대해 알아봤습니다. 이번 포스트에서는 Application클래스에 대해 알아보겠습니다.\n\nApplication 클래스Application클래스는 앱의 실행과 동시에 생성되는 객체입니다. Application클래스는 메모리에 오직 하나의 인스턴스로만 존재하는 싱글톤 객체며, 주로 컴포넌트 사이에서 데이터를 공유하는데 사용할 수 있습니다.\n사용 방법우선 Application클래스를 상속하는 서브클래스를 정의합니다.\nApp.javakotlin12345678910111213141516171819package com.yologger.exampleimport android.app.Application;import android.content.res.Configuration;public class App extends Application {        public String url = \"https://www.naver.com\";    @Override    public void onCreate() {        super.onCreate();    }    @Override    public void onConfigurationChanged(Configuration newConfig) {        super.onConfigurationChanged(newConfig);    }}\n\n\n이제 AndroidManifest.xml에 등록합니다.\nAndroidManifest.xmlxml123456789&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"package=\"com.yologger.example\"&gt;    &lt;application        android:name=\"com.yologger.example.App\"&gt;            &lt;!-- ... --&gt;    &lt;/application&gt;&lt;/manifest&gt;\n\n\n이제 getApplication()메소드를 사용하면 어느 컴포넌트에서든 공유 클래스에 접근할 수 있습니다.\nMainActivity.ktkotlin12345678910111213public class MainActivity extends Activity {    private App app;        @Override    protected void onCreate(Bundle savedInstanceState) {        super.onCreate(savedInstanceState);        setContentView(R.layout.activity_main);        app = (App)getApplication();        String apiUrl = app.url    }}\n\n\n\n마치며이번 포스트에서는 Application클래스에 대해 알아봤습니다. 다음 포스트에서는 컨텍스트(Context)에 대해 알아보겠습니다.\n","dateCreated":"2019-05-01T20:16:30+09:00","dateModified":"2021-06-28T17:44:47+09:00","datePublished":"2019-05-01T20:16:30+09:00","description":"","headline":"[안드로이드] Application 클래스","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/05/01/android/190501-application-class/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/05/01/android/190501-application-class/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 프래그먼트(Fragment)에 대해 알아봤습니다. 이번 포스트에서는 Application클래스에 대해 알아보겠습니다.  Application 클래스Application클래스는 앱의 실행과 동시에 생성되는 객체입니다. Applicatio">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] Application 클래스">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

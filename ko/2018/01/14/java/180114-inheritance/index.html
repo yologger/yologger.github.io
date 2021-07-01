@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 초기화 블록(Initialization Block)에 대해 알아봤습니다. 이번 포스트에서는 상속(Inheritance)에 대해 알아보겠습니다.\n\n상속실생활에서 상속은 부모가 자신에게 재산을 물려주는 행위를 뜻합니다. 자바에서도 상속은 비슷한 의미로 사용되고 있습니다. 상속(Inheritance)은 부모 클래스의 멤버변수나 메소드를 그대로 물려받는 것을 의미합니다. 이를 통해 코드의 중복을 제거할 수 있습니다.\n사용 방법다음과 같은 부모 클래스가 있다고 가정해봅시다.\n12345678910111213// 부모 클래스class Person &#123;    protected String name;    Person(String name) &#123;        this.name = name;    &#125;    void printInformation() &#123;        System.out.println(this.name);    &#125;&#125;\n부모 클래스를 상속할 땐 키워드extends를 사용합니다. 자식 클래스에서는 @Override를 붙여 메소드를 재정의할 수 있습니다.\n123456789101112131415161718// 자식 클래스class Player extends Person &#123;    private String team;    // 자식 클래스의 생성자    Player(String name, String team) &#123;        // 부모 클래스의 생성자를 호출        super(name);        this.team = team;    &#125;    // 부모 클래스의 메소드를 재정의    @Override    void printInformation() &#123;        System.out.println(name + &quot; plays in &quot; + team);    &#125;&#125;\n주의할 점은 자식 클래스의 생성자에서 부모 클래스의 생성자를 호출해야 한다는 것입니다. 이땐 키워드 super를 사용합니다.\n이렇게 정의한 자식 클래스는 다음과 같이 사용할 수 있습니다.\n12Player player = new Player(&quot;Heung-min Son&quot;, &quot;Tottenham&quot;);player.printInformation();\t// Heung-min Son plays in Tottenham\n\n마치며이번 포스트에서는 클래스의 상속(Inheritance)에 대해 알아봤습니다. 다음 포스트에서는 키워드 final에 대해 알아보겠습니다.\n","dateCreated":"2018-01-14T20:16:30+09:00","dateModified":"2021-06-23T16:53:12+09:00","datePublished":"2018-01-14T20:16:30+09:00","description":"","headline":"[자바] 상속(Inheritance)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/14/java/180114-inheritance/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/01/14/java/180114-inheritance/","keywords":"Java"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에서는 초기화 블록(Initialization Block)에 대해 알아봤습니다. 이번 포스트에서는 상속(Inheritance)에 대해 알아보겠습니다.\n\n상속실생활에서 상속은 부모가 자신에게 재산을 물려주는 행위를 뜻합니다. 자바에서도 상속은 비슷한 의미로 사용되고 있습니다. 상속(Inheritance)은 부모 클래스의 멤버변수나 메소드를 그대로 물려받는 것을 의미합니다. 이를 통해 코드의 중복을 제거할 수 있습니다.\n사용 방법다음과 같은 부모 클래스가 있다고 가정해봅시다.\n12345678910111213// 부모 클래스class Person &#123;    protected String name;    Person(String name) &#123;        this.name = name;    &#125;    void printInformation() &#123;        System.out.println(this.name);    &#125;&#125;\n부모 클래스를 상속할 땐 키워드extends를 사용합니다. 자식 클래스에서는 @Override를 붙여 메소드를 재정의할 수 있습니다.\n123456789101112131415161718// 자식 클래스class Player extends Person &#123;    private String team;    // 자식 클래스의 생성자    Player(String name, String team) &#123;        // 부모 클래스의 생성자를 호출        super(name);        this.team = team;    &#125;    // 부모 클래스의 메소드를 재정의    @Override    void printInformation() &#123;        System.out.println(name + &quot; plays in &quot; + team);    &#125;&#125;\n주의할 점은 자식 클래스의 생성자에서 부모 클래스의 생성자를 호출해야 한다는 것입니다. 이땐 키워드 super를 사용합니다.\n이렇게 정의한 자식 클래스는 다음과 같이 사용할 수 있습니다.\n12Player player = new Player(&quot;Heung-min Son&quot;, &quot;Tottenham&quot;);player.printInformation();\t// Heung-min Son plays in Tottenham\n\n마치며이번 포스트에서는 클래스의 상속(Inheritance)에 대해 알아봤습니다. 다음 포스트에서는 키워드 final에 대해 알아보겠습니다.\n","dateCreated":"2018-01-14T20:16:30+09:00","dateModified":"2021-06-23T16:53:12+09:00","datePublished":"2018-01-14T20:16:30+09:00","description":"","headline":"[자바] 상속(Inheritance)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2018/01/14/java/180114-inheritance/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2018/01/14/java/180114-inheritance/","keywords":"Java"}</script>
     <meta name="description" content="자바(Java)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에서는 초기화 블록(Initialization Block)에 대해 알아봤습니다. 이번 포스트에서는 상속(Inheritance)에 대해 알아보겠습니다.  상속실생활에서 상속은 부모가 자신에게 재산을 물려주는 행위를 뜻합니다. 자바에서도 상속은 비슷한 의미">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[자바] 상속(Inheritance)">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

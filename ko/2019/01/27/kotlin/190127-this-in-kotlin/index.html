@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에는 스코프 함수에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 this에 대해 알아보겠습니다.\n\n(1) 클래스에서의 this클래스에서 this는 해당 위치에서 가장 가까운 클래스의 인스턴스를 의미합니다. 아래 예제를 살펴봅시다.\n1234567891011121314class Person &#123;        var name: String        constructor(name: String) &#123;        this.name = name    &#125;        fun printSomething() &#123;        println(this.name)    &#125;&#125;val person = Person(&quot;Paul&quot;)\n위 코드에서의 this는 Person클래스의 인스턴스를 의미합니다. 키워드 this는 생략할 수도 있습니다.\n12345678910111213141516class Person &#123;        var name: String        constructor(name: String) &#123;        // this.name = name        name = name    &#125;        fun printSomething() &#123;        // println(this.name)        println(name)    &#125;&#125;val person = Person(&quot;Paul&quot;)\n(2) 확장 함수에서의 this확장 함수에서의 this는 확장 함수를 호출한 클래스의 인스턴스를 의미합니다. 다음과 같은 클래스가 있다고 가정합시다.\n12345678910class Person constructor(val name: String, val age: Int) &#123;    fun printName() &#123;        println(&quot;Name: $&#123;this.name&#125;&quot;)    &#125;    fun printAge() &#123;        println(&quot;Age: $&#123;this.age&#125;&quot;)    &#125;&#125;\n확장 함수를 추가해봅시다.\n123fun Person.printInformation() &#123;    print(&quot;$&#123;this.name&#125; is $&#123;this.age&#125; years old.&quot;)&#125;\n확장 함수에서 this는 점(.)의 왼쪽에 위치하는 확장 함수를 호출한 클래스를 의미합니다.\n(3) 스코프 함수에서의 this스코프 함수에서의 this는 리시버를 의미합니다. 리시버(Receiver)는 스코프 호출을 호출한, 점(.)의 왼쪽에 위치하는 대상입니다.\n우선 스코프 함수 run()의 예제는 아래와 같습니다.\n12345678910111213class Person constructor(var name: String, var age: Int) &#123;&#125;val person = Person(&quot;Paul&quot;, 35)// 스코프 함수person.run &#123;    // this는 person을 의미합니다.    this.name = &quot;John&quot;    this.age = 33    println(&quot;His name is $&#123;this.name&#125;&quot;)&#125;\n스코프 함수 with()의 예제는 아래와 같습니다.\n12345678910111213class Person constructor(var name: String, var age: Int) &#123;&#125;val person = Person(&quot;Paul&quot;, 35)// 스코프 함수with(person) &#123;    // this는 person을 의미합니다.    this.name = &quot;John&quot;    this.age = 35    println(&quot;His name is $&#123;this.name&#125;&quot;)&#125;\n(4) Qualified this아래 코드를 살펴봅시다. 클래스 안에 내부 클래스가 있고, 내부 클래스 안에 확장 함수가 있습니다.\n1234567class Outer &#123;    inner class Inner &#123;        fun Int.multiple(a: Int, b: Int): Int &#123;            return a*b        &#125;    &#125;&#125;\n이때 확장 함수에서의 this는 무엇을 가리킬까요?\n123456789class Outer &#123;        inner class Inner &#123;        fun Int.multiple(a: Int, b: Int): Int &#123;            val what = this     // this는 무엇을 가리킬까요?            return a*b        &#125;    &#125;&#125;\n확장 함수에서의 this는 확장 함수를 호출하는 리시버인 Int입니다.\n그럼 확장 함수 안에서 Outer클래스와 Inner클래스는 어떻게 접근할 수 있을까요? 이러한 경우에 Qualifed this를 사용합니다. Qualifed this는 this@클래스이름 형태로 사용합니다.\n1234567891011class Outer &#123;        inner class Inner &#123;        fun Int.multiple(a: Int, b: Int): Int &#123;            val what = this     // Int            val inner = this@Inner  // Inner            val outer = this@Outer  // Outer            return a*b        &#125;    &#125;&#125;\n아래 코드는 안드로이드에서 자주 사용하는 패턴으로 버튼을 눌렀을 때 특정 로직을 수행하는 코드입니다.\n12345678910111213141516class MainActivity: AppCompatActivity() &#123;    lateinit var buttonSayHello: Button    override fun onCreate(saveInstanceState: Bundle?) &#123;        super.onCreate(saveInstanceState)        buttonSayHello = findViewById(R.id.activity_main_button_say_hello) as Button        buttonSayHello.setOnClickListener(object: View.OnClickListener &#123;            override fun onClick(view: View) &#123;                Toast.makeText(this@MainActivity, &quot;Hello&quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;)    &#125;&#125;\nonClick()메소드 안에서의 this는 View.OnClickListener를 가리킵니다. 따라서 액티비티의 인스턴스를 참조하기 위해 this@MyActivity를 사용합니다.\n\n마치며이번 포스트에서 코틀린에서의 this에 대해 알아봤습니다. 다음 포스트에서는 코틀린의 상수에 대해 알아보겠습니다.\n","dateCreated":"2019-01-27T21:16:30+09:00","dateModified":"2021-06-23T13:50:52+09:00","datePublished":"2019-01-27T21:16:30+09:00","description":"","headline":"[코틀린] 코틀린에서의 this","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/27/kotlin/190127-this-in-kotlin/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/27/kotlin/190127-this-in-kotlin/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며이전 포스트에는 스코프 함수에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 this에 대해 알아보겠습니다.\n\n(1) 클래스에서의 this클래스에서 this는 해당 위치에서 가장 가까운 클래스의 인스턴스를 의미합니다. 아래 예제를 살펴봅시다.\n1234567891011121314class Person &#123;        var name: String        constructor(name: String) &#123;        this.name = name    &#125;        fun printSomething() &#123;        println(this.name)    &#125;&#125;val person = Person(&quot;Paul&quot;)\n위 코드에서의 this는 Person클래스의 인스턴스를 의미합니다. 키워드 this는 생략할 수도 있습니다.\n12345678910111213141516class Person &#123;        var name: String        constructor(name: String) &#123;        // this.name = name        name = name    &#125;        fun printSomething() &#123;        // println(this.name)        println(name)    &#125;&#125;val person = Person(&quot;Paul&quot;)\n(2) 확장 함수에서의 this확장 함수에서의 this는 확장 함수를 호출한 클래스의 인스턴스를 의미합니다. 다음과 같은 클래스가 있다고 가정합시다.\n12345678910class Person constructor(val name: String, val age: Int) &#123;    fun printName() &#123;        println(&quot;Name: $&#123;this.name&#125;&quot;)    &#125;    fun printAge() &#123;        println(&quot;Age: $&#123;this.age&#125;&quot;)    &#125;&#125;\n확장 함수를 추가해봅시다.\n123fun Person.printInformation() &#123;    print(&quot;$&#123;this.name&#125; is $&#123;this.age&#125; years old.&quot;)&#125;\n확장 함수에서 this는 점(.)의 왼쪽에 위치하는 확장 함수를 호출한 클래스를 의미합니다.\n(3) 스코프 함수에서의 this스코프 함수에서의 this는 리시버를 의미합니다. 리시버(Receiver)는 스코프 호출을 호출한, 점(.)의 왼쪽에 위치하는 대상입니다.\n우선 스코프 함수 run()의 예제는 아래와 같습니다.\n12345678910111213class Person constructor(var name: String, var age: Int) &#123;&#125;val person = Person(&quot;Paul&quot;, 35)// 스코프 함수person.run &#123;    // this는 person을 의미합니다.    this.name = &quot;John&quot;    this.age = 33    println(&quot;His name is $&#123;this.name&#125;&quot;)&#125;\n스코프 함수 with()의 예제는 아래와 같습니다.\n12345678910111213class Person constructor(var name: String, var age: Int) &#123;&#125;val person = Person(&quot;Paul&quot;, 35)// 스코프 함수with(person) &#123;    // this는 person을 의미합니다.    this.name = &quot;John&quot;    this.age = 35    println(&quot;His name is $&#123;this.name&#125;&quot;)&#125;\n(4) Qualified this아래 코드를 살펴봅시다. 클래스 안에 내부 클래스가 있고, 내부 클래스 안에 확장 함수가 있습니다.\n1234567class Outer &#123;    inner class Inner &#123;        fun Int.multiple(a: Int, b: Int): Int &#123;            return a*b        &#125;    &#125;&#125;\n이때 확장 함수에서의 this는 무엇을 가리킬까요?\n123456789class Outer &#123;        inner class Inner &#123;        fun Int.multiple(a: Int, b: Int): Int &#123;            val what = this     // this는 무엇을 가리킬까요?            return a*b        &#125;    &#125;&#125;\n확장 함수에서의 this는 확장 함수를 호출하는 리시버인 Int입니다.\n그럼 확장 함수 안에서 Outer클래스와 Inner클래스는 어떻게 접근할 수 있을까요? 이러한 경우에 Qualifed this를 사용합니다. Qualifed this는 this@클래스이름 형태로 사용합니다.\n1234567891011class Outer &#123;        inner class Inner &#123;        fun Int.multiple(a: Int, b: Int): Int &#123;            val what = this     // Int            val inner = this@Inner  // Inner            val outer = this@Outer  // Outer            return a*b        &#125;    &#125;&#125;\n아래 코드는 안드로이드에서 자주 사용하는 패턴으로 버튼을 눌렀을 때 특정 로직을 수행하는 코드입니다.\n12345678910111213141516class MainActivity: AppCompatActivity() &#123;    lateinit var buttonSayHello: Button    override fun onCreate(saveInstanceState: Bundle?) &#123;        super.onCreate(saveInstanceState)        buttonSayHello = findViewById(R.id.activity_main_button_say_hello) as Button        buttonSayHello.setOnClickListener(object: View.OnClickListener &#123;            override fun onClick(view: View) &#123;                Toast.makeText(this@MainActivity, &quot;Hello&quot;, Toast.LENGTH_SHORT).show()            &#125;        &#125;)    &#125;&#125;\nonClick()메소드 안에서의 this는 View.OnClickListener를 가리킵니다. 따라서 액티비티의 인스턴스를 참조하기 위해 this@MyActivity를 사용합니다.\n\n마치며이번 포스트에서 코틀린에서의 this에 대해 알아봤습니다. 다음 포스트에서는 코틀린의 상수에 대해 알아보겠습니다.\n","dateCreated":"2019-01-27T21:16:30+09:00","dateModified":"2021-06-23T13:50:52+09:00","datePublished":"2019-01-27T21:16:30+09:00","description":"","headline":"[코틀린] 코틀린에서의 this","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/27/kotlin/190127-this-in-kotlin/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/27/kotlin/190127-this-in-kotlin/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며이전 포스트에는 스코프 함수에 대해 알아봤습니다. 이번 포스트에서는 코틀린에서의 this에 대해 알아보겠습니다.  (1) 클래스에서의 this클래스에서 this는 해당 위치에서 가장 가까운 클래스의 인스턴스를 의미합니다. 아래 예제를 살펴봅시다. 123456">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] 코틀린에서의 this">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

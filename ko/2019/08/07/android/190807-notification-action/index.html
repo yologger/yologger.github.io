@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 여섯 개의 포스트에서 알림(Notification)에 대해 알아보겠습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기  ⬅️ ⬅️ ⬅️\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기\n\n\n액션알림에는 버튼이 포함될 수 있습니다. 이를 액션 버튼이라고 합니다.\n액션은 다음과 같이 생성할 수 있습니다.\n12345val action = NotificationCompat.Action.Builder(    android.R.drawable.sym_action_chat,    &quot;OPEN&quot;,    pendingIntent).build()\n생성된 액션은 NotificationBuilder객체의 addAction()메소드를 사용하여 추가합니다.\n1notificationBuilder.addAction(action)\n전체 코드는 다음과 같습니다.\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354class MainActivity : AppCompatActivity() &#123;    lateinit var button: Button    val REQUEST_CODE = 1    val NOTIFICATION_ID = 1    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById&lt;Button&gt;(R.id.activity_main_btn)        button.setOnClickListener &#123;            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;                val channelId = &quot;channel_id&quot;                val channelName = &quot;channel_name&quot;                val channelDescription = &quot;channel_description&quot;                val importance = NotificationManager.IMPORTANCE_HIGH                val notificationChannel = NotificationChannel(channelId, channelName, importance)                notificationChannel.description = channelDescription                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager                notificationManager.createNotificationChannel(notificationChannel)                val notificationBuilder = NotificationCompat.Builder(this, channelId)                    .setSmallIcon(android.R.drawable.ic_dialog_info)                    .setContentTitle(&quot;A Notification&quot;)                    .setContentText(&quot;This is a notification&quot;)                val resultIntent = Intent(this@MainActivity, ResultActivity::class.java)                val pendingIntent = PendingIntent.getActivity(this@MainActivity, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)                notificationBuilder.setContentIntent(pendingIntent)                val action = NotificationCompat.Action.Builder(                    android.R.drawable.sym_action_chat,                    &quot;OPEN&quot;,                    pendingIntent                ).build()                notificationBuilder.addAction(action)                val notification = notificationBuilder.build()                notificationManager.notify(NOTIFICATION_ID, notification)            &#125; else &#123;                // ...             &#125;        &#125;    &#125;&#125;\n이제 알림 패널에서 액션 버튼을 클릭하면 ResultActivity가 실행됩니다.\n\n마치며이번 포스트에서는 알림에 액션 버튼을 추가하는 방법에 대해 알아봤습니다. 다음 포스트에서는 알림 메시지를 묶는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-07T20:16:30+09:00","dateModified":"2021-06-28T22:20:31+09:00","datePublished":"2019-08-07T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (3) 알림에 액션 추가하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/07/android/190807-notification-action/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/07/android/190807-notification-action/","keywords":"Android"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며앞으로 여섯 개의 포스트에서 알림(Notification)에 대해 알아보겠습니다.\n\n로컬 알림\n알림에서 액티비티 시작하기\n알림에 액션 추가하기  ⬅️ ⬅️ ⬅️\n알림 메시지 묶기\n원격 알림\n포그라운드 상태에서 원격 알림 받기\n\n\n액션알림에는 버튼이 포함될 수 있습니다. 이를 액션 버튼이라고 합니다.\n액션은 다음과 같이 생성할 수 있습니다.\n12345val action = NotificationCompat.Action.Builder(    android.R.drawable.sym_action_chat,    &quot;OPEN&quot;,    pendingIntent).build()\n생성된 액션은 NotificationBuilder객체의 addAction()메소드를 사용하여 추가합니다.\n1notificationBuilder.addAction(action)\n전체 코드는 다음과 같습니다.\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354class MainActivity : AppCompatActivity() &#123;    lateinit var button: Button    val REQUEST_CODE = 1    val NOTIFICATION_ID = 1    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById&lt;Button&gt;(R.id.activity_main_btn)        button.setOnClickListener &#123;            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;                val channelId = &quot;channel_id&quot;                val channelName = &quot;channel_name&quot;                val channelDescription = &quot;channel_description&quot;                val importance = NotificationManager.IMPORTANCE_HIGH                val notificationChannel = NotificationChannel(channelId, channelName, importance)                notificationChannel.description = channelDescription                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager                notificationManager.createNotificationChannel(notificationChannel)                val notificationBuilder = NotificationCompat.Builder(this, channelId)                    .setSmallIcon(android.R.drawable.ic_dialog_info)                    .setContentTitle(&quot;A Notification&quot;)                    .setContentText(&quot;This is a notification&quot;)                val resultIntent = Intent(this@MainActivity, ResultActivity::class.java)                val pendingIntent = PendingIntent.getActivity(this@MainActivity, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)                notificationBuilder.setContentIntent(pendingIntent)                val action = NotificationCompat.Action.Builder(                    android.R.drawable.sym_action_chat,                    &quot;OPEN&quot;,                    pendingIntent                ).build()                notificationBuilder.addAction(action)                val notification = notificationBuilder.build()                notificationManager.notify(NOTIFICATION_ID, notification)            &#125; else &#123;                // ...             &#125;        &#125;    &#125;&#125;\n이제 알림 패널에서 액션 버튼을 클릭하면 ResultActivity가 실행됩니다.\n\n마치며이번 포스트에서는 알림에 액션 버튼을 추가하는 방법에 대해 알아봤습니다. 다음 포스트에서는 알림 메시지를 묶는 방법에 대해 알아보겠습니다.\n","dateCreated":"2019-08-07T20:16:30+09:00","dateModified":"2021-06-28T22:20:31+09:00","datePublished":"2019-08-07T20:16:30+09:00","description":"","headline":"[안드로이드] 알림(Notification) - (3) 알림에 액션 추가하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/08/07/android/190807-notification-action/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/08/07/android/190807-notification-action/","keywords":"Android"}</script>
     <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며앞으로 여섯 개의 포스트에서 알림(Notification)에 대해 알아보겠습니다.  로컬 알림 알림에서 액티비티 시작하기 알림에 액션 추가하기  ⬅️ ⬅️ ⬅️ 알림 메시지 묶기 원격 알림 포그라운드 상태에서 원격 알림 받기   액션알림에는 버튼이 포함">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 알림(Notification) - (3) 알림에 액션 추가하기">
@@ -120,37 +120,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -180,9 +152,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

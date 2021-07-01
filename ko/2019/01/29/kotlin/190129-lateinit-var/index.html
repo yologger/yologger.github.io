@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n늦은 초기화(Late Initialization)코틀린에서 변수나 상수는 원칙적으로 선언과 동시에 초기화해야합니다. 값이 없다면 null로 초기화 해야합니다. (관련 내용은 이 곳에서 확인하실 수 있습니다.)\n그러나 코틀린은 선언만 먼저 하고 초기화는 나중에 하는 방법을 제공합니다. 이를 늦은 초기화(Late Initialization)라고 합니다.\n이번 포스트에서는 늦은 초기화의 첫 번째 방법인 lateinit var에 대해 알아보겠습니다.\nvar코틀린에서의 변수는 초기화하지 않으면 컴파일 자체가 안됩니다.\n123// 기본 데이터타입 Intvar age: Int        // Property must be initialized or be abstractvar person: Person  // Property must be initialized or be abstract\n데이터 타입을 Nullable로 선언하고 null이라도 할당해주어야 합니다.\n12var age: Int? = nullvar person: Person? = null\n\nlateinit varlateinit var는 값의 생성 및 초기화를 나중에 할 수 있도록 합니다. 기본 자료형에는 사용할 수 없으며 클래스의 인스턴스에만 사용 가능합니다.\n12345class Person(name: String, age: Int)lateinit var person: Person     // 컴파일 에러가 발생하지 않습니다.person = Person(&quot;Paul&quot;, 35)\n문자열 String도 클래스이므로 사용할 수 있습니다.\n12lateinit var name: Stringname = &quot;Ronaldo&quot;\n보통 안드로이드 앱을 개발할 때 다음과 같이 사용합니다.\n123456789101112131415class MainActivity : AppCompatActivity() &#123;    private lateinit var loginButton: Button    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)                loginButton = findViewById(R.id.login_button)        loginButton.setOnClickListener &#123;            println(&quot;LoginButton Clicked.&quot;)        &#125;    &#125;&#125;\n\n\n\n마치며이번 포스트에서 늦은 초기화와 lateinit var에 대해 알아봤습니다. 다음 포스트에서는 by lazy에 대해 알아보겠습니다.\n","dateCreated":"2019-01-29T20:16:30+09:00","dateModified":"2021-06-23T12:16:44+09:00","datePublished":"2019-01-29T20:16:30+09:00","description":"","headline":"[코틀린] 늦은 초기화 - (1) lateinit var","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/29/kotlin/190129-lateinit-var/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/29/kotlin/190129-lateinit-var/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n늦은 초기화(Late Initialization)코틀린에서 변수나 상수는 원칙적으로 선언과 동시에 초기화해야합니다. 값이 없다면 null로 초기화 해야합니다. (관련 내용은 이 곳에서 확인하실 수 있습니다.)\n그러나 코틀린은 선언만 먼저 하고 초기화는 나중에 하는 방법을 제공합니다. 이를 늦은 초기화(Late Initialization)라고 합니다.\n이번 포스트에서는 늦은 초기화의 첫 번째 방법인 lateinit var에 대해 알아보겠습니다.\nvar코틀린에서의 변수는 초기화하지 않으면 컴파일 자체가 안됩니다.\n123// 기본 데이터타입 Intvar age: Int        // Property must be initialized or be abstractvar person: Person  // Property must be initialized or be abstract\n데이터 타입을 Nullable로 선언하고 null이라도 할당해주어야 합니다.\n12var age: Int? = nullvar person: Person? = null\n\nlateinit varlateinit var는 값의 생성 및 초기화를 나중에 할 수 있도록 합니다. 기본 자료형에는 사용할 수 없으며 클래스의 인스턴스에만 사용 가능합니다.\n12345class Person(name: String, age: Int)lateinit var person: Person     // 컴파일 에러가 발생하지 않습니다.person = Person(&quot;Paul&quot;, 35)\n문자열 String도 클래스이므로 사용할 수 있습니다.\n12lateinit var name: Stringname = &quot;Ronaldo&quot;\n보통 안드로이드 앱을 개발할 때 다음과 같이 사용합니다.\n123456789101112131415class MainActivity : AppCompatActivity() &#123;    private lateinit var loginButton: Button    override fun onCreate(savedInstanceState: Bundle?) &#123;        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)                loginButton = findViewById(R.id.login_button)        loginButton.setOnClickListener &#123;            println(&quot;LoginButton Clicked.&quot;)        &#125;    &#125;&#125;\n\n\n\n마치며이번 포스트에서 늦은 초기화와 lateinit var에 대해 알아봤습니다. 다음 포스트에서는 by lazy에 대해 알아보겠습니다.\n","dateCreated":"2019-01-29T20:16:30+09:00","dateModified":"2021-06-23T12:16:44+09:00","datePublished":"2019-01-29T20:16:30+09:00","description":"","headline":"[코틀린] 늦은 초기화 - (1) lateinit var","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/29/kotlin/190129-lateinit-var/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/29/kotlin/190129-lateinit-var/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.    늦은 초기화(Late Initialization)코틀린에서 변수나 상수는 원칙적으로 선언과 동시에 초기화해야합니다. 값이 없다면 null로 초기화 해야합니다. (관련 내용은 이 곳에서 확인하실 수 있습니다.) 그러나 코틀린은 선언만 먼저 하고 초기화는 나중에 하는">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] 늦은 초기화 - (1) lateinit var">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     

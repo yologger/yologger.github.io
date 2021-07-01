@@ -13,7 +13,7 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n접근 제한자접근 제한자(Access Modifiers)는 외부에서 클래스 내부의 메소드나 멤버변수에 접근하는 것을 제한하는 것입니다. 코틀린은 네 개의 접근 제한자를 지원합니다.\n\n(1) privateprivate으로 선언된 변수는 해당 클래스 내부에서만 접근이 가능합니다.\n12345678910class Person(private val name: String) &#123;        fun printName() &#123;        // 해당 클래스 내부에서 private 변수 name에 접근할 수 있습니다.        println(&quot;Name: $&#123;name&#125;.&quot;)    &#125;&#125;var person = Person(&quot;Paul&quot;)var name = person.name      // (에러) 클래스 내부가 아니므로 접근 불가능합니다.\nprivate으로 선언된 변수는 상속받는 자식 클래스에서도 접근이 불가능합니다.\n123456789101112131415161718open class Person(private val name: String) &#123;    fun printName() &#123;        println(&quot;Name: $&#123;name&#125;.&quot;)    &#125;&#125;class Player(name: String, private var team: String): Person(name) &#123;    fun printTeam() &#123;        println(&quot;Team: $&#123;team&#125;&quot;)    &#125;    fun printInformation() &#123;        println(&quot;$&#123;name&#125; works in $&#123;team&#125;&quot;)        // (에러) 부모클래스에 선언된 private 변수 name에 접근할 수 없고 컴파일되지 않습니다.    &#125;&#125;\n(2) protectedprotected로 선언된 변수는 해당 클래스와 자식 클래스에서 접근이 가능합니다.\n123456789101112131415161718open class Person(protected val name: String) &#123;    fun printName() &#123;        println(&quot;Name: $&#123;name&#125;.&quot;)    &#125;&#125;class Player(name: String, private var team: String): Person(name) &#123;    fun printTeam() &#123;        println(&quot;Team: $&#123;team&#125;&quot;)    &#125;    fun printInformation() &#123;        println(&quot;$&#123;name&#125; works in $&#123;team&#125;&quot;)        // 부모클래스에 선언된 protected 변수 name에 접근할 수 있습니다.    &#125;&#125;\n(3) internalinternal로 선언된 변수는 같은 모듈 내에서는 어디서 접근이 가능합니다. 코틀린 공식 문서에서 말하는 같은 모듈은 아래 상황을 뜻합니다.\n\nAndroid Studio Module\nIntelliJ IDEA Module\nMaven Project\n\n쉽게 말하면 안드로이드 스튜디오 프로젝트의 같은 모듈에서는 접근이 가능하다고 보면 되겠습니다.\n(4) public (default)어디서든 접근이 가능합니다. 접근 제한자를 붙이지 않으면 기본적으로 public입니다. \n\n마치며이번 포스트에서는 접근 제한자에 대해 알아봤습니다. 다음 포스트에서는 리플렉션(Reflection)에 대해 알아보겠습니다. \n","dateCreated":"2019-02-06T20:16:30+09:00","dateModified":"2021-06-23T12:50:14+09:00","datePublished":"2019-02-06T20:16:30+09:00","description":"","headline":"[코틀린] 접근 제한자(Access Modifiers)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/06/kotlin/190206-access-modifier/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/06/kotlin/190206-access-modifier/","keywords":"Kotlin"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n접근 제한자접근 제한자(Access Modifiers)는 외부에서 클래스 내부의 메소드나 멤버변수에 접근하는 것을 제한하는 것입니다. 코틀린은 네 개의 접근 제한자를 지원합니다.\n\n(1) privateprivate으로 선언된 변수는 해당 클래스 내부에서만 접근이 가능합니다.\n12345678910class Person(private val name: String) &#123;        fun printName() &#123;        // 해당 클래스 내부에서 private 변수 name에 접근할 수 있습니다.        println(&quot;Name: $&#123;name&#125;.&quot;)    &#125;&#125;var person = Person(&quot;Paul&quot;)var name = person.name      // (에러) 클래스 내부가 아니므로 접근 불가능합니다.\nprivate으로 선언된 변수는 상속받는 자식 클래스에서도 접근이 불가능합니다.\n123456789101112131415161718open class Person(private val name: String) &#123;    fun printName() &#123;        println(&quot;Name: $&#123;name&#125;.&quot;)    &#125;&#125;class Player(name: String, private var team: String): Person(name) &#123;    fun printTeam() &#123;        println(&quot;Team: $&#123;team&#125;&quot;)    &#125;    fun printInformation() &#123;        println(&quot;$&#123;name&#125; works in $&#123;team&#125;&quot;)        // (에러) 부모클래스에 선언된 private 변수 name에 접근할 수 없고 컴파일되지 않습니다.    &#125;&#125;\n(2) protectedprotected로 선언된 변수는 해당 클래스와 자식 클래스에서 접근이 가능합니다.\n123456789101112131415161718open class Person(protected val name: String) &#123;    fun printName() &#123;        println(&quot;Name: $&#123;name&#125;.&quot;)    &#125;&#125;class Player(name: String, private var team: String): Person(name) &#123;    fun printTeam() &#123;        println(&quot;Team: $&#123;team&#125;&quot;)    &#125;    fun printInformation() &#123;        println(&quot;$&#123;name&#125; works in $&#123;team&#125;&quot;)        // 부모클래스에 선언된 protected 변수 name에 접근할 수 있습니다.    &#125;&#125;\n(3) internalinternal로 선언된 변수는 같은 모듈 내에서는 어디서 접근이 가능합니다. 코틀린 공식 문서에서 말하는 같은 모듈은 아래 상황을 뜻합니다.\n\nAndroid Studio Module\nIntelliJ IDEA Module\nMaven Project\n\n쉽게 말하면 안드로이드 스튜디오 프로젝트의 같은 모듈에서는 접근이 가능하다고 보면 되겠습니다.\n(4) public (default)어디서든 접근이 가능합니다. 접근 제한자를 붙이지 않으면 기본적으로 public입니다. \n\n마치며이번 포스트에서는 접근 제한자에 대해 알아봤습니다. 다음 포스트에서는 리플렉션(Reflection)에 대해 알아보겠습니다. \n","dateCreated":"2019-02-06T20:16:30+09:00","dateModified":"2021-06-23T12:50:14+09:00","datePublished":"2019-02-06T20:16:30+09:00","description":"","headline":"[코틀린] 접근 제한자(Access Modifiers)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/06/kotlin/190206-access-modifier/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/06/kotlin/190206-access-modifier/","keywords":"Kotlin"}</script>
     <meta name="description" content="코틀린(Kotlin)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   접근 제한자접근 제한자(Access Modifiers)는 외부에서 클래스 내부의 메소드나 멤버변수에 접근하는 것을 제한하는 것입니다. 코틀린은 네 개의 접근 제한자를 지원합니다.  (1) privateprivate으로 선언된 변수는 해당 클래스 내부에서만 접근이 가">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[코틀린] 접근 제한자(Access Modifiers)">
@@ -117,37 +117,9 @@
         
             <ul class="sidebar-buttons">
             
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/ko/android"
-                            
-                            rel="noopener"
-                            title="Android"
-                        >
-                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Android</span>
-                    </a>
-            </li>
             
                 <li class="sidebar-button">
                     
@@ -177,9 +149,65 @@
                     </a>
             </li>
             
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
         </ul>
         
             <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
             
                 <li class="sidebar-button">
                     
