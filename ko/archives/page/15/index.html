@@ -270,6 +270,92 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/ko/2018/12/10/android/181210-build-config/"
+                            aria-label=": [안드로이드] 그래들 - (8) 코드에서 환경변수 분리하기 - BuildConfig"
+                        >
+                            [안드로이드] 그래들 - (8) 코드에서 환경변수 분리하기 - BuildConfig
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-12-10T20:16:30+09:00">
+	
+		    2018/12/10
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 그래들의 <a href="/ko/2018/12/07/android/181207-module/">모듈(Module)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">BuildConfig</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="BuildConfig"><a href="#BuildConfig" class="headerlink" title="BuildConfig"></a>BuildConfig</h1><p>안드로이드 시스템은 앱을 빌드할 때 여러가지 파일을 자동으로 생성합니다. 그 중 하나가 <code>BuildConfig</code>클래스입니다. 이 클래스에는 현재 빌드와 관련된 정보가 상수 형태로 정의되어 있으며, 코드에서도 직접 참조할 수 있습니다.</p>
+<h1 id="코드에서-BuildConfig에-접근하기"><a href="#코드에서-BuildConfig에-접근하기" class="headerlink" title="코드에서 BuildConfig에 접근하기"></a>코드에서 BuildConfig에 접근하기</h1><p>자동으로 생성된 <code>BuildConfig</code>클래스는 다음과 같습니다.</p>
+  <figure class="codeblock codeblock--tabbed"><figcaption><span>BuildConfig.java</span><ul class="tabs"><li class="tab active">java</li></ul></figcaption><div class="tabs-content"><figure class="highlight java" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Automatically generated file. DO NOT MODIFY</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildConfig</span> </span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> DEBUG = Boolean.parseBoolean(<span class="string">"true"</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String APPLICATION_ID = <span class="string">"com.yologger.example"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BUILD_TYPE = <span class="string">"debug"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VERSION_CODE = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String VERSION_NAME = <span class="string">"1.0"</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
+
+<p><code>BuildConfig</code>클래스에 정의된 상수는 코드에서 다음과 같이 접근할 수 있습니다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>MainActivity.kt</span><ul class="tabs"><li class="tab active">kotlin</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> applicationId = BuildConfig.APPLICATION_ID  <span class="comment">// "com.yologger.example"</span></span><br><span class="line">        <span class="keyword">val</span> versionCode = BuildConfig.VERSION_CODE      <span class="comment">// 1</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure></p>
+<p>그렇다면 이 상수는 어디에 정의되어 있을까요? 바로 모듈 수준의 <code>build.gradle</code>입니다. 이 파일의 <code>defaultConfig 섹션</code>에 상수가 정의되어 있습니다.</p>
+  <figure class="codeblock codeblock--tabbed"><figcaption><span>build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    defaultConfig {</span><br><span class="line">        applicationId <span class="string">"com.yologger.example"</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
+
+
+<h1 id="상수를-직접-정의하고-사용하기"><a href="#상수를-직접-정의하고-사용하기" class="headerlink" title="상수를 직접 정의하고 사용하기"></a>상수를 직접 정의하고 사용하기</h1><p><code>buildConfigField</code>를 사용하면 상수를 직접 정의하고 코드에서 참조할 수도 있습니다. 모듈 수준의 <code>build.gradle</code>에 <code>buildConfigField (&quot;DATA_TYPE&quot;, &quot;KEY&quot;, &quot;VALUE&quot;)</code> 형태로 선언하면 됩니다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    defaultConfig {</span><br><span class="line">        applicationId <span class="string">"com.yologger.example"</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line">        </span><br><span class="line">        buildConfigField (<span class="string">"String"</span>, <span class="string">"AUTH_API_KEY"</span>, <span class="string">'"your_auth_api_key"'</span>)</span><br><span class="line">        buildConfigField (<span class="string">"String"</span>, <span class="string">"AUTH_API_URL"</span>, <span class="string">'"your_auth_api_url"'</span>)</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure></p>
+<div class="alert warning icon"><p>추가 후 Gradle Sync를 해야만 BuildConfig 클래스가 생성됩니다.</p>
+</div>
+
+<div class="alert warning icon"><p>문자열의 경우 작은따옴표(‘’)로 감싸주어야 합니다.</p>
+</div>
+
+<p>새로 생성된 <code>BuildConfig</code>클래스는 다음과 같습니다.</p>
+  <figure class="codeblock codeblock--tabbed"><figcaption><span>BuildConfig.java</span><ul class="tabs"><li class="tab active">java</li></ul></figcaption><div class="tabs-content"><figure class="highlight java" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Automatically generated file. DO NOT MODIFY</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.example.simple_memo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildConfig</span> </span>{</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> DEBUG = Boolean.parseBoolean(<span class="string">"true"</span>);</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String APPLICATION_ID = <span class="string">"com.yologger.example"</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BUILD_TYPE = <span class="string">"debug"</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VERSION_CODE = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String VERSION_NAME = <span class="string">"1.0"</span>;</span><br><span class="line">  <span class="comment">// Field from default config.</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH_API_KEY = <span class="string">"your_auth_api_key"</span>;</span><br><span class="line">  <span class="comment">// Field from default config.</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH_API_URL = <span class="string">"your_auth_api_url"</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
+
+<p>생성된 상수에 접근해봅시다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>MainActivity.kt</span><ul class="tabs"><li class="tab active">kotlin</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() {</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> apiKey = BuildConfig.AUTH_API_KEY       <span class="comment">// your_auth_api_key</span></span><br><span class="line">        <span class="keyword">val</span> apiUrl = BuildConfig.AUTH_API_URL       <span class="comment">// your_auth_api_url</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure></p>
+<h1 id="상수를-xml-파일에서-사용하기"><a href="#상수를-xml-파일에서-사용하기" class="headerlink" title="상수를 xml 파일에서 사용하기"></a>상수를 xml 파일에서 사용하기</h1><p><code>xml 파일</code>에서 사용할 상수는 <code>resValue</code>를 사용하여 선언합니다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    defaultConfig {</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">// buildConfigField ("String", "AUTH_API_KEY", '"your_auth_api_key"')</span></span><br><span class="line">        <span class="comment">// buildConfigField ("String", "AUTH_API_URL", '"your_auth_api_url"')</span></span><br><span class="line">        resValue <span class="string">"string"</span>, <span class="string">"CLIENT_ID"</span>, <span class="string">"your_client_id"</span></span><br><span class="line">        resValue <span class="string">"string"</span>, <span class="string">"CLIENT_SECRET"</span>, <span class="string">"your_client_secret"</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure><br>다음과 같이 사용할 수 있습니다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>activity_main.xml</span><ul class="tabs"><li class="tab active">xml</li></ul></figcaption><div class="tabs-content"><figure class="highlight xml" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span> <span class="attr">android:text</span>=<span class="string">"@string/CLIENT_ID"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">TextView</span> <span class="attr">android:text</span>=<span class="string">"@string/CLIENT_SECRET"</span>/&gt;</span></span><br></pre></td></tr></tbody></table></figure></div></figure></p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>BuildConfig</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/11/android/181211-properties/">properties</a> 파일에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/12/10/android/181210-build-config/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/ko/2018/12/07/android/181207-module/"
                             aria-label=": [안드로이드] 그래들 - (7) 모듈(Module)이란?"
                         >
@@ -965,85 +1051,6 @@
                         <p>
                             <a
                                 href="/ko/2018/04/04/java/180404-mac-java/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/04/03/java/180403-oraclejdk-openjdk/"
-                            aria-label=": [Java] 자바 유료화? Oracle JDK와 OpenJDK"
-                        >
-                            [Java] 자바 유료화? Oracle JDK와 OpenJDK
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-04-03T08:16:30+09:00">
-	
-		    2018/04/03
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<hr>
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>2018년 Oracle이 <a href="/ko/2018/04/02/java/180402-jdk-version/">Java SE</a>의 과금 방식을 영구 라이선스에서 구독 모델로 변경하겠다고 밝혔습니다. 이 선언이 그동안 무료로 인식된 Java의 유료화로 받아들여지면서 관련 업계에 큰 혼란을 초래했습니다. Java의 유료화를 이해하려면 <code>Oracle JDK</code>와 <code>OpenJDK</code>에 대해 알아야 합니다.</p>
-<div class="alert warning icon"><p>참고로 Java 언어 자체는 무료입니다. Java 언어로 작성된 어플리케이션을 컴파일하고 실행하는 <a href="/ko/2018/01/01/java/180101-jvm-jre-jdk/">JDK(Java Development Kit)</a>가 유료화 논쟁의 대상입니다.</p>
-</div>
-
-<h1 id="Oracle-JDK"><a href="#Oracle-JDK" class="headerlink" title="Oracle JDK"></a>Oracle JDK</h1><span class="highlight-text red">Oracle JDK</span>는 <u>사용 목적</u>에 따라 유료이기도 무료이기도 한 JDK입니다. 
-
-<p>서버, PC, 스마트폰 등의 <u>일반적인 목적</u>으로 사용될 때는 무료이지만 키오스크 등 <u>특수한 목적</u>의 컴퓨팅에 사용될 땐 유료입니다. 또한 <code>Oracle JDK 8(Oracle Java SE 8)</code>부터는 Oracle의 지속적인 업데이트와 보안 패치, 기술지원을 받으려면 유료 서비스를 구매해야합니다. (참고로 Oracle JDK 8 이전 버전에서도 일반적인 목적의 사용은 무료였고 지속적인 업데이트와 보안 패치, 기술지원은 유료였습니다.)</p>
-<p>Oracle JDK는 OpenJDK를 기본으로 합니다. Open JDK에 추가적인 기능이 더해진 것이 <code>Oracle JDK</code>입니다. Oracle JDK에 존재하고 Open JDK에는 없는 대표적 기능으로는 글꼴 라이브러리와 Java Web Start가 있습니다. </p>
-<h1 id="OpenJDK"><a href="#OpenJDK" class="headerlink" title="OpenJDK"></a>OpenJDK</h1><span class="highlight-text red">OpenJDK</span>는 <u>사용 목적</u>에 관계없이 무료인 JDK입니다. 
-
-<p>2007년 Java를 개발한 Sun Microsystems사는 JDK를 오픈소스화하기 위해 OpenJDK를 만들었습니다. Sun Microsystems사는 저작권자가 오픈소스화를 거부한 일부 기능을 제외한 나머지 JDK 소스코드 전부를 OpenJDK에 제공했고, OpenJDK는 이를 기반으로 JDK 7 프로젝트를 시작했습니다.</p>
-<p>JDK 6 시절에는 OpenJDK가 Oracle JDK보다 성능이나 안정성이 크게 떨어졌습니다. 하지만 오늘날에는 Oracle JDK만이 제공하는 일부 기능을 제외하고는 차이가 없다는게 Oracle의 설명입니다. </p>
-<h1 id="안드로이드-스튜디오의-JDK"><a href="#안드로이드-스튜디오의-JDK" class="headerlink" title="안드로이드 스튜디오의 JDK"></a>안드로이드 스튜디오의 JDK</h1><p>참고로 안드로이드 스튜디오에는 OpenJDK가 내장되어 있으므로 별도의 JDK 설치가 필요없습니다. <code>File &gt; Project Structure &gt; SDK Location</code>에서 경로를 확인할 수 있습니다.<br><img src="/ko/images/posts/java/openjdk.png"><br>안드로이드 스튜디오에서는 보통 <code>compileSDKVersion</code>에 따라 적당한 JDK 버전이 자동으로 설정됩니다. 물론 프로젝트 수준의 <code>build.gradle</code> 파일에서 직접 JDK 버전을 설정할 수 있습니다.</p>
-<figure class="codeblock codeblock--tabbed"><figcaption><span>build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    <span class="comment">// Java 8을 사용하도록 설정</span></span><br><span class="line">    compileOptions {</span><br><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-
-<h1 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h1><p>Kakao나 Line처럼 한국에서 잘 알려진 기업도 OpenJDK를 도입하고 활용하고 있는 것으로 알고 있습니다. OpenJDK에서는 제공하지 않는 컴포넌트를 사용해야하거나, Oracle의 지속적인 지원을 받아야 하거나, 키오스크 등 특수한 목적의 컴퓨팅에 사용하는 경우에는 비용을 지불하고 Oracle JDK를 사용해야할 것입니다. 그렇지 않은 경우에는 OpenJDK를 사용해도 무방할 것 같습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/04/03/java/180403-oraclejdk-openjdk/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

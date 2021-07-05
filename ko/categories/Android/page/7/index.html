@@ -827,6 +827,7 @@
 </ul>
 <hr>
 <p><a target="_blank" rel="noopener" href="https://wp.swing2app.co.kr/knowledgebase/palystore-update/">https://wp.swing2app.co.kr/knowledgebase/palystore-update/</a></p>
+<h1 id="버전"><a href="#버전" class="headerlink" title="버전"></a>버전</h1><p>{major}.{minor}.{patch}<br>Major: 이전 버전과 호환이 안 되는 변경이 있다면 숫자를 올립니다<br>Minor: 이전 버전과 호환되는 기능 추가가 있다면 숫자를 올립니다.<br>Patch: 이전 버전의 버그를 수정했다면 숫자를 올립니다.</p>
 
                     
                         
@@ -837,6 +838,114 @@
                         <p>
                             <a
                                 href="/ko/2018/12/28/android/181228-app-update/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/12/27/android/181227-app-release-1/"
+                            aria-label=": [안드로이드] 앱 출시 - (5) 플레이스토어에 앱 출시하기"
+                        >
+                            [안드로이드] 앱 출시 - (5) 플레이스토어에 앱 출시하기
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-12-27T20:16:30+09:00">
+	
+		    2018/12/27
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="소프트웨어-출시-과정"><a href="#소프트웨어-출시-과정" class="headerlink" title="소프트웨어 출시 과정"></a>소프트웨어 출시 과정</h1><p>소프트웨어는 출시되기 전 많은 테스트를 거칩니다.<br><img src="/ko/images/posts/android/alpha-test/1.png"></p>
+<h3 id="1-알파-테스트"><a href="#1-알파-테스트" class="headerlink" title="(1) 알파 테스트"></a>(1) 알파 테스트</h3><p>알파 테스트는 회사 <u>내부</u>에서 진행하는 테스트입니다. <code>내부 테스트</code>라고도 하며 보통 개발팀이나 품질관리팀에서 실시합니다. </p>
+<h3 id="2-베타-테스트"><a href="#2-베타-테스트" class="headerlink" title="(2) 베타 테스트"></a>(2) 베타 테스트</h3><p>베타 테스트는 회사 <u>외부</u>에서 진행하는 테스트입니다. 베타 테스트에는 두 종류가 있습니다.</p>
+<ul>
+<li><p><code>클로스드 베타 테스트</code>: 회사가 <u>특정 사용자</u>들만 선발해서 진행하는 테스트입니다. <code>비공개 테스트</code>라고도 합니다.</p>
+</li>
+<li><p><code>오픈 베타 테스트</code>: 정식 출시 이전에 <u>모든 사용자</u>에게 진행하는 테스트입니다. <code>공개 테스트</code>라고도 합니다.</p>
+</li>
+</ul>
+<h3 id="3-출시"><a href="#3-출시" class="headerlink" title="(3) 출시"></a>(3) 출시</h3><p>소프트웨어가 모든 테스트를 통과하면 시장에 출시합니다.</p>
+<hr>
+<h1 id="안드로이드-내부-테스트"><a href="#안드로이드-내부-테스트" class="headerlink" title="안드로이드 내부 테스트"></a>안드로이드 내부 테스트</h1><p>안드로이드에서는 알파 테스트보다 <code>내부 테스트</code>라는 용어를 더 많이 사용합니다. 이제 <code>내부 테스트</code> 절차에 대해 알아보겠습니다.</p>
+<h3 id="1-개발자-계정-만들기"><a href="#1-개발자-계정-만들기" class="headerlink" title="(1) 개발자 계정 만들기"></a>(1) 개발자 계정 만들기</h3><p>구글 플레이스토어에 앱을 출시하려면 <code>구글 개발자 계정</code>을 만들어야 합니다. <a target="_blank" rel="noopener" href="http://play.google.com/apps/publish/signup">http://play.google.com/apps/publish/signup</a>을 방여문하 <code>구글 개발자 계정</code>을 생성합니다. (현재는 미화로 25달러를 결제해야하며, 한번 결제 시 평생 이용할 수 있습니다.)</p>
+<h3 id="2-구글-플레이-콘솔에-앱-생성하기"><a href="#2-구글-플레이-콘솔에-앱-생성하기" class="headerlink" title="(2) 구글 플레이 콘솔에 앱 생성하기"></a>(2) 구글 플레이 콘솔에 앱 생성하기</h3><p><code>구글 플레이 콘솔 &gt; All apps &gt; Create app</code>을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/2.png"></p>
+<p><code>App details</code>의 하위 항목을 입력합니다.<br><img src="/ko/images/posts/android/alpha-test/3.png"></p>
+</br>
+
+<ul>
+<li><code>App name</code>: 플레이 스토어에 출시되는 앱 이름</li>
+<li><code>Default launguage</code>: 기본 언어</li>
+<li><code>App or game</code>: 게임 앱인 경우 game, 그 외에는 App </li>
+<li><code>Free or paid</code>: 무료 앱인 경우 free, 유료 앱인 경우 paid (무료 선택 시 추후에 유료로 변경할 수 없습니다.)</li>
+</ul>
+<p><code>Declarations</code>의 하위 항목을 모두 체크합니다.<br><img src="/ko/images/posts/android/alpha-test/4.png"></p>
+</br>
+
+<ul>
+<li><code>Developer Program Policies</code>: 개발자 프로그램 정책에 동의</li>
+<li><code>US export laws</code>: 미국 수출법규에 동의</li>
+</ul>
+<p><code>구글 플레이 콘솔 &gt; All apps</code>을 선택하면 생성한 앱을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/5.png"></p>
+<h3 id="3-앱-정보-입력"><a href="#3-앱-정보-입력" class="headerlink" title="(3) 앱 정보 입력"></a>(3) 앱 정보 입력</h3><p>앱을 테스트하거나 출시하려면 앱에 대한 정보를 입력해야합니다. <code>구글 플레이 콘솔 &gt; All apps</code>에서 생성한 앱을 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/5.png"><br>왼쪽 사이드 바 메뉴에서 <code>Dashboard</code>를 선택합니다. <code>Dashboard</code>에서는 앱을 테스트하거나 출시하기위해 입력해야할 항목들을 확인할 수 있습니다. 항목은 크게 세 가지로 구성되어있습니다.</p>
+<ul>
+<li>Start testing now</li>
+<li>Set up your app</li>
+<li>Release your app</li>
+</ul>
+<p><img src="/ko/images/posts/android/alpha-test/6.png"><br><code>View tasks</code>를 누르면 아래 사진처럼 더 자세한 업무들을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/7.png"><br>완료된 업무는 옆에서 초록색 완료 아이콘을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/8.png"></p>
+<h3 id="4-테스터-선택"><a href="#4-테스터-선택" class="headerlink" title="(4) 테스터 선택"></a>(4) 테스터 선택</h3><p><code>Start testing now</code>항목에서 <code>Select testers</code>를 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/9.png"><br>내부 테스트는 최대 100명의 테스터를 선택할 수 있습니다. <code>Feedback URL or email address</code>에는 테스터로부터 피드백 받을 이메일을 입력합니다. 이후 <code>Create email list</code>을 클릭하여 테스터의 이메일을 입력합니다.<br><img src="/ko/images/posts/android/alpha-test/10.png"><br>테스터의 이메일을 추가하고 <code>Save changes</code>를 선택합니다.</p>
+<div class="alert warning icon"><p>테스터의 이메일은 구글 계정만 가능합니다.</p>
+</div>
+<p><img src="/ko/images/posts/android/alpha-test/11.png"></p>
+<h3 id="5-새로운-릴리즈-생성"><a href="#5-새로운-릴리즈-생성" class="headerlink" title="(5) 새로운 릴리즈 생성"></a>(5) 새로운 릴리즈 생성</h3><p><code>Dashboard</code>로 돌아와서 <code>Start testing now &gt; Create a new release</code>를 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/12.png"><br>다시 한번 <code>Create a new release</code>를 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/13.png"><br><a href="">이전 포스트</a>에서 생성한 서명된 APK파일을 업로드합니다.<br><img src="/ko/images/posts/android/alpha-test/14.png"><br><code>Release name</code>과 <code>Release notes</code>를 입력하고 <code>Save</code>버튼과 <code>Review release</code>버튼을 순서대로 클릭합니다.<br><img src="/ko/images/posts/android/alpha-test/15.png"><br>항목이 제대로 입력되었는지 확인하고 <code>Start rollout to internal testing</code>버튼을 클릭합니다.<br><img src="/ko/images/posts/android/alpha-test/16.png"></p>
+<h3 id="6-테스트-참여-URL"><a href="#6-테스트-참여-URL" class="headerlink" title="(6) 테스트 참여 URL"></a>(6) 테스트 참여 URL</h3><p>구글의 심사는 몇 시간에서 며칠이 소요될 수 있습니다. 심사가 끝나면 테스터 참여 URL이 발급되고 이를 전달할 수 있습니다. <code>구글 플레이 콘솔 &gt; 왼쪽 메뉴 바 &gt; All app</code>에서 본인이 알파 출시한 앱을 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/17.png"><br><code>왼쪽 메뉴 바 &gt; Testing &gt; Internal testing</code>으로 이동합니다.<br><img src="/ko/images/posts/android/alpha-test/18.png"><br><code>Testers</code>탭에서 하단 <code>Copy link</code>를 클릭하여 앱 설치 주소를 복사할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/19.png"><br>복사한 링크를 테스터에게 전달하면 테스터는 앱을 설치하고 테스트할 수 있습니다.</p>
+<div class="alert warning icon"><p><b><u>테스터 선택</u></b>에서 추가한 구글 계정만이 앱을 설치하고 테스트할 수 있습니다.</p>
+</div>
+
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>알파 테스트(내부 테스트)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트(비공개 테스트)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/12/27/android/181227-app-release-1/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -920,7 +1029,7 @@
 <h4 id="1-Start-testing-now"><a href="#1-Start-testing-now" class="headerlink" title="1. Start testing now"></a>1. Start testing now</h4><h4 id="2-Set-up-your-app"><a href="#2-Set-up-your-app" class="headerlink" title="2. Set up your app"></a>2. Set up your app</h4><p>다음 7개 항목을 입력해야합니다.<br><img src="/ko/images/posts/android/app-release-playstore/20.png"></p>
 <h6 id="a-App-access"><a href="#a-App-access" class="headerlink" title="(a) App access"></a>(a) App access</h6><p><img src="/ko/images/posts/android/app-release-playstore/21.png"><br><code>All functionality is available without special access</code>를 체크하고 저장합니다. 특별한 접근 권한 없이 모든 이용이 가능하다는 뜻입니다.</p>
 <h6 id="b-Ads"><a href="#b-Ads" class="headerlink" title="(b) Ads"></a>(b) Ads</h6><p><img src="/ko/images/posts/android/app-release-playstore/22.png"><br>광고 여부를 체크합니다. 앱 내에 광고가 있으면 “Yes, my app contains adds”를, 광고가 없으면 “No, my app does not contain ads”를 선택하고 저장합니다.</p>
-<h6 id="c-Content-ratings"><a href="#c-Content-ratings" class="headerlink" title="(c) Content ratings"></a>(c) Content ratings</h6><p>콘텐츠의 등급을 설정합니다. Start new questionaire를 클릭하여 설문을 시작합니다.<br><img src="/ko/images/posts/android/app-release-playstore/23.png"><br>이 단계에서는 이메일 주소와 앱 카테고리, 앱의 적합성을 조사합니다.<br><img src="/ko/images/posts/android/app-release-playstore/24.png"><br>모든 단계가 끝나면 각 국가에서의 등급을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/25.png"></p>
+<h6 id="c-Content-ratings"><a href="#c-Content-ratings" class="headerlink" title="(c) Content ratings"></a>(c) Content ratings</h6><p>콘텐츠의 등급을 설정합니다. Start new questionaire를 클릭하여 설문을 시작합니다.<br><img src="/ko/images/posts/android/app-release-playstore/23.png"><br>이 단계에서는 이메일 주소와 앱 카테고리, 앱의 적합성 등을 조사합니다.<br><img src="/ko/images/posts/android/app-release-playstore/24.png"><br>모든 단계가 끝나면 각 국가에서의 등급을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/25.png"></p>
 <h6 id="d-Target-audience-and-content"><a href="#d-Target-audience-and-content" class="headerlink" title="(d) Target audience and content"></a>(d) Target audience and content</h6><p>앱을 사용할 연령층과 어린이 관심 유도 여부 등을 확인합니다. 설문을 모두 완료합시다.<br><img src="/ko/images/posts/android/app-release-playstore/26.png"></p>
 <h6 id="e-News-Apps"><a href="#e-News-Apps" class="headerlink" title="(e) News Apps"></a>(e) News Apps</h6><p>뉴스 앱인지를 체크합니다.<br><img src="/ko/images/posts/android/app-release-playstore/27.png"></p>
 <h6 id="f-App-category-amp-Contact"><a href="#f-App-category-amp-Contact" class="headerlink" title="(f) App category &amp; Contact"></a>(f) App category &amp; Contact</h6><p>앱의 카테고리을 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/28.png"><br>개발자 연락처를 입력하고, 외부 마케팅 여부를 클릭합니다.<br><img src="/ko/images/posts/android/app-release-playstore/29.png"></p>
@@ -972,9 +1081,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/12/26/android/181226-open-beta-test/"
-                            aria-label=": [안드로이드] 앱 출시 - (4) 오픈 베타 테스트"
+                            aria-label=": [안드로이드] 앱 출시 - (4) 오픈 베타 테스트(공개 테스트)"
                         >
-                            [안드로이드] 앱 출시 - (4) 오픈 베타 테스트
+                            [안드로이드] 앱 출시 - (4) 오픈 베타 테스트(공개 테스트)
                         </a>
                     
                 </h1>
@@ -1012,78 +1121,16 @@
 <li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
 </ul>
 <hr>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/12/26/android/181226-open-beta-test/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2018/12/25/android/181225-closed-beta-test/"
-                            aria-label=": [안드로이드] 앱 출시 - (3) 클로스드 베타 테스트"
-                        >
-                            [안드로이드] 앱 출시 - (3) 클로스드 베타 테스트
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-12-25T20:16:30+09:00">
-	
-		    2018/12/25
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
+<h1 id="소프트웨어-출시-과정"><a href="#소프트웨어-출시-과정" class="headerlink" title="소프트웨어 출시 과정"></a>소프트웨어 출시 과정</h1><p>소프트웨어는 출시되기 전 많은 테스트를 거칩니다.<br><img src="/ko/images/posts/android/alpha-test/1.png"></p>
+<h3 id="1-알파-테스트"><a href="#1-알파-테스트" class="headerlink" title="(1) 알파 테스트"></a>(1) 알파 테스트</h3><p>알파 테스트는 회사 <u>내부</u>에서 진행하는 테스트입니다. <code>내부 테스트</code>라고도 하며 보통 개발팀이나 품질관리팀에서 실시합니다. </p>
+<h3 id="2-베타-테스트"><a href="#2-베타-테스트" class="headerlink" title="(2) 베타 테스트"></a>(2) 베타 테스트</h3><p>베타 테스트는 회사 <u>외부</u>에서 진행하는 테스트입니다. 베타 테스트에는 두 종류가 있습니다.</p>
 <ul>
-<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a> ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
-<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a></li>
-<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
-<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
-<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
-<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
-<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
+<li><p><code>클로스드 베타 테스트</code>: 회사가 <u>특정 사용자</u>들만 선발해서 진행하는 테스트입니다. <code>비공개 테스트</code>라고도 합니다.</p>
+</li>
+<li><p><code>오픈 베타 테스트</code>: 정식 출시 이전에 <u>모든 사용자</u>에게 진행하는 테스트입니다. <code>공개 테스트</code>라고도 합니다.</p>
+</li>
 </ul>
+<h3 id="3-출시"><a href="#3-출시" class="headerlink" title="(3) 출시"></a>(3) 출시</h3><p>소프트웨어가 모든 테스트를 통과하면 시장에 출시합니다.</p>
 <hr>
 <p>versionCode 1<br>versionName “1.0”</p>
 
@@ -1095,7 +1142,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2018/12/25/android/181225-closed-beta-test/#post-footer"
+                                href="/ko/2018/12/26/android/181226-open-beta-test/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
