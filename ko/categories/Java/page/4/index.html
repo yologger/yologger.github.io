@@ -344,9 +344,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2018/01/12/java/180112-static/"
-                            aria-label=": [자바] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)"
+                            aria-label=": [자바] 키워드 static이란? - 정적 멤버변수와 정적 메소드"
                         >
-                            [자바] 정적 멤버변수(Static Variable)과 정적 메소드(Static Method)
+                            [자바] 키워드 static이란? - 정적 멤버변수와 정적 메소드
                         </a>
                     
                 </h1>
@@ -374,8 +374,8 @@
 
 <h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/11/java/180111-constructor/">클래스의 생성자, 멤버변수, 메소드</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">정적 멤버변수(Static Variable)</span>와 <span class="highlight-text red">정적 메소드(Static Method)</span>에 대해 알아보겠습니다.</p>
 <hr>
-<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>키워드 <code>static</code>은 클래스의 멤버변수와 메소드 앞에 붙일 수 있습니다. 이렇게 <code>static</code>이 붙은 멤버변수와 메소드를 <strong>정적 멤버변수</strong>와 <strong>정적 메소드</strong>라고 합니다. </p>
-<p><strong>정적 멤버변수</strong>와 <strong>정적 메소드</strong>는 다음과 같은 특징이 있습니다.</p>
+<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>키워드 <code>static</code>은 클래스의 멤버변수와 메소드 앞에 붙일 수 있습니다. 이 키워드가 붙어있는 멤버변수와 메소드를 <code>정적 멤버변수</code>와 <code>정적 메소드</code>라고 합니다. </p>
+<p>정적 멤버변수와 정적 메소드는 다음과 같은 특징이 있습니다.</p>
 <ul>
 <li>클래스의 인스턴스를 생성하지 않고도 <strong>정적 메소드</strong>를 호출할 수 있습니다.</li>
 <li>클래스의 인스턴스를 생성하지 않고도 <strong>정적 멤버변수</strong>에 접근할 수 있습니다.</li>
@@ -525,11 +525,11 @@
 <h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/10/java/180110-collection-map/">집합자료형(Collection)의 맵(Map)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">클래스(Class)</span>, <span class="highlight-text red">인스턴스(Instance)</span>, <span class="highlight-text red">객체(Object)</span>에 대해 알아보겠습니다.</p>
 <hr>
 <h1 id="객체지향-프로그래밍"><a href="#객체지향-프로그래밍" class="headerlink" title="객체지향 프로그래밍"></a>객체지향 프로그래밍</h1><p>자바는 모든 대상을 <code>객체(Object)</code>로 바라봅니다. 이러한 점에서 자바는 <code>객체지향 프로그래밍(Object-oriented Programming)</code>언어입니다. 객체지향 프로그래밍을 이해하려면 클래스와 인스턴스에 대해 알아야합니다.</p>
-<h1 id="클래스와-인스턴스"><a href="#클래스와-인스턴스" class="headerlink" title="클래스와 인스턴스"></a>클래스와 인스턴스</h1><p>클래스와 인스턴스를 설명할 때 와플 기계와 와플을 예로 많이 듭니다.<br><img src="/ko/images/posts/kotlin/class/waffle.png"><br><strong>클래스</strong>는 인스턴스를 만드는 틀, <strong>인스턴스</strong>는 클래스로 만든 무언가입니다. 즉 클래스는 와플 기계, 인스턴스 와플입니다. 클래스를 코드로 표현하면 다음과 같습니다.</p>
+<h1 id="클래스와-인스턴스"><a href="#클래스와-인스턴스" class="headerlink" title="클래스와 인스턴스"></a>클래스와 인스턴스</h1><p>클래스와 인스턴스를 설명할 때 와플 기계와 와플을 예로 많이 듭니다.<br><img src="/ko/images/posts/java/180111-class/1.png"><br><code>클래스</code>는 <u>인스턴스를 만드는 틀</u>, <code>인스턴스</code>는 <u>클래스로 만든 무언가</u>입니다. 즉 클래스는 와플 기계, 인스턴스 와플입니다. 클래스를 코드로 표현하면 다음과 같습니다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Waffle</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>인스턴스는 다음과 같이 생성합니다. 키워드 <code>new</code>를 사용하고 클래스 이름 뒤에 <code>()</code>를 붙여주면 됩니다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Waffle waffle = <span class="keyword">new</span> Waffle()</span><br></pre></td></tr></table></figure>
-<p>이렇게 만든 인스턴스는 <strong>객체</strong>라고도 불립니다.</p>
+<p>이렇게 만든 인스턴스는 <code>객체</code>라고도 합니다.</p>
 <hr>
 <h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>클래스(Class)</code>, <code>인스턴스(Instance)</code>, <code>객체(Object)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/11/java/180111-constructor/">클래스의 생성자, 멤버변수, 메소드</a>에 대해 알아보겠습니다.</p>
 

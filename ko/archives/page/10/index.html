@@ -270,23 +270,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/19/android/190119-uri/"
-                            aria-label=": [안드로이드] URI와 UriMatcher"
+                            href="/ko/2019/02/08/android/002_01_app_release/190208-app-release-1/"
+                            aria-label=": [안드로이드] 앱 출시 - (5) 플레이스토어에 앱 출시하기"
                         >
-                            [안드로이드] URI와 UriMatcher
+                            [안드로이드] 앱 출시 - (5) 플레이스토어에 앱 출시하기
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2019-01-19T20:16:30+09:00">
+    <time datetime="2019-02-08T01:00:00+09:00">
 	
-		    2019/01/19
+		    2019/02/08
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Android/">Android</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/App-Release/">App Release</a>
 
 
     
@@ -295,52 +295,57 @@
             </div>
             
                 <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+                    <div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/17/android/190117-adb/">ADB</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">URI</span>와 <span class="highlight-text red">URI Matcher</span>에 대해 알아보겠습니다.</p>
+<h1 id="소프트웨어-출시-과정"><a href="#소프트웨어-출시-과정" class="headerlink" title="소프트웨어 출시 과정"></a>소프트웨어 출시 과정</h1><p>소프트웨어는 출시되기 전 많은 테스트를 거칩니다.<br><img src="/ko/images/posts/android/alpha-test/1.png"></p>
+<h3 id="1-알파-테스트"><a href="#1-알파-테스트" class="headerlink" title="(1) 알파 테스트"></a>(1) 알파 테스트</h3><p>알파 테스트는 회사 <u>내부</u>에서 진행하는 테스트입니다. <code>내부 테스트</code>라고도 하며 보통 개발팀이나 품질관리팀에서 실시합니다. </p>
+<h3 id="2-베타-테스트"><a href="#2-베타-테스트" class="headerlink" title="(2) 베타 테스트"></a>(2) 베타 테스트</h3><p>베타 테스트는 회사 <u>외부</u>에서 진행하는 테스트입니다. 베타 테스트에는 두 종류가 있습니다.</p>
+<ul>
+<li><p><code>클로스드 베타 테스트</code>: 회사가 <u>특정 사용자</u>들만 선발해서 진행하는 테스트입니다. <code>비공개 테스트</code>라고도 합니다.</p>
+</li>
+<li><p><code>오픈 베타 테스트</code>: 정식 출시 이전에 <u>모든 사용자</u>에게 진행하는 테스트입니다. <code>공개 테스트</code>라고도 합니다.</p>
+</li>
+</ul>
+<h3 id="3-출시"><a href="#3-출시" class="headerlink" title="(3) 출시"></a>(3) 출시</h3><p>소프트웨어가 모든 테스트를 통과하면 시장에 출시합니다.</p>
 <hr>
-<h1 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h1><p><code>URI(Uniform Resource Identifier, 통합 자원 식별자)</code>는 자원을 구분해주는 식별자입니다. 내 스마트폰이나 데스크톱, 그리고 인터넷 상에는 무수히 많은 자원(파일, 이미지, 비디오 등)이 존재합니다. URI는 이 자원을 구분하고 식별하는데 사용됩니다.</p>
-<p>우리는 구글에 접속할 때 웹 브라우저의 주소창에 <code>http://www.google.com</code>를 입력합니다. 이때 <code>http://www.google.com</code> 뒤에는 <code>index.html</code>이 생략되어있습니다</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="http://www.google.com/index.html">http://www.google.com/index.html</a></p>
-</blockquote>
-<p>이 주소도 URI입니다. 웹 브라우저는 URI에 위치한 index.html 파일을 가져와서 화면에 보여줍니다. 이처럼 URI는 자원을 구분하고 식별하는데 사용됩니다.</p>
-<h1 id="URI-구조"><a href="#URI-구조" class="headerlink" title="URI 구조"></a>URI 구조</h1><p>URI는 다음과 같은 구조를 가지고 있습니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme:[&#x2F;&#x2F;[user[:password]@]host[:port]][&#x2F;path][?query]</span><br></pre></td></tr></table></figure>
-<p><code>scheme</code>와 <code>host</code>는 필수사항이고 나머지는 선택사항입니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 예시</span><br><span class="line">https:&#x2F;&#x2F;www.google.com&#x2F;index.html</span><br><span class="line">mailto:yologger@gmail.com</span><br><span class="line">tel:+82-10-1111-2222</span><br><span class="line">ftp:&#x2F;&#x2F;yologger:1234@192.168.0.1:21</span><br><span class="line">content:&#x2F;&#x2F;com.korea.trains&#x2F;line&#x2F;1</span><br><span class="line">file:&#x2F;&#x2F;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;</span><br><span class="line">data:text&#x2F;vnd-example+xyz;foo&#x3D;bar;base64,R0lGODdh</span><br><span class="line">news:comp.infosystems.www.servers.unix</span><br><span class="line">telnet:&#x2F;&#x2F;192.0.2.16:80&#x2F;</span><br></pre></td></tr></table></figure>
-<h3 id="1-Scheme"><a href="#1-Scheme" class="headerlink" title="(1) Scheme"></a>(1) Scheme</h3><p><code>scheme</code>은 어떤 프로토콜을 사용할지 지정합니다. 자주 쓰는 스킴에는 http, https, ftp, content, file, data가 있습니다. 모든 URI 스킴은 <a target="_blank" rel="noopener" href="http://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">이 곳</a>에서 확인할 수 있습니다.</p>
-<h3 id="2-Host"><a href="#2-Host" class="headerlink" title="(2) Host"></a>(2) Host</h3><p>네트워크에 연결되어 있는 모든 컴퓨터 각각을 <code>호스트</code>라고 합니다. 보통 <code>도메인 네임</code>이나 <code>IP 주소</code>을 사용하여 호스트를 구분하고 식별합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 도메인 네임</span><br><span class="line">http:&#x2F;&#x2F;www.netflix.com</span><br><span class="line">https:&#x2F;&#x2F;www.google.com</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; IP 주소</span><br><span class="line">https:&#x2F;&#x2F;172.217.27.78</span><br></pre></td></tr></table></figure>
-<h3 id="3-Port"><a href="#3-Port" class="headerlink" title="(3) Port"></a>(3) Port</h3><p>컴퓨터 내에서 실행되고있는 어플리케이션들을 구분하기 위해 사용하는 번호입니다. 보통 HTTP 프로토콜을 사용할 때는 80, HTTPS 프로토콜을 사용할 때는 443 포트를 사용합니다. 예제는 다음과 같습니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;www.netflix.com:80</span><br><span class="line">https:&#x2F;&#x2F;www.google.com:443</span><br></pre></td></tr></table></figure>
-<h3 id="4-Authority"><a href="#4-Authority" class="headerlink" title="(4) Authority"></a>(4) Authority</h3><p><code>authority</code>는 사용자 이름과 비밀번호, 호스트, 포트번호의 조합입니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">authority &#x3D; [ username &quot;:&quot; password &quot;@&quot; ] host [ &quot;:&quot; port ]</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yologger:1234@mail.google.com&#x2F;:587</span><br></pre></td></tr></table></figure>
+<h1 id="안드로이드-내부-테스트"><a href="#안드로이드-내부-테스트" class="headerlink" title="안드로이드 내부 테스트"></a>안드로이드 내부 테스트</h1><p>안드로이드에서는 알파 테스트보다 <code>내부 테스트</code>라는 용어를 더 많이 사용합니다. 이제 <code>내부 테스트</code> 절차에 대해 알아보겠습니다.</p>
+<h3 id="1-개발자-계정-만들기"><a href="#1-개발자-계정-만들기" class="headerlink" title="(1) 개발자 계정 만들기"></a>(1) 개발자 계정 만들기</h3><p>구글 플레이스토어에 앱을 출시하려면 <code>구글 개발자 계정</code>을 만들어야 합니다. <a target="_blank" rel="noopener" href="http://play.google.com/apps/publish/signup">http://play.google.com/apps/publish/signup</a>을 방여문하 <code>구글 개발자 계정</code>을 생성합니다. (현재는 미화로 25달러를 결제해야하며, 한번 결제 시 평생 이용할 수 있습니다.)</p>
+<h3 id="2-구글-플레이-콘솔에-앱-생성하기"><a href="#2-구글-플레이-콘솔에-앱-생성하기" class="headerlink" title="(2) 구글 플레이 콘솔에 앱 생성하기"></a>(2) 구글 플레이 콘솔에 앱 생성하기</h3><p><code>구글 플레이 콘솔 &gt; All apps &gt; Create app</code>을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/2.png"></p>
+<p><code>App details</code>의 하위 항목을 입력합니다.<br><img src="/ko/images/posts/android/alpha-test/3.png"></p>
+</br>
 
-<h3 id="5-Path"><a href="#5-Path" class="headerlink" title="(5) Path"></a>(5) Path</h3><p>요청할 자원에 대한 경로를 의미합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 사람 자원의 경로</span><br><span class="line">https:&#x2F;&#x2F;www.example.com&#x2F;person</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 사람 중 프로그래머 자원의 경로</span><br><span class="line">https:&#x2F;&#x2F;www.example.com&#x2F;person&#x2F;programmer</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 차량 자원의 경로</span><br><span class="line">https:&#x2F;&#x2F;www.example.com&#x2F;car</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 책 자원의 경로</span><br><span class="line">https:&#x2F;&#x2F;192.168.0.1&#x2F;book</span><br></pre></td></tr></table></figure>
-<h3 id="6-Query"><a href="#6-Query" class="headerlink" title="(6) Query"></a>(6) Query</h3><p>경로에 있는 자원의 범위를 한정하기 위해 사용합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 이름이 paul인 사람</span><br><span class="line">https:&#x2F;&#x2F;www.example.com&#x2F;person?name&#x3D;paul</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 국가가 england인 사람</span><br><span class="line">https:&#x2F;&#x2F;www.example.com&#x2F;person?nation&#x3D;england</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 이름이 john이고 국가가 america인 사람</span><br><span class="line">https:&#x2F;&#x2F;www.example.com&#x2F;person?name&#x3D;john&amp;nation&#x3D;america</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 제조업체가 benz인 자동차</span><br><span class="line">https:&#x2F;&#x2F;www.example.com&#x2F;car?manufacturer&#x3D;benz</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 저자가 paul인 책</span><br><span class="line">https:&#x2F;&#x2F;192.168.0.1&#x2F;book?author&#x3D;paul</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 저자가 john인 책</span><br><span class="line">https:&#x2F;&#x2F;192.168.0.1&#x2F;book?author&#x3D;john</span><br></pre></td></tr></table></figure>
-<h1 id="안드로이드에서의-URI"><a href="#안드로이드에서의-URI" class="headerlink" title="안드로이드에서의 URI"></a>안드로이드에서의 URI</h1><p>안드로이드 API는 URI를 취급하기 위해 <code>Uri</code>클래스를 제공합니다. <code>Uri.Builder</code>클래스의 <code>build()</code>메소드를 사용하여 <code>Uri</code>객체를 생성할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.net.Uri</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> uri: Uri = Uri.Builder()</span><br><span class="line">    .scheme(<span class="string">&quot;https&quot;</span>)</span><br><span class="line">    .authority(<span class="string">&quot;www.example.com&quot;</span>)</span><br><span class="line">    .appendPath(<span class="string">&quot;person&quot;</span>)</span><br><span class="line">    .appendPath(<span class="string">&quot;programmer&quot;</span>)</span><br><span class="line">    .appendQueryParameter(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;paul&quot;</span>)</span><br><span class="line">    .appendQueryParameter(<span class="string">&quot;nation&quot;</span>, <span class="string">&quot;england&quot;</span>)</span><br><span class="line">    .build()</span><br><span class="line"></span><br><span class="line">println(uri.toString())     </span><br><span class="line"><span class="comment">// https://www.example.com/person/programmer?name=paul&amp;nation=england</span></span><br></pre></td></tr></table></figure>
-<p><code>Uri</code>클래스의 <code>parse()</code>메소드를 사용할 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.net.Uri</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> uri = Uri.parse(<span class="string">&quot;https://www.example.com/person/programmer?name=paul&amp;nation=england&quot;</span>)</span><br><span class="line"></span><br><span class="line">println(uri.toString())     </span><br><span class="line"><span class="comment">// https://www.example.com/person/programmer?name=paul&amp;nation=england</span></span><br></pre></td></tr></table></figure>
-<h1 id="UriMatcher"><a href="#UriMatcher" class="headerlink" title="UriMatcher"></a>UriMatcher</h1><p><code>UriMatcher</code>클래스는 두 개의 <code>Uri</code>를 비교하여 사용자가 정의한 값을 반환하는데 사용합니다. <code>UriMatcher</code>클래스는 두 개의 메소드만을 가지고 있습니다.</p>
-<h4 id="1-addUri"><a href="#1-addUri" class="headerlink" title="(1) addUri()"></a>(1) addUri()</h4><p>기준이 되는 Uri를 등록하는데 사용합니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addUri([authority], [path], [code])</span><br></pre></td></tr></table></figure>
-<p>세 번째 인자인 <code>code</code>는 두 <code>Uri</code>가 일치할 때 반환되는 정수값입니다.</p>
-<p><code>UriMatcher</code>객체를 생성하고 세 개의 <code>Uri</code>를 등록해봅시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> uriMatcher = UriMatcher(UriMatcher.NO_MATCH)</span><br><span class="line"></span><br><span class="line">uriMatcher.addURI(<span class="string">&quot;www.example.com&quot;</span>, <span class="string">&quot;person&quot;</span>, <span class="number">1</span>)</span><br><span class="line">uriMatcher.addURI(<span class="string">&quot;www.example.com&quot;</span>, <span class="string">&quot;person/*&quot;</span>, <span class="number">2</span>)</span><br><span class="line">uriMatcher.addURI(<span class="string">&quot;www.example.com&quot;</span>, <span class="string">&quot;car/*&quot;</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="2-match"><a href="#2-match" class="headerlink" title="(2) match()"></a>(2) match()</h4><p>인자로 전달된 <code>Uri</code>와 위에서 등록한 <code>Uri</code>과 비교하여 정수값을 반환합니다. </p>
-<p>우선 네 개의 <code>Uri</code>를 생성합시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://www.example.com/person</span></span><br><span class="line"><span class="keyword">val</span> uri1 = Uri.Builder()</span><br><span class="line">    .scheme(<span class="string">&quot;https&quot;</span>)</span><br><span class="line">    .authority(<span class="string">&quot;www.example.com&quot;</span>)</span><br><span class="line">    .appendPath(<span class="string">&quot;person&quot;</span>)</span><br><span class="line">    .build()</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://www.example.com/person/programmer</span></span><br><span class="line"><span class="keyword">val</span> uri2 = Uri.Builder()</span><br><span class="line">    .scheme(<span class="string">&quot;https&quot;</span>)</span><br><span class="line">    .authority(<span class="string">&quot;www.example.com&quot;</span>)</span><br><span class="line">    .appendPath(<span class="string">&quot;person&quot;</span>)</span><br><span class="line">    .appendPath(<span class="string">&quot;programmer&quot;</span>)</span><br><span class="line">    .build()</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://www.example.com/car/convertible</span></span><br><span class="line"><span class="keyword">val</span> uri3 = Uri.Builder()</span><br><span class="line">    .scheme(<span class="string">&quot;https&quot;</span>)</span><br><span class="line">    .authority(<span class="string">&quot;www.example.com&quot;</span>)</span><br><span class="line">    .appendPath(<span class="string">&quot;car&quot;</span>)</span><br><span class="line">    .appendPath(<span class="string">&quot;convertible&quot;</span>)</span><br><span class="line">    .build()</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://www.test.com/book</span></span><br><span class="line"><span class="keyword">val</span> uri4 = Uri.Builder()</span><br><span class="line">    .scheme(<span class="string">&quot;https&quot;</span>)</span><br><span class="line">    .authority(<span class="string">&quot;www.test.com&quot;</span>)</span><br><span class="line">    .appendPath(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">    .build()</span><br></pre></td></tr></table></figure>
-<p>이제 다음과 같이 두 <code>Uri</code>를 비교할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> result1 = uriMatcher.match(uri1)    <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> result2 = uriMatcher.match(uri2)    <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> result3 = uriMatcher.match(uri3)    <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 일치하는 uri가 없으면 -1을 반환합니다.</span></span><br><span class="line"><span class="keyword">val</span> result4 = uriMatcher.match(uri4)    <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>Uri</code>와 <code>UriMatcher</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/01/android/190201-permission/"><code>권한(Permission)</code></a>에 대해 알아보겠습니다.</p>
+<ul>
+<li><code>App name</code>: 플레이 스토어에 출시되는 앱 이름</li>
+<li><code>Default launguage</code>: 기본 언어</li>
+<li><code>App or game</code>: 게임 앱인 경우 game, 그 외에는 App </li>
+<li><code>Free or paid</code>: 무료 앱인 경우 free, 유료 앱인 경우 paid (무료 선택 시 추후에 유료로 변경할 수 없습니다.)</li>
+</ul>
+<p><code>Declarations</code>의 하위 항목을 모두 체크합니다.<br><img src="/ko/images/posts/android/alpha-test/4.png"></p>
+</br>
+
+<ul>
+<li><code>Developer Program Policies</code>: 개발자 프로그램 정책에 동의</li>
+<li><code>US export laws</code>: 미국 수출법규에 동의</li>
+</ul>
+<p><code>구글 플레이 콘솔 &gt; All apps</code>을 선택하면 생성한 앱을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/5.png"></p>
+<h3 id="3-앱-정보-입력"><a href="#3-앱-정보-입력" class="headerlink" title="(3) 앱 정보 입력"></a>(3) 앱 정보 입력</h3><p>앱을 테스트하거나 출시하려면 앱에 대한 정보를 입력해야합니다. <code>구글 플레이 콘솔 &gt; All apps</code>에서 생성한 앱을 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/5.png"><br>왼쪽 사이드 바 메뉴에서 <code>Dashboard</code>를 선택합니다. <code>Dashboard</code>에서는 앱을 테스트하거나 출시하기위해 입력해야할 항목들을 확인할 수 있습니다. 항목은 크게 세 가지로 구성되어있습니다.</p>
+<ul>
+<li>Start testing now</li>
+<li>Set up your app</li>
+<li>Release your app</li>
+</ul>
+<p><img src="/ko/images/posts/android/alpha-test/6.png"><br><code>View tasks</code>를 누르면 아래 사진처럼 더 자세한 업무들을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/7.png"><br>완료된 업무는 옆에서 초록색 완료 아이콘을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/8.png"></p>
+<h3 id="4-테스터-선택"><a href="#4-테스터-선택" class="headerlink" title="(4) 테스터 선택"></a>(4) 테스터 선택</h3><p><code>Start testing now</code>항목에서 <code>Select testers</code>를 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/9.png"><br>내부 테스트는 최대 100명의 테스터를 선택할 수 있습니다. <code>Feedback URL or email address</code>에는 테스터로부터 피드백 받을 이메일을 입력합니다. 이후 <code>Create email list</code>을 클릭하여 테스터의 이메일을 입력합니다.<br><img src="/ko/images/posts/android/alpha-test/10.png"><br>테스터의 이메일을 추가하고 <code>Save changes</code>를 선택합니다.</p>
+<div class="alert warning icon"><p>테스터의 이메일은 구글 계정만 가능합니다.</p>
+</div>
+<p><img src="/ko/images/posts/android/alpha-test/11.png"></p>
+<h3 id="5-새로운-릴리즈-생성"><a href="#5-새로운-릴리즈-생성" class="headerlink" title="(5) 새로운 릴리즈 생성"></a>(5) 새로운 릴리즈 생성</h3><p><code>Dashboard</code>로 돌아와서 <code>Start testing now &gt; Create a new release</code>를 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/12.png"><br>다시 한번 <code>Create a new release</code>를 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/13.png"><br><a href="">이전 포스트</a>에서 생성한 서명된 APK파일을 업로드합니다.<br><img src="/ko/images/posts/android/alpha-test/14.png"><br><code>Release name</code>과 <code>Release notes</code>를 입력하고 <code>Save</code>버튼과 <code>Review release</code>버튼을 순서대로 클릭합니다.<br><img src="/ko/images/posts/android/alpha-test/15.png"><br>항목이 제대로 입력되었는지 확인하고 <code>Start rollout to internal testing</code>버튼을 클릭합니다.<br><img src="/ko/images/posts/android/alpha-test/16.png"></p>
+<h3 id="6-테스트-참여-URL"><a href="#6-테스트-참여-URL" class="headerlink" title="(6) 테스트 참여 URL"></a>(6) 테스트 참여 URL</h3><p>구글의 심사는 몇 시간에서 며칠이 소요될 수 있습니다. 심사가 끝나면 테스터 참여 URL이 발급되고 이를 전달할 수 있습니다. <code>구글 플레이 콘솔 &gt; 왼쪽 메뉴 바 &gt; All app</code>에서 본인이 알파 출시한 앱을 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/17.png"><br><code>왼쪽 메뉴 바 &gt; Testing &gt; Internal testing</code>으로 이동합니다.<br><img src="/ko/images/posts/android/alpha-test/18.png"><br><code>Testers</code>탭에서 하단 <code>Copy link</code>를 클릭하여 앱 설치 주소를 복사할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/19.png"><br>복사한 링크를 테스터에게 전달하면 테스터는 앱을 설치하고 테스트할 수 있습니다.</p>
+<div class="alert warning icon"><p><b><u>테스터 선택</u></b>에서 추가한 구글 계정만이 앱을 설치하고 테스트할 수 있습니다.</p>
+</div>
+
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>알파 테스트(내부 테스트)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트(비공개 테스트)</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -350,7 +355,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2019/01/19/android/190119-uri/#post-footer"
+                                href="/ko/2019/02/08/android/002_01_app_release/190208-app-release-1/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -373,17 +378,130 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/19/kotlin/190119-null-1/"
-                            aria-label=": [코틀린] null 처리 - (1) NotNull과 Nullable"
+                            href="/ko/2019/02/08/android/002_01_app_release/190208-app-release/"
+                            aria-label=": [안드로이드] 앱 출시 - (5) 플레이스토어에 앱 출시하기"
                         >
-                            [코틀린] null 처리 - (1) NotNull과 Nullable
+                            [안드로이드] 앱 출시 - (5) 플레이스토어에 앱 출시하기
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2019-01-19T20:16:30+09:00">
+    <time datetime="2019-02-08T01:00:00+09:00">
 	
-		    2019/01/19
+		    2019/02/08
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/App-Release/">App Release</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
+<ul>
+<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
+<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a></li>
+<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
+<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
+<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
+<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
+<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
+</ul>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://wp.swing2app.co.kr/knowledgebase/playstore-apprelease/">https://wp.swing2app.co.kr/knowledgebase/playstore-apprelease/</a></p>
+<h1 id="들어가며-1"><a href="#들어가며-1" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
+<ul>
+<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
+<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a></li>
+<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
+<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
+<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
+<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
+<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
+</ul>
+<hr>
+<h1 id="개발자-계정-만들기"><a href="#개발자-계정-만들기" class="headerlink" title="개발자 계정 만들기"></a>개발자 계정 만들기</h1><p>구글 플레이스토어에 앱을 출시하려면 <code>구글 개발자 계정</code>을 만들어야 합니다. <a target="_blank" rel="noopener" href="http://play.google.com/apps/publish/signup">http://play.google.com/apps/publish/signup</a>을 방문하여 <code>구글 개발자 계정</code>을 생성합니다. (현재는 미화로 25달러를 결제해야하며, 한번 결제 시 평생 이용할 수 있습니다.)</p>
+<hr>
+<h1 id="앱-설정하기"><a href="#앱-설정하기" class="headerlink" title="앱 설정하기"></a>앱 설정하기</h1><p>All apps에서 생성한 앱을 선택합니다.<br><img src="/ko/images/posts/android/app-release-playstore/5.png"><br>왼쪽 사이드바 메뉴에 Dashboard를 클릭합니다.<br><img src="/ko/images/posts/android/app-release-playstore/6.png"><br>Dashboard 페이지에서는 앱 출시를 위해 입력해야할 정보가 단계별로 기재되어 있습니다. 하나씩 선택하고 입력하면 됩니다.</p>
+<p>또한 Dashboard에서는 각 단계의 진행상황을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/34.png"></p>
+<h4 id="1-Start-testing-now"><a href="#1-Start-testing-now" class="headerlink" title="1. Start testing now"></a>1. Start testing now</h4><h4 id="2-Set-up-your-app"><a href="#2-Set-up-your-app" class="headerlink" title="2. Set up your app"></a>2. Set up your app</h4><p>다음 7개 항목을 입력해야합니다.<br><img src="/ko/images/posts/android/app-release-playstore/20.png"></p>
+<h6 id="a-App-access"><a href="#a-App-access" class="headerlink" title="(a) App access"></a>(a) App access</h6><p><img src="/ko/images/posts/android/app-release-playstore/21.png"><br><code>All functionality is available without special access</code>를 체크하고 저장합니다. 특별한 접근 권한 없이 모든 이용이 가능하다는 뜻입니다.</p>
+<h6 id="b-Ads"><a href="#b-Ads" class="headerlink" title="(b) Ads"></a>(b) Ads</h6><p><img src="/ko/images/posts/android/app-release-playstore/22.png"><br>광고 여부를 체크합니다. 앱 내에 광고가 있으면 “Yes, my app contains adds”를, 광고가 없으면 “No, my app does not contain ads”를 선택하고 저장합니다.</p>
+<h6 id="c-Content-ratings"><a href="#c-Content-ratings" class="headerlink" title="(c) Content ratings"></a>(c) Content ratings</h6><p>콘텐츠의 등급을 설정합니다. Start new questionaire를 클릭하여 설문을 시작합니다.<br><img src="/ko/images/posts/android/app-release-playstore/23.png"><br>이 단계에서는 이메일 주소와 앱 카테고리, 앱의 적합성 등을 조사합니다.<br><img src="/ko/images/posts/android/app-release-playstore/24.png"><br>모든 단계가 끝나면 각 국가에서의 등급을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/app-release-playstore/25.png"></p>
+<h6 id="d-Target-audience-and-content"><a href="#d-Target-audience-and-content" class="headerlink" title="(d) Target audience and content"></a>(d) Target audience and content</h6><p>앱을 사용할 연령층과 어린이 관심 유도 여부 등을 확인합니다. 설문을 모두 완료합시다.<br><img src="/ko/images/posts/android/app-release-playstore/26.png"></p>
+<h6 id="e-News-Apps"><a href="#e-News-Apps" class="headerlink" title="(e) News Apps"></a>(e) News Apps</h6><p>뉴스 앱인지를 체크합니다.<br><img src="/ko/images/posts/android/app-release-playstore/27.png"></p>
+<h6 id="f-App-category-amp-Contact"><a href="#f-App-category-amp-Contact" class="headerlink" title="(f) App category &amp; Contact"></a>(f) App category &amp; Contact</h6><p>앱의 카테고리을 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/28.png"><br>개발자 연락처를 입력하고, 외부 마케팅 여부를 클릭합니다.<br><img src="/ko/images/posts/android/app-release-playstore/29.png"></p>
+<h6 id="g-Main-store-listing"><a href="#g-Main-store-listing" class="headerlink" title="(g) Main store listing"></a>(g) Main store listing</h6><p>앱 스토어에 표시될 앱 정보를 입력합니다.<br><img src="/ko/images/posts/android/app-release-playstore/30.png"></p>
+<ul>
+<li>App name: 플레이 스토어에 표시되는 앱 이름</li>
+<li>Short description: 간단한 앱 설명</li>
+<li>Full description: 자세한 앱 설명</li>
+</ul>
+<p><img src="/ko/images/posts/android/app-release-playstore/31.png"></p>
+<ul>
+<li>App icon: 플레이스토어에 표시되는 앱 아이콘 이미지 (512x512px)</li>
+<li>Feature graphic: 출시된 앱을 공유했을 때 나타나는 섬네일 이미지 (1024x500px)</li>
+</ul>
+<p><img src="/ko/images/posts/android/app-release-playstore/33.png"><br>스마트폰과 태블릿에 대한 스크린샷을 업로드</p>
+<hr>
+<h1 id="앱-출시하기"><a href="#앱-출시하기" class="headerlink" title="앱 출시하기"></a>앱 출시하기</h1><p>이제 Dashboard로 돌아와 Release your app 항목을 입력합시다.<br><img src="/ko/images/posts/android/app-release-playstore/35.png"></p>
+<h6 id="a-Select-countries-and-regions"><a href="#a-Select-countries-and-regions" class="headerlink" title="(a) Select countries and regions"></a>(a) Select countries and regions</h6><h6 id="b-Select-testers"><a href="#b-Select-testers" class="headerlink" title="(b) Select testers"></a>(b) Select testers</h6><h6 id="c-Create-a-new-release"><a href="#c-Create-a-new-release" class="headerlink" title="(c) Create a new release"></a>(c) Create a new release</h6><h6 id="d-Review-and-roll-out-the-release"><a href="#d-Review-and-roll-out-the-release" class="headerlink" title="(d) Review and roll out the release"></a>(d) Review and roll out the release</h6><p><a target="_blank" rel="noopener" href="https://wp.swing2app.co.kr/knowledgebase/playstore-apprelease/">https://wp.swing2app.co.kr/knowledgebase/playstore-apprelease/</a></p>
+<p>versionCode 1<br>versionName “1.0”</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/08/android/002_01_app_release/190208-app-release/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/07/kotlin/190207-reflection/"
+                            aria-label=": [코틀린] 리플렉션(Reflection)"
+                        >
+                            [코틀린] 리플렉션(Reflection)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-07T20:16:30+09:00">
+	
+		    2019/02/07
     	
     </time>
     
@@ -402,28 +520,196 @@
 <div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>앞으로 네 개의 포스트를 통해 코틀린의 <code>null</code> 처리 방법에 대해 알아보려고 합니다.</p>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><span class="highlight-text red">리플렉션(Reflection)</span>은 런타임에서 구체적인 클래스 타입을 몰라도 그 클래스의 멤버변수, 메소드 등에 접근할 수 있도록 하는 API입니다. 
+
+<hr>
+<h1 id="Class와-KClass"><a href="#Class와-KClass" class="headerlink" title="Class와 KClass"></a>Class와 KClass</h1><p>우선 <code>코틀린의 리플렉션</code>을 이해하려면 <code>자바의 리플랙션</code>에 대해 알아볼 필요가 있습니다. (자바의 리플랙션은 <a href="/ko/2018/03/01/java/180301-reflection/">이 포스트</a>를 참고하시기 바랍니다.) </p>
+<p>자바에서는 클래스에 대한 정보를 <code>Class</code>클래스에 저장할 수 있습니다. 이를 <code>클래스 참조(Class Reference)</code>라고 하며, 클래스를 참조하는 방법에는 여러 방법이 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .class를 사용하여 클래스에서 객체 정보 가져오기</span></span><br><span class="line">Class c1 = String.class</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// forName()메소드를 사용하여 클래스에서 객체 정보 가져오기</span></span><br><span class="line">Class c1 = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 인스턴스로부터 객체 정보 가져오기</span></span><br><span class="line">String string = <span class="keyword">new</span> String();</span><br><span class="line">Class c1 = string.getClass();</span><br></pre></td></tr></table></figure>
+<p>반면 코틀린에서는 <code>더블콜론(::)</code>을 사용하여 클래스에 대한 정보를 가져올 수 있습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 클래스에서 객체 정보 가져오기</span></span><br><span class="line"><span class="keyword">var</span> kc1: KClass&lt;Person&gt; = Person::<span class="class"><span class="keyword">class</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 인스턴스에서 객체 정보 가져오기</span></span><br><span class="line"><span class="keyword">var</span> kc1: KClass&lt;Person&gt; = Person::<span class="class"><span class="keyword">class</span></span></span><br></pre></td></tr></table></figure>
+<p>주의할 점은 <code>Class</code>클래스가 아닌 <code>KClass</code>라는 클래스에 정보가 저장된다는 점입니다. 이는 자바에서 사용하는 클래스와 코틀린에서 사용하는 클래스가 다르기 때문입니다. </p>
+<p>코틀린의 <code>Kclass</code>를 자바의 <code>Class</code>로 변환하려면 <code>.java</code>를 뒤에 붙여주면 됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> kc1: KClass&lt;Person&gt; = Person::<span class="class"><span class="keyword">class</span></span></span><br><span class="line"><span class="keyword">var</span> c1: Class&lt;Person&gt; = kc.java</span><br></pre></td></tr></table></figure>
+<h1 id="리플렉션을-사용하여-멤버-변수-참조"><a href="#리플렉션을-사용하여-멤버-변수-참조" class="headerlink" title="리플렉션을 사용하여 멤버 변수 참조"></a>리플렉션을 사용하여 멤버 변수 참조</h1><p>다음과 같은 클래스가 있다고 가정해봅시다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">&quot;Ronaldo&quot;</span></span><br><span class="line">    <span class="keyword">var</span> nation = <span class="string">&quot;Portugal&quot;</span></span><br><span class="line">    <span class="keyword">var</span> team = <span class="string">&quot;Juventus&quot;</span></span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">35</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>리플렉션을 사용하면 다음과 같이 클래스의 멤버변수에 접근할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> player: Player = Player()</span><br><span class="line"><span class="keyword">val</span> kclass: KClass&lt;Player&gt; = p::<span class="class"><span class="keyword">class</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// KClass를 사용하여 Player 클래스의 멤버변수를 알아내고 있습니다.</span></span><br><span class="line">kclass.memberProperties.forEach &#123;</span><br><span class="line">    print(<span class="string">&quot;<span class="subst">$&#123;it.name&#125;</span> :: <span class="subst">$&#123;it.getter.get(p)&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// name :: Ronaldo</span></span><br><span class="line"><span class="comment">// nation :: Portugal</span></span><br><span class="line"><span class="comment">// team :: Juventus</span></span><br><span class="line"><span class="comment">// age :: 35</span></span><br></pre></td></tr></table></figure>
+<h1 id="리플렉션을-사용하여-함수-참조"><a href="#리플렉션을-사용하여-함수-참조" class="headerlink" title="리플렉션을 사용하여 함수 참조"></a>리플렉션을 사용하여 함수 참조</h1><p>리플렉션은 함수를 참조하는데 사용할 수도 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">(name: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">    println(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수를 변수에 저장하는데 리플렉션 사용</span></span><br><span class="line"><span class="keyword">var</span> myFun = ::printName</span><br><span class="line">myFun(<span class="string">&quot;ronaldo&quot;</span>)  </span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">isOdd</span><span class="params">(x: <span class="type">Int</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> x % <span class="number">2</span> !=<span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> numbers = listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수를 함수의 인자로 전달하는데 리플렉션 사용</span></span><br><span class="line">println(numbers.filter(::isOdd)) </span><br></pre></td></tr></table></figure>
+<h1 id="초기화-여부-확인"><a href="#초기화-여부-확인" class="headerlink" title="초기화 여부 확인"></a>초기화 여부 확인</h1><p>리플렉션을 사용하여 멤버변수가 초기화되었는지 확인할 수도 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> phone: Phone</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">getPhone</span><span class="params">()</span></span>: Phone &#123;</span><br><span class="line">        <span class="comment">//  변수가 초기화 됐는지 확인</span></span><br><span class="line">        <span class="keyword">if</span>(::phone.isInitialized) &#123;	</span><br><span class="line">            <span class="keyword">return</span> phone</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.phone = Phone()</span><br><span class="line">            <span class="keyword">return</span> phone</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>리플렉션(Reflection)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/08/kotlin/190208-extension-function/"><code>확장 함수(Extension Function)</code></a>에 대해 알아보겠습니다. </p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/07/kotlin/190207-reflection/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/07/android/002_01_app_release/190207-open-beta-test/"
+                            aria-label=": [안드로이드] 앱 출시 - (4) 오픈 베타 테스트(공개 테스트)"
+                        >
+                            [안드로이드] 앱 출시 - (4) 오픈 베타 테스트(공개 테스트)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-07T01:00:00+09:00">
+	
+		    2019/02/07
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/App-Release/">App Release</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
+<ul>
+<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
+<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a></li>
+<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
+<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
+<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
+<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
+<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
+</ul>
+<hr>
+<h1 id="소프트웨어-출시-과정"><a href="#소프트웨어-출시-과정" class="headerlink" title="소프트웨어 출시 과정"></a>소프트웨어 출시 과정</h1><p>소프트웨어는 출시되기 전 많은 테스트를 거칩니다.<br><img src="/ko/images/posts/android/alpha-test/1.png"></p>
+<h3 id="1-알파-테스트"><a href="#1-알파-테스트" class="headerlink" title="(1) 알파 테스트"></a>(1) 알파 테스트</h3><p>알파 테스트는 회사 <u>내부</u>에서 진행하는 테스트입니다. <code>내부 테스트</code>라고도 하며 보통 개발팀이나 품질관리팀에서 실시합니다. </p>
+<h3 id="2-베타-테스트"><a href="#2-베타-테스트" class="headerlink" title="(2) 베타 테스트"></a>(2) 베타 테스트</h3><p>베타 테스트는 회사 <u>외부</u>에서 진행하는 테스트입니다. 베타 테스트에는 두 종류가 있습니다.</p>
+<ul>
+<li><p><code>클로스드 베타 테스트</code>: 회사가 <u>특정 사용자</u>들만 선발해서 진행하는 테스트입니다. <code>비공개 테스트</code>라고도 합니다.</p>
+</li>
+<li><p><code>오픈 베타 테스트</code>: 정식 출시 이전에 <u>모든 사용자</u>에게 진행하는 테스트입니다. <code>공개 테스트</code>라고도 합니다.</p>
+</li>
+</ul>
+<h3 id="3-출시"><a href="#3-출시" class="headerlink" title="(3) 출시"></a>(3) 출시</h3><p>소프트웨어가 모든 테스트를 통과하면 시장에 출시합니다.</p>
+<hr>
+<h1 id="안드로이드-비공개-테스트"><a href="#안드로이드-비공개-테스트" class="headerlink" title="안드로이드 비공개 테스트"></a>안드로이드 비공개 테스트</h1><p>안드로이드에서는 오픈 베타 테스트보다 <code>공개 테스트</code>라는 용어를 더 많이 사용합니다. 비공개 테스트는 테스트용 앱을 회사 <u>외부</u>의 불특정 다수에게 배포하고 피드백을 받습니다.</p>
+<p>이제 <code>공개 테스트</code>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/07/android/002_01_app_release/190207-open-beta-test/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/06/kotlin/190206-access-modifier/"
+                            aria-label=": [코틀린] 접근 제한자(Access Modifiers)"
+                        >
+                            [코틀린] 접근 제한자(Access Modifiers)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-06T20:16:30+09:00">
+	
+		    2019/02/06
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="접근-제한자"><a href="#접근-제한자" class="headerlink" title="접근 제한자"></a>접근 제한자</h1><span class="highlight-text red">접근 제한자(Access Modifiers)</span>는 <u>외부에서 클래스 내부의 메소드나 멤버변수에 접근하는 것을 제한하는 것</u>입니다. 코틀린은 네 개의 접근 제한자를 지원합니다.
+
+<h3 id="1-private"><a href="#1-private" class="headerlink" title="(1) private"></a>(1) private</h3><p><code>private</code>이 붙은 멤버변수, 메소드, 생성자는 클래스 내부에서만 접근할 수 있습니다. 클래스에는 붙일 수 없습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> name: String) &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// 해당 클래스 내부에서 private 변수 name에 접근할 수 있습니다.</span></span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> name = person.name      <span class="comment">// (에러) 클래스 내부가 아니므로 접근 불가능합니다.</span></span><br></pre></td></tr></table></figure>
+<p><code>private</code>으로 선언된 변수는 상속받는 자식 클래스에서도 접근이 불가능합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> name: String) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span></span>(name: String, <span class="keyword">private</span> <span class="keyword">var</span> team: String): Person(name) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printTeam</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Team: <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printInformation</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;<span class="subst">$&#123;name&#125;</span> works in <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment">// (에러) 부모클래스에 선언된 private 변수 name에 접근할 수 없고 컴파일되지 않습니다.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-protected"><a href="#2-protected" class="headerlink" title="(2) protected"></a>(2) protected</h3><p><code>protected</code>가 붙은 멤버변수, 메소드, 생성자는 해당 클래스와 자식 클래스에서만 접근할 수 있습니다. 클래스에는 붙일 수 없습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">protected</span> <span class="keyword">val</span> name: String) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Name: <span class="subst">$&#123;name&#125;</span>.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span></span>(name: String, <span class="keyword">private</span> <span class="keyword">var</span> team: String): Person(name) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printTeam</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Team: <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printInformation</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;<span class="subst">$&#123;name&#125;</span> works in <span class="subst">$&#123;team&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="comment">// 부모클래스에 선언된 protected 변수 name에 접근할 수 있습니다.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-internal"><a href="#3-internal" class="headerlink" title="(3) internal"></a>(3) internal</h3><p><code>internal</code>이 붙은 멤버변수, 메소드, 생성자는 같은 모듈 안의 어디에서든 접근할 수 있습니다. 이 접근 제한자는 클래스 앞에도 붙일 수 있습니다. 코틀린 공식 문서에서 말하는 같은 <a href="/ko/2018/12/07/android/181207-module/">모듈</a>은 아래 상황을 뜻합니다.</p>
 <ol>
-<li>NotNull과 Nullable ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2019/01/20/kotlin/190120-null-2/">Null Check</a></li>
-<li><a href="/ko/2019/01/21/kotlin/190121-elvis-operator/">엘비스 연산자(Elvis Operator)</a></li>
-<li><a href="/ko/2019/01/22/kotlin/190122-null-check-with-scope-function/">스코프 함수를 통한 Null Check</a></li>
+<li>Android Studio Module</li>
+<li>IntelliJ IDEA Module</li>
+<li>Maven Project</li>
 </ol>
+<p>쉽게 말하면 안드로이드 스튜디오 프로젝트의 같은 모듈에서는 접근이 가능하다고 보면 되겠습니다.</p>
+<h3 id="4-public-default"><a href="#4-public-default" class="headerlink" title="(4) public (default)"></a>(4) public (default)</h3><p>접근 제한자를 따로 붙이지 않으면 이 접근 제한자가 적용됩니다. <code>public</code>이 붙은 멤버변수, 메소드, 생성자는 다른 모듈에서도 접근할 수 있으며, 클래스에도 붙일 수 있습니다. </p>
 <hr>
-<h1 id="NotNull-타입"><a href="#NotNull-타입" class="headerlink" title="NotNull 타입"></a>NotNull 타입</h1><p>코틀린은 변수를 초기화하지 않으면 컴파일 자체가 안됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String</span><br><span class="line"><span class="comment">// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// Property must be initialized or be abstract</span></span><br></pre></td></tr></table></figure>
-<p>클래스의 멤버변수 역시 초기화하지 않으면 컴파일 자체가 안됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> name: String    <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> nation: String  <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>NotNull</code> 타입의 변수는 <code>null</code>로 초기화할 수도 없습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String = <span class="literal">null</span>	</span><br><span class="line"><span class="comment">// 컴파일 자체가 되지 않고 다음과 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// Null can not be a value of a non-null type String</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> name: String = <span class="literal">null</span>     <span class="comment">// Null can not be a value of a non-null type String</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> nation: String = <span class="literal">null</span>   <span class="comment">// Null can not be a value of a non-null type String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Nullable-타입"><a href="#Nullable-타입" class="headerlink" title="Nullable 타입"></a>Nullable 타입</h1><p>코틀린에서 <code>null</code>을 할당하기 위해서는 변수를 <code>Nullable</code>타입으로 선언해야합니다. 타입 뒤에 <code>물음표(?)</code>를 붙이면 됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> name: String? = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> nation: String? = <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>물론 <code>Nullable</code>타입이라도 초기화하지 않으면 컴파일 자체가 되지 않습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String?   <span class="comment">// 다음과 같은 에러가 발생합니다.</span></span><br><span class="line"><span class="comment">// Property must be initialized or be abstract</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> name: String?       <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> nation: String?     <span class="comment">// Property must be initialized or be abstract</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>NotNull과 Nullable</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/20/kotlin/190120-null-2/">코틀린의 Null Check 방법</a>에 대해 알아보겠습니다.</p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>접근 제한자</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/07/kotlin/190207-reflection/"><code>리플렉션(Reflection)</code></a>에 대해 알아보겠습니다. </p>
 
                     
                         
@@ -433,7 +719,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2019/01/19/kotlin/190119-null-1/#post-footer"
+                                href="/ko/2019/02/06/kotlin/190206-access-modifier/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -456,23 +742,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/18/android/190118-check-activity_stack/"
-                            aria-label=": [안드로이드] 액티비티 스택(Activity Stack) 확인하는 방법"
+                            href="/ko/2019/02/06/android/002_01_app_release/190206-closed-beta-test/"
+                            aria-label=": [안드로이드] 앱 출시 - (3) 클로스드 베타 테스트(비공개 테스트)"
                         >
-                            [안드로이드] 액티비티 스택(Activity Stack) 확인하는 방법
+                            [안드로이드] 앱 출시 - (3) 클로스드 베타 테스트(비공개 테스트)
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2019-01-18T20:16:30+09:00">
+    <time datetime="2019-02-06T01:00:00+09:00">
 	
-		    2019/01/18
+		    2019/02/06
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Android/">Android</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/App-Release/">App Release</a>
 
 
     
@@ -485,18 +771,98 @@
 <div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
+<ul>
+<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a></li>
+<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
+<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
+<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
+<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
+<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
+<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
+</ul>
 <hr>
-<p><a href="/ko/2019/01/17/android/190117-adb/">ADB(Android Debug Bridge)</a>를 사용하면 현재 앱에서 실행 중인 모든 서비스를 확인할 수 있습니다.</p>
-<p><code>adb shell</code> 명령어를 사용하면 연결된 기기에 접속할 수 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell</span> </span><br></pre></td></tr></table></figure>
-<p><code>dumpsys</code> 명령어를 사용하면 모든 서비스를 확인할 수 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> dumpsys</span> </span><br></pre></td></tr></table></figure>
-<p>다음과 같이 호출할 수도 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys</span> </span><br></pre></td></tr></table></figure>
-<p>현재 기기에서 실행 중인 태스크와 액티비티만을 확인할 수 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys activity activities</span></span><br></pre></td></tr></table></figure>
-<p>특정 앱의 태스크와 액티비티만 확인할 수도 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys activity activities | grep -i <span class="string">&quot;your_package_name&quot;</span> | grep -i Hist</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys activity activities | grep -i com.yologger.myapp | grep -i Hist</span></span><br></pre></td></tr></table></figure>
+<h1 id="소프트웨어-출시-과정"><a href="#소프트웨어-출시-과정" class="headerlink" title="소프트웨어 출시 과정"></a>소프트웨어 출시 과정</h1><p>소프트웨어는 출시되기 전 많은 테스트를 거칩니다.<br><img src="/ko/images/posts/android/closed-beta-test/1.png"></p>
+<h3 id="1-알파-테스트"><a href="#1-알파-테스트" class="headerlink" title="(1) 알파 테스트"></a>(1) 알파 테스트</h3><p>알파 테스트는 회사 <u>내부</u>에서 진행하는 테스트입니다. <code>내부 테스트</code>라고도 하며 보통 개발팀이나 품질관리팀에서 실시합니다. </p>
+<h3 id="2-베타-테스트"><a href="#2-베타-테스트" class="headerlink" title="(2) 베타 테스트"></a>(2) 베타 테스트</h3><p>베타 테스트는 회사 <u>외부</u>에서 진행하는 테스트입니다. 베타 테스트에는 두 종류가 있습니다.</p>
+<ul>
+<li><p><code>클로스드 베타 테스트</code>: 회사가 <u>특정 사용자</u>들만 선발해서 진행하는 테스트입니다. <code>비공개 테스트</code>라고도 합니다.</p>
+</li>
+<li><p><code>오픈 베타 테스트</code>: 정식 출시 이전에 <u>모든 사용자</u>에게 진행하는 테스트입니다. <code>공개 테스트</code>라고도 합니다.</p>
+</li>
+</ul>
+<h3 id="3-출시"><a href="#3-출시" class="headerlink" title="(3) 출시"></a>(3) 출시</h3><p>소프트웨어가 모든 테스트를 통과하면 시장에 출시합니다.</p>
+<hr>
+<h1 id="안드로이드-비공개-테스트"><a href="#안드로이드-비공개-테스트" class="headerlink" title="안드로이드 비공개 테스트"></a>안드로이드 비공개 테스트</h1><p>안드로이드에서는 클로스드 베타 테스트보다 <code>비공개 테스트</code>라는 용어를 더 많이 사용합니다. 회사 <u>외부</u>에서 신뢰할 만한 테스터를 선정하여 앱을 배포합니다. 내부 테스트보다 더 많은 테스터를 선발할 수 있습니다.</p>
+<p>이제 <code>비공개 테스트</code> 절차에 대해 알아보겠습니다.</p>
+<h3 id="1-개발자-계정-만들기"><a href="#1-개발자-계정-만들기" class="headerlink" title="(1) 개발자 계정 만들기"></a>(1) 개발자 계정 만들기</h3><p>구글 플레이스토어에 앱을 출시하려면 <code>구글 개발자 계정</code>을 만들어야 합니다. <a target="_blank" rel="noopener" href="http://play.google.com/apps/publish/signup">http://play.google.com/apps/publish/signup</a>을 방여문하 <code>구글 개발자 계정</code>을 생성합니다. (현재는 미화로 25달러를 결제해야하며, 한번 결제 시 평생 이용할 수 있습니다.)</p>
+<h3 id="2-구글-플레이-콘솔에-앱-생성하기"><a href="#2-구글-플레이-콘솔에-앱-생성하기" class="headerlink" title="(2) 구글 플레이 콘솔에 앱 생성하기"></a>(2) 구글 플레이 콘솔에 앱 생성하기</h3><p><code>구글 플레이 콘솔 &gt; All apps &gt; Create app</code>을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/2.png"></p>
+<p><code>App details</code>의 하위 항목을 입력합니다.<br><img src="/ko/images/posts/android/closed-beta-test/3.png"></p>
+</br>
+
+<ul>
+<li><code>App name</code>: 플레이 스토어에 출시되는 앱 이름</li>
+<li><code>Default launguage</code>: 기본 언어</li>
+<li><code>App or game</code>: 게임 앱인 경우 game, 그 외에는 App </li>
+<li><code>Free or paid</code>: 무료 앱인 경우 free, 유료 앱인 경우 paid (무료 선택 시 추후에 유료로 변경할 수 없습니다.)</li>
+</ul>
+<p><code>Declarations</code>의 하위 항목을 모두 체크합니다.<br><img src="/ko/images/posts/android/closed-beta-test/4.png"></p>
+</br>
+
+<ul>
+<li><code>Developer Program Policies</code>: 개발자 프로그램 정책에 동의</li>
+<li><code>US export laws</code>: 미국 수출법규에 동의</li>
+</ul>
+<p><code>구글 플레이 콘솔 &gt; All apps</code>을 선택하면 생성한 앱을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/closed-beta-test/5.png"></p>
+<h3 id="3-1-기존의-내부-테스트를-비공개-테스트로-업그레이드"><a href="#3-1-기존의-내부-테스트를-비공개-테스트로-업그레이드" class="headerlink" title="(3-1) 기존의 내부 테스트를 비공개 테스트로 업그레이드"></a>(3-1) 기존의 내부 테스트를 비공개 테스트로 업그레이드</h3><p>만약 <a href="/ko/2018/12/24/android/181224-alpha-test/">내부 테스트</a> 중인 앱이 있다면 비공개 테스트로 업그레이드할 수 있습니다. 내부 테스트 중인 앱은 <code>All apps &gt; 앱 선택 &gt; Testing &gt; Internal testing</code>에서 확인할 수 있습니다.<br><img src="/ko/images/posts/android/closed-beta-test/6.png"><br><code>View release details</code>를 클릭합니다.<br><img src="/ko/images/posts/android/closed-beta-test/7.png"><br>오른쪽 상단의 <code>Promote release</code>를 눌러 <code>비공개 테스트</code>로 전환할 수 있습니다. 뿐만 아니라 <code>공개 테스트</code>나 <code>출시</code>로 전환할 수도 있습니다.<br><img src="/ko/images/posts/android/closed-beta-test/8.png"></p>
+<h3 id="3-2-비공개-테스트용-APK-업로드"><a href="#3-2-비공개-테스트용-APK-업로드" class="headerlink" title="(3-2) 비공개 테스트용 APK 업로드"></a>(3-2) 비공개 테스트용 APK 업로드</h3><p>만약 내부 테스트를 진행 중인 앱이 없다면, 내부 테스트를 건너뛰고 비공개 테스트부터 시작할 수 있습니다. <code>All apps &gt; 앱 선택 &gt; Testing &gt; Closed testing</code>로 이동한 후 합니다.<br><img src="/ko/images/posts/android/closed-beta-test/9.png"><br><code>Alpha</code>트랙은 구글 플레이 콘솔에서 앱을 만들면 기본으로 제공되는 트랙입니다. 이 트랙을 비공개 테스트 용도로 사용할 수 있으며, 필요하다면 추가 트랙을 생성할 수 있습니다. 추가 트랙을 생성하기 위해 <code>Create Track</code>을 클릭합니다.<br><img src="/ko/images/posts/android/closed-beta-test/10.png"><br>트랙 이름을 입력하고 <code>Create Track</code>을 클릭합니다.<br><img src="/ko/images/posts/android/closed-beta-test/11.png"><br>추가된 트랙을 확인한 후 오른쪽 <code>Manager track</code>을 클릭합니다.<br><img src="/ko/images/posts/android/closed-beta-test/12.png"><br><code>Create new release</code>를 클릭합니다.<br><img src="/ko/images/posts/android/closed-beta-test/13.png"><br><code>Upload</code>를 클릭하고 <a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 출시용 APK 파일</a>을 업로드합니다.<br><img src="/ko/images/posts/android/closed-beta-test/14.png"></p>
+<div class="alert warning icon"><p>과거에 APK를 업로드한 적이 있다면, <b>versionCode</b> 값을 증가시켜 새롭게 빌드한 APK를 업로드해야합니다. <b>versionCode</b>는 <u><a href="/ko/2018/12/04/android/181204-build-gradle/">모듈 수준의 build.gradle</a></u>에서 수정할 수 있습니다.</p>
+</div>
+
+</br>
+
+<p><code>Release details</code>항목의 <code>Release name</code>과 <code>Release notes</code>를 적절하게 입력합니다.<br><img src="/ko/images/posts/android/closed-beta-test/15.png"><br><code>Save</code>와 <code>Review Release</code>버튼을 순서대로 누릅니다.<br><img src="/ko/images/posts/android/closed-beta-test/16.png"></p>
+<h3 id="4-출시할-나라-및-지역-선택"><a href="#4-출시할-나라-및-지역-선택" class="headerlink" title="(4) 출시할 나라 및 지역 선택"></a>(4) 출시할 나라 및 지역 선택</h3><p><code>왼쪽 사이드바 메뉴 &gt; Testing &gt; Closed testing</code>으로 이동하여 트랙을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/17.png"><br>상단에서는 비공개 테스트를 위한 진행 단계를 확인할 수 있습니다.<br><img src="/ko/images/posts/android/closed-beta-test/18.png"><br>상단의 <code>Select countries</code>나 하단의 <code>Countries/regions</code>탭을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/19.png"><br><code>Add countries/regions</code>를 선택하여 나라와 지역을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/20.png"></p>
+<h3 id="5-테스터-설정하기"><a href="#5-테스터-설정하기" class="headerlink" title="(5) 테스터 설정하기"></a>(5) 테스터 설정하기</h3><p>상단의 <code>Select testers</code>나 하단의 <code>Testers</code>탭을 클릭합니다.<br><img src="/ko/images/posts/android/closed-beta-test/21.png"><br><code>Create email list</code>를 클릭하여 테스터의 이메일을 추가합니다. 또한 테스터로부터 피드백 받을 이메일을 등록합니다.<br><img src="/ko/images/posts/android/closed-beta-test/22.png"></p>
+<h3 id="6-앱-정보-입력"><a href="#6-앱-정보-입력" class="headerlink" title="(6) 앱 정보 입력"></a>(6) 앱 정보 입력</h3><p>앱에 관한 정보를 입력해야합니다. <code>왼쪽 사이드바 메뉴 &gt; Dashboard</code>로 이동하여 해야할 업무를 확인할 수 있습니다.<br><img src="/ko/images/posts/android/closed-beta-test/23.png"></p>
+<p><code>App access</code>에서는 <code>All functionality is available without special access</code>를 체크하고 저장합니다. 특별한 접근 권한 없이 모든 이용이 가능하다는 뜻입니다.<br><img src="/ko/images/posts/android/closed-beta-test/24.png"></p>
+<p><code>Ads</code>에서는 광고 여부를 체크합니다. 앱 내에 광고가 있으면 <code>Yes, my app contains adds</code>를, 광고가 없으면 <code>No, my app does not contain ads</code>를 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/25.png"></p>
+<p><code>Content ratings</code>에서는 콘텐츠의 등급을 설정합니다. <code>Start new questionaire</code>를 클릭하여 설문을 시작합니다.<br><img src="/ko/images/posts/android/closed-beta-test/26.png"><br>설문에서는 앱 카테고리, 앱 적합성 등을 조사합니다.<br><img src="/ko/images/posts/android/closed-beta-test/27.png"><br>설문이 끝나면 각 국가에서의 콘텐츠 등급을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/closed-beta-test/28.png"><br><code>Target audience and content</code>에서는 앱을 사용할 연령층과 어린이 관심 유도 여부 등을 확인합니다. 설문을 모두 완료합시다.<br><img src="/ko/images/posts/android/closed-beta-test/29.png"><br><code>News Apps</code>에서는 뉴스 앱인지를 체크합니다.<br><img src="/ko/images/posts/android/closed-beta-test/30.png"><br><code>App category &amp; Contact Details</code>에서는 다음 항목들을 입력합니다.<br><img src="/ko/images/posts/android/closed-beta-test/31.png"></p>
+<ul>
+<li><code>App or Game</code>: 게임 앱인지 아닌지를 선택합니다.</li>
+<li><code>Category</code>: 앱의 카테고리를 선택합니다.</li>
+<li><code>Tag</code>: 앱의 태그를 선택합니다. </li>
+</ul>
+<p><img src="/ko/images/posts/android/closed-beta-test/32.png"></p>
+<ul>
+<li><code>Email address</code>: 구글 플레이스토어에 표시될 이메일 주소를 입력합니다.</li>
+<li><code>Phone number</code>: 구글 플레이스토어에 표시될 전화번호를 입력합니다.</li>
+<li><code>Website</code>: 구글 플레이스토어에 표시될 웹사이트 주소를 입력합니다.</li>
+<li><code>External marketing</code>: 외부 마케팅 여부를 선택합니다.</li>
+</ul>
+<p><code>Main store listing</code>에서는 다음 항목들을 입력합니다.<br><img src="/ko/images/posts/android/closed-beta-test/33.png"><br><img src="/ko/images/posts/android/closed-beta-test/34.png"></p>
+<ul>
+<li><code>App name</code>: 구글 플레이스토어에 표시되는 앱 이름입니다.</li>
+<li><code>Short description</code>: 짧은 앱 설명문입니다.</li>
+<li><code>Full description</code>: 긴 앱 설명문입니다.</li>
+<li><code>App icon</code>: 구글 플레이스토어에 표시되는 앱 아이콘 이미지 (512x512px)</li>
+<li><code>Feature graphic</code>: 앱을 공유했을 때 표시되는 섬네일 이미지 (1024x500px)</li>
+</ul>
+<p><img src="/ko/images/posts/android/closed-beta-test/35.png"></p>
+<ul>
+<li><code>Phone screenshots</code>: 모바일 환경에서 실행한 스크린샷 이미지 2~8장 (16:9 또는 9:6 비율) </li>
+<li><code>7-inch Tablet screenshots</code>: 7인치 태블릿 환경에서 실행한 스크린샷 이미지 2~8장 (16:9 또는 9:6 비율) </li>
+<li><code>10-inch Tablet screenshots</code>: 10인치 태블릿 환경에서 실행한 스크린샷 이미지 2~8장 (16:9 또는 9:6 비율) </li>
+</ul>
+<h3 id="7-비공개-테스트용-앱-출시"><a href="#7-비공개-테스트용-앱-출시" class="headerlink" title="(7) 비공개 테스트용 앱 출시"></a>(7) 비공개 테스트용 앱 출시</h3><p><code>Testing &gt; Closed testing</code>으로 이동하여 트랙을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/36.png"><br>입력사항을 확인하고 <code>Review and roll out release</code>를 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/37.png"><br>에러나 경고가 없으면 <code>Start rollout to [your track name]</code> 버튼을 누릅니다.<br><img src="/ko/images/posts/android/closed-beta-test/38.png"></p>
+<h3 id="8-테스트-참여-URL"><a href="#8-테스트-참여-URL" class="headerlink" title="(8) 테스트 참여 URL"></a>(8) 테스트 참여 URL</h3><p>구글의 심사는 몇 시간에서 며칠이 소요될 수 있습니다. 심사가 끝나면 테스터 참여 URL이 발급되고 이를 전달할 수 있습니다. <code>구글 플레이 콘솔 &gt; 왼쪽 메뉴 바 &gt; All app</code>에서 본인이 알파 출시한 앱을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/39.png"><br><code>왼쪽 메뉴 바 &gt; Testing &gt; Closed testing</code>으로 이동하고 트랙을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/40.png"><br><code>Testers</code>탭에서 하단 <code>Copy link</code>를 클릭하여 테스트 참여 URL을 복사할 수 있습니다.<br><img src="/ko/images/posts/android/closed-beta-test/41.png"><br>복사한 링크를 테스터에게 전달하면 테스터는 앱을 설치하고 테스트할 수 있습니다.</p>
+<div class="alert warning icon"><p><b><u>테스터 선택</u></b>에서 추가한 구글 계정만이 앱을 설치하고 테스트할 수 있습니다.</p>
+</div>
+
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>클로스드 베타 테스트(비공개 테스트)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트(공개 테스트)</a>에 대해 알아보겠습니다.</p>
+
                     
                         
 
@@ -505,7 +871,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2019/01/18/android/190118-check-activity_stack/#post-footer"
+                                href="/ko/2019/02/06/android/002_01_app_release/190206-closed-beta-test/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -528,17 +894,129 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/18/kotlin/190118-iteration_statement/"
-                            aria-label=": [코틀린] 반복문"
+                            href="/ko/2019/02/05/android/002_01_app_release/190205-alpha-test/"
+                            aria-label=": [안드로이드] 앱 출시 - (2) 알파 테스트(내부 테스트)"
                         >
-                            [코틀린] 반복문
+                            [안드로이드] 앱 출시 - (2) 알파 테스트(내부 테스트)
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2019-01-18T20:16:30+09:00">
+    <time datetime="2019-02-05T01:00:00+09:00">
 	
-		    2019/01/18
+		    2019/02/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/App-Release/">App Release</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="소프트웨어-출시-과정"><a href="#소프트웨어-출시-과정" class="headerlink" title="소프트웨어 출시 과정"></a>소프트웨어 출시 과정</h1><p>소프트웨어는 출시되기 전 많은 테스트를 거칩니다.<br><img src="/ko/images/posts/android/alpha-test/1.png"></p>
+<h3 id="1-알파-테스트"><a href="#1-알파-테스트" class="headerlink" title="(1) 알파 테스트"></a>(1) 알파 테스트</h3><p>알파 테스트는 회사 <u>내부</u>에서 진행하는 테스트입니다. <code>내부 테스트</code>라고도 하며 보통 개발팀이나 품질관리팀에서 실시합니다. </p>
+<h3 id="2-베타-테스트"><a href="#2-베타-테스트" class="headerlink" title="(2) 베타 테스트"></a>(2) 베타 테스트</h3><p>베타 테스트는 회사 <u>외부</u>에서 진행하는 테스트입니다. 베타 테스트에는 두 종류가 있습니다.</p>
+<ul>
+<li><p><code>클로스드 베타 테스트</code>: 회사가 <u>특정 사용자</u>들만 선발해서 진행하는 테스트입니다. <code>비공개 테스트</code>라고도 합니다.</p>
+</li>
+<li><p><code>오픈 베타 테스트</code>: 정식 출시 이전에 <u>모든 사용자</u>에게 진행하는 테스트입니다. <code>공개 테스트</code>라고도 합니다.</p>
+</li>
+</ul>
+<h3 id="3-출시"><a href="#3-출시" class="headerlink" title="(3) 출시"></a>(3) 출시</h3><p>소프트웨어가 모든 테스트를 통과하면 시장에 출시합니다.</p>
+<hr>
+<h1 id="안드로이드-내부-테스트"><a href="#안드로이드-내부-테스트" class="headerlink" title="안드로이드 내부 테스트"></a>안드로이드 내부 테스트</h1><p>안드로이드에서는 알파 테스트보다 <code>내부 테스트</code>라는 용어를 더 많이 사용합니다. 내부 테스트는 최대 <u>100</u>명의 테스터에게 앱을 배포할 수 있습니다. 보통 회사 내부의 개발팀이나 품질관리팀 등 <u>회사 내부</u> 인원에게 앱을 배포합니다.</p>
+<p>이제 <code>내부 테스트</code> 절차에 대해 알아보겠습니다.</p>
+<h3 id="1-개발자-계정-만들기"><a href="#1-개발자-계정-만들기" class="headerlink" title="(1) 개발자 계정 만들기"></a>(1) 개발자 계정 만들기</h3><p>구글 플레이스토어에 앱을 출시하려면 <code>구글 개발자 계정</code>을 만들어야 합니다. <a target="_blank" rel="noopener" href="http://play.google.com/apps/publish/signup">http://play.google.com/apps/publish/signup</a>을 방여문하 <code>구글 개발자 계정</code>을 생성합니다. (현재는 미화로 25달러를 결제해야하며, 한번 결제 시 평생 이용할 수 있습니다.)</p>
+<h3 id="2-구글-플레이-콘솔에-앱-생성하기"><a href="#2-구글-플레이-콘솔에-앱-생성하기" class="headerlink" title="(2) 구글 플레이 콘솔에 앱 생성하기"></a>(2) 구글 플레이 콘솔에 앱 생성하기</h3><p><code>구글 플레이 콘솔 &gt; All apps &gt; Create app</code>을 선택합니다.<br><img src="/ko/images/posts/android/closed-beta-test/2.png"></p>
+<p><code>App details</code>의 하위 항목을 입력합니다.<br><img src="/ko/images/posts/android/alpha-test/3.png"></p>
+</br>
+
+<ul>
+<li><code>App name</code>: 플레이 스토어에 출시되는 앱 이름</li>
+<li><code>Default launguage</code>: 기본 언어</li>
+<li><code>App or game</code>: 게임 앱인 경우 game, 그 외에는 App </li>
+<li><code>Free or paid</code>: 무료 앱인 경우 free, 유료 앱인 경우 paid (무료 선택 시 추후에 유료로 변경할 수 없습니다.)</li>
+</ul>
+<p><code>Declarations</code>의 하위 항목을 모두 체크합니다.<br><img src="/ko/images/posts/android/alpha-test/4.png"></p>
+</br>
+
+<ul>
+<li><code>Developer Program Policies</code>: 개발자 프로그램 정책에 동의</li>
+<li><code>US export laws</code>: 미국 수출법규에 동의</li>
+</ul>
+<p><code>구글 플레이 콘솔 &gt; All apps</code>을 선택하면 생성한 앱을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/5.png"></p>
+<h3 id="3-앱-정보-입력"><a href="#3-앱-정보-입력" class="headerlink" title="(3) 앱 정보 입력"></a>(3) 앱 정보 입력</h3><p>앱을 테스트하거나 출시하려면 앱에 대한 정보를 입력해야합니다. <code>구글 플레이 콘솔 &gt; All apps</code>에서 생성한 앱을 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/5.png"><br>왼쪽 사이드 바 메뉴에서 <code>Dashboard</code>를 선택합니다. <code>Dashboard</code>에서는 앱을 테스트하거나 출시하기위해 입력해야할 항목들을 확인할 수 있습니다. 항목은 크게 세 가지로 구성되어있습니다.</p>
+<ul>
+<li>Start testing now</li>
+<li>Set up your app</li>
+<li>Release your app</li>
+</ul>
+<p><img src="/ko/images/posts/android/alpha-test/6.png"><br><code>View tasks</code>를 누르면 아래 사진처럼 더 자세한 업무들을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/7.png"><br>완료된 업무는 옆에서 초록색 완료 아이콘을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/8.png"></p>
+<h3 id="4-테스터-선택"><a href="#4-테스터-선택" class="headerlink" title="(4) 테스터 선택"></a>(4) 테스터 선택</h3><p><code>Start testing now</code>항목에서 <code>Select testers</code>를 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/9.png"><br>내부 테스트는 최대 100명의 테스터를 선택할 수 있습니다. <code>Feedback URL or email address</code>에는 테스터로부터 피드백 받을 이메일을 입력합니다. 이후 <code>Create email list</code>을 클릭하여 테스터의 이메일을 입력합니다.<br><img src="/ko/images/posts/android/alpha-test/10.png"><br>테스터의 이메일을 추가하고 <code>Save changes</code>를 선택합니다.</p>
+<div class="alert warning icon"><p>테스터의 이메일은 구글 계정만 가능합니다.</p>
+</div>
+<p><img src="/ko/images/posts/android/alpha-test/11.png"></p>
+<h3 id="5-새로운-릴리즈-생성"><a href="#5-새로운-릴리즈-생성" class="headerlink" title="(5) 새로운 릴리즈 생성"></a>(5) 새로운 릴리즈 생성</h3><p><code>Dashboard</code>로 돌아와서 <code>Start testing now &gt; Create a new release</code>를 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/12.png"><br>다시 한번 <code>Create a new release</code>를 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/13.png"><br><a href="">이전 포스트</a>에서 생성한 서명된 APK파일을 업로드합니다.<br><img src="/ko/images/posts/android/alpha-test/14.png"><br><code>Release name</code>과 <code>Release notes</code>를 입력하고 <code>Save</code>버튼과 <code>Review release</code>버튼을 순서대로 클릭합니다.<br><img src="/ko/images/posts/android/alpha-test/15.png"><br>항목이 제대로 입력되었는지 확인하고 <code>Start rollout to internal testing</code>버튼을 클릭합니다.<br><img src="/ko/images/posts/android/alpha-test/16.png"></p>
+<h3 id="6-테스트-참여-URL"><a href="#6-테스트-참여-URL" class="headerlink" title="(6) 테스트 참여 URL"></a>(6) 테스트 참여 URL</h3><p>구글의 심사는 몇 시간에서 며칠이 소요될 수 있습니다. 심사가 끝나면 테스터 참여 URL이 발급되고 이를 전달할 수 있습니다. <code>구글 플레이 콘솔 &gt; 왼쪽 메뉴 바 &gt; All app</code>에서 본인이 알파 출시한 앱을 선택합니다.<br><img src="/ko/images/posts/android/alpha-test/17.png"><br><code>왼쪽 메뉴 바 &gt; Testing &gt; Internal testing</code>으로 이동합니다.<br><img src="/ko/images/posts/android/alpha-test/18.png"><br><code>Testers</code>탭에서 하단 <code>Copy link</code>를 클릭하여 앱 설치 주소를 복사할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/19.png"><br>복사한 링크를 테스터에게 전달하면 테스터는 앱을 설치하고 테스트할 수 있습니다.</p>
+<div class="alert warning icon"><p><b><u>테스터 선택</u></b>에서 추가한 구글 계정만이 앱을 설치하고 테스트할 수 있습니다.</p>
+</div>
+
+<h3 id="7-알파-테스트-일시중지"><a href="#7-알파-테스트-일시중지" class="headerlink" title="(7) 알파 테스트 일시중지"></a>(7) 알파 테스트 일시중지</h3><p><code>왼쪽 사이드바 메뉴 &gt; Testing &gt; Internal testing</code>으로 이동하여 <code>Pause track</code>을 클릭하면 알파 테스트를 일시중지할 수 있습니다. 알파 테스트를 일시중지하면 테스터들은 더 이상 앱을 테스트할 수 없습니다.<br><img src="/ko/images/posts/android/alpha-test/20.png"></p>
+<p><code>Resume track</code>을 클릭하면 알파 테스트를 재개할 수 있습니다.<br><img src="/ko/images/posts/android/alpha-test/21.png"></p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>알파 테스트(내부 테스트)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트(비공개 테스트)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/02/05/android/002_01_app_release/190205-alpha-test/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/02/04/kotlin/190204-unit/"
+                            aria-label=": [코틀린] Unit 이란?"
+                        >
+                            [코틀린] Unit 이란?
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-02-04T20:16:30+09:00">
+	
+		    2019/02/04
     	
     </time>
     
@@ -557,16 +1035,18 @@
 <div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/17/kotlin/190117-conditional_statement/">조건문</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">반복문</span>에 대해 알아보겠습니다. </p>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/03/kotlin/190203-first-class-citizen/"><code>일급 객체</code>와 <code>함수형 프로그래밍</code></a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">Unit</span>에 대해 알아보겠습니다. </p>
 <hr>
-<h1 id="for문"><a href="#for문" class="headerlink" title="for문"></a>for문</h1><p><code>for</code>구문은 키워드 <code>in</code>과 함께 사용할 수 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1.</span><span class="number">.10</span>) &#123;</span><br><span class="line">    sum += i</span><br><span class="line">&#125;</span><br><span class="line">println(sum)    <span class="comment">// 55</span></span><br></pre></td></tr></table></figure>
-<p><code>for</code>구문은 범위연산자<code>..</code>와 함께 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> players = arrayOf(<span class="string">&quot;Ronaldo&quot;</span>, <span class="string">&quot;Messi&quot;</span>, <span class="string">&quot;Ramos&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(player <span class="keyword">in</span> players) &#123;</span><br><span class="line">    println(player)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="while문"><a href="#while문" class="headerlink" title="while문"></a>while문</h1><p><code>while</code>구문은 조건이 만족할 때 까지 <code>코드 블럭(&#123;&#125;)</code>을 반복 수행합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> idx = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(idx &lt; <span class="number">5</span>) &#123;</span><br><span class="line">    println(idx)</span><br><span class="line">    idx++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Unit"><a href="#Unit" class="headerlink" title="Unit"></a>Unit</h1><p><code>Unit</code>은 <u>함수의 반환값이 없음</u>을 의미합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">printSomething</span><span class="params">(something: <span class="type">String</span>)</span></span>: <span class="built_in">Unit</span> &#123;</span><br><span class="line">    println(something)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">printSomething(<span class="string">&quot;Hello&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>Unit</code>은 <a href="/ko/2019/01/16/kotlin/190116-object/">싱글톤</a>이기도 합니다. 인스턴스를 생성하지 않고도 접근할 수 있으며, 인스턴스 또한 생성할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> unit: <span class="built_in">Unit</span> = <span class="built_in">Unit</span></span><br></pre></td></tr></table></figure>
+<p><code>Unit</code>은 <code>RxKotlin</code>에서 다음과 같이 사용하기도 합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> didLogOut = PublishSubject.create&lt;<span class="built_in">Unit</span>&gt;()</span><br><span class="line">didLogOut.onNext(<span class="built_in">Unit</span>)</span><br></pre></td></tr></table></figure>
+
+
 <hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>반복문</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/19/kotlin/190119-null-1/">코틀린의 null 처리</a>에 대해 알아보겠습니다.</p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>Unit</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/06/kotlin/190206-access-modifier/"><code>접근 제한자(Access Modifier)</code></a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -576,7 +1056,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2019/01/18/kotlin/190118-iteration_statement/#post-footer"
+                                href="/ko/2019/02/04/kotlin/190204-unit/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -599,23 +1079,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/17/android/190117-adb/"
-                            aria-label=": [안드로이드] ADB(Android Debug Bridge)란?"
+                            href="/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                            aria-label=": [안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성하기"
                         >
-                            [안드로이드] ADB(Android Debug Bridge)란?
+                            [안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성하기
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2019-01-17T20:16:30+09:00">
+    <time datetime="2019-02-04T01:00:00+09:00">
 	
-		    2019/01/17
+		    2019/02/04
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/App-Release/">App Release</a>
 
 
     
@@ -628,60 +1108,38 @@
 <div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
+<ul>
+<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
+<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a></li>
+<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
+<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
+<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
+<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
+<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
+</ul>
 <hr>
-<h1 id="ADB-Android-Debug-Bridge"><a href="#ADB-Android-Debug-Bridge" class="headerlink" title="ADB(Android Debug Bridge)"></a>ADB(Android Debug Bridge)</h1><span class="highlight-text red">ADB(Android Debug Bridge)</span>는 안드로이드 기기와 통신할 수 있는 명령어 도구입니다. ADB를 사용하면 윈도우의 계열 <u>명령 프롬프트</u>나 리눅스 계열의 <u>터미널</u>처럼 연결된 기기에 접근할 수 있습니다.
+<h1 id="서명된-릴리즈-APK-파일"><a href="#서명된-릴리즈-APK-파일" class="headerlink" title="서명된 릴리즈 APK 파일"></a>서명된 릴리즈 APK 파일</h1><p>구글 플레이스토어에 앱을 출시하는 과정은 다음과 같습니다.</p>
+<ol>
+<li>디버그 모드 대신 릴리스 모드로 변경</li>
+<li>개인 키를 사용하여 앱에 서명하고 빌드하여 APK 파일 생성</li>
+<li>구글 플레이스토어에 서명된 APK 파일 업로드</li>
+</ol>
+<h3 id="1-디버그-모드"><a href="#1-디버그-모드" class="headerlink" title="(1) 디버그 모드"></a>(1) 디버그 모드</h3><p>애플리캐이션을 개발할 때는 <code>디버그 모드</code>로 앱을 빌드하고 실행합니다.<br><img src="/ko/images/posts/android/app-release/1.png"></p>
+<p>안드로이드 스튜디오는 디버그 모드일 때 디버그용 키를 사용하여 앱을 자동으로 서명합니다. 따라서 에뮬레이터나 연결된 실제 기기에 앱을 설치하고 실행할 때 별도의 서명 정보를 입력할 필요가 없습니다.</p>
+<div class="alert warning icon"><p>안드로이드 스튜디오는 프로젝트를 처음 실행하면 디버그용 키를 자동으로 생성합니다. 이 키가 저장된 <b>키 스토어</b>의 위치는 <code>$HOME/.android/debug.keystore</code>입니다.</p>
+</div>
 
-<p>ADB는 <a href="/ko/2019/01/15/android/190115-android-sdk/"><code>안드로이드 SDK</code></a>의 <code>Platform Tools</code>에 포함되어 있습니다. </p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/[your_username]/Library/Android/sdk/platform-tools</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">adb</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>어느 위치에서든 ADB 명령어를 사용하려면 아래와 같이 경로 설정을 해야합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~</span> </span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&#x27;/Users/[your_username]/Library/Android/sdk/platform-tools&#x27;</span> &gt;&gt; ~/.bash_profile</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> ~/.bash_profile</span></span><br></pre></td></tr></table></figure>
-
-<p>이제 <code>adb --help</code> 명령어를 입력하면 ADB와 관련된 옵션들을 확인할 수 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb --<span class="built_in">help</span></span></span><br><span class="line">Android Debug Bridge version 1.0.41</span><br><span class="line">Version 31.0.0-7110759</span><br><span class="line">Installed as /usr/local/bin/adb</span><br><span class="line"></span><br><span class="line">global options:</span><br><span class="line"> -a         listen on all network interfaces, not just localhost</span><br><span class="line"> -d         use USB device (error if multiple devices connected)</span><br><span class="line"> -e         use TCP/IP device (error if multiple TCP/IP devices available)</span><br><span class="line"> -s SERIAL  use device with given serial (overrides $ANDROID_SERIAL)</span><br><span class="line"> -t ID      use device with given transport id</span><br><span class="line"> -H         name of adb server host [default=localhost]</span><br><span class="line"> -P         port of adb server [default=5037]</span><br><span class="line"> -L SOCKET  listen on given socket for adb server [default=tcp:localhost:5037]</span><br><span class="line"></span><br><span class="line">general commands:</span><br><span class="line"> devices [-l]             list connected devices (-l for long output)</span><br><span class="line"> help                     show this help message</span><br><span class="line"> version                  show version num</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>안드로이드는 리눅스 기반의 운영체제입니다. 따라서 연결된 기기의 리눅스 쉘에 접속할 수 있습니다. 이 때는 <code>adb shell</code> 명령어를 사용합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell</span></span><br></pre></td></tr></table></figure>
-<p>이제 연결된 기기의 디렉토리 구조를 확인할 수 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">bin</span><br><span class="line">data</span><br><span class="line">sdcard</span><br><span class="line">storage</span><br><span class="line">dev</span><br><span class="line">sys</span><br><span class="line">system</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h1 id="자주-쓰는-adb-명령어"><a href="#자주-쓰는-adb-명령어" class="headerlink" title="자주 쓰는 adb 명령어"></a>자주 쓰는 adb 명령어</h1><p><code>adb devices</code>명령어를 사용하면 실제 기기와 정상적으로 연결되었는지 확인할 수 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb devices</span></span><br><span class="line">List of devices attached</span><br><span class="line">R3CN109JVFK     device</span><br><span class="line">R332AEW32AA     device</span><br><span class="line">R3CN238IKEF     offline</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>상태</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>offline</td>
-<td>기기가 연결되지 않았거나 비정상인 경우</td>
-</tr>
-<tr>
-<td>device</td>
-<td>정상적으로 기기가 연결된 경우</td>
-</tr>
-<tr>
-<td>no device</td>
-<td>연결된 기기가 없는 경우</td>
-</tr>
-</tbody></table>
-<p><code>adb reboot</code>명령어를 사용하면 기기를 재시작할 수 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb reboot</span></span><br></pre></td></tr></table></figure>
-<p>PC에서 안드로이드 기기로 파일을 복사할 수도 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb push <span class="string">&quot;파일 명&quot;</span> <span class="string">&quot;복사할 경로&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb push backup.zip /sdcard</span></span><br></pre></td></tr></table></figure>
-<p>안드로이드 기기에서 PC로 파일을 복사할 수도 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb pull <span class="string">&quot;파일 명&quot;</span> <span class="string">&quot;복사할 경로&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb pull /sdcard/log.txt .</span></span><br></pre></td></tr></table></figure>
-<p><a href="/ko/2018/12/18/android/181218-apk/">APK 파일</a>을 직접 설치할 수도 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb install <span class="string">&quot;앱 이름&quot;</span>.apk</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb install my_app.apk</span></span><br></pre></td></tr></table></figure>
-<p>앱을 삭제할 수도 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb uninstall <span class="string">&quot;package name&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb uninstall com.yologger.package</span></span><br></pre></td></tr></table></figure>
-<p>연결된 기기의 시스템 정보를 가져올 수 도 있습니다. </p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys</span></span><br></pre></td></tr></table></figure>
-<p>아래와 같이 액티비티와 <a href="/ko/2019/02/16/android/190216-activity-stack/">태스크</a>의 스택을 확인할 때 많이 사용합니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys activity activities</span></span><br></pre></td></tr></table></figure>
-<p>위 명령어를 입력하면 너무 방대한 정보가 한꺼번에 출력됩니다. 따라서 여러 옵션과 <code>grep</code>을 적절히 활용하여 필요한 정보만 출력할 수 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys activity activities | grep -i <span class="string">&quot;your_package_name&quot;</span> | grep -i Hist</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> adb shell dumpsys activity activities | grep -i com.yologger.activity | grep -i Hist</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~&#x2F;.android</span><br><span class="line"></span><br><span class="line">$ ls</span><br><span class="line">debug.keystore</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>디버그용 키는 설계상 보안이 유지되지 않습니다. 따라서 구글 플레이스토어를 포함한 대부분의 앱 스토어는 디버그용 키로 서명한 앱을 게시하는 것을 허용하지 않습니다.</p>
+<h3 id="2-릴리즈-모드"><a href="#2-릴리즈-모드" class="headerlink" title="(2) 릴리즈 모드"></a>(2) 릴리즈 모드</h3><p>플레이스토어에 앱을 출시하려면 서명된 APK 파일을 업로드 해야합니다. 서명된 APK 파일을 생성하려면 <a href="/ko/2018/12/14/android/181214-buildtypes/">빌드 타입(BuildType)</a>를 릴리즈 모드로 변경해야합니다.<br><img src="/ko/images/posts/android/signed-apk/2.png"></p>
+<h3 id="3-키스토어-및-키-생성"><a href="#3-키스토어-및-키-생성" class="headerlink" title="(3) 키스토어 및 키 생성"></a>(3) 키스토어 및 키 생성</h3><p>앱을 빌드하고 <code>개인 키</code>로 서명하면 서명된 APK 파일이 생성됩니다. 이 개인 키가 저장되는 곳을 <code>키 스토어(Key Store)</code>라고 합니다.</p>
+<p><code>Build &gt; Generate Signed APK</code> 메뉴로 들어갑니다.<br><img src="/ko/images/posts/android/signed-apk/3.png"></p>
+<p>대화 상자에서 APK를 선택합니다.<br><img src="/ko/images/posts/android/signed-apk/4.png"></p>
+<p>먼저 <code>키 스토어(Key Store)</code>를 생성합시다. <code>Create new</code>버튼을 클릭합니다. 만약 이전에 키 스토어를 만들었다면 <code>Choose existing</code>버튼을 클릭하여 기존의 키 스토어를 사용합니다.<br><img src="/ko/images/posts/android/signed-apk/5.png"><br><code>New Key Store</code> 대화상자는 두 개의 섹션으로 나뉘어 있습니다. 첫 번째 섹션은 키 스토어 파일과 관련있습니다. 키 스토어 파일의 위치와 비밀번호를 입력합니다.<br><img src="/ko/images/posts/android/signed-apk/6.png"><br>두 번째 섹션은 키 스토어에 저장될 <code>개인 키</code>와 관련있습니다. 별칭(Alias), 비밀번호, 유효기간은 필수로 입력해야합니다. 나머지 필드는 최소 하나의 필드에 정보를 입력합니다.<br><img src="/ko/images/posts/android/signed-apk/7.png"><br>간혹 다음과 같은 경고 문구가 발생합니다. 특정 형식의 사용을 권장하는 경고문인데 서명하는데 아무 지장없으므로 무시합니다.<br><img src="/ko/images/posts/android/signed-apk/8.png"><br>정보가 제대로 입력되었는지 확인하고 <code>Next</code>버튼을 누릅니다.<br><img src="/ko/images/posts/android/signed-apk/9.png"><br><code>Destination Folder</code>에서는 APK 파일이 생성될 경로를 지정합니다. 기본값은 프로젝트의 <code>app</code>폴더입니다. <code>Build Variants</code>는 <code>release</code>를 선택합니다. <code>Signature Version</code>은 <code>V2</code>를 선택하고 <code>Finish</code>버튼을 누릅니다.<br><img src="/ko/images/posts/android/signed-apk/10.png"><br>이제 <code>app</code>폴더를 확인해봅시다. <code>[your_project]/app/release</code> 폴더 안에 서명된 APK 파일이 생성되었습니다.<br><img src="/ko/images/posts/android/signed-apk/11.png"></p>
 <hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>ADB</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/18/android/190118-check-activity_stack/">액티비티 스택을 확인하는 방법</a>에 대해 알아보겠습니다.</p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>서명된 APK 파일을 생성하는 법</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/24/android/181224-alpha-test/"><code>알파 테스트</code></a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -691,7 +1149,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2019/01/17/android/190117-adb/#post-footer"
+                                href="/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -714,17 +1172,17 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/17/kotlin/190117-conditional_statement/"
-                            aria-label=": [코틀린] 조건문"
+                            href="/ko/2019/02/03/kotlin/190203-first-class-citizen/"
+                            aria-label=": [코틀린] 일급 객체, 함수형 프로그래밍"
                         >
-                            [코틀린] 조건문
+                            [코틀린] 일급 객체, 함수형 프로그래밍
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2019-01-17T20:16:30+09:00">
+    <time datetime="2019-02-03T20:16:30+09:00">
 	
-		    2019/01/17
+		    2019/02/03
     	
     </time>
     
@@ -743,28 +1201,28 @@
 <div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/16/kotlin/190116-object/">object와 companion object</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">조건문</span>에 대해 알아보겠습니다. </p>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/02/kotlin/190202-lamda/">람다식과 익명함수</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">일급 객체(First-class Object)</span>, <span class="highlight-text red">함수형 프로그래밍(Functional Programming)</span>에 대해 알아보겠습니다.</p>
 <hr>
-<h1 id="비교연산자"><a href="#비교연산자" class="headerlink" title="비교연산자"></a>비교연산자</h1><h4 id="1"><a href="#1" class="headerlink" title="(1) =="></a>(1) ==</h4><p><code>==</code>는 내부적으로 <code>equals()</code>메소드를 호출합니다. 우선 기본 데이터 타입의 비교는 다음과 같이 합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span> == <span class="number">100</span>      <span class="comment">// true</span></span><br><span class="line"><span class="number">100</span> != <span class="number">100</span>      <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<p>클래스의 인스턴스를 비교할 때도 마찬가지로 <code>equals()</code>를 호출합니다. 단 <code>equals()</code>메소드를 오버라이드하여 구현해 주어야 합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">var</span> name: String) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">equals</span><span class="params">(other: <span class="type">Any</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> target = other <span class="keyword">as</span> Person</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name == target.name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
-<p>이제 세 개의 인스턴스를 생성합시다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = Person(<span class="string">&quot;Ronaldo&quot;</span>)	</span><br><span class="line"><span class="keyword">var</span> p2 = Person(<span class="string">&quot;Ronaldo&quot;</span>)	</span><br><span class="line"><span class="keyword">var</span> p3 = Person(<span class="string">&quot;Bale&quot;</span>)	</span><br></pre></td></tr></table></figure>
-<p><code>==</code>를 사용하면 <code>equals()</code>메소드가 호출됩니다. 아래 두 줄은 동일한 코드입니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p1==p2          <span class="comment">// true</span></span><br><span class="line">p1.equals(p2))  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h4 id="2"><a href="#2" class="headerlink" title="(2) ==="></a>(2) ===</h4><p><code>===</code>는 같은 주소를 참조하고 있는지 <code>주소값</code>을 비교합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = Person(<span class="string">&quot;Paul&quot;</span>)	</span><br><span class="line"><span class="keyword">var</span> p2 = Person(<span class="string">&quot;Paul&quot;</span>)	</span><br><span class="line"><span class="keyword">var</span> p3 = p1	</span><br><span class="line"></span><br><span class="line">p1===p2     <span class="comment">// false</span></span><br><span class="line">p1===p3     <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="타입-체크"><a href="#타입-체크" class="headerlink" title="타입 체크"></a>타입 체크</h1><p>타입 체크를 할 때는 키워드<code>is</code>를 사용합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = Person()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (p <span class="keyword">is</span> Person) &#123;</span><br><span class="line">    println(<span class="string">&quot;p is Person.&quot;</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    println(<span class="string">&quot;p is not Person.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="조건문"><a href="#조건문" class="headerlink" title="조건문"></a>조건문</h1><p>코틀린은 두 가지의 조건문을 제공합니다.</p>
-<h4 id="1-if-구문"><a href="#1-if-구문" class="headerlink" title="(1) if 구문"></a>(1) if 구문</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isMarried: <span class="built_in">Boolean</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (isMarried) &#123;</span><br><span class="line">    println(<span class="string">&quot;He is married.&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    println(<span class="string">&quot;He is not married.&quot;</span>);        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="2-when-구문"><a href="#2-when-구문" class="headerlink" title="(2) when 구문"></a>(2) when 구문</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">doWhen</span><span class="params">(nation: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span>(nation) &#123;</span><br><span class="line">        <span class="string">&quot;Korea&quot;</span> -&gt; println(<span class="string">&quot;He&#x27;s from Korea.&quot;</span>)</span><br><span class="line">        <span class="string">&quot;Spain&quot;</span> -&gt; println(<span class="string">&quot;He&#x27;s from Spain.&quot;</span>)</span><br><span class="line">        <span class="string">&quot;France&quot;</span> -&gt; println(<span class="string">&quot;He&#x27;s from France.&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span> -&gt; println(<span class="string">&quot;Where are you from?&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doWhen(<span class="string">&quot;Korea&quot;</span>)     <span class="comment">// He&#x27;s from Korea.</span></span><br><span class="line">doWhen(<span class="string">&quot;Germany&quot;</span>)   <span class="comment">// Where are you from?</span></span><br></pre></td></tr></table></figure>
-<p><code>when</code>구문은 결과값을 변수에 할당할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">doWhen</span><span class="params">(nation: <span class="type">String</span>)</span></span>: String &#123;</span><br><span class="line">    <span class="keyword">var</span> result: String = <span class="keyword">when</span>(nation) &#123;</span><br><span class="line">        <span class="string">&quot;Korea&quot;</span> -&gt; <span class="string">&quot;He&#x27;s from Korea.&quot;</span></span><br><span class="line">        <span class="string">&quot;Spain&quot;</span> -&gt; <span class="string">&quot;He&#x27;s from Spain.&quot;</span></span><br><span class="line">        <span class="string">&quot;France&quot;</span> -&gt; <span class="string">&quot;He&#x27;s from France.&quot;</span></span><br><span class="line">        <span class="keyword">else</span> -&gt; <span class="string">&quot;Where are you from?&quot;</span></span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = doWhen(<span class="string">&quot;Korean&quot;</span>)</span><br><span class="line">println(result)</span><br></pre></td></tr></table></figure>
+<h1 id="일급-객체"><a href="#일급-객체" class="headerlink" title="일급 객체"></a>일급 객체</h1><p>다음 세 가지 조건을 모두 충족하면 <code>일급 객체</code>라고 힙니다.</p>
+<ol>
+<li>변수나 상수에 할당할 수 있다.</li>
+<li>함수의 인자로 전달할 수 있다.</li>
+<li>함수의 반환값으로 반환할 수 있다.</li>
+</ol>
+<p>코틀린에서는 <code>함수</code>를 <code>일급 객체</code>로 취급합니다. 함수가 위의 세 가지 조건을 모두 충족하는지 살펴보겠습니다.</p>
+<h3 id="1-함수를-변수나-상수에-할당할-수-있다"><a href="#1-함수를-변수나-상수에-할당할-수-있다" class="headerlink" title="(1) 함수를 변수나 상수에 할당할 수 있다."></a>(1) 함수를 변수나 상수에 할당할 수 있다.</h3><p>코틀린에서는 함수를 변수에 할당할 수 있습니다. 이때 <a href="/ko/2019/02/07/kotlin/190207-reflection/"><code>리플렉션(::)</code></a>을 사용합니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">add</span><span class="params">(a: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a+b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수를 변수에 할당</span></span><br><span class="line"><span class="keyword">var</span> plus = ::add</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수 호출</span></span><br><span class="line"><span class="keyword">var</span> sum = plus(<span class="number">3</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>람다식 또한 변수에 할당할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 람다식을 변수에 할당</span></span><br><span class="line"><span class="keyword">var</span> add = &#123; a, b -&gt; </span><br><span class="line">    a+b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 람다식 호출</span></span><br><span class="line"><span class="keyword">var</span> result = add(<span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2-함수를-함수의-인자로-전달할-수-있다"><a href="#2-함수를-함수의-인자로-전달할-수-있다" class="headerlink" title="(2) 함수를 함수의 인자로 전달할 수 있다."></a>(2) 함수를 함수의 인자로 전달할 수 있다.</h3><p>코틀린에서는 함수를 함수의 인자로 전달할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">run</span><span class="params">(func: () -&gt; <span class="type">Unit</span>)</span></span> &#123;</span><br><span class="line">    func()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 함수의 인자로 익명함수 전달</span></span><br><span class="line">run(&#123;</span><br><span class="line">    println(<span class="string">&quot;Hello World!&quot;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="3-함수를-함수의-반환-값으로-반환"><a href="#3-함수를-함수의-반환-값으로-반환" class="headerlink" title="(3) 함수를 함수의 반환 값으로 반환"></a>(3) 함수를 함수의 반환 값으로 반환</h3><p>코틀린에서는 함수를 함수의 반환 값으로 반환할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">function</span><span class="params">()</span></span>: () -&gt; <span class="built_in">Unit</span> &#123;</span><br><span class="line">    <span class="comment">// 함수에서 익명함수를 반환</span></span><br><span class="line">    <span class="keyword">return</span> &#123; println(<span class="string">&quot;kotlin&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myFunction = function()</span><br></pre></td></tr></table></figure>
+<h1 id="함수-타입"><a href="#함수-타입" class="headerlink" title="함수 타입"></a>함수 타입</h1><p><code>함수 타입</code>은 위 세 가지 특성을 가능하게 해주는 코틀린의 자료형입니다. 정수형 타입의 변수에 정수를 할당하는 것 처럼 함수형 타입에는 함수를 할당할 수 있습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 익명 함수를 변수에 할당</span></span><br><span class="line"><span class="keyword">var</span> add: (<span class="built_in">Int</span>, <span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> = &#123; a, b -&gt; </span><br><span class="line">    a+b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 익명 함수 호출</span></span><br><span class="line"><span class="keyword">var</span> result = add(<span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>위 예제에서는 <code>(Int, Int) -&gt; Int</code>가 바로 함수 타입입니다. </p>
 <hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>조건문</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/18/kotlin/190118-iteration_statement/">반복문</a>에 대해 알아보겠습니다.</p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>일급 객체</code>, <code>함수형 프로그래밍</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/04/kotlin/190204-unit/">Unit</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -774,328 +1232,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2019/01/17/kotlin/190117-conditional_statement/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/01/16/android/190116-compile-min-target-sdk-version/"
-                            aria-label=": [안드로이드] compileSdkVersion, minSdkVersion, targetSdkVersion 차이점"
-                        >
-                            [안드로이드] compileSdkVersion, minSdkVersion, targetSdkVersion 차이점
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-16T20:16:30+09:00">
-	
-		    2019/01/16
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/16/android/190116-sdk-version/">런타임에서 SDK 버전을 확인하는 방법</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">compileSdkVersion</span>, <span class="highlight-text red">minSdkVersion</span>, <span class="highlight-text red">targetSdkVersion</span>의 차이점에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="1-compileSdkVersion"><a href="#1-compileSdkVersion" class="headerlink" title="(1) compileSdkVersion"></a>(1) compileSdkVersion</h1><p>안드로이드 스튜디오에서 앱을 빌드할 때 어떤 SDK 버전을 사용할 것인지 지정합니다. 즉 <code>comileSdkVersion</code>은 지원할 수 있는 가장 높은 버전을 의미합니다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>모듈 수준의 build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    compileSdkVersion <span class="number">30</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure><br>안드로이드 스튜디오의 SDK Manager에 해당 SDK가 설치되어있어야 합니다.<br><img src="/ko/images/posts/android/sdk/0.png"></p>
-<h1 id="2-minSdkVersion"><a href="#2-minSdkVersion" class="headerlink" title="(2) minSdkVersion"></a>(2) minSdkVersion</h1><p>최소 지원 SDK 버전을 의미합니다. 즉 해당 버전 이하의 안드로이드 운영체제가 설치된 기기에서는 앱을 설치할 수 없습니다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>모듈 수준의 build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    compileSdkVersion <span class="number">30</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    defaultConfig {</span><br><span class="line">        minSdkVersion <span class="number">25</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure></p>
-<h1 id="3-targetSdkVersion"><a href="#3-targetSdkVersion" class="headerlink" title="(3) targetSdkVersion"></a>(3) targetSdkVersion</h1><p>앱을 실제 기기에서 실행할 때 어떤 SDK 버전을 사용할지 지정합니다. 기능은 똑같아도 SDK 버전에 따라 다르게 동작하는 API도 있습니다. 이때는 <code>targetSdkVersion</code>에 맞는 API를 사용하게 됩니다.</p>
-  <figure class="codeblock codeblock--tabbed"><figcaption><span>모듈 수준의 build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    compileSdkVersion <span class="number">30</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    defaultConfig {</span><br><span class="line">        minSdkVersion <span class="number">25</span></span><br><span class="line">        targetSdkVersion <span class="number">27</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-<p><code>targetSdkVersion</code>을 지정하지 않으면 기본 값은 <code>minSdkVersion</code>과 동일하게 적용됩니다. </p>
-<h1 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h1><p>모듈 수준의 <code>build.gradle</code>파일에서 다음과 같이 SDK 버전 설정을 설정합니다.</p>
-  <figure class="codeblock codeblock--tabbed"><figcaption><span>모듈 수준의 build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    compileSdkVersion <span class="number">30</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    defaultConfig {</span><br><span class="line">        minSdkVersion <span class="number">25</span></span><br><span class="line">        targetSdkVersion <span class="number">27</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-<p>이는 SDK 버전이 25 이상 30 이하에서만 이 앱이 실행될 수 있음을 의미합니다. 또한 실제 동작은 27 버전으로 동작하게 됩니다. 보통 실무에서는 </p>
-<div class="alert warning icon"><p>minSdkVersion &lt;= targetSdkVersion == compileSdkVersion</p>
-</div>
-
-<p>로 SDK 버전을 설정합니다.</p>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>compileSdkVersion, minSdkVersion, targetSdkVersion 차이점</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/17/android/190117-adb/">ADB(Android Debug Bridge)</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/16/android/190116-compile-min-target-sdk-version/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/01/16/kotlin/190116-object/"
-                            aria-label=": [코틀린] object, companion object"
-                        >
-                            [코틀린] object, companion object
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-16T20:16:30+09:00">
-	
-		    2019/01/16
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/15/kotlin/190115-sealed-class/">Sealed Class</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">object</span>와 <span class="highlight-text red">companion object</span>에 대해 알아보겠습니다. 키워드 <code>object</code>는 크게 3가지 용도로 사용됩니다. </p>
-<hr>
-<h3 id="1-싱글톤-Singleton"><a href="#1-싱글톤-Singleton" class="headerlink" title="(1) 싱글톤 (Singleton)"></a>(1) 싱글톤 (Singleton)</h3><p>키워드 object는 <code>싱글톤</code>을 만드는데 사용할 수 있습니다. 싱글톤은 <strong>오직 하나의 인스턴스만 존재하는 클래스</strong>를 의미합니다. 싱글톤은 다음과 같이 정의합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> Counter &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">countUp</span><span class="params">()</span></span> &#123;</span><br><span class="line">        count ++</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">clear</span><span class="params">()</span></span> &#123;</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>싱글톤은 별도의 인스턴스를 생성하지 않고 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Counter.count   <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">Counter.countUp()</span><br><span class="line">Counter.countUp()</span><br><span class="line">Counter.countUp()</span><br><span class="line">Counter.count   <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">Counter.clear()</span><br><span class="line">Counter.count   <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
-<p>물론 <code>싱글톤</code>은 인스턴스에 할당할 수 있습니다. 이때 모든 인스턴스가 값을 공유합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCounter: Counter = Counter</span><br><span class="line">myCounter.countUp()</span><br><span class="line">myCounter.countUp()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> yourCounter: Counter = Counter</span><br><span class="line">yourCounter.countUp()</span><br><span class="line">yourCounter.countUp()</span><br><span class="line"></span><br><span class="line">myCounter.count     <span class="comment">// 4</span></span><br><span class="line">yourCounter.count   <span class="comment">// 4</span></span><br><span class="line">Counter.count       <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-익명-클래스-Anonymous-Class"><a href="#2-익명-클래스-Anonymous-Class" class="headerlink" title="(2) 익명 클래스(Anonymous Class)"></a>(2) 익명 클래스(Anonymous Class)</h3><p>키워드 object는 <code>익명 클래스(Anonymous Class)</code>에도 사용됩니다. 아래 예제는 안드로이드에서 버튼을 클릭했을 때 특정 작업을 수행하는 코드입니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> button: Button</span><br><span class="line"></span><br><span class="line">button.setOnClickListener(OnButtonClickedListener())</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OnButtonClickedListener</span>: <span class="type">View.OnClickListener &#123;</span></span></span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onClick</span><span class="params">(v: <span class="type">View</span>?)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 클릭 시 처리</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>Button</code>클래스의 <code>setOnClickListener()</code>메소드는 인터페이스 <code>View.OnClickListener</code>의 구현체를 인자로 전달받습니다. 따라서 <code>OnButtonClickedListener</code>라는 구현체에서 <code>View.OnClickListener</code>를 구현하고 있습니다.</p>
-<p><code>익명 클래스</code>를 사용하면 위 코드를 다음과 같이 단축할 수 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> button: Button</span><br><span class="line"></span><br><span class="line">button.setOnClickListener(<span class="keyword">object</span>: View.OnClickListener &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onClick</span><span class="params">(v: <span class="type">View</span>?)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 클릭 시 처리</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="3-companion-object"><a href="#3-companion-object" class="headerlink" title="(3) companion object"></a>(3) companion object</h3><p>키워드 <code>companion object</code>는 자바의 <a href="/ko/2018/01/12/java/180112-static/">static</a>와 유사합니다. <code>companion object</code>구문 안에 선언된 멤버 변수와 메소드는 인스턴스를 별도로 생성하지 않고 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FoodPoll</span></span>(<span class="keyword">val</span> name: String) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> total = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">printTotal</span><span class="params">()</span></span> &#123;</span><br><span class="line">            println(total);</span><br><span class="line">        &#125;</span><br><span class="line">		</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">val</span> POLL: String = <span class="string">&quot;food&quot;</span> </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">vote</span><span class="params">()</span></span> &#123;</span><br><span class="line">        total++</span><br><span class="line">        count++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>또한 <code>companion object</code>구문 안에 선언된 멤버 변수는 클래스의 모든 인스턴스가 공유합니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> melon = FoodPoll(<span class="string">&quot;Melon&quot;</span>)</span><br><span class="line">melon.vote()</span><br><span class="line">melon.vote()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> apple = FoodPoll(<span class="string">&quot;Apple&quot;</span>)</span><br><span class="line">apple.vote()</span><br><span class="line">apple.vote()</span><br><span class="line">apple.vote()</span><br><span class="line"></span><br><span class="line">FoodPoll.printTotal()   <span class="comment">// 5</span></span><br><span class="line">    </span><br><span class="line">println(<span class="string">&quot;<span class="subst">$&#123;melon.name&#125;</span>: <span class="subst">$&#123;melon.count&#125;</span>&quot;</span>)    <span class="comment">// Melon: 2</span></span><br><span class="line">println(<span class="string">&quot;<span class="subst">$&#123;apple.name&#125;</span>: <span class="subst">$&#123;apple.count&#125;</span>&quot;</span>)    <span class="comment">// Apple: 3</span></span><br><span class="line"></span><br><span class="line">println(<span class="string">&quot;Total: <span class="subst">$&#123;FoodPoll.total&#125;</span>&quot;</span>) <span class="comment">// Total: 5</span></span><br><span class="line">println(<span class="string">&quot;POLL: <span class="subst">$&#123;FoodPoll.POLL&#125;</span>&quot;</span>)    <span class="comment">// food</span></span><br></pre></td></tr></table></figure>
-<p><code>companion object</code>에는 이름을 붙일 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">val</span> name: String) &#123; </span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> Loader &#123; </span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">fromJSON</span><span class="params">(jsonText: <span class="type">String</span>)</span></span>: Person = .... </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">person1 = Person.Loader.fromJSON(<span class="string">&quot;&#123;name:&#x27;hong&#x27;&#125;&quot;</span>) </span><br><span class="line">person2 = Person.fromJSON(<span class="string">&quot;&#123;name:&#x27;kim&#x27;&#125;&quot;</span>) </span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>Object</code>와 <code>Companion Object</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/17/kotlin/190117-conditional_statement/">조건문</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/16/kotlin/190116-object/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/01/16/android/190116-sdk-version/"
-                            aria-label=": [안드로이드] 런타임에서 SDK 버전 확인하기"
-                        >
-                            [안드로이드] 런타임에서 SDK 버전 확인하기
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-16T10:16:30+09:00">
-	
-		    2019/01/16
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/15/android/190115-android-sdk/">안드로이드 SDK</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">런타임에서 SDK 버전을 확인하는 방법</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="런타임에서-현재-기기의-SDK-버전-확인하기"><a href="#런타임에서-현재-기기의-SDK-버전-확인하기" class="headerlink" title="런타임에서 현재 기기의 SDK 버전 확인하기"></a>런타임에서 현재 기기의 SDK 버전 확인하기</h1><p>런타임에서 현재 기기의 SDK 버전을 확인할 수 있습니다.<br>  <figure class="codeblock codeblock--tabbed"><figcaption><span>MainActivity.kt</span><ul class="tabs"><li class="tab active">kotlin</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        println(Build.VERSION.SDK_INT)  <span class="comment">// 기기의 SDK Version 확인</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure><br>안드로이드 API에는 SDK의 버전이 상수 값으로 정의되어있습니다.</p>
-  <figure class="codeblock codeblock--tabbed"><figcaption><span>MainActivity.kt</span><ul class="tabs"><li class="tab active">kotlin</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        println(Build.VERSION_CODES.BASE)                   <span class="comment">// 1</span></span><br><span class="line">        println(Build.VERSION_CODES.BASE_1_1)               <span class="comment">// 2</span></span><br><span class="line">        println(Build.VERSION_CODES.CUPCAKE)                <span class="comment">// 3</span></span><br><span class="line">        println(Build.VERSION_CODES.DONUT)                  <span class="comment">// 4</span></span><br><span class="line">        println(Build.VERSION_CODES.ECLAIR)                 <span class="comment">// 5</span></span><br><span class="line">        println(Build.VERSION_CODES.ECLAIR_0_1)             <span class="comment">// 6</span></span><br><span class="line">        println(Build.VERSION_CODES.ECLAIR_MR1)             <span class="comment">// 7</span></span><br><span class="line">        println(Build.VERSION_CODES.FROYO)                  <span class="comment">// 8</span></span><br><span class="line">        println(Build.VERSION_CODES.GINGERBREAD)            <span class="comment">// 9</span></span><br><span class="line">        println(Build.VERSION_CODES.GINGERBREAD_MR1)        <span class="comment">// 10</span></span><br><span class="line">        println(Build.VERSION_CODES.HONEYCOMB)              <span class="comment">// 11</span></span><br><span class="line">        println(Build.VERSION_CODES.HONEYCOMB_MR1)          <span class="comment">// 12</span></span><br><span class="line">        println(Build.VERSION_CODES.HONEYCOMB_MR2)          <span class="comment">// 13</span></span><br><span class="line">        println(Build.VERSION_CODES.ICE_CREAM_SANDWICH)     <span class="comment">// 14</span></span><br><span class="line">        println(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) <span class="comment">// 15</span></span><br><span class="line">        println(Build.VERSION_CODES.JELLY_BEAN)             <span class="comment">// 16</span></span><br><span class="line">        println(Build.VERSION_CODES.JELLY_BEAN_MR1)         <span class="comment">// 17</span></span><br><span class="line">        println(Build.VERSION_CODES.JELLY_BEAN_MR2)         <span class="comment">// 18</span></span><br><span class="line">        println(Build.VERSION_CODES.KITKAT)                 <span class="comment">// 19</span></span><br><span class="line">        println(Build.VERSION_CODES.KITKAT_WATCH)           <span class="comment">// 20</span></span><br><span class="line">        println(Build.VERSION_CODES.LOLLIPOP)               <span class="comment">// 21</span></span><br><span class="line">        println(Build.VERSION_CODES.LOLLIPOP_MR1)           <span class="comment">// 22</span></span><br><span class="line">        println(Build.VERSION_CODES.M)                      <span class="comment">// 23</span></span><br><span class="line">        println(Build.VERSION_CODES.N)                      <span class="comment">// 24</span></span><br><span class="line">        println(Build.VERSION_CODES.N_MR1)                  <span class="comment">// 25</span></span><br><span class="line">        println(Build.VERSION_CODES.O)                      <span class="comment">// 26</span></span><br><span class="line">        println(Build.VERSION_CODES.O_MR1)                  <span class="comment">// 27</span></span><br><span class="line">        println(Build.VERSION_CODES.P)                      <span class="comment">// 28</span></span><br><span class="line">        println(Build.VERSION_CODES.Q)                      <span class="comment">// 29</span></span><br><span class="line">        println(Build.VERSION_CODES.R)                      <span class="comment">// 30</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-
-
-
-<p>비교문을 사용하여 버전에 따른 분기처리를 할 수 있습니다.</p>
-  <figure class="codeblock codeblock--tabbed"><figcaption><span>MainActivity.kt</span><ul class="tabs"><li class="tab active">kotlin</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) {</span><br><span class="line">    <span class="comment">// do something when os version is lower than Marshmallow(23).</span></span><br><span class="line">} <span class="keyword">else</span> {</span><br><span class="line">    <span class="comment">// do something when os version is equal or higher than Marshmallow(23).</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>런타임에서 SDK 버전을 확인하는 방법</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/16/android/190116-compile-min-target-sdk-version/">compileSdkVersion, minSdkVersion, targetSdkVersion 차이점</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/16/android/190116-sdk-version/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2019/01/15/android/190115-android-sdk/"
-                            aria-label=": [안드로이드] 안드로이드 SDK란?"
-                        >
-                            [안드로이드] 안드로이드 SDK란?
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-15T20:16:30+09:00">
-	
-		    2019/01/15
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/15/android/190115-android-sdk/">구글 플레이스토어에 앱을 출시하는 방법</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">안드로이드 SDK</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="안드로이드-SDK"><a href="#안드로이드-SDK" class="headerlink" title="안드로이드 SDK"></a>안드로이드 SDK</h1><p><code>안드로이드 SDK(Software Development Kit)</code>는 안드로이드 앱을 개발하기 위한 툴 킷입니다. </p>
-<p>안드로이드 스튜디오는 <code>SDK Manager</code>를 제공하는데 이 곳에서 안드로이드 SDK를 설치, 삭제, 설정 할 수 있습니다. 또한 SDK Manager에서 SDK의 설치 경로를 확인할 수 있습니다.<br><img src="/ko/images/posts/android/sdk/2.png"></p>
-<p>그럼 터미널에서 SDK의 설치 경로로 이동해보겠습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /Users/[user_name]/Library/Android/sdk</span></span><br></pre></td></tr></table></figure>
-<p>SDK에 무엇이 설치되어있는지 확인해봅시다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">build-tools    extras         icons          patcher        platforms      skins          system-images</span><br><span class="line">emulator       fonts          licenses       platform-tools skiaparser     sources        tools</span><br></pre></td></tr></table></figure>
-<h3 id="1-system-images"><a href="#1-system-images" class="headerlink" title="(1) system-images"></a>(1) system-images</h3><p><code>system-images</code>폴더에는 에뮬레이터가 사용하는 안드로이드 운영체제 이미지가 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/[user_name]/Library/Android/sdk/system-images</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">android-23 android-27</span><br></pre></td></tr></table></figure>
-<p><img src="/ko/images/posts/android/sdk/3.png"></p>
-<h3 id="2-platforms"><a href="#2-platforms" class="headerlink" title="(2) platforms"></a>(2) platforms</h3><p><code>platforms</code>폴더에는 안드로이드 플랫폼이 설치되어 있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/[user_name]/Library/Android/sdk/platforms</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">android-23 android-25 android-26 android-27 android-28 android-29 android-30</span><br></pre></td></tr></table></figure>
-<p><img src="/ko/images/posts/android/sdk/4.png"></p>
-<h3 id="3-tools"><a href="#3-tools" class="headerlink" title="(3) tools"></a>(3) tools</h3><p><code>tools</code>폴더와 <code>tools/bin</code>폴더에는 앱을 개발하고 디버깅하기 위한 여러가지 툴이 있습니다. 에뮬레이터, SDK 매니저, AVD 매니저, UI 뷰어 등이 이 폴더에 설치되어있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/[user_name]/Library/Android/sdk/tools</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">bin               </span><br><span class="line">emulator</span><br><span class="line">monitor</span><br><span class="line">proguard</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/[user_name]/Library/Android/sdk/tools/bin</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">avdmanager</span><br><span class="line">sdkmanager</span><br><span class="line">uiautomatorviewer</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>안드로이드 스튜디오에서도 <code>tools</code>폴더에 설치된 툴을 확인할 수 있습니다.<br><img src="/ko/images/posts/android/sdk/5.png"></p>
-<h3 id="4-build-tools"><a href="#4-build-tools" class="headerlink" title="(4) build-tools"></a>(4) build-tools</h3><p><code>build-tools</code>폴더에는 앱을 빌드하기 위한 도구들이 설치되어있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/[user_name]]/Library/Android/sdk/build-tools</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">25.0.2 26.0.2 27.0.3 28.0.3 29.0.2 29.0.3 30.0.2 30.0.3</span><br></pre></td></tr></table></figure>
-<p><img src="/ko/images/posts/android/sdk/6.png"></p>
-<h3 id="5-platform-tools"><a href="#5-platform-tools" class="headerlink" title="(5) platform-tools"></a>(5) platform-tools</h3><p><code>platform-tools</code>폴더에는 안드로이드 기기와 연결했을 때 사용하는 도구들이 설치되어있습니다. adb, fastboot, systrace, sqlite3 등이 이 폴더에 설치되어있습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/[user_name]]/Library/Android/sdk/platform-tools</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">adb</span><br><span class="line">fastboot</span><br><span class="line">systrace</span><br><span class="line">sqlite3</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>안드로이드 SDK</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/16/android/190116-sdk-version/">런타임에서 SDK 버전을 확인하는 방법</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/15/android/190115-android-sdk/#post-footer"
+                                href="/ko/2019/02/03/kotlin/190203-first-class-citizen/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -1135,7 +1272,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 10 of 19</li>
+        <li class="pagination-number">page 10 of 20</li>
     </ul>
 </div>
 

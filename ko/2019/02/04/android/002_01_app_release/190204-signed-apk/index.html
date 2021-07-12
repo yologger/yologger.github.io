@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Yologger&#39;s Blog">
+    <title>[안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성하기 - Yologger&#39;s Blog</title>
+    <meta name="author" content="yologger">
+    
+    
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.\n\n서명된 릴리즈 APK 생성하기 ⬅️ ⬅️ ⬅️\n알파 테스트\n클로스드 베타 테스트\n오픈 베타 테스트\n플레이스토어에 앱 출시하기\n플레이스토어 앱 업데이트하기\n앱 게시 취소 및 삭제하기\n앱 번들이란?\n\n\n서명된 릴리즈 APK 파일구글 플레이스토어에 앱을 출시하는 과정은 다음과 같습니다.\n\n디버그 모드 대신 릴리스 모드로 변경\n개인 키를 사용하여 앱에 서명하고 빌드하여 APK 파일 생성\n구글 플레이스토어에 서명된 APK 파일 업로드\n\n(1) 디버그 모드애플리캐이션을 개발할 때는 디버그 모드로 앱을 빌드하고 실행합니다.\n안드로이드 스튜디오는 디버그 모드일 때 디버그용 키를 사용하여 앱을 자동으로 서명합니다. 따라서 에뮬레이터나 연결된 실제 기기에 앱을 설치하고 실행할 때 별도의 서명 정보를 입력할 필요가 없습니다.\n안드로이드 스튜디오는 프로젝트를 처음 실행하면 디버그용 키를 자동으로 생성합니다. 이 키가 저장된 키 스토어의 위치는 $HOME/.android/debug.keystore입니다.\n\n\n12345$ cd ~&#x2F;.android$ lsdebug.keystore...\n디버그용 키는 설계상 보안이 유지되지 않습니다. 따라서 구글 플레이스토어를 포함한 대부분의 앱 스토어는 디버그용 키로 서명한 앱을 게시하는 것을 허용하지 않습니다.\n(2) 릴리즈 모드플레이스토어에 앱을 출시하려면 서명된 APK 파일을 업로드 해야합니다. 서명된 APK 파일을 생성하려면 빌드 타입(BuildType)를 릴리즈 모드로 변경해야합니다.\n(3) 키스토어 및 키 생성앱을 빌드하고 개인 키로 서명하면 서명된 APK 파일이 생성됩니다. 이 개인 키가 저장되는 곳을 키 스토어(Key Store)라고 합니다.\nBuild &gt; Generate Signed APK 메뉴로 들어갑니다.\n대화 상자에서 APK를 선택합니다.\n먼저 키 스토어(Key Store)를 생성합시다. Create new버튼을 클릭합니다. 만약 이전에 키 스토어를 만들었다면 Choose existing버튼을 클릭하여 기존의 키 스토어를 사용합니다.New Key Store 대화상자는 두 개의 섹션으로 나뉘어 있습니다. 첫 번째 섹션은 키 스토어 파일과 관련있습니다. 키 스토어 파일의 위치와 비밀번호를 입력합니다.두 번째 섹션은 키 스토어에 저장될 개인 키와 관련있습니다. 별칭(Alias), 비밀번호, 유효기간은 필수로 입력해야합니다. 나머지 필드는 최소 하나의 필드에 정보를 입력합니다.간혹 다음과 같은 경고 문구가 발생합니다. 특정 형식의 사용을 권장하는 경고문인데 서명하는데 아무 지장없으므로 무시합니다.정보가 제대로 입력되었는지 확인하고 Next버튼을 누릅니다.Destination Folder에서는 APK 파일이 생성될 경로를 지정합니다. 기본값은 프로젝트의 app폴더입니다. Build Variants는 release를 선택합니다. Signature Version은 V2를 선택하고 Finish버튼을 누릅니다.이제 app폴더를 확인해봅시다. [your_project]/app/release 폴더 안에 서명된 APK 파일이 생성되었습니다.\n\n마치며이번 포스트에서는 서명된 APK 파일을 생성하는 법에 대해 알아봤습니다. 다음 포스트에서는 알파 테스트에 대해 알아보겠습니다.\n","dateCreated":"2019-02-04T01:00:00+09:00","dateModified":"2021-07-12T12:32:59+09:00","datePublished":"2019-02-04T01:00:00+09:00","description":"","headline":"[안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성하기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"}</script>
+    <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.  서명된 릴리즈 APK 생성하기 ⬅️ ⬅️ ⬅️ 알파 테스트 클로스드 베타 테스트 오픈 베타 테스트 플레이스토어에 앱 출시하기 플레이스토어 앱 업데이트하기 앱 게시 취소 및 삭제하기 앱 번들이란">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성하기">
+<meta property="og:url" content="https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/index.html">
+<meta property="og:site_name" content="Yologger&#39;s Blog">
+<meta property="og:description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.  서명된 릴리즈 APK 생성하기 ⬅️ ⬅️ ⬅️ 알파 테스트 클로스드 베타 테스트 오픈 베타 테스트 플레이스토어에 앱 출시하기 플레이스토어 앱 업데이트하기 앱 게시 취소 및 삭제하기 앱 번들이란">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/app-release/1.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/2.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/3.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/4.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/5.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/6.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/7.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/8.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/9.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/10.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/signed-apk/11.png">
+<meta property="article:published_time" content="2019-02-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-12T03:32:59.862Z">
+<meta property="article:author" content="yologger">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/android/app-release/1.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
+
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYKNWR810R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-QYKNWR810R');
+    </script>
+
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/ko/"
+            aria-label=""
+        >
+            Yologger&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="링크 열기: /ko/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://yologger.github.io"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="English"
+                        >
+                        <i class="sidebar-button-icon fa fa-globe" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">English</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/java"
+                            
+                            rel="noopener"
+                            title="Java"
+                        >
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/yologger"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Github"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [안드로이드] 앱 출시 - (1) 서명된 릴리즈 APK 생성하기
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2019-02-04T01:00:00+09:00">
+	
+		    2019/02/04
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/App-Release/">App Release</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
+<ul>
+<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
+<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a></li>
+<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
+<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
+<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
+<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
+<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
+</ul>
+<hr>
+<h1 id="서명된-릴리즈-APK-파일"><a href="#서명된-릴리즈-APK-파일" class="headerlink" title="서명된 릴리즈 APK 파일"></a>서명된 릴리즈 APK 파일</h1><p>구글 플레이스토어에 앱을 출시하는 과정은 다음과 같습니다.</p>
+<ol>
+<li>디버그 모드 대신 릴리스 모드로 변경</li>
+<li>개인 키를 사용하여 앱에 서명하고 빌드하여 APK 파일 생성</li>
+<li>구글 플레이스토어에 서명된 APK 파일 업로드</li>
+</ol>
+<h3 id="1-디버그-모드"><a href="#1-디버그-모드" class="headerlink" title="(1) 디버그 모드"></a>(1) 디버그 모드</h3><p>애플리캐이션을 개발할 때는 <code>디버그 모드</code>로 앱을 빌드하고 실행합니다.<br><img src="/ko/images/posts/android/app-release/1.png"></p>
+<p>안드로이드 스튜디오는 디버그 모드일 때 디버그용 키를 사용하여 앱을 자동으로 서명합니다. 따라서 에뮬레이터나 연결된 실제 기기에 앱을 설치하고 실행할 때 별도의 서명 정보를 입력할 필요가 없습니다.</p>
+<div class="alert warning icon"><p>안드로이드 스튜디오는 프로젝트를 처음 실행하면 디버그용 키를 자동으로 생성합니다. 이 키가 저장된 <b>키 스토어</b>의 위치는 <code>$HOME/.android/debug.keystore</code>입니다.</p>
+</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~&#x2F;.android</span><br><span class="line"></span><br><span class="line">$ ls</span><br><span class="line">debug.keystore</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>디버그용 키는 설계상 보안이 유지되지 않습니다. 따라서 구글 플레이스토어를 포함한 대부분의 앱 스토어는 디버그용 키로 서명한 앱을 게시하는 것을 허용하지 않습니다.</p>
+<h3 id="2-릴리즈-모드"><a href="#2-릴리즈-모드" class="headerlink" title="(2) 릴리즈 모드"></a>(2) 릴리즈 모드</h3><p>플레이스토어에 앱을 출시하려면 서명된 APK 파일을 업로드 해야합니다. 서명된 APK 파일을 생성하려면 <a href="/ko/2018/12/14/android/181214-buildtypes/">빌드 타입(BuildType)</a>를 릴리즈 모드로 변경해야합니다.<br><img src="/ko/images/posts/android/signed-apk/2.png"></p>
+<h3 id="3-키스토어-및-키-생성"><a href="#3-키스토어-및-키-생성" class="headerlink" title="(3) 키스토어 및 키 생성"></a>(3) 키스토어 및 키 생성</h3><p>앱을 빌드하고 <code>개인 키</code>로 서명하면 서명된 APK 파일이 생성됩니다. 이 개인 키가 저장되는 곳을 <code>키 스토어(Key Store)</code>라고 합니다.</p>
+<p><code>Build &gt; Generate Signed APK</code> 메뉴로 들어갑니다.<br><img src="/ko/images/posts/android/signed-apk/3.png"></p>
+<p>대화 상자에서 APK를 선택합니다.<br><img src="/ko/images/posts/android/signed-apk/4.png"></p>
+<p>먼저 <code>키 스토어(Key Store)</code>를 생성합시다. <code>Create new</code>버튼을 클릭합니다. 만약 이전에 키 스토어를 만들었다면 <code>Choose existing</code>버튼을 클릭하여 기존의 키 스토어를 사용합니다.<br><img src="/ko/images/posts/android/signed-apk/5.png"><br><code>New Key Store</code> 대화상자는 두 개의 섹션으로 나뉘어 있습니다. 첫 번째 섹션은 키 스토어 파일과 관련있습니다. 키 스토어 파일의 위치와 비밀번호를 입력합니다.<br><img src="/ko/images/posts/android/signed-apk/6.png"><br>두 번째 섹션은 키 스토어에 저장될 <code>개인 키</code>와 관련있습니다. 별칭(Alias), 비밀번호, 유효기간은 필수로 입력해야합니다. 나머지 필드는 최소 하나의 필드에 정보를 입력합니다.<br><img src="/ko/images/posts/android/signed-apk/7.png"><br>간혹 다음과 같은 경고 문구가 발생합니다. 특정 형식의 사용을 권장하는 경고문인데 서명하는데 아무 지장없으므로 무시합니다.<br><img src="/ko/images/posts/android/signed-apk/8.png"><br>정보가 제대로 입력되었는지 확인하고 <code>Next</code>버튼을 누릅니다.<br><img src="/ko/images/posts/android/signed-apk/9.png"><br><code>Destination Folder</code>에서는 APK 파일이 생성될 경로를 지정합니다. 기본값은 프로젝트의 <code>app</code>폴더입니다. <code>Build Variants</code>는 <code>release</code>를 선택합니다. <code>Signature Version</code>은 <code>V2</code>를 선택하고 <code>Finish</code>버튼을 누릅니다.<br><img src="/ko/images/posts/android/signed-apk/10.png"><br>이제 <code>app</code>폴더를 확인해봅시다. <code>[your_project]/app/release</code> 폴더 안에 서명된 APK 파일이 생성되었습니다.<br><img src="/ko/images/posts/android/signed-apk/11.png"></p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>서명된 APK 파일을 생성하는 법</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/24/android/181224-alpha-test/"><code>알파 테스트</code></a>에 대해 알아보겠습니다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 yologger. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                        aria-label="Facebook에 공유하기"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                        aria-label="Twitter에 공유하기"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/"
+                        aria-label="Google+에 공유하기"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">yologger</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/ko/assets/images/sunset11.png');"></div>
+        <!--SCRIPTS-->
+
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

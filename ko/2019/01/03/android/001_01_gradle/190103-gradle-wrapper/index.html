@@ -1,0 +1,575 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Yologger&#39;s Blog">
+    <title>[안드로이드] 그래들(Gradle) - (3) 그래들 래퍼(Gradle Wrapper) - Yologger&#39;s Blog</title>
+    <meta name="author" content="yologger">
+    
+    
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며우리는 이전 포스트에서 그래들(Gradle)에 대해 알아봤습니다. 이번 포스트에서는 그래들 래퍼(Gradle Wrapper)에 대해 알아보겠습니다.\n\nGradle Wrapper안드로이드 스튜디오를 사용하는 개발자는 의문이 생길 수도 있습니다. 그래들을 별도로 설치하지 않았지만 프로젝트를 빌드할 수 있기 때문입니다. 이를 가능하게 하는 것이 그래들 래퍼입니다.\n그래들 래퍼(Gradle Wrapper)는 그래들을 설치하지 않아도 프로젝트를 빌드할 수 있도록 프로젝트 내부에 그래들 관련 파일을 포함시키는 방법입니다. 그래들 래퍼 덕분에 기존의 프로젝트를 새로운 환경에 설치할 때 그래들을 별도로 설치 않아도 됩니다.\n\n우리는 이전 포스트에서 그래들을 설치하고 아래와 같은 명령어를 입력하여 프로젝트를 빌드했습니다.\n1$ gradle build\t\n하지만 그래들 명령어를 사용하려면 빌드하는 컴퓨터에 그래들이 설치되어있어야 합니다. 이제 그래들 래퍼를 사용하여 프로젝트를 빌드해보겠습니다.\nGradle Wrapper 초기화프로젝트 루트 디렉토리에서 다음 명령어를 입력합니다.\n1234$ gradle wrapperBUILD SUCCESSFUL in 545ms1 actionable task: 1 executed\n디렉토리에 그래들 래퍼와 관련된 파일이 생성되었습니다.\n12345678910$ ls -a.gradlegradlewgradlew.batgradlegradle/wrapper/gradle/wrapper/gradle-wrapper.jargradle/wrapper/gradle-wrapper.propertiesbuild.gradlesettings.gradle\nGradle Wrapper 구조생성된 디렉토리의 구조는 다음과 같습니다.\n12345678910$ tree . ├── gradle │ └── wrapper │   ├── gradle-wrapper.jar │   └── gradle-wrapper.properties ├── gradlew └── gradlew.bat 2 directories, 4 files\n(1) gradlew유닉스용 그래들 명령어 실행 스크립트 파일입니다.\n(2) gradlew.bat윈도우용 그래들 명령어 실행 스크립트 파일입니다.\n(3) gradle/wrapper/gradle-wrapper.jar그래들 래퍼 파일입니다. 위 두 개의 스크립트 파일 중 하나가 실행되면 운영체제에 맞는 환경을 로컬 컴퓨터에 다운받은 뒤 실제 태스크를 실행합니다.\n(4) gradle/wrapper/gradle-wrapper.properties그래들 래퍼 설정 파일입니다.\nGradle Wrapper를 통한 빌드유닉스 계열인 Mac OS 환경에서 프로젝트를 빌드해보겠습니다. 다음 명령어를 실행하면 $ gradle build 명령어와 동일하게 태스크를 실행합니다.\n1$ ./gradlew build\n\n안드로이드 스튜디오 프로젝트와 Gradle Wrapper안드로이드 스튜디오에서 프로젝트를 생성하면 자동으로 Gradle Wrapper 관련 파일이 생성됩니다.\n\n마치며이번 포스트에서는 그래들 래퍼(Gradle Wrapper)에 대해 알아봤습니다. 다음 포스트에서는 build.gradle 파일에 대해 알아보겠습니다.\n","dateCreated":"2019-01-03T01:00:00+09:00","dateModified":"2021-07-12T13:20:59+09:00","datePublished":"2019-01-03T01:00:00+09:00","description":"","headline":"[안드로이드] 그래들(Gradle) - (3) 그래들 래퍼(Gradle Wrapper)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/","keywords":"Android, Gradle"}</script>
+    <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며우리는 이전 포스트에서 그래들(Gradle)에 대해 알아봤습니다. 이번 포스트에서는 그래들 래퍼(Gradle Wrapper)에 대해 알아보겠습니다.  Gradle Wrapper안드로이드 스튜디오를 사용하는 개발자는 의문이 생길 수도 있습니다. 그래들을">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[안드로이드] 그래들(Gradle) - (3) 그래들 래퍼(Gradle Wrapper)">
+<meta property="og:url" content="https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/index.html">
+<meta property="og:site_name" content="Yologger&#39;s Blog">
+<meta property="og:description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며우리는 이전 포스트에서 그래들(Gradle)에 대해 알아봤습니다. 이번 포스트에서는 그래들 래퍼(Gradle Wrapper)에 대해 알아보겠습니다.  Gradle Wrapper안드로이드 스튜디오를 사용하는 개발자는 의문이 생길 수도 있습니다. 그래들을">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/gradle/gradle-1.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/gradle/gradle-2.png">
+<meta property="article:published_time" content="2019-01-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-12T04:20:59.024Z">
+<meta property="article:author" content="yologger">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Gradle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/android/gradle/gradle-1.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
+
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYKNWR810R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-QYKNWR810R');
+    </script>
+
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/ko/"
+            aria-label=""
+        >
+            Yologger&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="링크 열기: /ko/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://yologger.github.io"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="English"
+                        >
+                        <i class="sidebar-button-icon fa fa-globe" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">English</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/java"
+                            
+                            rel="noopener"
+                            title="Java"
+                        >
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/yologger"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Github"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [안드로이드] 그래들(Gradle) - (3) 그래들 래퍼(Gradle Wrapper)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2019-01-03T01:00:00+09:00">
+	
+		    2019/01/03
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>우리는 이전 포스트에서 <a href="/ko/2018/12/02/android/181202-gradle/">그래들(Gradle)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">그래들 래퍼(Gradle Wrapper)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="Gradle-Wrapper"><a href="#Gradle-Wrapper" class="headerlink" title="Gradle Wrapper"></a>Gradle Wrapper</h1><p>안드로이드 스튜디오를 사용하는 개발자는 의문이 생길 수도 있습니다. 그래들을 별도로 설치하지 않았지만 프로젝트를 빌드할 수 있기 때문입니다. 이를 가능하게 하는 것이 그래들 래퍼입니다.<br></br></p>
+<span class="highlight-text" style="background-color:#F6F7F7;">그래들 래퍼(Gradle Wrapper)</span>는 <u>그래들을 설치하지 않아도 프로젝트를 빌드할 수 있도록 프로젝트 내부에 그래들 관련 파일을 포함시키는 방법</u>입니다. 그래들 래퍼 덕분에 기존의 프로젝트를 새로운 환경에 설치할 때 그래들을 별도로 설치 않아도 됩니다.
+
+<p>우리는 <a href="/ko/2018/12/02/android/181202-gradle/">이전 포스트</a>에서 그래들을 설치하고 아래와 같은 명령어를 입력하여 프로젝트를 빌드했습니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle build</span>	</span><br></pre></td></tr></table></figure>
+<p>하지만 그래들 명령어를 사용하려면 빌드하는 컴퓨터에 그래들이 설치되어있어야 합니다. 이제 그래들 래퍼를 사용하여 프로젝트를 빌드해보겠습니다.</p>
+<h1 id="Gradle-Wrapper-초기화"><a href="#Gradle-Wrapper-초기화" class="headerlink" title="Gradle Wrapper 초기화"></a>Gradle Wrapper 초기화</h1><p>프로젝트 루트 디렉토리에서 다음 명령어를 입력합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle wrapper</span></span><br><span class="line"></span><br><span class="line">BUILD SUCCESSFUL in 545ms</span><br><span class="line">1 actionable task: 1 executed</span><br></pre></td></tr></table></figure>
+<p>디렉토리에 그래들 래퍼와 관련된 파일이 생성되었습니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -a</span></span><br><span class="line">.gradle</span><br><span class="line">gradlew</span><br><span class="line">gradlew.bat</span><br><span class="line">gradle</span><br><span class="line">gradle/wrapper/</span><br><span class="line">gradle/wrapper/gradle-wrapper.jar</span><br><span class="line">gradle/wrapper/gradle-wrapper.properties</span><br><span class="line">build.gradle</span><br><span class="line">settings.gradle</span><br></pre></td></tr></table></figure>
+<h1 id="Gradle-Wrapper-구조"><a href="#Gradle-Wrapper-구조" class="headerlink" title="Gradle Wrapper 구조"></a>Gradle Wrapper 구조</h1><p>생성된 디렉토리의 구조는 다음과 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ tree </span><br><span class="line">. </span><br><span class="line">├── gradle </span><br><span class="line">│ └── wrapper </span><br><span class="line">│   ├── gradle-wrapper.jar </span><br><span class="line">│   └── gradle-wrapper.properties </span><br><span class="line">├── gradlew </span><br><span class="line">└── gradlew.bat </span><br><span class="line"></span><br><span class="line">2 directories, 4 files</span><br></pre></td></tr></table></figure>
+<h5 id="1-gradlew"><a href="#1-gradlew" class="headerlink" title="(1) gradlew"></a>(1) gradlew</h5><p>유닉스용 그래들 명령어 실행 스크립트 파일입니다.</p>
+<h5 id="2-gradlew-bat"><a href="#2-gradlew-bat" class="headerlink" title="(2) gradlew.bat"></a>(2) gradlew.bat</h5><p>윈도우용 그래들 명령어 실행 스크립트 파일입니다.</p>
+<h5 id="3-gradle-wrapper-gradle-wrapper-jar"><a href="#3-gradle-wrapper-gradle-wrapper-jar" class="headerlink" title="(3) gradle/wrapper/gradle-wrapper.jar"></a>(3) gradle/wrapper/gradle-wrapper.jar</h5><p>그래들 래퍼 파일입니다. 위 두 개의 스크립트 파일 중 하나가 실행되면 운영체제에 맞는 환경을 로컬 컴퓨터에 다운받은 뒤 실제 태스크를 실행합니다.</p>
+<h5 id="4-gradle-wrapper-gradle-wrapper-properties"><a href="#4-gradle-wrapper-gradle-wrapper-properties" class="headerlink" title="(4) gradle/wrapper/gradle-wrapper.properties"></a>(4) gradle/wrapper/gradle-wrapper.properties</h5><p>그래들 래퍼 설정 파일입니다.</p>
+<h1 id="Gradle-Wrapper를-통한-빌드"><a href="#Gradle-Wrapper를-통한-빌드" class="headerlink" title="Gradle Wrapper를 통한 빌드"></a>Gradle Wrapper를 통한 빌드</h1><p>유닉스 계열인 Mac OS 환경에서 프로젝트를 빌드해보겠습니다. 다음 명령어를 실행하면 <code>$ gradle build</code> 명령어와 동일하게 태스크를 실행합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./gradlew build</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="안드로이드-스튜디오-프로젝트와-Gradle-Wrapper"><a href="#안드로이드-스튜디오-프로젝트와-Gradle-Wrapper" class="headerlink" title="안드로이드 스튜디오 프로젝트와 Gradle Wrapper"></a>안드로이드 스튜디오 프로젝트와 Gradle Wrapper</h1><p>안드로이드 스튜디오에서 프로젝트를 생성하면 자동으로 Gradle Wrapper 관련 파일이 생성됩니다.<br><img src="/ko/images/posts/android/gradle/gradle-1.png"><br><img src="/ko/images/posts/android/gradle/gradle-2.png"></p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>그래들 래퍼(Gradle Wrapper)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/04/android/181204-build-gradle/"><code>build.gradle</code></a> 파일에 대해 알아보겠습니다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">태그</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Android/" rel="tag">Android</a> <a class="tag tag--primary tag--small t-none-link" href="/ko/tags/Gradle/" rel="tag">Gradle</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 yologger. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                        aria-label="Facebook에 공유하기"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                        aria-label="Twitter에 공유하기"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                        aria-label="Google+에 공유하기"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">yologger</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/ko/assets/images/sunset11.png');"></div>
+        <!--SCRIPTS-->
+
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

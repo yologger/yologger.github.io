@@ -1,0 +1,561 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Yologger&#39;s Blog">
+    <title>[안드로이드] 프래그먼트 - (3) 프래그먼트 백 스택(Fragment Back Stack) - Yologger&#39;s Blog</title>
+    <meta name="author" content="yologger">
+    
+    
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며네 개의 포스트에서 걸쳐서 프래그먼트(Fragment)에 대해 알아보고 있습니다.\n\n프래그먼트(Fragment)란?\n프래그먼트 매니저\n프래그먼트 백 스택  ⬅️ ⬅️ ⬅️\n프래그먼트의 생명주기 메소드\n\n\n프래그먼트 백 스택(Back Stack)액티비티는 태스크에 스택 형태로 유지됩니다. 이 때문에 백 버튼을 누르면 스택의 최상단 액티비티를 종료하고 이전 액티비티로 돌아올 수 있습니다.\n프래그먼트 백 스택(Fragment Back Stack)은 프래그먼트에서도 액티비티와 유사하게 이전 프래그먼트 상태로 돌아가는 것을 가능하게 합니다. 백 스택을 사용하면 트랜잭션을 백 스택이라는 공간에 유지합니다. 따라서 백 버튼이나 Fragment.popBackStack()을 호출하면 이전 프래그먼트의 상태로 돌아올 수 있습니다.\n예제우선 MainActivity의 레이아웃는 다음과 같습니다.\nactivity_main.xmlxml1234567891011121314151617181920212223242526272829&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"    xmlns:app=\"http://schemas.android.com/apk/res-auto\"    xmlns:tools=\"http://schemas.android.com/tools\"    android:layout_width=\"match_parent\"    android:layout_height=\"match_parent\"    tools:context=\".MainActivity\"&gt;    &lt;Button android:id=\"@+id/activity_main_btn\"        android:layout_margin=\"16dp\"        android:layout_width=\"wrap_content\"        android:layout_height=\"wrap_content\"        android:textAllCaps=\"false\"        app:layout_constraintTop_toTopOf=\"parent\"        app:layout_constraintBottom_toTopOf=\"@+id/activity_main_fl\"        app:layout_constraintStart_toStartOf=\"parent\"        app:layout_constraintEnd_toEndOf=\"parent\"        android:text=\"Start Transaction\"/&gt;    &lt;FrameLayout android:id=\"@+id/activity_main_fl\"        android:layout_width=\"match_parent\"        android:layout_height=\"200dp\"        app:layout_constraintTop_toBottomOf=\"@+id/activity_main_btn\"        app:layout_constraintBottom_toBottomOf=\"parent\"        app:layout_constraintStart_toStartOf=\"parent\"        app:layout_constraintEnd_toEndOf=\"parent\"&gt;    &lt;/FrameLayout&gt;    &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;\n버튼을 누르면 다음과 같이 네 개의 트랜잭션을 실행하겠습니다. 백 스택에 트랜잭션을 추가할 때는 addToBackStack(null)메소드를 사용합니다. \nMainActivity.ktkotlin1234567891011121314151617181920212223242526272829303132333435363738394041424344class MainActivity : AppCompatActivity() {    lateinit var button: Button    override fun onCreate(savedInstanceState: Bundle?) {        super.onCreate(savedInstanceState)        setContentView(R.layout.activity_main)        button = findViewById(R.id.activity_main_btn)        button.setOnClickListener {            // 첫 번째 트랜잭션             // Fragment A 추가            var fragmentA = FragmentA()            val transaction1 = supportFragmentManager.beginTransaction()            transaction1.add(R.id.activity_main_fl, fragmentA)            transaction1.addToBackStack(null)            transaction1.commit()            // 두 번째 트랜잭션            // Fragment A 삭제            val transaction2 = supportFragmentManager.beginTransaction()            transaction2.remove(fragmentA)            transaction2.addToBackStack(null)            transaction2.commit()            // 세 번째 트랜잭션             // Fragment B 추가            val fragmentB = FragmentB()            val transaction3 = supportFragmentManager.beginTransaction()            transaction3.add(R.id.activity_main_fl, fragmentB)            transaction3.addToBackStack(null)            transaction3.commit()            // 네 번째 트랜잭션            // Fragment B를 Fragment A로 교체            val transaction4 = supportFragmentManager.beginTransaction()            transaction4.replace(R.id.activity_main_fl, fragmentA)            transaction4.addToBackStack(null)            transaction4.commit()        }    }}\n\n이제 앱을 실행합시다. 백 버튼을 누를 때 마다 이전 상태로 돌아가는 것을 확인할 수 있습니다.\n만약 백 스택에 트랜잭션을 추가하지 않았다면, 백 버튼을 눌렀을 때 이전 상태로 돌아가지 않고 앱이 종료됩니다.\n백 버튼 대신 popBackStack()메소드를 사용할 수도 있습니다.\nOnBackStackChangedListenerOnBackStackChangedListener를 사용하면 백 스택의 변화를 감지할 수 있습니다.\n1234567var fragmentManager = supportFragmentManagerfragmentManager.addOnBackStackChangedListener(object: FragmentManager.OnBackStackChangedListener &#123;    override fun onBackStackChanged() &#123;        // Do something when back stack changed.    &#125;&#125;)\n\n마치며이번 포스트에서는 프래그먼트 백 스택에 대해 알아봤습니다. 다음 포스트에서는 프래그먼트의 생명주기 함수에 대해 알아보겠습니다.\n","dateCreated":"2019-04-05T01:00:00+09:00","dateModified":"2021-07-12T13:16:36+09:00","datePublished":"2019-04-05T01:00:00+09:00","description":"","headline":"[안드로이드] 프래그먼트 - (3) 프래그먼트 백 스택(Fragment Back Stack)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"}</script>
+    <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며네 개의 포스트에서 걸쳐서 프래그먼트(Fragment)에 대해 알아보고 있습니다.  프래그먼트(Fragment)란? 프래그먼트 매니저 프래그먼트 백 스택  ⬅️ ⬅️ ⬅️ 프래그먼트의 생명주기 메소드   프래그먼트 백 스택(Back Stack)액티비티는">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[안드로이드] 프래그먼트 - (3) 프래그먼트 백 스택(Fragment Back Stack)">
+<meta property="og:url" content="https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/index.html">
+<meta property="og:site_name" content="Yologger&#39;s Blog">
+<meta property="og:description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며네 개의 포스트에서 걸쳐서 프래그먼트(Fragment)에 대해 알아보고 있습니다.  프래그먼트(Fragment)란? 프래그먼트 매니저 프래그먼트 백 스택  ⬅️ ⬅️ ⬅️ 프래그먼트의 생명주기 메소드   프래그먼트 백 스택(Back Stack)액티비티는">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2019-04-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-12T04:16:36.156Z">
+<meta property="article:author" content="yologger">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
+
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYKNWR810R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-QYKNWR810R');
+    </script>
+
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/ko/"
+            aria-label=""
+        >
+            Yologger&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="링크 열기: /ko/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://yologger.github.io"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="English"
+                        >
+                        <i class="sidebar-button-icon fa fa-globe" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">English</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/java"
+                            
+                            rel="noopener"
+                            title="Java"
+                        >
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/yologger"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Github"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [안드로이드] 프래그먼트 - (3) 프래그먼트 백 스택(Fragment Back Stack)
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2019-04-05T01:00:00+09:00">
+	
+		    2019/04/05
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Android-Framework/">Android Framework</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>네 개의 포스트에서 걸쳐서 <code>프래그먼트(Fragment)</code>에 대해 알아보고 있습니다.</p>
+<ol>
+<li><a href="/ko/2019/04/10/android/190410-fragment/">프래그먼트(Fragment)란?</a></li>
+<li><a href="/ko/2019/04/11/android/190411-fragment-manager/">프래그먼트 매니저</a></li>
+<li><a href="/ko/2019/04/12/android/190412-fragment_backstack/">프래그먼트 백 스택</a>  ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/04/13/android/190413-fragment-lifecycle/">프래그먼트의 생명주기 메소드</a></li>
+</ol>
+<hr>
+<h1 id="프래그먼트-백-스택-Back-Stack"><a href="#프래그먼트-백-스택-Back-Stack" class="headerlink" title="프래그먼트 백 스택(Back Stack)"></a>프래그먼트 백 스택(Back Stack)</h1><p>액티비티는 <a href="/ko/2019/02/16/android/190216-activity-stack/">태스크</a>에 스택 형태로 유지됩니다. 이 때문에 백 버튼을 누르면 스택의 최상단 액티비티를 종료하고 이전 액티비티로 돌아올 수 있습니다.</p>
+<p><code>프래그먼트 백 스택(Fragment Back Stack)</code>은 프래그먼트에서도 액티비티와 유사하게 이전 프래그먼트 상태로 돌아가는 것을 가능하게 합니다. 백 스택을 사용하면 트랜잭션을 백 스택이라는 공간에 유지합니다. 따라서 백 버튼이나 <code>Fragment.popBackStack()</code>을 호출하면 이전 프래그먼트의 상태로 돌아올 수 있습니다.</p>
+<h1 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h1><p>우선 <code>MainActivity</code>의 레이아웃는 다음과 같습니다.</p>
+<figure class="codeblock codeblock--tabbed"><figcaption><span>activity_main.xml</span><ul class="tabs"><li class="tab active">xml</li></ul></figcaption><div class="tabs-content"><figure class="highlight xml" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span> <span class="attr">android:id</span>=<span class="string">"@+id/activity_main_btn"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_margin</span>=<span class="string">"16dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:textAllCaps</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintBottom_toTopOf</span>=<span class="string">"@+id/activity_main_fl"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"Start Transaction"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">FrameLayout</span> <span class="attr">android:id</span>=<span class="string">"@+id/activity_main_fl"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"200dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toBottomOf</span>=<span class="string">"@+id/activity_main_btn"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure></div></figure>
+<p>버튼을 누르면 다음과 같이 네 개의 트랜잭션을 실행하겠습니다. 백 스택에 트랜잭션을 추가할 때는 <code>addToBackStack(null)</code>메소드를 사용합니다. </p>
+<figure class="codeblock codeblock--tabbed"><figcaption><span>MainActivity.kt</span><ul class="tabs"><li class="tab active">kotlin</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">lateinit</span> <span class="keyword">var</span> button: Button</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> {</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        button = findViewById(R.id.activity_main_btn)</span><br><span class="line"></span><br><span class="line">        button.setOnClickListener {</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 첫 번째 트랜잭션 </span></span><br><span class="line">            <span class="comment">// Fragment A 추가</span></span><br><span class="line">            <span class="keyword">var</span> fragmentA = FragmentA()</span><br><span class="line">            <span class="keyword">val</span> transaction1 = supportFragmentManager.beginTransaction()</span><br><span class="line">            transaction1.add(R.id.activity_main_fl, fragmentA)</span><br><span class="line">            transaction1.addToBackStack(<span class="literal">null</span>)</span><br><span class="line">            transaction1.commit()</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 두 번째 트랜잭션</span></span><br><span class="line">            <span class="comment">// Fragment A 삭제</span></span><br><span class="line">            <span class="keyword">val</span> transaction2 = supportFragmentManager.beginTransaction()</span><br><span class="line">            transaction2.remove(fragmentA)</span><br><span class="line">            transaction2.addToBackStack(<span class="literal">null</span>)</span><br><span class="line">            transaction2.commit()</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 세 번째 트랜잭션 </span></span><br><span class="line">            <span class="comment">// Fragment B 추가</span></span><br><span class="line">            <span class="keyword">val</span> fragmentB = FragmentB()</span><br><span class="line">            <span class="keyword">val</span> transaction3 = supportFragmentManager.beginTransaction()</span><br><span class="line">            transaction3.add(R.id.activity_main_fl, fragmentB)</span><br><span class="line">            transaction3.addToBackStack(<span class="literal">null</span>)</span><br><span class="line">            transaction3.commit()</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 네 번째 트랜잭션</span></span><br><span class="line">            <span class="comment">// Fragment B를 Fragment A로 교체</span></span><br><span class="line">            <span class="keyword">val</span> transaction4 = supportFragmentManager.beginTransaction()</span><br><span class="line">            transaction4.replace(R.id.activity_main_fl, fragmentA)</span><br><span class="line">            transaction4.addToBackStack(<span class="literal">null</span>)</span><br><span class="line">            transaction4.commit()</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
+
+<p>이제 앱을 실행합시다. <code>백 버튼</code>을 누를 때 마다 이전 상태로 돌아가는 것을 확인할 수 있습니다.</p>
+<p>만약 백 스택에 트랜잭션을 추가하지 않았다면, <code>백 버튼</code>을 눌렀을 때 이전 상태로 돌아가지 않고 앱이 종료됩니다.</p>
+<p><code>백 버튼</code> 대신 <code>popBackStack()</code>메소드를 사용할 수도 있습니다.</p>
+<h1 id="OnBackStackChangedListener"><a href="#OnBackStackChangedListener" class="headerlink" title="OnBackStackChangedListener"></a>OnBackStackChangedListener</h1><p><code>OnBackStackChangedListener</code>를 사용하면 <code>백 스택</code>의 변화를 감지할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fragmentManager = supportFragmentManager</span><br><span class="line"></span><br><span class="line">fragmentManager.addOnBackStackChangedListener(<span class="keyword">object</span>: FragmentManager.OnBackStackChangedListener &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onBackStackChanged</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// Do something when back stack changed.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>프래그먼트 백 스택</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/04/13/android/190413-fragment-lifecycle/"><code>프래그먼트의 생명주기 함수</code></a>에 대해 알아보겠습니다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 yologger. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"
+                        aria-label="Facebook에 공유하기"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"
+                        aria-label="Twitter에 공유하기"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2019/04/05/android/003_01_android_platform/190405-01-fragment_backstack/"
+                        aria-label="Google+에 공유하기"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">yologger</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/ko/assets/images/sunset11.png');"></div>
+        <!--SCRIPTS-->
+
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

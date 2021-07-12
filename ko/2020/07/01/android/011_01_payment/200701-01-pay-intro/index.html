@@ -1,0 +1,559 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Yologger&#39;s Blog">
+    <title>[안드로이드] 결제 - (1) 인앱 결제와 PG 결제의 차이점 - Yologger&#39;s Blog</title>
+    <meta name="author" content="yologger">
+    
+    
+        <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며세 개의 포스트에 걸쳐서 안드로이드 앱의 결제 방식에 대해 알아보고있습니다.\n\n개요\n인앱 결제(Google Pay API)\nPG 결제\n\n\n결제안드로이드 앱에서 결제를 구현하는 방식에는 크게 두 가지가 있습니다.\n(1) 인앱 결제인앱 결제는 구글 결제 API를 사용하여 앱 내부에서 결제를 진행합니다. 인앱 결제를 사용하면 화면 하단에 다음과 같이 결제 구매 화면이 나타납니다.\n\n인앱 결제의 거래 수수료는 고객이 결제하는 가격의 30%입니다. 즉, 개발자는 결제 금액의 70%만 수령하고 나머지 30%는 구글이 가져가게 됩니다.\n(2) PG 결제PG(Payment Gateway)사는 이니시스, 다날, LG유플러스 같은 결제창을 제공하는 회사입니다. PG 결제를 사용하면 다음과 같이 PG사가 제공하는 결제 화면으로 이동하게 됩니다.\n\nPG 결제는 인앱 결제에 비해 훨씬 낮은 수수료를 부과합니다. (PG사에 따라 수수료는 달라질 수 있으며 보통 3% 내외입니다.)\n무엇을 사용해야하는가구글은 2020년 인앱결제 의무화 정책을 시행했습니다. 따라서 앱이 디지털 상품을 거래하면서 앱 내부 결제를 할 때는 무조건 구글 결제 API를 사용해야합니다. 여기서 말하는 디지털 상품는 게임 아이템, 게임 머니, 이모티콘, 음악, 영화, 웹툰 같은 전자상품을 의미합니다. 아마존, 쿠팡, 이케아, 에어비엔비, 우버, 카카오T, DoorDash, 배달의 민족처럼 디지털 재화가 아닌 실물 상품이나 실제 서비스를 거래하는 경우에는 구글 결제 API를 사용하지 않아도 됩니다.\n\n마치며이번 포스트에서는 인앱결제와 PG결제의 차이점에 대해 알아봤습니다. 다음 포스트에서는 Google Pay API를 사용하여 인앱 결제를 구현해보겠습니다.\n","dateCreated":"2020-07-01T01:00:00+09:00","dateModified":"2021-07-12T12:45:00+09:00","datePublished":"2020-07-01T01:00:00+09:00","description":"","headline":"[안드로이드] 결제 - (1) 인앱 결제와 PG 결제의 차이점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"}</script>
+    <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며세 개의 포스트에 걸쳐서 안드로이드 앱의 결제 방식에 대해 알아보고있습니다.  개요 인앱 결제(Google Pay API) PG 결제   결제안드로이드 앱에서 결제를 구현하는 방식에는 크게 두 가지가 있습니다. (1) 인앱 결제인앱 결제는 구글 결제 A">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="[안드로이드] 결제 - (1) 인앱 결제와 PG 결제의 차이점">
+<meta property="og:url" content="https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/index.html">
+<meta property="og:site_name" content="Yologger&#39;s Blog">
+<meta property="og:description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며세 개의 포스트에 걸쳐서 안드로이드 앱의 결제 방식에 대해 알아보고있습니다.  개요 인앱 결제(Google Pay API) PG 결제   결제안드로이드 앱에서 결제를 구현하는 방식에는 크게 두 가지가 있습니다. (1) 인앱 결제인앱 결제는 구글 결제 A">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/pay-intro/1.png">
+<meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/pay-intro/2.png">
+<meta property="article:published_time" content="2020-06-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-12T03:45:00.196Z">
+<meta property="article:author" content="yologger">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/android/pay-intro/1.png">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/ko/assets/css/style-eqhdkxahvrqcto5tde9zeivmtxrilhwzusu4n1qk6jqpdztntanojnzegvzi.min.css">
+
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYKNWR810R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-QYKNWR810R');
+    </script>
+
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/ko/"
+            aria-label=""
+        >
+            Yologger&#39;s Blog
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="링크 열기: /ko/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://yologger.github.io"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="English"
+                        >
+                        <i class="sidebar-button-icon fa fa-globe" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">English</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/java"
+                            
+                            rel="noopener"
+                            title="Java"
+                        >
+                        <i class="sidebar-button-icon fab fa-java" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Java</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/kotlin"
+                            
+                            rel="noopener"
+                            title="Kotlin"
+                        >
+                        <i class="sidebar-button-icon fab fa-korvue" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Kotlin</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/android"
+                            
+                            rel="noopener"
+                            title="Android"
+                        >
+                        <i class="sidebar-button-icon fab fa-android" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Android</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/springboot"
+                            
+                            rel="noopener"
+                            title="Spring Boot"
+                        >
+                        <i class="sidebar-button-icon fas fa-power-off" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Spring Boot</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/algorithm"
+                            
+                            rel="noopener"
+                            title="Algorithm"
+                        >
+                        <i class="sidebar-button-icon fas fa-project-diagram" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Algorithm</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="#about"
+                            
+                            rel="noopener"
+                            title="About"
+                        >
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/ko/mailto"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/yologger"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Github"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Github</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            [안드로이드] 결제 - (1) 인앱 결제와 PG 결제의 차이점
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2020-07-01T01:00:00+09:00">
+	
+		    2020/07/01
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Payment/">Payment</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+<hr>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>세 개의 포스트에 걸쳐서 안드로이드 앱의 결제 방식에 대해 알아보고있습니다.</p>
+<ol>
+<li><a href="/ko/2021/03/01/android/008_01_google_pay/210301-01-pay-intro/">개요</a></li>
+<li><a href="/ko/2021/03/01/android/008_01_google_pay/210301-02-google-pay/">인앱 결제(Google Pay API)</a></li>
+<li><a href="/ko/2021/03/01/android/008_01_google_pay/210301-03-pg/">PG 결제</a></li>
+</ol>
+<hr>
+<h1 id="결제"><a href="#결제" class="headerlink" title="결제"></a>결제</h1><p>안드로이드 앱에서 결제를 구현하는 방식에는 크게 두 가지가 있습니다.</p>
+<h3 id="1-인앱-결제"><a href="#1-인앱-결제" class="headerlink" title="(1) 인앱 결제"></a>(1) 인앱 결제</h3><p><code>인앱 결제</code>는 <a target="_blank" rel="noopener" href="https://developers.google.com/pay/api/android/overview?hl=ko">구글 결제 API</a>를 사용하여 앱 내부에서 결제를 진행합니다. 인앱 결제를 사용하면 화면 하단에 다음과 같이 결제 구매 화면이 나타납니다.</p>
+<p><img src="/ko/images/posts/android/pay-intro/1.png"></p>
+<p>인앱 결제의 거래 수수료는 고객이 결제하는 가격의 30%입니다. 즉, 개발자는 결제 금액의 70%만 수령하고 나머지 30%는 구글이 가져가게 됩니다.</p>
+<h3 id="2-PG-결제"><a href="#2-PG-결제" class="headerlink" title="(2) PG 결제"></a>(2) PG 결제</h3><p><code>PG(Payment Gateway)사</code>는 이니시스, 다날, LG유플러스 같은 결제창을 제공하는 회사입니다. PG 결제를 사용하면 다음과 같이 PG사가 제공하는 결제 화면으로 이동하게 됩니다.</p>
+<p><img src="/ko/images/posts/android/pay-intro/2.png"></p>
+<p>PG 결제는 인앱 결제에 비해 훨씬 낮은 수수료를 부과합니다. (PG사에 따라 수수료는 달라질 수 있으며 보통 3% 내외입니다.)</p>
+<h1 id="무엇을-사용해야하는가"><a href="#무엇을-사용해야하는가" class="headerlink" title="무엇을 사용해야하는가"></a>무엇을 사용해야하는가</h1><p>구글은 2020년 인앱결제 의무화 정책을 시행했습니다. 따라서 앱이 디지털 상품을 거래하면서 앱 내부 결제를 할 때는 무조건 구글 결제 API를 사용해야합니다. 여기서 말하는 <code>디지털 상품</code>는 게임 아이템, 게임 머니, 이모티콘, 음악, 영화, 웹툰 같은 전자상품을 의미합니다. 아마존, 쿠팡, 이케아, 에어비엔비, 우버, 카카오T, DoorDash, 배달의 민족처럼 디지털 재화가 아닌 <code>실물 상품</code>이나 <code>실제 서비스</code>를 거래하는 경우에는 구글 결제 API를 사용하지 않아도 됩니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 인앱결제와 PG결제의 차이점에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2021/03/01/android/008_01_google_pay/210301-02-google-pay/">Google Pay API를 사용하여 인앱 결제</a>를 구현해보겠습니다.</p>
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2021 yologger. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="이 포스트 공유하기"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"
+                    title="Facebook에 공유하기"
+                    aria-label="Facebook에 공유하기"
+                >
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"
+                    title="Twitter에 공유하기"
+                    aria-label="Twitter에 공유하기"
+                >
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"
+                    title="Google+에 공유하기"
+                    aria-label="Google+에 공유하기"
+                >
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"
+                        aria-label="Facebook에 공유하기"
+                    >
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"
+                        aria-label="Twitter에 공유하기"
+                    >
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/07/01/android/011_01_payment/200701-01-pay-intro/"
+                        aria-label="Google+에 공유하기"
+                    >
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">yologger</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/ko/assets/images/sunset11.png');"></div>
+        <!--SCRIPTS-->
+
+<script src="/ko/assets/js/script-iunmdqsnzvlwsd3tu4j439hm21rswmrccyqp6pivb4viqdqre4vbnm0chrws.min.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>

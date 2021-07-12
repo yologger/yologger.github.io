@@ -270,23 +270,23 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2021/02/01/android/210201-retrofit/"
-                            aria-label=": [안드로이드] Retrofit"
+                            href="/ko/2020/05/07/android/009_01_google_maps/200507-google-maps-control/"
+                            aria-label=": [안드로이드] 구글 지도(Google Maps) - (7) 맵 컨트롤"
                         >
-                            [안드로이드] Retrofit
+                            [안드로이드] 구글 지도(Google Maps) - (7) 맵 컨트롤
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2021-02-01T20:16:30+09:00">
+    <time datetime="2020-05-07T01:00:00+09:00">
 	
-		    2021/02/01
+		    2020/05/07
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Google-Maps/">Google Maps</a>
 
 
     
@@ -296,6 +296,30 @@
             
                 <div class="postShorten-content">
                     <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>일곱 개의 포스트에 걸쳐 <code>구글 지도(Google Maps)</code>에 대해 알아보고자 합니다.</p>
+<ul>
+<li><a href="/ko/2019/07/10/android/190710-google-maps-api/">구글 지도 띄우기</a></li>
+<li><a href="/ko/2019/07/11/android/190711-google-maps-map-type/">지도 타입 변경하기</a></li>
+<li><a href="/ko/2019/07/12/android/190712-google-maps-marker/">마커 보여주기</a></li>
+<li><a href="/ko/2019/07/13/android/190713-google-maps-zoom/">지도 확대와 축소 (줌-인과 줌-아웃)</a></li>
+<li><a href="/ko/2019/07/14/android/190714-google-maps-show-my-location/">지도에 내 위치 보여주기</a></li>
+<li><a href="/ko/2019/07/15/android/190715-google-maps-move-to-my-location/">내 위치로 카메라 이동하기</a></li>
+<li><a href="/ko/2019/07/16/android/190716-google-maps-control/">맵 컨트롤</a> ⬅️ ⬅️ ⬅️</li>
+</ul>
+<hr>
+<h1 id="맵-컨트롤"><a href="#맵-컨트롤" class="headerlink" title="맵 컨트롤"></a>맵 컨트롤</h1><p>우리는 이전 포스트에서 <code>줌 인 버튼</code>과 <code>줌 아웃 버튼</code>, <code>내 위치 버튼</code>을 직접 만들고 구현했습니다. 구글 맵 API는 이러한 기능을 위한 여러 <code>컨트롤</code>을 자체적으로 제공합니다. <code>UiSetting</code>클래스의 <code>setZoomControlsEnable(true)</code>메소드를 사용하면 됩니다.</p>
+<p>우선 <code>GoogleMap</code>객체에서 <code>UiSettings</code>객체를 가져옵니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> mapSettings: MapSettings? = mMap?.uiSettings</span><br></pre></td></tr></table></figure>
+<p>그리고 <code>setZoomControlsEnable(true)</code>메소드를 호출합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mapSettings?.setZoomControlsEnabled(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<p>앱을 실행하면 <code>줌-인</code>과 <code>줌-아웃 버튼</code>, <code>현재 내 위치 버튼</code>이 나타납니다.<br><img src="/ko/images/posts/android/google-maps-control/1.png"></p>
+<p>내 위치 버튼에서 위치 정보를 사용하므로 <a href="/ko/2019/02/01/android/190201-permission/">권한 설정</a> 코드가 필요합니다. 전체 코드는 다음과 같습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>(), OnMapReadyCallback &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> mMap: GoogleMap? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">val</span> REQUEST_CODE_PERMISSIONS = <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_fragment_map) <span class="keyword">as</span> SupportMapFragment</span><br><span class="line">        mapFragment.getMapAsync(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onMapReady</span><span class="params">(googleMap: <span class="type">GoogleMap</span>)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">        mMap = googleMap</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 초기 위치 설정</span></span><br><span class="line">        <span class="keyword">val</span> sydney = LatLng(-<span class="number">33.8688</span>, <span class="number">151.2093</span>)</span><br><span class="line">        mMap?.moveCamera(CameraUpdateFactory.newLatLng(sydney))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> hasFineLocationPermission = ActivityCompat.checkSelfPermission(<span class="keyword">this</span>, Manifest.permission.ACCESS_FINE_LOCATION)</span><br><span class="line">        <span class="keyword">val</span> hasCoarseLocationPermission = ActivityCompat.checkSelfPermission(<span class="keyword">this</span>, Manifest.permission.ACCESS_COARSE_LOCATION)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED &amp;&amp; hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) &#123;</span><br><span class="line">            ActivityCompat.requestPermissions(<span class="keyword">this</span>, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_CODE_PERMISSIONS)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// MapSettings 객체 가져오기</span></span><br><span class="line">            <span class="keyword">val</span> mapSettings: MapSettings? = mMap?.uiSettings</span><br><span class="line"></span><br><span class="line">            mapSettings?.run &#123;</span><br><span class="line">                <span class="comment">// 컨트롤 보여주기</span></span><br><span class="line">                setZoomControlsEnabled(<span class="literal">true</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onRequestPermissionsResult</span><span class="params">(requestCode: <span class="type">Int</span>, permissions: <span class="type">Array</span>&lt;<span class="type">out</span> <span class="type">String</span>&gt;, grantResults: <span class="type">IntArray</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onRequestPermissionsResult(requestCode, permissions, grantResults)</span><br><span class="line">        <span class="keyword">when</span> (requestCode) &#123;</span><br><span class="line">            REQUEST_CODE_PERMISSIONS -&gt; &#123;</span><br><span class="line">                <span class="keyword">if</span>(grantResults.isNotEmpty()) &#123;</span><br><span class="line">                    <span class="keyword">for</span> ((i, permission) <span class="keyword">in</span> permissions.withIndex()) &#123;</span><br><span class="line">                        isPermissionsGranted = grantResults[i] == PackageManager.PERMISSION_GRANTED</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                Toast.makeText(<span class="keyword">this</span><span class="symbol">@MainActivity</span>, <span class="string">&quot;Permissions denied.&quot;</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>일곱 개의 포스트에 걸쳐 <code>구글 지도(Google Maps)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/08/01/android/190801-google-admob/"><code>구글 애드몹(Google AdMob)</code></a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -305,7 +329,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2021/02/01/android/210201-retrofit/#post-footer"
+                                href="/ko/2020/05/07/android/009_01_google_maps/200507-google-maps-control/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -328,181 +352,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2020/06/01/android/200601-acc-intro/"
-                            aria-label=": [안드로이드] ACC(Android Architecture Component) - (1) 개요"
-                        >
-                            [안드로이드] ACC(Android Architecture Component) - (1) 개요
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-06-01T20:16:30+09:00">
-	
-		    2020/06/01
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="Shared-Preference"><a href="#Shared-Preference" class="headerlink" title="Shared Preference"></a>Shared Preference</h1><p><code>Shared Preference</code>를 사용하면 비교적 간단한 값을 저장할 수 있습니다. Shared Preference는 파일 형태로 아래 경로에 저장됩니다.</p>
-<blockquote>
-<p>data/data/[pacakge_name]/shared_prefs/[file_name].xml</p>
-</blockquote>
-<p>Shared Preference 파일에 저장된 데이터는 앱이 삭제되기 전까지 유지됩니다.</p>
-<h1 id="Shared-Preference-객체-생성하기"><a href="#Shared-Preference-객체-생성하기" class="headerlink" title="Shared Preference 객체 생성하기"></a>Shared Preference 객체 생성하기</h1><p><a href="/ko/2019/05/02/android/190502-context/"><code>Context</code></a>클래스에는 <code>getSharedPreferences()</code>메소드와 <code>getPreferences()</code>메소드가 선언되어있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Context.java</span></span><br><span class="line"><span class="keyword">package</span> android.content;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(String name, <span class="meta">@PreferencesMode</span> <span class="keyword">int</span> mode)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(File file, <span class="meta">@PreferencesMode</span> <span class="keyword">int</span> mode)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>따라서 <code>Context</code>를 구현한 객체에서는 둘 중 하나의 메서드를 호출하여 새로운 Shared Preference 파일을 생성하거나 기존 파일에 접근할 수 있습니다. <code>액티비티(Activity)</code>도 <code>Context</code>클래스를 구현하므로 두 메소드를 호출할 수 있습니다.</p>
-<h4 id="1-getSharedPreferences"><a href="#1-getSharedPreferences" class="headerlink" title="(1) getSharedPreferences()"></a>(1) getSharedPreferences()</h4><p><code>getSharedPreferences()</code>는 함수의 첫 번째 인자로 전달되는 이름으로 파일을 생성하거나 구분합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> YOUR_KEY = <span class="string">&quot;your_key&quot;</span></span><br><span class="line"><span class="keyword">val</span> sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)</span><br></pre></td></tr></table></figure>
-<h4 id="2-getPreferences"><a href="#2-getPreferences" class="headerlink" title="(2) getPreferences()"></a>(2) getPreferences()</h4><p>액티비티에서 하나의 Shared Preference 파일만 사용해야하는 경우 <code>getPreferences()</code>메서드를 사용합니다. 이 메서드는 액티비티에 포함된 기본 Shared Preference 파일을 자동으로 검색하므로 첫 번째 인자로 파일의 이름을 제공할 필요가 없습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE)</span><br></pre></td></tr></table></figure>
-<h1 id="Shared-Prefenreces에-쓰기"><a href="#Shared-Prefenreces에-쓰기" class="headerlink" title="Shared Prefenreces에 쓰기"></a>Shared Prefenreces에 쓰기</h1><p>SharedPreference의 <code>edit()</code>메소드를 호출하여 <code>Editor</code>객체를 생성합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> YOUR_KEY = <span class="string">&quot;your_key&quot;</span></span><br><span class="line"><span class="keyword">val</span> sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> editor = sharedPref.edit()</span><br></pre></td></tr></table></figure>
-<p>이제 <code>put○○○()</code>을 호출하여 데이터를 저장할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">edit.putString(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Monica&quot;</span>)</span><br><span class="line">edit.putInt(<span class="string">&quot;age&quot;</span>, <span class="number">35</span>)</span><br><span class="line">edit.putBoolean(<span class="string">&quot;is_married&quot;</span>, <span class="literal">false</span>)</span><br><span class="line">edit.putFloat(<span class="number">168.3</span>)</span><br></pre></td></tr></table></figure>
-<p>마지막으로 <code>commit()</code>을 호출하여 동기화합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit.commit()</span><br></pre></td></tr></table></figure>
-<h1 id="Shared-Prefrences에서-읽기"><a href="#Shared-Prefrences에서-읽기" class="headerlink" title="Shared Prefrences에서 읽기"></a>Shared Prefrences에서 읽기</h1><p><code>SharedPreferences</code>객체의 <code>get○○○()</code>를 호출하여 데이터를 읽어올 수 있습니다. 이 때 두 번째 인자로 값이 없을 때의 기본값을 지정합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> YOUR_KEY = <span class="string">&quot;your_key&quot;</span></span><br><span class="line"><span class="keyword">val</span> sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> name = sharedPref.getString(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">val</span> age = sharedPref.getInt(<span class="string">&quot;age&quot;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">val</span> isMarred = sharedPref.getBoolean(<span class="string">&quot;is_married&quot;</span>, <span class="literal">false</span>)</span><br><span class="line"><span class="keyword">val</span> height = sharedPref.getFloat(<span class="string">&quot;height&quot;</span>, <span class="number">0.0</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="Context를-구현하지-않은-클래스에서는-어떻게"><a href="#Context를-구현하지-않은-클래스에서는-어떻게" class="headerlink" title="Context를 구현하지 않은 클래스에서는 어떻게?"></a>Context를 구현하지 않은 클래스에서는 어떻게?</h1><p>개발을 하다보면 <code>Context</code>클래스를 구현하지 않은 클래스에서도 <code>Shared Preferences</code>에 접근할 필요가 있습니다. 이 때는 <a href="/ko/2019/05/01/android/190501-application-class/"><code>Application</code></a>클래스를 사용할 수 있습니다.</p>
-<p>우선 <code>Application</code>클래스를 상속하는 <code>App</code>클래스를 정의합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.app.Application</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span>: <span class="type">Application</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> instance: App</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">newInstance</span><span class="params">()</span></span>: App &#123;</span><br><span class="line">            <span class="keyword">return</span> instance</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate()</span><br><span class="line">        instance = <span class="keyword">this</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>AndroidManifest.xml</code>파일에 <code>App</code>클래스를 지정합니다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.shared_preference&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span> <span class="attr">android:name</span>=<span class="string">&quot;com.yologger.shared_preference.App&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>이제 다음과 같이 <code>Shared Preferences</code>에 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> sharedPreference = App.newInstance().getSharedPreferences(<span class="string">&quot;your_file_key&quot;</span>, Context.MODE_PRIVATE)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2020/06/01/android/200601-acc-intro/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2020/06/01/android/200701-android-design-component/"
-                            aria-label=": [안드로이드] Material Design Component - (1) 개요"
-                        >
-                            [안드로이드] Material Design Component - (1) 개요
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-06-01T20:16:30+09:00">
-	
-		    2020/06/01
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<blockquote>
-<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="Shared-Preference"><a href="#Shared-Preference" class="headerlink" title="Shared Preference"></a>Shared Preference</h1><p><code>Shared Preference</code>를 사용하면 비교적 간단한 값을 저장할 수 있습니다. Shared Preference는 파일 형태로 아래 경로에 저장됩니다.</p>
-<blockquote>
-<p>data/data/[pacakge_name]/shared_prefs/[file_name].xml</p>
-</blockquote>
-<p>Shared Preference 파일에 저장된 데이터는 앱이 삭제되기 전까지 유지됩니다.</p>
-<h1 id="Shared-Preference-객체-생성하기"><a href="#Shared-Preference-객체-생성하기" class="headerlink" title="Shared Preference 객체 생성하기"></a>Shared Preference 객체 생성하기</h1><p><a href="/ko/2019/05/02/android/190502-context/"><code>Context</code></a>클래스에는 <code>getSharedPreferences()</code>메소드와 <code>getPreferences()</code>메소드가 선언되어있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Context.java</span></span><br><span class="line"><span class="keyword">package</span> android.content;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(String name, <span class="meta">@PreferencesMode</span> <span class="keyword">int</span> mode)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(File file, <span class="meta">@PreferencesMode</span> <span class="keyword">int</span> mode)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>따라서 <code>Context</code>를 구현한 객체에서는 둘 중 하나의 메서드를 호출하여 새로운 Shared Preference 파일을 생성하거나 기존 파일에 접근할 수 있습니다. <code>액티비티(Activity)</code>도 <code>Context</code>클래스를 구현하므로 두 메소드를 호출할 수 있습니다.</p>
-<h4 id="1-getSharedPreferences"><a href="#1-getSharedPreferences" class="headerlink" title="(1) getSharedPreferences()"></a>(1) getSharedPreferences()</h4><p><code>getSharedPreferences()</code>는 함수의 첫 번째 인자로 전달되는 이름으로 파일을 생성하거나 구분합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> YOUR_KEY = <span class="string">&quot;your_key&quot;</span></span><br><span class="line"><span class="keyword">val</span> sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)</span><br></pre></td></tr></table></figure>
-<h4 id="2-getPreferences"><a href="#2-getPreferences" class="headerlink" title="(2) getPreferences()"></a>(2) getPreferences()</h4><p>액티비티에서 하나의 Shared Preference 파일만 사용해야하는 경우 <code>getPreferences()</code>메서드를 사용합니다. 이 메서드는 액티비티에 포함된 기본 Shared Preference 파일을 자동으로 검색하므로 첫 번째 인자로 파일의 이름을 제공할 필요가 없습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE)</span><br></pre></td></tr></table></figure>
-<h1 id="Shared-Prefenreces에-쓰기"><a href="#Shared-Prefenreces에-쓰기" class="headerlink" title="Shared Prefenreces에 쓰기"></a>Shared Prefenreces에 쓰기</h1><p>SharedPreference의 <code>edit()</code>메소드를 호출하여 <code>Editor</code>객체를 생성합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> YOUR_KEY = <span class="string">&quot;your_key&quot;</span></span><br><span class="line"><span class="keyword">val</span> sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> editor = sharedPref.edit()</span><br></pre></td></tr></table></figure>
-<p>이제 <code>put○○○()</code>을 호출하여 데이터를 저장할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">edit.putString(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Monica&quot;</span>)</span><br><span class="line">edit.putInt(<span class="string">&quot;age&quot;</span>, <span class="number">35</span>)</span><br><span class="line">edit.putBoolean(<span class="string">&quot;is_married&quot;</span>, <span class="literal">false</span>)</span><br><span class="line">edit.putFloat(<span class="number">168.3</span>)</span><br></pre></td></tr></table></figure>
-<p>마지막으로 <code>commit()</code>을 호출하여 동기화합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit.commit()</span><br></pre></td></tr></table></figure>
-<h1 id="Shared-Prefrences에서-읽기"><a href="#Shared-Prefrences에서-읽기" class="headerlink" title="Shared Prefrences에서 읽기"></a>Shared Prefrences에서 읽기</h1><p><code>SharedPreferences</code>객체의 <code>get○○○()</code>를 호출하여 데이터를 읽어올 수 있습니다. 이 때 두 번째 인자로 값이 없을 때의 기본값을 지정합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> YOUR_KEY = <span class="string">&quot;your_key&quot;</span></span><br><span class="line"><span class="keyword">val</span> sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> name = sharedPref.getString(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">val</span> age = sharedPref.getInt(<span class="string">&quot;age&quot;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">val</span> isMarred = sharedPref.getBoolean(<span class="string">&quot;is_married&quot;</span>, <span class="literal">false</span>)</span><br><span class="line"><span class="keyword">val</span> height = sharedPref.getFloat(<span class="string">&quot;height&quot;</span>, <span class="number">0.0</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="Context를-구현하지-않은-클래스에서는-어떻게"><a href="#Context를-구현하지-않은-클래스에서는-어떻게" class="headerlink" title="Context를 구현하지 않은 클래스에서는 어떻게?"></a>Context를 구현하지 않은 클래스에서는 어떻게?</h1><p>개발을 하다보면 <code>Context</code>클래스를 구현하지 않은 클래스에서도 <code>Shared Preferences</code>에 접근할 필요가 있습니다. 이 때는 <a href="/ko/2019/05/01/android/190501-application-class/"><code>Application</code></a>클래스를 사용할 수 있습니다.</p>
-<p>우선 <code>Application</code>클래스를 상속하는 <code>App</code>클래스를 정의합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.app.Application</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span>: <span class="type">Application</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> instance: App</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">newInstance</span><span class="params">()</span></span>: App &#123;</span><br><span class="line">            <span class="keyword">return</span> instance</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate()</span><br><span class="line">        instance = <span class="keyword">this</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>AndroidManifest.xml</code>파일에 <code>App</code>클래스를 지정합니다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.shared_preference&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span> <span class="attr">android:name</span>=<span class="string">&quot;com.yologger.shared_preference.App&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>이제 다음과 같이 <code>Shared Preferences</code>에 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> sharedPreference = App.newInstance().getSharedPreferences(<span class="string">&quot;your_file_key&quot;</span>, Context.MODE_PRIVATE)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2020/06/01/android/200701-android-design-component/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2020/03/01/android/200301-design-pattern/"
+                            href="/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
                             aria-label=": [안드로이드] 디자인 패턴 - (1) 개요"
                         >
                             [안드로이드] 디자인 패턴 - (1) 개요
@@ -510,9 +360,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2020-03-01T20:16:30+09:00">
+    <time datetime="2020-04-01T01:00:00+09:00">
 	
-		    2020/03/01
+		    2020/04/01
     	
     </time>
     
@@ -532,6 +382,7 @@
 </div>
 
 
+
 <h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 안드로이드의 <code>아키텍처 패턴</code>에 대해 알아보고있습니다.</p>
 <ul>
 <li><a href="/ko/2019/11/20/android/191120-architecture-pattern-intro/">아키텍처 패턴이란?</a></li>
@@ -550,7 +401,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/03/01/android/200301-design-pattern/#post-footer"
+                                href="/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -573,78 +424,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2020/02/05/android/200205-architecture-pattern-clean-architecture/"
-                            aria-label=": [안드로이드] 아키텍처 패턴 - (5) 클린 아키텍처(Clean Architecture)"
-                        >
-                            [안드로이드] 아키텍처 패턴 - (5) 클린 아키텍처(Clean Architecture)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2020-02-05T20:16:30+09:00">
-	
-		    2020/02/05
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Architecture-Pattern/">Architecture Pattern</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 안드로이드의 <code>아키텍처 패턴</code>에 대해 알아보고있습니다.</p>
-<ul>
-<li><a href="/ko/2019/11/20/android/191120-architecture-pattern-intro/">아키텍처 패턴이란?</a></li>
-<li><a href="/ko/2019/11/21/android/191121-architecture-pattern-mvc/">MVC (Model-View-Controller)</a></li>
-<li><a href="/ko/2019/11/22/android/191122-architecture-pattern-mvp/">MVP (Model-View-Presenter)</a> ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2019/11/23/android/191123-architecture-pattern-mvvm/">MVVM (Model-View-ViewModel)</a></li>
-<li><a href="/ko/2019/11/24/android/191124-architecture-pattern-clean-architecture/">Clean Architecture</a></li>
-</ul>
-<hr>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2020/02/05/android/200205-architecture-pattern-clean-architecture/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
-                            href="/ko/2020/02/04/android/200204-architecture-pattern-mvvm/"
+                            href="/ko/2020/03/04/android/007_01_architecture_pattern/200304-architecture-pattern-mvvm/"
                             aria-label=": [안드로이드] 아키텍처 패턴 - (4) MVVM"
                         >
                             [안드로이드] 아키텍처 패턴 - (4) MVVM
@@ -652,9 +432,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2020-02-04T20:16:30+09:00">
+    <time datetime="2020-03-04T01:00:00+09:00">
 	
-		    2020/02/04
+		    2020/03/04
     	
     </time>
     
@@ -740,7 +520,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/02/04/android/200204-architecture-pattern-mvvm/#post-footer"
+                                href="/ko/2020/03/04/android/007_01_architecture_pattern/200304-architecture-pattern-mvvm/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -763,7 +543,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2020/02/03/android/200203-architecture-pattern-mvp/"
+                            href="/ko/2020/03/03/android/007_01_architecture_pattern/200303-architecture-pattern-mvp/"
                             aria-label=": [안드로이드] 아키텍처 패턴 - (3) MVP"
                         >
                             [안드로이드] 아키텍처 패턴 - (3) MVP
@@ -771,9 +551,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2020-02-03T20:16:30+09:00">
+    <time datetime="2020-03-03T01:00:00+09:00">
 	
-		    2020/02/03
+		    2020/03/03
     	
     </time>
     
@@ -853,7 +633,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/02/03/android/200203-architecture-pattern-mvp/#post-footer"
+                                href="/ko/2020/03/03/android/007_01_architecture_pattern/200303-architecture-pattern-mvp/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -876,7 +656,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2020/02/02/android/200202-architecture-pattern-mvc/"
+                            href="/ko/2020/03/02/android/007_01_architecture_pattern/200302-architecture-pattern-mvc/"
                             aria-label=": [안드로이드] 아키텍처 패턴 - (2) MVC"
                         >
                             [안드로이드] 아키텍처 패턴 - (2) MVC
@@ -884,9 +664,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2020-02-02T20:16:30+09:00">
+    <time datetime="2020-03-02T01:00:00+09:00">
 	
-		    2020/02/02
+		    2020/03/02
     	
     </time>
     
@@ -951,7 +731,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/02/02/android/200202-architecture-pattern-mvc/#post-footer"
+                                href="/ko/2020/03/02/android/007_01_architecture_pattern/200302-architecture-pattern-mvc/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -974,7 +754,7 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2020/02/01/android/200201-architecture-pattern-intro/"
+                            href="/ko/2020/03/01/android/007_01_architecture_pattern/200301-architecture-pattern-intro/"
                             aria-label=": [안드로이드] 아키텍처 패턴 - (1) 개요"
                         >
                             [안드로이드] 아키텍처 패턴 - (1) 개요
@@ -982,9 +762,9 @@
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2020-02-01T20:16:30+09:00">
+    <time datetime="2020-03-01T01:00:00+09:00">
 	
-		    2020/02/01
+		    2020/03/01
     	
     </time>
     
@@ -1024,7 +804,7 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/02/01/android/200201-architecture-pattern-intro/#post-footer"
+                                href="/ko/2020/03/01/android/007_01_architecture_pattern/200301-architecture-pattern-intro/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -1047,23 +827,84 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2020/01/01/android/200101-shared_preference/"
-                            aria-label=": [안드로이드] Shared Preference"
+                            href="/ko/2019/01/05/android/001_01_gradle/190105-task/"
+                            aria-label=": [안드로이드] 그래들(Gradle) - (5) 태스크(Task)"
                         >
-                            [안드로이드] Shared Preference
+                            [안드로이드] 그래들(Gradle) - (5) 태스크(Task)
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time datetime="2020-01-01T20:16:30+09:00">
+    <time datetime="2019-01-05T01:00:00+09:00">
 	
-		    2020/01/01
+		    2019/01/05
     	
     </time>
     
         <span>카테고리 </span>
         
-    <a class="category-link" href="/ko/categories/Android/">Android</a>
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<blockquote>
+<p>Android의 특징과 개념에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</blockquote>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/05/android/001_01_gradle/190105-task/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/04/android/001_01_gradle/190104-build-gradle/"
+                            aria-label=": [안드로이드] 그래들(Gradle) - (4) build.gradle 파일"
+                        >
+                            [안드로이드] 그래들(Gradle) - (4) build.gradle 파일
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-04T01:00:00+09:00">
+	
+		    2019/01/04
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
 
 
     
@@ -1076,37 +917,30 @@
 <div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서 <a href="/ko/2018/12/03/android/181203-gradle-wrapper/">그래들 래퍼(Gradle Wrapper)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">build.gradle</span> 파일에 대해 알아보겠습니다.</p>
 <hr>
-<h1 id="Shared-Preference"><a href="#Shared-Preference" class="headerlink" title="Shared Preference"></a>Shared Preference</h1><span class="highlight-text red">Shared Preference</span>를 사용하면 비교적 간단한 값을 저장할 수 있습니다. Shared Preference는 파일 형태로 아래 경로에 저장됩니다.
+<h1 id="build-gradle-파일"><a href="#build-gradle-파일" class="headerlink" title="build.gradle 파일"></a>build.gradle 파일</h1><p><code>build.gradle</code>은 <u>그래들 설정 파일</u>입니다. 이 파일에 어떤 식으로 앱을 빌드할 지를 명시합니다. 그래들은 이 파일을 참조하여 프로젝트를 빌드합니다.</p>
+<p>안드로이드 프로젝트를 생성하면 기본적으로 두 개의 <code>build.gradle</code>가 생성됩니다.<br><img src="/ko/images/posts/android/build_gradle/1.png"></p>
+<h1 id="1-프로젝트-수준의-build-gradle"><a href="#1-프로젝트-수준의-build-gradle" class="headerlink" title="1. 프로젝트 수준의 build.gradle"></a>1. 프로젝트 수준의 build.gradle</h1><p>하나의 프로젝트는 여러 개의 <a href="/ko/2018/12/07/android/181207-module/">모듈(Module)</a>로 구성될 수 있습니다. 프로젝트 수준의 <code>build.gradle</code>은 프로젝트 전체에, 다시 말해 모든 모듈에 적용되는 그래들 설정 파일입니다.</p>
+<p>프로젝트를 생성하면 자동으로 생성되는 프로젝트 수준의 <code>build.gradle</code>파일은 다음과 같습니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 그래들에서 사용할 변수</span></span><br><span class="line">    ext &#123;</span><br><span class="line">        kotlin_version = <span class="string">&quot;1.3.72&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 라이브러리를 다운 받을 원격 저장소</span></span><br><span class="line">    repositories &#123;</span><br><span class="line">        google()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dependencies &#123;</span><br><span class="line">        <span class="comment">// 안드로이드 그래들 플러그인</span></span><br><span class="line">        <span class="comment">// 이 프로젝트에서 사용하든 그래들의 버전</span></span><br><span class="line">        classpath <span class="string">&quot;com.android.tools.build:gradle:4.1.2&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 코틀린 그래들 플러그인</span></span><br><span class="line">        classpath <span class="string">&quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        google()</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 앱을 새로 빌드할 때 이전 파일을 삭제하는 작업</span></span><br><span class="line">task clean(<span class="attr">type:</span> Delete) &#123;</span><br><span class="line">    delete rootProject.buildDir</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>여기서는 설정 파일에서 사용할 변수, 원격 라이브러리를 다운받을 저장소, <strong>안드로이드 그래들 플러그인</strong>과 <strong>코틀린 그래들 플러그인</strong> 등이 선언되어있습니다.</p>
+<h1 id="2-모듈-수준의-build-gradle"><a href="#2-모듈-수준의-build-gradle" class="headerlink" title="2. 모듈 수준의 build.gradle"></a>2. 모듈 수준의 build.gradle</h1><p>모듈 수준의 <code>build.gradle</code>은 특정 모듈에만 적용되는 설정 파일입니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id <span class="string">&#x27;com.android.application&#x27;</span></span><br><span class="line">    id <span class="string">&#x27;kotlin-android&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion <span class="number">30</span></span><br><span class="line">    buildToolsVersion <span class="string">&quot;30.0.3&quot;</span></span><br><span class="line"></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">&quot;com.yologger.build_variant&quot;</span></span><br><span class="line">        minSdkVersion <span class="number">21</span></span><br><span class="line">        targetSdkVersion <span class="number">30</span></span><br><span class="line">        versionCode <span class="number">1</span></span><br><span class="line">        versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line"></span><br><span class="line">        testInstrumentationRunner <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            applicationIdSuffix <span class="string">&#x27;.prod&#x27;</span></span><br><span class="line">            minifyEnabled <span class="literal">false</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">&#x27;proguard-android-optimize.txt&#x27;</span>), <span class="string">&#x27;proguard-rules.pro&#x27;</span></span><br><span class="line">            buildConfigField <span class="string">&quot;boolean&quot;</span>, <span class="string">&quot;IS_DEBUG&quot;</span>, <span class="string">&quot;true&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">    &#125;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        jvmTarget = <span class="string">&#x27;1.8&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 의존성</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation <span class="string">&quot;org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version&quot;</span></span><br><span class="line">    implementation <span class="string">&#x27;androidx.core:core-ktx:1.5.0&#x27;</span></span><br><span class="line">    implementation <span class="string">&#x27;androidx.appcompat:appcompat:1.3.0&#x27;</span></span><br><span class="line">    implementation <span class="string">&#x27;com.google.android.material:material:1.3.0&#x27;</span></span><br><span class="line">    implementation <span class="string">&#x27;androidx.constraintlayout:constraintlayout:2.0.4&#x27;</span></span><br><span class="line">    testImplementation <span class="string">&#x27;junit:junit:4.+&#x27;</span></span><br><span class="line">    androidTestImplementation <span class="string">&#x27;androidx.test.ext:junit:1.1.2&#x27;</span></span><br><span class="line">    androidTestImplementation <span class="string">&#x27;androidx.test.espresso:espresso-core:3.3.0&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>plugins 섹션</code>에는 안드로이드 플러그인과 코틀린 플러그인의 사용을 선언하고 있습니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id <span class="string">&#x27;com.android.application&#x27;</span></span><br><span class="line">    id <span class="string">&#x27;kotlin-android&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>android 섹션</code>에서는 빌드할 때 사용할 <a href="/ko/2019/01/15/android/190115-android-sdk/">SDK</a>와 빌드 도구의 버전을 정의하고 있습니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion <span class="number">30</span></span><br><span class="line">    buildToolsVersion <span class="string">&quot;30.0.3&quot;</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>defaultConfig 섹션</code>에 선언된 항목들은 빌드하는 동안 해당 모듈의 <code>AndroidManifest.xml</code>파일로 생성되는 요소를 정의합니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">defaultConfig &#123;</span><br><span class="line">    applicationId <span class="string">&quot;com.yologger.build_variant&quot;</span></span><br><span class="line">    minSdkVersion <span class="number">21</span></span><br><span class="line">    targetSdkVersion <span class="number">30</span></span><br><span class="line">    versionCode <span class="number">1</span></span><br><span class="line">    versionName <span class="string">&quot;1.0&quot;</span></span><br><span class="line"></span><br><span class="line">    testInstrumentationRunner <span class="string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="/ko/2018/12/14/android/181214-buildtypes/"><code>buildType 섹션</code></a>에는 어플리케이션을 어떻게 빌드할 지를 명시합니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">buildTypes &#123;</span><br><span class="line">    release &#123;</span><br><span class="line">        applicationIdSuffix <span class="string">&#x27;.prod&#x27;</span></span><br><span class="line">        minifyEnabled <span class="literal">true</span></span><br><span class="line">        proguardFiles getDefaultProguardFile(<span class="string">&#x27;proguard-android-optimize.txt&#x27;</span>), <span class="string">&#x27;proguard-rules.pro&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="/ko/2018/12/06/android/181206-dependency/"><code>dependencies 섹션</code></a>은 외부 모듈이나 라이브러리를 사용할 때 정의합니다. 같은 프로젝트 내 다른 모듈, jar 파일, 다른 개발자가 만든 라이브러리 등을 사용하려면 이 섹션에 명시해야합니다.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation <span class="string">&quot;org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version&quot;</span></span><br><span class="line">    implementation <span class="string">&#x27;androidx.core:core-ktx:1.5.0&#x27;</span></span><br><span class="line">    implementation <span class="string">&#x27;androidx.appcompat:appcompat:1.3.0&#x27;</span></span><br><span class="line">    implementation <span class="string">&#x27;com.google.android.material:material:1.3.0&#x27;</span></span><br><span class="line">    implementation <span class="string">&#x27;androidx.constraintlayout:constraintlayout:2.0.4&#x27;</span></span><br><span class="line">    testImplementation <span class="string">&#x27;junit:junit:4.+&#x27;</span></span><br><span class="line">    androidTestImplementation <span class="string">&#x27;androidx.test.ext:junit:1.1.2&#x27;</span></span><br><span class="line">    androidTestImplementation <span class="string">&#x27;androidx.test.espresso:espresso-core:3.3.0&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="CoC"><a href="#CoC" class="headerlink" title="CoC"></a>CoC</h1><p>그래들은 <span class="highlight-text" style="background-color:#F6F7F7;">설정보다는 관례(CoC, Convention over Configuration)</span>라는 개념을 구현하고 있습니다. 즉, 그래들은 사전에 정의된 합리적인 기본 설정값을 가지고 있습니다. 따라서 모든 설정을 설정하지 않아도 기본 설정값이 적용됩니다. 이 덕분에 개발자는 모든 설정을 모두 설정할 필요가 없어집니다. 자신의 요구 사항에 맞지 않는 설정만 빌드 설정 파일에서 변경하면 됩니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>build.gradle 파일</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/05/android/181205-task/">그래들의 태스크(Task)</a>에 대해 알아보겠습니다.</p>
 
-<div class="alert success no-icon"><p>data/data/[pacakge_name]/shared_prefs/[file_name].xml</p>
-</div>
-
-
-
-<p>Shared Preference 파일에 저장된 데이터는 앱이 삭제되기 전까지 유지됩니다.</p>
-<h1 id="Shared-Preference-객체-생성하기"><a href="#Shared-Preference-객체-생성하기" class="headerlink" title="Shared Preference 객체 생성하기"></a>Shared Preference 객체 생성하기</h1><p><a href="/ko/2019/05/02/android/190502-context/"><code>Context</code></a>클래스에는 <code>getSharedPreferences()</code>메소드와 <code>getPreferences()</code>메소드가 선언되어있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Context.java</span></span><br><span class="line"><span class="keyword">package</span> android.content;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(String name, <span class="meta">@PreferencesMode</span> <span class="keyword">int</span> mode)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> SharedPreferences <span class="title">getSharedPreferences</span><span class="params">(File file, <span class="meta">@PreferencesMode</span> <span class="keyword">int</span> mode)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>따라서 <code>Context</code>를 구현한 객체에서는 둘 중 하나의 메서드를 호출하여 새로운 Shared Preference 파일을 생성하거나 기존 파일에 접근할 수 있습니다. <code>액티비티(Activity)</code>도 <code>Context</code>클래스를 구현하므로 두 메소드를 호출할 수 있습니다.</p>
-<h4 id="1-getSharedPreferences"><a href="#1-getSharedPreferences" class="headerlink" title="(1) getSharedPreferences()"></a>(1) getSharedPreferences()</h4><p><code>getSharedPreferences()</code>는 함수의 첫 번째 인자로 전달되는 이름으로 파일을 생성하거나 구분합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> YOUR_KEY = <span class="string">&quot;your_key&quot;</span></span><br><span class="line"><span class="keyword">val</span> sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)</span><br></pre></td></tr></table></figure>
-<h4 id="2-getPreferences"><a href="#2-getPreferences" class="headerlink" title="(2) getPreferences()"></a>(2) getPreferences()</h4><p>액티비티에서 하나의 Shared Preference 파일만 사용해야하는 경우 <code>getPreferences()</code>메서드를 사용합니다. 이 메서드는 액티비티에 포함된 기본 Shared Preference 파일을 자동으로 검색하므로 첫 번째 인자로 파일의 이름을 제공할 필요가 없습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sharedPreference = activity?.getPreferences(Context.MODE_PRIVATE)</span><br></pre></td></tr></table></figure>
-<h1 id="Shared-Prefenreces에-쓰기"><a href="#Shared-Prefenreces에-쓰기" class="headerlink" title="Shared Prefenreces에 쓰기"></a>Shared Prefenreces에 쓰기</h1><p>SharedPreference의 <code>edit()</code>메소드를 호출하여 <code>Editor</code>객체를 생성합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> YOUR_KEY = <span class="string">&quot;your_key&quot;</span></span><br><span class="line"><span class="keyword">val</span> sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> editor = sharedPref.edit()</span><br></pre></td></tr></table></figure>
-<p>이제 <code>put○○○()</code>을 호출하여 데이터를 저장할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">edit.putString(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Monica&quot;</span>)</span><br><span class="line">edit.putInt(<span class="string">&quot;age&quot;</span>, <span class="number">35</span>)</span><br><span class="line">edit.putBoolean(<span class="string">&quot;is_married&quot;</span>, <span class="literal">false</span>)</span><br><span class="line">edit.putFloat(<span class="number">168.3</span>)</span><br></pre></td></tr></table></figure>
-<p>마지막으로 <code>commit()</code>을 호출하여 동기화합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit.commit()</span><br></pre></td></tr></table></figure>
-<h1 id="Shared-Prefrences에서-읽기"><a href="#Shared-Prefrences에서-읽기" class="headerlink" title="Shared Prefrences에서 읽기"></a>Shared Prefrences에서 읽기</h1><p><code>SharedPreferences</code>객체의 <code>get○○○()</code>를 호출하여 데이터를 읽어올 수 있습니다. 이 때 두 번째 인자로 값이 없을 때의 기본값을 지정합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> YOUR_KEY = <span class="string">&quot;your_key&quot;</span></span><br><span class="line"><span class="keyword">val</span> sharedPref = activity?.getSharedPreferences(YOUR_KEY, Context.MODE_PRIVATE)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> name = sharedPref.getString(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">val</span> age = sharedPref.getInt(<span class="string">&quot;age&quot;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">val</span> isMarred = sharedPref.getBoolean(<span class="string">&quot;is_married&quot;</span>, <span class="literal">false</span>)</span><br><span class="line"><span class="keyword">val</span> height = sharedPref.getFloat(<span class="string">&quot;height&quot;</span>, <span class="number">0.0</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="Context를-구현하지-않은-클래스에서는-어떻게"><a href="#Context를-구현하지-않은-클래스에서는-어떻게" class="headerlink" title="Context를 구현하지 않은 클래스에서는 어떻게?"></a>Context를 구현하지 않은 클래스에서는 어떻게?</h1><p>개발을 하다보면 <code>Context</code>클래스를 구현하지 않은 클래스에서도 <code>Shared Preferences</code>에 접근할 필요가 있습니다. 이 때는 <a href="/ko/2019/05/01/android/190501-application-class/"><code>Application</code></a>클래스를 사용할 수 있습니다.</p>
-<p>우선 <code>Application</code>클래스를 상속하는 <code>App</code>클래스를 정의합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.app.Application</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span>: <span class="type">Application</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> instance: App</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">newInstance</span><span class="params">()</span></span>: App &#123;</span><br><span class="line">            <span class="keyword">return</span> instance</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate()</span><br><span class="line">        instance = <span class="keyword">this</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>AndroidManifest.xml</code>파일에 <code>App</code>클래스를 지정합니다.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.yologger.shared_preference&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span> <span class="attr">android:name</span>=<span class="string">&quot;com.yologger.shared_preference.App&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>이제 다음과 같이 <code>Shared Preferences</code>에 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> sharedPreference = App.newInstance().getSharedPreferences(<span class="string">&quot;your_file_key&quot;</span>, Context.MODE_PRIVATE)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                     
                         
 
@@ -1115,7 +949,195 @@
                     
                         <p>
                             <a
-                                href="/ko/2020/01/01/android/200101-shared_preference/#post-footer"
+                                href="/ko/2019/01/04/android/001_01_gradle/190104-build-gradle/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/"
+                            aria-label=": [안드로이드] 그래들(Gradle) - (3) 그래들 래퍼(Gradle Wrapper)"
+                        >
+                            [안드로이드] 그래들(Gradle) - (3) 그래들 래퍼(Gradle Wrapper)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-03T01:00:00+09:00">
+	
+		    2019/01/03
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>우리는 이전 포스트에서 <a href="/ko/2018/12/02/android/181202-gradle/">그래들(Gradle)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">그래들 래퍼(Gradle Wrapper)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="Gradle-Wrapper"><a href="#Gradle-Wrapper" class="headerlink" title="Gradle Wrapper"></a>Gradle Wrapper</h1><p>안드로이드 스튜디오를 사용하는 개발자는 의문이 생길 수도 있습니다. 그래들을 별도로 설치하지 않았지만 프로젝트를 빌드할 수 있기 때문입니다. 이를 가능하게 하는 것이 그래들 래퍼입니다.<br></br></p>
+<span class="highlight-text" style="background-color:#F6F7F7;">그래들 래퍼(Gradle Wrapper)</span>는 <u>그래들을 설치하지 않아도 프로젝트를 빌드할 수 있도록 프로젝트 내부에 그래들 관련 파일을 포함시키는 방법</u>입니다. 그래들 래퍼 덕분에 기존의 프로젝트를 새로운 환경에 설치할 때 그래들을 별도로 설치 않아도 됩니다.
+
+<p>우리는 <a href="/ko/2018/12/02/android/181202-gradle/">이전 포스트</a>에서 그래들을 설치하고 아래와 같은 명령어를 입력하여 프로젝트를 빌드했습니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle build</span>	</span><br></pre></td></tr></table></figure>
+<p>하지만 그래들 명령어를 사용하려면 빌드하는 컴퓨터에 그래들이 설치되어있어야 합니다. 이제 그래들 래퍼를 사용하여 프로젝트를 빌드해보겠습니다.</p>
+<h1 id="Gradle-Wrapper-초기화"><a href="#Gradle-Wrapper-초기화" class="headerlink" title="Gradle Wrapper 초기화"></a>Gradle Wrapper 초기화</h1><p>프로젝트 루트 디렉토리에서 다음 명령어를 입력합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle wrapper</span></span><br><span class="line"></span><br><span class="line">BUILD SUCCESSFUL in 545ms</span><br><span class="line">1 actionable task: 1 executed</span><br></pre></td></tr></table></figure>
+<p>디렉토리에 그래들 래퍼와 관련된 파일이 생성되었습니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -a</span></span><br><span class="line">.gradle</span><br><span class="line">gradlew</span><br><span class="line">gradlew.bat</span><br><span class="line">gradle</span><br><span class="line">gradle/wrapper/</span><br><span class="line">gradle/wrapper/gradle-wrapper.jar</span><br><span class="line">gradle/wrapper/gradle-wrapper.properties</span><br><span class="line">build.gradle</span><br><span class="line">settings.gradle</span><br></pre></td></tr></table></figure>
+<h1 id="Gradle-Wrapper-구조"><a href="#Gradle-Wrapper-구조" class="headerlink" title="Gradle Wrapper 구조"></a>Gradle Wrapper 구조</h1><p>생성된 디렉토리의 구조는 다음과 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ tree </span><br><span class="line">. </span><br><span class="line">├── gradle </span><br><span class="line">│ └── wrapper </span><br><span class="line">│   ├── gradle-wrapper.jar </span><br><span class="line">│   └── gradle-wrapper.properties </span><br><span class="line">├── gradlew </span><br><span class="line">└── gradlew.bat </span><br><span class="line"></span><br><span class="line">2 directories, 4 files</span><br></pre></td></tr></table></figure>
+<h5 id="1-gradlew"><a href="#1-gradlew" class="headerlink" title="(1) gradlew"></a>(1) gradlew</h5><p>유닉스용 그래들 명령어 실행 스크립트 파일입니다.</p>
+<h5 id="2-gradlew-bat"><a href="#2-gradlew-bat" class="headerlink" title="(2) gradlew.bat"></a>(2) gradlew.bat</h5><p>윈도우용 그래들 명령어 실행 스크립트 파일입니다.</p>
+<h5 id="3-gradle-wrapper-gradle-wrapper-jar"><a href="#3-gradle-wrapper-gradle-wrapper-jar" class="headerlink" title="(3) gradle/wrapper/gradle-wrapper.jar"></a>(3) gradle/wrapper/gradle-wrapper.jar</h5><p>그래들 래퍼 파일입니다. 위 두 개의 스크립트 파일 중 하나가 실행되면 운영체제에 맞는 환경을 로컬 컴퓨터에 다운받은 뒤 실제 태스크를 실행합니다.</p>
+<h5 id="4-gradle-wrapper-gradle-wrapper-properties"><a href="#4-gradle-wrapper-gradle-wrapper-properties" class="headerlink" title="(4) gradle/wrapper/gradle-wrapper.properties"></a>(4) gradle/wrapper/gradle-wrapper.properties</h5><p>그래들 래퍼 설정 파일입니다.</p>
+<h1 id="Gradle-Wrapper를-통한-빌드"><a href="#Gradle-Wrapper를-통한-빌드" class="headerlink" title="Gradle Wrapper를 통한 빌드"></a>Gradle Wrapper를 통한 빌드</h1><p>유닉스 계열인 Mac OS 환경에서 프로젝트를 빌드해보겠습니다. 다음 명령어를 실행하면 <code>$ gradle build</code> 명령어와 동일하게 태스크를 실행합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./gradlew build</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="안드로이드-스튜디오-프로젝트와-Gradle-Wrapper"><a href="#안드로이드-스튜디오-프로젝트와-Gradle-Wrapper" class="headerlink" title="안드로이드 스튜디오 프로젝트와 Gradle Wrapper"></a>안드로이드 스튜디오 프로젝트와 Gradle Wrapper</h1><p>안드로이드 스튜디오에서 프로젝트를 생성하면 자동으로 Gradle Wrapper 관련 파일이 생성됩니다.<br><img src="/ko/images/posts/android/gradle/gradle-1.png"><br><img src="/ko/images/posts/android/gradle/gradle-2.png"></p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>그래들 래퍼(Gradle Wrapper)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/04/android/181204-build-gradle/"><code>build.gradle</code></a> 파일에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/03/android/001_01_gradle/190103-gradle-wrapper/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/02/android/001_01_gradle/190102-gradle/"
+                            aria-label=": [안드로이드] 그래들(Gradle) - (2) 그래들(Gradle)이란?"
+                        >
+                            [안드로이드] 그래들(Gradle) - (2) 그래들(Gradle)이란?
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-02T01:00:00+09:00">
+	
+		    2019/01/02
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/Gradle/">Gradle</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+<hr>
+<h1 id="그래들"><a href="#그래들" class="headerlink" title="그래들"></a>그래들</h1><p><code>그래들(Gradle)</code>은 그루비 언어를 기반으로 한 <a href="/ko/2018/12/01/android/181201-compile-build/">빌드 도구</a>입니다. <code>Ant</code>나 <code>Maven</code>같은 이전 세대의 빌드 도구의 단점을 보완하고 장점을 취합하여 만든 오픈소스 빌드 도구가 그래들입니다.</p>
+<h1 id="그래들-설치"><a href="#그래들-설치" class="headerlink" title="그래들 설치"></a>그래들 설치</h1><p>그래들은 <a target="_blank" rel="noopener" href="https://gradle.org/releases/">이 곳</a>에서 다운받을 수 있습니다. </p>
+<div class="alert success icon"><p>Mac OS를 기준으로 설명합니다.</p>
+</div>
+
+<p>압출 파일을 다운받고 적절한 경로에 설치해봅시다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/Users/yologger/Library/gradle-5.2.1-all/gradle-5.2.1</span><br><span class="line"> </span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">LICENSE			</span><br><span class="line">NOTICE			</span><br><span class="line">bin				</span><br><span class="line">docs				</span><br><span class="line">getting-started.html</span><br><span class="line">init.d</span><br><span class="line">lib</span><br><span class="line">media</span><br><span class="line">samples</span><br><span class="line">src</span><br></pre></td></tr></table></figure>
+<p>설치가 완료되면 경로를 설정을 해야합니다. <code>~/.bash_profile</code>파일을 오픈합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim ~/.bash_profile</span></span><br></pre></td></tr></table></figure>
+<p>경로를 추가합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=&quot;/Users/yologger/Library/gradle-5.2.1-all/gradle-5.2.1/bin:$&#123;PATH&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p>변경사항을 적용합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> ~/.bash_profile</span></span><br></pre></td></tr></table></figure>
+<p>이제 어디서든 그래들 명령어를 사용할 수 있습니다. 그래들의 설치여부와 버전을 확인해봅시다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle --v</span></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">Gradle 5.2.1</span><br><span class="line">------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Build time:   2019-02-08 19:00:10 UTC</span><br><span class="line">Revision:     f02764e074c32ee8851a4e1877dd1fea8ffb7183</span><br><span class="line"></span><br><span class="line">Kotlin DSL:   1.1.3</span><br><span class="line">Kotlin:       1.3.20</span><br><span class="line">Groovy:       2.5.4</span><br><span class="line">Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018</span><br><span class="line">JVM:          10.0.1 (&quot;Oracle Corporation&quot; 10.0.1+10)</span><br><span class="line">OS:           Mac OS X 10.14.5 x86_64</span><br></pre></td></tr></table></figure>
+<h1 id="그래들을-사용하여-프로젝트-초기화하기"><a href="#그래들을-사용하여-프로젝트-초기화하기" class="headerlink" title="그래들을 사용하여 프로젝트 초기화하기"></a>그래들을 사용하여 프로젝트 초기화하기</h1><p>간단한 프로젝트를 생성해보겠습니다. 디렉토리를 생성하고 생성한 디렉토리로 이동합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir myProject</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> myProject</span></span><br></pre></td></tr></table></figure>
+<p><code>src/yolo</code> 디렉토리를 생성합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p src/yolo/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> src/yolo</span></span><br></pre></td></tr></table></figure>
+<p><code>Person.java</code>파일을 생성하고 아래와 같이 코드를 작성합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        name = <span class="string">&quot;Yologrammer&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>다시 프로젝트의 루트 디렉토리로 이동합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ../..</span></span><br></pre></td></tr></table></figure>
+<p>그래들 명령어 <code>gradle init</code>을 입력합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle init</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Task :<span class="built_in">help</span></span></span><br><span class="line">Welcome to Gradle 5.2.1.</span><br><span class="line">To run a build, run gradle &lt;task&gt; ...</span><br><span class="line">To see a list of available tasks, run gradle tasks</span><br><span class="line">To see a list of command-line options, run gradle --help</span><br><span class="line">To see more detail about a task, run gradle help --task &lt;task&gt;</span><br><span class="line">        </span><br><span class="line">For troubleshooting, visit https://help.gradle.org</span><br><span class="line">    </span><br><span class="line">BUILD SUCCESSFUL in 0s</span><br><span class="line">1 actionable task: 1 executed</span><br></pre></td></tr></table></figure>
+<p>또한 <code>.gradle</code> 디렉토리가 생성됩니다. 그래들이 이 프로젝트를 관리하고 있다는 의미입니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">.gradle     // 그래들 관련 데이터가 이 디렉토리에 저장됩니다.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h1 id="그래들을-사용하여-프로젝트-빌드하기"><a href="#그래들을-사용하여-프로젝트-빌드하기" class="headerlink" title="그래들을 사용하여 프로젝트 빌드하기"></a>그래들을 사용하여 프로젝트 빌드하기</h1><p>그래들을 사용하여 수행할 수 있는 <a href="/ko/2018/12/05/android/181205-task/">태스크(Task)</a>을 확인할 수 있습니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gradle tasks</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Task :tasks</span></span><br><span class="line">------------------------------------------------------------</span><br><span class="line">Tasks runnable from root project</span><br><span class="line">------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Build Setup tasks</span><br><span class="line">-----------------</span><br><span class="line">init - Initializes a new Gradle build.</span><br><span class="line">wrapper - Generates Gradle wrapper files.</span><br><span class="line"></span><br><span class="line">Help tasks</span><br><span class="line">----------</span><br><span class="line">buildEnvironment - Displays all buildscript dependencies declared in root project &#x27;myProject&#x27;.</span><br><span class="line">components - Displays the components produced by root project &#x27;myProject&#x27;. [incubating]</span><br><span class="line">dependencies - Displays all dependencies declared in root project &#x27;myProject&#x27;.</span><br><span class="line">dependencyInsight - Displays the insight into a specific dependency in root project &#x27;myProject&#x27;.</span><br><span class="line">dependentComponents - Displays the dependent components of components in root project &#x27;myProject&#x27;.</span><br><span class="line">    </span><br><span class="line">[incubating]</span><br><span class="line">help - Displays a help message.</span><br><span class="line">model - Displays the configuration model of root project &#x27;myProject&#x27;. [incubating]</span><br><span class="line">projects - Displays the sub-projects of root project &#x27;myProject&#x27;.</span><br><span class="line">properties - Displays the properties of root project &#x27;myProject&#x27;.</span><br><span class="line">tasks - Displays the tasks runnable from root project &#x27;myProject&#x27;.</span><br><span class="line"></span><br><span class="line">To see all tasks and more detail, run gradle tasks --all</span><br><span class="line"></span><br><span class="line">To see more detail about a task, run gradle help --task &lt;task&gt;</span><br><span class="line"></span><br><span class="line">BUILD SUCCESSFUL in 0s</span><br><span class="line">1 actionable task: 1 executed</span><br></pre></td></tr></table></figure>
+<p>이제 <a href="/ko/2018/12/04/android/181204-build-gradle/"><code>build.gradle</code></a>파일을 생성합니다. 이 파일은 <strong>빌드 스크립트</strong>라고 하며 <u>프로젝트를 어떤 방법으로 빌드를 할 것인지</u> 명시할 수 있습니다. 우리는 Java로 작성된 소스코드를 빌드해야하므로 <code>그래들 자바 플러그인</code>을 추가합시다.</p>
+<figure class="codeblock codeblock--tabbed"><figcaption><span>build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 그래들 자바 플러그인</span></span><br><span class="line">apply <span class="attr">plugin:</span> <span class="string">'java'</span></span><br></pre></td></tr></tbody></table></figure></div></figure>
+<p>이제 그래들 명령어를 사용하여 프로젝트를 빌드해보겠습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gradle build</span><br></pre></td></tr></table></figure>
+<p>빌드가 정상적으로 수행되었다면 다음과 같은 결과물이 출력됩니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BUILD SUCCESSFUL in 0s</span><br><span class="line">1 actionable task: 1 executed</span><br></pre></td></tr></table></figure>
+<p>이제 프로젝트의 루트 디렉토리를 확인해보면 <code>build</code> 디렉토리가 생성되었음을 확인할 수 있습니다. 이 곳에 컴파일된 코드가 위치합니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">build   build.gradle    src</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <strong>그래들</strong>에 대해 알아봤습니다. </p>
+<p>그런데 안드로이드 스튜디오를 사용하는 개발자는 의문이 생길 수도 있습니다. 그래들을 별도로 설치하지 않았지만 프로젝트를 빌드할 수 있기 때문입니다. 이를 가능하게 하는 것이 <strong>그래들 래퍼</strong>입니다. 다음 포스트에서는 안드로이드 스튜디오와 <a href="/ko/2018/12/03/android/181203-gradle-wrapper/"><code>그래들 래퍼(Gradle Wrapper)</code></a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/02/android/001_01_gradle/190102-gradle/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
@@ -1144,7 +1166,7 @@
             </a>
           </li>
         
-        <li class="pagination-number">page 1 of 10</li>
+        <li class="pagination-number">page 1 of 2</li>
     </ul>
 </div>
 
