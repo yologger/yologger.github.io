@@ -444,18 +444,18 @@
 <hr>
 <h1 id="컴파일"><a href="#컴파일" class="headerlink" title="컴파일"></a>컴파일</h1><span class="highlight-text red">컴파일(Compile)</span>은 <u>개발자가 작성한 소스코드를 컴퓨터가 이해할 수 있는 기계어로 변환하는 과정</u>을 의미합니다. 
 
-<p>C의 경우 <code>gcc</code>라는 컴파일러가 <code>*.c</code>파일을 컴파일하여 <code>*.o</code>파일을 생성합니다. Java의 경우 <a href="/ko/2018/01/01/java/180101-jvm-jre-jdk/"><code>자바 컴파일러(Java Compiler)</code></a>가 <code>*.java</code>파일을 컴파일하여 <code>자바 바이트코드</code>를 생성합니다.</p>
+<p>C의 경우 <code>gcc</code>라는 컴파일러가 <code>*.c</code>파일을 컴파일하여 <code>*.o</code>파일을 생성합니다. Java의 경우 <a href="/ko/2018/01/01/java/180101_jvm_jre_jdk/"><code>자바 컴파일러</code></a>가 <code>*.java</code>파일을 컴파일하여 <code>자바 바이트코드</code>를 생성합니다.</p>
 <h1 id="빌드"><a href="#빌드" class="headerlink" title="빌드"></a>빌드</h1><p>프로젝트를 진행하다보면 여러 개의 소스코드 파일이 생성됩니다. 만약 A라는 소스코드 파일에서 B라는 소스코드 파일을 참조한다고 가정해봅시다. 이때 파일 A와 파일 B를 각각 컴파일하면 A에서 B를 찾지 못하므로 참조할 수가 없습니다. 따라서 파일 A와 파일 B를 연결하는 작업이 필요한데 이를 <span class="highlight-text red">링크(Link)</span>라고 합니다.<br><br></p>
 <span class="highlight-text red">빌드(Build)</span>는 이러한 컴파일, 링크 등을 모두 포함하여 <u>실행 가능한 소프트웨어로 만드는 과정</u>을 의미합니다.
 
 
-<div class="alert warning icon"><p>안드로이드 스튜디오에서 소스코드를 빌드하면 안드로이드 운영체제에서 실행할 수 있는 <a href="/ko/2018/12/18/android/181218-apk/">APK</a> 파일이 생성됩니다.</p>
+<div class="alert warning icon"><p>안드로이드 스튜디오에서 소스코드를 빌드하면 안드로이드 운영체제에서 실행할 수 있는 <a href="/ko/2019/03/01/android/003_01_android_platform/190301-01-apk/">APK</a> 파일이 생성됩니다.</p>
 </div>
 
 <h1 id="빌드-도구"><a href="#빌드-도구" class="headerlink" title="빌드 도구"></a>빌드 도구</h1><span class="highlight-text red">빌드 도구(Build Tool)</span>는 소스코드를 실행 가능한 소프트웨어로 만들어주는 도구입니다. 요즘의 빌드 도구는 빌드 작업뿐만 아니라 테스트, 빌드 자동화, 배포 등 다양한 기능을 제공하기도 합니다. 자바나 코틀린의 빌드 도구에는 <span class="highlight-text" style="background-color:#F6F7F7;">Ant</span>, <span class="highlight-text" style="background-color:#F6F7F7;">Maven</span>, <span class="highlight-text" style="background-color:#F6F7F7;">Gradle</span> 등이 있습니다. 
 
 <hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <span class="highlight-text" style="background-color:#F6F7F7;">컴파일</span>과 <span class="highlight-text" style="background-color:#F6F7F7;">빌드</span>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/02/android/181202-gradle/"><code>그래들(Gradle)</code></a>에 대해 알아보겠습니다.</p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <span class="highlight-text" style="background-color:#F6F7F7;">컴파일</span>과 <span class="highlight-text" style="background-color:#F6F7F7;">빌드</span>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/02/android/001_01_gradle/190102-gradle/"><code>그래들(Gradle)</code></a>에 대해 알아보겠습니다.</p>
 
                     
                         

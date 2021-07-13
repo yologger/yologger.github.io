@@ -299,9 +299,9 @@
 <div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/12/20/android/181220-proguard/">프로가드(ProGuard)</a>와 <a href="/ko/2018/12/21/android/181221-r8/">R8 컴파일러</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">멀티 덱스(Multidex)</span>에 대해 알아보겠습니다.</p>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/01/android/002_01_app_release/190201-proguard/">프로가드(ProGuard)</a>와 <a href="/ko/2019/02/02/android/002_01_app_release/190202-r8/">R8 컴파일러</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">멀티 덱스(Multidex)</span>에 대해 알아보겠습니다.</p>
 <hr>
-<h1 id="Why-use-Multidex"><a href="#Why-use-Multidex" class="headerlink" title="Why use Multidex?"></a>Why use Multidex?</h1><p>안드로이드에서 자바 소스코드나 코틀린 소스코드는 <a href="/ko/2018/12/18/android/181218-apk/">DEX 파일</a>로 컴파일됩니다. 이 DEX 파일의 메소드가 <code>64K(65,536)</code>개를 초과하면 안드로이드 시스템은 다음과 같은 빌드 오류를 발생시킵니다.</p>
+<h1 id="Why-use-Multidex"><a href="#Why-use-Multidex" class="headerlink" title="Why use Multidex?"></a>Why use Multidex?</h1><p>안드로이드에서 자바 소스코드나 코틀린 소스코드는 <a href="/ko/2019/03/01/android/003_01_android_platform/190301-01-apk/">DEX 파일</a>로 컴파일됩니다. 이 DEX 파일의 메소드가 <code>64K(65,536)</code>개를 초과하면 안드로이드 시스템은 다음과 같은 빌드 오류를 발생시킵니다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">trouble writing output:</span><br><span class="line">Too many field references: 131000; max is 65536.</span><br><span class="line">You may try using --multi-dex option.</span><br></pre></td></tr></table></figure>
 <span class="highlight-text red">멀티 덱스(Multidex)</span>는 <u>메소드가 64K(65,536)개를 초과하지 않도록 DEX 파일을 여러 개로 나누는 기술</u>입니다.
 
@@ -313,11 +313,12 @@
 <p><code>AndroidManifest.xml</code>에서 <code>&lt;application&gt;</code>태그의 <code>android:name</code>속성을 다음과 같이 설정합니다.</p>
 <figure class="codeblock codeblock--tabbed"><figcaption><span>AndroidManifest.xml</span><ul class="tabs"><li class="tab active">xml</li></ul></figcaption><div class="tabs-content"><figure class="highlight xml" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">"com.example.project"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"androidx.multidex.MultiDexApplication"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure></div></figure>
 
-<p>만약 <a href="/ko/2019/05/01/android/190501-application-class/"><code>Application</code></a>클래스를 사용 중이라면 다음과 같이 수정합니다.</p>
+<p>만약 <a href="/ko/2019/04/07/android/003_01_android_platform/190407-01-application-class/"><code>Application</code></a>클래스를 사용 중이라면 다음과 같이 수정합니다.</p>
 <figure class="codeblock codeblock--tabbed"><figcaption><span>AndroidManifest.xml</span><ul class="tabs"><li class="tab active">kotlin</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span>: <span class="type">MultiDexApplication</span></span>() {</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
 <p><code>AndroidManifest.xml</code>에서 <code>&lt;application&gt;</code>태그의 <code>android:name</code>속성을 다음과 같이 설정합니다.</p>
 <figure class="codeblock codeblock--tabbed"><figcaption><span>AndroidManifest.xml</span><ul class="tabs"><li class="tab active">xml</li></ul></figcaption><div class="tabs-content"><figure class="highlight xml" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">"com.example.project"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">".App"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure></div></figure>
 <hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>멀티덱스</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/">서명된 출시용 APK를 생성하는 방법</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -468,29 +469,26 @@
 <div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/12/20/android/181220-proguard/">프로가드(ProGuard)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">R8 컴파일러</span>에 대해 알아보겠습니다.</p>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/01/android/002_01_app_release/190201-proguard/">프로가드(ProGuard)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">R8 컴파일러</span>에 대해 알아보겠습니다.</p>
 <hr>
-<h1 id="사전-지식-DEX-컴파일러"><a href="#사전-지식-DEX-컴파일러" class="headerlink" title="사전 지식 - DEX 컴파일러"></a>사전 지식 - DEX 컴파일러</h1><p><code>DEX 컴파일러</code>는 자바 바이트코드를 안드로이드 시스템에서 실행 가능한 DEX 파일로 변환합니다.</p>
-<ul>
-<li>(참고 1) <a href="/ko/2018/12/18/android/181218-apk/">DEX 파일과 APK 파일</a></li>
-<li>(참고 2) <a href="/ko/2018/12/18/android/181219-art-dalvik/">JVM, 달빅 가상머신, ART</a></li>
-</ul>
-<p><code>DEX 컴파일러</code>는 오랜 시간에 걸쳐 발전해왔습니다.</p>
-<h4 id="1-DX-컴파일러"><a href="#1-DX-컴파일러" class="headerlink" title="(1) DX 컴파일러"></a>(1) DX 컴파일러</h4><p>D8 컴파일러가 출시되기 전까지 사용되는 DEX 컴파일러입니다.</p>
-<h4 id="2-D8-컴파일러"><a href="#2-D8-컴파일러" class="headerlink" title="(2) D8 컴파일러"></a>(2) D8 컴파일러</h4><p>구글이 2018년 출시한 새로운 DEX 컴파일러입니다. <code>Android Studio 3.0 버전</code>부터 사용할 수 있으며, <code>Android Studio 3.1 버전</code>부터 기본 DEX 컴파일러가 되었습니다. DEX 컴파일러는 <code>Android Gradle Plugin</code>에 포함되어있습니다.</p>
-<h4 id="3-R8-컴파일러"><a href="#3-R8-컴파일러" class="headerlink" title="(3) R8 컴파일러"></a>(3) R8 컴파일러</h4><p>구글이 2019년 출시한 새로운 DEX 컴파일러입니다. <code>Android Stuido 3.4 버전</code>부터 사용할 수 있습니다. R8 컴파일러는 <a href="/ko/2018/12/20/android/181220-proguard/">프로가드(ProGurad)</a>가 기존에 수행하던 <u>코드 난독화</u> 및 <u>최적화 작업</u>을 대신 수행합니다. 따라서 <code>Android Gradle Plugin 3.4.0</code> 버전부터는 ProGuard 대신 R8 컴파일러를 사용하여 코드 난독화와 최적화 작업을 수행할 수 있습니다.</p>
+<h1 id="DEX-컴파일러"><a href="#DEX-컴파일러" class="headerlink" title="DEX 컴파일러"></a>DEX 컴파일러</h1><p><code>DEX 컴파일러</code>는 자바 바이트코드를 안드로이드 시스템에서 실행 가능한 <a href="/ko/2019/03/01/android/003_01_android_platform/190301-01-apk/">DEX 파일</a>로 변환합니다. DEX 컴파일러는 오랜 시간에 걸쳐 발전해왔습니다.</p>
+<h3 id="1-DX-컴파일러"><a href="#1-DX-컴파일러" class="headerlink" title="(1) DX 컴파일러"></a>(1) DX 컴파일러</h3><p>D8 컴파일러가 출시되기 전까지 사용되었던 DEX 컴파일러입니다.</p>
+<h3 id="2-D8-컴파일러"><a href="#2-D8-컴파일러" class="headerlink" title="(2) D8 컴파일러"></a>(2) D8 컴파일러</h3><p>구글이 2018년 출시한 새로운 DEX 컴파일러입니다. <code>Android Studio 3.0 버전</code>부터 사용할 수 있으며, <code>Android Studio 3.1 버전</code>부터 기본 DEX 컴파일러가 되었습니다. DEX 컴파일러는 <code>Android Gradle Plugin</code>에 포함되어있습니다.</p>
+<h3 id="3-R8-컴파일러"><a href="#3-R8-컴파일러" class="headerlink" title="(3) R8 컴파일러"></a>(3) R8 컴파일러</h3><p>구글이 2019년 출시한 새로운 DEX 컴파일러입니다. <code>Android Stuido 3.4 버전</code>부터 사용할 수 있습니다. R8 컴파일러는 <a href="/ko/2019/02/01/android/002_01_app_release/190201-proguard/">프로가드(ProGurad)</a>가 기존에 수행하던 <u>코드 난독화</u> 및 <u>최적화 작업</u>을 대신 수행합니다. 따라서 <code>Android Gradle Plugin 3.4.0</code> 버전부터는 ProGuard 대신 R8 컴파일러를 사용하여 코드 난독화와 최적화 작업을 수행할 수 있습니다.</p>
 <hr>
 <h1 id="R8-컴파일러"><a href="#R8-컴파일러" class="headerlink" title="R8 컴파일러"></a>R8 컴파일러</h1><p>R8 컴파일러 이전에는 DEX 파일을 생성하는 과정이 두 단계로 나누어 있었습니다.</p>
 <ol>
-<li><a href="/ko/2018/12/20/android/181220-proguard/">프로가드(ProGurad)</a>가 수행하는 난독화와 최적화 작업</li>
+<li><a href="/ko/2019/02/01/android/002_01_app_release/190201-proguard/">프로가드(ProGurad)</a>가 수행하는 난독화와 최적화 작업</li>
 <li>D8 컴파일러가 수행하는 DEX 컴파일 </li>
 </ol>
-<p><img src="/ko/images/posts/android/r8/1.png"></p>
+<p><img src="/ko/images/posts/android/190202-r8/1.png"></p>
 <p>R8 컴파일러는 이 두 과정을 한 단계로 통합했습니다.</p>
-<p><img src="/ko/images/posts/android/r8/2.png"></p>
+<p><img src="/ko/images/posts/android/190202-r8/2.png"></p>
 <p>사실 프로가드와 D8 컴파일러 대신 R8 컴파일러를 사용하는 것은 매우 간단합니다. <code>gradle.properties</code>파일에 다음 한 줄을 추가하면 됩니다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.enableR8&#x3D;true</span><br></pre></td></tr></table></figure>
 <p>이 코드를 추가하면 <code>Android Gradle Plugin 3.4.0</code> 버전부터는 ProGuard 대신 R8 컴파일러를 사용하여 코드 난독화와 최적화 작업을 수행합니다.</p>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>R8 컴파일러</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/03/android/002_01_app_release/190203-multi-dex/">멀티 덱스</a>에 대해 알아보겠습니다.</p>
 
                     
                         
@@ -602,9 +600,9 @@
                         <a
                             class="link-unstyled"
                             href="/ko/2019/02/01/android/002_01_app_release/190201-proguard/"
-                            aria-label=": [안드로이드] 코드 난독화 및 최적화 - (1) ProGuard"
+                            aria-label=": [안드로이드] 코드 난독화 및 최적화 - (1) 프로가드(ProGuard)"
                         >
-                            [안드로이드] 코드 난독화 및 최적화 - (1) ProGuard
+                            [안드로이드] 코드 난독화 및 최적화 - (1) 프로가드(ProGuard)
                         </a>
                     
                 </h1>
@@ -630,17 +628,17 @@
 <div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
 </div>
 
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/12/18/android/181219-art-dalvik/">JVM, 달빅 가상머신, ART</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">프로가드(ProGuard)</span>에 대해 알아보겠습니다.</p>
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/15/android/001_01_gradle/190115-product-flavor/">프로덕트 플래이버(Product Flavor)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">프로가드(ProGuard)</span>에 대해 알아보겠습니다.</p>
 <hr>
 <h1 id="프로가드"><a href="#프로가드" class="headerlink" title="프로가드"></a>프로가드</h1><span class="highlight-text red">프로가드(ProGuard)</span>를 적용하면 어플리캐이션에 <u>코드 난독화</u>와 <u>최적화</u>를 적용할 수 있습니다. 프로가드를 이해하기 위해 알아야 할 개념은 다음과 같습니다.
 
 <h3 id="1-역공학과-디컴파일"><a href="#1-역공학과-디컴파일" class="headerlink" title="(1) 역공학과 디컴파일"></a>(1) 역공학과 디컴파일</h3><p><code>역공학(Reverse Engineering)</code>은 <u>완성된 결과물을 반대로 분해하고 조각내어 설계와 원리를 분석하는 것</u>을 의미합니다. 비유하자면 완성된 비행기를 분해하며 어떻게 조립되었고 동작하는지를 분석하는 것입니다.</p>
-<p>소프트웨어 공학에서 역공학의 핵심 기술은 디컴파일입니다. <code>디컴파일(Decompile)</code>은 <u>실행 가능한 소프트웨어를 사람이 읽을 수 있는 소스코드로 변환하는 것</u>을 말합니다. 안드로이드에서는 APK 파일을 사용하여 소스코드 파일로 복원하는 작업을 의미합니다. <a href="/ko/2018/12/01/android/181201-compile-build/">컴파일</a>이나 <a href="/ko/2018/12/01/android/181201-compile-build/">빌드</a>의 반대 작업이라고 이해하시면 됩니다.</p>
-<h3 id="2-난독화"><a href="#2-난독화" class="headerlink" title="(2) 난독화"></a>(2) 난독화</h3><p><a href="/ko/2018/12/22/android/181222-01-extract-apk/">APK 파일을 추출하는 앱</a>을 사용하면 구글 플레이스토어에서 다운받은 앱의 APK 파일을 추출할 수 있습니다. 여기에 <a href="/ko/2018/12/22/android/181222-03-decompiler/">디컴파일</a>까지 적용하면 앱의 소스코드를 볼 수 있게 됩니다.</p>
+<p>소프트웨어 공학에서 역공학의 핵심 기술은 디컴파일입니다. <code>디컴파일(Decompile)</code>은 <u>실행 가능한 소프트웨어를 사람이 읽을 수 있는 소스코드로 변환하는 것</u>을 말합니다. 안드로이드에서는 APK 파일을 사용하여 소스코드 파일로 복원하는 작업을 의미합니다. <a href="/ko/2019/01/01/android/001_01_gradle/190101-compile-build/">컴파일</a>이나 <a href="/ko/2019/01/01/android/001_01_gradle/190101-compile-build/">빌드</a>의 반대 작업이라고 이해하시면 됩니다.</p>
+<h3 id="2-난독화"><a href="#2-난독화" class="headerlink" title="(2) 난독화"></a>(2) 난독화</h3><p><a href="/ko/2019/03/03/android/003_01_android_platform/190303-01-extract-apk/">APK 파일을 추출하는 앱</a>을 사용하면 구글 플레이스토어에서 다운받은 앱의 APK 파일을 추출할 수 있습니다. 여기에 <a href="/ko/2019/03/01/android/003_01_android_platform/190303-03-decompiler/">디컴파일</a>까지 적용하면 앱의 소스코드를 볼 수 있게 됩니다.</p>
 <p><code>코드 난독화(Code Obfuscation)</code>은 악의적으로 앱의 소스코드에 접근하는 공격자로부터 코드를 보호하는 기술입니다. <u>소스코드를 읽기 어렵게 만들어 가독성을 떨어지게 할 수 있습니다</u>.</p>
 <h3 id="3-코드-축소와-리소스-축소"><a href="#3-코드-축소와-리소스-축소" class="headerlink" title="(3) 코드 축소와 리소스 축소"></a>(3) 코드 축소와 리소스 축소</h3><p>앱이나 라이브러리에서 사용하지 않는 클래스, 속성, 메소드를 탐지하여 안전하게 삭제하는 것을 <code>코드 축소(Code shrinking)</code>라고 합니다. 또한 앱에서 사용하지 않는 리소스를 안전하게 삭제하는 것을 <code>리소스 축소(Resource shrinking)</code>라고 합니다. </p>
 <hr>
-<h1 id="프로가드-사용법"><a href="#프로가드-사용법" class="headerlink" title="프로가드 사용법"></a>프로가드 사용법</h1><p><code>프로가드(ProGuard)</code>를 사용하면 <a href="/ko/2018/12/14/android/181214-buildtypes/">빌드 타입</a> 별로 난독화, 코드 축소, 리소스 축소를 적용할 수 있습니다.</p>
+<h1 id="프로가드-사용법"><a href="#프로가드-사용법" class="headerlink" title="프로가드 사용법"></a>프로가드 사용법</h1><p><code>프로가드(ProGuard)</code>를 사용하면 <a href="/ko/2019/01/14/android/001_01_gradle/190114-buildtypes/">빌드 타입(BuildType)</a> 별로 난독화, 코드 축소, 리소스 축소를 적용할 수 있습니다.</p>
 <p>모듈 수준의 <code>build.gradle</code>에 두 개의 빌드 타입 <code>debug</code>, <code>release</code>를 추가합니다.</p>
 <figure class="codeblock codeblock--tabbed"><figcaption><span>모듈 수준의 build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    buildTypes {</span><br><span class="line">        debug {</span><br><span class="line"></span><br><span class="line">        }</span><br><span class="line">        release {</span><br><span class="line"></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
 <p><code>release</code>빌드 타입에 프로가드를 적용하겠습니다. <code>minifyEnabled</code>값을 <code>true</code>로 설정하면 난독화, 코드 축소, 최적화를 진행합니다.</p>
@@ -656,7 +654,7 @@
 <p><code>proguard-android-optimize.txt</code>은 안드로이드 그래들 플러그인이 자동으로 생성합니다.</p>
 <figure class="codeblock codeblock--tabbed"><figcaption><span>프로젝트 수준의 build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">buildscript {</span><br><span class="line"></span><br><span class="line">    dependencies {</span><br><span class="line">        <span class="comment">// 안드로이드 그래이들 플러그인</span></span><br><span class="line">        classpath <span class="string">"com.android.tools.build:gradle:4.1.2"</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
 <p>이 파일에는 사전에 정해진 합리적인 규칙이 정의되어있습니다. 따라서 개발자는 이 파일을 수정할 필요가 없습니다.</p>
-<p><code>proguard-rules.pro</code>는 안드로이드 프로젝트나 모듈을 생성하면 <a href="/ko/2018/12/07/android/181207-module/">모듈</a>의 루트 디렉토리에 자동으로 생성됩니다.<br><img src="/ko/images/posts/android/proguard/1.png"><br><img src="/ko/images/posts/android/proguard/2.png"><br>개발자는 이 파일을 수정하여 프로가드 규칙을 적용할 수 있습니다.</p>
+<p><code>proguard-rules.pro</code>는 안드로이드 프로젝트나 모듈을 생성하면 <a href="/ko/2019/01/07/android/001_01_gradle/190107-module/">모듈</a>의 루트 디렉토리에 자동으로 생성됩니다.<br><img src="/ko/images/posts/android/190201-proguard/1.png"><br><img src="/ko/images/posts/android/190201-proguard/2.png"><br>개발자는 이 파일을 수정하여 프로가드 규칙을 적용할 수 있습니다.</p>
 <hr>
 <h1 id="프로가드-설정파일"><a href="#프로가드-설정파일" class="headerlink" title="프로가드 설정파일"></a>프로가드 설정파일</h1><p><code>proguard-rules.pro</code>를 프로가드 설정파일이라고 합니다. 이 파일에서는 특정 클래스나 멤버변수를 난독화에서 제외한다든지, 최적화를 진행하지 않는다든지, 코드 축소를 하지 않는다든지 등의 <u><b>규칙</b></u>을 설정을 할 수 있습니다. </p>
 <p>자주 사용하는 프로가드 <u><b>규칙</b></u>은 다음과 같습니다.</p>
@@ -697,7 +695,7 @@
 <p>모듈 수준의 <code>build.gradle</code>에 프로가드 설정파일을 추가합니다.</p>
 <figure class="codeblock codeblock--tabbed"><figcaption><span>모듈 수준의 build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    buildTypes {</span><br><span class="line">        debug {</span><br><span class="line"></span><br><span class="line">        }</span><br><span class="line">        release {</span><br><span class="line">            proguardFile getDefaultProguardFile(<span class="string">'proguard-android-optimize.txt'</span>)</span><br><span class="line">            <span class="comment">// 공통</span></span><br><span class="line">            proguardFile <span class="string">'proguard-common.pro'</span></span><br><span class="line">            <span class="comment">// Retrofit을 위한 프로가드 설정파일</span></span><br><span class="line">            proguardFile <span class="string">'proguard-retrofit.pro'</span></span><br><span class="line">            <span class="comment">// OkHttp를 위한 프로가드 설정파일</span></span><br><span class="line">            proguardFile <span class="string">'proguard-okhttp.pro'</span></span><br><span class="line">            <span class="comment">// Glide를 위한 프로가드 설정파일</span></span><br><span class="line">            proguardFile <span class="string">'proguard-glide.pro'</span></span><br><span class="line">            <span class="comment">// Gson 위한 프로가드 설정파일</span></span><br><span class="line">            proguardFile <span class="string">'proguard-gson.pro'</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
 <hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>프로가드(ProGuard)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/21/android/181221-r8/">R8 컴파일러를 사용한 코드 난독화와 최적화</a>에 대해 알아보겠습니다.</p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>프로가드(ProGuard)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/02/android/002_01_app_release/190202-r8/">R8 컴파일러를 사용한 코드 난독화와 최적화</a>에 대해 알아보겠습니다.</p>
 
                     
                         

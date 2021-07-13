@@ -13,16 +13,16 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n컴파일컴파일(Compile)은 개발자가 작성한 소스코드를 컴퓨터가 이해할 수 있는 기계어로 변환하는 과정을 의미합니다. \n\nC의 경우 gcc라는 컴파일러가 *.c파일을 컴파일하여 *.o파일을 생성합니다. Java의 경우 자바 컴파일러(Java Compiler)가 *.java파일을 컴파일하여 자바 바이트코드를 생성합니다.\n빌드프로젝트를 진행하다보면 여러 개의 소스코드 파일이 생성됩니다. 만약 A라는 소스코드 파일에서 B라는 소스코드 파일을 참조한다고 가정해봅시다. 이때 파일 A와 파일 B를 각각 컴파일하면 A에서 B를 찾지 못하므로 참조할 수가 없습니다. 따라서 파일 A와 파일 B를 연결하는 작업이 필요한데 이를 링크(Link)라고 합니다.\n빌드(Build)는 이러한 컴파일, 링크 등을 모두 포함하여 실행 가능한 소프트웨어로 만드는 과정을 의미합니다.\n\n\n안드로이드 스튜디오에서 소스코드를 빌드하면 안드로이드 운영체제에서 실행할 수 있는 APK 파일이 생성됩니다.\n\n\n빌드 도구빌드 도구(Build Tool)는 소스코드를 실행 가능한 소프트웨어로 만들어주는 도구입니다. 요즘의 빌드 도구는 빌드 작업뿐만 아니라 테스트, 빌드 자동화, 배포 등 다양한 기능을 제공하기도 합니다. 자바나 코틀린의 빌드 도구에는 Ant, Maven, Gradle 등이 있습니다. \n\n\n마치며이번 포스트에서는 컴파일과 빌드에 대해 알아봤습니다. 다음 포스트에서는 그래들(Gradle)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-01T01:00:00+09:00","dateModified":"2021-07-12T15:34:04+09:00","datePublished":"2019-01-01T01:00:00+09:00","description":"","headline":"[안드로이드] 그래들(Gradle) - (1) 컴파일과 빌드의 차이점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/01/android/001_01_gradle/190101-compile-build/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/01/android/001_01_gradle/190101-compile-build/","keywords":"Android, Gradle"}</script>
-    <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   컴파일컴파일(Compile)은 개발자가 작성한 소스코드를 컴퓨터가 이해할 수 있는 기계어로 변환하는 과정을 의미합니다.   C의 경우 gcc라는 컴파일러가 *.c파일을 컴파일하여 *.o파일을 생성합니다. Java의 경우 자바 컴파일러(Java Compiler)">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n컴파일컴파일(Compile)은 개발자가 작성한 소스코드를 컴퓨터가 이해할 수 있는 기계어로 변환하는 과정을 의미합니다. \n\nC의 경우 gcc라는 컴파일러가 *.c파일을 컴파일하여 *.o파일을 생성합니다. Java의 경우 자바 컴파일러가 *.java파일을 컴파일하여 자바 바이트코드를 생성합니다.\n빌드프로젝트를 진행하다보면 여러 개의 소스코드 파일이 생성됩니다. 만약 A라는 소스코드 파일에서 B라는 소스코드 파일을 참조한다고 가정해봅시다. 이때 파일 A와 파일 B를 각각 컴파일하면 A에서 B를 찾지 못하므로 참조할 수가 없습니다. 따라서 파일 A와 파일 B를 연결하는 작업이 필요한데 이를 링크(Link)라고 합니다.\n빌드(Build)는 이러한 컴파일, 링크 등을 모두 포함하여 실행 가능한 소프트웨어로 만드는 과정을 의미합니다.\n\n\n안드로이드 스튜디오에서 소스코드를 빌드하면 안드로이드 운영체제에서 실행할 수 있는 APK 파일이 생성됩니다.\n\n\n빌드 도구빌드 도구(Build Tool)는 소스코드를 실행 가능한 소프트웨어로 만들어주는 도구입니다. 요즘의 빌드 도구는 빌드 작업뿐만 아니라 테스트, 빌드 자동화, 배포 등 다양한 기능을 제공하기도 합니다. 자바나 코틀린의 빌드 도구에는 Ant, Maven, Gradle 등이 있습니다. \n\n\n마치며이번 포스트에서는 컴파일과 빌드에 대해 알아봤습니다. 다음 포스트에서는 그래들(Gradle)에 대해 알아보겠습니다.\n","dateCreated":"2019-01-01T01:00:00+09:00","dateModified":"2021-07-12T18:06:05+09:00","datePublished":"2019-01-01T01:00:00+09:00","description":"","headline":"[안드로이드] 그래들(Gradle) - (1) 컴파일과 빌드의 차이점","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/01/01/android/001_01_gradle/190101-compile-build/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/01/01/android/001_01_gradle/190101-compile-build/","keywords":"Android, Gradle"}</script>
+    <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   컴파일컴파일(Compile)은 개발자가 작성한 소스코드를 컴퓨터가 이해할 수 있는 기계어로 변환하는 과정을 의미합니다.   C의 경우 gcc라는 컴파일러가 *.c파일을 컴파일하여 *.o파일을 생성합니다. Java의 경우 자바 컴파일러가 *.java파일을 컴파일">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 그래들(Gradle) - (1) 컴파일과 빌드의 차이점">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/01/01/android/001_01_gradle/190101-compile-build/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   컴파일컴파일(Compile)은 개발자가 작성한 소스코드를 컴퓨터가 이해할 수 있는 기계어로 변환하는 과정을 의미합니다.   C의 경우 gcc라는 컴파일러가 *.c파일을 컴파일하여 *.o파일을 생성합니다. Java의 경우 자바 컴파일러(Java Compiler)">
+<meta property="og:description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   컴파일컴파일(Compile)은 개발자가 작성한 소스코드를 컴퓨터가 이해할 수 있는 기계어로 변환하는 과정을 의미합니다.   C의 경우 gcc라는 컴파일러가 *.c파일을 컴파일하여 *.o파일을 생성합니다. Java의 경우 자바 컴파일러가 *.java파일을 컴파일">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2018-12-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-07-12T06:34:04.285Z">
+<meta property="article:modified_time" content="2021-07-12T09:06:05.483Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Gradle">
@@ -302,18 +302,18 @@
 <hr>
 <h1 id="컴파일"><a href="#컴파일" class="headerlink" title="컴파일"></a>컴파일</h1><span class="highlight-text red">컴파일(Compile)</span>은 <u>개발자가 작성한 소스코드를 컴퓨터가 이해할 수 있는 기계어로 변환하는 과정</u>을 의미합니다. 
 
-<p>C의 경우 <code>gcc</code>라는 컴파일러가 <code>*.c</code>파일을 컴파일하여 <code>*.o</code>파일을 생성합니다. Java의 경우 <a href="/ko/2018/01/01/java/180101-jvm-jre-jdk/"><code>자바 컴파일러(Java Compiler)</code></a>가 <code>*.java</code>파일을 컴파일하여 <code>자바 바이트코드</code>를 생성합니다.</p>
+<p>C의 경우 <code>gcc</code>라는 컴파일러가 <code>*.c</code>파일을 컴파일하여 <code>*.o</code>파일을 생성합니다. Java의 경우 <a href="/ko/2018/01/01/java/180101_jvm_jre_jdk/"><code>자바 컴파일러</code></a>가 <code>*.java</code>파일을 컴파일하여 <code>자바 바이트코드</code>를 생성합니다.</p>
 <h1 id="빌드"><a href="#빌드" class="headerlink" title="빌드"></a>빌드</h1><p>프로젝트를 진행하다보면 여러 개의 소스코드 파일이 생성됩니다. 만약 A라는 소스코드 파일에서 B라는 소스코드 파일을 참조한다고 가정해봅시다. 이때 파일 A와 파일 B를 각각 컴파일하면 A에서 B를 찾지 못하므로 참조할 수가 없습니다. 따라서 파일 A와 파일 B를 연결하는 작업이 필요한데 이를 <span class="highlight-text red">링크(Link)</span>라고 합니다.<br><br></p>
 <span class="highlight-text red">빌드(Build)</span>는 이러한 컴파일, 링크 등을 모두 포함하여 <u>실행 가능한 소프트웨어로 만드는 과정</u>을 의미합니다.
 
 
-<div class="alert warning icon"><p>안드로이드 스튜디오에서 소스코드를 빌드하면 안드로이드 운영체제에서 실행할 수 있는 <a href="/ko/2018/12/18/android/181218-apk/">APK</a> 파일이 생성됩니다.</p>
+<div class="alert warning icon"><p>안드로이드 스튜디오에서 소스코드를 빌드하면 안드로이드 운영체제에서 실행할 수 있는 <a href="/ko/2019/03/01/android/003_01_android_platform/190301-01-apk/">APK</a> 파일이 생성됩니다.</p>
 </div>
 
 <h1 id="빌드-도구"><a href="#빌드-도구" class="headerlink" title="빌드 도구"></a>빌드 도구</h1><span class="highlight-text red">빌드 도구(Build Tool)</span>는 소스코드를 실행 가능한 소프트웨어로 만들어주는 도구입니다. 요즘의 빌드 도구는 빌드 작업뿐만 아니라 테스트, 빌드 자동화, 배포 등 다양한 기능을 제공하기도 합니다. 자바나 코틀린의 빌드 도구에는 <span class="highlight-text" style="background-color:#F6F7F7;">Ant</span>, <span class="highlight-text" style="background-color:#F6F7F7;">Maven</span>, <span class="highlight-text" style="background-color:#F6F7F7;">Gradle</span> 등이 있습니다. 
 
 <hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <span class="highlight-text" style="background-color:#F6F7F7;">컴파일</span>과 <span class="highlight-text" style="background-color:#F6F7F7;">빌드</span>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/12/02/android/181202-gradle/"><code>그래들(Gradle)</code></a>에 대해 알아보겠습니다.</p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <span class="highlight-text" style="background-color:#F6F7F7;">컴파일</span>과 <span class="highlight-text" style="background-color:#F6F7F7;">빌드</span>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/02/android/001_01_gradle/190102-gradle/"><code>그래들(Gradle)</code></a>에 대해 알아보겠습니다.</p>
 
             
 
@@ -321,6 +321,7 @@
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
+        
         
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">태그</span><br/>
@@ -395,9 +396,6 @@
         
     </div>
 </article>
-
-
-
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
         Copyrights &copy; 2021 yologger. All Rights Reserved.

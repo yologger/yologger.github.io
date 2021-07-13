@@ -13,17 +13,17 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n들어가며플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.\n\n서명된 릴리즈 APK 생성하기 ⬅️ ⬅️ ⬅️\n알파 테스트\n클로스드 베타 테스트\n오픈 베타 테스트\n플레이스토어에 앱 출시하기\n플레이스토어 앱 업데이트하기\n앱 게시 취소 및 삭제하기\n앱 번들이란?\n\n\n소프트웨어 출시 과정소프트웨어는 출시되기 전 많은 테스트를 거칩니다.\n(1) 알파 테스트알파 테스트는 회사 내부에서 진행하는 테스트입니다. 내부 테스트라고도 하며 보통 개발팀이나 품질관리팀에서 실시합니다. \n(2) 베타 테스트베타 테스트는 회사 외부에서 진행하는 테스트입니다. 베타 테스트에는 두 종류가 있습니다.\n\n클로스드 베타 테스트: 회사가 특정 사용자들만 선발해서 진행하는 테스트입니다. 비공개 테스트라고도 합니다.\n\n오픈 베타 테스트: 정식 출시 이전에 모든 사용자에게 진행하는 테스트입니다. 공개 테스트라고도 합니다.\n\n\n(3) 출시소프트웨어가 모든 테스트를 통과하면 시장에 출시합니다.\n\n안드로이드 비공개 테스트안드로이드에서는 오픈 베타 테스트보다 공개 테스트라는 용어를 더 많이 사용합니다. 비공개 테스트는 테스트용 앱을 회사 외부의 불특정 다수에게 배포하고 피드백을 받습니다.\n이제 공개 테스트에 대해 알아보겠습니다.\n","dateCreated":"2019-02-07T01:00:00+09:00","dateModified":"2021-07-12T13:18:19+09:00","datePublished":"2019-02-07T01:00:00+09:00","description":"","headline":"[안드로이드] 앱 출시 - (4) 오픈 베타 테스트(공개 테스트)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/07/android/002_01_app_release/190207-open-beta-test/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/07/android/002_01_app_release/190207-open-beta-test/"}</script>
-    <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.  서명된 릴리즈 APK 생성하기 ⬅️ ⬅️ ⬅️ 알파 테스트 클로스드 베타 테스트 오픈 베타 테스트 플레이스토어에 앱 출시하기 플레이스토어 앱 업데이트하기 앱 게시 취소 및 삭제하기 앱 번들이란">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n들어가며플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.\n\n서명된 출시용 APK 생성하기\n알파 테스트\n클로스드 베타 테스트\n오픈 베타 테스트 ⬅️ ⬅️ ⬅️\n플레이스토어에 앱 출시하기\n플레이스토어 앱 업데이트하기\n앱 게시 취소 및 삭제하기\n앱 번들이란?\n\n\n소프트웨어 출시 과정소프트웨어는 출시되기 전 많은 테스트를 거칩니다.\n(1) 알파 테스트알파 테스트는 회사 내부에서 진행하는 테스트입니다. 내부 테스트라고도 하며 보통 개발팀이나 품질관리팀에서 실시합니다. \n(2) 베타 테스트베타 테스트는 회사 외부에서 진행하는 테스트입니다. 베타 테스트에는 두 종류가 있습니다.\n\n클로스드 베타 테스트: 회사가 특정 사용자들만 선발해서 진행하는 테스트입니다. 비공개 테스트라고도 합니다.\n\n오픈 베타 테스트: 정식 출시 이전에 모든 사용자에게 진행하는 테스트입니다. 공개 테스트라고도 합니다.\n\n\n(3) 출시소프트웨어가 모든 테스트를 통과하면 시장에 출시합니다.\n\n안드로이드 비공개 테스트안드로이드에서는 오픈 베타 테스트보다 공개 테스트라는 용어를 더 많이 사용합니다. 비공개 테스트는 테스트용 앱을 회사 외부의 불특정 다수에게 배포하고 피드백을 받습니다.\n이제 공개 테스트에 대해 알아보겠습니다.\n","dateCreated":"2019-02-07T01:00:00+09:00","dateModified":"2021-07-12T19:02:55+09:00","datePublished":"2019-02-07T01:00:00+09:00","description":"","headline":"[안드로이드] 앱 출시 - (4) 오픈 베타 테스트(공개 테스트)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2019/02/07/android/002_01_app_release/190207-open-beta-test/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2019/02/07/android/002_01_app_release/190207-open-beta-test/"}</script>
+    <meta name="description" content="들어가며플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.  서명된 출시용 APK 생성하기 알파 테스트 클로스드 베타 테스트 오픈 베타 테스트 ⬅️ ⬅️ ⬅️ 플레이스토어에 앱 출시하기 플레이스토어 앱 업데이트하기 앱 게시 취소 및 삭제하기 앱 번들이란?   소프트웨어 출시 과정소프트웨어는 출시되기 전 많은 테스트를 거칩니다. (1) 알파 테스트알">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 앱 출시 - (4) 오픈 베타 테스트(공개 테스트)">
 <meta property="og:url" content="https://yologger.github.io/ko/2019/02/07/android/002_01_app_release/190207-open-beta-test/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.   들어가며플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.  서명된 릴리즈 APK 생성하기 ⬅️ ⬅️ ⬅️ 알파 테스트 클로스드 베타 테스트 오픈 베타 테스트 플레이스토어에 앱 출시하기 플레이스토어 앱 업데이트하기 앱 게시 취소 및 삭제하기 앱 번들이란">
+<meta property="og:description" content="들어가며플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.  서명된 출시용 APK 생성하기 알파 테스트 클로스드 베타 테스트 오픈 베타 테스트 ⬅️ ⬅️ ⬅️ 플레이스토어에 앱 출시하기 플레이스토어 앱 업데이트하기 앱 게시 취소 및 삭제하기 앱 번들이란?   소프트웨어 출시 과정소프트웨어는 출시되기 전 많은 테스트를 거칩니다. (1) 알파 테스트알">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://yologger.github.io/ko/images/posts/android/alpha-test/1.png">
 <meta property="article:published_time" content="2019-02-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-07-12T04:18:19.213Z">
+<meta property="article:modified_time" content="2021-07-12T10:02:55.723Z">
 <meta property="article:author" content="yologger">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://yologger.github.io/ko/images/posts/android/alpha-test/1.png">
@@ -297,19 +297,16 @@
     <div class="post-content markdown">
         <div class="main-content-wrap">
             <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
 <h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>플레이스토어에 앱을 출시하는 방법에 대해 알아보고있습니다.</p>
 <ul>
-<li><a href="/ko/2018/12/23/android/181223-signed-apk/">서명된 릴리즈 APK 생성하기</a> ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2018/12/24/android/181224-alpha-test/">알파 테스트</a></li>
-<li><a href="/ko/2018/12/25/android/181225-closed-beta-test/">클로스드 베타 테스트</a></li>
-<li><a href="/ko/2018/12/26/android/181226-open-beta-test/">오픈 베타 테스트</a></li>
-<li><a href="/ko/2018/12/27/android/181227-app-release/">플레이스토어에 앱 출시하기</a></li>
-<li><a href="/ko/2018/12/28/android/181228-app-update/">플레이스토어 앱 업데이트하기</a></li>
-<li><a href="/ko/2018/12/29/android/181229-unpublish/">앱 게시 취소 및 삭제하기</a></li>
-<li><a href="/ko/2018/12/30/android/181230-app-bundle/">앱 번들이란?</a></li>
+<li><a href="/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/">서명된 출시용 APK 생성하기</a></li>
+<li><a href="/ko/2019/02/05/android/002_01_app_release/190205-alpha-test/">알파 테스트</a></li>
+<li><a href="/ko/2019/02/06/android/002_01_app_release/190206-closed-beta-test/">클로스드 베타 테스트</a></li>
+<li><a href="/ko/2019/02/07/android/002_01_app_release/190207-open-beta-test/">오픈 베타 테스트</a> ⬅️ ⬅️ ⬅️</li>
+<li><a href="/ko/2019/02/08/android/002_01_app_release/190208-app-release/">플레이스토어에 앱 출시하기</a></li>
+<li><a href="/ko/2019/02/09/android/002_01_app_release/190209-app-update/">플레이스토어 앱 업데이트하기</a></li>
+<li><a href="/ko/2019/02/10/android/002_01_app_release/190210-unpublish/">앱 게시 취소 및 삭제하기</a></li>
+<li><a href="/ko/2019/02/11/android/002_01_app_release/190211-app-bundle/">앱 번들이란?</a></li>
 </ul>
 <hr>
 <h1 id="소프트웨어-출시-과정"><a href="#소프트웨어-출시-과정" class="headerlink" title="소프트웨어 출시 과정"></a>소프트웨어 출시 과정</h1><p>소프트웨어는 출시되기 전 많은 테스트를 거칩니다.<br><img src="/ko/images/posts/android/alpha-test/1.png"></p>
@@ -332,6 +329,7 @@
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
+        
         
         
             <div class="post-actions-wrap">
@@ -399,9 +397,6 @@
         
     </div>
 </article>
-
-
-
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
         Copyrights &copy; 2021 yologger. All Rights Reserved.
