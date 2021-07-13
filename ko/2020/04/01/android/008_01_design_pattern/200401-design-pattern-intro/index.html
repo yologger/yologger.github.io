@@ -13,16 +13,16 @@
         <link rel="icon" href="https://yologger.github.io/ko/assets/images/yologger_favicon.png">
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n\n들어가며다섯 개의 포스트에 걸쳐 안드로이드의 아키텍처 패턴에 대해 알아보고있습니다.\n\n아키텍처 패턴이란?\nMVC (Model-View-Controller)\nMVP (Model-View-Presenter) ⬅️ ⬅️ ⬅️\nMVVM (Model-View-ViewModel)\nClean Architecture\n\n\n","dateCreated":"2020-04-01T01:00:00+09:00","dateModified":"2021-07-12T12:40:31+09:00","datePublished":"2020-04-01T01:00:00+09:00","description":"","headline":"[안드로이드] 디자인 패턴 - (1) 개요","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/","keywords":"Android"}</script>
-    <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.     들어가며다섯 개의 포스트에 걸쳐 안드로이드의 아키텍처 패턴에 대해 알아보고있습니다.  아키텍처 패턴이란? MVC (Model-View-Controller) MVP (Model-View-Presenter) ⬅️ ⬅️ ⬅️ MVVM (Model-View-Vie">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"articleBody":"\n안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.\n\n\n\n\n","dateCreated":"2020-04-01T01:00:00+09:00","dateModified":"2021-07-13T20:32:08+09:00","datePublished":"2020-04-01T01:00:00+09:00","description":"","headline":"[안드로이드] 디자인 패턴 - (1) 개요","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"},"publisher":{"@type":"Organization","name":"yologger","sameAs":["/","#about","mailto","https://github.com/yologger"]},"url":"https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/","keywords":"Android"}</script>
+    <meta name="description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="[안드로이드] 디자인 패턴 - (1) 개요">
-<meta property="og:url" content="https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/index.html">
+<meta property="og:url" content="https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/index.html">
 <meta property="og:site_name" content="Yologger&#39;s Blog">
-<meta property="og:description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.     들어가며다섯 개의 포스트에 걸쳐 안드로이드의 아키텍처 패턴에 대해 알아보고있습니다.  아키텍처 패턴이란? MVC (Model-View-Controller) MVP (Model-View-Presenter) ⬅️ ⬅️ ⬅️ MVVM (Model-View-Vie">
+<meta property="og:description" content="안드로이드(Android)에 대해 연재하고 있습니다. 목차는 이 곳에서 확인할 수 있습니다.">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-03-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-07-12T03:40:31.148Z">
+<meta property="article:modified_time" content="2021-07-13T11:32:08.719Z">
 <meta property="article:author" content="yologger">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -300,15 +300,6 @@
 </div>
 
 
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>다섯 개의 포스트에 걸쳐 안드로이드의 <code>아키텍처 패턴</code>에 대해 알아보고있습니다.</p>
-<ul>
-<li><a href="/ko/2019/11/20/android/191120-architecture-pattern-intro/">아키텍처 패턴이란?</a></li>
-<li><a href="/ko/2019/11/21/android/191121-architecture-pattern-mvc/">MVC (Model-View-Controller)</a></li>
-<li><a href="/ko/2019/11/22/android/191122-architecture-pattern-mvp/">MVP (Model-View-Presenter)</a> ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2019/11/23/android/191123-architecture-pattern-mvvm/">MVVM (Model-View-ViewModel)</a></li>
-<li><a href="/ko/2019/11/24/android/191124-architecture-pattern-clean-architecture/">Clean Architecture</a></li>
-</ul>
 <hr>
 
             
@@ -345,7 +336,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -358,7 +349,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -371,7 +362,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -419,7 +410,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"
                     title="Facebook에 공유하기"
                     aria-label="Facebook에 공유하기"
                 >
@@ -432,7 +423,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"
                     title="Twitter에 공유하기"
                     aria-label="Twitter에 공유하기"
                 >
@@ -445,7 +436,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
+                    target="new" href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"
                     title="Google+에 공유하기"
                     aria-label="Google+에 공유하기"
                 >
@@ -472,7 +463,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"
                         aria-label="Facebook에 공유하기"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook에 공유하기</span>
@@ -485,7 +476,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
+                        href="https://twitter.com/intent/tweet?text=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"
                         aria-label="Twitter에 공유하기"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Twitter에 공유하기</span>
@@ -498,7 +489,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern/"
+                        href="https://plus.google.com/share?url=https://yologger.github.io/ko/2020/04/01/android/008_01_design_pattern/200401-design-pattern-intro/"
                         aria-label="Google+에 공유하기"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Google+에 공유하기</span>

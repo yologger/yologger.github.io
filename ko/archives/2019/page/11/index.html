@@ -270,86 +270,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/07/kotlin/190107-constructor/"
-                            aria-label=": [코틀린] 클래스의 생성자(Constructor)"
-                        >
-                            [코틀린] 클래스의 생성자(Constructor)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-07T20:16:30+09:00">
-	
-		    2019/01/07
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에는 <a href="/ko/2019/01/07/kotlin/190107-class-instance-object/">객체지향 프로그래밍, 클래스, 인스턴스, 객체</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">생성자(Constructor)</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="생성자"><a href="#생성자" class="headerlink" title="생성자"></a>생성자</h1><p><code>생성자(Constructor)</code>는 클래스의 인스턴스를 생성할 때 호출되는 구문입니다. 보통 초기화 작업을 생성자에서 수행합니다. 생성자는 키워드<code>constructor</code>를 사용하여 정의합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String name</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="comment">// 멤버변수 초기화 작업 수행   </span></span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;Paul&quot;</span> </span><br><span class="line">        println(<span class="string">&quot;This is constructor.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이 생성자는 클래스의 인스턴스를 생성할 때 호출됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person person = person()</span><br><span class="line"><span class="comment">// This is constructor.</span></span><br></pre></td></tr></table></figure>
-<p>생성자에는 두 가지가 있습니다.</p>
-<h1 id="1-기본-생성자"><a href="#1-기본-생성자" class="headerlink" title="(1) 기본 생성자"></a>(1) 기본 생성자</h1><p><code>기본 생성자</code>는 클래스 이름 뒤에 키워드<code>constructor</code>를 붙여서 만듭니다. 주의할 점은 기본 생성자는 별도의 초기화 구문이 존재하지 않습니다. 이 때는 <code>init</code>구문을 사용할 수 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(name: String) &#123;	</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수 선언</span></span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line">	    </span><br><span class="line">    <span class="comment">// 초기화 작업 수행</span></span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;This is constructor.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스의 인스턴스 생성</span></span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>)		</span><br><span class="line"></span><br><span class="line">print(person.name)</span><br></pre></td></tr></table></figure>
-<p>키워드<code>constructor</code>는 생략 가능합니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(name: String) &#123;	</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수 선언</span></span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line">	    </span><br><span class="line">    <span class="comment">// 초기화 구문</span></span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>)		</span><br><span class="line"></span><br><span class="line">print(person.name)</span><br></pre></td></tr></table></figure>
-<p>맴버변수 선언도 생성자 안에서 할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>(<span class="keyword">var</span> name: String) &#123;</span><br><span class="line">    <span class="comment">// var name: String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위처럼 코드를 작성하는 경우, 클래스를 생성할 때 전달한 값 전달인자가 매개변수에 자동으로 초기화됩니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>)</span><br><span class="line"></span><br><span class="line">print(person.name)</span><br></pre></td></tr></table></figure>
-<h1 id="2-보조-생성자"><a href="#2-보조-생성자" class="headerlink" title="(2) 보조 생성자"></a>(2) 보조 생성자</h1><p>기본 생성자를 정의하지 않고 아래와 같이 <code>보조 생성자</code>만을 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 보조 생성자</span></span><br><span class="line">    <span class="keyword">constructor</span>(name: String) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>) </span><br><span class="line">println(person.name)</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 클래스의 <code>생성자</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/08/kotlin/190108-class-method/">클래스의 멤버변수와 메소드</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/07/kotlin/190107-constructor/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2019/01/07/kotlin/190107-class-instance-object/"
                             aria-label=": [코틀린] 객체지향 프로그래밍, 클래스, 인스턴스, 객체"
                         >
@@ -995,6 +915,87 @@
                         <p>
                             <a
                                 href="/ko/2019/01/04/kotlin/190104-collection-set/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/04/kotlin/190104-collection-list/"
+                            aria-label=": [코틀린] 집합자료형(Collection) - (1) List"
+                        >
+                            [코틀린] 집합자료형(Collection) - (1) List
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-04T20:16:30+09:00">
+	
+		    2019/01/04
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>저번 포스트에서는 <a href="/ko/2019/01/03/kotlin/190103-array/">배열(Array)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">집합자료형(Collection)</span>과 <span class="highlight-text red">리스트(List)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="집합자료형"><a href="#집합자료형" class="headerlink" title="집합자료형"></a>집합자료형</h1><p><code>집합자료형(Collection)</code>을 사용하면 같은 타입의 데이터를 여러 개 담을 수 있습니다. 코틀린은 <a href="/ko/2019/01/04/kotlin/190104-collection-list/">리스트(List)</a>, <a href="/ko/2019/01/04/kotlin/190104-collection-set/">집합(Set)</a>, <a href="/ko/2019/01/04/kotlin/190104-collection-map/">맵(Map)</a>이라는 세 개의 집합자료형을 지원합니다. 이 집합자료형들은 모두 <code>Collection</code>클래스를 상속합니다.</p>
+<p><img src="/ko/images/posts/kotlin/190104-collection-list/1.png"></p>
+<h1 id="리스트-List"><a href="#리스트-List" class="headerlink" title="리스트(List)"></a>리스트(List)</h1><p>변경 불가능한 리스트를 선언할 때는 <code>listOf()</code>메소드를 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 초기화 이후 추가, 삭제, 변경 불가능</span></span><br><span class="line"><span class="keyword">val</span> players: List&lt;String&gt; = listOf(<span class="string">&quot;Ronaldo&quot;</span>, <span class="string">&quot;Kane&quot;</span>, <span class="string">&quot;Benzema&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// List의 요소에 접근</span></span><br><span class="line">players[<span class="number">0</span>]  </span><br></pre></td></tr></table></figure>
+<p>변경 가능한 리스트를 선언할 때는 <code>mutableListOf()</code>메소드를 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// List에 데이터를 추가, 삭제, 변경 가능</span></span><br><span class="line"><span class="keyword">var</span> players: MutableList&lt;String&gt; = mutableListOf(<span class="string">&quot;Ronaldo&quot;</span>, <span class="string">&quot;Kane&quot;</span>, <span class="string">&quot;Benzema&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// List의 끝에 데이터 추가</span></span><br><span class="line">mutableList.add(<span class="string">&quot;Ramos&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2번 인덱스에 데이터 추가</span></span><br><span class="line">mutableList.add(<span class="number">2</span>, <span class="string">&quot;Son&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 데이터 삭제</span></span><br><span class="line">mutableList.removeAt(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 데이터 변경</span></span><br><span class="line">mutableList[<span class="number">1</span>] = <span class="string">&quot;Marcelo&quot;</span></span><br></pre></td></tr></table></figure>
+<p>리스트는 <a href="/ko/2019/01/03/kotlin/190103-array/">배열(Array)</a>와 유사합니다. 하지만 차이점도 존재합니다. 리스트는 초기화 후 값을 추가, 삭제할 수 있습니다. 반면 배열은 초기화하여 크기가 결정되면 값을 추가, 삭제할 수 없습니다.  </p>
+<h1 id="집합자료형-조작-함수"><a href="#집합자료형-조작-함수" class="headerlink" title="집합자료형 조작 함수"></a>집합자료형 조작 함수</h1><p>집합자료형은 데이터 조작을 위한 다양한 메소드를 제공합니다. 리스트의 대표적인 메소드 몇 가지만 알아보겠습니다.</p>
+<h3 id="1-filter"><a href="#1-filter" class="headerlink" title="(1) filter()"></a>(1) filter()</h3><p>리스트에서 조건에 맞는 요소만 필터링하는데 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 필터링</span></span><br><span class="line"><span class="keyword">val</span> fruits = listOf(<span class="string">&quot;pineapple&quot;</span>, <span class="string">&quot;melon&quot;</span>, <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;mango&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 문자&#x27;m&#x27;으로 시작하는 요소만 찾기</span></span><br><span class="line"><span class="keyword">var</span> newFruits = fruits.filter(&#123; fruit: String -&gt; fruit.startsWith(<span class="string">&#x27;m&#x27;</span>) &#125;)  <span class="comment">// [&quot;melon&quot;, &quot;mango&quot;]</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-sortedBy"><a href="#2-sortedBy" class="headerlink" title="(2) sortedBy()"></a>(2) sortedBy()</h3><p>리스트를 조건에 맞게 정렬하는데 사용합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 정렬</span></span><br><span class="line"><span class="keyword">val</span> fruits = listOf(<span class="string">&quot;pineapple&quot;</span>, <span class="string">&quot;melon&quot;</span>, <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> newFruits = fruits.sortedBy(&#123; element: String -&gt; element &#125;) [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;melon&quot;</span>, <span class="string">&quot;pineapple&quot;</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="3-map-forEach"><a href="#3-map-forEach" class="headerlink" title="(3) map(), forEach()"></a>(3) map(), forEach()</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> fruits = listOf(<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;melon&quot;</span>)</span><br><span class="line">    .map(&#123; fruit -&gt; </span><br><span class="line">        <span class="comment">// 람다는 마지막 값이 반환</span></span><br><span class="line">        <span class="string">&quot;My favorite fruit is <span class="subst">$&#123;fruit&#125;</span>&quot;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .forEach &#123; println(it) &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// My favorite fruit is apple</span></span><br><span class="line"><span class="comment">// My favorite fruit is banana</span></span><br><span class="line"><span class="comment">// My favorite fruit is melon</span></span><br></pre></td></tr></table></figure>
+<p>위 코드는 다음과 같이 단축할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> fruits = listOf(<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;melon&quot;</span>)</span><br><span class="line">    .map &#123; it.toUpperCase() &#125;</span><br><span class="line">    .forEach &#123; println(it) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// APPLE</span></span><br><span class="line"><span class="comment">// BANANA</span></span><br><span class="line"><span class="comment">// MELON</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이번 포스트에서는 <code>집합자료형(Collection)</code>과 <code>리스트(List)</code>에 대해 알아봤습니다. 다음 포스트에서는 집합자료형의 <a href="/ko/2019/01/04/kotlin/190104-collection-set/">집합(Set)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/04/kotlin/190104-collection-list/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

@@ -270,86 +270,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/"
-                            aria-label=": [코틀린] 스코프 함수 - (1) run"
-                        >
-                            [코틀린] 스코프 함수 - (1) run
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-23T20:16:30+09:00">
-	
-		    2019/01/23
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 다섯 개의 <span class="highlight-text red">스코프 함수(Scope function)</span>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 앞으로 다섯 개의 포스트에서 스코프 함수에 대해 알아보려고 합니다.</p>
-<ol>
-<li><a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">run()</a> ⬅️ ⬅️ ⬅️</li>
-<li><a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a></li>
-<li><a href="/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/">apply()</a></li>
-<li><a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a></li>
-<li><a href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/">with()</a></li>
-</ol>
-<hr>
-<h1 id="run"><a href="#run" class="headerlink" title="run()"></a>run()</h1><span class="highlight-text red">run()</span>은 <u>함수를 호출한 객체</u>가 <u>코드 블록</u>으로 <b>암시적</b>으로 전달됩니다. 따라서 코드 블록 안에서 호출 객체의 멤버변수와 메소드에 접근할 수 있습니다. 또한 코드 블록의 수행결과가 반환됩니다.
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">var</span> name: String, <span class="keyword">var</span> age: <span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">incrementAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        age += <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printAge</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;Age: <span class="subst">$&#123;age&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).run &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 멤버변수에 접근</span></span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    <span class="keyword">this</span>.age = <span class="number">35</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 메소드를 호출</span></span><br><span class="line">    <span class="keyword">this</span>.incrementAge()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 마지막 구문의 결과값이 반환</span></span><br><span class="line">    <span class="keyword">this</span>.age     </span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">println(age)    <span class="comment">// 36</span></span><br></pre></td></tr></table></figure>
-<p><code>run()</code>을 호출한 객체는 <a href="/ko/2019/02/02/kotlin/190202-lamda/">람다</a> 안에서 키워드 <code>this</code>로 접근할 수 있습니다. 함수를 호출한 객체를 <code>Receiver</code>라고 하며, 이 때문에 스코프 함수는 <code>수신객체 지정 람다(Lambda with Receiver)</code>라고도 합니다.</p>
-<p>키워드 <code>this</code>를 생략할 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = Person(<span class="string">&quot;&quot;</span>, <span class="number">0</span>).run &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 멤버변수에 접근</span></span><br><span class="line">    name = <span class="string">&quot;Paul&quot;</span></span><br><span class="line">    age = <span class="number">35</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 호출객체의 메소드를 호출</span></span><br><span class="line">    incrementAge()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 마지막 구문의 결과값이 반환</span></span><br><span class="line">    age     </span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">println(age)    <span class="comment">// 36</span></span><br></pre></td></tr></table></figure>
-<p>반환값 없이도 사용할 수도 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line">person.run &#123;</span><br><span class="line">    printAge()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서 스코프 함수 중 <code>run()</code>에 대해 알아봤습니다. 다음 포스트에서는 스코프 함수 중 <a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2019/01/22/kotlin/190122-null-check-with-scope-function/"
                             aria-label=": [코틀린] null 처리 - (4) 스코프 함수를 통한 Null Check"
                         >
@@ -1080,6 +1000,82 @@
                         <p>
                             <a
                                 href="/ko/2019/01/15/android/001_01_gradle/190115-product-flavor/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/14/kotlin/190114-enum-class/"
+                            aria-label=": [코틀린] 열거 클래스(enum class)"
+                        >
+                            [코틀린] 열거 클래스(enum class)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-14T20:16:30+09:00">
+	
+		    2019/01/14
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/13/kotlin/190113-data-class/">데이터 클래스(data class)</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">열거 클래스(enum class)</span>에 대해 알아보겠습니다. </p>
+<hr>
+<h1 id="열거-클래스"><a href="#열거-클래스" class="headerlink" title="열거 클래스"></a>열거 클래스</h1><p><code>열거 클래스(enum class)</code>는 <u>서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의하는 것</u>입니다. </p>
+<p>예를 들어 요일은 월요일부터 일요일까지로 데이터의 범위가 한정되어 있습니다. 이러한 경우 열거 클래스를 유용하게 사용할 수 있습니다. 열거 클래스는 키워드 <code>enum</code>을 붙여 정의합니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Day</span> </span>&#123;</span><br><span class="line">    SUNDAY,</span><br><span class="line">    MONDAY,</span><br><span class="line">    TUESDAY,</span><br><span class="line">    WEDNESDAY,</span><br><span class="line">    THURSDAY,</span><br><span class="line">    FRIDAY,</span><br><span class="line">    SATURDAY,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>열거 클래스의 인스턴스는 다음과 같이 생성합니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> today = Day.MONDAY</span><br></pre></td></tr></table></figure>
+<p>열거 클래스는 <a href="/ko/2019/01/17/kotlin/190117-conditional_statement/"><code>when()</code></a>구문과 함께 유용하게 사용할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">when</span>(today) &#123;</span><br><span class="line">    Day.MONDAY -&gt; println(<span class="string">&quot;It&#x27;s monday today.&quot;</span>)</span><br><span class="line">    Day.TUESDAY -&gt; println(<span class="string">&quot;It&#x27;s tuesday today.&quot;</span>)</span><br><span class="line">    Day.WEDNESDAY -&gt; println(<span class="string">&quot;It&#x27;s Wednesday today.&quot;</span>)</span><br><span class="line">    Day.THURSDAY -&gt; println(<span class="string">&quot;It&#x27;s thursday today.&quot;</span>)</span><br><span class="line">    Day.FRIDAY -&gt; println(<span class="string">&quot;It&#x27;s friday today.&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span> -&gt; println(<span class="string">&quot;Weekend.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>열거 클래스는 내부에 데이터를 담을 수도 있습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Day</span></span>(<span class="keyword">val</span> color: String) &#123;</span><br><span class="line">    SUNDAY(<span class="string">&quot;Red&quot;</span>),</span><br><span class="line">    MONDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    TUESDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    WEDNESDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    THURSDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    FRIDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    SATURDAY(<span class="string">&quot;Blue&quot;</span>),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>다음과 같이 값에 접근할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> today = Day.SUNDAY</span><br><span class="line"></span><br><span class="line">today.color    <span class="comment">// Red</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>열거 클래스(enum class)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/15/kotlin/190115-sealed-class/"><code>Sealed Class</code></a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/14/kotlin/190114-enum-class/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

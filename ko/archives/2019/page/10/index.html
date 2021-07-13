@@ -270,82 +270,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/01/14/kotlin/190114-enum-class/"
-                            aria-label=": [코틀린] 열거 클래스(enum class)"
-                        >
-                            [코틀린] 열거 클래스(enum class)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-14T20:16:30+09:00">
-	
-		    2019/01/14
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/01/13/kotlin/190113-data-class/">데이터 클래스(data class)</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">열거 클래스(enum class)</span>에 대해 알아보겠습니다. </p>
-<hr>
-<h1 id="열거-클래스"><a href="#열거-클래스" class="headerlink" title="열거 클래스"></a>열거 클래스</h1><p><code>열거 클래스(enum class)</code>는 <u>서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의하는 것</u>입니다. </p>
-<p>예를 들어 요일은 월요일부터 일요일까지로 데이터의 범위가 한정되어 있습니다. 이러한 경우 열거 클래스를 유용하게 사용할 수 있습니다. 열거 클래스는 키워드 <code>enum</code>을 붙여 정의합니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Day</span> </span>&#123;</span><br><span class="line">    SUNDAY,</span><br><span class="line">    MONDAY,</span><br><span class="line">    TUESDAY,</span><br><span class="line">    WEDNESDAY,</span><br><span class="line">    THURSDAY,</span><br><span class="line">    FRIDAY,</span><br><span class="line">    SATURDAY,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>열거 클래스의 인스턴스는 다음과 같이 생성합니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> today = Day.MONDAY</span><br></pre></td></tr></table></figure>
-<p>열거 클래스는 <a href="/ko/2019/01/17/kotlin/190117-conditional_statement/"><code>when()</code></a>구문과 함께 유용하게 사용할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">when</span>(today) &#123;</span><br><span class="line">    Day.MONDAY -&gt; println(<span class="string">&quot;It&#x27;s monday today.&quot;</span>)</span><br><span class="line">    Day.TUESDAY -&gt; println(<span class="string">&quot;It&#x27;s tuesday today.&quot;</span>)</span><br><span class="line">    Day.WEDNESDAY -&gt; println(<span class="string">&quot;It&#x27;s Wednesday today.&quot;</span>)</span><br><span class="line">    Day.THURSDAY -&gt; println(<span class="string">&quot;It&#x27;s thursday today.&quot;</span>)</span><br><span class="line">    Day.FRIDAY -&gt; println(<span class="string">&quot;It&#x27;s friday today.&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span> -&gt; println(<span class="string">&quot;Weekend.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>열거 클래스는 내부에 데이터를 담을 수도 있습니다. </p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Day</span></span>(<span class="keyword">val</span> color: String) &#123;</span><br><span class="line">    SUNDAY(<span class="string">&quot;Red&quot;</span>),</span><br><span class="line">    MONDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    TUESDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    WEDNESDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    THURSDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    FRIDAY(<span class="string">&quot;Black&quot;</span>),</span><br><span class="line">    SATURDAY(<span class="string">&quot;Blue&quot;</span>),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>다음과 같이 값에 접근할 수 있습니다.</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> today = Day.SUNDAY</span><br><span class="line"></span><br><span class="line">today.color    <span class="comment">// Red</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>열거 클래스(enum class)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/15/kotlin/190115-sealed-class/"><code>Sealed Class</code></a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/01/14/kotlin/190114-enum-class/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2019/01/14/android/001_01_gradle/190114-buildtypes/"
                             aria-label=": [안드로이드] 그래들(Gradle) - (10) 빌드 변형(Build Variant) - BuildType"
                         >
@@ -1021,6 +945,86 @@
                         <p>
                             <a
                                 href="/ko/2019/01/08/kotlin/190108-class-method/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/07/kotlin/190107-constructor/"
+                            aria-label=": [코틀린] 클래스의 생성자(Constructor)"
+                        >
+                            [코틀린] 클래스의 생성자(Constructor)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-07T20:16:30+09:00">
+	
+		    2019/01/07
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에는 <a href="/ko/2019/01/07/kotlin/190107-class-instance-object/">객체지향 프로그래밍, 클래스, 인스턴스, 객체</a>에 대해 알아봤습니다. 이번 포스트에서는 클래스의 <span class="highlight-text red">생성자(Constructor)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="생성자"><a href="#생성자" class="headerlink" title="생성자"></a>생성자</h1><p><code>생성자(Constructor)</code>는 클래스의 인스턴스를 생성할 때 호출되는 구문입니다. 보통 초기화 작업을 생성자에서 수행합니다. 생성자는 키워드<code>constructor</code>를 사용하여 정의합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    String name</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 생성자</span></span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="comment">// 멤버변수 초기화 작업 수행   </span></span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">&quot;Paul&quot;</span> </span><br><span class="line">        println(<span class="string">&quot;This is constructor.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이 생성자는 클래스의 인스턴스를 생성할 때 호출됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person person = person()</span><br><span class="line"><span class="comment">// This is constructor.</span></span><br></pre></td></tr></table></figure>
+<p>생성자에는 두 가지가 있습니다.</p>
+<h1 id="1-기본-생성자"><a href="#1-기본-생성자" class="headerlink" title="(1) 기본 생성자"></a>(1) 기본 생성자</h1><p><code>기본 생성자</code>는 클래스 이름 뒤에 키워드<code>constructor</code>를 붙여서 만듭니다. 주의할 점은 기본 생성자는 별도의 초기화 구문이 존재하지 않습니다. 이 때는 <code>init</code>구문을 사용할 수 있습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">constructor</span></span>(name: String) &#123;	</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수 선언</span></span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line">	    </span><br><span class="line">    <span class="comment">// 초기화 작업 수행</span></span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        println(<span class="string">&quot;This is constructor.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스의 인스턴스 생성</span></span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>)		</span><br><span class="line"></span><br><span class="line">print(person.name)</span><br></pre></td></tr></table></figure>
+<p>키워드<code>constructor</code>는 생략 가능합니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(name: String) &#123;	</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수 선언</span></span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line">	    </span><br><span class="line">    <span class="comment">// 초기화 구문</span></span><br><span class="line">    <span class="keyword">init</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>)		</span><br><span class="line"></span><br><span class="line">print(person.name)</span><br></pre></td></tr></table></figure>
+<p>맴버변수 선언도 생성자 안에서 할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>(<span class="keyword">var</span> name: String) &#123;</span><br><span class="line">    <span class="comment">// var name: String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위처럼 코드를 작성하는 경우, 클래스를 생성할 때 전달한 값 전달인자가 매개변수에 자동으로 초기화됩니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>)</span><br><span class="line"></span><br><span class="line">print(person.name)</span><br></pre></td></tr></table></figure>
+<h1 id="2-보조-생성자"><a href="#2-보조-생성자" class="headerlink" title="(2) 보조 생성자"></a>(2) 보조 생성자</h1><p>기본 생성자를 정의하지 않고 아래와 같이 <code>보조 생성자</code>만을 사용할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 멤버변수</span></span><br><span class="line">    <span class="keyword">var</span> name: String</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 보조 생성자</span></span><br><span class="line">    <span class="keyword">constructor</span>(name: String) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Ronaldo&quot;</span>) </span><br><span class="line">println(person.name)</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 클래스의 <code>생성자</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/08/kotlin/190108-class-method/">클래스의 멤버변수와 메소드</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/07/kotlin/190107-constructor/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

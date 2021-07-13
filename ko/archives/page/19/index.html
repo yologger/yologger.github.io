@@ -270,79 +270,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2018/01/18/java/180118-inner-class/"
-                            aria-label=": [자바] 내부 클래스(Inner Class)"
-                        >
-                            [자바] 내부 클래스(Inner Class)
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2018-01-18T20:16:30+09:00">
-	
-		    2018/01/18
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Java/">Java</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/17/java/180117-interface/">인터페이스(Interface)</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">내부 클래스(Inner Class)</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="Inner-Class"><a href="#Inner-Class" class="headerlink" title="Inner Class"></a>Inner Class</h1><p>자바에서는 클래스 안에 클래스를 정의할 수 있습니다. 이를 <code>내부 클래스</code>라고 합니다. 내부 클래스는 다음과 같이 선언합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>내부 클래스는 다음과 같이 사용합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (1) 외부 클래스의 인스턴스 생성</span></span><br><span class="line">OuterClass outerClass = <span class="keyword">new</span> OuterClass();</span><br><span class="line"></span><br><span class="line"><span class="comment">// (2) 외부 클래스의 인스턴스를 사용하여 내부 클래스의 인스턴스 생성</span></span><br><span class="line">OuterClass.InnerClass innerClass = outerClass.<span class="function">new <span class="title">InnerClass</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-<h1 id="Static-Inner-Class"><a href="#Static-Inner-Class" class="headerlink" title="Static Inner Class"></a>Static Inner Class</h1><p><code>Static</code> 내부 클래스도 다음과 같이 선언할 수 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Static Inner Class</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInnerClass</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>Static</code> 내부 클래스는 다음과 같이 사용합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 외부 클래스의 인스턴스를 생성하지 않고도 내부 클래스의 인스턴스 생성</span></span><br><span class="line">OuterClass.StaticInnerClass staticInnerClass = <span class="keyword">new</span> OuterClass.StaticInnerClass();</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>내부 클래스(Inner Class)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2018/01/19/java/180119-anonymous-class/">익명 클래스(Anonymous Class)</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2018/01/18/java/180118-inner-class/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2018/01/17/java/180117-interface/"
                             aria-label=": [자바] 인터페이스(Interface)"
                         >
@@ -1001,6 +928,84 @@
                         <p>
                             <a
                                 href="/ko/2018/01/10/java/180110-collection-map/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2018/01/09/java/180109-collection-set/"
+                            aria-label=": [자바] 집합자료형 - (2) 집합(Set)"
+                        >
+                            [자바] 집합자료형 - (2) 집합(Set)
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2018-01-09T20:16:30+09:00">
+	
+		    2018/01/09
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Java/">Java</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>자바(Java)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/java/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2018/01/08/java/180108-collection-list/">집합자료형(Collection)과 리스트(List)</a>에 대해 알아봤습니다. 이번 포스트에서는 집합자료형의 <span class="highlight-text red">집합(Set)</span>에 대해 알아보겠습니다.</p>
+<hr>
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>자바 API에서 제공하는 <code>Set</code>의 정의는 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Set</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span></span>;</span><br><span class="line">    <span class="function">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위에서 보는 것처럼 <code>Set</code>은 <a href="/ko/2018/01/17/java/180117-interface/">interface</a>이므로 인스턴스를 생성할 수 없습니다. 따라서 <code>Set</code>의 구현체가 필요합니다. 다행히 자바 API에서는 <code>HashSet</code>, <code>TreeSet</code>이라는 구현체들을 제공합니다. </p>
+<h1 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h1><p><code>HashSet</code>은 다음과 같이 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; players = <span class="keyword">new</span> HashSet&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+<p>데이터 추가는 다음과 같이 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">players.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p><code>Set</code>은 <strong>중복을 허용하지 않습니다</strong>. 동일한 데이터를 여러 개 추가해도 한 개만 유지됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">players.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Benzema&quot;</span>);</span><br><span class="line"></span><br><span class="line">players.toString(); <span class="comment">// [Benzema, Ronaldo, Kane]</span></span><br></pre></td></tr></table></figure>
+<h1 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h1><p><code>TreeSet</code>은 다음과 같이 생성합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; players = <span class="keyword">new</span> TreeSet&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+<p>데이터 추가는 다음과 같이 합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">players.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Ronaldo&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Kane&quot;</span>);</span><br><span class="line">players.add(<span class="string">&quot;Benzema&quot;</span>);</span><br><span class="line"></span><br><span class="line">players.toString();     <span class="comment">// [Benzema, Ronaldo, Kane]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>집합자료형(Collection)</code>의 <code>집합(Set)</code>에 대해 알아봤습니다. 다음 포스트에서는 집합자료형의 <a href="/ko/2018/01/10/java/180110-collection-map/">맵(Map)</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2018/01/09/java/180109-collection-set/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >

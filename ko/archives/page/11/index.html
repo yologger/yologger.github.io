@@ -270,87 +270,6 @@
                     
                         <a
                             class="link-unstyled"
-                            href="/ko/2019/02/03/android/002_01_app_release/190203-multi-dex/"
-                            aria-label=": [안드로이드] 멀티 덱스"
-                        >
-                            [안드로이드] 멀티 덱스
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-02-03T01:00:00+09:00">
-	
-		    2019/02/03
-    	
-    </time>
-    
-        <span>카테고리 </span>
-        
-    <a class="category-link" href="/ko/categories/Android/">Android</a>, <a class="category-link" href="/ko/categories/Android/App-Release/">App Release</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content">
-                    <hr>
-<div class="alert info icon"><p><b>안드로이드(Android)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/android/">이 곳</a>에서 확인할 수 있습니다.</p>
-</div>
-
-<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>이전 포스트에서는 <a href="/ko/2019/02/01/android/002_01_app_release/190201-proguard/">프로가드(ProGuard)</a>와 <a href="/ko/2019/02/02/android/002_01_app_release/190202-r8/">R8 컴파일러</a>에 대해 알아봤습니다. 이번 포스트에서는 <span class="highlight-text red">멀티 덱스(Multidex)</span>에 대해 알아보겠습니다.</p>
-<hr>
-<h1 id="Why-use-Multidex"><a href="#Why-use-Multidex" class="headerlink" title="Why use Multidex?"></a>Why use Multidex?</h1><p>안드로이드에서 자바 소스코드나 코틀린 소스코드는 <a href="/ko/2019/03/01/android/003_01_android_platform/190301-01-apk/">DEX 파일</a>로 컴파일됩니다. 이 DEX 파일의 메소드가 <code>64K(65,536)</code>개를 초과하면 안드로이드 시스템은 다음과 같은 빌드 오류를 발생시킵니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">trouble writing output:</span><br><span class="line">Too many field references: 131000; max is 65536.</span><br><span class="line">You may try using --multi-dex option.</span><br></pre></td></tr></table></figure>
-<span class="highlight-text red">멀티 덱스(Multidex)</span>는 <u>메소드가 64K(65,536)개를 초과하지 않도록 DEX 파일을 여러 개로 나누는 기술</u>입니다.
-
-
-
-<h1 id="사용-방법"><a href="#사용-방법" class="headerlink" title="사용 방법"></a>사용 방법</h1><p>우선 모듈 수준의 <code>build.gradle</code>에 다음 코드를 추가합니다.</p>
-<figure class="codeblock codeblock--tabbed"><figcaption><span>모듈 수준의 build.gradle</span><ul class="tabs"><li class="tab active">groovy</li></ul></figcaption><div class="tabs-content"><figure class="highlight groovy" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">android {</span><br><span class="line">    defaultConfig{</span><br><span class="line">        <span class="comment">// 멀티덱스 기능 true</span></span><br><span class="line">        multiDexEnabled <span class="literal">true</span></span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">  </span><br><span class="line">dependencies {</span><br><span class="line">    <span class="comment">// 의존성 추가</span></span><br><span class="line">    implementation <span class="string">'com.android.support:multidex:1.0.3'</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-<p><code>AndroidManifest.xml</code>에서 <code>&lt;application&gt;</code>태그의 <code>android:name</code>속성을 다음과 같이 설정합니다.</p>
-<figure class="codeblock codeblock--tabbed"><figcaption><span>AndroidManifest.xml</span><ul class="tabs"><li class="tab active">xml</li></ul></figcaption><div class="tabs-content"><figure class="highlight xml" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">"com.example.project"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"androidx.multidex.MultiDexApplication"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure></div></figure>
-
-<p>만약 <a href="/ko/2019/04/07/android/003_01_android_platform/190407-01-application-class/"><code>Application</code></a>클래스를 사용 중이라면 다음과 같이 수정합니다.</p>
-<figure class="codeblock codeblock--tabbed"><figcaption><span>AndroidManifest.xml</span><ul class="tabs"><li class="tab active">kotlin</li></ul></figcaption><div class="tabs-content"><figure class="highlight kotlin" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span>: <span class="type">MultiDexApplication</span></span>() {</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure>
-<p><code>AndroidManifest.xml</code>에서 <code>&lt;application&gt;</code>태그의 <code>android:name</code>속성을 다음과 같이 설정합니다.</p>
-<figure class="codeblock codeblock--tabbed"><figcaption><span>AndroidManifest.xml</span><ul class="tabs"><li class="tab active">xml</li></ul></figcaption><div class="tabs-content"><figure class="highlight xml" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">"com.example.project"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">".App"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure></div></figure>
-<hr>
-<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>이번 포스트에서는 <code>멀티덱스</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/02/04/android/002_01_app_release/190204-signed-apk/">서명된 출시용 APK를 생성하는 방법</a>에 대해 알아보겠습니다.</p>
-
-                    
-                        
-
-
-                    
-                    
-                        <p>
-                            <a
-                                href="/ko/2019/02/03/android/002_01_app_release/190203-multi-dex/#post-footer"
-                                class="postShorten-excerpt_link link"
-                                aria-label=""
-                            >
-                                댓글 공유
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a
-                            class="link-unstyled"
                             href="/ko/2019/02/02/kotlin/190202-lamda/"
                             aria-label=": [코틀린] 람다식과 익명함수"
                         >
@@ -1115,6 +1034,84 @@
                         <p>
                             <a
                                 href="/ko/2019/01/27/kotlin/190127-this-in-kotlin/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                댓글 공유
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/"
+                            aria-label=": [코틀린] 스코프 함수 - (5) with"
+                        >
+                            [코틀린] 스코프 함수 - (5) with
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-01-27T20:16:30+09:00">
+	
+		    2019/01/27
+    	
+    </time>
+    
+        <span>카테고리 </span>
+        
+    <a class="category-link" href="/ko/categories/Kotlin/">Kotlin</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <hr>
+<div class="alert info icon"><p><b>코틀린(Kotlin)</b>에 대해 연재하고 있습니다. 목차는 <a href="/ko/kotlin/">이 곳</a>에서 확인할 수 있습니다.</p>
+</div>
+
+<h1 id="들어가며"><a href="#들어가며" class="headerlink" title="들어가며"></a>들어가며</h1><p>코틀린 표준 라이브러리는 객체의 컨텍스트 내에서 코드 블럭을 실행하기 위한 목적만을 가진 다섯 개의 <span class="highlight-text red">스코프 함수(Scope function)</span>를 제공합니다. <code>run</code>, <code>let</code>, <code>apply</code>, <code>also</code>, <code>with</code>가 그것입니다. 다섯 개의 포스트에서 스코프 함수에 대해 알아보고있습니다.</p>
+<ol>
+<li><a href="/ko/2019/01/23/kotlin/190123-scope-operator-1-run/">run()</a></li>
+<li><a href="/ko/2019/01/24/kotlin/190124-scope-operator-2-let/">let()</a></li>
+<li><a href="/ko/2019/01/25/kotlin/190125-scope-operator-3-apply/">apply()</a></li>
+<li><a href="/ko/2019/01/26/kotlin/190126-scope-operator-4-also/">also()</a></li>
+<li><a href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/">with()</a> ⬅️ ⬅️ ⬅️</li>
+</ol>
+<hr>
+<h1 id="with"><a href="#with" class="headerlink" title="with()"></a>with()</h1><p><code>with()</code>는 <code>run()</code>과 유사합니다. 차이점은 인스턴스 뒤에 <code>점(.)</code>을 붙여 호출하지 않고 함수의 인자로 인스턴스를 전달합니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = Person(<span class="string">&quot;Paul&quot;</span>, <span class="number">35</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age = with(person) &#123;</span><br><span class="line">    incrementAge()</span><br><span class="line">    printAge()</span><br><span class="line">    age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>개발을 하다보면 다음과 같이 반복적으로 객체의 속성에 접근하거나 객체의 메소드를 호출하는 경우가 많습니다. </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> settings = webView.settings</span><br><span class="line"></span><br><span class="line">settings.javaScriptEnabled = <span class="literal">true</span></span><br><span class="line">settings.useWideViewPort = <span class="literal">true</span></span><br><span class="line">settings.domStorageEnabled = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>이때 <code>with()</code>를 유용하게 사용할 수 있습니다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> settings = webView.settings</span><br><span class="line"></span><br><span class="line">with(settings) &#123;</span><br><span class="line">    javaScriptEnabled = <span class="literal">true</span></span><br><span class="line">    useWideViewPort = <span class="literal">true</span></span><br><span class="line">    domStorageEnabled = <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>우리는 다섯 개의 포스트에서 <code>스코프 함수(Scope Function)</code>에 대해 알아봤습니다. 다음 포스트에서는 <a href="/ko/2019/01/27/kotlin/190127-this-in-kotlin/">코틀린에서의 this</a>에 대해 알아보겠습니다.</p>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/ko/2019/01/27/kotlin/190127-scope-operator-5-with/#post-footer"
                                 class="postShorten-excerpt_link link"
                                 aria-label=""
                             >
